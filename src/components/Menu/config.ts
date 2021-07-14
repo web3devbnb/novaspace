@@ -12,11 +12,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.goosedefi.com/',
+        href: 'https://swap.shibanova.com/',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.goosedefi.com/#/pool',
+        href: 'https://swap.shibanova.com/#/pool',
       },
     ],
   },
@@ -73,32 +73,33 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Github',
-        href: 'https://github.com/goosedefi/',
+        href: 'https://github.com/shibanova/',
       },
       {
         label: 'Docs',
-        href: 'https://goosedefi.gitbook.io/goose-finance/',
+        href: 'https://docs.shibanova.com/',
       },
       {
         label: 'Blog',
-        href: 'https://goosefinance.medium.com/',
+        href: 'https://shibanova.medium.com/',
       },
     ],
   },
+  
   {
-    label: 'Partnerships/IFO',
-    icon: 'GooseIcon',
-    href: 'https://docs.google.com/forms/d/e/1FAIpQLSe7ycrw8Dq4C5Vjc9WNlRtTxEhFDB1Ny6jlAByZ2Y6qBo7SKg/viewform?usp=sf_link',
+    label: 'Audit by CTDSEC',
+    icon: 'AuditIcon',
+    href: 'https://ctdsec.com/',
   },
   {
-    label: 'Audit by Hacken',
+    label: 'Audit by Ether Authority',
     icon: 'AuditIcon',
-    href: 'https://www.goosedefi.com/files/hackenAudit.pdf',
+    href: 'https://etherauthority.io/shibanova-smart-contracts-audit/',
   },
   {
-    label: 'Audit by CertiK',
+    label: 'Audit by Peckshield',
     icon: 'AuditIcon',
-    href: 'https://certik.org/projects/goose-finance',
+    href: 'https://',
   },
 ]
 
