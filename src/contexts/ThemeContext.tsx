@@ -4,12 +4,12 @@ import { light, dark } from '@pancakeswap-libs/uikit'
 
 const CACHE_KEY = 'IS_DARK'
 
-const ThemeContext = React.createContext({ isDark: null, toggleTheme: () => null })
+const ThemeContext = React.createContext({ isDark: true, toggleTheme: () => null })
 
 const ThemeContextProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     const isDarkUserSetting = localStorage.getItem(CACHE_KEY)
-    return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false
+    return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : true
   })
 
   const toggleTheme = () => {
