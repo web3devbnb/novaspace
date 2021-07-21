@@ -4,8 +4,7 @@ import { allLanguages } from 'config/localisation/languageCodes'
 import { LanguageContext } from 'contexts/Localisation/languageContext'
 import useTheme from 'hooks/useTheme'
 import { usePriceCakeBusd } from 'state/hooks'
-import { Menu as UikitMenu } from '@pancakeswap-libs/uikit'
-import config from './config'
+import { Menu as UikitMenu, menuConfig as config } from '@pancakeswap-libs/uikit'
 
 const Menu = (props) => {
   const { account, connect, reset } = useWallet()
