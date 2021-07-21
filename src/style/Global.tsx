@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 // eslint-disable-next-line import/no-unresolved
-import { PancakeTheme } from '@pancakeswap-libs/uikit'
+import { ShibanovaTheme } from '@pancakeswap-libs/uikit'
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
-  export interface DefaultTheme extends PancakeTheme {}
+  export interface DefaultTheme extends ShibanovaTheme {}
 }
 
 const GlobalStyle = createGlobalStyle`
