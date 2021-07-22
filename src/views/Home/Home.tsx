@@ -11,7 +11,7 @@ import TwitterCard from './components/TwitterCard'
 
 const Hero = styled.div`
   align-items: center;
-  background-image: url('/images/egg/3.png');
+  
   background-repeat: no-repeat;
   background-position: top center;
   display: flex;
@@ -23,9 +23,10 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/egg/3.png'), url('/images/egg/3b.png');
-    background-position: left center, right center;
-    height: 165px;
+    
+    background-position: left center;
+    image-size: 200px;
+    height: 105px;
     padding-top: 0;
   }
 `
@@ -36,7 +37,7 @@ const Cards = styled(BaseLayout)`
   margin-bottom: 48px;
 
   & > div {
-    grid-column: span 6;
+    grid-column: span 10;
     width: 100%;
   }
 
@@ -51,6 +52,12 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    & > div {
+      grid-column: span 4;
+    }
+  }
 `
 
 const Home: React.FC = () => {
@@ -59,15 +66,16 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" size="xl" mb="24px" color="secondary">
-          {TranslateString(576, 'Goose Finance')}
+        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF">
+           DASHBOARD
         </Heading>
-        <Text>{TranslateString(578, 'Top 3 best DEFI app on Binance Smart Chain.')}</Text>
+        
       </Hero>
       <div>
         <Cards>
-          <FarmStakingCard />
+          
           <TwitterCard/>
+          <FarmStakingCard />
           <CakeStats />
           <TotalValueLockedCard />
         </Cards>

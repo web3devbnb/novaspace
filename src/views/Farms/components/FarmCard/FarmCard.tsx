@@ -17,17 +17,7 @@ export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
 }
 
-const RainbowLight = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-`
+
 
 const StyledCardAccent = styled.div`
   background: linear-gradient(45deg,
@@ -43,7 +33,7 @@ const StyledCardAccent = styled.div`
   rgba(251, 7, 217, 1) 90%,
   rgba(255, 0, 0, 1) 100%);
   background-size: 300% 300%;
-  animation: ${RainbowLight} 2s linear infinite;
+ 
   border-radius: 16px;
   filter: blur(6px);
   position: absolute;

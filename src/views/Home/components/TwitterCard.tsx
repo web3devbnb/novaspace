@@ -11,8 +11,8 @@ import CardValue from './CardValue'
 import { useFarms } from '../../../state/hooks'
 
 const StyledTwitterCard = styled(Card)`
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10px;
+  margin-right: 10px;
 `
 
 const Row = styled.div`
@@ -29,13 +29,13 @@ const TwitterCard = () => {
   return (
     <StyledTwitterCard>
       <CardBody>
-        <Heading size="xl" mb="24px">
-          {TranslateString(10003, 'Announcements')}
+        <Heading as="h1" size="xl" mb="24px">
+          Twitter News
         </Heading>
         <Timeline
           dataSource={{
             sourceType: 'profile',
-            screenName: 'GooseFinance'
+            screenName: 'ShibanovaDEFI'
           }}
           options={{
             height: '300',
