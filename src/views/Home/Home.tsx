@@ -9,28 +9,30 @@ import CakeStats from './components/CakeStats'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
 import Divider from './components/Divider'
+import SNovaStakingCard from './components/sNovaStakingCard'
+import StatsCard from './components/StatsCard'
 
 const Hero = styled.div`
   
-
+background-image: url(images/TVLbg.png);
+background-position: right;
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position: right;
   display: flex;
   justify-content: center;
   flex-direction: row;
   margin: auto;
   margin-bottom: 0px;
-  padding-top: 16px;
+  padding-top: 10px;
   text-align: left;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url(images/TVLbg.png);
-background-position: right;
+   
     text-align: left;
     image-size: 10px;
     height: 135px;
     padding-top: 35px;
-    padding-right: 150px;
+    padding-right: 1px;
   }
   
 `
@@ -41,27 +43,17 @@ const Cards = styled(BaseLayout)`
   margin-bottom: 48px;
 
   & > div {
-    grid-column: span 4;
+    grid-column: 8;
     width: 100%;
   }
 
   ${({ theme }) => theme.mediaQueries.sm} {
     & > div {
-      grid-column: span 8;
-    }
-  }
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    & > div {
-      grid-column: span 8;
-    }
-  }
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    & > div {
       grid-column: span 4;
     }
   }
+
+  
 `
 
 const Home: React.FC = () => {
@@ -70,7 +62,10 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', paddingRight:'255px'}}>
+        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
+          textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
+          paddingRight:'385px'
+          }}>
            DASHBOARD
            
         </Heading>
@@ -81,9 +76,10 @@ const Home: React.FC = () => {
       <Divider />
         <Cards>
           
-          <TwitterCard/>
+          
           <FarmStakingCard />
-          <CakeStats />
+          <SNovaStakingCard />
+          
           
         </Cards>
       </div>
