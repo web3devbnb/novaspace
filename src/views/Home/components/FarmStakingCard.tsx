@@ -20,14 +20,16 @@ const StyledFarmStakingCard = styled(Card)`
   background-repeat: no-repeat;
   background-position: top right;
   min-height: 376px;
+  margin-right: 4px;
+  margin-left: 4px;
 `
 
 const Block = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 `
 
 const CardImage = styled.img`
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 `
 
 const Label = styled.div`

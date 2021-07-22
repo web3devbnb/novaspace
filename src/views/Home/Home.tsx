@@ -8,27 +8,31 @@ import LotteryCard from './components/LotteryCard'
 import CakeStats from './components/CakeStats'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
+import Divider from './components/Divider'
 
 const Hero = styled.div`
-  align-items: center;
   
+
   background-repeat: no-repeat;
   background-position: top center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   margin: auto;
-  margin-bottom: 32px;
-  padding-top: 116px;
-  text-align: center;
+  margin-bottom: 0px;
+  padding-top: 16px;
+  text-align: left;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    
-    background-position: left center;
-    image-size: 200px;
-    height: 105px;
-    padding-top: 0;
+    background-image: url(images/TVLbg.png);
+background-position: right;
+    text-align: left;
+    image-size: 10px;
+    height: 135px;
+    padding-top: 35px;
+    padding-right: 150px;
   }
+  
 `
 
 const Cards = styled(BaseLayout)`
@@ -37,7 +41,7 @@ const Cards = styled(BaseLayout)`
   margin-bottom: 48px;
 
   & > div {
-    grid-column: span 10;
+    grid-column: span 4;
     width: 100%;
   }
 
@@ -49,7 +53,7 @@ const Cards = styled(BaseLayout)`
 
   ${({ theme }) => theme.mediaQueries.lg} {
     & > div {
-      grid-column: span 6;
+      grid-column: span 8;
     }
   }
 
@@ -66,18 +70,21 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF">
+        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', paddingRight:'255px'}}>
            DASHBOARD
+           
         </Heading>
+        <TotalValueLockedCard />
         
       </Hero>
       <div>
+      <Divider />
         <Cards>
           
           <TwitterCard/>
           <FarmStakingCard />
           <CakeStats />
-          <TotalValueLockedCard />
+          
         </Cards>
       </div>
     </Page>

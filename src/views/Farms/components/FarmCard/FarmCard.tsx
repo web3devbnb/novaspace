@@ -17,22 +17,22 @@ export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
 }
 
-
+// background: linear-gradient(45deg,
+//  rgba(255, 0, 0, 1) 0%,
+//  rgba(255, 154, 0, 1) 10%,
+//  rgba(208, 222, 33, 1) 20%,
+//  rgba(79, 220, 74, 1) 30%,
+ // rgba(63, 218, 216, 1) 40%,
+ // rgba(47, 201, 226, 1) 50%,
+ // rgba(28, 127, 238, 1) 60%,
+ // rgba(95, 21, 242, 1) 70%,
+ // rgba(186, 12, 248, 1) 80%,
+ // rgba(251, 7, 217, 1) 90%,
+ // rgba(255, 0, 0, 1) 100%);
+ // background-size: 300% 300%;
 
 const StyledCardAccent = styled.div`
-  background: linear-gradient(45deg,
-  rgba(255, 0, 0, 1) 0%,
-  rgba(255, 154, 0, 1) 10%,
-  rgba(208, 222, 33, 1) 20%,
-  rgba(79, 220, 74, 1) 30%,
-  rgba(63, 218, 216, 1) 40%,
-  rgba(47, 201, 226, 1) 50%,
-  rgba(28, 127, 238, 1) 60%,
-  rgba(95, 21, 242, 1) 70%,
-  rgba(186, 12, 248, 1) 80%,
-  rgba(251, 7, 217, 1) 90%,
-  rgba(255, 0, 0, 1) 100%);
-  background-size: 300% 300%;
+  
  
   border-radius: 16px;
   filter: blur(6px);
@@ -42,12 +42,16 @@ const StyledCardAccent = styled.div`
   bottom: -2px;
   left: -2px;
   z-index: -1;
+  border-style: solid;
+  border-color: white;
 `
-
+// background: ${(props) => props.theme.card.background}
 const FCard = styled.div`
   align-self: baseline;
-  background: ${(props) => props.theme.card.background};
-  border-radius: 32px;
+  background-color: transparent; 
+  border: 1px solid;
+  border-color: #00aaff;
+  border-radius: 16px;
   box-shadow: 0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05);
   display: flex;
   flex-direction: column;
@@ -55,10 +59,11 @@ const FCard = styled.div`
   padding: 24px;
   position: relative;
   text-align: center;
+  grid-column: 3;
 `
 
 const Divider = styled.div`
-  background-color: ${({ theme }) => theme.colors.borderColor};
+  background-color: #00aaff;
   height: 1px;
   margin: 28px auto;
   width: 100%;
@@ -162,8 +167,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
         <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
+        
       </Flex>
-      <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}
@@ -185,7 +190,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
           quoteTokenSymbol={quoteTokenSymbol}
           tokenAddresses={tokenAddresses}
         />
+        <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       </ExpandingWrapper>
+      
+      
+      
     </FCard>
   )
 }
