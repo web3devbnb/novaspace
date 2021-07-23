@@ -77,7 +77,7 @@ const SNovaedStakingCard = () => {
       <CardBody>
         <Heading size="xl" mb="0px" style={{
           textShadow:'2px 2px 10px #d4af3780, -2px -2px 10px #d4af3780 '}}>
-          sNOVA STATS
+          sNova Stats
         </Heading>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
         <Block>
