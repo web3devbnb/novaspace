@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
@@ -16,11 +17,37 @@ import useI18n from 'hooks/useI18n'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
 import Divider from './components/Divider'
+import TotalValueLockedCard from './components/TotalValueLockedCard'
+
 
 export interface FarmsProps{
   tokenMode?: boolean
 }
 
+const Hero = styled.div`
+  
+background-image: url(images/TVLbg.png);
+background-position: right;
+  background-repeat: no-repeat;
+  background-position: right;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: auto;
+  margin-bottom: 1px;
+  padding-top: 8px;
+  text-align: left;
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+   
+    text-align: left;
+    image-size: 10px;
+    height: 160px;
+    padding-top: 55px;
+    padding-right: 1px;
+  }
+  
+`
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
   const TranslateString = useI18n()
@@ -92,6 +119,19 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
   return (
     <Page>
+      <Hero>
+        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
+          textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
+          paddingRight:'385px'
+          }}>
+            {tokenMode ?
+           'POOLS' : 'FARMS'
+            }
+        </Heading>
+        <TotalValueLockedCard />
+        
+      </Hero>
+      <div>
       <Heading as="h1" size="lg" color="white" mb="10px" style={{textShadow:'2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ', textAlign: 'center' }}>
         {
           tokenMode ?
@@ -100,10 +140,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           'Stake LP Tokens to Earn NOVA and sNOVA'
         }
       </Heading>
-      <Heading as="h2" color="secondary" mb="10px" style={{ textAlign: 'center' }}>
+      <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center' }}>
         Deposit Fees are distributed to sNova holders.
       </Heading>
       <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly}/>
+      </div>
       <div>
         <Divider />
         <FlexLayout>
