@@ -6,10 +6,14 @@ import { useGetStats } from 'hooks/api'
 import { useTotalValue } from '../../../state/hooks'
 import CardValue from './CardValue'
 
-const StyledTotalValueLockedCard = styled(Card)`
-  align-items: right;
-  
-  background: transparent;
+const StyledTotalValueLockedCard = styled.div`
+  align-items: center;
+  background-height: auto;
+  background-image: url(images/TVLbg.png);
+  background-position: right;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: right;
 `
 
 const TotalValueLockedCard = () => {
@@ -20,7 +24,7 @@ const TotalValueLockedCard = () => {
 
   return (
     <StyledTotalValueLockedCard>
-      <CardBody>
+      <div style={{width:'350px', paddingTop:'70px', paddingRight:'10px'}}>
         
         <>
           {/* <Heading size="xl">{`$${tvl}`}</Heading> */}
@@ -29,7 +33,7 @@ const TotalValueLockedCard = () => {
           {/* </Heading> */}
          
         </>
-      </CardBody>
+      </div>
     </StyledTotalValueLockedCard>
   )
 }

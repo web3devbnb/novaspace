@@ -13,7 +13,7 @@ const StyledMoneyPotCard = styled(Card)`
   min-height: 376px;
   margin-right: 0px;
   margin-left: 0px;
-  border-radius: 8px;
+  border-radius: 30px;
   background-color: transparent;
   text-align: center;
 `

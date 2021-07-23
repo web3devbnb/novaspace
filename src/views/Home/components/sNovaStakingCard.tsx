@@ -23,7 +23,7 @@ const StyledSNovaStakingCard = styled(Card)`
   min-height: 376px;
   margin-right: 0px;
   margin-left: 0px;
-  border-radius: 8px;
+  border-radius: 30px;
   background-color: transparent;
   text-align: center;
   border: 1px
@@ -77,18 +77,18 @@ const SNovaedStakingCard = () => {
       <CardBody>
         <Heading size="xl" mb="0px" style={{
           textShadow:'2px 2px 10px #d4af3780, -2px -2px 10px #d4af3780 '}}>
-          sNova Stats
+          sNOVA STATS
         </Heading>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
         <Block>
-          <Label>Pending sNOVA</Label>
+          <Label style={{paddingTop:'25px'}}>Pending sNOVA</Label>
           <CakeHarvestBalance earningsSum={earningsSum}/>
-          <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
+          
         </Block>
         <Block>
           <Label>sNOVA Balance</Label>
           <CakeWalletBalance cakeBalance={cakeBalance} />
-          <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
+          
         </Block>
         <Actions>
           {account ? (

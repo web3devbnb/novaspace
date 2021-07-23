@@ -26,24 +26,23 @@ export interface FarmsProps{
 
 const Hero = styled.div`
   
-background-image: url(images/TVLbg.png);
-background-position: right;
+  
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center;
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: grid;
   margin: auto;
-  margin-bottom: 1px;
-  padding-top: 8px;
+  margin-bottom: 0px;
+  padding-top: 15px;
   text-align: left;
 
   ${({ theme }) => theme.mediaQueries.lg} {
    
     text-align: left;
-    image-size: 10px;
-    height: 160px;
-    padding-top: 55px;
+    image-size: 100px;
+    height: 150px;
+    padding-top: 5px;
     padding-right: 1px;
   }
   
@@ -122,7 +121,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       <Hero>
         <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
           textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
-          paddingRight:'385px'
+          paddingRight:'25px', paddingTop:'55px'
           }}>
             {tokenMode ?
            'POOLS' : 'FARMS'
@@ -132,7 +131,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         
       </Hero>
       <div>
-      <Heading as="h1" size="lg" color="white" mb="10px" style={{textShadow:'2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ', textAlign: 'center' }}>
+      <Heading as="h1" size="lg" color="white" mb="10px" style={{textShadow:'2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ', textAlign: 'center', paddingTop:'20px'  }}>
         {
           tokenMode ?
             'Stake Tokens to Earn NOVA'
@@ -140,7 +139,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           'Stake LP Tokens to Earn NOVA and sNOVA'
         }
       </Heading>
-      <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center' }}>
+      <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center'}}>
         Deposit Fees are distributed to sNova holders.
       </Heading>
       <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly}/>

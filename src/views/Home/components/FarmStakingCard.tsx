@@ -21,9 +21,10 @@ const StyledFarmStakingCard = styled(Card)`
   background-repeat: no-repeat;
   background-position: center;
   min-height: 376px;
+  min-width: 250px;
   margin-right: 0px;
   margin-left: 0px;
-  border-radius: 8px;
+  border-radius: 30px;
   background-color: transparent;
   text-align: center;
 `

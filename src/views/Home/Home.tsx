@@ -13,15 +13,17 @@ import SNovaStakingCard from './components/sNovaStakingCard'
 import StatsCard from './components/StatsCard'
 import MoneyedPotCard from './components/MoneyPotCard'
 
+// background-image: url(images/TVLbg.png);
+// background-position: right;
+
 const Hero = styled.div`
   
-background-image: url(images/TVLbg.png);
-background-position: right;
+
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center;
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: grid;
   margin: auto;
   margin-bottom: 0px;
   padding-top: 15px;
@@ -30,9 +32,9 @@ background-position: right;
   ${({ theme }) => theme.mediaQueries.lg} {
    
     text-align: left;
-    image-size: 10px;
+    image-size: 100px;
     height: 150px;
-    padding-top: 55px;
+    padding-top: 5px;
     padding-right: 1px;
   }
   
@@ -40,11 +42,11 @@ background-position: right;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
-  justify-content: stretch;
+  justify-content: center;
   margin-bottom: 48px;
 
   & > div {
-    grid-column: 8;
+    grid-column: 4;
     width: 100%;
   }
 
@@ -81,7 +83,7 @@ const Home: React.FC = () => {
       <Hero>
         <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
           textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
-          paddingRight:'385px'
+          paddingRight:'25px', paddingTop:'55px'
           }}>
            DASHBOARD
            
