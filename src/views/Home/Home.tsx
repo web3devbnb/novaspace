@@ -17,8 +17,6 @@ import MoneyedPotCard from './components/MoneyPotCard'
 // background-position: right;
 
 const Hero = styled.div`
-  
-
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
@@ -30,14 +28,12 @@ const Hero = styled.div`
   text-align: left;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-   
     text-align: left;
     image-size: 100px;
     height: 150px;
     padding-top: 5px;
     padding-right: 1px;
   }
-  
 `
 
 const Cards = styled(BaseLayout)`
@@ -71,8 +67,6 @@ const Cards = styled(BaseLayout)`
       border-color: #00aaff;
     }
   }
-
-  
 `
 
 const Home: React.FC = () => {
@@ -81,25 +75,27 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
-          textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
-          paddingRight:'25px', paddingTop:'55px'
-          }}>
-           DASHBOARD
-           
+        <Heading
+          as="h1"
+          size="xxl"
+          mb="24px"
+          color="#FFFFFF"
+          style={{
+            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
+            paddingRight: '25px',
+            paddingTop: '55px',
+          }}
+        >
+          DASHBOARD
         </Heading>
         <TotalValueLockedCard />
-        
       </Hero>
       <div>
-      <Divider />
+        <Divider />
         <Cards>
-          
-          
           <FarmStakingCard />
           <SNovaStakingCard />
           <MoneyedPotCard />
-          
         </Cards>
       </div>
     </Page>

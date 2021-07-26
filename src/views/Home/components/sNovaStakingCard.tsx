@@ -17,7 +17,6 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import SnovaStats from './sNovaStats'
 
 const StyledSNovaStakingCard = styled(Card)`
-  
   background-repeat: no-repeat;
   background-position: top right;
   min-height: 376px;
@@ -26,7 +25,7 @@ const StyledSNovaStakingCard = styled(Card)`
   border-radius: 30px;
   background-color: transparent;
   text-align: center;
-  border: 1px
+  border: 1px;
 `
 
 const Block = styled.div`
@@ -75,20 +74,23 @@ const SNovaedStakingCard = () => {
   return (
     <StyledSNovaStakingCard>
       <CardBody>
-        <Heading size="xl" mb="0px" style={{
-          textShadow:'2px 2px 10px #d4af3780, -2px -2px 10px #d4af3780 '}}>
+        <Heading
+          size="xl"
+          mb="0px"
+          style={{
+            textShadow: '2px 2px 10px #d4af3780, -2px -2px 10px #d4af3780 ',
+          }}
+        >
           sNova Stats
         </Heading>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
         <Block>
-          <Label style={{paddingTop:'25px'}}>Pending sNOVA</Label>
-          <CakeHarvestBalance earningsSum={earningsSum}/>
-          
+          <Label style={{ paddingTop: '25px' }}>Pending sNOVA</Label>
+          <CakeHarvestBalance earningsSum={earningsSum} />
         </Block>
         <Block>
           <Label>sNOVA Balance</Label>
           <CakeWalletBalance cakeBalance={cakeBalance} />
-          
         </Block>
         <Actions>
           {account ? (
@@ -98,9 +100,7 @@ const SNovaedStakingCard = () => {
               onClick={harvestAllFarms}
               fullWidth
             >
-              {pendingTx
-                ? 'Collecting Nova'
-                : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+              {pendingTx ? 'Collecting Nova' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
             </Button>
           ) : (
             <UnlockButton fullWidth />

@@ -27,21 +27,20 @@ const CakeStats = () => {
   const TranslateString = useI18n()
   const totalSupply = useTotalSupply()
   const burnedBalance = useBurnedBalance(getCakeAddress())
-  const farms = useFarms();
-  const eggPrice = usePriceCakeBusd();
-  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0);
-  const cakeSupply = getBalanceNumber(circSupply);
-  const marketCap = eggPrice.times(circSupply);
+  const farms = useFarms()
+  const eggPrice = usePriceCakeBusd()
+  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
+  const cakeSupply = getBalanceNumber(circSupply)
+  const marketCap = eggPrice.times(circSupply)
 
-  let NovaPerBlock = 0;
-  if(farms && farms[0] && farms[0].NovaPerBlock){
-    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber();
+  let NovaPerBlock = 0
+  if (farms && farms[0] && farms[0].NovaPerBlock) {
+    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber()
   }
 
   return (
     <StyledCakeStats>
       <CardBody>
-        
         <Row>
           <Text fontSize="14px">{TranslateString(10005, 'Market Cap')}</Text>
           <CardValue fontSize="14px" value={getBalanceNumber(marketCap)} decimals={0} prefix="$" />
@@ -60,7 +59,9 @@ const CakeStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">NOVA/block</Text>
-          <Text bold fontSize="14px">{NovaPerBlock}</Text>
+          <Text bold fontSize="14px">
+            {NovaPerBlock}
+          </Text>
         </Row>
       </CardBody>
     </StyledCakeStats>

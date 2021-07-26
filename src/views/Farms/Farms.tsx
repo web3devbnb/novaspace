@@ -19,14 +19,11 @@ import FarmTabButtons from './components/FarmTabButtons'
 import Divider from './components/Divider'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 
-
-export interface FarmsProps{
+export interface FarmsProps {
   tokenMode?: boolean
 }
 
 const Hero = styled.div`
-  
-  
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
@@ -38,14 +35,12 @@ const Hero = styled.div`
   text-align: left;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-   
     text-align: left;
     image-size: 100px;
     height: 150px;
     padding-top: 5px;
     padding-right: 1px;
   }
-  
 `
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
@@ -54,7 +49,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const cakePrice = usePriceCakeBusd()
   const bnbPrice = usePriceBnbBusd()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
-  const {tokenMode} = farmsProps;
+  const { tokenMode } = farmsProps
 
   const dispatch = useDispatch()
   const { fastRefresh } = useRefresh()
@@ -83,19 +78,21 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         // if (!farm.tokenAmount || !farm.lpTotalInQuoteToken || !farm.lpTotalInQuoteToken) {
         //   return farm
         // }
-        const cakeRewardPerBlock = new BigNumber(farm.NovaPerBlock || 1).times(new BigNumber(farm.poolWeight)) .div(new BigNumber(10).pow(18))
+        const cakeRewardPerBlock = new BigNumber(farm.NovaPerBlock || 1)
+          .times(new BigNumber(farm.poolWeight))
+          .div(new BigNumber(10).pow(18))
         const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
 
-        let apy = cakePrice.times(cakeRewardPerYear);
+        let apy = cakePrice.times(cakeRewardPerYear)
 
-        let totalValue = new BigNumber(farm.lpTotalInQuoteToken || 0);
+        let totalValue = new BigNumber(farm.lpTotalInQuoteToken || 0)
 
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
-          totalValue = totalValue.times(bnbPrice);
+          totalValue = totalValue.times(bnbPrice)
         }
 
-        if(totalValue.comparedTo(0) > 0){
-          apy = apy.div(totalValue);
+        if (totalValue.comparedTo(0) > 0) {
+          apy = apy.div(totalValue)
         }
 
         return { ...farm, apy }
@@ -114,35 +111,43 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     },
     [bnbPrice, account, cakePrice, ethereum],
   )
-  
 
   return (
     <Page>
       <Hero>
-        <Heading as="h1" size="xxl" mb="24px" color="#FFFFFF" style={{
-          textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ', 
-          paddingRight:'25px', paddingTop:'55px'
-          }}>
-            {tokenMode ?
-           'POOLS' : 'FARMS'
-            }
+        <Heading
+          as="h1"
+          size="xxl"
+          mb="24px"
+          color="#FFFFFF"
+          style={{
+            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
+            paddingRight: '25px',
+            paddingTop: '55px',
+          }}
+        >
+          {tokenMode ? 'POOLS' : 'FARMS'}
         </Heading>
         <TotalValueLockedCard />
-        
       </Hero>
       <div>
-      <Heading as="h1" size="lg" color="white" mb="10px" style={{textShadow:'2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ', textAlign: 'center', paddingTop:'20px'  }}>
-        {
-          tokenMode ?
-            'Stake Tokens to Earn NOVA'
-            :
-          'Stake LP Tokens to Earn NOVA and sNOVA'
-        }
-      </Heading>
-      <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center'}}>
-        Deposit Fees are distributed to sNova holders.
-      </Heading>
-      <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly}/>
+        <Heading
+          as="h1"
+          size="lg"
+          color="white"
+          mb="10px"
+          style={{
+            textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',
+            textAlign: 'center',
+            paddingTop: '20px',
+          }}
+        >
+          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
+        </Heading>
+        <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center' }}>
+          Deposit Fees are distributed to sNova holders.
+        </Heading>
+        <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
       <div>
         <Divider />
@@ -155,7 +160,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           </Route>
         </FlexLayout>
       </div>
-      
     </Page>
   )
 }

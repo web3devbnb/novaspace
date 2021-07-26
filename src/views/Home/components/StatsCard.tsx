@@ -13,14 +13,11 @@ const StyledStatsCard = styled(Card)`
   background: transparent;
 `
 const StatsCard = () => {
-    const TranslateString = useI18n()
-return (
+  const TranslateString = useI18n()
+  return (
     <StyledStatsCard>
-      
-        <SNovaStakingCard />
-        <FarmStakingCard />
-        
-      
+      <SNovaStakingCard />
+      <FarmStakingCard />
     </StyledStatsCard>
   )
 }

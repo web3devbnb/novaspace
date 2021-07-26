@@ -17,7 +17,6 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import CakeStats from './CakeStats'
 
 const StyledFarmStakingCard = styled(Card)`
-  
   background-repeat: no-repeat;
   background-position: center;
   min-height: 376px;
@@ -75,14 +74,19 @@ const FarmedStakingCard = () => {
   return (
     <StyledFarmStakingCard>
       <CardBody>
-        <Heading size="xl" mb="0px" style={{
-          textShadow:'2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 '}}>
+        <Heading
+          size="xl"
+          mb="0px"
+          style={{
+            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
+          }}
+        >
           Nova Stats
         </Heading>
         <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
         <Block>
           <Label>Pending NOVA</Label>
-          <CakeHarvestBalance earningsSum={earningsSum}/>
+          <CakeHarvestBalance earningsSum={earningsSum} />
           <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
         </Block>
         <Block>
@@ -98,19 +102,17 @@ const FarmedStakingCard = () => {
               onClick={harvestAllFarms}
               fullWidth
             >
-              {pendingTx
-                ? 'Collecting Nova'
-                : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+              {pendingTx ? 'Collecting Nova' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
             </Button>
           ) : (
             <UnlockButton fullWidth />
           )}
         </Actions>
         <div>
-        <CakeStats /> </div>
+          <CakeStats />{' '}
+        </div>
       </CardBody>
     </StyledFarmStakingCard>
-    
   )
 }
 

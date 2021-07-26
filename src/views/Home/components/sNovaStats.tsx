@@ -27,22 +27,20 @@ const SnovaStats = () => {
   const TranslateString = useI18n()
   const totalSupply = useTotalSupply()
   const burnedBalance = useBurnedBalance(getCakeAddress())
-  const farms = useFarms();
-  const eggPrice = usePriceCakeBusd();
-  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0);
-  const cakeSupply = getBalanceNumber(circSupply);
-  const marketCap = eggPrice.times(circSupply);
+  const farms = useFarms()
+  const eggPrice = usePriceCakeBusd()
+  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
+  const cakeSupply = getBalanceNumber(circSupply)
+  const marketCap = eggPrice.times(circSupply)
 
-  let NovaPerBlock = 0;
-  if(farms && farms[0] && farms[0].NovaPerBlock){
-    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber();
+  let NovaPerBlock = 0
+  if (farms && farms[0] && farms[0].NovaPerBlock) {
+    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber()
   }
 
   return (
     <StyledCakeStats>
       <CardBody>
-        
-        
         <Row>
           <Text fontSize="14px">{TranslateString(536, 'Total Minted')}</Text>
           {totalSupply && <CardValue fontSize="14px" value={getBalanceNumber(totalSupply)} decimals={0} />}
@@ -55,7 +53,6 @@ const SnovaStats = () => {
           <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
-        
       </CardBody>
     </StyledCakeStats>
   )

@@ -19,19 +19,17 @@ const StyledTotalValueLockedCard = styled.div`
 const TotalValueLockedCard = () => {
   const TranslateString = useI18n()
   // const data = useGetStats()
-  const totalValue = useTotalValue();
+  const totalValue = useTotalValue()
   // const tvl = totalValue.toFixed(2);
 
   return (
     <StyledTotalValueLockedCard>
-      <div style={{width:'350px', paddingTop:'70px', paddingRight:'10px'}}>
-        
+      <div style={{ width: '350px', paddingTop: '70px', paddingRight: '10px' }}>
         <>
           {/* <Heading size="xl">{`$${tvl}`}</Heading> */}
           {/* <Heading size="xl"> */}
-            <CardValue value={totalValue.toNumber()} prefix="$" decimals={2}/>
+          <CardValue value={totalValue.toNumber()} prefix="$" decimals={2} />
           {/* </Heading> */}
-         
         </>
       </div>
     </StyledTotalValueLockedCard>

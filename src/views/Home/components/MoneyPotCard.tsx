@@ -7,7 +7,6 @@ import useI18n from 'hooks/useI18n'
 import UnlockButton from 'components/UnlockButton'
 
 const StyledMoneyPotCard = styled(Card)`
-  
   background-repeat: no-repeat;
   background-position: center;
   min-height: 376px;
@@ -27,29 +26,30 @@ const Label = styled.div`
 `
 const CardImage = styled.img`
   margin-bottom: 0px;
-  margin:15px;
+  margin: 15px;
 `
 
 const Actions = styled.div`
   margin-top: 24px;
 `
-const MoneyedPotCard = () => {  
+const MoneyedPotCard = () => {
+  return (
+    <StyledMoneyPotCard>
+      <CardBody>
+        <Heading
+          size="xl"
+          mb="10px"
+          style={{
+            textShadow: '2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 ',
+          }}
+        >
+          My Rewards
+        </Heading>
+        <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={80} height={80} />
+        <CardImage src="/images/farms/busd.png" alt="busd logo" width={80} height={80} />
+      </CardBody>
+    </StyledMoneyPotCard>
+  )
+}
 
-    return (
-        <StyledMoneyPotCard>
-          <CardBody>
-            <Heading size="xl" mb="10px" style={{
-              textShadow:'2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 '}}>
-              My Rewards
-            </Heading>
-            <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={80} height={80} />
-            <CardImage src="/images/farms/busd.png" alt="busd logo" width={80} height={80} />
-              
-            
-          </CardBody>
-        </StyledMoneyPotCard>
-        
-      )
-    }
-    
-    export default MoneyedPotCard
+export default MoneyedPotCard

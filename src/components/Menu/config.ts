@@ -85,7 +85,7 @@ const config: MenuEntry[] = [
       },
     ],
   },
-  
+
   {
     label: 'Audit by CTDSEC',
     icon: 'AuditIcon',
