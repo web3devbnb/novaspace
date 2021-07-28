@@ -1,11 +1,17 @@
 import React from 'react'
-import { Card, CardBody, Heading, Text } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Heading, Text, Button, useModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
+import { 
+  useSNovaTotalSupply,
+  useSNovaBurnedBalance,
+} from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getSNovaAddress } from 'utils/addressHelpers'
+import { useSwapToNova } from 'hooks/useUnstake'
+import SwapToNovaModal from './SwapToNovaModal'
+import useTokenBalance from '../../../hooks/useTokenBalance'
 import CardValue from './CardValue'
 import { useFarms, usePriceCakeBusd } from '../../../state/hooks'
 
@@ -25,13 +31,17 @@ const Row = styled.div`
 
 const SnovaStats = () => {
   const TranslateString = useI18n()
-  const totalSupply = useTotalSupply()
-  const burnedBalance = useBurnedBalance(getCakeAddress())
+  const totalSupply = useSNovaTotalSupply()
+  const burnedBalance = useSNovaBurnedBalance(getSNovaAddress())
   const farms = useFarms()
   const eggPrice = usePriceCakeBusd()
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
   const cakeSupply = getBalanceNumber(circSupply)
-  const marketCap = eggPrice.times(circSupply)
+  const sNovaBalance = useTokenBalance(getSNovaAddress())
+  const { onUnstake } = useSwapToNova()
+  const [onPresentSwapToNova] = useModal(
+    <SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />,
+  )
 
   let NovaPerBlock = 0
   if (farms && farms[0] && farms[0].NovaPerBlock) {
@@ -52,6 +62,13 @@ const SnovaStats = () => {
         <Row>
           <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
+        </Row>
+        <Row style={{paddingTop:'10px'}}>
+          <Button
+            onClick={onPresentSwapToNova}
+          >
+            {TranslateString(999, 'Swap to Nova')}
+          </Button>
         </Row>
       </CardBody>
     </StyledCakeStats>

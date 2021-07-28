@@ -7,8 +7,8 @@ import {
   updateUserBalance,
   updateUserPendingReward,
 } from 'state/actions'
-import { unstake, sousUnstake, sousEmegencyUnstake } from 'utils/callHelpers'
-import { useMasterchef, useSousChef } from './useContract'
+import { unstake, sousUnstake, sousEmegencyUnstake, swapToNova } from 'utils/callHelpers'
+import { useMasterchef, useSousChef, useSNova } from './useContract'
 
 const useUnstake = (pid: number) => {
   const dispatch = useDispatch()
@@ -56,6 +56,23 @@ export const useSousUnstake = (sousId) => {
   )
 
   return { onUnstake: handleUnstake }
+}
+
+export const useSwapToNova = () => {
+  const dispatch = useDispatch()
+  const { account } = useWallet()
+  const sNovaContract = useSNova()
+
+  const handleSwapToNova = useCallback(
+    async (amount: string) => {
+      const txHash = await swapToNova(sNovaContract, amount, account)
+      dispatch(fetchFarmUserDataAsync(account))
+      console.info(txHash)
+    },
+    [account, dispatch, sNovaContract],
+  )
+
+  return { onUnstake: handleSwapToNova }
 }
 
 export default useUnstake

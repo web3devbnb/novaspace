@@ -104,3 +104,28 @@ export const soushHarvestBnb = async (sousChefContract, account) => {
       return tx.transactionHash
     })
 }
+
+export const harvestRewards = async (moneyPotContract, address, account) => {
+  let sNovaHolder
+  if (address === null || address ===  undefined || address === '') {
+    sNovaHolder = '0x0000000000000000000000000000000000000000'
+  } else {
+    sNovaHolder = address
+  }
+
+  return moneyPotContract.methods
+    .harvestRewards(sNovaHolder)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const swapToNova = async (sNovaContract, amount, account) => {
+  return sNovaContract.methods
+    .swapToNova(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
