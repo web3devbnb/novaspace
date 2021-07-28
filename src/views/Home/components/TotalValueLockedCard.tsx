@@ -1,13 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, CardBody, Heading, Skeleton, Text } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Heading, Skeleton, Text, Tag } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import { useGetStats } from 'hooks/api'
 import { useTotalValue } from '../../../state/hooks'
 import CardValue from './CardValue'
 import Divider from './Divider'
 
-const StyledTotalValueLockedCard = styled.div`
+const StyledTag = styled(Tag)`
+  position: absolute;
+  top: -32px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  right: 30px;
+`
+
+const Container = styled.div`
   position: relative;
   padding: 18px 40px 28px;
   border-right: solid 2px ${({ theme }) => theme.colors.primary};
@@ -31,10 +39,13 @@ const TotalValueLockedCard = () => {
   // const tvl = totalValue.toFixed(2);
 
   return (
-    <StyledTotalValueLockedCard>
+    <Container>
+      <StyledTag glowing bold>
+        TOTAL DEPOSITED
+      </StyledTag>
       <StyledDivider />
       <CardValue value={totalValue.toNumber()} prefix="$" decimals={2} />
-    </StyledTotalValueLockedCard>
+    </Container>
   )
 }
 
