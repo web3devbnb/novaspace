@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody, Button, CardHeader } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
@@ -17,14 +17,6 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import CakeStats from './CakeStats'
 
 const StyledFarmStakingCard = styled(Card)`
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 376px;
-  min-width: 250px;
-  margin-right: 0px;
-  margin-left: 0px;
-  border-radius: 30px;
-  background-color: transparent;
   text-align: center;
 `
 
@@ -72,17 +64,13 @@ const FarmedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledFarmStakingCard>
-      <CardBody>
-        <Heading
-          size="xl"
-          mb="0px"
-          style={{
-            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
-          }}
-        >
+    <StyledFarmStakingCard gradientBorder>
+      <CardHeader>
+        <Heading glowing size="xl" mb="0px">
           Nova Stats
         </Heading>
+      </CardHeader>
+      <CardBody>
         <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
         <Block>
           <Label>Pending NOVA</Label>
@@ -109,7 +97,7 @@ const FarmedStakingCard = () => {
           )}
         </Actions>
         <div>
-          <CakeStats />{' '}
+          <CakeStats />
         </div>
       </CardBody>
     </StyledFarmStakingCard>

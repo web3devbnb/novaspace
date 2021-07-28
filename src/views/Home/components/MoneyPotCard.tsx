@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, Heading, Text, Button, useModal, Flex } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Heading, Text, Button, useModal, Flex, CardHeader } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -7,7 +7,7 @@ import {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
   useDistributedMoneyPotBNB,
-  useDistributedMoneyPotBUSD
+  useDistributedMoneyPotBUSD,
 } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
@@ -17,15 +17,7 @@ import CardValue from './CardValue'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 
 const StyledMoneyPotCard = styled(Card)`
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 376px;
-  margin-right: 0px;
-  margin-left: 0px;
-  border-radius: 30px;
-  background-color: transparent;
   text-align: center;
-  align-items: center;
 `
 const Row = styled.div`
   align-items: center;
@@ -61,38 +53,28 @@ const MoneyedPotCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
 
-
-
   return (
-    <StyledMoneyPotCard>
-      <CardBody>
-      
-        <Heading
-          size="xl"
-          mb="10px"
-          style={{
-            textShadow: '2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 ',
-          }}
-        >
+    <StyledMoneyPotCard gradientBorder>
+      <CardHeader>
+        <Heading size="xl" glowing>
           My Rewards
         </Heading>
-        
+      </CardHeader>
+      <CardBody>
         <Row>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={80} height={80} />
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={80} height={80} />
         </Row>
-        
-        
+
         <Row>
           <CardValue fontSize="14px" value={getBalanceNumber(bnbReward)} decimals={3} />
           <Text fontSize="14px">{TranslateString(999, 'BNB ')}</Text>
-          
+
           <CardValue fontSize="14px" value={getBalanceNumber(busdReward)} decimals={3} />
           <Text fontSize="14px">{TranslateString(999, ' BUSD ')}</Text>
         </Row>
-        <Row style={{paddingTop:'20px'}}>
+        <Row style={{ paddingTop: '20px' }}>
           <Button
-            
             fullWidth
             disabled={pendingTx}
             onClick={async () => {
@@ -105,39 +87,39 @@ const MoneyedPotCard = () => {
           </Button>
         </Row>
         {/* BNB distributedMoneyPot */}
-       <div>
-       <Heading
-          size="xl"
-          mb="10px"
-          style={{
-            textShadow: '2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 ',
-            padding:'20px'
-          }}
-        >
-          Total Rewards
-        </Heading>
-        <Row>
-          <Text fontSize="14px">{TranslateString(999, 'Total BNB')}</Text>
-          {distributedMoneyPotWBNB[0]}
-        </Row>
-        <Row>
-          <Text fontSize="14px">{TranslateString(999, 'BNB/sNOVA')}</Text>
-          {distributedMoneyPotWBNB[1]}
-        </Row>
-        
-        {/* BUSD distributedMoneyPot */}
-        <Row>
-          <Text fontSize="14px">{TranslateString(999, 'Total BUSD')}</Text>
-          {distributedMoneyPotBUSD[0]}
-        </Row>
-        <Row>
-          <Text fontSize="14px">{TranslateString(999, 'BUSD/sNOVA')}</Text>
-          {distributedMoneyPotBUSD[1]}
-        </Row>
-        <Row>
-          <Text fontSize="14px">{TranslateString(999, 'Last Reward Block')}</Text>
-          {distributedMoneyPotBUSD[2]}
-        </Row>
+        <div>
+          <Heading
+            size="xl"
+            mb="10px"
+            style={{
+              textShadow: '2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 ',
+              padding: '20px',
+            }}
+          >
+            Total Rewards
+          </Heading>
+          <Row>
+            <Text fontSize="14px">{TranslateString(999, 'Total BNB')}</Text>
+            {distributedMoneyPotWBNB[0]}
+          </Row>
+          <Row>
+            <Text fontSize="14px">{TranslateString(999, 'BNB/sNOVA')}</Text>
+            {distributedMoneyPotWBNB[1]}
+          </Row>
+
+          {/* BUSD distributedMoneyPot */}
+          <Row>
+            <Text fontSize="14px">{TranslateString(999, 'Total BUSD')}</Text>
+            {distributedMoneyPotBUSD[0]}
+          </Row>
+          <Row>
+            <Text fontSize="14px">{TranslateString(999, 'BUSD/sNOVA')}</Text>
+            {distributedMoneyPotBUSD[1]}
+          </Row>
+          <Row>
+            <Text fontSize="14px">{TranslateString(999, 'Last Reward Block')}</Text>
+            {distributedMoneyPotBUSD[2]}
+          </Row>
         </div>
       </CardBody>
     </StyledMoneyPotCard>

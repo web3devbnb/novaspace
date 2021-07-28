@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody, Button, CardHeader } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
@@ -17,15 +17,7 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import SnovaStats from './sNovaStats'
 
 const StyledSNovaStakingCard = styled(Card)`
-  background-repeat: no-repeat;
-  background-position: top right;
-  min-height: 376px;
-  margin-right: 0px;
-  margin-left: 0px;
-  border-radius: 30px;
-  background-color: transparent;
   text-align: center;
-  border: 1px;
 `
 
 const Block = styled.div`
@@ -51,7 +43,7 @@ const SNovaedStakingCard = () => {
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
   const cakeBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
-  
+
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
@@ -72,17 +64,13 @@ const SNovaedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledSNovaStakingCard>
-      <CardBody>
-        <Heading
-          size="xl"
-          mb="0px"
-          style={{
-            textShadow: '2px 2px 10px #d4af3780, -2px -2px 10px #d4af3780 ',
-          }}
-        >
+    <StyledSNovaStakingCard gradientBorder>
+      <CardHeader>
+        <Heading size="xl" glowing>
           sNova Stats
         </Heading>
+      </CardHeader>
+      <CardBody>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
         <Block>
           <Label style={{ paddingTop: '25px' }}>Pending sNOVA</Label>

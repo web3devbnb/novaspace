@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { 
+  useSNovaPenalty,
   useSNovaTotalSupply,
   useSNovaBurnedBalance,
 } from 'hooks/useTokenBalance'
@@ -42,12 +43,8 @@ const SnovaStats = () => {
   const [onPresentSwapToNova] = useModal(
     <SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />,
   )
-
-  let NovaPerBlock = 0
-  if (farms && farms[0] && farms[0].NovaPerBlock) {
-    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber()
-  }
-
+  const swapPenalty = useSNovaPenalty()
+  
   return (
     <StyledCakeStats>
       <CardBody>
@@ -69,6 +66,9 @@ const SnovaStats = () => {
           >
             {TranslateString(999, 'Swap to Nova')}
           </Button>
+          
+          <CardValue fontSize="14px" value={getBalanceNumber(swapPenalty)} decimals={10} />
+          <Text fontSize="14px">{TranslateString(999, 'Penalty')}</Text>
         </Row>
       </CardBody>
     </StyledCakeStats>

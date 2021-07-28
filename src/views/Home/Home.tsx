@@ -37,7 +37,7 @@ const Hero = styled.div`
 `
 
 const Cards = styled(BaseLayout)`
-  align-items: stretch;
+  display: flex;
   justify-content: center;
   margin-bottom: 48px;
   margin-top: 32px;
@@ -45,28 +45,6 @@ const Cards = styled(BaseLayout)`
   & > div {
     grid-column: 4;
     width: 100%;
-  }
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 4;
-      border: 1px solid;
-      border-color: #00aaff;
-    }
-  }
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 4;
-      border: 1px solid;
-      border-color: #00aaff;
-    }
-  }
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 4;
-      border: 1px solid;
-      border-color: #00aaff;
-    }
   }
 `
 
