@@ -7,7 +7,13 @@ import sNovaABI from 'config/abi/snova.json'
 import moneypotABI from 'config/abi/moneypot.json'
 import { getContract } from 'utils/web3'
 import { getTokenBalance } from 'utils/erc20'
-import { getCakeAddress, getSNovaAddress, getMoneyPotAddress, getBusdAddress, getWbnbAddress } from 'utils/addressHelpers'
+import {
+  getCakeAddress,
+  getSNovaAddress,
+  getMoneyPotAddress,
+  getBusdAddress,
+  getWbnbAddress,
+} from 'utils/addressHelpers'
 import useRefresh from './useRefresh'
 
 const useTokenBalance = (tokenAddress: string) => {
@@ -104,7 +110,7 @@ export const useMoneyPotBNBReward = () => {
   const bnbAddress = getWbnbAddress()
   let user
 
-  if (account === null || account ===  undefined || account === '') {
+  if (account === null || account === undefined || account === '') {
     user = '0x0000000000000000000000000000000000000000'
   } else {
     user = account
@@ -130,7 +136,7 @@ export const useMoneyPotBUSDReward = () => {
   const busdAddress = getBusdAddress()
   let user
 
-  if (account === null || account ===  undefined || account === '') {
+  if (account === null || account === undefined || account === '') {
     user = '0x0000000000000000000000000000000000000000'
   } else {
     user = account
@@ -155,7 +161,7 @@ export const useSNovaPenalty = () => {
   const { account }: { account: string } = useWallet()
   let user
 
-  if (account === null || account ===  undefined || account === '') {
+  if (account === null || account === undefined || account === '') {
     user = '0x0000000000000000000000000000000000000000'
   } else {
     user = account

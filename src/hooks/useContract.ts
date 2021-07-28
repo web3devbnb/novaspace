@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react'
 import { AbiItem } from 'web3-utils'
 import { ContractOptions } from 'web3-eth-contract'
 import useWeb3 from 'hooks/useWeb3'
-import { getMasterChefAddress, getCakeAddress, getLotteryAddress, getLotteryTicketAddress, getMoneyPotAddress, getSNovaAddress } from 'utils/addressHelpers'
+import {
+  getMasterChefAddress,
+  getCakeAddress,
+  getLotteryAddress,
+  getLotteryTicketAddress,
+  getMoneyPotAddress,
+  getSNovaAddress,
+} from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
 import ifo from 'config/abi/ifo.json'
@@ -79,12 +86,12 @@ export const useSousChef = (id) => {
 }
 
 export const useMoneyPot = () => {
-  const moneyPotAbi = (moneyPot as unknown) as AbiItem
+  const moneyPotAbi = moneyPot as unknown as AbiItem
   return useContract(moneyPotAbi, getMoneyPotAddress())
 }
 
 export const useSNova = () => {
-  const sNovaAbi = (sNova as unknown) as AbiItem
+  const sNovaAbi = sNova as unknown as AbiItem
   return useContract(sNovaAbi, getSNovaAddress())
 }
 
