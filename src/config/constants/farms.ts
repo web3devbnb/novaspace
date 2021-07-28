@@ -8,12 +8,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA-BUSD LP',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
+      56: '0x52157699bA2b3bCEF0E91aa6bF56680672810964',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
@@ -24,12 +24,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA-BNB LP',
     lpAddresses: {
       97: '0x429008d0fe2725c68715d5db13a67f038c501fff',
-      56: '0xd1b59d11316e87c3a0a069e80f590ba35cd8d8d3',
+      56: '0x6534cA773018203f6774503d6A7Cd530f9CC4EA3',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
@@ -40,7 +40,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {
       97: '0xa39352142b1f8f9FD43DEB307fbABb05FeC195B6',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
+      56: '0xe20E810Cbe229E9AbAd210adfFF59B1EB723acEa',
     },
     tokenSymbol: 'BNB',
     tokenAddresses: {
@@ -217,12 +217,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '', // EGG-BUSD LP
+      56: '0x52157699bA2b3bCEF0E91aa6bF56680672810964', // EGG-BUSD LP
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,

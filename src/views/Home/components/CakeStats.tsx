@@ -1,11 +1,21 @@
-import React from 'react'
-import { Card, CardBody, Heading, Text } from '@pancakeswap-libs/uikit'
+import React, { useState } from 'react'
+import { Card, CardBody, Heading, Text, Button } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
+import {
+  useTotalSupply,
+  useBurnedBalance,
+  useSNovaTotalSupply,
+  useSNovaBurnedBalance,
+  useMoneyPotBNBReward,
+  useMoneyPotBUSDReward,
+  useDistributedMoneyPotBNB,
+  useDistributedMoneyPotBUSD
+} from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { useHarvestRewards } from 'hooks/useHarvest'
+import { getCakeAddress, getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import { useFarms, usePriceCakeBusd } from '../../../state/hooks'
 
@@ -26,11 +36,19 @@ const CakeStats = () => {
   const TranslateString = useI18n()
   const totalSupply = useTotalSupply()
   const burnedBalance = useBurnedBalance(getCakeAddress())
+  const totalSNovaSupply = useSNovaTotalSupply()
+  const burnedSNovaBalance = useSNovaBurnedBalance(getSNovaAddress())
   const farms = useFarms();
   const eggPrice = usePriceCakeBusd();
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0);
   const cakeSupply = getBalanceNumber(circSupply);
   const marketCap = eggPrice.times(circSupply);
+  const bnbReward = useMoneyPotBNBReward()
+  const busdReward = useMoneyPotBUSDReward()
+  const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
+  const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
+  const [pendingTx, setPendingTx] = useState(false)
+  const { onReward } = useHarvestRewards()
 
   let NovaPerBlock = 0;
   if(farms && farms[0] && farms[0].NovaPerBlock){
@@ -62,6 +80,60 @@ const CakeStats = () => {
         <Row>
           <Text fontSize="14px">{TranslateString(540, 'New EGG/block')}</Text>
           <Text bold fontSize="14px">{NovaPerBlock}</Text>
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Total SNova Minted')}</Text>
+          {totalSNovaSupply && <CardValue fontSize="14px" value={getBalanceNumber(totalSNovaSupply)} decimals={0} />}
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Total SNova Burned')}</Text>
+          <CardValue fontSize="14px" value={getBalanceNumber(burnedSNovaBalance)} decimals={0} />
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Total BNB Reward')}</Text>
+          <CardValue fontSize="14px" value={getBalanceNumber(bnbReward)} decimals={3} />
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Total BUSD Reward')}</Text>
+          <CardValue fontSize="14px" value={getBalanceNumber(busdReward)} decimals={3} />
+        </Row>
+        <Row>
+          <Button
+            disabled={pendingTx}
+            onClick={async () => {
+              setPendingTx(true)
+              await onReward()
+              setPendingTx(false)
+            }}
+          >
+            {TranslateString(999, 'Harvest Rewards')}
+          </Button>
+        </Row>
+        {/* BNB distributedMoneyPot */}
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BNB tokenAmount')}</Text>
+          {distributedMoneyPotWBNB[0]}
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BNB accTokenPerShare')}</Text>
+          {distributedMoneyPotWBNB[1]}
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BNB lastRewardBlock')}</Text>
+          {distributedMoneyPotWBNB[2]}
+        </Row>
+        {/* BUSD distributedMoneyPot */}
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BUSD tokenAmount')}</Text>
+          {distributedMoneyPotBUSD[0]}
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BUSD accTokenPerShare')}</Text>
+          {distributedMoneyPotBUSD[1]}
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BUSD lastRewardBlock')}</Text>
+          {distributedMoneyPotBUSD[2]}
         </Row>
       </CardBody>
     </StyledCakeStats>
