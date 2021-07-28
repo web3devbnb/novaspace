@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, Heading, Text, Button } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Heading, Text, Button, useModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -15,9 +15,12 @@ import {
 } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
+import { useSwapToNova } from 'hooks/useUnstake'
 import { getCakeAddress, getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
+import useTokenBalance from '../../../hooks/useTokenBalance'
 import { useFarms, usePriceCakeBusd } from '../../../state/hooks'
+import SwapToNovaModal from './SwapToNovaModal'
 
 const StyledCakeStats = styled(Card)`
   margin-left: auto;
@@ -49,6 +52,12 @@ const CakeStats = () => {
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
+  const sNovaBalance = useTokenBalance(getSNovaAddress())
+  const { onUnstake } = useSwapToNova()
+
+  const [onPresentSwapToNova] = useModal(
+    <SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />,
+  )
 
   let NovaPerBlock = 0;
   if(farms && farms[0] && farms[0].NovaPerBlock){
@@ -135,6 +144,14 @@ const CakeStats = () => {
           <Text fontSize="14px">{TranslateString(999, 'Distributed Money Pot BUSD lastRewardBlock')}</Text>
           {distributedMoneyPotBUSD[2]}
         </Row>
+        <Row>
+          <Button
+            onClick={onPresentSwapToNova}
+          >
+            {TranslateString(999, 'Swap to Nova')}
+          </Button>
+        </Row>
+
       </CardBody>
     </StyledCakeStats>
   )
