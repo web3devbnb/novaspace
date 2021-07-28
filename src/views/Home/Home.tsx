@@ -17,12 +17,13 @@ import MoneyedPotCard from './components/MoneyPotCard'
 // background-position: right;
 
 const Hero = styled.div`
+  position: relative;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
   justify-content: center;
   flex-direction: grid;
-  margin: auto;
+  //margin: auto;
   margin-bottom: 0px;
   padding-top: 15px;
   text-align: left;
@@ -30,8 +31,7 @@ const Hero = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     text-align: left;
     image-size: 100px;
-    height: 150px;
-    padding-top: 5px;
+    padding-top: 0px;
     padding-right: 1px;
   }
 `
@@ -40,6 +40,7 @@ const Cards = styled(BaseLayout)`
   align-items: stretch;
   justify-content: center;
   margin-bottom: 48px;
+  margin-top: 32px;
 
   & > div {
     grid-column: 4;
@@ -69,35 +70,29 @@ const Cards = styled(BaseLayout)`
   }
 `
 
+const Header = ({ children }) => (
+  <Hero>
+    <Heading as="p" size="xl" glowing mb="28px" color="#FFFFFF" style={{ fontWeight: 700 }}>
+      {children}
+    </Heading>
+    <div style={{ position: 'absolute', right: '10vw', bottom: -4 }}>
+      <TotalValueLockedCard />
+    </div>
+  </Hero>
+)
+
 const Home: React.FC = () => {
   const TranslateString = useI18n()
 
   return (
     <Page>
-      <Hero>
-        <Heading
-          as="h1"
-          size="xxl"
-          mb="24px"
-          color="#FFFFFF"
-          style={{
-            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
-            paddingRight: '25px',
-            paddingTop: '55px',
-          }}
-        >
-          DASHBOARD
-        </Heading>
-        <TotalValueLockedCard />
-      </Hero>
-      <div>
-        <Divider />
-        <Cards>
-          <FarmStakingCard />
-          <SNovaStakingCard />
-          <MoneyedPotCard />
-        </Cards>
-      </div>
+      <Header>DASHBOARD</Header>
+      <Divider />
+      <Cards>
+        <FarmStakingCard />
+        <SNovaStakingCard />
+        <MoneyedPotCard />
+      </Cards>
     </Page>
   )
 }
