@@ -149,6 +149,31 @@ export const useMoneyPotBUSDReward = () => {
   return moneyPotBUSDReward
 }
 
+export const useSNovaPenalty = () => {
+  const { slowRefresh } = useRefresh()
+  const [SNovaPenalty, setSNovaPenalty] = useState<BigNumber>()
+  const { account }: { account: string } = useWallet()
+  let user
+
+  if (account === null || account ===  undefined || account === '') {
+    user = '0x0000000000000000000000000000000000000000'
+  } else {
+    user = account
+  }
+
+  useEffect(() => {
+    async function fetchSNovaPenalty() {
+      const sNovaContract = getContract(sNovaABI, getSNovaAddress())
+      const reward = await sNovaContract.methods.getPenaltyPercent(user).call()
+      setSNovaPenalty(new BigNumber(reward))
+    }
+
+    fetchSNovaPenalty()
+  }, [user, slowRefresh])
+
+  return SNovaPenalty
+}
+
 export const useDistributedMoneyPotBUSD = () => {
   const { slowRefresh } = useRefresh()
   const [distributedMoneyPotBUSD, setDistributedMoneyPotBUSD] = useState<Array<any>>([])
