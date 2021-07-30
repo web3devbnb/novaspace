@@ -39,6 +39,25 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "getEthBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "balance",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "blockNumber",
         "type": "uint256"
@@ -57,12 +76,25 @@
   },
   {
     "inputs": [],
-    "name": "getCurrentBlockCoinbase",
+    "name": "getLastBlockHash",
     "outputs": [
       {
-        "internalType": "address",
-        "name": "coinbase",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "blockHash",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCurrentBlockTimestamp",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -96,44 +128,12 @@
   },
   {
     "inputs": [],
-    "name": "getCurrentBlockTimestamp",
+    "name": "getCurrentBlockCoinbase",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
       {
         "internalType": "address",
-        "name": "addr",
+        "name": "coinbase",
         "type": "address"
-      }
-    ],
-    "name": "getEthBalance",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "balance",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getLastBlockHash",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "blockHash",
-        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
