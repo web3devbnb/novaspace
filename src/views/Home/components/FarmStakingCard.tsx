@@ -7,14 +7,14 @@ import useI18n from 'hooks/useI18n'
 import { useAllHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
-import CakeHarvestBalance from './CakeHarvestBalance'
-import CakeWalletBalance from './CakeWalletBalance'
-import { usePriceCakeBusd } from '../../../state/hooks'
+import NovaHarvestBalance from './NovaHarvestBalance'
+import NovaWalletBalance from './NovaWalletBalance'
+import { usePriceNovaBusd } from '../../../state/hooks'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import { getCakeAddress } from '../../../utils/addressHelpers'
+import { getNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-import CakeStats from './CakeStats'
+import NovaStats from './NovaStats'
 
 const StyledFarmStakingCard = styled(Card)`
   text-align: center;
@@ -42,8 +42,8 @@ const FarmedStakingCard = () => {
   const { account } = useWallet()
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
-  const cakeBalance = getBalanceNumber(useTokenBalance(getCakeAddress()))
-  const eggPrice = usePriceCakeBusd().toNumber()
+  const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
+  const eggPrice = usePriceNovaBusd().toNumber()
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
@@ -74,13 +74,13 @@ const FarmedStakingCard = () => {
         <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
         <Block>
           <Label>Pending NOVA</Label>
-          <CakeHarvestBalance earningsSum={earningsSum} />
+          <NovaHarvestBalance earningsSum={earningsSum} />
           <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
         </Block>
         <Block>
           <Label>NOVA Balance</Label>
-          <CakeWalletBalance cakeBalance={cakeBalance} />
-          <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
+          <NovaWalletBalance novaBalance={novaBalance} />
+          <Label>~${(eggPrice * novaBalance).toFixed(2)}</Label>
         </Block>
         <Actions>
           {account ? (
@@ -97,7 +97,7 @@ const FarmedStakingCard = () => {
           )}
         </Actions>
         <div>
-          <CakeStats />
+          <NovaStats />
         </div>
       </CardBody>
     </StyledFarmStakingCard>

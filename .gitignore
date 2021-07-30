@@ -23,6 +23,7 @@
 .env.development.local
 .env
 .eslintcache
+notes.txt
 
 # debug
 npm-debug.log*

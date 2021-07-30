@@ -7,8 +7,8 @@ import useI18n from 'hooks/useI18n'
 import { useAllHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
-import CakeHarvestBalance from './CakeHarvestBalance'
-import CakeWalletBalance from './CakeWalletBalance'
+import NovaHarvestBalance from './NovaHarvestBalance'
+import NovaWalletBalance from './NovaWalletBalance'
 
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getSNovaAddress } from '../../../utils/addressHelpers'
@@ -43,7 +43,7 @@ const SNovaedStakingCard = () => {
   const { account } = useWallet()
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
-  const cakeBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
+  const novaBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
 
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
@@ -75,11 +75,11 @@ const SNovaedStakingCard = () => {
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
         <Block>
           <Label style={{ paddingTop: '25px' }}>Pending sNOVA</Label>
-          <CakeHarvestBalance earningsSum={earningsSum} />
+          <NovaHarvestBalance earningsSum={earningsSum} />
         </Block>
         <Block>
           <Label>sNOVA Balance</Label>
-          <CakeWalletBalance cakeBalance={cakeBalance} />
+          <NovaWalletBalance novaBalance={novaBalance} />
         </Block>
         <Actions>
           {account ? (

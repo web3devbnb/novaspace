@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
-import { useFarms, usePriceCakeBusd } from '../../../state/hooks'
+import { useFarms, usePriceNovaBusd } from '../../../state/hooks'
 
-const StyledCakeStats = styled(Card)`
+const StyledNovaStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
   background: transparent;
@@ -23,14 +23,14 @@ const Row = styled.div`
   margin-bottom: 8px;
 `
 
-const CakeStats = () => {
+const NovaStats = () => {
   const TranslateString = useI18n()
   const totalSupply = useTotalSupply()
-  const burnedBalance = useBurnedBalance(getCakeAddress())
+  const burnedBalance = useBurnedBalance(getNovaAddress())
   const farms = useFarms()
-  const eggPrice = usePriceCakeBusd()
+  const eggPrice = usePriceNovaBusd()
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
-  const cakeSupply = getBalanceNumber(circSupply)
+  const novaSupply = getBalanceNumber(circSupply)
   const marketCap = eggPrice.times(circSupply)
 
   let NovaPerBlock = 0
@@ -39,7 +39,7 @@ const CakeStats = () => {
   }
 
   return (
-    <StyledCakeStats>
+    <StyledNovaStats>
       <CardBody>
         <Row>
           <Text fontSize="14px">{TranslateString(10005, 'Market Cap')}</Text>
@@ -55,7 +55,7 @@ const CakeStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
+          {novaSupply && <CardValue fontSize="14px" value={novaSupply} decimals={0} />}
         </Row>
         <Row>
           <Text fontSize="14px">NOVA/block</Text>
@@ -64,8 +64,8 @@ const CakeStats = () => {
           </Text>
         </Row>
       </CardBody>
-    </StyledCakeStats>
+    </StyledNovaStats>
   )
 }
 
-export default CakeStats
+export default NovaStats

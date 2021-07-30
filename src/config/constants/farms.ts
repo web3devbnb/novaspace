@@ -9,12 +9,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '', // EGG-BUSD LP
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63', 
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
@@ -30,7 +30,7 @@ const farms: FarmConfig[] = [
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
@@ -46,7 +46,7 @@ const farms: FarmConfig[] = [
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
@@ -57,7 +57,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {
       97: '0xa39352142b1f8f9FD43DEB307fbABb05FeC195B6',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
+      56: '0xe20E810Cbe229E9AbAd210adfFF59B1EB723acEa',
     },
     tokenSymbol: 'BNB',
     tokenAddresses: {
@@ -80,8 +80,8 @@ const farms: FarmConfig[] = [
       97: '0xc3c08346480c7d6059193d9b978f19682b15524a',
       56: '',
     },
-    quoteTokenSymbol: QuoteToken.CAKE,
-    quoteTokenAdresses: contracts.cake,
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
   },
   {
     pid: 5,
@@ -198,12 +198,12 @@ const farms: FarmConfig[] = [
   // {
   //   pid: 10,
   //   risk: 4,
-  //   lpSymbol: 'CAKE-BUSD LP',
+  //   lpSymbol: 'NOVA-BUSD LP',
   //   lpAddresses: {
   //     97: '',
   //     56: '0x0ed8e0a2d99643e1e65cca22ed4424090b8b7458',
   //   },
-  //   tokenSymbol: 'CAKE',
+  //   tokenSymbol: 'NOVA',
   //   tokenAddresses: {
   //     97: '',
   //     56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
@@ -214,12 +214,12 @@ const farms: FarmConfig[] = [
   // {
   //   pid: 11,
   //   risk: 4,
-  //   lpSymbol: 'CAKE-BNB LP',
+  //   lpSymbol: 'NOVA-BNB LP',
   //   lpAddresses: {
   //     97: '',
   //     56: '0xa527a61703d82139f8a06bc30097cc9caa2df5a6',
   //   },
-  //   tokenSymbol: 'CAKE',
+  //   tokenSymbol: 'NOVA',
   //   tokenAddresses: {
   //     97: '',
   //     56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
@@ -334,12 +334,12 @@ const farms: FarmConfig[] = [
   //   pid: 21,
   //   risk: 4,
   //   isTokenOnly: true,
-  //   lpSymbol: 'CAKE',
+  //   lpSymbol: 'NOVA',
   //   lpAddresses: {
   //     97: '',
-  //     56: '0x0ed8e0a2d99643e1e65cca22ed4424090b8b7458', // CAKE-BUSD LP
+  //     56: '0x0ed8e0a2d99643e1e65cca22ed4424090b8b7458', // NOVA-BUSD LP
   //   },
-  //   tokenSymbol: 'CAKE',
+  //   tokenSymbol: 'NOVA',
   //   tokenAddresses: {
   //     97: '',
   //     56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',

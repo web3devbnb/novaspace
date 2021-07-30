@@ -12,7 +12,7 @@ import {
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
 import { useSwapToNova } from 'hooks/useUnstake'
-import { getCakeAddress, getSNovaAddress } from 'utils/addressHelpers'
+import { getNovaAddress, getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 

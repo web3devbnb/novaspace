@@ -4,7 +4,7 @@ import { ContractOptions } from 'web3-eth-contract'
 import useWeb3 from 'hooks/useWeb3'
 import {
   getMasterChefAddress,
-  getCakeAddress,
+  getNovaAddress,
   getLotteryAddress,
   getLotteryTicketAddress,
   getMoneyPotAddress,
@@ -15,7 +15,7 @@ import { PoolCategory } from 'config/constants/types'
 import ifo from 'config/abi/ifo.json'
 import erc20 from 'config/abi/erc20.json'
 import rabbitmintingfarm from 'config/abi/rabbitmintingfarm.json'
-import pancakeRabbits from 'config/abi/pancakeRabbits.json'
+
 import lottery from 'config/abi/lottery.json'
 import lotteryTicket from 'config/abi/lotteryNft.json'
 import masterChef from 'config/abi/masterchef.json'
@@ -49,8 +49,8 @@ export const useERC20 = (address: string) => {
   return useContract(erc20Abi, address)
 }
 
-export const useCake = () => {
-  return useERC20(getCakeAddress())
+export const useNova = () => {
+  return useERC20(getNovaAddress())
 }
 
 export const useRabbitMintingFarm = (address: string) => {
@@ -58,10 +58,7 @@ export const useRabbitMintingFarm = (address: string) => {
   return useContract(rabbitMintingFarmAbi, address)
 }
 
-export const usePancakeRabbits = (address: string) => {
-  const pancakeRabbitsAbi = pancakeRabbits as unknown as AbiItem
-  return useContract(pancakeRabbitsAbi, address)
-}
+
 
 export const useLottery = () => {
   const abi = lottery as unknown as AbiItem

@@ -5,12 +5,12 @@ import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
 import FarmStakingCard from './components/FarmStakingCard'
 import LotteryCard from './components/LotteryCard'
-import CakeStats from './components/CakeStats'
+import NovaStats from './components/NovaStats'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
 import Divider from './components/Divider'
 import SNovaStakingCard from './components/sNovaStakingCard'
-import StatsCard from './components/StatsCard'
+
 import MoneyedPotCard from './components/MoneyPotCard'
 
 // background-image: url(images/TVLbg.png);

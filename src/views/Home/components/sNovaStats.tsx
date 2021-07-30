@@ -14,9 +14,9 @@ import { useSwapToNova } from 'hooks/useUnstake'
 import SwapToNovaModal from './SwapToNovaModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import CardValue from './CardValue'
-import { useFarms, usePriceCakeBusd } from '../../../state/hooks'
+import { useFarms, usePriceNovaBusd } from '../../../state/hooks'
 
-const StyledCakeStats = styled(Card)`
+const StyledNovaStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
   background: transparent;
@@ -36,7 +36,7 @@ const SnovaStats = () => {
   const burnedBalance = useSNovaBurnedBalance(getSNovaAddress())
   
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
-  const cakeSupply = getBalanceNumber(circSupply)
+  const novaSupply = getBalanceNumber(circSupply)
   const sNovaBalance = useTokenBalance(getSNovaAddress()) 
   const { onUnstake } = useSwapToNova()
   const [onPresentSwapToNova] = useModal(
@@ -45,7 +45,7 @@ const SnovaStats = () => {
   const swapPenalty = useSNovaPenalty()
   
   return (
-    <StyledCakeStats>
+    <StyledNovaStats>
       <CardBody>
         <Row>
           <Text fontSize="14px">{TranslateString(536, 'Total Minted')}</Text>
@@ -57,7 +57,7 @@ const SnovaStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
+          {novaSupply && <CardValue fontSize="14px" value={novaSupply} decimals={0} />}
         </Row>
         <Row style={{paddingTop:'10px'}}>
           <Button
@@ -70,7 +70,7 @@ const SnovaStats = () => {
           <Text fontSize="14px">{TranslateString(999, 'Penalty')}</Text>
         </Row>
       </CardBody>
-    </StyledCakeStats>
+    </StyledNovaStats>
   )
 }
 

@@ -1,5 +1,5 @@
 export default {
-  cake: {
+  nova: {
     56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
   },
@@ -32,7 +32,7 @@ export default {
     97: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
   },
   moneyPot: {
-    56: '0x1974E708bbb4AbC3EFC7A85DaD3853Ac8B47B28C',
+    56: '0xC733261fC2e4c48996C49e92f54c630c74910Edd',
     97: '0x6099c4f8b42C4F41c070514EF48fCA00ca454710',
   },
 }
