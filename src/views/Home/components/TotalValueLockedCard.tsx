@@ -40,7 +40,7 @@ const TotalValueLockedCard = () => {
 
   return (
     <Container>
-      <StyledTag glowing bold>
+      <StyledTag  >
         TOTAL DEPOSITED
       </StyledTag>
       <StyledDivider />

@@ -3,7 +3,11 @@ import { Card, CardBody, Heading, Text, Button, useModal } from '@pancakeswap-li
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useSNovaPenalty, useSNovaTotalSupply, useSNovaBurnedBalance } from 'hooks/useTokenBalance'
+import { 
+  useSNovaPenalty,
+  useSNovaTotalSupply,
+  useSNovaBurnedBalance,
+} from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { getSNovaAddress } from 'utils/addressHelpers'
 import { useSwapToNova } from 'hooks/useUnstake'
@@ -30,15 +34,16 @@ const SnovaStats = () => {
   const TranslateString = useI18n()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnedBalance(getSNovaAddress())
-  const farms = useFarms()
-  const eggPrice = usePriceCakeBusd()
+  
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
   const cakeSupply = getBalanceNumber(circSupply)
-  const sNovaBalance = useTokenBalance(getSNovaAddress())
+  const sNovaBalance = useTokenBalance(getSNovaAddress()) 
   const { onUnstake } = useSwapToNova()
-  const [onPresentSwapToNova] = useModal(<SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />)
+  const [onPresentSwapToNova] = useModal(
+    <SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />,
+  )
   const swapPenalty = useSNovaPenalty()
-
+  
   return (
     <StyledCakeStats>
       <CardBody>
@@ -54,10 +59,14 @@ const SnovaStats = () => {
           <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
-        <Row style={{ paddingTop: '10px' }}>
-          <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to Nova')}</Button>
-
-          <CardValue fontSize="14px" value={getBalanceNumber(swapPenalty)} decimals={10} />
+        <Row style={{paddingTop:'10px'}}>
+          <Button
+            onClick={onPresentSwapToNova}
+          >
+            {TranslateString(999, 'Swap to Nova')}
+          </Button>
+          
+          <CardValue fontSize="14px" value={getBalanceNumber(swapPenalty)} />
           <Text fontSize="14px">{TranslateString(999, 'Penalty')}</Text>
         </Row>
       </CardBody>

@@ -36,7 +36,8 @@ const Label = styled.div`
 `
 const CardImage = styled.img`
   margin-bottom: 0px;
-  margin: 15px;
+  margin-top: 0px;
+  margin: auto;
   align-items: center;
   text-align: center;
 `
@@ -62,16 +63,16 @@ const MoneyedPotCard = () => {
       </CardHeader>
       <CardBody>
         <Row>
-          <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={80} height={80} />
-          <CardImage src="/images/farms/busd.png" alt="busd logo" width={80} height={80} />
+          <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={120} height={120} />
+          <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
         </Row>
 
         <Row>
-          <CardValue fontSize="14px" value={getBalanceNumber(bnbReward)} decimals={3} />
-          <Text fontSize="14px">{TranslateString(999, 'BNB ')}</Text>
+          <CardValue fontSize="24px" value={getBalanceNumber(bnbReward)} decimals={3} />
+          <Text fontSize="24px">{TranslateString(999, 'BNB ')}</Text>
 
-          <CardValue fontSize="14px" value={getBalanceNumber(busdReward)} decimals={3} />
-          <Text fontSize="14px">{TranslateString(999, ' BUSD ')}</Text>
+          <CardValue fontSize="24px" value={getBalanceNumber(busdReward)} decimals={3} />
+          <Text fontSize="24px">{TranslateString(999, ' BUSD ')}</Text>
         </Row>
         <Row style={{ paddingTop: '20px' }}>
           <Button

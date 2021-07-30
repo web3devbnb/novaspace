@@ -3,6 +3,23 @@ import { FarmConfig, QuoteToken } from './types'
 
 const farms: FarmConfig[] = [
   {
+    pid: 0,
+    risk: 5,
+    isTokenOnly: true,
+    lpSymbol: 'NOVA',
+    lpAddresses: {
+      97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
+      56: '', // EGG-BUSD LP
+    },
+    tokenSymbol: 'NOVA',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
+    },
+    quoteTokenSymbol: QuoteToken.BUSD,
+    quoteTokenAdresses: contracts.busd,
+  },
+  {
     pid: 2,
     risk: 5,
     lpSymbol: 'NOVA-BUSD LP',
@@ -210,23 +227,7 @@ const farms: FarmConfig[] = [
   //   quoteTokenSymbol: QuoteToken.BNB,
   //   quoteTokenAdresses: contracts.wbnb,
   // },
-  {
-    pid: 0,
-    risk: 5,
-    isTokenOnly: true,
-    lpSymbol: 'NOVA',
-    lpAddresses: {
-      97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '', // EGG-BUSD LP
-    },
-    tokenSymbol: 'NOVA',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x6DbDdAb446A56D87219637772a5d64a336f328ce',
-    },
-    quoteTokenSymbol: QuoteToken.BUSD,
-    quoteTokenAdresses: contracts.busd,
-  },
+ 
   // {
   //   pid: 13,
   //   risk: 1,

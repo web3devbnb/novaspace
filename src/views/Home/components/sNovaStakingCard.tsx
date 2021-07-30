@@ -18,6 +18,7 @@ import SnovaStats from './sNovaStats'
 
 const StyledSNovaStakingCard = styled(Card)`
   text-align: center;
+  
 `
 
 const Block = styled.div`

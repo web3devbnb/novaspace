@@ -170,8 +170,8 @@ export const useSNovaPenalty = () => {
   useEffect(() => {
     async function fetchSNovaPenalty() {
       const sNovaContract = getContract(sNovaABI, getSNovaAddress())
-      const reward = await sNovaContract.methods.getPenaltyPercent(user).call()
-      setSNovaPenalty(new BigNumber(reward))
+      const penalty = await sNovaContract.methods.getPenaltyPercent(user).call()
+      setSNovaPenalty(new BigNumber(penalty))
     }
 
     fetchSNovaPenalty()
