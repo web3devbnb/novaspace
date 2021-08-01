@@ -32,7 +32,7 @@ const useFarmsWithBalance = () => {
     }
 
     if (account) {
-      // fetchBalances()
+       fetchBalances()
     }
   }, [account, fastRefresh])
 
