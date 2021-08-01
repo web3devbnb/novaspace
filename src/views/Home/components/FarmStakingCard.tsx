@@ -16,7 +16,7 @@ import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import NovaStats from './NovaStats'
 
-const StyledFarmStakingCard = styled(Card)`
+const StyledCard = styled(Card)`
   text-align: center;
 `
 
@@ -64,9 +64,9 @@ const FarmedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledFarmStakingCard gradientBorder>
+    <StyledCard gradientBorder>
       <CardHeader>
-        <Heading glowing size="xl" mb="0px">
+        <Heading glowing style={{ fontSize: 32 }}>
           Nova Stats
         </Heading>
       </CardHeader>
@@ -100,7 +100,7 @@ const FarmedStakingCard = () => {
           <NovaStats />
         </div>
       </CardBody>
-    </StyledFarmStakingCard>
+    </StyledCard>
   )
 }
 

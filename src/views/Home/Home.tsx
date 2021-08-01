@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '@pancakeswap-libs/uikit'
+import { Text, BaseLayout } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
+import Header from 'components/Header'
 import FarmStakingCard from './components/FarmStakingCard'
 import LotteryCard from './components/LotteryCard'
 import NovaStats from './components/NovaStats'
@@ -13,51 +14,24 @@ import SNovaStakingCard from './components/sNovaStakingCard'
 
 import MoneyedPotCard from './components/MoneyPotCard'
 
-// background-image: url(images/TVLbg.png);
-// background-position: right;
-
-const Hero = styled.div`
-  position: relative;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: grid;
-  //margin: auto;
-  margin-bottom: 2px;
-  padding-top: 15px;
-  text-align: left;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    text-align: left;
-    image-size: 100px;
-    padding-top: 0px;
-    padding-right: 1px;
-  }
-`
-
 const Cards = styled(BaseLayout)`
-  display: flex;
   justify-content: center;
   margin-bottom: 48px;
   margin-top: 32px;
 
   & > div {
-    grid-column: 4;
+    grid-column: span 8;
     width: 100%;
+
+    ${({ theme }) => theme.mediaQueries.md} {
+      grid-column: span 6;
+    }
+
+    ${({ theme }) => theme.mediaQueries.xl} {
+      grid-column: span 4;
+    }
   }
 `
-
-const Header = ({ children }) => (
-  <Hero>
-    <Heading as="p" size="xl" glowing mb="28px" color="#FFFFFF" style={{ fontWeight: 700 }}>
-      {children}
-    </Heading>
-    <div style={{ position: 'absolute', right: '10vw', bottom: -4 }}>
-      <TotalValueLockedCard />
-    </div>
-  </Hero>
-)
 
 const Home: React.FC = () => {
   const TranslateString = useI18n()

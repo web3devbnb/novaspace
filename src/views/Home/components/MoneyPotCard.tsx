@@ -16,7 +16,7 @@ import { getNovaAddress, getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 
-const StyledMoneyPotCard = styled(Card)`
+const StyledCard = styled(Card)`
   text-align: center;
 `
 const Row = styled.div`
@@ -55,9 +55,9 @@ const MoneyedPotCard = () => {
   const { onReward } = useHarvestRewards()
 
   return (
-    <StyledMoneyPotCard gradientBorder>
+    <StyledCard gradientBorder>
       <CardHeader>
-        <Heading size="xl" glowing>
+        <Heading style={{ fontSize: 32 }} glowing>
           My Rewards
         </Heading>
       </CardHeader>
@@ -123,7 +123,7 @@ const MoneyedPotCard = () => {
           </Row>
         </div>
       </CardBody>
-    </StyledMoneyPotCard>
+    </StyledCard>
   )
 }
 

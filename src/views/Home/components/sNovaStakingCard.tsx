@@ -16,9 +16,8 @@ import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import SnovaStats from './sNovaStats'
 
-const StyledSNovaStakingCard = styled(Card)`
+const StyledCard = styled(Card)`
   text-align: center;
-  
 `
 
 const Block = styled.div`
@@ -65,9 +64,9 @@ const SNovaedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledSNovaStakingCard gradientBorder>
+    <StyledCard gradientBorder>
       <CardHeader>
-        <Heading size="xl" glowing>
+        <Heading style={{ fontSize: 32 }} glowing>
           sNova Stats
         </Heading>
       </CardHeader>
@@ -97,7 +96,7 @@ const SNovaedStakingCard = () => {
         </Actions>
         <SnovaStats />
       </CardBody>
-    </StyledSNovaStakingCard>
+    </StyledCard>
   )
 }
 

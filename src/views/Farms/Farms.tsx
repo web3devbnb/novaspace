@@ -14,6 +14,7 @@ import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
 import useI18n from 'hooks/useI18n'
+import Header from 'components/Header'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
 import Divider from './components/Divider'
@@ -44,7 +45,7 @@ const Hero = styled.div`
 `
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
-  const TranslateString = useI18n()
+  // const TranslateString = useI18n()
   const farmsLP = useFarms()
   const novaPrice = usePriceNovaBusd()
   const bnbPrice = usePriceBnbBusd()
@@ -114,22 +115,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
   return (
     <Page>
-      <Hero>
-        <Heading
-          as="h1"
-          size="xxl"
-          mb="24px"
-          color="#FFFFFF"
-          style={{
-            textShadow: '2px 2px 5px #00aaff95, -2px -2px 5px #00aaff95 ',
-            paddingRight: '25px',
-            paddingTop: '55px',
-          }}
-        >
-          {tokenMode ? 'POOLS' : 'FARMS'}
-        </Heading>
-        <TotalValueLockedCard />
-      </Hero>
+      <Header>{tokenMode ? 'POOLS' : 'FARMS'}</Header>
       <div>
         <Heading
           as="h1"

@@ -17,11 +17,18 @@ const StyledTag = styled(Tag)`
 
 const Container = styled.div`
   position: relative;
-  padding: 18px 40px 28px;
+  padding: 18px;
   border-right: solid 2px ${({ theme }) => theme.colors.primary};
   border-top: solid 1px ${({ theme }) => theme.colors.primary};
   border-radius: 30px;
   border-top-left-radius: 0;
+  text-align: right;
+  font-size: 28px;
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding: 18px 40px 28px;
+    font-size: 32px;
+  }
 `
 
 const StyledDivider = styled(Divider)`
@@ -40,11 +47,11 @@ const TotalValueLockedCard = () => {
 
   return (
     <Container>
-      <StyledTag  >
+      <StyledTag glowing bold>
         TOTAL DEPOSITED
       </StyledTag>
       <StyledDivider />
-      <CardValue value={totalValue.toNumber()} prefix="$" decimals={2} />
+      <CardValue fontSize="inherit" value={totalValue.toNumber()} prefix="$" decimals={2} />
     </Container>
   )
 }

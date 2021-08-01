@@ -67,38 +67,38 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
   },
-  {
-    pid: 3,
-    risk: 1,
-    lpSymbol: 'NOVA-BST LP',
-    lpAddresses: {
-      97: '0x6b06eefbcea02f5ba42b02c4fdf9d43856c81dc5',
-      56: '',
-    },
-    tokenSymbol: 'BST',
-    tokenAddresses: {
-      97: '0xc3c08346480c7d6059193d9b978f19682b15524a',
-      56: '',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
-    pid: 5,
-    risk: 2,
-    lpSymbol: 'BST-BNB LP',
-    lpAddresses: {
-      97: '0xfa0393C947f7216EfB7b93F86d08430203437b40',
-      56: '',
-    },
-    tokenSymbol: 'BST',
-    tokenAddresses: {
-      97: '0xc3c08346480c7d6059193d9b978f19682b15524a',
-      56: '',
-    },
-    quoteTokenSymbol: QuoteToken.BNB,
-    quoteTokenAdresses: contracts.wbnb,
-  },
+  // {
+  //   pid: 3,
+  //   risk: 1,
+  //   lpSymbol: 'NOVA-BST LP',
+  //   lpAddresses: {
+  //     97: '0x6b06eefbcea02f5ba42b02c4fdf9d43856c81dc5',
+  //     56: '',
+  //   },
+  //   tokenSymbol: 'BST',
+  //   tokenAddresses: {
+  //     97: '0xc3c08346480c7d6059193d9b978f19682b15524a',
+  //     56: '',
+  //   },
+  //   quoteTokenSymbol: QuoteToken.NOVA,
+  //   quoteTokenAdresses: contracts.nova,
+  // },
+  // {
+  //   pid: 5,
+  //   risk: 2,
+  //   lpSymbol: 'BST-BNB LP',
+  //   lpAddresses: {
+  //     97: '0xfa0393C947f7216EfB7b93F86d08430203437b40',
+  //     56: '',
+  //   },
+  //   tokenSymbol: 'BST',
+  //   tokenAddresses: {
+  //     97: '0xc3c08346480c7d6059193d9b978f19682b15524a',
+  //     56: '',
+  //   },
+  //   quoteTokenSymbol: QuoteToken.BNB,
+  //   quoteTokenAdresses: contracts.wbnb,
+  // },
   // {
   //   pid: 3,
   //   risk: 1,
