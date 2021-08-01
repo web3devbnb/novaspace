@@ -25,7 +25,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA-BUSD LP',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
+      56: '0x52157699bA2b3bCEF0E91aa6bF56680672810964',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
@@ -41,7 +41,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA-BNB LP',
     lpAddresses: {
       97: '0x429008d0fe2725c68715d5db13a67f038c501fff',
-      56: '0xd1b59d11316e87c3a0a069e80f590ba35cd8d8d3',
+      56: '0x6534cA773018203f6774503d6A7Cd530f9CC4EA3',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
@@ -52,7 +52,7 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
-    pid: 4,
+    pid: 3,
     risk: 3,
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {

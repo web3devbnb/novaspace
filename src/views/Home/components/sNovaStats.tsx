@@ -10,7 +10,7 @@ import { useSwapToNova } from 'hooks/useUnstake'
 import SwapToNovaModal from './SwapToNovaModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import CardValue from './CardValue'
-import { useFarms, usePriceNovaBusd } from '../../../state/hooks'
+
 
 const StyledNovaStats = styled(Card)`
   margin-left: auto;
