@@ -58,8 +58,6 @@ export const useRabbitMintingFarm = (address: string) => {
   return useContract(rabbitMintingFarmAbi, address)
 }
 
-
-
 export const useLottery = () => {
   const abi = lottery as unknown as AbiItem
   return useContract(abi, getLotteryAddress())

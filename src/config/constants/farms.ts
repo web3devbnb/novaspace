@@ -9,7 +9,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63', 
+      56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
@@ -227,7 +227,7 @@ const farms: FarmConfig[] = [
   //   quoteTokenSymbol: QuoteToken.BNB,
   //   quoteTokenAdresses: contracts.wbnb,
   // },
- 
+
   // {
   //   pid: 13,
   //   risk: 1,
