@@ -36,6 +36,7 @@ const SnovaStats = () => {
   const { onUnstake } = useSwapToNova()
   const [onPresentSwapToNova] = useModal(<SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />)
   const swapPenalty = useSNovaPenalty()
+  const penalty = Number(swapPenalty)/10**10
 
   return (
     <StyledNovaStats>
@@ -55,8 +56,9 @@ const SnovaStats = () => {
         <Row style={{ paddingTop: '10px' }}>
           <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to Nova')}</Button>
 
-          <CardValue fontSize="14px" value={getBalanceNumber(swapPenalty)} />
-          <Text fontSize="14px">{TranslateString(999, 'Penalty')}</Text>
+          
+          <Text fontSize="14px" >{penalty.toFixed(2)}% {TranslateString(999, 'Penalty')}</Text>
+          
         </Row>
       </CardBody>
     </StyledNovaStats>

@@ -5,6 +5,7 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 
 const Hero = styled.div`
   position: relative;
+  background-position: right;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
@@ -34,7 +35,7 @@ const Header = ({ children }) => (
     <StyledHeading as="p" size="xl" glowing>
       {children}
     </StyledHeading>
-    <TotalValueLockedCard />
+    <TotalValueLockedCard  />
   </Hero>
 )
 
