@@ -35,7 +35,7 @@ const Header = ({ children }) => (
     <StyledHeading as="p" size="xl" glowing>
       {children}
     </StyledHeading>
-    <TotalValueLockedCard  />
+    <TotalValueLockedCard />
   </Hero>
 )
 

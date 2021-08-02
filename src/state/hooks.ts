@@ -12,8 +12,8 @@ export const useFetchPublicData = () => {
   const dispatch = useDispatch()
   const { slowRefresh } = useRefresh()
   useEffect(() => {
-     dispatch(fetchFarmsPublicDataAsync())
-     dispatch(fetchPoolsPublicDataAsync())
+    dispatch(fetchFarmsPublicDataAsync())
+    dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 }
 
@@ -99,8 +99,8 @@ export const useTotalValue = (): BigNumber => {
         val = novaPrice.times(farm.lpTotalInQuoteToken)
       } else {
         val = farm.lpTotalInQuoteToken
-      }    
-      value = value.plus(val)      
+      }
+      value = value.plus(val)
     }
   }
   return value

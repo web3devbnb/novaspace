@@ -129,7 +129,6 @@ export const useMoneyPotBNBReward = () => {
   return moneyPotBNBReward
 }
 
-
 export const useMoneyPotBUSDReward = () => {
   const { slowRefresh } = useRefresh()
   const [moneyPotBUSDReward, setMoneyPotBUSDReward] = useState<BigNumber>()
@@ -172,15 +171,14 @@ export const useSNovaPenalty = () => {
     async function fetchSNovaPenalty() {
       const sNovaContract = getContract(sNovaABI, getSNovaAddress())
       const penalty = await sNovaContract.methods.getPenaltyPercent(user).call()
-      
+
       setSNovaPenalty(penalty)
     }
-    
+
     fetchSNovaPenalty()
   }, [user, slowRefresh])
-  
+
   return SNovaPenalty
-  
 }
 
 export const useDistributedMoneyPotBUSD = () => {
