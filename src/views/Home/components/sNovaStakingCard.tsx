@@ -114,7 +114,7 @@ const SNovaedStakingCard = () => {
             onClick={harvestAllFarms}
             fullWidth
           >
-            {pendingTx ? 'Collecting Nova' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+            {pendingTx ? 'Collecting sNOVA' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
           </Button>
         ) : (
           <UnlockButton fullWidth />

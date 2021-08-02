@@ -38,8 +38,9 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
       onDismiss()
     } catch (e) {
       console.log(e)
+    } finally {
+      setPendingTx(false)
     }
-    setPendingTx(false)
   }
 
   const handleSelectMax = () => {

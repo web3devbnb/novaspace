@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Card, CardBody, Heading, Text, Button, useModal, Flex, CardHeader } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js/bignumber'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import {
@@ -18,6 +19,8 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 
+import UnlockButton from '../../../components/UnlockButton'
+
 const Row = styled.div`
   align-items: center;
   display: flex;
@@ -34,11 +37,9 @@ const CardImage = styled.img`
   text-align: center;
 `
 
-const Actions = styled.div`
-  margin-top: 24px;
-`
 const MoneyedPotCard = () => {
   const TranslateString = useI18n()
+  const { account } = useWallet()
   const bnbReward = useMoneyPotBNBReward()
   const busdReward = useMoneyPotBUSDReward()
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
@@ -46,34 +47,48 @@ const MoneyedPotCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
 
+  const sendTx = async () => {
+    setPendingTx(true)
+    try {
+      await onReward()
+    } catch (error) {
+      console.log('Error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
   return (
     <StatsCard title="My Rewards">
       <Row style={{ justifyContent: 'center' }}>
         <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={120} height={120} />
-          <Text fontSize="24px">{TranslateString(999, 'BNB ')}</Text>
+          <Text bold fontSize="24px">
+            {TranslateString(999, 'BNB ')}
+          </Text>
           <CardValue fontSize="20px" value={getBalanceNumber(bnbReward)} decimals={3} />
         </div>
         <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
-          <Text fontSize="24px">{TranslateString(999, ' BUSD ')}</Text>
+          <Text bold fontSize="24px">
+            {TranslateString(999, ' BUSD ')}
+          </Text>
           <CardValue fontSize="20px" value={getBalanceNumber(busdReward)} decimals={3} />
         </div>
       </Row>
       <Row style={{ paddingTop: '20px' }}>
-        <Button
-          fullWidth
-          disabled={pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onReward()
-            setPendingTx(false)
-          }}
-        >
-          {TranslateString(999, 'Harvest Rewards')}
-        </Button>
+        {account ? (
+          <Button
+            fullWidth
+            disabled={bnbReward?.toNumber() === 0 || busdReward?.toNumber() === 0 || pendingTx}
+            onClick={sendTx}
+          >
+            {TranslateString(999, 'Harvest Rewards')}
+          </Button>
+        ) : (
+          <UnlockButton fullWidth />
+        )}
       </Row>
-      {/* BNB distributedMoneyPot */}
       <div>
         <Heading
           size="lg"
