@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Text, Skeleton } from '@pancakeswap-libs/uikit'
+import { Flex, Text, Skeleton, Card } from '@pancakeswap-libs/uikit'
 import { communityFarms } from 'config/constants'
 import { Farm } from 'state/types'
 import { provider } from 'web3-core'
@@ -44,11 +44,8 @@ const StyledCardAccent = styled.div`
   border-color: white;
 `
 // background: ${(props) => props.theme.card.background}
-const FCard = styled.div`
+const FCard = styled(Card)`
   align-self: baseline;
-  background-color: transparent;
-  border: 1px solid;
-  border-color: #00aaff;
   border-radius: 30px;
   box-shadow: 0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05);
   display: flex;
@@ -130,7 +127,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
 
   return (
-    <FCard>
+    <FCard gradientBorder>
       {farm.tokenSymbol === 'NOVA' && <StyledCardAccent />}
       <CardHeading
         lpLabel={lpLabel}
@@ -167,7 +164,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
         <Text bold>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent="space-between">
-        <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
+        <Text glowing style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
         <Text bold style={{ fontSize: '24px' }}>
           {farm.depositFeeBP / 100}%
         </Text>

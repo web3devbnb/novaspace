@@ -116,6 +116,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   return (
     <Page>
       <Header>{tokenMode ? 'POOLS' : 'FARMS'}</Header>
+      <Divider />
       <div>
         <Heading
           as="h1"
@@ -131,12 +132,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
         </Heading>
         <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center' }}>
-          Deposit Fees are distributed to sNova holders.
+          Deposit Fees are distributed to sNOVA holders.
         </Heading>
         <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
       <div>
-        <Divider />
         <FlexLayout>
           <Route exact path={`${path}`}>
             {stakedOnly ? farmsList(stakedOnlyFarms, false) : farmsList(activeFarms, false)}
