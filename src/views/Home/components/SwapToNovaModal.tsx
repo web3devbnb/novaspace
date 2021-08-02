@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState, useEffect } from 'react'
 
-import { Button, Modal as UikitModal, Text, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Modal, Text } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
 import TokenInput from 'components/TokenInput'
 import useI18n from 'hooks/useI18n'
@@ -15,7 +15,9 @@ interface SwapToNovaModalProps {
   tokenName?: string
 }
 
-const Modal = styled(UikitModal)``
+const StyledModal = styled(Modal)`
+  max-width: 560px;
+`
 
 const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
   const [val, setVal] = useState('')
@@ -29,12 +31,25 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
     setVal(e.target.validity.valid ? e.target.value : val)
   }
 
-  const handleSelectMax = useCallback(() => {
+  const sendTx = async () => {
+    setPendingTx(true)
+    try {
+      await onConfirm(val)
+      onDismiss()
+    } catch (e) {
+      console.log(e)
+    }
+    setPendingTx(false)
+  }
+
+  const handleSelectMax = () => {
     setVal(fullBalance)
-  }, [fullBalance, setVal])
+  }
+
+  const disableConfirmButton = pendingTx || Number(fullBalance) < Number(val)
 
   return (
-    <Modal title={`Swap ${tokenName} to Nova`} onDismiss={onDismiss}>
+    <StyledModal title={`Swap ${tokenName} to Nova`} onDismiss={onDismiss}>
       <Text>
         Harvested sNova has a 3-day vesting period with a scaling swap penalty starting at 30%. Actual Nova received is
         reduced by penalty %.
@@ -50,13 +65,9 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
 
       <ModalActions>
         <Button
-          disabled={pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onConfirm(val)
-            setPendingTx(false)
-            onDismiss()
-          }}
+          variant={!disableConfirmButton ? 'primary' : 'secondary'}
+          disabled={disableConfirmButton}
+          onClick={sendTx}
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
         </Button>
@@ -64,7 +75,7 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
           {TranslateString(462, 'Cancel')}
         </Button>
       </ModalActions>
-    </Modal>
+    </StyledModal>
   )
 }
 

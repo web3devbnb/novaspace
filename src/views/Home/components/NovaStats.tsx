@@ -33,9 +33,10 @@ const NovaStats = () => {
   const novaSupply = getBalanceNumber(circSupply)
   const marketCap = eggPrice.times(circSupply)
 
-  let NovaPerBlock = 0
-  if (farms && farms[0] && farms[0].NovaPerBlock) {
-    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toNumber()
+  let NovaPerBlock = '0'
+
+  if (farms[0]?.NovaPerBlock) {
+    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toFixed(2)
   }
 
   return (
@@ -59,7 +60,7 @@ const NovaStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">NOVA/block</Text>
-          <Text bold fontSize="14px">
+          <Text glowing bold fontSize="14px">
             {NovaPerBlock}
           </Text>
         </Row>

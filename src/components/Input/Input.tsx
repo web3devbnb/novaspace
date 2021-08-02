@@ -9,6 +9,7 @@ export interface InputProps {
   placeholder?: string
   inputMode?: 'text' | 'none' | 'search' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal'
   pattern?: string
+  error?: boolean
 }
 
 const Input: React.FC<InputProps> = ({ endAdornment, onChange, placeholder, startAdornment, value, ...props }) => {
@@ -34,7 +35,7 @@ const StyledInput = styled.input<InputProps>`
   width: ${({ inputMode }) => (inputMode === 'decimal' ? '0px' : '100%')};
   background: none;
   border: 0;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${({ error, theme }) => (error ? theme.colors.failure : theme.colors.text)};
   font-size: 18px;
   flex: 1 1 auto;
   height: 56px;

@@ -12,7 +12,15 @@ interface TokenInputProps extends InputProps {
   depositFeeBP?: number
 }
 
-const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelectMax, value, depositFeeBP = 0 }) => {
+const TokenInput: React.FC<TokenInputProps> = ({
+  max,
+  symbol,
+  onChange,
+  onSelectMax,
+  value,
+  depositFeeBP = 0,
+  placeholder,
+}) => {
   const TranslateString = useI18n()
   return (
     <StyledTokenInput>
@@ -32,7 +40,7 @@ const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelect
           </StyledTokenAdornmentWrapper>
         }
         onChange={onChange}
-        placeholder="0"
+        placeholder={placeholder || '0.0'}
         value={value}
         inputMode="decimal"
         pattern="^[0-9]*[.,]?[0-9]*$"
