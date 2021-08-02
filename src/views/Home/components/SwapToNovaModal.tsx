@@ -1,11 +1,12 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState, useEffect } from 'react'
 
-import { Button, Modal, Text, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Modal as UikitModal, Text, useModal } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
 import TokenInput from 'components/TokenInput'
 import useI18n from 'hooks/useI18n'
 import { getFullDisplayBalance } from 'utils/formatBalance'
+import styled from 'styled-components'
 
 interface SwapToNovaModalProps {
   max: BigNumber
@@ -13,6 +14,8 @@ interface SwapToNovaModalProps {
   onDismiss?: () => void
   tokenName?: string
 }
+
+const Modal = styled(UikitModal)``
 
 const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
   const [val, setVal] = useState('')
@@ -22,12 +25,9 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
     return getFullDisplayBalance(max)
   }, [max])
 
-  const handleChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      setVal(e.currentTarget.value)
-    },
-    [setVal],
-  )
+  const handleChange = (e) => {
+    setVal(e.target.validity.valid ? e.target.value : val)
+  }
 
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance)
@@ -49,9 +49,6 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
       />
 
       <ModalActions>
-        <Button variant="secondary" onClick={onDismiss}>
-          {TranslateString(462, 'Cancel')}
-        </Button>
         <Button
           disabled={pendingTx}
           onClick={async () => {
@@ -62,6 +59,9 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
           }}
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
+        </Button>
+        <Button variant="secondary" onClick={onDismiss}>
+          {TranslateString(462, 'Cancel')}
         </Button>
       </ModalActions>
     </Modal>

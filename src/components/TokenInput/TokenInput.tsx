@@ -19,7 +19,7 @@ const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelect
       <StyledMaxText>
         {max.toLocaleString()} {symbol} {TranslateString(526, 'Available')}
       </StyledMaxText>
-      <Input
+      <StyledInput
         endAdornment={
           <StyledTokenAdornmentWrapper>
             <StyledTokenSymbol>{symbol}</StyledTokenSymbol>
@@ -34,6 +34,8 @@ const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelect
         onChange={onChange}
         placeholder="0"
         value={value}
+        inputMode="decimal"
+        pattern="^[0-9]*[.,]?[0-9]*$"
       />
       {depositFeeBP > 0 ? (
         <StyledMaxText>
@@ -55,7 +57,10 @@ const StyledTokenAdornmentWrapper = styled.div`
   align-items: center;
   display: flex;
 `
-
+const StyledInput = styled(Input)`
+  width: 0px;
+  flex: 1 1 auto;
+`
 const StyledMaxText = styled.div`
   align-items: center;
   color: ${(props) => props.theme.colors.primary};

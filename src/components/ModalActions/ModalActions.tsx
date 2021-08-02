@@ -10,7 +10,7 @@ const ModalActions: React.FC = ({ children }) => {
       {React.Children.map(children, (child, i) => (
         <>
           <StyledModalAction>{child}</StyledModalAction>
-          {i < l - 1 && <Spacer />}
+          {i < l - 1 && <Spacer size="sm" />}
         </>
       ))}
     </StyledModalActions>
@@ -23,10 +23,10 @@ const StyledModalActions = styled.div`
   display: flex;
   margin: 0;
   padding: ${(props) => props.theme.spacing[4]}px;
+  justify-content: end;
 `
 
 const StyledModalAction = styled.div`
-  flex: 1;
   text-align: center;
 `
 
