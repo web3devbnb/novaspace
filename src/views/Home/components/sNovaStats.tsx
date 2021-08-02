@@ -11,7 +11,6 @@ import SwapToNovaModal from './SwapToNovaModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import CardValue from './CardValue'
 
-
 const StyledNovaStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
