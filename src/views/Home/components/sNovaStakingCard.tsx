@@ -4,8 +4,9 @@ import { Button, Text, useModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
-import { useAllHarvest } from 'hooks/useHarvest'
+import { useAllHarvest, useSNovaHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
+import useSNovaFarmsWithBalance from 'hooks/useSNovaFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
@@ -21,6 +22,7 @@ import StatsCard from './StatsCard'
 import SwapToNovaModal from './SwapToNovaModal'
 import { useSwapToNova } from '../../../hooks/useUnstake'
 import Stats from './Stats'
+import useSNovaEarnings from '../../../hooks/useSNovaEarnings'
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
@@ -63,6 +65,11 @@ const SNovaedStakingCard = () => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
   }, 0)
   const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
+
+  const snovaEarnings = useSNovaEarnings()
+  const earningsSNovaSum = snovaEarnings.reduce((accum, earning) => {
+    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
+  }, 0)
 
   const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
 

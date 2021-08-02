@@ -4,15 +4,17 @@ import { Button } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
-import { useAllHarvest } from 'hooks/useHarvest'
+import { useAllHarvest, useNovaHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
+import useNovaFarmsWithBalance from 'hooks/useNovaFarmsWithBalance'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
 import { usePriceNovaBusd, useFarms } from '../../../state/hooks'
 import useTokenBalance, { useTotalSupply, useBurnedBalance } from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
+import useNovaEarnings from '../../../hooks/useNovaEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
@@ -39,12 +41,18 @@ const FarmedStakingCard = () => {
   const { account } = useWallet()
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
+  const farmsNovaWithBalance = useNovaFarmsWithBalance()
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const eggPrice = usePriceNovaBusd().toNumber()
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
   }, 0)
+  const novaEarnings = useNovaEarnings()
+  const earningsNovaSum = novaEarnings.reduce((accum, earning) => {
+    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
+  }, 0)
+
   const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
 

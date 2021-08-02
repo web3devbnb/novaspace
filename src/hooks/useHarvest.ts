@@ -19,6 +19,36 @@ export const useHarvest = (farmPid: number) => {
   return { onReward: handleHarvest }
 }
 
+export const useSNovaHarvest = (farmPids: number[]) => {
+  const { account } = useWallet()
+  const masterChefContract = useMasterchef()
+
+  const handleHarvest = useCallback(async () => {
+    const harvestPromises = farmPids.reduce((accum, pid) => {
+      return [...accum, harvest(masterChefContract, pid, account)]
+    }, [])
+
+    return Promise.all(harvestPromises)
+  }, [account, farmPids, masterChefContract])
+
+  return { onSNovaReward: handleHarvest }
+}
+
+export const useNovaHarvest = (farmPids: number[]) => {
+  const { account } = useWallet()
+  const masterChefContract = useMasterchef()
+
+  const handleHarvest = useCallback(async () => {
+    const harvestPromises = farmPids.reduce((accum, pid) => {
+      return [...accum, harvest(masterChefContract, pid, account)]
+    }, [])
+
+    return Promise.all(harvestPromises)
+  }, [account, farmPids, masterChefContract])
+
+  return { onNovaReward: handleHarvest }
+}
+
 export const useHarvestRewards = () => {
   const dispatch = useDispatch()
   const { account } = useWallet()
