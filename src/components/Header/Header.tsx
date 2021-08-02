@@ -9,7 +9,7 @@ const Hero = styled.div`
 
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   ${({ theme }) => theme.mediaQueries.xl} {

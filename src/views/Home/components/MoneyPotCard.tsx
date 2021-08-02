@@ -15,10 +15,9 @@ import { useSwapToNova } from 'hooks/useUnstake'
 import { getNovaAddress, getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import useTokenBalance from '../../../hooks/useTokenBalance'
+import StatsCard from './StatsCard'
+import Stats from './Stats'
 
-const StyledCard = styled(Card)`
-  text-align: center;
-`
 const Row = styled.div`
   align-items: center;
   display: flex;
@@ -27,13 +26,6 @@ const Row = styled.div`
   margin: 8px;
 `
 
-const Block = styled.div`
-  margin-bottom: 0px;
-`
-const Label = styled.div`
-  color: ${({ theme }) => theme.colors.textSubtle};
-  font-size: 14px;
-`
 const CardImage = styled.img`
   margin-bottom: 0px;
   margin-top: 0px;
@@ -55,75 +47,54 @@ const MoneyedPotCard = () => {
   const { onReward } = useHarvestRewards()
 
   return (
-    <StyledCard gradientBorder>
-      <CardHeader>
-        <Heading style={{ fontSize: 32 }} glowing>
-          My Rewards
-        </Heading>
-      </CardHeader>
-      <CardBody>
-        <Row>
+    <StatsCard title="My Rewards">
+      <Row style={{ justifyContent: 'center' }}>
+        <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={120} height={120} />
-          <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
-        </Row>
-
-        <Row>
-          <CardValue fontSize="24px" value={getBalanceNumber(bnbReward)} decimals={3} />
           <Text fontSize="24px">{TranslateString(999, 'BNB ')}</Text>
-
-          <CardValue fontSize="24px" value={getBalanceNumber(busdReward)} decimals={3} />
-          <Text fontSize="24px">{TranslateString(999, ' BUSD ')}</Text>
-        </Row>
-        <Row style={{ paddingTop: '20px' }}>
-          <Button
-            fullWidth
-            disabled={pendingTx}
-            onClick={async () => {
-              setPendingTx(true)
-              await onReward()
-              setPendingTx(false)
-            }}
-          >
-            {TranslateString(999, 'Harvest Rewards')}
-          </Button>
-        </Row>
-        {/* BNB distributedMoneyPot */}
-        <div>
-          <Heading
-            size="xl"
-            mb="10px"
-            style={{
-              textShadow: '2px 2px 8px #00aaff95, -2px -2px 8px #00FF0095 ',
-              padding: '20px',
-            }}
-          >
-            Total Rewards
-          </Heading>
-          <Row>
-            <Text fontSize="14px">{TranslateString(999, 'Total BNB')}</Text>
-            {distributedMoneyPotWBNB[0]}
-          </Row>
-          <Row>
-            <Text fontSize="14px">{TranslateString(999, 'BNB/sNOVA')}</Text>
-            {distributedMoneyPotWBNB[1]}
-          </Row>
-
-          {/* BUSD distributedMoneyPot */}
-          <Row>
-            <Text fontSize="14px">{TranslateString(999, 'Total BUSD')}</Text>
-            {distributedMoneyPotBUSD[0]}
-          </Row>
-          <Row>
-            <Text fontSize="14px">{TranslateString(999, 'BUSD/sNOVA')}</Text>
-            {distributedMoneyPotBUSD[1]}
-          </Row>
-          <Row>
-            <Text fontSize="14px">{TranslateString(999, 'Last Reward Block')}</Text>
-            {distributedMoneyPotBUSD[2]}
-          </Row>
+          <CardValue fontSize="20px" value={getBalanceNumber(bnbReward)} decimals={3} />
         </div>
-      </CardBody>
-    </StyledCard>
+        <div style={{ padding: '0 10px' }}>
+          <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
+          <Text fontSize="24px">{TranslateString(999, ' BUSD ')}</Text>
+          <CardValue fontSize="20px" value={getBalanceNumber(busdReward)} decimals={3} />
+        </div>
+      </Row>
+      <Row style={{ paddingTop: '20px' }}>
+        <Button
+          fullWidth
+          disabled={pendingTx}
+          onClick={async () => {
+            setPendingTx(true)
+            await onReward()
+            setPendingTx(false)
+          }}
+        >
+          {TranslateString(999, 'Harvest Rewards')}
+        </Button>
+      </Row>
+      {/* BNB distributedMoneyPot */}
+      <div>
+        <Heading
+          size="lg"
+          style={{
+            textShadow: 'rgba(56, 255, 0, 0.58) 2px 2px 8px, rgba(0, 255, 0, 0.584) -2px -2px 8px',
+            padding: '20px 15px 0',
+          }}
+        >
+          Total Rewards
+        </Heading>
+        <Stats
+          stats={[
+            { label: TranslateString(999, 'Total BNB'), value: distributedMoneyPotWBNB[0] },
+            { label: TranslateString(999, 'BNB/sNOVA'), value: distributedMoneyPotWBNB[1] },
+            { label: TranslateString(999, 'Total BUSD'), value: distributedMoneyPotBUSD[0] },
+            { label: TranslateString(999, 'BUSD/sNOVA'), value: distributedMoneyPotBUSD[1] },
+            { label: TranslateString(999, 'Last Reward Block'), value: distributedMoneyPotBUSD[2] },
+          ]}
+        />
+      </div>
+    </StatsCard>
   )
 }
 

@@ -46,7 +46,7 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
     setVal(fullBalance)
   }
 
-  const disableConfirmButton = pendingTx || Number(fullBalance) < Number(val)
+  const disableConfirmButton = pendingTx || Number(fullBalance) < Number(val) || Number(val) === 0
 
   return (
     <StyledModal title={`Swap ${tokenName} to Nova`} onDismiss={onDismiss}>
