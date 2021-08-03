@@ -105,7 +105,7 @@ const SNovaedStakingCard = () => {
 
   const stats = [
     { label: TranslateString(536, 'Total Minted'), value: minted },
-    { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(0) },
+    { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(2) },
     { label: TranslateString(10004, 'Circulating Supply'), value: circSupply },
   ]
 

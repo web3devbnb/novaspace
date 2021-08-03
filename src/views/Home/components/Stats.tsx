@@ -40,7 +40,7 @@ const Stats = ({ stats }: { stats: Stat[] }) => (
             {value}
           </Text>
         ) : (
-          <CardValue fontSize="14px" value={value} decimals={0} />
+          <CardValue fontSize="14px" value={value} decimals={2} />
         )}
       </Row>
     ))}

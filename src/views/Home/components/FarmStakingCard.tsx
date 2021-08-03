@@ -102,9 +102,9 @@ const FarmedStakingCard = () => {
 
   const stats = [
     { label: TranslateString(999, 'Market Cap (USD)'), value: getBalanceNumber(marketCap) },
+    { label: TranslateString(999, 'Total Minted'), value: novaSupply },    
+    { label: TranslateString(999, 'Total Burned'), value: burnedNova.toFixed(2)},
     { label: TranslateString(999, 'Circulating Supply'), value: circNova },
-    { label: TranslateString(999, 'Total Burned'), value: burnedNova},
-    { label: TranslateString(999, 'Total Minted'), value: novaSupply },
     { label: 'NOVA/block', value: NovaPerBlock },
   ]
 
