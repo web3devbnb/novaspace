@@ -66,6 +66,19 @@ const FarmedStakingCard = () => {
       setPendingTx(false)
     }
   }, [onReward])
+  
+  const balancesNovaWithValue = farmsNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
+  const { onNovaReward } = useNovaHarvest(balancesNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
+  const harvestNovaFarms = useCallback(async () => {
+    setPendingTx(true)
+    try {
+      await onNovaReward()
+    } catch (error) {
+      // TODO: find a way to handle when the user rejects transaction or it fails
+    } finally {
+      setPendingTx(false)
+    }
+  }, [onNovaReward])
 
   // Stats
   const farms = useFarms()
@@ -94,8 +107,8 @@ const FarmedStakingCard = () => {
       <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
       <Block>
         <Label>Pending NOVA</Label>
-        <NovaHarvestBalance earningsSum={earningsSum} />
-        <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
+        <NovaHarvestBalance earningsSum={earningsNovaSum} />
+          <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
       </Block>
       <Block>
         <Label>NOVA Balance</Label>
@@ -105,12 +118,14 @@ const FarmedStakingCard = () => {
       <Actions>
         {account ? (
           <Button
-            id="harvest-all"
-            disabled={balancesWithValue.length <= 0 || pendingTx}
-            onClick={harvestAllFarms}
-            fullWidth
+          id="harvest-nova"
+          disabled={balancesNovaWithValue.length <= 0 || pendingTx}
+          onClick={harvestNovaFarms}
+          fullWidth
           >
-            {pendingTx ? 'Collecting NOVA' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+                {pendingTx
+                ? TranslateString(999, 'Collecting NOVA')
+                : TranslateString(999, `Harvest all NOVA (${balancesNovaWithValue.length})`)}
           </Button>
         ) : (
           <UnlockButton fullWidth />

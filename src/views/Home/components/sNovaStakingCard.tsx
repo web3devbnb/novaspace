@@ -47,7 +47,7 @@ const SNovaedStakingCard = () => {
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
   const novaBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
-
+  const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnedBalance(getSNovaAddress())
 
@@ -84,6 +84,19 @@ const SNovaedStakingCard = () => {
     }
   }, [onReward])
 
+  const balancesSNovaWithValue = farmsSNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
+  const { onSNovaReward } = useSNovaHarvest(balancesSNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
+  const harvestSNovaFarms = useCallback(async () => {
+    setPendingTx(true)
+    try {
+      await onSNovaReward()
+    } catch (error) {
+      // TODO: find a way to handle when the user rejects transaction or it fails
+    } finally {
+      setPendingTx(false)
+    }
+  }, [onSNovaReward])
+
   const stats = [
     { label: TranslateString(536, 'Total Minted'), value: getBalanceNumber(totalSupply) },
     { label: TranslateString(538, 'Total Burned'), value: getBalanceNumber(burnedBalance) },
@@ -107,7 +120,7 @@ const SNovaedStakingCard = () => {
       <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
       <div>
         <Label style={{ paddingTop: '25px' }}>Pending sNOVA</Label>
-        <NovaHarvestBalance earningsSum={earningsSum} />
+        <NovaHarvestBalance earningsSum={earningsSNovaSum} />
       </div>
       <div>
         <Label>sNOVA Balance</Label>
@@ -116,12 +129,14 @@ const SNovaedStakingCard = () => {
       <Actions>
         {account ? (
           <Button
-            id="harvest-all"
-            disabled={balancesWithValue.length <= 0 || pendingTx}
-            onClick={harvestAllFarms}
-            fullWidth
+          id="harvest-snova"
+          disabled={balancesSNovaWithValue.length <= 0 || pendingTx}
+          onClick={harvestSNovaFarms}
+          fullWidth
           >
-            {pendingTx ? 'Collecting sNOVA' : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+            +              {pendingTx
+                ? TranslateString(999, 'Collecting sNOVA')
+                : TranslateString(999, `Harvest all sNOVA (${balancesSNovaWithValue.length})`)}
           </Button>
         ) : (
           <UnlockButton fullWidth />
