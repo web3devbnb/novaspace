@@ -24,6 +24,7 @@ const Container = styled.div`
   border-top-left-radius: 0;
   text-align: right;
   font-size: 28px;
+  min-width: 310px;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: 18px 40px 28px;

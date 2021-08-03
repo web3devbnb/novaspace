@@ -99,13 +99,13 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
       return bnbPrice.times(farm.lpTotalInQuoteToken)
     }
     if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
-      return novaPrice.times(farm.lpTotalInQuoteToken)
+      return novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
     }
     return farm.lpTotalInQuoteToken
-  }, [bnbPrice, novaPrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol])
+  }, [bnbPrice, novaPrice, farm])
 
   const totalValueFormated = totalValue
-    ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+    ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     : '-'
 
   const lpLabel = farm.lpSymbol

@@ -16,8 +16,8 @@ const farms: FarmConfig[] = [
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
       56: '0xDb2B70a73C587513089DaAB4d38Ff6f35dA5eD63',
     },
-    quoteTokenSymbol: QuoteToken.BUSD,
-    quoteTokenAdresses: contracts.busd,
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
   },
   {
     pid: 2,

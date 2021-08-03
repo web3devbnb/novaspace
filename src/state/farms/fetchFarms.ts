@@ -59,8 +59,9 @@ const fetchFarms = async () => {
         if (farmConfig.tokenSymbol === QuoteToken.BUSD && farmConfig.quoteTokenSymbol === QuoteToken.BUSD) {
           tokenPriceVsQuote = new BigNumber(1)
         } else {
-          tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
+          tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP.balance).div(new BigNumber(tokenBalanceLP.balance))
         }
+
         lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote)
       } else {
         // Ratio in % a LP tokens that are in staking, vs the total number in circulation
