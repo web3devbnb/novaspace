@@ -11,7 +11,7 @@ import useNovaFarmsWithBalance from 'hooks/useNovaFarmsWithBalance'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
 import { usePriceNovaBusd, useFarms } from '../../../state/hooks'
-import useTokenBalance, { useTotalSupply, useBurnedBalance } from '../../../hooks/useTokenBalance'
+import useTokenBalance, { useTotalSupply, useNovaBurnSupply, useBurnedBalance } from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useNovaEarnings from '../../../hooks/useNovaEarnings'
@@ -83,10 +83,16 @@ const FarmedStakingCard = () => {
   // Stats
   const farms = useFarms()
   const totalSupply = useTotalSupply()
-  const burnedBalance = useBurnedBalance(getNovaAddress())
-  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
-  const novaSupply = getBalanceNumber(circSupply)
-  const marketCap = usePriceNovaBusd().times(circSupply)
+  
+  const burnedBalance = useNovaBurnSupply()
+  const burnedNova = Number(burnedBalance) / 10**18
+  const supply = totalSupply ? totalSupply.minus(-burnedBalance) : new BigNumber(0)
+  const novaSupply = getBalanceNumber(supply)
+  
+  const fakeburn = useBurnedBalance(getNovaAddress())
+  const theSupply = totalSupply ? totalSupply.minus(fakeburn) : new BigNumber(0)
+  const circNova = getBalanceNumber(theSupply)
+  const marketCap = usePriceNovaBusd().times(theSupply)
 
   let NovaPerBlock = '0'
 
@@ -95,10 +101,10 @@ const FarmedStakingCard = () => {
   }
 
   const stats = [
-    { label: TranslateString(10005, 'Market Cap'), value: getBalanceNumber(marketCap) },
-    { label: TranslateString(536, 'Total Minted'), value: getBalanceNumber(totalSupply) },
-    { label: TranslateString(538, 'Total Burned'), value: getBalanceNumber(burnedBalance) },
-    { label: TranslateString(10004, 'Circulating Supply'), value: novaSupply },
+    { label: TranslateString(999, 'Market Cap (USD)'), value: getBalanceNumber(marketCap) },
+    { label: TranslateString(999, 'Circulating Supply'), value: circNova },
+    { label: TranslateString(999, 'Total Burned'), value: burnedNova},
+    { label: TranslateString(999, 'Total Minted'), value: novaSupply },
     { label: 'NOVA/block', value: NovaPerBlock },
   ]
 

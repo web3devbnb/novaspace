@@ -13,7 +13,8 @@ import NovaWalletBalance from './NovaWalletBalance'
 import useTokenBalance, {
   useSNovaPenalty,
   useSNovaTotalSupply,
-  useSNovaBurnedBalance,
+  useSNovaBurnSupply,
+  useBurnedBalance
 } from '../../../hooks/useTokenBalance'
 import { getSNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
@@ -49,10 +50,15 @@ const SNovaedStakingCard = () => {
   const novaBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
-  const burnedBalance = useSNovaBurnedBalance(getSNovaAddress())
+  const burnedBalance = useSNovaBurnSupply()
+  const burnedNova = Number(burnedBalance) / 10**18
+  const fakeburn = useBurnedBalance(getSNovaAddress())
+  
+  const theSupply = totalSupply ? totalSupply.minus(fakeburn) : new BigNumber(0)
+  const circSupply = getBalanceNumber(theSupply)
 
-  const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
-  const novaSupply = getBalanceNumber(circSupply)
+  const mintedSupply = totalSupply ? totalSupply.minus(-burnedBalance) : new BigNumber(0)
+  const minted = getBalanceNumber(mintedSupply)
 
   const sNovaBalance = useTokenBalance(getSNovaAddress())
   const { onUnstake } = useSwapToNova()
@@ -98,9 +104,9 @@ const SNovaedStakingCard = () => {
   }, [onSNovaReward])
 
   const stats = [
-    { label: TranslateString(536, 'Total Minted'), value: getBalanceNumber(totalSupply) },
-    { label: TranslateString(538, 'Total Burned'), value: getBalanceNumber(burnedBalance) },
-    { label: TranslateString(10004, 'Circulating Supply'), value: novaSupply },
+    { label: TranslateString(536, 'Total Minted'), value: minted },
+    { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(0) },
+    { label: TranslateString(10004, 'Circulating Supply'), value: circSupply },
   ]
 
   return (

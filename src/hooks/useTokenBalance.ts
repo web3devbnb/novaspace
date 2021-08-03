@@ -52,6 +52,40 @@ export const useTotalSupply = () => {
   return totalSupply
 }
 
+export const useNovaBurnSupply = () => {
+  const { slowRefresh } = useRefresh()
+  const [novaBurnSupply, setNovaBurnSupply] = useState<BigNumber>()
+
+  useEffect(() => {
+    async function fetchNovaBurnSupply() {
+      const novaContract = getContract(novaABI, getNovaAddress())
+      const supply = await novaContract.methods.burnSupply().call()
+      setNovaBurnSupply(new BigNumber(supply))
+    }
+
+    fetchNovaBurnSupply()
+  }, [slowRefresh])
+
+  return novaBurnSupply
+}
+
+export const useSNovaBurnSupply = () => {
+  const { slowRefresh } = useRefresh()
+  const [sNovaBurnSupply, setSNovaBurnSupply] = useState<BigNumber>()
+
+  useEffect(() => {
+    async function fetchSNovaBurnSupply() {
+      const sNovaContract = getContract(sNovaABI, getSNovaAddress())
+      const supply = await sNovaContract.methods.burnSupply().call()
+      setSNovaBurnSupply(new BigNumber(supply))
+    }
+
+    fetchSNovaBurnSupply()
+  }, [slowRefresh])
+
+  return sNovaBurnSupply
+}
+
 export const useBurnedBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { slowRefresh } = useRefresh()
