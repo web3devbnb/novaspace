@@ -66,7 +66,7 @@ const FarmedStakingCard = () => {
       setPendingTx(false)
     }
   }, [onReward])
-  
+
   const balancesNovaWithValue = farmsNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onNovaReward } = useNovaHarvest(balancesNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
   const harvestNovaFarms = useCallback(async () => {
@@ -108,7 +108,7 @@ const FarmedStakingCard = () => {
       <Block>
         <Label>Pending NOVA</Label>
         <NovaHarvestBalance earningsSum={earningsNovaSum} />
-          <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
+        <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
       </Block>
       <Block>
         <Label>NOVA Balance</Label>
@@ -118,14 +118,14 @@ const FarmedStakingCard = () => {
       <Actions>
         {account ? (
           <Button
-          id="harvest-nova"
-          disabled={balancesNovaWithValue.length <= 0 || pendingTx}
-          onClick={harvestNovaFarms}
-          fullWidth
+            id="harvest-nova"
+            disabled={balancesNovaWithValue.length <= 0 || pendingTx}
+            onClick={harvestNovaFarms}
+            fullWidth
           >
-                {pendingTx
-                ? TranslateString(999, 'Collecting NOVA')
-                : TranslateString(999, `Harvest all NOVA (${balancesNovaWithValue.length})`)}
+            {pendingTx
+              ? TranslateString(999, 'Collecting NOVA')
+              : TranslateString(999, `Harvest all NOVA (${balancesNovaWithValue.length})`)}
           </Button>
         ) : (
           <UnlockButton fullWidth />

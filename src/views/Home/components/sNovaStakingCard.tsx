@@ -56,9 +56,11 @@ const SNovaedStakingCard = () => {
 
   const sNovaBalance = useTokenBalance(getSNovaAddress())
   const { onUnstake } = useSwapToNova()
-  const [onPresentSwapToNova] = useModal(<SwapToNovaModal max={sNovaBalance} onConfirm={onUnstake} tokenName="sNova" />)
   const swapPenalty = useSNovaPenalty()
-  const penalty = Number(swapPenalty) / 10 ** 10
+  const penalty = (Number(swapPenalty) / 10 ** 10).toFixed(2)
+  const [onPresentSwapToNova] = useModal(
+    <SwapToNovaModal penalty={penalty} max={sNovaBalance} onConfirm={onUnstake} tokenName="sNOVA" />,
+  )
 
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
@@ -110,7 +112,7 @@ const SNovaedStakingCard = () => {
           <Row>
             <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
             <Text fontSize="14px">
-              {penalty.toFixed(2)}% {TranslateString(999, 'Penalty')}
+              {penalty}% {TranslateString(999, 'Penalty')}
             </Text>
           </Row>
         ) : null
@@ -129,14 +131,14 @@ const SNovaedStakingCard = () => {
       <Actions>
         {account ? (
           <Button
-          id="harvest-snova"
-          disabled={balancesSNovaWithValue.length <= 0 || pendingTx}
-          onClick={harvestSNovaFarms}
-          fullWidth
+            id="harvest-snova"
+            disabled={balancesSNovaWithValue.length <= 0 || pendingTx}
+            onClick={harvestSNovaFarms}
+            fullWidth
           >
-                         {pendingTx
-                ? TranslateString(999, 'Collecting sNOVA')
-                : TranslateString(999, `Harvest all sNOVA (${balancesSNovaWithValue.length})`)}
+            {pendingTx
+              ? TranslateString(999, 'Collecting sNOVA')
+              : TranslateString(999, `Harvest all sNOVA (${balancesSNovaWithValue.length})`)}
           </Button>
         ) : (
           <UnlockButton fullWidth />

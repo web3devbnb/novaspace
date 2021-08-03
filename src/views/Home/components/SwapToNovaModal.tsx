@@ -13,13 +13,14 @@ interface SwapToNovaModalProps {
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
+  penalty: string
 }
 
 const StyledModal = styled(Modal)`
   max-width: 560px;
 `
 
-const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
+const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss, max, penalty, tokenName = '' }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
@@ -55,7 +56,6 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
         Harvested sNova has a 3-day vesting period with a scaling swap penalty starting at 30%. Actual Nova received is
         reduced by penalty %.
       </Text>
-
       <TokenInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}
@@ -63,6 +63,19 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
         max={fullBalance}
         symbol={tokenName}
       />
+      {
+        /* eslint-disable */
+        val.length > 0 ? (
+          Number(fullBalance) < Number(val) ? (
+            <Text style={{ textAlign: 'right', fontSize: 14, color: '#ff2525' }}>Insufficient NOVA balance</Text>
+          ) : (
+            <Text style={{ textAlign: 'right', fontSize: 14 }}>
+              You&apos;ll receive <b>~{Number(val) * ((100 - Number(penalty)) / 100)}</b> NOVA tokens.{' '}
+              {Number(penalty) > 0 ? <span style={{ color: '#ff2525' }}>(-{penalty}%)</span> : null}
+            </Text>
+          )
+        ) : null
+      }
 
       <ModalActions>
         <Button

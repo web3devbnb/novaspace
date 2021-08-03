@@ -23,7 +23,7 @@ const StyledModalActions = styled.div`
   display: flex;
   margin: 0;
   padding: ${(props) => props.theme.spacing[4]}px;
-  justify-content: end;
+  justify-content: flex-end;
 `
 
 const StyledModalAction = styled.div`
