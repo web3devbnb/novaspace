@@ -8,10 +8,9 @@ const FlexLayout = styled.div`
     min-width: 280px;
     width: 100%;
     margin-bottom: 32px;
-
     ${({ theme }) => theme.mediaQueries.md} {
       max-width: 45%;
-      margin: 0 8px;
+      margin: 0 8px 32px;
     }
   }
 `
