@@ -1966,7 +1966,7 @@
 
 "@pancakeswap-libs/uikit@ShibaNova/shibanova-uikit":
   version "0.10.2"
-  resolved "https://codeload.github.com/ShibaNova/shibanova-uikit/tar.gz/73da784a03808b6e38e3dff04c2c38969c7c6ce5"
+  resolved "https://codeload.github.com/ShibaNova/shibanova-uikit/tar.gz/7ca4ec4a576700bfc34d694ac18cd002c7f18e0c"
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"
