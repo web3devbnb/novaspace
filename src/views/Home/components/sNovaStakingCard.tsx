@@ -14,7 +14,7 @@ import useTokenBalance, {
   useSNovaPenalty,
   useSNovaTotalSupply,
   useSNovaBurnSupply,
-  useBurnedBalance
+  useBurnedBalance,
 } from '../../../hooks/useTokenBalance'
 import { getSNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
@@ -51,9 +51,9 @@ const SNovaedStakingCard = () => {
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnSupply()
-  const burnedNova = Number(burnedBalance) / 10**18
+  const burnedNova = Number(burnedBalance) / 10 ** 18
   const fakeburn = useBurnedBalance(getSNovaAddress())
-  
+
   const theSupply = totalSupply ? totalSupply.minus(fakeburn) : new BigNumber(0)
   const circSupply = getBalanceNumber(theSupply)
 
