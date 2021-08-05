@@ -2,23 +2,15 @@ import { MenuEntry } from '@pancakeswap-libs/uikit'
 
 const config: MenuEntry[] = [
   {
-    label: 'Home',
+    label: 'Dashboard',
     icon: 'HomeIcon',
     href: '/',
   },
   {
-    label: 'Trade',
+    label: 'Exchange',
     icon: 'TradeIcon',
-    items: [
-      {
-        label: 'Exchange',
-        href: 'https://swap.shibanova.com/',
-      },
-      {
-        label: 'Liquidity',
-        href: 'https://swap.shibanova.com/#/pool',
-      },
-    ],
+    href: '/swap',
+    button: true,
   },
   {
     label: 'Farms',
@@ -26,80 +18,40 @@ const config: MenuEntry[] = [
     href: '/farms',
   },
   {
-    label: 'Nests',
+    label: 'Pools',
     icon: 'PoolIcon',
-    href: '/nests',
-  },
-  // {
-  //   label: 'Pools',
-  //   icon: 'PoolIcon',
-  //   href: '/pools',
-  // },
-  // {
-  //   label: 'Lottery',
-  //   icon: 'TicketIcon',
-  //   href: '/lottery',
-  // },
-  // {
-  //   label: 'NFT',
-  //   icon: 'NftIcon',
-  //   href: '/nft',
-  // },
-  {
-    label: 'Info',
-    icon: 'InfoIcon',
-    items: [
-      {
-        label: 'PancakeSwap',
-        href: 'https://pancakeswap.info/token/0xF952Fc3ca7325Cc27D15885d37117676d25BfdA6',
-      },
-      {
-        label: 'CoinGecko',
-        href: 'https://www.coingecko.com/en/coins/goose-finance',
-      },
-      {
-        label: 'CoinMarketCap',
-        href: 'https://coinmarketcap.com/currencies/goose-finance/',
-      },
-      {
-        label: 'AstroTools',
-        href: 'https://app.astrotools.io/pancake-pair-explorer/0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
-      },
-    ],
+    href: '/pools',
   },
   {
-    label: 'More',
+    label: 'Socials',
     icon: 'MoreIcon',
     items: [
       {
+        label: 'Telegram',
+        icon: 'TelegramIcon',
+        href: 'https://t.me/ShibaNovaDEX',
+      },
+      {
+        label: 'Twitter',
+        icon: 'TwitterIcon',
+        href: 'https://twitter.com/ShibaNovaDefi',
+      },
+      {
+        label: 'Medium',
+        icon: 'MediumIcon',
+        href: 'https://shibanova.medium.com/',
+      },
+      {
         label: 'Github',
-        href: 'https://github.com/shibanova/',
+        icon: 'GithubIcon',
+        href: 'https://github.com/ShibaNova',
       },
       {
         label: 'Docs',
-        href: 'https://docs.shibanova.com/',
-      },
-      {
-        label: 'Blog',
-        href: 'https://shibanova.medium.com/',
+        icon: 'BookIcon',
+        href: 'https://docs.shibanova.io',
       },
     ],
-  },
-
-  {
-    label: 'Audit by CTDSEC',
-    icon: 'AuditIcon',
-    href: 'https://ctdsec.com/',
-  },
-  {
-    label: 'Audit by Ether Authority',
-    icon: 'AuditIcon',
-    href: 'https://etherauthority.io/shibanova-smart-contracts-audit/',
-  },
-  {
-    label: 'Audit by Peckshield',
-    icon: 'AuditIcon',
-    href: 'https://',
   },
 ]
 
