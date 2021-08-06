@@ -134,7 +134,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
-          Deposit Fees are distributed to sNOVA holders.
+         {tokenMode ? 'NOVA SINGLE POOL APR IS NOT SHOWING CORRECTLY. We are working on a fix, but for now please compare the tvl to the tvl of the nova-busd farm for a more accurate APR. ' : 'Deposit Fees are distributed to sNOVA holders'}
         </Heading>
         <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
