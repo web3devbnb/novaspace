@@ -67,7 +67,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
   },
-    {
+  {
     pid: 4,
     risk: 1,
     lpSymbol: 'USDT-BUSD LP',
