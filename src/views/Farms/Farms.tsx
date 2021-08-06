@@ -60,6 +60,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     }
   }, [account, dispatch, fastRefresh])
 
+  const [showInactive, setShowInactive] = useState(false)
   const [stakedOnly, setStakedOnly] = useState(false)
 
   const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
@@ -119,31 +120,34 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       <Divider />
       <div>
         <Heading
-          as="h1"
+          as="h4"
           size="lg"
           color="white"
           mb="10px"
           style={{
             textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',
             textAlign: 'center',
-            paddingTop: '20px',
+            paddingTop: 20,
+            fontSize: 22,
           }}
         >
           {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
         </Heading>
-        <Heading as="h2" color="#00aaff" mb="10px" style={{ textAlign: 'center' }}>
+        <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Deposit Fees are distributed to sNOVA holders.
         </Heading>
-        <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
+        <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
       <div>
         <FlexLayout>
-          <Route exact path={`${path}`}>
-            {stakedOnly ? farmsList(stakedOnlyFarms, false) : farmsList(activeFarms, false)}
-          </Route>
-          <Route exact path={`${path}/history`}>
-            {farmsList(inactiveFarms, true)}
-          </Route>
+          {
+            /* eslint-disable */
+            !showInactive
+              ? stakedOnly
+                ? farmsList(stakedOnlyFarms, false)
+                : farmsList(activeFarms, false)
+              : farmsList(inactiveFarms, true)
+          }
         </FlexLayout>
       </div>
     </Page>
