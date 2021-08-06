@@ -39,13 +39,15 @@ const Stats = ({ stats }: { stats: Stat[] }) => (
   <StyledStats>
     {stats.map(({ label, value }) => (
       <Row>
-        <Text fontSize="inherit">{label}</Text>
+        <Text bold textTransform="uppercase" fontSize="12px">
+          {label}
+        </Text>
         {typeof value === 'string' ? (
-          <Text glowing bold fontSize="inherit">
+          <Text glowing bold fontSize="14px">
             {value}
           </Text>
         ) : (
-          <CardValue value={value} decimals={2} />
+          <CardValue fontSize="14px" value={value} decimals={2} />
         )}
       </Row>
     ))}

@@ -64,8 +64,8 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
         depositFeeBP={depositFeeBP}
       />
     ) : (
-      <Button mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
-        {TranslateString(999, 'Approve Contract')}
+      <Button style={{ fontSize: 14 }} mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
+        {TranslateString(999, 'APPROVE CONTRACT')}
       </Button>
     )
   }

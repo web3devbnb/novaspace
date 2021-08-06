@@ -51,7 +51,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
   return (
     <Wrapper>
       <Flex justifyContent="space-between">
-        <Text>{TranslateString(316, 'Stake')}:</Text>
+        <Text bold fontSize="14px">{TranslateString(316, 'STAKE')}:</Text>
         <StyledLinkExternal
           href={
             isTokenOnly
@@ -64,7 +64,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
       </Flex>
       {!removed && (
         <Flex justifyContent="space-between">
-          <Text>{TranslateString(23, 'Total Liquidity')}:</Text>
+          <Text bold fontSize="14px">{TranslateString(23, 'TOTAL LIQUIDITY')}:</Text>
           <Text>{totalValueFormated}</Text>
         </Flex>
       )}

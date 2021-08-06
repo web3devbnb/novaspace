@@ -51,10 +51,14 @@ const FCard = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 24px;
+  padding: 16px;
   position: relative;
   text-align: center;
   grid-column: 3;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 24px;
+  }
 `
 
 const Divider = styled.div`
@@ -139,8 +143,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
       />
       {!removed && (
         <Flex justifyContent="space-between" alignItems="center">
-          <Text>{TranslateString(352, 'APR')}:</Text>
-          <Text bold style={{ display: 'flex', alignItems: 'center' }}>
+          <Text bold fontSize="12px">
+            {TranslateString(352, 'APR')}:
+          </Text>
+          <Text style={{ display: 'flex', alignItems: 'center' }}>
             {farm.apy ? (
               <>
                 <ApyButton
@@ -160,14 +166,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
         </Flex>
       )}
       <Flex justifyContent="space-between">
-        <Text>{TranslateString(318, 'Earn')}:</Text>
-        <Text bold>{earnLabel}</Text>
+        <Text bold fontSize="12px">
+          {TranslateString(318, 'EARN')}:
+        </Text>
+        <Text>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent="space-between">
-        <Text glowing style={{ fontSize: '24px' }}>
-          {TranslateString(10001, 'Deposit Fee')}:
+        <Text bold glowing style={{ fontSize: '18px' }}>
+          {TranslateString(10001, 'DEPOSIT FEE')}:
         </Text>
-        <Text bold style={{ fontSize: '24px' }}>
+        <Text bold color="primary" style={{ fontSize: '18px' }}>
           {farm.depositFeeBP / 100}%
         </Text>
       </Flex>
