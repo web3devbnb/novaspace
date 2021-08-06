@@ -5,6 +5,7 @@ import useRefresh from 'hooks/useRefresh'
 import { fetchFarmsPublicDataAsync, fetchPoolsPublicDataAsync, fetchPoolsUserDataAsync } from './actions'
 import { State, Farm, Pool } from './types'
 import { QuoteToken } from '../config/constants/types'
+import { getBalanceNumber } from '../utils/formatBalance'
 
 const ZERO = new BigNumber(0)
 
