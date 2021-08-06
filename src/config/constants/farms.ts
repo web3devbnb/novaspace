@@ -227,7 +227,6 @@ const farms: FarmConfig[] = [
   //   quoteTokenSymbol: QuoteToken.BNB,
   //   quoteTokenAdresses: contracts.wbnb,
   // },
-
   // {
   //   pid: 13,
   //   risk: 1,

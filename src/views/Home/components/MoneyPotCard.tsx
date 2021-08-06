@@ -127,8 +127,8 @@ const MoneyPotCard = () => {
         />
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}
-          <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot.toNumber()}`}>
-            #{nextMoneyPot ? nextMoneyPot.toNumber() : null}
+          <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
+            #{nextMoneyPot?.toNumber()}
           </a>
         </NextMoneyPotCard>
       </div>

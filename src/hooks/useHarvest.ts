@@ -53,7 +53,6 @@ export const useHarvestRewards = () => {
   const dispatch = useDispatch()
   const { account } = useWallet()
   const moneyPotContract = useMoneyPot()
-
   const handleHarvestRewards = useCallback(async () => {
     const txHash = await harvestRewards(moneyPotContract, account.toString(), account)
     dispatch(fetchFarmUserDataAsync(account))
