@@ -9,4 +9,4 @@ export const NOVA_PER_BLOCK = new BigNumber(1)
 export const BLOCKS_PER_YEAR = new BigNumber(10512000)
 export const BSC_BLOCK_TIME = 3
 
-export const NOVA_POOL_PID = 1
+export const NOVA_POOL_PID = 0
