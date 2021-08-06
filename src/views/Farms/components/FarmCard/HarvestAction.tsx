@@ -6,6 +6,7 @@ import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import styled from 'styled-components'
 import useStake from '../../../../hooks/useStake'
+import HarvestButton from '../../../Home/components/HarvestButton'
 
 interface FarmCardActionsProps {
   earnings?: BigNumber
@@ -48,7 +49,7 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
             {TranslateString(999, 'Compound')}
           </Button>
         ) : null}
-        <Button
+        <HarvestButton
           disabled={rawEarningsBalance === 0 || pendingTx}
           onClick={async () => {
             setPendingTx(true)
@@ -57,7 +58,7 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
           }}
         >
           {TranslateString(999, 'Harvest')}
-        </Button>
+        </HarvestButton>
       </BalanceAndCompound>
     </Flex>
   )

@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Button } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
@@ -18,6 +17,7 @@ import useNovaEarnings from '../../../hooks/useNovaEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
+import HarvestButton from './HarvestButton'
 
 const Block = styled.div`
   margin-bottom: 0px;
@@ -123,7 +123,7 @@ const FarmedStakingCard = () => {
       </Block>
       <Actions>
         {account ? (
-          <Button
+          <HarvestButton
             id="harvest-nova"
             disabled={balancesNovaWithValue.length <= 0 || pendingTx}
             onClick={harvestNovaFarms}
@@ -132,7 +132,7 @@ const FarmedStakingCard = () => {
             {pendingTx
               ? TranslateString(999, 'Collecting NOVA')
               : TranslateString(999, `Harvest all NOVA (${balancesNovaWithValue.length})`)}
-          </Button>
+          </HarvestButton>
         ) : (
           <UnlockButton fullWidth />
         )}

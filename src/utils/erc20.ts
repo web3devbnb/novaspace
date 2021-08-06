@@ -4,7 +4,7 @@ import { Contract } from 'web3-eth-contract'
 import { AbiItem } from 'web3-utils'
 import erc20 from 'config/abi/erc20.json'
 
-export const getContract = (provider: ProviderType, address: string) => {
+export const getContract = (provider: ProviderType, address: string) => {// @ts-ignore: Unreachable code
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(erc20 as unknown as AbiItem, address)
   return contract

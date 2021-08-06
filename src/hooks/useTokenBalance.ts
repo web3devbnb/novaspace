@@ -137,6 +137,23 @@ export const useSNovaBurnedBalance = (tokenAddress: string) => {
   return balance
 }
 
+export const useNextMoneyPot = () => {
+  const { slowRefresh } = useRefresh()
+  const [nextMoneyPot, setNextMoneyPot] = useState<BigNumber>()
+
+  useEffect(() => {
+    async function fetchNextMoneyPot() {
+      const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
+      const blockNumber = await moneyPotContract.methods.nextMoneyPotUpdateBlock().call()
+      setNextMoneyPot(new BigNumber(blockNumber))
+    }
+
+    fetchNextMoneyPot()
+  }, [slowRefresh])
+
+  return nextMoneyPot
+}
+
 export const useMoneyPotBNBReward = () => {
   const { slowRefresh } = useRefresh()
   const [moneyPotBNBReward, setMoneyPotBNBReward] = useState<BigNumber>()

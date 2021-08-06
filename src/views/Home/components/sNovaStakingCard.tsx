@@ -24,6 +24,7 @@ import SwapToNovaModal from './SwapToNovaModal'
 import { useSwapToNova } from '../../../hooks/useUnstake'
 import Stats from './Stats'
 import useSNovaEarnings from '../../../hooks/useSNovaEarnings'
+import HarvestButton from './HarvestButton'
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
@@ -136,7 +137,7 @@ const SNovaedStakingCard = () => {
       </div>
       <Actions>
         {account ? (
-          <Button
+          <HarvestButton
             id="harvest-snova"
             disabled={balancesSNovaWithValue.length <= 0 || pendingTx}
             onClick={harvestSNovaFarms}
@@ -145,7 +146,7 @@ const SNovaedStakingCard = () => {
             {pendingTx
               ? TranslateString(999, 'Collecting sNOVA')
               : TranslateString(999, `Harvest all sNOVA (${balancesSNovaWithValue.length})`)}
-          </Button>
+          </HarvestButton>
         ) : (
           <UnlockButton fullWidth />
         )}
