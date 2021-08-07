@@ -190,7 +190,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
           isTokenOnly={farm.isTokenOnly}
           bscScanAddress={
             farm.isTokenOnly
-              ? `https://bscscan.com/token/${farm.tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              ? `https://bscscan.com/token/${farm.tokenAddresses[process.env.REACT_APP_CHAIN_ID]}#balances`
               : `https://bscscan.com/token/${farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]}`
           }
           totalValueFormated={totalValueFormated}
