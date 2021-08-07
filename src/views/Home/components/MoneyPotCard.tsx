@@ -108,8 +108,10 @@ const MoneyPotCard = () => {
       <div>
         <Heading
           size="lg"
+          // @ts-ignore: Unreachable code error
+          glowing="true"
           style={{
-            textShadow: 'rgba(56, 255, 0, 0.58) 2px 2px 8px, rgba(0, 255, 0, 0.584) -2px -2px 8px',
+            
             padding: '20px 15px 0',
           }}
         >
