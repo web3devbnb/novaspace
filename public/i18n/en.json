@@ -651,13 +651,13 @@
     {
       "data": {
         "stringId": 536,
-        "text": "Total Minted"
+        "text": "TOTAL MINTED"
       }
     },
     {
       "data": {
         "stringId": 538,
-        "text": "Total Burned"
+        "text": "TOTAL BURNED"
       }
     },
     {
@@ -1233,7 +1233,7 @@
     {
       "data": {
         "stringId": 10004,
-        "text": "Circulating Supply"
+        "text": "CIRCULATING SUPPLY"
       }
     },
     {

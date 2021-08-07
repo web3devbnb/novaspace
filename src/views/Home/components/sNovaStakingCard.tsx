@@ -48,7 +48,6 @@ const SNovaStakingCard = () => {
   const { account } = useWallet()
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
-  const novaBalance = getBalanceNumber(useTokenBalance(getSNovaAddress()))
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnSupply()
@@ -133,7 +132,7 @@ const SNovaStakingCard = () => {
       </div>
       <div>
         <Label>sNOVA Balance</Label>
-        <NovaWalletBalance novaBalance={novaBalance} />
+        <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
       </div>
       <Actions>
         {account ? (

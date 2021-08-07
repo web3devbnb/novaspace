@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
-import { Card, CardBody, Heading, Text, useModal, Flex, Link } from '@pancakeswap-libs/uikit'
-import BigNumber from 'bignumber.js/bignumber'
+import { Heading, Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import {
+import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
   useDistributedMoneyPotBNB,
   useDistributedMoneyPotBUSD,
   useNextMoneyPot,
+  useSNovaTotalSupply,
 } from 'hooks/useTokenBalance'
+import { usePriceBnbBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
-import { useSwapToNova } from 'hooks/useUnstake'
-import { getNovaAddress, getSNovaAddress } from 'utils/addressHelpers'
+import { getSNovaAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
-import useTokenBalance from '../../../hooks/useTokenBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 
@@ -59,16 +58,20 @@ const MoneyPotCard = () => {
   const busdReward = useMoneyPotBUSDReward()
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
+  const sNovaSupply = useSNovaTotalSupply()
+  const sNovaBalance = useTokenBalance(getSNovaAddress())
   const nextMoneyPot = useNextMoneyPot()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
+  const bnbPrice = usePriceBnbBusd()
+  const moneypotValue = bnbPrice.times(distributedMoneyPotWBNB[0]).plus(distributedMoneyPotBUSD[0])
 
   const sendTx = async () => {
     setPendingTx(true)
     try {
       await onReward()
     } catch (error) {
-      console.log('Error: ', error)
+      console.log('error: ', error)
     } finally {
       setPendingTx(false)
     }
@@ -119,11 +122,21 @@ const MoneyPotCard = () => {
         <Stats
           stats={[
             {
-              label: TranslateString(999, 'Total Value'),
-              value: getBalanceNumber(distributedMoneyPotWBNB[0]),
+              label: TranslateString(999, 'VALUE'),
+              value: getBalanceNumber(moneypotValue),
+              prefix: '$',
             },
-            { label: TranslateString(999, '$ per sNOVA'), value: getBalanceNumber(distributedMoneyPotWBNB[1]) },
-            { label: TranslateString(999, 'Last Reward Block'), value: distributedMoneyPotBUSD[2] },
+            {
+              label: TranslateString(999, 'USD/sNOVA'),
+              value: getBalanceNumber(moneypotValue.div(sNovaSupply)),
+              prefix: '$',
+            },
+            {
+              label: TranslateString(999, 'YOUR SHARE'),
+              value: getBalanceNumber(sNovaSupply?.div(sNovaBalance)),
+              prefix: '%',
+            },
+            { label: TranslateString(999, 'LAST REWARD BLOCK'), value: distributedMoneyPotBUSD[2] },
           ]}
         />
         <NextMoneyPotCard>
