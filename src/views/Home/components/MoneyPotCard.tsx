@@ -111,7 +111,6 @@ const MoneyPotCard = () => {
           // @ts-ignore: Unreachable code error
           glowing="true"
           style={{
-            
             padding: '20px 15px 0',
           }}
         >
