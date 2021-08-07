@@ -86,11 +86,14 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         const novaRewardPerYear = novaRewardPerBlock.times(BLOCKS_PER_YEAR)
 
         let apy = novaPrice.times(novaRewardPerYear)
-
-        let totalValue = new BigNumber(farm.lpTotalInQuoteToken || 0)
+        let totalValue = new BigNumber(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken || 0)
 
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
           totalValue = totalValue.times(bnbPrice)
+        }
+
+        if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
+          totalValue = totalValue.times(novaPrice)
         }
 
         if (totalValue.comparedTo(0) > 0) {
@@ -134,7 +137,9 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
-         {tokenMode ? 'NOVA SINGLE POOL APR IS NOT SHOWING CORRECTLY. We are working on a fix, but for now please compare the tvl to the tvl of the nova-busd farm for a more accurate APR. ' : 'Deposit Fees are distributed to sNOVA holders'}
+          {tokenMode
+            ? 'NOVA SINGLE POOL APR IS NOT SHOWING CORRECTLY. We are working on a fix, but for now please compare the tvl to the tvl of the nova-busd farm for a more accurate APR. '
+            : 'Deposit Fees are distributed to sNOVA holders'}
         </Heading>
         <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
