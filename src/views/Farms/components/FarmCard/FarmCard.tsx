@@ -92,7 +92,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
   // NAR-NOVA LP. The images should be nova-bnb.svg, link-bnb.svg, nar-nova.svg
   // const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
   const farmImage = farm.isTokenOnly
-    ? farm.tokenSymbol.toLowerCase()
+    ? farm.tokenSymbol
     : `${farm.tokenSymbol.toLowerCase()}-${farm.quoteTokenSymbol.toLowerCase()}`
 
   const totalValue: BigNumber = useMemo(() => {
