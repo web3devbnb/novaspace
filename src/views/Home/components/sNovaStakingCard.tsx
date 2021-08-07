@@ -43,7 +43,7 @@ const Row = styled.div`
   margin-bottom: 8px;
 `
 
-const SNovaedStakingCard = () => {
+const SNovaStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
   const TranslateString = useI18n()
@@ -115,7 +115,7 @@ const SNovaedStakingCard = () => {
   return (
     <StatsCard
       actions={
-        account ? (
+        account && sNovaBalance.comparedTo(0) > 0 ? (
           <Row>
             <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
             <Text fontSize="14px">
@@ -156,4 +156,4 @@ const SNovaedStakingCard = () => {
   )
 }
 
-export default SNovaedStakingCard
+export default SNovaStakingCard

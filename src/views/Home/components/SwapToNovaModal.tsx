@@ -78,15 +78,15 @@ const SwapToNovaModal: React.FC<SwapToNovaModalProps> = ({ onConfirm, onDismiss,
       }
 
       <ModalActions>
+        <Button variant="secondary" onClick={onDismiss}>
+          {TranslateString(462, 'Cancel')}
+        </Button>
         <Button
           variant={!disableConfirmButton ? 'primary' : 'secondary'}
           disabled={disableConfirmButton}
           onClick={sendTx}
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
-        </Button>
-        <Button variant="secondary" onClick={onDismiss}>
-          {TranslateString(462, 'Cancel')}
         </Button>
       </ModalActions>
     </StyledModal>
