@@ -130,7 +130,7 @@ const MoneyPotCard = () => {
         >
           Moneypot
         </Heading>
-        <Text> </Text>
+        <Text> 
         <Stats
           stats={[
             {
@@ -150,7 +150,7 @@ const MoneyPotCard = () => {
             },
             { label: TranslateString(999, 'LAST REWARD BLOCK'), value: distributedMoneyPotBUSD[2] },
           ]}
-        />
+        /></Text>
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}
           <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
