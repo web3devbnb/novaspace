@@ -55,7 +55,9 @@ const MoneyPotCard = () => {
   const TranslateString = useI18n()
   const { account } = useWallet()
   const bnbReward = useMoneyPotBNBReward()
+  const bnbUserRew = Number(bnbReward)/10**18
   const busdReward = useMoneyPotBUSDReward()
+  const busdUserRew = Number(busdReward)/10**18
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
   const sNovaSupply = useSNovaTotalSupply()
@@ -85,14 +87,14 @@ const MoneyPotCard = () => {
           <Text bold fontSize="20px">
             {TranslateString(999, 'BNB ')}
           </Text>
-          <CardValue fontSize="18px" value={getBalanceNumber(bnbReward)} decimals={3} />
+          <Text fontSize="18px"  > {bnbUserRew.toFixed(4)}</Text>
         </div>
         <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
           <Text bold fontSize="20px">
             {TranslateString(999, ' BUSD ')}
           </Text>
-          <CardValue fontSize="18px" value={getBalanceNumber(busdReward)} decimals={3} />
+          <Text fontSize="18px"  >{busdUserRew.toFixed(4)}</Text>
         </div>
       </Row>
       <Row style={{ paddingTop: '20px' }}>

@@ -171,6 +171,7 @@ export const useMoneyPotBNBReward = () => {
     async function fetchMoneyPotBNBReward() {
       const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
       const reward = await moneyPotContract.methods.pendingTokenRewardsAmount(bnbAddress, user).call()
+      console.log(reward)
       setMoneyPotBNBReward(new BigNumber(reward))
     }
 
@@ -197,6 +198,7 @@ export const useMoneyPotBUSDReward = () => {
     async function fetchMoneyPotBUSDReward() {
       const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
       const reward = await moneyPotContract.methods.pendingTokenRewardsAmount(busdAddress, user).call()
+      console.log(reward)
       setMoneyPotBUSDReward(new BigNumber(reward))
     }
 
@@ -241,6 +243,7 @@ export const useDistributedMoneyPotBUSD = () => {
     async function fetchMoneyPotDistributedMoneyPotBUSD() {
       const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
       const disMoneyPotBusd = await moneyPotContract.methods.distributedMoneyPot(busdAddress).call()
+      console.log(disMoneyPotBusd)
       setDistributedMoneyPotBUSD(disMoneyPotBusd)
     }
 
