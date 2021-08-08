@@ -61,12 +61,21 @@ const MoneyPotCard = () => {
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
   const sNovaSupply = useSNovaTotalSupply()
+  
   const sNovaBalance = useTokenBalance(getSNovaAddress())
   const nextMoneyPot = useNextMoneyPot()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
   const bnbPrice = usePriceBnbBusd()
-  const moneypotValue = bnbPrice.times(distributedMoneyPotWBNB[0]).plus(distributedMoneyPotBUSD[0])
+  const moneypotBNBValue = Number(bnbPrice)*(distributedMoneyPotWBNB[0])/10**18
+  const moneypotBUSDValue = distributedMoneyPotBUSD[0]/10**18
+  const moneypotValue = moneypotBUSDValue+moneypotBNBValue 
+  const sNovaShare = moneypotValue/(Number(sNovaSupply))*10**18
+ 
+
+  const share = Number(sNovaBalance) / Number(sNovaSupply) * 100
+  console.log(share)
+
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -88,7 +97,7 @@ const MoneyPotCard = () => {
             {TranslateString(999, 'BNB ')}
           </Text>
           <Text fontSize="18px"  > {bnbUserRew.toFixed(4)}</Text>
-        </div>
+        </div> 
         <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={120} height={120} />
           <Text bold fontSize="20px">
@@ -121,21 +130,22 @@ const MoneyPotCard = () => {
         >
           Moneypot
         </Heading>
+        
         <Stats
           stats={[
             {
               label: TranslateString(999, 'VALUE'),
-              value: getBalanceNumber(moneypotValue),
+              value: moneypotValue,
               prefix: '$',
             },
             {
               label: TranslateString(999, 'USD/sNOVA'),
-              value: getBalanceNumber(moneypotValue.div(sNovaSupply)),
+              value: sNovaShare,
               prefix: '$',
             },
             {
               label: TranslateString(999, 'YOUR SHARE'),
-              value: getBalanceNumber(sNovaSupply?.div(sNovaBalance)),
+              value: share,
               prefix: '%',
             },
             { label: TranslateString(999, 'LAST REWARD BLOCK'), value: distributedMoneyPotBUSD[2] },
