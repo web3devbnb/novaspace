@@ -24,7 +24,7 @@ const Menu = (props) => {
       setLang={setSelectedLanguage}
       novaPriceUsd={novaPriceUsd.toNumber()}
       links={config}
-      priceLink="https://www.coingecko.com/en/coins/shibanova"
+      priceLink="https://dex.guru/token/0x56e344be9a7a7a1d27c854628483efd67c11214f-bsc"
       {...props}
     />
   )
