@@ -74,7 +74,7 @@ const MoneyPotCard = () => {
  
 
   const share = Number(sNovaBalance) / Number(sNovaSupply) * 100
-  console.log(share)
+  
 
 
   const sendTx = async () => {
@@ -130,7 +130,7 @@ const MoneyPotCard = () => {
         >
           Moneypot
         </Heading>
-        
+        <Text> </Text>
         <Stats
           stats={[
             {
