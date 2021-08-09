@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Heading, Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
-import { getBalanceNumber } from 'utils/formatBalance'
+
 import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
@@ -15,7 +15,7 @@ import { usePriceBnbBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
 import { getSNovaAddress } from 'utils/addressHelpers'
-import CardValue from './CardValue'
+
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 
@@ -71,7 +71,8 @@ const MoneyPotCard = () => {
   const moneypotBUSDValue = distributedMoneyPotBUSD[0]/10**18
   const moneypotValue = moneypotBUSDValue+moneypotBNBValue 
   const sNovaShare = moneypotValue/(Number(sNovaSupply))*10**18
- 
+  const totalvalue = ((distributedMoneyPotWBNB[0]*Number(bnbPrice))/10**18)+(distributedMoneyPotBUSD[0]/10**18)
+  console.log(totalvalue)
 
   const share = Number(sNovaBalance) / Number(sNovaSupply) * 100
   
@@ -125,17 +126,16 @@ const MoneyPotCard = () => {
           // @ts-ignore: Unreachable code error
           glowing="true"
           style={{
-            padding: '20px 15px 0',
+            padding: '20px 15px 10px',
           }}
         >
           Moneypot
-        </Heading>
-        
-        <Stats
+        </Heading>      
+        {/* <Stats
           stats={[
             {
               label: TranslateString(999, 'VALUE'),
-              value: moneypotValue,
+              value: totalvalue,
               prefix: '$',
             },
             {
@@ -150,7 +150,33 @@ const MoneyPotCard = () => {
             },
             { label: TranslateString(999, 'LAST REWARD BLOCK'), value: distributedMoneyPotBUSD[2] },
           ]}
-        />
+        /> */}
+        <Row style={{ padding: '0 15px 5px' }}>
+            <Text fontSize="13px" bold >VALUE</Text> <Text fontSize="14px"
+             // @ts-ignore: Unreachable code error
+          glowing="true"
+          >${totalvalue.toFixed(2)}</Text>
+            </Row>
+
+            <Row style={{ padding: '0 15px 5px' }}>
+        <Text fontSize="13px" bold >USD/sNOVA </Text><Text fontSize="14px"
+             // @ts-ignore: Unreachable code error
+          glowing="true"> ${sNovaShare.toFixed(2)}</Text>
+        </Row>
+
+        <Row style={{ padding: '0 15px 5px' }}>
+        <Text fontSize="13px" bold >YOUR SHARE </Text><Text fontSize="14px"
+             // @ts-ignore: Unreachable code error
+          glowing="true"> {share.toFixed(2)}%</Text>
+        </Row>
+
+        <Row style={{ padding: '0 15px 5px' }}>
+        <Text fontSize="13px" bold>LAST REWARD BLOCK </Text><Text fontSize="14px"
+             // @ts-ignore: Unreachable code error
+          glowing="true"> {distributedMoneyPotBUSD[2]}</Text>
+        </Row>
+        
+        
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}
           <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
