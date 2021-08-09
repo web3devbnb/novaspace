@@ -95,7 +95,7 @@ const MoneyPotCard = () => {
         <div style={{ padding: '0 10px' }}>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={120} height={120} />
           <Text bold fontSize="20px">
-            {TranslateString(999, 'BNB ')}
+            {TranslateString(999, 'WBNB ')}
           </Text>
           <Text fontSize="18px"  > {bnbUserRew.toFixed(4)}</Text>
         </div> 

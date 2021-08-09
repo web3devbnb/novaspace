@@ -36,6 +36,7 @@ const Actions = styled.div`
   margin-top: 24px;
 `
 
+
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
