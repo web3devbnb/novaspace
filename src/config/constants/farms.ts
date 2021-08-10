@@ -179,6 +179,87 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.NOVA,
     quoteTokenAdresses: contracts.nova,
   },
+  {
+    pid: 11,
+    risk: 1,
+    lpSymbol: 'MATIC-BNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x6264a3eac2d0beb3de1c930a9068c956391a50ad',
+    },
+    tokenSymbol: 'MATIC',
+    tokenAddresses: {
+      97: '',
+      56: '0xcc42724c6683b7e57334c4e856f4c9965ed682bd',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  {
+    pid: 12,
+    risk: 1,
+    lpSymbol: 'CAKE-BNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x5f2ba7c2c53df850c0fe017bf618b0550f0998aa',
+    },
+    tokenSymbol: 'CAKE',
+    tokenAddresses: {
+      97: '',
+      56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  // {
+  //   pid: 13,
+  //   risk: 1,
+  //   lpSymbol: 'ADA-BNB LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0xAFe738BD826c124575C6C7e93a7288ff61766733',
+  //   },
+  //   tokenSymbol: 'ADA',
+  //   tokenAddresses: {
+  //     97: '',
+  //     56: '0x3ee2200efb3400fabb9aacf31297cbdd1d435d47',
+  //   },
+  //   quoteTokenSymbol: QuoteToken.BNB,
+  //   quoteTokenAdresses: contracts.wbnb,
+  // },
+  // {
+  //   pid: 15,
+  //   risk: 1,
+  //   lpSymbol: 'DAI-BUSD LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0xF45936B04E81258a289D6bFE1B176D7FdD483bA0',
+  //   },
+  //   tokenSymbol: 'DAI',
+  //   tokenAddresses: {
+  //     97: '',
+  //     56: '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3',
+  //   },
+  //   quoteTokenSymbol: QuoteToken.BUSD,
+  //   quoteTokenAdresses: contracts.busd,
+  // },
+  {
+    pid: 13,
+    risk: 1,
+    lpSymbol: 'USDT-BUSD LP',
+    lpAddresses: {
+      97: '',
+      56: '0xbcd0e7a54a2a629595e7098989de5cb9516877a5',
+    },
+    tokenSymbol: 'USDT',
+    tokenAddresses: {
+      97: '',
+      56: '0x55d398326f99059ff775485246999027b3197955',
+    },
+    quoteTokenSymbol: QuoteToken.BUSD,
+    quoteTokenAdresses: contracts.busd,
+  },
+  
   // {
   //   pid: 7,
   //   risk: 1,
