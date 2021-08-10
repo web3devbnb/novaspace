@@ -212,7 +212,7 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
-    pid: 14,
+    pid: 16,
     risk: 1,
     lpSymbol: 'ADA-BNB LP',
     lpAddresses: {
@@ -228,7 +228,7 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
-    pid: 15,
+    pid: 14,
     risk: 1,
     lpSymbol: 'DAI-BUSD LP',
     lpAddresses: {
@@ -261,7 +261,7 @@ const farms: FarmConfig[] = [
   },
   
   {
-    pid: 16,
+    pid: 15,
     risk: 1,
     lpSymbol: 'DOT-BNB LP',
     lpAddresses: {
