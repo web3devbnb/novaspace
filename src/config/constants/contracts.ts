@@ -35,4 +35,8 @@ export default {
     56: '0xAD07Cf266C99d0cC379D4f460F0FF27b81314238',
     97: '0x6099c4f8b42C4F41c070514EF48fCA00ca454710',
   },
+   eth: {
+    56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    97: '',
+  },
 }
