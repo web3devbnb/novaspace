@@ -105,6 +105,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
     if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
       return novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
     }
+    if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+      return bnbPrice.times(farm.lpTotalInQuoteToken).times(8.5)
+    }
     return farm.lpTotalInQuoteToken
   }, [bnbPrice, novaPrice, farm])
 
