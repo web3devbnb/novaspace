@@ -95,6 +95,9 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
           totalValue = totalValue.times(novaPrice)
         }
+        if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+          totalValue = totalValue.times(bnbPrice).times(8.5)
+        }
 
         if (totalValue.comparedTo(0) > 0) {
           apy = apy.div(totalValue)
