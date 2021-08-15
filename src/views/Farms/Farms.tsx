@@ -136,7 +136,8 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           color="white"
           mb="10px"
           style={{
-            textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',
+            // textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',
+            textShadow: '2px 2px 12px #FF0000, -2px -2px 12px #FF0000 ',
             textAlign: 'center',
             paddingTop: 20,
             fontSize: 22,
