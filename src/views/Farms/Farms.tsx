@@ -142,7 +142,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
             fontSize: 22,
           }}
         >
-          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
+          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'NOVA-MATIC/ETH/BTCB/CAKE farms are being phased out 8/16/21 1900 UTC'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Deposit Fees are distributed to sNOVA holders
