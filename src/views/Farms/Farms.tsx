@@ -136,14 +136,13 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           color="white"
           mb="10px"
           style={{
-            // textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',
-            textShadow: '2px 2px 12px #FF0000, -2px -2px 12px #FF0000 ',
+            textShadow: '2px 2px 12px #00aaff95, -2px -2px 12px #00aaff95 ',            
             textAlign: 'center',
             paddingTop: 20,
             fontSize: 22,
           }}
         >
-          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'NOVA-MATIC/ETH/BTCB/CAKE farms are being phased out 8/16/21 19:00 UTC'}
+          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'NOVA-MATIC/ETH/BTCB/CAKE farms can be found under "Inactive"'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Deposit Fees are distributed to sNOVA holders

@@ -14,7 +14,7 @@ const StyledStats = styled(Card)`
   }
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 24px;
+    padding: 12px;
   }
 `
 
