@@ -72,8 +72,9 @@ const MoneyPotCard = () => {
   const moneypotValue = moneypotBUSDValue+moneypotBNBValue
   const sNovaShare = moneypotValue/(Number(sNovaSupply))*10**18
   const totalvalue = ((distributedMoneyPotWBNB[0]*Number(bnbPrice))/10**18)+(distributedMoneyPotBUSD[0]/10**18)
-  console.log(totalvalue)
-
+  
+  const rewardTotal = (Number(bnbPrice)*bnbUserRew) + busdUserRew
+  
   const share = Number(sNovaBalance) / Number(sNovaSupply) * 100
 
 
@@ -130,7 +131,7 @@ const MoneyPotCard = () => {
             disabled={bnbReward?.toNumber() === 0 || busdReward?.toNumber() === 0 || pendingTx}
             onClick={sendTx}
           >
-            {TranslateString(999, 'Harvest Rewards')}
+            {TranslateString(999, 'Harvest Rewards - $')} {rewardTotal.toFixed(2)}
           </HarvestButton>
         ) : (
           <UnlockButton fullWidth />
