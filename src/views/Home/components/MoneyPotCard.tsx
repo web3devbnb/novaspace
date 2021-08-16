@@ -103,7 +103,7 @@ const MoneyPotCard = () => {
       <QuestionHelper
               text={TranslateString(
                 999,
-                'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the prebious day.'
+                'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.'
               )}
               />
               </Row>
