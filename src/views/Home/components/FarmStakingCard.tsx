@@ -86,13 +86,15 @@ const FarmedStakingCard = () => {
   const totalSupply = useTotalSupply()
 
   const burnedBalance = useNovaBurnSupply()
-  const burnedNova = Number(burnedBalance) / 10 ** 18
+  const burnedNova = burnedBalance ? getBalanceNumber(burnedBalance) : 0
+
   const supply = totalSupply ? totalSupply.minus(-burnedBalance) : new BigNumber(0)
   const novaSupply = getBalanceNumber(supply)
 
   const fakeburn = useBurnedBalance(getNovaAddress())
   const theSupply = totalSupply ? totalSupply.minus(fakeburn) : new BigNumber(0)
   const circNova = getBalanceNumber(theSupply)
+
   const marketCap = usePriceNovaBusd().times(theSupply)
 
   let NovaPerBlock = '0'
@@ -104,7 +106,7 @@ const FarmedStakingCard = () => {
   const stats = [
     { label: TranslateString(999, 'Market Cap').toUpperCase(), value: getBalanceNumber(marketCap), prefix: '$' },
     { label: TranslateString(536, 'Total Minted'), value: novaSupply },
-    { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(2) },
+    { label: TranslateString(538, 'Total Burned'), value: burnedNova },
     { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova },
     { label: 'NOVA/BLOCK', value: NovaPerBlock },
   ]
