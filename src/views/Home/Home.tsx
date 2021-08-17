@@ -17,6 +17,7 @@ const Cards = styled(BaseLayout)`
   justify-content: center;
   margin-bottom: 48px;
   margin-top: 32px;
+  
 
   & > div {
     grid-column: span 8;

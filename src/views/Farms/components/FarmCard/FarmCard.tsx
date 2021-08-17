@@ -79,11 +79,12 @@ interface FarmCardProps {
   novaPrice?: BigNumber
   bnbPrice?: BigNumber
   usdtPrice?: BigNumber
+  ethPrice?: BigNumber
   ethereum?: provider
   account?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice, usdtPrice, ethereum, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice, usdtPrice, ethPrice, ethereum, account }) => {
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -110,10 +111,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
       return novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
     }
     if (farm.quoteTokenSymbol === QuoteToken.ETH) {
-      return bnbPrice.times(farm.lpTotalInQuoteToken).times(8.5)
+      return ethPrice.times(farm.lpTotalInQuoteToken)
     }
     return farm.lpTotalInQuoteToken
-  }, [bnbPrice, novaPrice, usdtPrice, farm])
+  }, [bnbPrice, novaPrice, usdtPrice, ethPrice, farm])
 
   const totalValueFormated = totalValue
     ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}`

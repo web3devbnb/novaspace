@@ -9,7 +9,7 @@ import { Image, Heading } from '@pancakeswap-libs/uikit'
 import { BLOCKS_PER_YEAR, NOVA_PER_BLOCK, NOVA_POOL_PID } from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd } from 'state/hooks'
+import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
@@ -50,6 +50,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const novaPrice = usePriceNovaBusd()
   const bnbPrice = usePriceBnbBusd()
   const usdtPrice = usePriceUsdtBusd()
+  const ethPrice = usePriceEthBusd()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const { tokenMode } = farmsProps
 
@@ -97,7 +98,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           totalValue = totalValue.times(novaPrice)
         }
         if (farm.quoteTokenSymbol === QuoteToken.ETH) {
-          totalValue = totalValue.times(bnbPrice).times(8.5)
+          totalValue = totalValue.times(ethPrice)
         }
         if (farm.quoteTokenSymbol === QuoteToken.USDT) {
           totalValue = totalValue.times(usdtPrice)
@@ -117,12 +118,13 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           bnbPrice={bnbPrice}
           novaPrice={novaPrice}
           usdtPrice={usdtPrice}
+          ethPrice={ethPrice}
           ethereum={ethereum}
           account={account}
         />
       ))
     },
-    [bnbPrice, account, novaPrice, usdtPrice, ethereum],
+    [bnbPrice, account, novaPrice, usdtPrice, ethPrice, ethereum],
   )
 
   return (

@@ -18,6 +18,7 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 import HarvestButton from './HarvestButton'
+import QuestionHelper from '../../../components/QuestionHelper'
 
 const Block = styled.div`
   margin-bottom: 0px;
@@ -117,7 +118,14 @@ const FarmedStakingCard = () => {
         <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
       </Block>
       <Block>
-        <Label>NOVA Balance</Label>
+        <Label>NOVA Balance
+        <QuestionHelper
+          text={TranslateString(
+            999,
+            'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.',
+          )}
+        />
+        </Label>
         <NovaWalletBalance novaBalance={novaBalance} />
         <Label>~${(eggPrice * novaBalance).toFixed(2)}</Label>
       </Block>

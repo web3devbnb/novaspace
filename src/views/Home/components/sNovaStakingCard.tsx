@@ -25,6 +25,7 @@ import { useSwapToNova } from '../../../hooks/useUnstake'
 import Stats from './Stats'
 import useSNovaEarnings from '../../../hooks/useSNovaEarnings'
 import HarvestButton from './HarvestButton'
+import QuestionHelper from '../../../components/QuestionHelper'
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
@@ -131,7 +132,14 @@ const SNovaStakingCard = () => {
         <NovaHarvestBalance earningsSum={earningsSNovaSum} />
       </div>
       <div>
-        <Label>sNOVA Balance</Label>
+        <Label>sNOVA Balance
+        <QuestionHelper
+          text={TranslateString(
+            999,
+            'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.',
+          )}
+        />
+        </Label>
         <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
       </div>
       <Actions>
