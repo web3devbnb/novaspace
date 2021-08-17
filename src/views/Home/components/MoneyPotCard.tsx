@@ -55,9 +55,9 @@ const MoneyPotCard = () => {
   const TranslateString = useI18n()
   const { account } = useWallet()
   const bnbReward = useMoneyPotBNBReward()
-  const bnbUserRew = Number(bnbReward)/10**18
+  const bnbUserRew = Number(bnbReward) / 10 ** 18
   const busdReward = useMoneyPotBUSDReward()
-  const busdUserRew = Number(busdReward)/10**18
+  const busdUserRew = Number(busdReward) / 10 ** 18
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
   const sNovaSupply = useSNovaTotalSupply()
@@ -67,17 +67,15 @@ const MoneyPotCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
   const bnbPrice = usePriceBnbBusd()
-  const moneypotBNBValue = Number(bnbPrice)*(distributedMoneyPotWBNB[0])/10**18
-  const moneypotBUSDValue = distributedMoneyPotBUSD[0]/10**18
-  const moneypotValue = moneypotBUSDValue+moneypotBNBValue
-  const sNovaShare = moneypotValue/(Number(sNovaSupply))*10**18
-  const totalvalue = ((distributedMoneyPotWBNB[0]*Number(bnbPrice))/10**18)+(distributedMoneyPotBUSD[0]/10**18)
-  
-  const rewardTotal = (Number(bnbPrice)*bnbUserRew) + busdUserRew
-  
-  const share = Number(sNovaBalance) / Number(sNovaSupply) * 100
+  const moneypotBNBValue = (Number(bnbPrice) * distributedMoneyPotWBNB[0]) / 10 ** 18
+  const moneypotBUSDValue = distributedMoneyPotBUSD[0] / 10 ** 18
+  const moneypotValue = moneypotBUSDValue + moneypotBNBValue
+  const sNovaShare = (moneypotValue / Number(sNovaSupply)) * 10 ** 18
+  const totalvalue = (distributedMoneyPotWBNB[0] * Number(bnbPrice)) / 10 ** 18 + distributedMoneyPotBUSD[0] / 10 ** 18
 
+  const rewardTotal = Number(bnbPrice) * bnbUserRew + busdUserRew
 
+  const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -92,36 +90,36 @@ const MoneyPotCard = () => {
 
   return (
     <StatsCard title="Money Pot">
-     
-      <Row style={{ justifyContent:'center', padding:'0 0 30px 0' }}> 
-        
-            <Text bold fontSize="34px"
-             // @ts-ignore: Unreachable code error
+      <Row style={{ justifyContent: 'center', padding: '0 0 30px 0' }}>
+        <Text
+          bold
+          fontSize="34px"
+          // @ts-ignore: Unreachable code error
           glowing="true"
-          >
-            ${totalvalue.toFixed(2)}
-            </Text>
-      <QuestionHelper
-              text={TranslateString(
-                999,
-                'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.'
-              )}
-              />
-              </Row>
+        >
+          ${totalvalue.toFixed(2)}
+        </Text>
+        <QuestionHelper
+          text={TranslateString(
+            999,
+            'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.',
+          )}
+        />
+      </Row>
       <Row style={{ justifyContent: 'center' }}>
         <div style={{ padding: '0 20px' }}>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={90} height={90} />
           <Text bold fontSize="20px">
             {TranslateString(999, 'WBNB ')}
           </Text>
-          <Text fontSize="18px"  > {bnbUserRew.toFixed(4)}</Text>
+          <Text fontSize="18px"> {bnbUserRew.toFixed(4)}</Text>
         </div>
         <div style={{ padding: '0 20px' }}>
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={90} height={90} />
           <Text bold fontSize="20px">
             {TranslateString(999, ' BUSD ')}
           </Text>
-          <Text fontSize="18px"  >{busdUserRew.toFixed(4)}</Text>
+          <Text fontSize="18px">{busdUserRew.toFixed(4)}</Text>
         </div>
       </Row>
       <Row style={{ paddingTop: '10px' }}>
@@ -169,25 +167,47 @@ const MoneyPotCard = () => {
           ]}
         /> */}
 
-
-            <Row style={{ padding: '10px 15px 5px' }}>
-        <Text fontSize="13px" bold >USD/sNOVA </Text><Text fontSize="14px"
-             // @ts-ignore: Unreachable code error
-          glowing="true"> ${sNovaShare.toFixed(2)}</Text>
+        <Row style={{ padding: '10px 15px 5px' }}>
+          <Text fontSize="13px" bold>
+            USD/sNOVA{' '}
+          </Text>
+          <Text
+            fontSize="14px"
+            // @ts-ignore: Unreachable code error
+            glowing="true"
+          >
+            {' '}
+            ${sNovaShare.toFixed(2)}
+          </Text>
         </Row>
 
         <Row style={{ padding: '0 15px 5px' }}>
-        <Text fontSize="13px" bold >YOUR SHARE </Text><Text fontSize="14px"
-             // @ts-ignore: Unreachable code error
-          glowing="true"> {share.toFixed(2)}%</Text>
+          <Text fontSize="13px" bold>
+            YOUR SHARE{' '}
+          </Text>
+          <Text
+            fontSize="14px"
+            // @ts-ignore: Unreachable code error
+            glowing="true"
+          >
+            {' '}
+            {share.toFixed(2)}%
+          </Text>
         </Row>
 
         <Row style={{ padding: '0 15px 20px' }}>
-        <Text fontSize="13px" bold>LAST REWARD BLOCK </Text><Text fontSize="14px"
-             // @ts-ignore: Unreachable code error
-          glowing="true"> {distributedMoneyPotBUSD[2]}</Text>
+          <Text fontSize="13px" bold>
+            LAST REWARD BLOCK{' '}
+          </Text>
+          <Text
+            fontSize="14px"
+            // @ts-ignore: Unreachable code error
+            glowing="true"
+          >
+            {' '}
+            {distributedMoneyPotBUSD[2]}
+          </Text>
         </Row>
-
 
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}

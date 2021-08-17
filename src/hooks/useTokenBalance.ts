@@ -241,7 +241,7 @@ export const useDistributedMoneyPotBUSD = () => {
     async function fetchMoneyPotDistributedMoneyPotBUSD() {
       const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
       const disMoneyPotBusd = await moneyPotContract.methods.distributedMoneyPot(busdAddress).call()
-      
+
       setDistributedMoneyPotBUSD(disMoneyPotBusd)
     }
 
