@@ -34,12 +34,11 @@ interface Stat {
   label: string
   value: string | number
   prefix?: string
-  
 }
 
 const Stats = ({ stats }: { stats: Stat[] }) => (
   <StyledStats>
-    {stats.map(({ label, value, prefix = null}) => (
+    {stats.map(({ label, value, prefix = null }) => (
       <Row>
         <Text bold fontSize="12px">
           {label}
@@ -49,7 +48,7 @@ const Stats = ({ stats }: { stats: Stat[] }) => (
             {value}
           </Text>
         ) : (
-          <CardValue fontSize="14px" prefix={prefix} value={value} decimals={2}  />
+          <CardValue fontSize="14px" prefix={prefix} value={value} decimals={2} />
         )}
       </Row>
     ))}

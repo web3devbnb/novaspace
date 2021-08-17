@@ -36,7 +36,6 @@ const Actions = styled.div`
   margin-top: 24px;
 `
 
-
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
@@ -102,7 +101,7 @@ const FarmedStakingCard = () => {
   }
 
   const stats = [
-    { label: TranslateString(999, 'Market Cap').toUpperCase(), value: getBalanceNumber(marketCap), prefix: '$'},
+    { label: TranslateString(999, 'Market Cap').toUpperCase(), value: getBalanceNumber(marketCap), prefix: '$' },
     { label: TranslateString(536, 'Total Minted'), value: novaSupply },
     { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(2) },
     { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova },
