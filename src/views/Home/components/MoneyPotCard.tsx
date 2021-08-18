@@ -21,6 +21,7 @@ import Stats from './Stats'
 import QuestionHelper from '../../../components/QuestionHelper'
 import UnlockButton from '../../../components/UnlockButton'
 import HarvestButton from './HarvestButton'
+import CardValue from './CardValue'
 
 const Row = styled.div`
   align-items: center;
@@ -91,14 +92,7 @@ const MoneyPotCard = () => {
   return (
     <StatsCard title="Money Pot">
       <Row style={{ justifyContent: 'center', padding: '0 0 30px 0' }}>
-        <Text
-          bold
-          fontSize="34px"
-          // @ts-ignore: Unreachable code error
-          glowing="true"
-        >
-          ${totalvalue.toFixed(2)}
-        </Text>
+        <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
         <QuestionHelper
           text={TranslateString(
             999,

@@ -52,7 +52,7 @@ const SNovaStakingCard = () => {
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnSupply()
-  const burnedNova = Number(burnedBalance) / 10 ** 18
+  const burnedNova = burnedBalance ? getBalanceNumber(burnedBalance) : 0
   const fakeburn = useBurnedBalance(getSNovaAddress())
 
   const theSupply = totalSupply ? totalSupply.minus(fakeburn) : new BigNumber(0)
@@ -108,7 +108,7 @@ const SNovaStakingCard = () => {
 
   const stats = [
     { label: TranslateString(536, 'Total Minted'), value: minted },
-    { label: TranslateString(538, 'Total Burned'), value: burnedNova.toFixed(2) },
+    { label: TranslateString(538, 'Total Burned'), value: burnedNova },
     { label: TranslateString(10004, 'Circulating Supply'), value: circSupply },
   ]
 
