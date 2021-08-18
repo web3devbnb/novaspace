@@ -89,6 +89,12 @@ const MoneyPotCard = () => {
     }
   }
 
+  const stats = [
+    { label: 'USD/sNOVA', value: sNovaShare || 0, prefix: '$' },
+    { label: 'YOUR SHARE', value: share || 0, suffix: '%' },
+    { label: 'LAST REWARD BLOCK', value: distributedMoneyPotBUSD[2] },
+  ]
+
   return (
     <StatsCard title="Money Pot">
       <Row style={{ justifyContent: 'center', padding: '0 0 30px 0' }}>
@@ -130,78 +136,7 @@ const MoneyPotCard = () => {
         )}
       </Row>
       <div>
-        {/* <Heading
-          size="lg"
-          // @ts-ignore: Unreachable code error
-          glowing="true"
-          style={{
-            padding: '20px 15px 10px',
-          }}
-        >
-          Moneypot
-        </Heading>       */}
-        {/* <Stats
-          stats={[
-            {
-              label: TranslateString(999, 'VALUE'),
-              value: totalvalue,
-              prefix: '$',
-            },
-            {
-              label: TranslateString(999, 'USD/sNOVA'),
-              value: sNovaShare,
-              prefix: '$',
-            },
-            {
-              label: TranslateString(999, 'YOUR SHARE'),
-              value: share,
-              prefix: '%',
-            },
-            { label: TranslateString(999, 'LAST REWARD BLOCK'), value: distributedMoneyPotBUSD[2] },
-          ]}
-        /> */}
-
-        <Row style={{ padding: '10px 15px 5px' }}>
-          <Text fontSize="13px" bold>
-            USD/sNOVA{' '}
-          </Text>
-          <Text
-            fontSize="14px"
-            // @ts-ignore: Unreachable code error
-            glowing="true"
-          >
-            {' '}
-            ${sNovaShare.toFixed(2)}
-          </Text>
-        </Row>
-
-        <Row style={{ padding: '0 15px 5px' }}>
-          <Text fontSize="13px" bold>
-            YOUR SHARE{' '}
-          </Text>
-          <Text
-            fontSize="14px"
-            // @ts-ignore: Unreachable code error
-            glowing="true"
-          >
-            {' '}
-            {share.toFixed(2)}%
-          </Text>
-        </Row>
-
-        <Row style={{ padding: '0 15px 20px' }}>
-          <Text fontSize="13px" bold>
-            LAST REWARD BLOCK{' '}
-          </Text>
-          <Text
-            fontSize="14px"
-            // @ts-ignore: Unreachable code error
-            glowing="true"
-          >
-            {' '}
-            {distributedMoneyPotBUSD[2]}
-          </Text>
-        </Row>
+        <Stats stats={stats} />
 
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}
