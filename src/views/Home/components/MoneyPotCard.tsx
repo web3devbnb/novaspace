@@ -15,7 +15,7 @@ import useTokenBalance, {
 } from 'hooks/useTokenBalance'
 import { usePriceBnbBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
-import { useHarvestRewards } from 'hooks/useHarvest'
+import { useHarvestRewards, useHarvestRewardsOld } from 'hooks/useHarvest'
 import { getSNovaAddress } from 'utils/addressHelpers'
 
 import StatsCard from './StatsCard'
@@ -68,6 +68,7 @@ const MoneyPotCard = () => {
   const nextMoneyPot = useNextMoneyPot()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
+  const { onRewardOld } = useHarvestRewardsOld()
   const bnbPrice = usePriceBnbBusd()
   const moneypotBNBValue = (Number(bnbPrice) * distributedMoneyPotWBNB[0]) / 10 ** 18
   const moneypotBUSDValue = distributedMoneyPotBUSD[0] / 10 ** 18
@@ -88,6 +89,17 @@ const MoneyPotCard = () => {
     setPendingTx(true)
     try {
       await onReward()
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const sendTxOld = async () => {
+    setPendingTx(true)
+    try {
+      await onRewardOld()
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -147,7 +159,7 @@ const MoneyPotCard = () => {
           <HarvestButton
             fullWidth
             disabled={oldbnbReward?.toNumber() === 0 || oldbusdReward?.toNumber() === 0 || pendingTx}
-            onClick={sendTx}            
+            onClick={sendTxOld}            
           >
             {TranslateString(999, 'Harvest Old Rewards - $')}{oldrewardTotal.toFixed(2)} 
           </HarvestButton>

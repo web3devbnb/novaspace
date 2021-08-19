@@ -73,7 +73,7 @@ const FarmedStakingCard = () => {
 
   const balancesNovaWithValue = farmsNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onNovaReward } = useNovaHarvest(balancesNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
-  const harvestNovaFarms = useCallback(async () => {
+  const harvestNovaFarms = useCallback(async () => { 
     setPendingTx(true)
     try {
       await onNovaReward()

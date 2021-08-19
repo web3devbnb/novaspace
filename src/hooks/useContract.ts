@@ -9,6 +9,7 @@ import {
   getLotteryTicketAddress,
   getMoneyPotAddress,
   getSNovaAddress,
+  getMoneyPotOldAddress
 } from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
@@ -83,6 +84,11 @@ export const useSousChef = (id) => {
 export const useMoneyPot = () => {
   const moneyPotAbi = moneyPot as unknown as AbiItem
   return useContract(moneyPotAbi, getMoneyPotAddress())
+}
+
+export const useMoneyPotOld = () => {
+  const moneyPotOldAbi = moneyPot as unknown as AbiItem
+  return useContract(moneyPotOldAbi, getMoneyPotOldAddress())
 }
 
 export const useSNova = () => {
