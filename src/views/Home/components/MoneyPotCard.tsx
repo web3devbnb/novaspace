@@ -85,16 +85,16 @@ const MoneyPotCard = () => {
   const busdUserRewOld = Number(oldbusdReward) / 10 ** 18
   const oldrewardTotal = Number(bnbPrice) * bnbUserRewOld + busdUserRewOld
 
-  const sendTx = async () => {
-    setPendingTx(true)
-    try {
-      await onReward()
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
+  // const sendTx = async () => {
+  //   setPendingTx(true)
+  //   try {
+  //     await onReward()
+  //   } catch (error) {
+  //     console.log('error: ', error)
+  //   } finally {
+  //     setPendingTx(false)
+  //   }
+  // }
 
   const sendTxOld = async () => {
     setPendingTx(true)
@@ -140,7 +140,7 @@ const MoneyPotCard = () => {
           <Text fontSize="18px">{busdUserRew.toFixed(4)}</Text>
         </div>
       </Row>
-      <Row style={{ paddingTop: '10px' }}>
+      {/* <Row style={{ paddingTop: '10px' }}>
         {account ? (
           <HarvestButton
             fullWidth
@@ -152,7 +152,7 @@ const MoneyPotCard = () => {
         ) : (
           <UnlockButton fullWidth />
         )}
-      </Row>
+      </Row> */}
         {/* Harvest old reward */}
         <Row >
         {account ? (

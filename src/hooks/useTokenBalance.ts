@@ -5,6 +5,7 @@ import { provider } from 'web3-core'
 import novaABI from 'config/abi/nova.json'
 import sNovaABI from 'config/abi/snova.json'
 import moneypotABI from 'config/abi/moneypot.json'
+import moneypotoldABI from 'config/abi/moneypotold.json'
 import { getContract } from 'utils/web3'
 import { getTokenBalance } from 'utils/erc20'
 import {
@@ -197,7 +198,7 @@ export const useMoneyPotOldBNBReward = () => {
 
   useEffect(() => {
     async function fetchMoneyPotOldBNBReward() {
-      const moneyPotOldContract = getContract(moneypotABI, getMoneyPotOldAddress())
+      const moneyPotOldContract = getContract(moneypotoldABI, getMoneyPotOldAddress())
       const reward = await moneyPotOldContract.methods.pendingTokenRewardsAmount(bnbAddress, user).call()
       setMoneyPotOldBNBReward(new BigNumber(reward))
     }
@@ -224,7 +225,7 @@ export const useMoneyPotBUSDReward = () => {
 
   useEffect(() => {
     async function fetchMoneyPotBUSDReward() {
-      const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
+      const moneyPotContract = getContract(moneypotoldABI, getMoneyPotAddress())
       const reward = await moneyPotContract.methods.pendingTokenRewardsAmount(busdAddress, user).call()
       setMoneyPotBUSDReward(new BigNumber(reward))
     }
