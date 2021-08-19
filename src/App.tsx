@@ -38,11 +38,13 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      
       <ResetCSS />
       <GlobalStyle />
       <Menu>
         <Suspense fallback={<PageLoader />}>
           <Switch>
+            
             <Route path="/" exact>
               <Home />
             </Route>
@@ -53,11 +55,15 @@ const App: React.FC = () => {
               <Farms tokenMode />
             </Route>
             <Route component={NotFound} />
+            
           </Switch>
+          <Bubbles numberOfBubbles={150} />
         </Suspense>
+        
       </Menu>
-      <Bubbles numberOfBubbles={150} />
+      
     </Router>
+    
   )
 }
 
