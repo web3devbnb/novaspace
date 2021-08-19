@@ -31,6 +31,9 @@ const CardImage = styled.img`
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Actions = styled.div`
@@ -120,13 +123,14 @@ const FarmedStakingCard = () => {
         <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
       </Block>
       <Block>
-        <Label>NOVA Balance
-        <QuestionHelper
-          text={TranslateString(
-            999,
-            'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.',
-          )}
-        />
+        <Label>
+          NOVA Balance
+          <QuestionHelper
+            text={TranslateString(
+              999,
+              'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.',
+            )}
+          />
         </Label>
         <NovaWalletBalance novaBalance={novaBalance} />
         <Label>~${(eggPrice * novaBalance).toFixed(2)}</Label>

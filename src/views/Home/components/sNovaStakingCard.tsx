@@ -30,6 +30,9 @@ import QuestionHelper from '../../../components/QuestionHelper'
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Actions = styled.div`
@@ -132,13 +135,14 @@ const SNovaStakingCard = () => {
         <NovaHarvestBalance earningsSum={earningsSNovaSum} />
       </div>
       <div>
-        <Label>sNOVA Balance
-        <QuestionHelper
-          text={TranslateString(
-            999,
-            'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.',
-          )}
-        />
+        <Label>
+          sNOVA Balance
+          <QuestionHelper
+            text={TranslateString(
+              999,
+              'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.',
+            )}
+          />
         </Label>
         <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
       </div>
