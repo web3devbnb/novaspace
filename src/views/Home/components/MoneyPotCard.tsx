@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
+  useMoneyPotOldBNBReward,
+  useMoneyPotOldBUSDReward,
   useDistributedMoneyPotBNB,
   useDistributedMoneyPotBUSD,
   useNextMoneyPot,
@@ -62,7 +64,6 @@ const MoneyPotCard = () => {
   const distributedMoneyPotWBNB = useDistributedMoneyPotBNB()
   const distributedMoneyPotBUSD = useDistributedMoneyPotBUSD()
   const sNovaSupply = useSNovaTotalSupply()
-
   const sNovaBalance = useTokenBalance(getSNovaAddress())
   const nextMoneyPot = useNextMoneyPot()
   const [pendingTx, setPendingTx] = useState(false)
@@ -73,10 +74,15 @@ const MoneyPotCard = () => {
   const moneypotValue = moneypotBUSDValue + moneypotBNBValue
   const sNovaShare = (moneypotValue / Number(sNovaSupply)) * 10 ** 18
   const totalvalue = (distributedMoneyPotWBNB[0] * Number(bnbPrice)) / 10 ** 18 + distributedMoneyPotBUSD[0] / 10 ** 18
-
   const rewardTotal = Number(bnbPrice) * bnbUserRew + busdUserRew
-
   const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
+
+  // old money pot
+  const oldbnbReward = useMoneyPotOldBNBReward()
+  const oldbusdReward = useMoneyPotOldBUSDReward()
+  const bnbUserRewOld = Number(oldbnbReward) / 10 ** 18
+  const busdUserRewOld = Number(oldbusdReward) / 10 ** 18
+  const oldrewardTotal = Number(bnbPrice) * bnbUserRewOld + busdUserRewOld
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -129,11 +135,26 @@ const MoneyPotCard = () => {
             disabled={bnbReward?.toNumber() === 0 || busdReward?.toNumber() === 0 || pendingTx}
             onClick={sendTx}
           >
-            {TranslateString(999, 'Harvest Rewards - $')} {rewardTotal.toFixed(2)}
+            {TranslateString(999, 'Harvest Rewards - $')}{rewardTotal.toFixed(2)}
           </HarvestButton>
         ) : (
           <UnlockButton fullWidth />
         )}
+      </Row>
+        {/* Harvest old reward */}
+        <Row >
+        {account ? (
+          <HarvestButton
+            fullWidth
+            disabled={oldbnbReward?.toNumber() === 0 || oldbusdReward?.toNumber() === 0 || pendingTx}
+            onClick={sendTx}            
+          >
+            {TranslateString(999, 'Harvest Old Rewards - $')}{oldrewardTotal.toFixed(2)} 
+          </HarvestButton>
+        ) : (
+          <UnlockButton fullWidth />
+        )}
+      
       </Row>
       <div>
         <Stats stats={stats} />

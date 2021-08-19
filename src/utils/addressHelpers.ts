@@ -26,6 +26,9 @@ export const getSNovaAddress = () => {
 export const getMoneyPotAddress = () => {
   return addresses.moneyPot[chainId]
 }
+export const getMoneyPotOldAddress = () => {
+  return addresses.moneyPotOld[chainId]
+}
 export const getBusdAddress = () => {
   return addresses.busd[chainId]
 }
