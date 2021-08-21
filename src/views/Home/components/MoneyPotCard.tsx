@@ -130,14 +130,14 @@ const MoneyPotCard = () => {
           <Text bold fontSize="20px">
             {TranslateString(999, 'WBNB ')}
           </Text>
-          <Text fontSize="18px"> {bnbUserRew.toFixed(4)}</Text>
+          <CardValue fontSize="18px" value={bnbUserRew || 0} decimals={4} />
         </div>
         <div style={{ padding: '0 20px' }}>
           <CardImage src="/images/farms/busd.png" alt="busd logo" width={90} height={90} />
           <Text bold fontSize="20px">
             {TranslateString(999, ' BUSD ')}
           </Text>
-          <Text fontSize="18px">{busdUserRew.toFixed(4)}</Text>
+          <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
         </div>
       </Row>
       <Row style={{ paddingTop: '10px' }}>
@@ -147,14 +147,15 @@ const MoneyPotCard = () => {
             disabled={bnbReward?.toNumber() === 0 || busdReward?.toNumber() === 0 || pendingTx}
             onClick={sendTx}
           >
-            {TranslateString(999, 'Harvest Rewards - $')}{rewardTotal.toFixed(2)}
+            {TranslateString(999, 'Harvest Rewards - $')}
+            {rewardTotal.toFixed(2)}
           </HarvestButton>
         ) : (
           <UnlockButton fullWidth />
         )}
       </Row>
-        {/* Harvest old reward */}
-        {/* <Row >
+      {/* Harvest old reward */}
+      {/* <Row >
         {account ? (
           <HarvestButton
             fullWidth
