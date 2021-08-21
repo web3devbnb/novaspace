@@ -91,7 +91,7 @@ const FarmedStakingCard = () => {
 
   const balancesNovaWithValue = farmsNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onNovaReward } = useNovaHarvest(balancesNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
-  const harvestNovaFarms = useCallback(async () => { 
+  const harvestNovaFarms = useCallback(async () => {
     setPendingTx(true)
     try {
       await onNovaReward()
@@ -118,11 +118,7 @@ const FarmedStakingCard = () => {
 
   const marketCap = usePriceNovaBusd().times(theSupply)
 
-  let NovaPerBlock = '0'
-
-  if (farms[0]?.NovaPerBlock) {
-    NovaPerBlock = new BigNumber(farms[0].NovaPerBlock).div(new BigNumber(10).pow(18)).toFixed(2)
-  }
+  const NovaPerBlock = farms[0]?.NovaPerBlock ? getBalanceNumber(new BigNumber(farms[0].NovaPerBlock)) : 0
 
   const stats = [
     { label: TranslateString(999, 'Market Cap').toUpperCase(), value: getBalanceNumber(marketCap), prefix: '$' },
