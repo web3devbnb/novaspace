@@ -128,10 +128,11 @@ const SNovaStakingCard = () => {
         ) : null
       }
       title="sNOVA Stats"
-    >
-      <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
+    > 
+    <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
+      <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} /></Row>
       <div>
-        <Label style={{ paddingTop: '25px' }}>Pending sNOVA</Label>
+        <Label style={{ paddingTop: '5px' }}>Pending sNOVA</Label>
         <NovaHarvestBalance earningsSum={earningsSNovaSum} />
       </div>
       <div>

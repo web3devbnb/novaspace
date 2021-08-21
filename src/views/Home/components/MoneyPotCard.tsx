@@ -13,7 +13,7 @@ import useTokenBalance, {
   useNextMoneyPot,
   useSNovaTotalSupply,
 } from 'hooks/useTokenBalance'
-import { usePriceBnbBusd } from 'state/hooks'
+import { usePriceBnbBusd, usePriceNovaBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards, useHarvestRewardsOld } from 'hooks/useHarvest'
 import { getSNovaAddress } from 'utils/addressHelpers'
@@ -77,7 +77,8 @@ const MoneyPotCard = () => {
   const totalvalue = (distributedMoneyPotWBNB[0] * Number(bnbPrice)) / 10 ** 18 + distributedMoneyPotBUSD[0] / 10 ** 18
   const rewardTotal = Number(bnbPrice) * bnbUserRew + busdUserRew
   const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
-
+  const novaPrice = usePriceNovaBusd().toNumber()
+  const dailyROI = sNovaShare / novaPrice * 100
   // old money pot
   const oldbnbReward = useMoneyPotOldBNBReward()
   const oldbusdReward = useMoneyPotOldBUSDReward()
@@ -115,7 +116,7 @@ const MoneyPotCard = () => {
 
   return (
     <StatsCard title="Money Pot">
-      <Row style={{ justifyContent: 'center', padding: '0 0 30px 0' }}>
+      <Row style={{ justifyContent: 'center', padding: '0 0 0px 0' }}>
         <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
         <QuestionHelper
           text={TranslateString(
@@ -124,8 +125,11 @@ const MoneyPotCard = () => {
           )}
         />
       </Row>
+      <Text glowing bold style={{padding:'0 0 3px 0'}}>
+        Daily ROI {dailyROI.toFixed(2)}%
+      </Text>
       <Row style={{ justifyContent: 'center' }}>
-        <div style={{ padding: '0 20px' }}>
+        <div style={{ padding: '5px 20px' }}>
           <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={90} height={90} />
           <Text bold fontSize="20px">
             {TranslateString(999, 'WBNB ')}
@@ -140,7 +144,7 @@ const MoneyPotCard = () => {
           <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
         </div>
       </Row>
-      <Row style={{ paddingTop: '10px' }}>
+      <Row style={{ paddingTop: '0px' }}>
         {account ? (
           <HarvestButton
             fullWidth
@@ -171,13 +175,14 @@ const MoneyPotCard = () => {
       </Row> */}
       <div>
         <Stats stats={stats} />
-
+        <Row  style={{ justifyContent: 'center', padding: '7px 0 0px 0'}}>
         <NextMoneyPotCard>
           Next Moneypot starts rewarding at block{' '}
           <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
             #{nextMoneyPot?.toNumber()}
           </a>
         </NextMoneyPotCard>
+        </Row>
       </div>
     </StatsCard>
   )

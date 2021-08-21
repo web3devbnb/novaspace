@@ -24,7 +24,7 @@ const Menu = (props) => {
       setLang={setSelectedLanguage}
       novaPriceUsd={novaPriceUsd.toNumber()}
       links={config}
-      priceLink="https://dex.guru/token/0x56e344be9a7a7a1d27c854628483efd67c11214f-bsc"
+      priceLink="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
       {...props}
     />
   )

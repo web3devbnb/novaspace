@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { Text } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
 import { useAllHarvest, useNovaHarvest } from 'hooks/useHarvest'
@@ -9,7 +10,7 @@ import UnlockButton from 'components/UnlockButton'
 import useNovaFarmsWithBalance from 'hooks/useNovaFarmsWithBalance'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
-import { usePriceNovaBusd, useFarms } from '../../../state/hooks'
+import { usePriceNovaBusd, useFarms } from '../../../state/hooks' 
 import useTokenBalance, { useTotalSupply, useNovaBurnSupply, useBurnedBalance } from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
@@ -24,6 +25,14 @@ const Block = styled.div`
   margin-bottom: 0px;
 `
 
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 8px;
+`
+
 const CardImage = styled.img`
   margin-bottom: 0px;
 `
@@ -31,6 +40,15 @@ const CardImage = styled.img`
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Label1 = styled.div`
+  // color: ${({ theme }) => theme.colors.textSubtle};
+  color: #ffffff;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +65,7 @@ const FarmedStakingCard = () => {
   const farmsWithBalance = useFarmsWithBalance()
   const farmsNovaWithBalance = useNovaFarmsWithBalance()
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
-  const eggPrice = usePriceNovaBusd().toNumber()
+  const novaPrice = usePriceNovaBusd().toNumber()
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
@@ -116,11 +134,15 @@ const FarmedStakingCard = () => {
 
   return (
     <StatsCard title="NOVA Stats">
+      <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
       <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
+      </Row>
       <Block>
         <Label>Pending NOVA</Label>
-        <NovaHarvestBalance earningsSum={earningsNovaSum} />
-        <Label>~${(eggPrice * earningsNovaSum).toFixed(2)}</Label>
+        <Label1> 
+          <NovaHarvestBalance earningsSum={earningsNovaSum} /> 
+          &nbsp; ~ ${(novaPrice * earningsNovaSum).toFixed(2)}
+         </Label1>
       </Block>
       <Block>
         <Label>
@@ -132,8 +154,10 @@ const FarmedStakingCard = () => {
             )}
           />
         </Label>
+        <Label1> 
         <NovaWalletBalance novaBalance={novaBalance} />
-        <Label>~${(eggPrice * novaBalance).toFixed(2)}</Label>
+        &nbsp; ~ ${(novaPrice * novaBalance).toFixed(2)}
+        </Label1>
       </Block>
       <Actions>
         {account ? (

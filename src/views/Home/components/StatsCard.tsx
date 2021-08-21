@@ -8,7 +8,7 @@ const StyledCard = styled(Card)`
 
 const StyledCardHeader = styled(CardHeader)`
   @media (min-width: 360px) and (max-width: 576px) {
-    padding: 12px;
+    padding: 0px;
   }
 `
 
@@ -21,7 +21,7 @@ const StyledHeading = styled(Heading)`
 
 const StyledCardBody = styled(CardBody)`
   @media (min-width: 360px) and (max-width: 576px) {
-    padding: 10px;
+    padding: 0px;
   }
 `
 
@@ -41,8 +41,8 @@ const StatsCard = ({
 }) => {
   return (
     <StyledCard gradientBorder>
-      <StyledCardHeader>
-        <StyledHeading glowing>{title}</StyledHeading>
+      <StyledCardHeader style={{padding:'10px 0 0 0'}}>
+        <StyledHeading glowing style={{padding:'0 0 0 0'}}>{title}</StyledHeading>
       </StyledCardHeader>
       <StyledCardBody>{children}</StyledCardBody>
       {actions && <StyledCardFooter>{actions}</StyledCardFooter>}
