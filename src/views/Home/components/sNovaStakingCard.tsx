@@ -45,6 +45,10 @@ const Row = styled.div`
   margin-bottom: 8px;
 `
 
+const CardImage = styled.img`
+  margin-bottom: 0px;
+`
+
 const SNovaStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
@@ -108,7 +112,7 @@ const SNovaStakingCard = () => {
       title="sNOVA Stats"
     >
       <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
-        <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
+        <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
       </Row>
       <div>
         <Label style={{ paddingTop: '5px' }}>Pending sNOVA</Label>
