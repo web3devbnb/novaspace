@@ -44,7 +44,6 @@ const Label = styled.div`
 
 const Label1 = styled.div`
   color: #ffffff;
-  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;

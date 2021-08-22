@@ -25,6 +25,22 @@ import useSNovaEarnings from '../../../hooks/useSNovaEarnings'
 import HarvestButton from './HarvestButton'
 import QuestionHelper from '../../../components/QuestionHelper'
 
+const Block = styled.div`
+  margin-bottom: 0px;
+`
+
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 8px;
+`
+
+const CardImage = styled.img`
+  margin-bottom: 0px;
+`
+
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
@@ -35,18 +51,6 @@ const Label = styled.div`
 
 const Actions = styled.div`
   margin-top: 24px;
-`
-
-const Row = styled.div`
-  align-items: center;
-  display: flex;
-  font-size: 14px;
-  justify-content: space-between;
-  margin-bottom: 8px;
-`
-
-const CardImage = styled.img`
-  margin-bottom: 0px;
 `
 
 const SNovaStakingCard = () => {
@@ -114,11 +118,11 @@ const SNovaStakingCard = () => {
       <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
       </Row>
-      <div>
-        <Label style={{ paddingTop: '5px' }}>Pending sNOVA</Label>
+      <Block>
+        <Label>Pending sNOVA</Label>
         <NovaHarvestBalance earningsSum={earningsSNovaSum} />
-      </div>
-      <div>
+      </Block>
+      <Block>
         <Label>
           sNOVA Balance
           <QuestionHelper
@@ -129,7 +133,7 @@ const SNovaStakingCard = () => {
           />
         </Label>
         <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
-      </div>
+      </Block>
       <Actions>
         {account ? (
           <HarvestButton
