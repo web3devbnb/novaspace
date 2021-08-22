@@ -1,19 +1,16 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Text } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
-import { useAllHarvest, useNovaHarvest } from 'hooks/useHarvest'
-import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
+import { useNovaHarvest } from 'hooks/useHarvest'
 import UnlockButton from 'components/UnlockButton'
 import useNovaFarmsWithBalance from 'hooks/useNovaFarmsWithBalance'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
-import { usePriceNovaBusd, useFarms } from '../../../state/hooks' 
+import { usePriceNovaBusd, useFarms } from '../../../state/hooks'
 import useTokenBalance, { useTotalSupply, useNovaBurnSupply, useBurnedBalance } from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
-import useAllEarnings from '../../../hooks/useAllEarnings'
 import useNovaEarnings from '../../../hooks/useNovaEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
@@ -46,7 +43,6 @@ const Label = styled.div`
 `
 
 const Label1 = styled.div`
-  // color: ${({ theme }) => theme.colors.textSubtle};
   color: #ffffff;
   font-size: 15px;
   display: flex;
@@ -62,32 +58,13 @@ const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
   const TranslateString = useI18n()
-  const farmsWithBalance = useFarmsWithBalance()
   const farmsNovaWithBalance = useNovaFarmsWithBalance()
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = usePriceNovaBusd().toNumber()
-  const allEarnings = useAllEarnings()
-  const earningsSum = allEarnings.reduce((accum, earning) => {
-    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
-  }, 0)
   const novaEarnings = useNovaEarnings()
   const earningsNovaSum = novaEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
   }, 0)
-
-  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
-  const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
-
-  const harvestAllFarms = useCallback(async () => {
-    setPendingTx(true)
-    try {
-      await onReward()
-    } catch (error) {
-      // TODO: find a way to handle when the user rejects transaction or it fails
-    } finally {
-      setPendingTx(false)
-    }
-  }, [onReward])
 
   const balancesNovaWithValue = farmsNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onNovaReward } = useNovaHarvest(balancesNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
@@ -131,14 +108,14 @@ const FarmedStakingCard = () => {
   return (
     <StatsCard title="NOVA Stats">
       <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
-      <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
+        <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
       </Row>
       <Block>
         <Label>Pending NOVA</Label>
-        <Label1> 
-          <NovaHarvestBalance earningsSum={earningsNovaSum} /> 
+        <Label1>
+          <NovaHarvestBalance earningsSum={earningsNovaSum} />
           &nbsp; ~ ${(novaPrice * earningsNovaSum).toFixed(2)}
-         </Label1>
+        </Label1>
       </Block>
       <Block>
         <Label>
@@ -150,9 +127,9 @@ const FarmedStakingCard = () => {
             )}
           />
         </Label>
-        <Label1> 
-        <NovaWalletBalance novaBalance={novaBalance} />
-        &nbsp; ~ ${(novaPrice * novaBalance).toFixed(2)}
+        <Label1>
+          <NovaWalletBalance novaBalance={novaBalance} />
+          &nbsp; ~ ${(novaPrice * novaBalance).toFixed(2)}
         </Label1>
       </Block>
       <Actions>
