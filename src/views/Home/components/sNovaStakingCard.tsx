@@ -4,8 +4,7 @@ import { Button, Text, useModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
-import { useAllHarvest, useSNovaHarvest } from 'hooks/useHarvest'
-import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
+import { useSNovaHarvest } from 'hooks/useHarvest'
 import useSNovaFarmsWithBalance from 'hooks/useSNovaFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
 import NovaHarvestBalance from './NovaHarvestBalance'
@@ -17,7 +16,6 @@ import useTokenBalance, {
   useBurnedBalance,
 } from '../../../hooks/useTokenBalance'
 import { getSNovaAddress } from '../../../utils/addressHelpers'
-import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import SwapToNovaModal from './SwapToNovaModal'
@@ -51,7 +49,6 @@ const SNovaStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
   const TranslateString = useI18n()
-  const farmsWithBalance = useFarmsWithBalance()
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
   const burnedBalance = useSNovaBurnSupply()
@@ -72,29 +69,10 @@ const SNovaStakingCard = () => {
     <SwapToNovaModal penalty={penalty} max={sNovaBalance} onConfirm={onUnstake} tokenName="sNOVA" />,
   )
 
-  const allEarnings = useAllEarnings()
-  const earningsSum = allEarnings.reduce((accum, earning) => {
-    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
-  }, 0)
-  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
-
   const snovaEarnings = useSNovaEarnings()
   const earningsSNovaSum = snovaEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
   }, 0)
-
-  const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
-
-  const harvestAllFarms = useCallback(async () => {
-    setPendingTx(true)
-    try {
-      await onReward()
-    } catch (error) {
-      // TODO: find a way to handle when the user rejects transaction or it fails
-    } finally {
-      setPendingTx(false)
-    }
-  }, [onReward])
 
   const balancesSNovaWithValue = farmsSNovaWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
   const { onSNovaReward } = useSNovaHarvest(balancesSNovaWithValue.map((farmWithBalance) => farmWithBalance.pid))
@@ -128,9 +106,10 @@ const SNovaStakingCard = () => {
         ) : null
       }
       title="sNOVA Stats"
-    > 
-    <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
-      <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} /></Row>
+    >
+      <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
+        <img src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
+      </Row>
       <div>
         <Label style={{ paddingTop: '5px' }}>Pending sNOVA</Label>
         <NovaHarvestBalance earningsSum={earningsSNovaSum} />
