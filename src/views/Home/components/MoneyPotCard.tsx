@@ -30,7 +30,7 @@ const Row = styled.div`
   display: flex;
   font-size: 14px;
   justify-content: space-between;
-  margin: 8px;
+  margin: 8px 0;
 `
 
 const CardImage = styled.img`
