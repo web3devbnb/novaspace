@@ -78,7 +78,7 @@ const MoneyPotCard = () => {
   const rewardTotal = Number(bnbPrice) * bnbUserRew + busdUserRew
   const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
   const novaPrice = usePriceNovaBusd().toNumber()
-  const dailyROI = sNovaShare / novaPrice * 100
+  const dailyROI = (sNovaShare / novaPrice) * 100
   // old money pot
   const oldbnbReward = useMoneyPotOldBNBReward()
   const oldbusdReward = useMoneyPotOldBUSDReward()
@@ -125,7 +125,7 @@ const MoneyPotCard = () => {
           )}
         />
       </Row>
-      <Text glowing bold style={{padding:'0 0 3px 0'}}>
+      <Text glowing bold style={{ padding: '0 0 3px 0' }}>
         Daily ROI {dailyROI.toFixed(2)}%
       </Text>
       <Row style={{ justifyContent: 'center' }}>
@@ -147,7 +147,6 @@ const MoneyPotCard = () => {
       <Row style={{ paddingTop: '0px' }}>
         {account ? (
           <HarvestButton
-            fullWidth
             disabled={bnbReward?.toNumber() === 0 || busdReward?.toNumber() === 0 || pendingTx}
             onClick={sendTx}
           >
@@ -175,13 +174,13 @@ const MoneyPotCard = () => {
       </Row> */}
       <div>
         <Stats stats={stats} />
-        <Row  style={{ justifyContent: 'center', padding: '7px 0 0px 0'}}>
-        <NextMoneyPotCard>
-          Next Moneypot starts rewarding at block{' '}
-          <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
-            #{nextMoneyPot?.toNumber()}
-          </a>
-        </NextMoneyPotCard>
+        <Row style={{ justifyContent: 'center', padding: '7px 0 0px 0' }}>
+          <NextMoneyPotCard>
+            Next Moneypot starts rewarding at block{' '}
+            <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
+              #{nextMoneyPot?.toNumber()}
+            </a>
+          </NextMoneyPotCard>
         </Row>
       </div>
     </StatsCard>

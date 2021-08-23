@@ -137,7 +137,6 @@ const FarmedStakingCard = () => {
             id="harvest-nova"
             disabled={balancesNovaWithValue.length <= 0 || pendingTx}
             onClick={harvestNovaFarms}
-            fullWidth
           >
             {pendingTx
               ? TranslateString(999, 'Collecting NOVA')

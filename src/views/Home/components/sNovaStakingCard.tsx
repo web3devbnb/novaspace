@@ -140,7 +140,6 @@ const SNovaStakingCard = () => {
             id="harvest-snova"
             disabled={balancesSNovaWithValue.length <= 0 || pendingTx}
             onClick={harvestSNovaFarms}
-            fullWidth
           >
             {pendingTx
               ? TranslateString(999, 'Collecting sNOVA')
