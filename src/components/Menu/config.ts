@@ -22,6 +22,7 @@ const config: MenuEntry[] = [
     icon: 'PoolIcon',
     href: '/pools',
   },
+  
   {
     label: 'Socials',
     icon: 'MoreIcon',
