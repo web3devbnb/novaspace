@@ -41,7 +41,7 @@ const StatsCard = ({
 }) => {
   return (
     <StyledCard gradientBorder>
-      <StyledCardHeader style={{ padding: '10px 0 0 0' }}>
+      <StyledCardHeader style={{ padding: '20px 0 0 0' }}>
         <StyledHeading glowing style={{ padding: '0 0 0 0' }}>
           {title}
         </StyledHeading>
