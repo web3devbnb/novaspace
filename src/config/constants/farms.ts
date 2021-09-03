@@ -420,6 +420,22 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
   },
+  {
+    pid: 26,
+    risk: 4,
+    lpSymbol: 'JAWS-BNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x186c1c8b3f5297319afa9ecee69579f2ddcf25fe',
+    },
+    tokenSymbol: 'JAWS',
+    tokenAddresses: {
+      97: '',
+      56: '0xdd97ab35e3c0820215bc85a395e13671d84ccba2',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
 ]
 
 export default farms
