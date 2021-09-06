@@ -18,6 +18,11 @@ const Cards = styled(BaseLayout)`
   margin-bottom: 48px;
   margin-top: 32px;
 
+  ${({ theme }) => theme.mediaQueries.md} {
+    grid-gap: 48px;
+    padding: 0 25px;
+  }
+
   & > div {
     grid-column: span 8;
     width: 100%;
