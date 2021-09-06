@@ -24,10 +24,10 @@ const Cards = styled(BaseLayout)`
     width: 100%;
 
     ${({ theme }) => theme.mediaQueries.md} {
-      grid-column: span 4;
+      grid-column: span 6;
     }
 
-    ${({ theme }) => theme.mediaQueries.xl} {
+    ${({ theme }) => theme.mediaQueries.lg} {
       grid-column: span 4;
     }
   }
