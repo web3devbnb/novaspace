@@ -17,16 +17,13 @@ const Cards = styled(BaseLayout)`
   justify-content: center;
   margin-bottom: 48px;
   margin-top: 32px;
-  padding-left: 25px;
-  
 
   & > div {
     grid-column: span 8;
-    width: 95%;
-    
+    width: 100%;
 
     ${({ theme }) => theme.mediaQueries.md} {
-      grid-column: span 4;
+      grid-column: span 6;
     }
 
     ${({ theme }) => theme.mediaQueries.xl} {
