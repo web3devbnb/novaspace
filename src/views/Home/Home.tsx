@@ -1,13 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, BaseLayout } from '@pancakeswap-libs/uikit'
-import useI18n from 'hooks/useI18n'
+import { BaseLayout } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import FarmStakingCard from './components/FarmStakingCard'
-import LotteryCard from './components/LotteryCard'
-import TotalValueLockedCard from './components/TotalValueLockedCard'
-import TwitterCard from './components/TwitterCard'
 import Divider from './components/Divider'
 import SNovaStakingCard from './components/sNovaStakingCard'
 
@@ -38,8 +34,6 @@ const Cards = styled(BaseLayout)`
 `
 
 const Home: React.FC = () => {
-  const TranslateString = useI18n()
-
   return (
     <Page>
       <Header>DASHBOARD</Header>
