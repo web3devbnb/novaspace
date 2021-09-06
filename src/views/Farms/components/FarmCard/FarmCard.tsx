@@ -125,7 +125,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
 
   // if (farm.pid <= 1) { //0716
   if (farm.pid === 1 || farm.pid === 2) {
-    earnLabel = 'sNOVA'
+    earnLabel = 'sNOVA' 
   } else {
     earnLabel = 'NOVA'
   }
@@ -145,16 +145,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
         lpLabel={lpLabel}
         multiplier={farm.multiplier}
         risk={risk}
-        depositFee={farm.depositFeeBP}
+        // depositFee={farm.depositFeeBP}
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       />
       {!removed && (
         <Flex justifyContent="space-between" alignItems="center">
-          <Text bold fontSize="12px">
+          <Text bold glowing fontSize="14px">
             {TranslateString(352, 'APR')}:
           </Text>
-          <Text style={{ display: 'flex', alignItems: 'center' }}>
+          <Text glowing bold style={{ display: 'flex', alignItems: 'center' }}>
             {farm.apy ? (
               <>
                 <ApyButton
@@ -180,11 +180,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
         <Text>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent="space-between">
+        <Text bold glowing style={{ fontSize: '14px' }}>
+          {TranslateString(999, 'Total Value Locked')}:
+        </Text> 
         <Text bold glowing style={{ fontSize: '18px' }}>
-          {TranslateString(10001, 'DEPOSIT FEE')}:
-        </Text>
-        <Text bold color="primary" style={{ fontSize: '18px' }}>
-          {farm.depositFeeBP / 100}%
+          {totalValueFormated}
         </Text>
       </Flex>
       <Divider />
@@ -201,7 +201,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
               ? `https://bscscan.com/token/${farm.tokenAddresses[process.env.REACT_APP_CHAIN_ID]}#balances`
               : `https://bscscan.com/token/${farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]}`
           }
-          totalValueFormated={totalValueFormated}
+          depositFee={farm.depositFeeBP / 100}
+          // totalValueFormated={totalValueFormated}
           lpLabel={lpLabel}
           quoteTokenAdresses={quoteTokenAdresses}
           quoteTokenSymbol={quoteTokenSymbol}

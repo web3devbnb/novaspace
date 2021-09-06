@@ -9,7 +9,8 @@ export interface ExpandableSectionProps {
   isTokenOnly?: boolean
   bscScanAddress?: string
   removed?: boolean
-  totalValueFormated?: string
+  depositFee?: number
+  // totalValueFormated?: string
   lpLabel?: string
   quoteTokenAdresses?: Address
   quoteTokenSymbol?: string
@@ -39,7 +40,8 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
   isTokenOnly,
   bscScanAddress,
   removed,
-  totalValueFormated,
+  depositFee,
+  // totalValueFormated,
   lpLabel,
   quoteTokenAdresses,
   quoteTokenSymbol,
@@ -67,11 +69,12 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
       {!removed && (
         <Flex justifyContent="space-between">
           <Text bold fontSize="14px">
-            {TranslateString(23, 'TOTAL LIQUIDITY')}:
-          </Text>
-          <Text>{totalValueFormated}</Text>
+            {TranslateString(999, 'DEPOSIT FEE')}:            
+          </Text>          
+          <Text>{depositFee}%</Text>
         </Flex>
       )}
+      <Flex><Text fontSize="12px">(75% to sNova Rewards, 25% Marketing)</Text></Flex>
       <Flex justifyContent="flex-start">
         <Link external href={bscScanAddress} bold={false}>
           {TranslateString(356, 'View on BscScan')}
