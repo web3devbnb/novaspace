@@ -1,12 +1,12 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { Route, useRouteMatch } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
-import { Image, Heading } from '@pancakeswap-libs/uikit'
-import { BLOCKS_PER_YEAR, NOVA_PER_BLOCK, NOVA_POOL_PID } from 'config'
+import { Heading } from '@pancakeswap-libs/uikit'
+import { BLOCKS_PER_YEAR } from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
@@ -18,7 +18,6 @@ import Header from 'components/Header'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
 import Divider from './components/Divider'
-import TotalValueLockedCard from './components/TotalValueLockedCard'
 
 export interface FarmsProps {
   tokenMode?: boolean

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { Button, Modal, Text } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'

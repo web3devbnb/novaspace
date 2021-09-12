@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useRouteMatch, Link } from 'react-router-dom'
 import { ButtonMenu, ButtonMenuItem, Text, Toggle } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 

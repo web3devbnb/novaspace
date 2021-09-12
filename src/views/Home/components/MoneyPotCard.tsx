@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 
