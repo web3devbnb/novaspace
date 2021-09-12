@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Tag } from '@pancakeswap-libs/uikit'
-import useI18n from 'hooks/useI18n'
 import { useTotalValue } from '../../../state/hooks'
 import CardValue from './CardValue'
 import Divider from './Divider'
@@ -40,10 +39,7 @@ const StyledDivider = styled(Divider)`
 `
 
 const TotalValueLockedCard = () => {
-  const TranslateString = useI18n()
-  // const data = useGetStats()
   const totalValue = useTotalValue()
-  // const tvl = totalValue.toFixed(2);
 
   return (
     <Container>

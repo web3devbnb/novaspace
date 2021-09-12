@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
@@ -13,7 +12,6 @@ import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePrice
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
-import useI18n from 'hooks/useI18n'
 import Header from 'components/Header'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
@@ -43,8 +41,6 @@ const Hero = styled.div`
   }
 `
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
-  const { path } = useRouteMatch()
-  // const TranslateString = useI18n()
   const farmsLP = useFarms()
   const novaPrice = usePriceNovaBusd()
   const bnbPrice = usePriceBnbBusd()
