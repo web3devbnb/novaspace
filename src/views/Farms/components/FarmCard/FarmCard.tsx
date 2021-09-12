@@ -84,7 +84,16 @@ interface FarmCardProps {
   account?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice, usdtPrice, ethPrice, ethereum, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({
+  farm,
+  removed,
+  novaPrice,
+  bnbPrice,
+  usdtPrice,
+  ethPrice,
+  ethereum,
+  account,
+}) => {
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -125,7 +134,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
 
   // if (farm.pid <= 1) { //0716
   if (farm.pid === 1 || farm.pid === 2) {
-    earnLabel = 'sNOVA' 
+    earnLabel = 'sNOVA'
   } else {
     earnLabel = 'NOVA'
   }
@@ -164,6 +173,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
                   tokenAddresses={tokenAddresses}
                   novaPrice={novaPrice}
                   apy={farm.apy}
+                  earnLabel={earnLabel}
                 />
                 {farmAPY}%
               </>
@@ -182,7 +192,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, novaPrice, bnbPrice,
       <Flex justifyContent="space-between">
         <Text bold glowing style={{ fontSize: '14px' }}>
           {TranslateString(999, 'Total Value Locked')}:
-        </Text> 
+        </Text>
         <Text bold glowing style={{ fontSize: '18px' }}>
           {totalValueFormated}
         </Text>

@@ -11,6 +11,7 @@ export interface ApyButtonProps {
   quoteTokenAdresses?: Address
   quoteTokenSymbol?: string
   tokenAddresses: Address
+  earnLabel: string
 }
 
 const ApyButton: React.FC<ApyButtonProps> = ({
@@ -20,6 +21,7 @@ const ApyButton: React.FC<ApyButtonProps> = ({
   tokenAddresses,
   novaPrice,
   apy,
+  earnLabel,
 }) => {
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal
@@ -29,6 +31,7 @@ const ApyButton: React.FC<ApyButtonProps> = ({
       tokenAddresses={tokenAddresses}
       novaPrice={novaPrice}
       apy={apy}
+      earnLabel={earnLabel}
     />,
   )
 

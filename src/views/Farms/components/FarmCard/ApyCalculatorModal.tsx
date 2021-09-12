@@ -15,6 +15,7 @@ interface ApyCalculatorModalProps {
   quoteTokenAdresses?: Address
   quoteTokenSymbol?: string
   tokenAddresses: Address
+  earnLabel: string
 }
 
 const Grid = styled.div`
@@ -41,6 +42,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   tokenAddresses,
   novaPrice,
   apy,
+  earnLabel,
 }) => {
   const TranslateString = useI18n()
   const liquidityUrlPathParts = getLiquidityUrlPathParts({ quoteTokenAdresses, quoteTokenSymbol, tokenAddresses })
@@ -67,7 +69,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(999, 'NOVA per $1000')}
+            {TranslateString(999, `${earnLabel} per $1000`)}
           </Text>
         </GridItem>
         {/* 1 day row */}
