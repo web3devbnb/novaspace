@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
-  useMoneyPotOldBNBReward,
-  useMoneyPotOldBUSDReward,
   useDistributedMoneyPotBNB,
   useDistributedMoneyPotBUSD,
   useNextMoneyPot,
@@ -15,7 +13,7 @@ import useTokenBalance, {
 } from 'hooks/useTokenBalance'
 import { usePriceBnbBusd, usePriceNovaBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
-import { useHarvestRewards, useHarvestRewardsOld } from 'hooks/useHarvest'
+import { useHarvestRewards } from 'hooks/useHarvest'
 import { getSNovaAddress } from 'utils/addressHelpers'
 
 import StatsCard from './StatsCard'
@@ -68,7 +66,6 @@ const MoneyPotCard = () => {
   const nextMoneyPot = useNextMoneyPot()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvestRewards()
-  const { onRewardOld } = useHarvestRewardsOld()
   const bnbPrice = usePriceBnbBusd()
   const moneypotBNBValue = (Number(bnbPrice) * distributedMoneyPotWBNB[0]) / 10 ** 18
   const moneypotBUSDValue = distributedMoneyPotBUSD[0] / 10 ** 18
@@ -79,12 +76,6 @@ const MoneyPotCard = () => {
   const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
   const novaPrice = usePriceNovaBusd().toNumber()
   const dailyROI = (sNovaShare / novaPrice) * 100
-  // old money pot
-  const oldbnbReward = useMoneyPotOldBNBReward()
-  const oldbusdReward = useMoneyPotOldBUSDReward()
-  const bnbUserRewOld = Number(oldbnbReward) / 10 ** 18
-  const busdUserRewOld = Number(oldbusdReward) / 10 ** 18
-  const oldrewardTotal = Number(bnbPrice) * bnbUserRewOld + busdUserRewOld
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -96,17 +87,6 @@ const MoneyPotCard = () => {
       setPendingTx(false)
     }
   }
-
-  // const sendTxOld = async () => {
-  //   setPendingTx(true)
-  //   try {
-  //     await onRewardOld()
-  //   } catch (error) {
-  //     console.log('error: ', error)
-  //   } finally {
-  //     setPendingTx(false)
-  //   }
-  // }
 
   const stats = [
     { label: 'USD/sNOVA', value: sNovaShare || 0, prefix: '$' },
@@ -157,21 +137,6 @@ const MoneyPotCard = () => {
           <UnlockButton fullWidth />
         )}
       </Row>
-      {/* Harvest old reward */}
-      {/* <Row >
-        {account ? (
-          <HarvestButton
-            fullWidth
-            disabled={oldbnbReward?.toNumber() === 0 || oldbusdReward?.toNumber() === 0 || pendingTx}
-            onClick={sendTxOld}            
-          >
-            {TranslateString(999, 'Harvest Old Rewards - $')}{oldrewardTotal.toFixed(2)} 
-          </HarvestButton>
-        ) : (
-          <UnlockButton fullWidth />
-        )}
-      
-      </Row> */}
       <div>
         <Stats stats={stats} />
         <Row style={{ justifyContent: 'center', padding: '7px 0 0px 0' }}>
