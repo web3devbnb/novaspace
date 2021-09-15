@@ -18,7 +18,7 @@ const LeftColumn = styled(Flex)`
   }
 `
 
-const Block = styled(Flex)`
+const LeftColumnBlock = styled(Flex)`
   flex-direction: column;
   margin: 5px;
 
@@ -31,13 +31,19 @@ const Block = styled(Flex)`
   }
 `
 
-const BlockItems = styled(Flex)`
+const LeftColumnBlockItems = styled(Flex)`
   flex-direction: column;
 `
 
 const RightColumn = styled(Flex)`
   flex-direction: column;
   flex-grow: 2;
+`
+
+const RightColumnFooter = styled(Flex)`
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 const data = [
@@ -64,24 +70,24 @@ const LaunchPad: React.FC = () => {
         <LeftColumn>
           {data.map((entry) => {
             return (
-              <Block>
+              <LeftColumnBlock>
                 <Heading>{entry.title.toUpperCase()}</Heading>
-                <BlockItems>
+                <LeftColumnBlockItems>
                   {entry.items.map((item) => {
                     return <Text>{item.toUpperCase()}</Text>
                   })}
-                </BlockItems>
-              </Block>
+                </LeftColumnBlockItems>
+              </LeftColumnBlock>
             )
           })}
         </LeftColumn>
         <RightColumn>
           <img alt="" style={{ width: '100%', height: '400px', color: 'white' }} />
-          <Flex flexDirection="column" alignItems="center" justifyContent="flex-end">
+          <RightColumnFooter>
             <Text>The DEFI 2.0</Text>
             <Text>NEW PROJECT LAUNCHPAD</Text>
             <Text>COMING SOON!</Text>
-          </Flex>
+          </RightColumnFooter>
         </RightColumn>
       </Flex>
     </Page>
