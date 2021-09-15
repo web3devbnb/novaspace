@@ -5,7 +5,7 @@ import Header from 'components/Header'
 import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 
-const Blocks = styled(Flex)`
+const LeftColumn = styled(Flex)`
   flex-direction: column;
   padding: 5px;
 
@@ -35,6 +35,11 @@ const BlockItems = styled(Flex)`
   flex-direction: column;
 `
 
+const RightColumn = styled(Flex)`
+  flex-direction: column;
+  flex-grow: 2;
+`
+
 const data = [
   {
     title: 'Features',
@@ -56,7 +61,7 @@ const LaunchPad: React.FC = () => {
       <Header>NOVAPAD</Header>
       <Divider />
       <Flex>
-        <Blocks>
+        <LeftColumn>
           {data.map((entry) => {
             return (
               <Block>
@@ -69,7 +74,15 @@ const LaunchPad: React.FC = () => {
               </Block>
             )
           })}
-        </Blocks>
+        </LeftColumn>
+        <RightColumn>
+          <img alt="" style={{ width: '100%', height: '400px', color: 'white' }} />
+          <Flex flexDirection="column" alignItems="center" justifyContent="flex-end">
+            <Text>The DEFI 2.0</Text>
+            <Text>NEW PROJECT LAUNCHPAD</Text>
+            <Text>COMING SOON!</Text>
+          </Flex>
+        </RightColumn>
       </Flex>
     </Page>
   )
