@@ -51,6 +51,29 @@ const NovaPadLogo = styled.img`
   height: 400px;
 `
 
+const WrappedText = styled(Text)`
+  :before,
+  :after {
+    background-color: #159bd2;
+    content: '';
+    display: inline-block;
+    height: 5px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  :before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+
+  :after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+`
+
 const data = [
   {
     title: 'Features',
@@ -90,7 +113,7 @@ const LaunchPad: React.FC = () => {
           <NovaPadLogo />
           <RightColumnFooter>
             <Text>The DEFI 2.0</Text>
-            <Text>NEW PROJECT LAUNCHPAD</Text>
+            <WrappedText>NEW PROJECT LAUNCHPAD</WrappedText>
             <Text>COMING SOON!</Text>
           </RightColumnFooter>
         </RightColumn>
