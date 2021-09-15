@@ -1,8 +1,39 @@
 import React from 'react'
+import styled from 'styled-components'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
+
+const Blocks = styled(Flex)`
+  flex-direction: column;
+  padding: 5px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 20px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding: 40px;
+  }
+`
+
+const Block = styled(Flex)`
+  flex-direction: column;
+  margin: 5px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 20px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin: 40px;
+  }
+`
+
+const BlockItems = styled(Flex)`
+  flex-direction: column;
+`
 
 const data = [
   {
@@ -25,20 +56,20 @@ const LaunchPad: React.FC = () => {
       <Header>NOVAPAD</Header>
       <Divider />
       <Flex>
-        <Flex flexDirection="column" style={{ padding: '40px' }}>
+        <Blocks>
           {data.map((entry) => {
             return (
-              <Flex flexDirection="column" style={{ margin: '40px' }}>
+              <Block>
                 <Heading>{entry.title.toUpperCase()}</Heading>
-                <Flex flexDirection="column">
+                <BlockItems>
                   {entry.items.map((item) => {
                     return <Text>{item.toUpperCase()}</Text>
                   })}
-                </Flex>
-              </Flex>
+                </BlockItems>
+              </Block>
             )
           })}
-        </Flex>
+        </Blocks>
       </Flex>
     </Page>
   )
