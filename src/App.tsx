@@ -14,11 +14,8 @@ import './bubbles.scss'
 // Only pool is included in the main bundle because of it's the most visited page'
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
-// const Lottery = lazy(() => import('./views/Lottery'))
-// const Pools = lazy(() => import('./views/Pools'))
-// const Ifos = lazy(() => import('./views/Ifos'))
+const LaunchPad = lazy(() => import('./views/LaunchPad'))
 const NotFound = lazy(() => import('./views/NotFound'))
-// const Nft = lazy(() => import('./views/Nft'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -51,6 +48,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/pools">
               <Farms tokenMode />
+            </Route>
+            <Route path="/novapad">
+              <LaunchPad />
             </Route>
             <Route component={NotFound} />
           </Switch>
