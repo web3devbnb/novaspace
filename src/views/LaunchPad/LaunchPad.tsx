@@ -46,6 +46,11 @@ const RightColumnFooter = styled(Flex)`
   justify-content: flex-end;
 `
 
+const NovaPadLogo = styled.img`
+  width: 100%;
+  height: 400px;
+`
+
 const data = [
   {
     title: 'Features',
@@ -82,7 +87,7 @@ const LaunchPad: React.FC = () => {
           })}
         </LeftColumn>
         <RightColumn>
-          <img alt="" style={{ width: '100%', height: '400px', color: 'white' }} />
+          <NovaPadLogo />
           <RightColumnFooter>
             <Text>The DEFI 2.0</Text>
             <Text>NEW PROJECT LAUNCHPAD</Text>
