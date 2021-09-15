@@ -5,6 +5,10 @@ import Header from 'components/Header'
 import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 
+const Body = styled(Flex)`
+  flex-wrap: wrap;
+`
+
 const LeftColumn = styled(Flex)`
   flex-direction: column;
   padding: 5px;
@@ -94,7 +98,7 @@ const LaunchPad: React.FC = () => {
     <Page>
       <Header>NOVAPAD</Header>
       <Divider />
-      <Flex>
+      <Body>
         <LeftColumn>
           {data.map((entry) => {
             return (
@@ -117,7 +121,7 @@ const LaunchPad: React.FC = () => {
             <Text>COMING SOON!</Text>
           </RightColumnFooter>
         </RightColumn>
-      </Flex>
+      </Body>
     </Page>
   )
 }
