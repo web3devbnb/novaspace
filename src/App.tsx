@@ -37,7 +37,7 @@ const App: React.FC = () => {
     <Router>
       <ResetCSS />
       <GlobalStyle />
-      <Menu>
+      <Menu style={{backgroundImage:"transparent"}}>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>

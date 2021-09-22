@@ -4,14 +4,20 @@ import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
+// eslint-disable-next-line import/no-unresolved
+import logo from './components/novapadlogo.png'
+import BG from './components/BG_SPACE.png'
+
 
 const Body = styled(Flex)`
   flex-wrap: wrap;
+  justify-content: center;
 `
 
 const LeftColumn = styled(Flex)`
   flex-direction: column;
   padding: 5px;
+  align-items: center;
 
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 20px;
@@ -24,14 +30,21 @@ const LeftColumn = styled(Flex)`
 
 const LeftColumnBlock = styled(Flex)`
   flex-direction: column;
-  margin: 5px;
+  margin: 10px;
+
+ 
 
   ${({ theme }) => theme.mediaQueries.md} {
     margin: 20px;
   }
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    margin: 40px;
+    margin: 20px;
+  }
+  ${({ theme }) => theme.mediaQueries.xs} {
+    margin: 20px;
+    text-align: center;
+    
   }
 `
 
@@ -42,6 +55,8 @@ const LeftColumnBlockItems = styled(Flex)`
 const RightColumn = styled(Flex)`
   flex-direction: column;
   flex-grow: 2;
+  padding-top: 0px;
+  width: 66%;
 `
 
 const RightColumnFooter = styled(Flex)`
@@ -51,8 +66,12 @@ const RightColumnFooter = styled(Flex)`
 `
 
 const NovaPadLogo = styled.img`
-  width: 100%;
-  height: 400px;
+  width: 800px;
+  height: undefined;
+  aspectRatio: 3/2;
+  margin-left:auto;
+  margin-right:auto;
+
 `
 
 const WrappedText = styled(Text)`
@@ -95,10 +114,20 @@ const data = [
 
 const LaunchPad: React.FC = () => {
   return (
-    <Page>
-      <Header>NOVAPAD</Header>
+    <Page
+    // style={{backgroundImage:"linear-gradient(to top left, #09a8d0, #17004a, #00002e)"}}
+    >      
+      {/* <Header>NOVAPAD</Header> */}
       <Divider />
       <Body>
+      <RightColumn>
+          <NovaPadLogo src={logo} alt="NovaPad"  />
+          <RightColumnFooter>
+            <Text>The DEFI 2.0</Text>
+            <WrappedText>NEW PROJECT LAUNCHPAD</WrappedText>
+            <Text>COMING SOON!</Text>
+          </RightColumnFooter>
+        </RightColumn>
         <LeftColumn>
           {data.map((entry) => {
             return (
@@ -113,14 +142,6 @@ const LaunchPad: React.FC = () => {
             )
           })}
         </LeftColumn>
-        <RightColumn>
-          <NovaPadLogo />
-          <RightColumnFooter>
-            <Text>The DEFI 2.0</Text>
-            <WrappedText>NEW PROJECT LAUNCHPAD</WrappedText>
-            <Text>COMING SOON!</Text>
-          </RightColumnFooter>
-        </RightColumn>
       </Body>
     </Page>
   )
