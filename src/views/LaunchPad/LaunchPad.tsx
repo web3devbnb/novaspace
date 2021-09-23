@@ -4,9 +4,7 @@ import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
-// eslint-disable-next-line import/no-unresolved
 import logo from './components/novapadlogo.png'
-import BG from './components/BG_SPACE.png'
 
 
 const Body = styled(Flex)`
@@ -115,7 +113,10 @@ const data = [
 const LaunchPad: React.FC = () => {
   return (
     <Page
-    // style={{backgroundImage:"linear-gradient(to top left, #09a8d0, #17004a, #00002e)"}}
+    style={{backgroundImage:"url('/images/BG_SPACE.png')", backgroundSize:"cover" 
+            // backgroundImage:"linear-gradient(to top left, #09a8d0, #17004a, #00002e)"
+          }}
+    
     >      
       {/* <Header>NOVAPAD</Header> */}
       <Divider />

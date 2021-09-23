@@ -15,6 +15,7 @@ import './bubbles.scss'
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
 const LaunchPad = lazy(() => import('./views/LaunchPad'))
+const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 
 // This config is required for number formating
@@ -42,6 +43,9 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/" exact>
               <Home />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
             <Route path="/farms">
               <Farms />
