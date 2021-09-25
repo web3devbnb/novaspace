@@ -71,7 +71,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Header>ShibaNova</Header>
-      <Divider />
+      {/* <Divider /> */}
       <Body>
         <Row>
           <Main>

@@ -54,7 +54,7 @@ const RightColumn = styled(Flex)`
   flex-direction: column;
   flex-grow: 2;
   padding-top: 0px;
-  width: 66%;
+  width: 60%;
 `
 
 const RightColumnFooter = styled(Flex)`
@@ -81,17 +81,17 @@ const WrappedText = styled(Text)`
     height: 5px;
     position: relative;
     vertical-align: middle;
-    width: 50%;
+    width: 25%;
   }
 
   :before {
     right: 0.5em;
-    margin-left: -50%;
+    margin-left: -25%;
   }
 
   :after {
     left: 0.5em;
-    margin-right: -50%;
+    margin-right: -25%;
   }
 `
 
@@ -119,7 +119,7 @@ const LaunchPad: React.FC = () => {
     
     >      
       {/* <Header>NOVAPAD</Header> */}
-      <Divider />
+      {/* <Divider /> */}
       <Body>
       <RightColumn>
           <NovaPadLogo src={logo} alt="NovaPad"  />

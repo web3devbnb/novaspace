@@ -125,7 +125,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   return (
     <Page>
       <Header>{tokenMode ? 'POOLS' : 'FARMS'}</Header>
-      <Divider />
+      {/* <Divider /> */}
       <div>
         <Heading
           as="h4"

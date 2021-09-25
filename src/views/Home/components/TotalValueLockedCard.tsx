@@ -7,15 +7,15 @@ import Divider from './Divider'
 
 const StyledTag = styled(Tag)`
   position: absolute;
-  top: -32px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  right: 30px;
+  top: 0px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  right: 38px;
 `
 
 const Container = styled.div`
   position: relative;
-  padding: 18px;
+  padding: 32px 40px 4px;
   border-right: solid 2px ${({ theme }) => theme.colors.primary};
   border-top: solid 1px ${({ theme }) => theme.colors.primary};
   border-radius: 30px;
@@ -25,7 +25,7 @@ const Container = styled.div`
   min-width: 310px;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding: 18px 40px 28px;
+    padding: 32px 40px 4px;
     font-size: 32px;
   }
 `
