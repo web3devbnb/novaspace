@@ -5,6 +5,7 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 
 const Hero = styled.div`
   position: relative;
+  width: 98%;
   background-position: right;
   border-bottom: solid 1px ${({ theme }) => theme.colors.primary};
   border-bottom-right-radius: 30px;

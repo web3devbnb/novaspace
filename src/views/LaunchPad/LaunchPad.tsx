@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
-import { Flex, Text, Heading } from '@pancakeswap-libs/uikit'
+import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 import logo from './components/novapadlogo.png'
 
@@ -10,6 +10,7 @@ import logo from './components/novapadlogo.png'
 const Body = styled(Flex)`
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 `
 
 const LeftColumn = styled(Flex)`
@@ -95,6 +96,12 @@ const WrappedText = styled(Text)`
   }
 `
 
+const Row = styled.div`
+  display: flex;
+  width: 98%;
+  justify-content: space-evenly;
+`
+
 const data = [
   {
     title: 'Features',
@@ -142,7 +149,16 @@ const LaunchPad: React.FC = () => {
               </LeftColumnBlock>
             )
           })}
+          <Row>
+        <a target="_blank" rel="noreferrer noopener" href="/NOVAPAD_PITCHDECK.pdf">
+          <Tag glowing bold>Learn More!</Tag>
+        </a>
+        <a target="_blank" rel="noreferrer noopener" href="https://t.me/joinchat/z4TDiDvZkTY1Nzlh">
+          <Tag glowing bold>Apply to Launch!</Tag>
+        </a>
+        </Row>
         </LeftColumn>
+       
       </Body>
     </Page>
   )

@@ -8,6 +8,7 @@ import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
+import Footer from './components/Footer'
 import './bubbles.scss'
 
 // Route-based code splitting
@@ -61,6 +62,7 @@ const App: React.FC = () => {
           <Bubbles numberOfBubbles={150} />
         </Suspense>
       </Menu>
+      <Footer />
     </Router>
   )
 }
