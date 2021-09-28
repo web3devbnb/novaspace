@@ -123,7 +123,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   )
 
   return (
-    <Page>
+    <Page style={{
+      backgroundImage:"url('/images/dexbgbig.png')", 
+      backgroundPosition:"center",
+      backgroundRepeat: "repeat-y",
+      }}>
       <Header>{tokenMode ? 'POOLS' : 'FARMS'}</Header>
       {/* <Divider /> */}
       <div>

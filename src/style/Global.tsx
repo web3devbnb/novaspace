@@ -15,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
      background-image: url('/images/home/dexmobilebg2.png');
      background-size: 100% auto;
     background-repeat: repeat-y;
-    background-position: center;
 
     // background: ${({ theme }) => theme.colors.gradients.background};
 
@@ -25,9 +24,9 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background-image: url('/images/home/dexbg.png');
-      background-size: cover;
-      background-repeat: no-repeat;
+      background-image: url('/images/home/dexbgbig.png');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
     }
   }
 `
