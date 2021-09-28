@@ -10,22 +10,25 @@ import SNovaStakingCard from './components/sNovaStakingCard'
 import MoneyedPotCard from './components/MoneyPotCard'
 
 const Cards = styled(BaseLayout)`
+  
   justify-content: center;
   margin-bottom: 48px;
   margin-top: 32px;
 
+  
+
   ${({ theme }) => theme.mediaQueries.md} {
-    grid-gap: 50px;
+    grid-gap: 35px;
     padding: 0 25px;
   }
 
   & > div {
-    grid-column: span 8;
+    grid-column: span 6;
     width: 100%;
 
-    ${({ theme }) => theme.mediaQueries.md} {
-      grid-column: span 4;
-    }
+    // ${({ theme }) => theme.mediaQueries.md} {
+    //   grid-column: span 4;
+    // }
 
     ${({ theme }) => theme.mediaQueries.lg} {
       grid-column: span 4;

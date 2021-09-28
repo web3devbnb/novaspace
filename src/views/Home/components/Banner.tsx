@@ -9,7 +9,7 @@ import Banner2 from './Banner2'
 const Wrapper = styled.div`
   // border: 2px solid ${({ theme }) => theme.colors.primary};
   height: 300px;
-  width: 98%;
+  width: 95%;
   border-radius: 30px;
   position: relative;
   margin: 15px 0;

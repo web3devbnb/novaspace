@@ -7,8 +7,8 @@ const Hero = styled(Flex)`
   flex-direction: column;
   position: relative;
   justify-content: center;
-  background-position: right;
-  // background-image: ${({ theme }) => theme.colors.gradients.background};
+  background-position: bottom center;
+  background-image: url('/images/home/banner2bg.png');
   background-color: #00aaff20;
   border-top: solid 1px ${({ theme }) => theme.colors.primary};
   
@@ -37,7 +37,9 @@ const Col = styled(Flex)`
 `
 const Img = styled.img`
   height: 25px;
-  padding: 0 5px;
+  margin: 5px 5px;
+  background-color: white;
+  border-radius: 5px;
 `
 const Ul = styled.ul`
   list-style-type: none;  

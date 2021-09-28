@@ -16,6 +16,7 @@ import Divider from "./assets/divider.png"
 const Body = styled(Flex)`
   flex-wrap: wrap;
   justify-content: center;
+  margin 0 20px;
 `
 
 const Col = styled(Flex)`
@@ -26,14 +27,19 @@ const Col = styled(Flex)`
   width: 99%;
   margin: 0 5px;
 
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin: 0 10px;
+  }
+
   ${({ theme }) => theme.mediaQueries.lg} {
-    width: 49%;
+    width: 47%;
   }
  
 `
 
 const Main = styled(Flex)`
-  width: 98%;
+  width: 95%;
   margin: 10px 0 0 0;
   flex-direction: column;
   object-position: center bottom;

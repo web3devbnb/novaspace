@@ -11,9 +11,17 @@ const Hero = styled.div`
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 0px;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-left: 50px;
+    width: 92%;
+  }
+  
+
+  ${({ theme }) => theme.mediaQueries.md} {
     display: flex;
     justify-content: flex-end;
+
   }
 
   ${({ theme }) => theme.mediaQueries.xl} {
@@ -25,6 +33,13 @@ const StyledHeading = styled(Heading)`
   text-align: center;
   margin-bottom: 32px;
 
+  ${({ theme }) => theme.mediaQueries.md} {
+    position: absolute;
+    left: 45px;
+    
+    bottom: 0;
+    margin-bottom: 8px;
+  }
   ${({ theme }) => theme.mediaQueries.lg} {
     position: absolute;
     left: 0;

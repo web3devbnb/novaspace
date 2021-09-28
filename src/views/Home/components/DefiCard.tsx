@@ -7,8 +7,8 @@ const Grid = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.primary};
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('/images/home/defi2bg1.png');
-  background-position: bottom right;
+  background-image: url('/images/home/defi2small.png');
+  background-position: center;
   background-color: #041729;
   height: 150px;
   width: 100%;
@@ -20,6 +20,12 @@ const Grid = styled.div`
 
   ${({ theme }) => theme.mediaQueries.sm} {
     background-position: center;
+    background-image: url('/images/home/defi2med.png');
+    }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    background-position: center;
+    background-image: url('/images/home/defi2bg1.png');
     }
 `
 
