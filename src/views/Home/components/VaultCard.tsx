@@ -98,9 +98,15 @@ const VaultsCard = () => {
       {/* </ColRight>  */}
       <TextRow2>
         <SubHeading >Earn more with 
-          <a href="https://app.crudeoil.finance/#/app/vaults" target="_blank" rel="noreferrer noopener" style={{color:"#00aaff"}}> AutoShark </a>
+          <a href="https://autoshark.finance/vaults/Nova" target="_blank" 
+          rel="noreferrer noopener" style={{color:"#00aaff"}}> 
+          AutoShark 
+          </a>
            & 
-          <a href="https://autoshark.finance/vaults/Nova" target="_blank" rel="noreferrer noopener" style={{color:"#00aaff"}}> CrudeOil </a>
+          <a href="https://app.crudeoil.finance/#/app/vaults" target="_blank" 
+          rel="noreferrer noopener" style={{color:"#00aaff"}}> 
+          CrudeOil 
+          </a>
         </SubHeading>
       </TextRow2>
     </Grid>

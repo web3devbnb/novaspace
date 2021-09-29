@@ -76,7 +76,9 @@ const Home: React.FC = () => {
         <Announcements /> */}
         <Main>
           <Announcement glowing>
-            THE NEW NOVAPAD IS GETTING READY FOR LIFTOFF!
+            Want to Launch Your Project to the Moon? Apply 
+            <a target="_blank" rel="noreferrer" style={{color:"gold"}}
+            href="https://t.me/joinchat/z4TDiDvZkTY1Nzlh"> HERE!</a>
           </Announcement>
           <Img src={Divider} alt="divider" style={{}} />
         </Main>
