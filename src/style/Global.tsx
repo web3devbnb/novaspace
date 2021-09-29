@@ -16,8 +16,6 @@ const GlobalStyle = createGlobalStyle`
      background-size: 100% auto;
     background-repeat: repeat-y;
 
-    // background: ${({ theme }) => theme.colors.gradients.background};
-
     img {
       height: auto;
       max-width: 100%;

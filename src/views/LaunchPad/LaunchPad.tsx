@@ -6,6 +6,11 @@ import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 import logo from './components/novapadlogo.png'
 
+const Page1 = styled(Page)`
+background-image:url('/images/home/BG_SPACE.png');
+ background-size:cover ;
+`
+
 
 const Body = styled(Flex)`
   flex-wrap: wrap;
@@ -119,15 +124,10 @@ const data = [
 
 const LaunchPad: React.FC = () => {
   return (
-    <Page
-    style={{backgroundImage:"url('/images/BG_SPACE.png')", backgroundSize:"cover" 
-            // backgroundImage:"linear-gradient(to top left, #09a8d0, #17004a, #00002e)"
-          }}
-    
-    >      
+    <Page1 >      
       {/* <Header>NOVAPAD</Header> */}
       {/* <Divider /> */}
-      <Body>
+      <Body >
       <RightColumn>
           <NovaPadLogo src={logo} alt="NovaPad"  />
           <RightColumnFooter>
@@ -160,7 +160,7 @@ const LaunchPad: React.FC = () => {
         </LeftColumn>
        
       </Body>
-    </Page>
+    </Page1>
   )
 }
 
