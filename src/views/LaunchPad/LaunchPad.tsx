@@ -140,7 +140,7 @@ const LaunchPad: React.FC = () => {
           {data.map((entry) => {
             return (
               <LeftColumnBlock>
-                <Heading>{entry.title.toUpperCase()}</Heading>
+                <Heading style={{textDecoration: "underline"}} >{entry.title.toUpperCase()}</Heading>
                 <LeftColumnBlockItems>
                   {entry.items.map((item) => {
                     return <Text>{item.toUpperCase()}</Text>
