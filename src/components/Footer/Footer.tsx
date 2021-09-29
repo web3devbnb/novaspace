@@ -92,10 +92,10 @@ const Footer = () => (
         {/* <Text>Links</Text>       */}
         <Ul >
             <li style={{color:"white", marginTop:"2px"}}>
-              <a target="_blank" rel="noreferrer" href="/terms">Terms</a>
+              <a target="_blank" rel="noreferrer" href="https://shibanova.io/terms">Terms</a>
             </li>
             <li style={{color:"white", marginTop:"4px"}}>
-              <a target="_blank" rel="noreferrer" href="/privacy">Privacy</a>
+              <a target="_blank" rel="noreferrer" href="https://shibanova.io/privacy">Privacy</a>
             </li>
             <li style={{color:"white", marginTop:"4px"}}>
               <a target="_blank" rel="noreferrer" href="https://docs.shibanova.io/shibanova-documentation/"
