@@ -5,10 +5,9 @@ import vaultlogo from '../assets/vaultlogos.png'
 
 const Grid = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.primary};
-  background-image: url('/images/home/vaultbg.png');
-  // background-size: cover;
+  background-image: url('/images/home/vaultbg2.png');
+  background-position: left;
   background-repeat: no-repeat;
-  background-position: -100px -40px;
   background-color: #f082b3;
   height: 150px;
   width: 100%;
