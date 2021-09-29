@@ -28,7 +28,7 @@ const Banner = () => {
         <Carousel
         // eslint-disable-next-line react/jsx-boolean-value
         autoplay={true}
-        autoplayInterval={80000000} 
+        autoplayInterval={8000} 
         // eslint-disable-next-line react/jsx-boolean-value
         wrapAround={true}
         // eslint-disable-next-line react/jsx-boolean-value
