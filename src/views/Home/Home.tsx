@@ -66,7 +66,9 @@ const Home: React.FC = () => {
 
   
   return (
-    <Page>
+    <Page 
+    // style={{backgroundImage:"linear-gradient(to left, #008dad, #17004a, #000023 )"}}
+    >
       <Header>WELCOME!</Header>
       
       <Body>

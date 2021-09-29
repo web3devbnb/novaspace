@@ -52,7 +52,7 @@ const Footer = () => (
       <Col>
       <Text>Get in Touch</Text>
         <Row >
-                <a
+                <a                  
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.facebook.com/ShibaNovaDEFI"
