@@ -77,13 +77,27 @@ const ColRight = styled.div`
   
 `
 const Heading = styled(Text)`
-  font-size: 35px;
+  font-size: 25px;
   font-weight: bold;
   margin-left: 3%;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 35px;
+  }
 `
 const SubHeading = styled(Text)`
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-left: -3%;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 20px;
+    margin-left: -10%;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+   
+    margin-left: 0%;
+  }
 `
 
 

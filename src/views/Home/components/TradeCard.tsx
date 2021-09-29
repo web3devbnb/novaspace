@@ -51,9 +51,12 @@ const ColRight = styled.div`
   padding-right: 5px;
 `
 const Heading = styled(Text)`
-  font-size: 35px;
+  font-size: 25px;
   font-weight: bold;
   margin-left: 3%;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 35px;
+  }
 `
 const SubHeading = styled(Text)`
   font-size: 20px;

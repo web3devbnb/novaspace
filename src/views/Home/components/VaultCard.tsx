@@ -35,14 +35,14 @@ ${({ theme }) => theme.mediaQueries.sm} {
 const TextRow2 = styled.div`
 wrap: no-wrap;
 grid-column-start: 1;
-grid-column-end: 6;
+grid-column-end: 4;
 position: absolute;
 top: 50%;
 left: 5%;
 
 ${({ theme }) => theme.mediaQueries.sm} {
   grid-column-start: 1;
-  grid-column-end: 6;
+  grid-column-end: 4;
 }
 `
 
@@ -60,20 +60,31 @@ const ColRight = styled.div`
   border-radius: 0 30px 30px 0;
   // margin-top: 30px;
   ${({ theme }) => theme.mediaQueries.sm} {
-    background-position: 10px 17px;
+    background-position: 0px 17px;
   }
   
 `
 const Heading = styled(Text)`
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 900;
   margin-left: 3%;
   color: #130042;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 35px;
+  }
 `
 const SubHeading = styled(Text)`
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bolder;
   color: #130042;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-left: 2%;
+
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 20px;
+    margin-left: 0%;
+  }
 `
 
 
