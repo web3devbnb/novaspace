@@ -10,6 +10,7 @@ import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
+import { orderBy } from 'lodash'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
 import Header from 'components/Header'
@@ -46,9 +47,9 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const bnbPrice = usePriceBnbBusd()
   const usdtPrice = usePriceUsdtBusd()
   const ethPrice = usePriceEthBusd()
+  const busdPrice = usePriceUsdtBusd()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const { tokenMode } = farmsProps
-
   const dispatch = useDispatch()
   const { fastRefresh } = useRefresh()
   useEffect(() => {
@@ -59,6 +60,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
   const [showInactive, setShowInactive] = useState(false)
   const [stakedOnly, setStakedOnly] = useState(false)
+  const [sortByApy, setSortApy] = useState(false)
 
   const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
   const inactiveFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')
@@ -66,6 +68,8 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const stakedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
+
+  
 
   // /!\ This function will be removed soon
   // This function compute the APY for each farm and will be replaced when we have a reliable API
@@ -88,7 +92,9 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
           totalValue = totalValue.times(bnbPrice)
         }
-
+        if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
+          totalValue = totalValue.times(busdPrice)
+        }
         if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
           totalValue = totalValue.times(novaPrice)
         }
@@ -110,6 +116,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           key={farm.pid}
           farm={farm}
           removed={removed}
+          busdPrice={busdPrice}
           bnbPrice={bnbPrice}
           novaPrice={novaPrice}
           usdtPrice={usdtPrice}
@@ -119,8 +126,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         />
       ))
     },
-    [bnbPrice, account, novaPrice, usdtPrice, ethPrice, ethereum],
+    [bnbPrice, busdPrice, account, novaPrice, usdtPrice, ethPrice, ethereum],
   )
+
+ 
+
 
   return (
     <Page style={{

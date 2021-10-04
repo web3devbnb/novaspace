@@ -48,9 +48,15 @@ const Ul = styled.ul`
 
 const Footer = () => (
   <Hero>
+     
     <Row>
       <Col>
-      <Text>Get in Touch</Text>
+      <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract:</Text>
+    <Text style={{fontSize:"12px"}}> 
+      <a  target="_blank"
+        rel="noreferrer"
+        href="https://bscscan.com/address/0x56E344bE9A7a7A1d27C854628483Efd67c11214F#code"> 
+        0x56E344bE9A7a7A1d27C854628483Efd67c11214F </a></Text>
         <Row >
                 <a                  
                   target="_blank"
@@ -85,6 +91,28 @@ const Footer = () => (
                     alt="twitter"                    
                   />
                 </a>
+                <a                  
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://coinmarketcap.com/currencies/shibanova/"
+                >
+                  <Img
+                    src="https://shibanova.io/assets/images/home/cmclogo.png"
+                    alt="coin marketcap"
+                    style={{}}
+                  />
+                </a> 
+                <a                  
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.coingecko.com/en/coins/shiba-nova"
+                >
+                  <Img
+                    src="https://shibanova.io/assets/images/home/coingecko.png"
+                    alt="coin gecko"
+                    style={{}}
+                  />
+                </a> 
 
         </Row>
       </Col>

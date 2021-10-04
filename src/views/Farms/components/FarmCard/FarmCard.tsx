@@ -6,7 +6,9 @@ import { Farm } from 'state/types'
 import { provider } from 'web3-core'
 import useI18n from 'hooks/useI18n'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
+import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import { QuoteToken } from 'config/constants/types'
+import { getBalanceNumber } from 'utils/formatBalance'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
@@ -77,6 +79,7 @@ interface FarmCardProps {
   removed: boolean
   novaPrice?: BigNumber
   bnbPrice?: BigNumber
+  busdPrice?: BigNumber
   usdtPrice?: BigNumber
   ethPrice?: BigNumber
   ethereum?: provider
@@ -87,6 +90,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   farm,
   removed,
   novaPrice,
+  busdPrice,
   bnbPrice,
   usdtPrice,
   ethPrice,
@@ -96,6 +100,8 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
+  const { pid, lpAddresses, isTokenOnly, depositFeeBP } = useFarmFromPid(farm.pid)
+  const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid)
 
   // const isCommunityFarm = communityFarms.includes(farm.tokenSymbol)
   // We assume the token name is coin pair + lp e.g. NOVA-BNB LP, LINK-BNB LP,
@@ -112,6 +118,9 @@ const FarmCard: React.FC<FarmCardProps> = ({
     if (farm.quoteTokenSymbol === QuoteToken.BNB) {
       return bnbPrice.times(farm.lpTotalInQuoteToken)
     }
+    if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
+      return busdPrice.times(farm.lpTotalInQuoteToken)
+    }
     if (farm.quoteTokenSymbol === QuoteToken.USDT) {
       return usdtPrice.times(farm.lpTotalInQuoteToken)
     }
@@ -122,16 +131,20 @@ const FarmCard: React.FC<FarmCardProps> = ({
       return ethPrice.times(farm.lpTotalInQuoteToken)
     }
     return farm.lpTotalInQuoteToken
-  }, [bnbPrice, novaPrice, usdtPrice, ethPrice, farm])
+  }, [bnbPrice, busdPrice, novaPrice, usdtPrice, ethPrice, farm])
 
   const totalValueFormated = totalValue
     ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     : '-'
 
+ 
+
+
+
   const lpLabel = farm.lpSymbol
   let earnLabel = ''
 
-  // if (farm.pid <= 1) { //0716
+  
   if (farm.pid === 1 || farm.pid === 2) {
     earnLabel = 'sNOVA'
   } else {

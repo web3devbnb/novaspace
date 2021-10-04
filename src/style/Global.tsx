@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
   }
   body {
-     background-image: url('/images/home/dexmobilebg2.png');
+     background-image: url('/images/home/dexmobilebg2.jpg');
      background-size: 100% auto;
     background-repeat: repeat-y;
 
@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background-image: url('/images/home/dexbgbig.png');
+      background-image: url('/images/home/dexbgbig.jpg');
       background-size: 100% auto;
       background-repeat: repeat-y;
     }
