@@ -22,7 +22,7 @@ export const farmsSlice = createSlice({
         const liveFarmData = liveFarmsData.find((f) => f.pid === farm.pid)
         return { ...farm, ...liveFarmData }
       })
-    },
+    }, 
     setFarmUserData: (state, action) => {
       const { arrayOfUserDataObjects } = action.payload
       arrayOfUserDataObjects.forEach((userDataEl) => {

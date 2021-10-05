@@ -95,6 +95,9 @@ export const useTotalValue = (): BigNumber => {
   const farms = useFarms()
   const bnbPrice = usePriceBnbBusd()
   const novaPrice = usePriceNovaBusd()
+  const ethPrice = usePriceEthBusd()
+  const busdPrice = usePriceUsdtBusd()
+  const usdtPrice = usePriceUsdtBusd()
   let value = new BigNumber(0)
   for (let i = 0; i < farms.length; i++) {
     const farm = farms[i]
@@ -102,9 +105,20 @@ export const useTotalValue = (): BigNumber => {
       let val
       if (farm.quoteTokenSymbol === QuoteToken.BNB) {
         val = bnbPrice.times(farm.lpTotalInQuoteToken)
-      } else if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
+      } 
+      else if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
+        val = busdPrice.times(farm.lpTotalInQuoteToken)
+      } 
+      else if (farm.quoteTokenSymbol === QuoteToken.USDT) {
+        val = usdtPrice.times(farm.lpTotalInQuoteToken)
+      } 
+      else if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
         val = novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
-      } else {
+      } 
+      else if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+        val=ethPrice.times(farm.lpTotalInQuoteToken)
+      }
+      else {
         val = farm.lpTotalInQuoteToken
       }
       value = value.plus(val)

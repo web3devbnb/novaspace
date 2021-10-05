@@ -7,6 +7,7 @@ import { Button, Flex, Text } from '@pancakeswap-libs/uikit'
 import { Farm } from 'state/types'
 import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
+import { QuoteToken } from 'config/constants/types'
 import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
 import StakeAction from './StakeAction'
@@ -34,6 +35,9 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID]
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
+
+ 
+
 
   const lpContract = useMemo(() => {
     if (isTokenOnly) {
@@ -87,7 +91,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
       <HarvestAction earnings={earnings} pid={pid} />
       <Flex>
         <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {lpName}
+          {lpName} 
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Staked')}

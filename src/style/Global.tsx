@@ -12,11 +12,19 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
   }
   body {
-    background: ${({ theme }) => theme.colors.gradients.background};
+     background-image: url('/images/home/dexmobilebg2.jpg');
+     background-size: 100% auto;
+    background-repeat: repeat-y;
 
     img {
       height: auto;
       max-width: 100%;
+    }
+
+    ${({ theme }) => theme.mediaQueries.md} {
+      background-image: url('/images/home/dexbgbig.jpg');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
     }
   }
 `

@@ -22,7 +22,7 @@ const farms: FarmConfig[] = [
   {
     pid: 2,
     risk: 5,
-    lpSymbol: 'NOVA-BUSD LP',
+    lpSymbol: 'NOVA-BUSD LP', 
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
       56: '0x9d6fDE3Bd9e1Cc21da6D6c606343BC9164509Cb6',
