@@ -52,7 +52,7 @@ const Footer = () => (
     <Row>
       <Col>
       <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract:</Text>
-    <Text style={{fontSize:"10px"}}> 
+    <Text style={{fontSize:"8px"}}> 
       <a  target="_blank"
         rel="noreferrer"
         href="https://bscscan.com/address/0x56E344bE9A7a7A1d27C854628483Efd67c11214F#code"> 
