@@ -3,15 +3,6 @@ import styled from 'styled-components'
 import { BaseLayout, Flex, Text, Card } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
-import SimpleImageSlider from "react-simple-image-slider"
-import MoneyPotCard from './components/MoneyPotCard'
-import VaultsCard from './components/VaultCard'
-import FarmsCard from './components/FarmCard'
-import TradesCard from './components/TradeCard'
-import Defi2Card from './components/DefiCard'
-import CandleCard from './components/CandleCard'
-import Announcements from './components/Announcements'
-import Banner from "./components/Banner"
 import Divider from "./assets/divider.png"
 
 
@@ -64,7 +55,7 @@ const Img = styled.img`
   object-position: center bottom;
 `
 
-const Home: React.FC = () => {
+const MoneyPot: React.FC = () => {
   
 
   
@@ -72,34 +63,14 @@ const Home: React.FC = () => {
     <Page 
       
     >
-      <Header>WELCOME!</Header>
+      <Header>MoneyPot</Header>
       
       <Body>
-        {/* TO-DO: replace static announcements banner with announcements.tsx?
-        <Announcements /> */}
-        <Main>
-          <Announcement glowing>
-            Want to Launch Your Project to the Moon? Apply 
-            <a target="_blank" rel="noreferrer" style={{color:"gold"}}
-            href="https://t.me/joinchat/z4TDiDvZkTY1Nzlh"> HERE!</a>
-          </Announcement>
-          <Img src={Divider} alt="divider" style={{}} />
-        </Main>
-        <Banner />
-          <Col>  
-            <FarmsCard />                          
-            <VaultsCard />
-            <CandleCard />
-          </Col>
-          <Col>
-            <MoneyPotCard />
-            <Defi2Card />
-            <TradesCard />              
-          </Col>
+     
         
       </Body>
     </Page>
   )
 }
 
-export default Home
+export default MoneyPot

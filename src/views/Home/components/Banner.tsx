@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   border-radius: 30px;
   position: relative;
   margin: 15px 0;
+  max-width: 1600px;
 `
 
 const Img = styled.img`
