@@ -12,8 +12,12 @@ const Wrapper = styled.div`
   width: 95%;
   border-radius: 30px;
   position: relative;
-  margin: 15px 0;
+  margin: 15px 0px;
   max-width: 1600px;
+
+  @media screen and (min-width: 2400px) {
+    margin: 15px 200px;
+  }
 `
 
 const Img = styled.img`

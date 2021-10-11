@@ -19,6 +19,7 @@ const Body = styled(Flex)`
   flex-wrap: wrap;
   justify-content: center;
   margin 0 20px;
+  max-width: 2800px;
 `
 
 const Col = styled(Flex)`
