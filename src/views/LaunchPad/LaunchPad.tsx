@@ -180,7 +180,7 @@ const LaunchPad: React.FC = () => {
           Projects
         </Heading>
        <Row style={{height:200, marginBottom:15}}>
-         <LeftColumn>
+         <Column>
            <img src={toonworld} alt="toon world" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text>
               Starts OCT 28, 2021 @ 20:00 UTC
@@ -188,7 +188,7 @@ const LaunchPad: React.FC = () => {
            <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0"}}>
               <Tag glowing bold>ENTER</Tag>
            </a>
-         </LeftColumn>
+         </Column>
        </Row>
       </Body>
     </Page1>
