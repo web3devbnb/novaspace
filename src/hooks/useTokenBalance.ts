@@ -6,6 +6,8 @@ import novaABI from 'config/abi/nova.json'
 import sNovaABI from 'config/abi/snova.json'
 import moneypotABI from 'config/abi/moneypot.json'
 import moneypotoldABI from 'config/abi/moneypotold.json'
+import wethABI from 'config/abi/weth.json'
+import erc20ABI from 'config/abi/erc20.json'
 import { getContract } from 'utils/web3'
 import { getTokenBalance } from 'utils/erc20'
 import {
@@ -16,6 +18,7 @@ import {
   getBusdAddress,
   getWbnbAddress,
 } from 'utils/addressHelpers'
+import Web3 from 'web3'
 import useRefresh from './useRefresh'
 
 const useTokenBalance = (tokenAddress: string) => {
@@ -325,5 +328,33 @@ export const useDistributedMoneyPotBNB = () => {
 
   return distributedMoneyPotWBNB
 }
+
+export const useTotalMoneyPotBNB = () => {
+  const { slowRefresh } = useRefresh()
+  const [totalMoneyPotWBNB, setTotalMoneyPotWBNB] = useState<Array<any>>([])
+  const wbnbAddress = getWbnbAddress()
+  
+
+  useEffect(() => {
+    async function wbnbTransfers() {
+      const moneyPot = getMoneyPotAddress()
+      const wbnbContract = getContract(wethABI, wbnbAddress)
+      const totalMoneyPotWbnb = await wbnbContract.getPastEvents(
+        'Transfer', {
+          filter: {dst:[moneyPot]},
+          fromBlock: 9790136,
+          toBlock: 'latest'
+        }
+      )
+      setTotalMoneyPotWBNB(totalMoneyPotWbnb)
+    }
+
+    wbnbTransfers()
+  }, [wbnbAddress, slowRefresh])
+
+  return totalMoneyPotWBNB
+}
+
+
 
 export default useTokenBalance

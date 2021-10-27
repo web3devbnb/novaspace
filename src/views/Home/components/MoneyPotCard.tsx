@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardBody, CardHeader, CardFooter, Text, Flex } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
+import {useTotalMoneyPotBNB} from 'hooks/useTokenBalance'
 import logo from '../assets/farmcoins.png'
 
 const Grid = styled.a`
@@ -91,6 +92,7 @@ const SubHeading = styled(Text)`
 
 const MoneyPotCard = () => {
 
+ 
   return (
     <Grid href="/dashboard">
       <TextRow1>

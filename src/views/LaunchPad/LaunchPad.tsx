@@ -5,6 +5,7 @@ import Header from 'components/Header'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 import logo from './components/novapadlogo.png'
+import toonworld from './components/toonpresale.png'
 
 const Page1 = styled(Page)`
 background-image:url('/images/home/BG_SPACE.png');
@@ -133,7 +134,7 @@ const LaunchPad: React.FC = () => {
           <RightColumnFooter>
             <Text>The DEFI 2.0</Text>
             <WrappedText>NEW PROJECT LAUNCHPAD</WrappedText>
-            <Text>COMING SOON!</Text>
+           
           </RightColumnFooter>
         </RightColumn>
         <LeftColumn>
@@ -149,7 +150,7 @@ const LaunchPad: React.FC = () => {
               </LeftColumnBlock>
             )
           })}
-          <Row>
+          <Row style={{paddingBottom:10}}>
         <a target="_blank" rel="noreferrer noopener" href="/NOVAPAD_PITCHDECK.pdf">
           <Tag glowing bold>Learn More!</Tag>
         </a>
@@ -158,7 +159,23 @@ const LaunchPad: React.FC = () => {
         </a>
         </Row>
         </LeftColumn>
-       
+        <Heading glowing bold 
+          style={{fontSize:30, borderTop:"1px solid #00aaff", width:"95%", textAlign:"center",
+                  paddingTop:10
+          }}>
+          Projects
+        </Heading>
+       <Row style={{height:200, marginBottom:10}}>
+         <LeftColumnBlock>
+           <img src={toonworld} alt="toon world" style={{maxHeight:"90%"}} />
+           <Text>
+              Starts OCT 28, 2021 @ 20:00 UTC
+           </Text>
+           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0"}}>
+              <Tag glowing bold>ENTER</Tag>
+           </a>
+         </LeftColumnBlock>
+       </Row>
       </Body>
     </Page1>
   )
