@@ -33,6 +33,20 @@ const LeftColumn = styled(Flex)`
   }
 `
 
+const Column = styled(Flex)`
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 20px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding: 20px;
+  }
+`
+
 const LeftColumnBlock = styled(Flex)`
   flex-direction: column;
   margin: 10px;
@@ -165,16 +179,16 @@ const LaunchPad: React.FC = () => {
           }}>
           Projects
         </Heading>
-       <Row style={{height:200, marginBottom:10}}>
-         <LeftColumnBlock>
-           <img src={toonworld} alt="toon world" style={{maxHeight:"90%"}} />
+       <Row style={{height:200, marginBottom:15}}>
+         <LeftColumn>
+           <img src={toonworld} alt="toon world" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text>
               Starts OCT 28, 2021 @ 20:00 UTC
            </Text>
            <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0"}}>
               <Tag glowing bold>ENTER</Tag>
            </a>
-         </LeftColumnBlock>
+         </LeftColumn>
        </Row>
       </Body>
     </Page1>
