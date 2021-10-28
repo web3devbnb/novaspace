@@ -183,7 +183,7 @@ const LaunchPad: React.FC = () => {
          <Column>
            <img src={toonworld} alt="toon world" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text>
-              Starts OCT 28, 2021 @ 20:00 UTC
+              Starts OCT 29, 2021 @ 20:00 UTC
            </Text>
            <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0"}}>
               <Tag glowing bold>ENTER</Tag>
