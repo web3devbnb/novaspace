@@ -5,7 +5,9 @@ import Header from 'components/Header'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 import logo from './components/novapadlogo.png'
-import toonworld from './components/toonpresale.png'
+import toonworld from './components/toonpresale1.png'
+import safu from './components/safupresale.png'
+import donate from './components/donatepresale.png'
 
 const Page1 = styled(Page)`
 background-image:url('/images/home/BG_SPACE.png');
@@ -22,7 +24,7 @@ const Body = styled(Flex)`
 const LeftColumn = styled(Flex)`
   flex-direction: column;
   padding: 5px;
-  align-items: center;
+  // align-items: center;
 
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 20px;
@@ -35,8 +37,9 @@ const LeftColumn = styled(Flex)`
 
 const Column = styled(Flex)`
   flex-direction: column;
-  padding: 5px;
+  padding: 15px 5px;
   align-items: center;
+  max-width: 350px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 20px;
@@ -50,6 +53,7 @@ const Column = styled(Flex)`
 const LeftColumnBlock = styled(Flex)`
   flex-direction: column;
   margin: 10px;
+  paddingLeft: 5px;
 
  
 
@@ -62,7 +66,7 @@ const LeftColumnBlock = styled(Flex)`
   }
   ${({ theme }) => theme.mediaQueries.xs} {
     margin: 20px;
-    text-align: center;
+    text-align: left;
     
   }
 `
@@ -118,6 +122,7 @@ const WrappedText = styled(Text)`
 
 const Row = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 98%;
   justify-content: space-evenly;
 `
@@ -155,7 +160,7 @@ const LaunchPad: React.FC = () => {
           {data.map((entry) => {
             return (
               <LeftColumnBlock>
-                <Heading style={{textDecoration: "underline"}} >{entry.title.toUpperCase()}</Heading>
+                <Heading style={{color:"darkblue", backgroundColor:"#00aaff", padding:"5px 5px 2px"}} >{entry.title.toUpperCase()}</Heading>
                 <LeftColumnBlockItems>
                   {entry.items.map((item) => {
                     return <Text>{item.toUpperCase()}</Text>
@@ -175,18 +180,36 @@ const LaunchPad: React.FC = () => {
         </LeftColumn>
         <Heading glowing bold 
           style={{fontSize:30, borderTop:"1px solid #00aaff", width:"95%", textAlign:"center",
-                  paddingTop:10
+                  paddingTop:10, 
           }}>
-          Projects
+         <span style={{ backgroundColor: "#00aaff", padding: "9px 10px 5px", color:"darkblue"}}> PROJECTS </span>
         </Heading>
-       <Row style={{height:200, marginBottom:15}}>
+       <Row style={{ marginBottom:5}}>
          <Column>
            <img src={toonworld} alt="toon world" style={{maxHeight:"90%", maxWidth:"auto"}}  />
-           <Text>
+           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
               Starts OCT 29, 2021 @ 20:00 UTC
            </Text>
-           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0"}}>
+           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold>ENTER</Tag>
+           </a>
+         </Column>
+         <Column>
+           <img src={safu} alt="safu guard" style={{maxHeight:"90%", maxWidth:"auto"}}  />
+           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
+              Starts NOV 2, 2021 
+           </Text>
+           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0", marginTop:5}}>
+              <Tag glowing bold>ENTER</Tag>
+           </a>
+         </Column>
+         <Column>
+           <img src={donate} alt="donate" style={{maxHeight:"90%", maxWidth:"auto"}}  />
+           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
+              Starts NOV 8, 2021 
+           </Text>
+           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0", marginTop:5}}>
+              <Tag glowing bold >ENTER</Tag>
            </a>
          </Column>
        </Row>
