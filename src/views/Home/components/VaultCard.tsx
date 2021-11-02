@@ -93,16 +93,13 @@ const VaultsCard = () => {
   return (
     <Grid>
       <TextRow1><Heading >VAULTS</Heading></TextRow1>
-      <ColRight /> 
-        {/* <img src={vaultlogo} alt="vault logos" /> */}
+      <ColRight />
+      {/* <img src={vaultlogo} alt="vault logos" /> */}
       {/* </ColRight>  */}
       <TextRow2>
-        <SubHeading >Earn more with 
-          <a href="https://autoshark.finance/vaults/Nova" target="_blank" 
-          rel="noreferrer noopener" style={{color:"#00aaff"}}> AutoShark </a>
-           & 
-          <a href="https://app.crudeoil.finance/#/app/vaults" target="_blank" 
-          rel="noreferrer noopener" style={{color:"#00aaff"}}> CrudeOil </a>
+        <SubHeading >Earn more with
+          <a href="https://app.crudeoil.finance/#/app/vaults" target="_blank"
+            rel="noreferrer noopener" style={{ color: "#00aaff" }}> CrudeOil </a>
         </SubHeading>
       </TextRow2>
     </Grid>
