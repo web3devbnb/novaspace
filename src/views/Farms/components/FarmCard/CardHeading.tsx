@@ -22,7 +22,7 @@ const MultiplierTag = styled(Tag)`
   margin-left: 4px;
 `
 
-const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, farmImage, tokenSymbol, depositFee }) => {
+const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, farmImage, tokenSymbol, depositFee, risk }) => {
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
       <Image src={`/images/farms/${farmImage}.png`} alt={tokenSymbol} width={64} height={64} />
@@ -32,6 +32,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, fa
           {depositFee === 0 ? <NoFeeTag /> : null}
           {/* {isCommunityFarm ? <CommunityTag /> : <CoreTag />} */}
           {/* <RiskTag risk={risk} /> */}
+          {risk === 20 ? <Tag> NEW </Tag> : null}
           <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
         </Flex>
       </Flex>
