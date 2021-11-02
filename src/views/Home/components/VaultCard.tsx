@@ -47,10 +47,10 @@ ${({ theme }) => theme.mediaQueries.sm} {
 `
 
 const ColRight = styled.div`
-  background-image: url('/images/home/vaultlogo1.png');
-  background-size: cover;
+  background-image: url('/images/home/crude.png');
+  background-size: 70px;
   background-repeat: no-repeat;
-  background-position: 0 10px;
+  background-position:  right;
   grid-column-start: 4;
   grid-column-end: 6;
   grid-row-start: 1;
@@ -60,7 +60,7 @@ const ColRight = styled.div`
   border-radius: 0 30px 30px 0;
   // margin-top: 30px;
   ${({ theme }) => theme.mediaQueries.sm} {
-    background-position: 0px 17px;
+    // background-position: 0px 17px;
   }
   
 `
