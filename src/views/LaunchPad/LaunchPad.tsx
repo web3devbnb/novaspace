@@ -190,16 +190,16 @@ const LaunchPad: React.FC = () => {
            <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
               Starts OCT 29, 2021 @ 20:00 UTC
            </Text>
-           <a target="_blank" rel="noreferrer noopener" href="https://toonworld.shibanova.io" style={{padding:"5px 0", marginTop:5}}>
-              <Tag glowing bold>ENTER</Tag>
-           </a>
+           <Text style={{ backgroundColor: "YELLOW", color:"black", padding: "5px 5px 2px"}}>
+             COMPLETE - 56 BNB RAISED
+           </Text>
          </Column>
          <Column>
            <img src={safu} alt="safu guard" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts NOV 2, 2021 
+              Starts NOV 2, 2021 @ 14:00 UTC
            </Text>
-           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0", marginTop:5}}>
+           <a target="_blank" rel="noreferrer noopener" href="https://safuguard.shibanova.io" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold>ENTER</Tag>
            </a>
          </Column>
