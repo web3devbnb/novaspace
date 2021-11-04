@@ -197,7 +197,7 @@ const LaunchPad: React.FC = () => {
          <Column>
            <img src={safu} alt="safu guard" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts NOV 2, 2021 @ 14:00 UTC
+              Coming Soon
            </Text>
            <a target="_blank" rel="noreferrer noopener" href="https://safuguard.shibanova.io" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold>ENTER</Tag>

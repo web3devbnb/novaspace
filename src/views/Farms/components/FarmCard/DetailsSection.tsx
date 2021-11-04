@@ -74,7 +74,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
           <Text>{depositFee}%</Text>
         </Flex>
       )}
-      <Flex><Text fontSize="12px">(75% to sNova Rewards, 25% Marketing)</Text></Flex>
+      {/* <Flex><Text fontSize="12px">(75% to sNova Rewards, 25% Marketing)</Text></Flex> */}
       <Flex justifyContent="flex-start">
         <Link external href={bscScanAddress} bold={false}>
           {TranslateString(356, 'View on BscScan')}
