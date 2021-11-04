@@ -52,6 +52,22 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
+    pid: 28,
+    risk: 19,
+    lpSymbol: 'RYOSHI-BNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x1a25b6fc13bd8bcf2d01759f650ff44962227a61',
+    },
+    tokenSymbol: 'RYOSHI',
+    tokenAddresses: {
+      97: '',
+      56: '0x0e5f989ce525acc4ee45506af91964f7f4c9f2e9',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+},
+  {
     pid: 27,
     risk: 20,
     lpSymbol: 'TOON-BNB LP',

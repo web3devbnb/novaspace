@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Tag, Flex, Heading, Image } from '@pancakeswap-libs/uikit'
 import { NoFeeTag } from 'components/Tags'
+import QuestionHelper from 'components/QuestionHelper'
 
 export interface ExpandableSectionProps {
   lpLabel?: string
@@ -33,6 +34,13 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, fa
           {/* {isCommunityFarm ? <CommunityTag /> : <CoreTag />} */}
           {/* <RiskTag risk={risk} /> */}
           {risk === 20 ? <Tag> NEW </Tag> : null}
+          {risk === 19 ?
+          <div><QuestionHelper
+          text=
+            'What are EXTREME farms? Short term farms quickly created to capture high volume coins.  They have 0% fees, but the farm could be removed in 24 hours if we feel things are overly risky or volume is too low. They carry a little higher risk as they have not been proven by time and market depth, yet.  However, we still do as much due diligence as we can to keep risk as low as possible.'
+          
+          />
+          <img src="images/extremetag.png" alt="extreme" width="110px" /> </div>: null }
           <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
         </Flex>
       </Flex>
