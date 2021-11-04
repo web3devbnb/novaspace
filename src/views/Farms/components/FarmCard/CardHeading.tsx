@@ -37,8 +37,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, fa
           {risk === 19 ?
           <div><QuestionHelper
           text=
-            'What are EXTREME farms? Short term farms quickly created to capture high volume coins.  They have 0% fees, but the farm could be removed in 24 hours if we feel things are overly risky or volume is too low. They carry a little higher risk as they have not been proven by time and market depth, yet.  However, we still do as much due diligence as we can to keep risk as low as possible.'
-          
+            'What are EXTREME farms? Farms quickly created to support high volume, high volatility coins.  They are a little higher risk then our normal farms as they have not been around as long and/or as heavily vetted as staple projects such as BNB and ETH.  PLEASE do your own research.'
           />
           <img src="images/extremetag.png" alt="extreme" width="110px" /> </div>: null }
           <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
