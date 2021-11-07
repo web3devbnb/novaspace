@@ -206,9 +206,9 @@ const LaunchPad: React.FC = () => {
          <Column>
            <img src={donate} alt="donate" style={{maxHeight:"90%", maxWidth:"auto"}}  />
            <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts NOV 8, 2021 
+              Starts NOV 8, 2021 @ 18:00 UTC
            </Text>
-           <a target="_blank" rel="noreferrer noopener" href="/#" style={{padding:"5px 0", marginTop:5}}>
+           <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold >ENTER</Tag>
            </a>
          </Column>
