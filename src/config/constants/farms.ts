@@ -67,6 +67,38 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
 },
+{
+  pid: 29,
+  risk: 19,
+  lpSymbol: 'ETERNAL-BNB LP',
+  lpAddresses: {
+    97: '',
+    56: '0x6B6A170dA0713187DE61547F3807703735c5b01f',
+  },
+  tokenSymbol: 'ETERNAL',
+  tokenAddresses: {
+    97: '',
+    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+  },
+  quoteTokenSymbol: QuoteToken.BNB,
+  quoteTokenAdresses: contracts.wbnb,
+},
+{
+  pid: 30,
+  risk: 19,
+  lpSymbol: 'ETERNAL-NOVA LP',
+  lpAddresses: {
+    97: '',
+    56: '0xEFd70fee6A55c8A8641554c7FEb5A216A3cb645D',
+  },
+  tokenSymbol: 'ETERNAL',
+  tokenAddresses: {
+    97: '',
+    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+  },
+  quoteTokenSymbol: QuoteToken.NOVA,
+  quoteTokenAdresses: contracts.nova,
+},
   {
     pid: 27,
     risk: 20,

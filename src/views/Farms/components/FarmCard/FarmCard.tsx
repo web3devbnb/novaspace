@@ -18,22 +18,10 @@ export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
 }
 
-// background: linear-gradient(45deg,
-//  rgba(255, 0, 0, 1) 0%,
-//  rgba(255, 154, 0, 1) 10%,
-//  rgba(208, 222, 33, 1) 20%,
-//  rgba(79, 220, 74, 1) 30%,
-// rgba(63, 218, 216, 1) 40%,
-// rgba(47, 201, 226, 1) 50%,
-// rgba(28, 127, 238, 1) 60%,
-// rgba(95, 21, 242, 1) 70%,
-// rgba(186, 12, 248, 1) 80%,
-// rgba(251, 7, 217, 1) 90%,
-// rgba(255, 0, 0, 1) 100%);
-// background-size: 300% 300%;
+
 
 const StyledCardAccent = styled.div`
-  border-radius: 16px;
+  border-radius: 30px;
   filter: blur(6px);
   position: absolute;
   top: -2px;
@@ -43,6 +31,12 @@ const StyledCardAccent = styled.div`
   z-index: -1;
   border-style: solid;
   border-color: white;
+
+  // background-image: url('/images/home/BG_SPACE.png');
+  //  background-position: center;
+  //  background-size: auto ;
+  //  opacity: .75;
+   
 `
 // background: ${(props) => props.theme.card.background}
 const FCard = styled(Card)`
@@ -161,7 +155,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
 
   return (
     <FCard gradientBorder>
-      {farm.tokenSymbol === 'NOVA' && <StyledCardAccent />}
+      {farm.risk === 19 && <StyledCardAccent />}
       <CardHeading
         lpLabel={lpLabel}
         multiplier={farm.multiplier}
