@@ -31,7 +31,7 @@ const StyledCardAccent = styled.div`
   left: -2px;
   z-index: -1;
   border-style: solid;
-  border-color: white;
+  border-color: gold;
 
   // background-image: url('/images/home/BG_SPACE.png');
   //  background-position: center;
@@ -50,7 +50,7 @@ const FCard = styled(Card)`
   padding: 16px;
   position: relative;
   text-align: center;
-  grid-column: 3;
+  // grid-column: 3;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: 24px;
@@ -129,7 +129,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   }, [bnbPrice, busdPrice, novaPrice, usdtPrice, ethPrice, farm])
 
   const totalValueFormated = totalValue
-    ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
+    ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
     : '-'
 
  

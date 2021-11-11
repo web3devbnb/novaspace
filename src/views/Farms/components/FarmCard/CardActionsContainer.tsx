@@ -5,11 +5,12 @@ import { provider } from 'web3-core'
 import { getContract } from 'utils/erc20'
 import { Button, Flex, Text } from '@pancakeswap-libs/uikit'
 import { Farm } from 'state/types'
-import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { QuoteToken } from 'config/constants/types'
 import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
+import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
+import { useFarmFromPid, useFarmUser, useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
 
@@ -24,6 +25,11 @@ interface FarmCardActionsProps {
   farm: FarmWithStakedValue
   ethereum?: provider
   account?: string
+  novaPrice?: BigNumber
+  bnbPrice?: BigNumber
+  busdPrice?: BigNumber
+  usdtPrice?: BigNumber
+  ethPrice?: BigNumber
 }
 
 const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }) => {
@@ -36,8 +42,12 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
 
- 
-
+  const novaPrice = usePriceNovaBusd()
+  const bnbPrice = usePriceBnbBusd()
+  const usdtPrice = usePriceUsdtBusd()
+  const ethPrice = usePriceEthBusd()
+  const busdPrice = usePriceUsdtBusd()
+  const farms = useFarms()
 
   const lpContract = useMemo(() => {
     if (isTokenOnly) {
@@ -60,12 +70,18 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
 
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
-      <StakeAction
+      <StakeAction 
+        farm={farm}
         stakedBalance={stakedBalance}
         tokenBalance={tokenBalance}
         tokenName={lpName}
         pid={pid}
         depositFeeBP={depositFeeBP}
+        novaPrice= {novaPrice}
+        bnbPrice= {bnbPrice}
+        busdPrice= {busdPrice}
+        usdtPrice= {usdtPrice}
+        ethPrice= {ethPrice}
       />
     ) : (
       <Button style={{ fontSize: 14 }} mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>

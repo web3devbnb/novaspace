@@ -18,6 +18,7 @@ const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive }) => {
         <Toggle checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} />
         <Text bold>Staked</Text>
       </ToggleWrapper>
+     
       <ButtonMenu onClick={handleClick} activeIndex={index} size="sm" variant="primary">
         <ButtonMenuItem>{TranslateString(698, 'Active')}</ButtonMenuItem>
         <ButtonMenuItem>{TranslateString(700, 'Inactive')}</ButtonMenuItem>

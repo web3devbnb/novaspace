@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal } from '@pancakeswap-libs/uikit'
+import { Farm } from 'state/types'
+import { provider } from 'web3-core'
+import { QuoteToken } from 'config/constants/types'
 import useI18n from 'hooks/useI18n'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
@@ -9,12 +12,25 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
 
+export interface FarmWithStakedValue extends Farm {
+  apy?: BigNumber
+}
+
 interface FarmCardActionsProps {
+  farm: FarmWithStakedValue
   stakedBalance?: BigNumber
   tokenBalance?: BigNumber
   tokenName?: string
   pid?: number
   depositFeeBP?: number
+  // removed: boolean
+  novaPrice?: BigNumber
+  bnbPrice?: BigNumber
+  busdPrice?: BigNumber
+  usdtPrice?: BigNumber
+  ethPrice?: BigNumber
+  // ethereum?: provider
+  // account?: string
 }
 
 const IconButtonWrapper = styled.div`
@@ -24,7 +40,18 @@ const IconButtonWrapper = styled.div`
   }
 `
 
-const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalance, tokenName, pid, depositFeeBP }) => {
+const StakeAction: React.FC<FarmCardActionsProps> = ({ 
+  stakedBalance, tokenBalance, tokenName, pid, depositFeeBP,
+  farm,
+  // removed,
+  novaPrice,
+  busdPrice,
+  bnbPrice,
+  usdtPrice,
+  ethPrice,
+  // ethereum,
+  // account,
+ }) => {
   const TranslateString = useI18n()
   const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid) 
@@ -38,6 +65,35 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalan
   const [onPresentWithdraw] = useModal(
     <WithdrawModal max={stakedBalance} onConfirm={onUnstake} tokenName={tokenName} />,
   )
+
+  const totalValue: BigNumber = useMemo(() => {
+    if (!farm.lpTotalInQuoteToken) {
+      return null
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+      return bnbPrice.times(farm.lpTotalInQuoteToken)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
+      return busdPrice.times(farm.lpTotalInQuoteToken)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.USDT) {
+      return usdtPrice.times(farm.lpTotalInQuoteToken)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
+      return novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+      return ethPrice.times(farm.lpTotalInQuoteToken)
+    }
+    return farm.lpTotalInQuoteToken
+  }, [bnbPrice, busdPrice, novaPrice, usdtPrice, ethPrice, farm])
+
+  const stakedValue = 
+    (Number(rawStakedBalance)/Number(farm.lpTotalInQuoteToken)*Number(totalValue)*2)
+    .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
+
+  const novaValue = (rawStakedBalance*Number(novaPrice))
+    .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
 
   const renderStakingButtons = () => {
     return rawStakedBalance === 0 ? (
@@ -56,7 +112,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalan
 
   return (
     <Flex justifyContent="space-between" alignItems="center">
-      <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance}</Heading>
+      <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance} (${farm.pid === 0 ? novaValue : stakedValue})</Heading>
       {renderStakingButtons()}
     </Flex>
   )
