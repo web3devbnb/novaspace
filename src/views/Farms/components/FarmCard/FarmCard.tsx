@@ -9,6 +9,7 @@ import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import { QuoteToken } from 'config/constants/types'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { calculateNovaEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
@@ -17,7 +18,7 @@ import ApyButton from './ApyButton'
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
 }
-
+ 
 
 
 const StyledCardAccent = styled.div`
@@ -151,8 +152,11 @@ const FarmCard: React.FC<FarmCardProps> = ({
       maximumFractionDigits: 2,
     })
 
+  const farmApy = farm.apy.times(new BigNumber(100)).toNumber()
+  const novaEarnedPerThousand365D = calculateNovaEarnedPerThousandDollars({ numberOfDays: 365, farmApy, novaPrice }) 
+  const oneThousandDollarsWorthOfNova = 1000 / novaPrice.toNumber()
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
-
+  const APY = apyModalRoi({ amountEarned: novaEarnedPerThousand365D, amountInvested: oneThousandDollarsWorthOfNova })
   return (
     <FCard gradientBorder>
       {farm.risk === 19 && <StyledCardAccent />}
@@ -167,7 +171,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
       {!removed && (
         <Flex justifyContent="space-between" alignItems="center">
           <Text bold glowing fontSize="14px">
-            {TranslateString(352, 'APR')}:
+            {TranslateString(999, 'APY')}:
           </Text>
           <Text glowing bold style={{ display: 'flex', alignItems: 'center' }}>
             {farm.apy ? (
@@ -181,7 +185,8 @@ const FarmCard: React.FC<FarmCardProps> = ({
                   apy={farm.apy}
                   earnLabel={earnLabel}
                 />
-                {farmAPY}%
+                {/* {farmAPY}% */}
+                {Number(APY).toLocaleString() }%
               </>
             ) : (
               <Skeleton height={24} width={80} />

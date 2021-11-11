@@ -7,7 +7,7 @@ export const calculateNovaEarnedPerThousandDollars = ({ numberOfDays, farmApy, n
   const apyAsDecimal = farmApy / 100
   const daysAsDecimalOfYear = numberOfDays / timesCompounded
   //   Calculate the starting NOVA balance with a dollar balance of $1000.
-  const principal = 1000 / novaPrice
+  const principal = 1000 / novaPrice 
 
   // This is a translation of the typical mathematical compounding APY formula. Details here: https://www.calculatorsoup.com/calculators/financial/compound-interest-calculator.php
   const finalAmount = principal * (1 + apyAsDecimal / timesCompounded) ** (timesCompounded * daysAsDecimalOfYear)
