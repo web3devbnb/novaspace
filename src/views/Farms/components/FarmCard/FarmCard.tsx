@@ -168,7 +168,29 @@ const FarmCard: React.FC<FarmCardProps> = ({
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       />
+         {!removed && (
+        
+        <Flex justifyContent="space-between" alignItems="center">
+          <Text bold glowing fontSize="14px">
+            {TranslateString(999, 'APR')}:
+          </Text>
+          <Text glowing bold style={{ display: 'flex', alignItems: 'center' }}>
+            {farm.apy ? (
+              <>
+              
+                 {farmAPY}% 
+                
+              </>
+            ) : (
+              <Skeleton height={24} width={80} />
+            )}
+          </Text>
+        </Flex>
+       
+      )}
+
       {!removed && (
+        
         <Flex justifyContent="space-between" alignItems="center">
           <Text bold glowing fontSize="14px">
             {TranslateString(999, 'APY')}:
@@ -193,6 +215,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
             )}
           </Text>
         </Flex>
+       
       )}
       <Flex justifyContent="space-between">
         <Text bold fontSize="12px">

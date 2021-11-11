@@ -16,7 +16,7 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 import HarvestButton from './HarvestButton'
-import QuestionHelper from '../../../components/QuestionHelper'
+import QuestionHelper from '../../../components/QuestionHelper' 
 
 const Block = styled.div`
   margin-bottom: 0px;
