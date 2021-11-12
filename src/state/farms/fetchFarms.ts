@@ -52,7 +52,7 @@ const fetchFarms = async () => {
         await multicall(erc20, calls)
 
       let tokenAmount
-      let lpTotalInQuoteToken
+      let lpTotalInQuoteToken 
       let tokenPriceVsQuote
       if (farmConfig.isTokenOnly) {
         tokenAmount = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(tokenDecimals))
@@ -66,6 +66,8 @@ const fetchFarms = async () => {
       } else {
         // Ratio in % a LP tokens that are in staking, vs the total number in circulation
         const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+
+        
 
         // Total value in staking in quote token value
         lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
@@ -85,7 +87,8 @@ const fetchFarms = async () => {
           tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
         }
       }
-
+      const LPSupply = lpTotalSupply
+      console.log(LPSupply)
       const [info, totalAllocPoint, NovaPerBlock] = await multicall(masterchefABI, [
         {
           address: getMasterChefAddress(),
@@ -115,6 +118,7 @@ const fetchFarms = async () => {
         multiplier: `${allocPoint.div(100).toString()}X`,
         depositFeeBP: info.depositFeeBP,
         NovaPerBlock: new BigNumber(NovaPerBlock).toNumber(),
+        LPSupply: new BigNumber(LPSupply).toNumber(),
       }
     }),
   )

@@ -88,10 +88,16 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
     return farm.lpTotalInQuoteToken
   }, [bnbPrice, busdPrice, novaPrice, usdtPrice, ethPrice, farm])
 
+  
+  const totalLP = getBalanceNumber(farm.LPSupply)
+
   const stakedValue = 
-    (Number(rawStakedBalance)/Number(farm.lpTotalInQuoteToken)*Number(totalValue)*2)
+    (Number(totalValue)*Number(rawStakedBalance)/totalLP)
     .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
 
+ 
+
+  
   const novaValue = (rawStakedBalance*Number(novaPrice))
     .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
 
