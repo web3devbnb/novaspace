@@ -88,7 +88,7 @@ const fetchFarms = async () => {
         }
       }
       const LPSupply = lpTotalSupply
-      console.log(LPSupply)
+     
       const [info, totalAllocPoint, NovaPerBlock] = await multicall(masterchefABI, [
         {
           address: getMasterChefAddress(),

@@ -140,7 +140,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   let earnLabel = ''
 
   
-  if (farm.pid === 1 || farm.pid === 2) {
+  if (farm.pid === 1 || farm.pid === 2 || farm.pid === 30) {
     earnLabel = 'sNOVA'
   } else {
     earnLabel = 'NOVA'
