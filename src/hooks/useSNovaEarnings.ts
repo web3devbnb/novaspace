@@ -14,7 +14,7 @@ const useSNovaEarnings = () => {
   useEffect(() => {
     const fetchSNovaBalances = async () => {
       const calls = farmsConfig
-        .filter((farm) => farm.pid === 1 || farm.pid === 2)
+        .filter((farm) => farm.pid === 1 || farm.pid === 2 || farm.pid === 30)
         .map((farm) => ({
           address: getMasterChefAddress(),
           name: 'pendingNova',
