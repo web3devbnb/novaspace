@@ -173,7 +173,7 @@ const LaunchPad: React.FC = () => {
         <a target="_blank" rel="noreferrer noopener" href="/NOVAPAD_PITCHDECK.pdf">
           <Tag glowing bold>Learn More!</Tag>
         </a>
-        <a target="_blank" rel="noreferrer noopener" href="https://t.me/joinchat/z4TDiDvZkTY1Nzlh">
+        <a target="_blank" rel="noreferrer noopener" href="https://forms.gle/hH2ikfTqaznbTjAe8">
           <Tag glowing bold>Apply to Launch!</Tag>
         </a>
         </Row>
@@ -200,7 +200,7 @@ const LaunchPad: React.FC = () => {
               Starts NOV 5, 2021 @ 14:00 UTC
            </Text>
            <a target="_blank" rel="noreferrer noopener" href="https://safuguard.shibanova.io" style={{padding:"5px 0", marginTop:5}}>
-              <Tag glowing bold>ENTER</Tag>
+              <Tag glowing bold>Refund Active</Tag>
            </a>
          </Column>
          <Column>
@@ -208,9 +208,12 @@ const LaunchPad: React.FC = () => {
            <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
               Starts NOV 8, 2021 @ 18:00 UTC
            </Text>
-           <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
+           {/* <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold >ENTER</Tag>
-           </a>
+           </a> */}
+           <Text style={{ backgroundColor: "YELLOW", color:"black", padding: "5px 5px 2px"}}>
+             COMPLETE - 42 BNB RAISED
+           </Text>
          </Column>
        </Row>
       </Body>

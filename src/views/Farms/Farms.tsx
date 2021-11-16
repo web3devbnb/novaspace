@@ -60,15 +60,19 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
   const [showInactive, setShowInactive] = useState(false)
   const [stakedOnly, setStakedOnly] = useState(false)
+  const [extremeOnly, setExtremeOnly] = useState(false)
   const [sortByApy, setSortApy] = useState(false)
 
-  const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
-  const inactiveFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')
+  const activeFarms = farmsLP.filter((farm) =>  farm.multiplier !== '0X')
+  const inactiveFarms = farmsLP.filter((farm) => farm.multiplier === '0X')
 
   const stakedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
 
+  const extremeOnlyFarms = activeFarms.filter(
+    (farm) => farm.risk === 19,
+  )
   
 
   // /!\ This function will be removed soon
@@ -159,17 +163,33 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Deposit Fees are distributed to sNOVA holders
         </Heading>
-        <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
+        <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} extremeOnly={extremeOnly} setExtremeOnly={setExtremeOnly} />
       </div>
       <div>
         <FlexLayout>
           {
             /* eslint-disable */
+            // !showInactive
+            //   ? stakedOnly
+            //     ? farmsList(stakedOnlyFarms, false)
+                 
+            //     : farmsList(activeFarms, false) 
+              
+            //   : farmsList(inactiveFarms, true) 
+
+              // figure out how to add in extreme farm filter
+              // ? extremeOnly
+              // ? farmsList(extremeOnlyFarms, false)
+              // : farmsList(activeFarms, false)
+             
             !showInactive
               ? stakedOnly
+              
                 ? farmsList(stakedOnlyFarms, false)
-                : farmsList(activeFarms, false)
-              : farmsList(inactiveFarms, true)
+                 
+                : farmsList(activeFarms, false) 
+              
+              : farmsList(inactiveFarms, true) 
           }
         </FlexLayout>
       </div>

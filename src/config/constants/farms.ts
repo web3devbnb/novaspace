@@ -3,23 +3,6 @@ import { FarmConfig, QuoteToken } from './types'
 
 const farms: FarmConfig[] = [
   {
-    pid: 0,
-    risk: 5,
-    isTokenOnly: true,
-    lpSymbol: 'NOVA',
-    lpAddresses: {
-      97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
-    },
-    tokenSymbol: 'NOVA',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
     pid: 2,
     risk: 5,
     lpSymbol: 'NOVA-BUSD LP', 
@@ -52,6 +35,23 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
+    pid: 0,
+    risk: 5,
+    isTokenOnly: true,
+    lpSymbol: 'NOVA',
+    lpAddresses: {
+      97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
+      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+    },
+    tokenSymbol: 'NOVA',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
+  },
+  {
     pid: 28,
     risk: 19,
     lpSymbol: 'RYOSHI-BNB LP',
@@ -68,22 +68,6 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
 },
 {
-  pid: 29,
-  risk: 19,
-  lpSymbol: 'ETERNAL-BNB LP',
-  lpAddresses: {
-    97: '',
-    56: '0x6B6A170dA0713187DE61547F3807703735c5b01f',
-  },
-  tokenSymbol: 'ETERNAL',
-  tokenAddresses: {
-    97: '',
-    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
-  },
-  quoteTokenSymbol: QuoteToken.BNB,
-  quoteTokenAdresses: contracts.wbnb,
-},
-{
   pid: 30,
   risk: 19,
   lpSymbol: 'ETERNAL-NOVA LP',
@@ -98,6 +82,22 @@ const farms: FarmConfig[] = [
   },
   quoteTokenSymbol: QuoteToken.NOVA,
   quoteTokenAdresses: contracts.nova,
+},
+{
+  pid: 29,
+  risk: 19,
+  lpSymbol: 'ETERNAL-BNB LP',
+  lpAddresses: {
+    97: '',
+    56: '0x6B6A170dA0713187DE61547F3807703735c5b01f',
+  },
+  tokenSymbol: 'ETERNAL',
+  tokenAddresses: {
+    97: '',
+    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+  },
+  quoteTokenSymbol: QuoteToken.BNB,
+  quoteTokenAdresses: contracts.wbnb,
 },
   {
     pid: 27,

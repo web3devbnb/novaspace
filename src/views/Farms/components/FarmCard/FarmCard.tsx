@@ -221,7 +221,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
         <Text bold fontSize="12px">
           {TranslateString(318, 'EARN')}:
         </Text>
-        <Text>{earnLabel}</Text>
+        <Text color={earnLabel === 'sNOVA' ? 'gold' : null} >{earnLabel}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text bold glowing style={{ fontSize: '14px' }}>

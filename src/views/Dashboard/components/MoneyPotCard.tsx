@@ -76,6 +76,7 @@ const MoneyPotCard = () => {
   const share = (Number(sNovaBalance) / Number(sNovaSupply)) * 100
   const novaPrice = usePriceNovaBusd().toNumber()
   const dailyROI = (sNovaShare / novaPrice) * 100
+  const yearlyROI = dailyROI * 365
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -107,6 +108,9 @@ const MoneyPotCard = () => {
       </Row>
       <Text glowing bold style={{ padding: '0 0 3px 0' }}>
         Daily ROI {dailyROI.toFixed(2)}%
+      </Text>
+      <Text glowing bold style={{ padding: '0 0 3px 0' }}>
+        Annual ROI {yearlyROI.toFixed(2)}%
       </Text>
       <Row style={{ justifyContent: 'center' }}>
         <div style={{ padding: '5px 20px' }}>

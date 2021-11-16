@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ButtonMenu, ButtonMenuItem, Text, Toggle } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 
-const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive }) => {
+const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive, extremeOnly, setExtremeOnly }) => {
   const [index, setIndex] = useState(0)
   const TranslateString = useI18n()
 
@@ -18,11 +18,15 @@ const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive }) => {
         <Toggle checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} />
         <Text bold>Staked</Text>
       </ToggleWrapper>
-     
+      {/* <ToggleWrapper>
+        <Toggle checked={extremeOnly} onChange={() => setExtremeOnly(!extremeOnly)} />
+        <Text bold>Extreme</Text>
+      </ToggleWrapper> */}
       <ButtonMenu onClick={handleClick} activeIndex={index} size="sm" variant="primary">
         <ButtonMenuItem>{TranslateString(698, 'Active')}</ButtonMenuItem>
         <ButtonMenuItem>{TranslateString(700, 'Inactive')}</ButtonMenuItem>
       </ButtonMenu>
+      
     </Wrapper>
   )
 }
