@@ -1,15 +1,16 @@
-import React, { useEffect, Suspense, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ResetCSS } from '@pancakeswap-libs/uikit'
 import Bubbles from 'components/Bubbles'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
+import useEagerConnect from 'hooks/useEagerConnect'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 import './bubbles.scss'
+
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page'
@@ -26,20 +27,14 @@ BigNumber.config({
 })
 
 const App: React.FC = () => {
-  const { account, connect } = useWallet()
-  useEffect(() => {
-    if (!account && window.localStorage.getItem('accountStatus')) {
-      connect('injected')
-    }
-  }, [account, connect])
-
+  useEagerConnect()
   useFetchPublicData()
 
   return (
     <Router>
       <ResetCSS />
       <GlobalStyle />
-      <Menu style={{backgroundImage:"transparent"}}>
+      <Menu style={{ backgroundImage: "transparent" }}>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
