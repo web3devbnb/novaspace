@@ -33,7 +33,7 @@
     "@binance-chain/bsc-use-wallet": "^0.8.1",
     "@crowdin/crowdin-api-client": "^1.10.1",
     "@ethersproject/abi": "^5.0.7",
-    "@pancakeswap-libs/uikit": "ShibaNova/shibanova-uikit#d540a9a7ab0652e5cba7c873d4cb5c4602a5ebb5",
+    "@pancakeswap-libs/uikit": "ShibaNova/shibanova-uikit#8a3a5dba618619f5fb8eee1b25b6e9d55961e36d",
     "@popperjs/core": "^2.4.4",
     "@reach/portal": "^0.10.3",
     "@reduxjs/toolkit": "^1.5.0",
