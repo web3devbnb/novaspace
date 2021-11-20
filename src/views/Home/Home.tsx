@@ -82,7 +82,7 @@ const Home: React.FC = () => {
           <Announcement glowing>
             Want to Launch Your Project to the Moon? Apply 
             <a target="_blank" rel="noreferrer" style={{color:"gold"}}
-            href="https://t.me/joinchat/z4TDiDvZkTY1Nzlh"> HERE!</a>
+            href="https://forms.gle/hH2ikfTqaznbTjAe8"> HERE!</a>
           </Announcement>
           <Img src={Divider} alt="divider" style={{}} />
         </Main>

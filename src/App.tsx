@@ -12,11 +12,10 @@ import Footer from './components/Footer'
 import './bubbles.scss'
 
 // Route-based code splitting
-// Only pool is included in the main bundle because of it's the most visited page'
-const Home = lazy(() => import('./views/Home'))
+const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
 const LaunchPad = lazy(() => import('./views/LaunchPad'))
-const Dashboard = lazy(() => import('./views/Dashboard'))
+// const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 
 // This config is required for number formating
@@ -45,15 +44,15 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/dashboard">
+            {/* <Route path="/dashboard">
               <Dashboard />
-            </Route>
+            </Route> */}
             <Route path="/farms">
               <Farms />
             </Route>
-            <Route path="/pools">
+            {/* <Route path="/pools">
               <Farms tokenMode />
-            </Route>
+            </Route> */}
             <Route path="/novapad">
               <LaunchPad />
             </Route>
