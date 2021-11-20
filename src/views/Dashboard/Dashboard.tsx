@@ -80,8 +80,8 @@ const Dashboard: React.FC = () => {
       {/* <Divider /> */}
       <Announcement glowing>
         The DEX, launchpad and yield farm that rewards holders with 75% of the platform fees in the daily <span style={{color:"gold"}} > MONEY POT</span>!
+        <Img src={Divider} alt="divider"  />
       </Announcement>
-      <Img src={Divider} alt="divider" style={{}} />
       <Cards>
         <FarmStakingCard />
         <SNovaStakingCard />

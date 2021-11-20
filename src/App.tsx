@@ -18,6 +18,8 @@ const Farms = lazy(() => import('./views/Farms'))
 const LaunchPad = lazy(() => import('./views/LaunchPad'))
 // const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
+const Privacy = lazy(() => import('./views/Privacy'))
+const Terms = lazy(() => import('./views/Terms'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -50,6 +52,12 @@ const App: React.FC = () => {
             </Route> */}
             <Route path="/novapad">
               <LaunchPad />
+            </Route>
+            <Route path="/privacy">
+              <Privacy />
+            </Route>
+            <Route path="/terms">
+              <Terms />
             </Route>
             <Route component={NotFound} />
           </Switch>
