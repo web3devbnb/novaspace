@@ -97,7 +97,7 @@ const Footer = () => (
                   href="https://coinmarketcap.com/currencies/shibanova/"
                 >
                   <Img
-                    src="https://app.shibanova.io/images/home/cmclogo.png"
+                    src="https://shibanova.io/images/home/cmclogo.png"
                     alt="coin marketcap"
                   />
                 </a> 
@@ -107,7 +107,7 @@ const Footer = () => (
                   href="https://www.coingecko.com/en/coins/shiba-nova"
                 >
                   <Img
-                    src="https://app.shibanova.io/images/home/coingecko.png"
+                    src="https://shibanova.io/images/home/coingecko.png"
                     alt="coin gecko"
                   />
                 </a> 
