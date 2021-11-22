@@ -31,7 +31,9 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const novaPrice = usePriceNovaBusd().toNumber()
   const displayBalance = rawEarningsBalance.toLocaleString()
   const earnedValue = (Number(displayBalance)*novaPrice).toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2} )
-
+  console.log('earned value',earnedValue)
+  console.log('nova price', novaPrice)
+  console.log('displayBalance', Number(displayBalance))
   return (
     <Flex mb="8px" justifyContent="space-between" alignItems="center">
       <Heading color={rawEarningsBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance} (${earnedValue})</Heading>
