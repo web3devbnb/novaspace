@@ -15,7 +15,6 @@ import './bubbles.scss'
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
 const LaunchPad = lazy(() => import('./views/LaunchPad'))
-// const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Novaria = lazy(() => import('./views/Novaria'))
 const Privacy = lazy(() => import('./views/Privacy'))

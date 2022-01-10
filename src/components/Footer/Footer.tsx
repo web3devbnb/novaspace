@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, Flex } from '@pancakeswap-libs/uikit'
-import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
+import { Text, Flex } from '@pancakeswap-libs/uikit'
 
 const Hero = styled(Flex)`
   flex-direction: column;
