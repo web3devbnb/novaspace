@@ -9,6 +9,9 @@ const Grid = styled.div.attrs(props => ({ nx: 5, ny: 5 }))`
 `
 
 const GridCell = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Novaria = (props) => {
