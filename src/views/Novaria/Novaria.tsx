@@ -19,8 +19,8 @@ const Novaria = (props) => {
 
     return (
         <Grid nx={nx} ny={ny}>
-            {times(nx * ny, () => (
-                <GridCell />
+            {times(nx * ny, (i) => (
+                <GridCell>{i}</GridCell>
             ))}
         </Grid>
     )
