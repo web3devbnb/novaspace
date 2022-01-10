@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Grid = styled.div.attrs(props => ({ nx: 5, ny: 5 }))`
+  height: calc(100vh - 68px - 145px);
   display: grid;
   grid-template-columns: repeat(${props => props.nx}, 1fr);
   grid-template-rows: repeat(${props => props.ny}, 1fr);
