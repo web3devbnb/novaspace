@@ -2,6 +2,33 @@ import { times } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
 
+const mockData: [string, string, boolean, boolean, boolean][] = [
+    ['Haven', '', true, true, true],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['The Sun', 'Star', true, true, true],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+    ['', '', false, false, false],
+]
 export interface GridProps {
     nx: number
     ny: number
@@ -25,9 +52,14 @@ const Novaria = (props) => {
 
     return (
         <Grid nx={nx} ny={ny}>
-            {times(nx * ny, (i) => (
-                <GridCell>{i}</GridCell>
-            ))}
+            {times(nx * ny, (i) => {
+                const [handle, placeType, isDmz, isRefinery, isActive] = mockData[i];
+                return (
+                    <GridCell>
+                        {handle || i}
+                    </GridCell>
+                )
+            })}
         </Grid>
     )
 }
