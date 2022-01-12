@@ -3,35 +3,35 @@ import React from 'react'
 import styled from 'styled-components'
 
 const mockData: [string, string, boolean, boolean, boolean][] = [
-    ['Haven', '', true, true, true],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['The Sun', 'Star', true, true, true],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
-    ['', '', false, false, false],
+  ['Haven', '', true, true, true],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['The Sun', 'Star', true, true, true],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
+  ['', '', false, false, false],
 ]
 export interface GridProps {
-    nx: number
-    ny: number
+  nx: number
+  ny: number
 }
 
 const Grid = styled.div`
@@ -47,21 +47,18 @@ const GridCell = styled.div`
   align-items: center;
 `
 
-const Novaria = (props) => {
-    const [nx, ny] = [5, 5];
+const NX = 5
+const NY = 5
 
-    return (
-        <Grid nx={nx} ny={ny}>
-            {times(nx * ny, (i) => {
-                const [handle, placeType, isDmz, isRefinery, isActive] = mockData[i];
-                return (
-                    <GridCell>
-                        {handle || i}
-                    </GridCell>
-                )
-            })}
-        </Grid>
-    )
+const Novaria = (props) => {
+  return (
+    <Grid nx={NX} ny={NY}>
+      {times(NX * NY, (i) => {
+        const [handle, placeType, isDmz, isRefinery, isActive] = mockData[i]
+        return <GridCell>{handle || i}</GridCell>
+      })}
+    </Grid>
+  )
 }
 
 export default Novaria
