@@ -1,6 +1,6 @@
 import { AbiItem } from 'web3-utils'
 import { times } from 'lodash'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
@@ -67,6 +67,10 @@ const NX = 5
 const NY = 5
 
 const Novaria = (props) => {
+  useEffect(() => {
+    fetchMap()
+  }, [])
+
   return (
     <Grid nx={NX} ny={NY}>
       {times(NX * NY, (i) => {
