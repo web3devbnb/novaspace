@@ -28,6 +28,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
+  grid-gap: 1px;
 `
 
 const GridCell = styled.div`
@@ -35,6 +36,10 @@ const GridCell = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  margin-left: -1px;
+  margin-bottom: -1px;
 `
 
 const NX = 5
@@ -54,7 +59,7 @@ const Novaria = (props) => {
   return (
     <Grid nx={NX} ny={NY}>
       {times(NX * NY, (i) => {
-        return <GridCell>{(mapData && mapData[i].name) || i}</GridCell>
+        return <GridCell key={i}>{mapData && mapData[i].name}</GridCell>
       })}
     </Grid>
   )
