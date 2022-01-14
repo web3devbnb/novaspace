@@ -10,15 +10,11 @@ const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
 const CHAIN_ID = '97'
 
-const fetchMap = () => {
+const fetchMap = async () => {
   const web3 = new Web3(httpProvider)
   const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, '0x4ccCa81e520B424F37f0FBBa3731854519862aF7')
-  contract.methods
-    .getCoordinatePlaces(0, 0, 4, 4)
-    .call()
-    .then((result) => {
-      console.log(result)
-    })
+  const data = await contract.methods.getCoordinatePlaces(0, 0, 4, 4).call()
+  console.log(data)
 }
 
 const mockData: [string, string, boolean, boolean, boolean][] = [
