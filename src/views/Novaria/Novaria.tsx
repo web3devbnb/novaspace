@@ -17,33 +17,6 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   return data
 }
 
-const mockData: [string, string, boolean, boolean, boolean][] = [
-  ['Haven', '', true, true, true],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['The Sun', 'Star', true, true, true],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-  ['', '', false, false, false],
-]
 export interface GridProps {
   nx: number
   ny: number
