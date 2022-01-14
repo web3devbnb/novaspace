@@ -44,11 +44,11 @@ const Novaria = (props) => {
   const [mapData, setMapData] = useState(null)
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;(async () => {
+    const fetch = async () => {
       const data = await fetchMapData(0, 0, NX, NY)
       setMapData(data)
-    })()
+    }
+    fetch()
   }, [])
 
   return (
