@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
+import contracts from 'config/constants/contracts'
 
 const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
@@ -12,7 +13,7 @@ const CHAIN_ID = '97'
 
 const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   const web3 = new Web3(httpProvider)
-  const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, '0x4ccCa81e520B424F37f0FBBa3731854519862aF7')
+  const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, contracts.map[CHAIN_ID])
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
   return data
 }
