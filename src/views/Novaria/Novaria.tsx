@@ -10,10 +10,10 @@ const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
 const CHAIN_ID = '97'
 
-const fetchMapData = async () => {
+const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   const web3 = new Web3(httpProvider)
   const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, '0x4ccCa81e520B424F37f0FBBa3731854519862aF7')
-  const data = await contract.methods.getCoordinatePlaces(0, 0, 4, 4).call()
+  const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
   return data
 }
 
@@ -72,7 +72,7 @@ const Novaria = (props) => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(async () => {
-      const data = await fetchMapData()
+      const data = await fetchMapData(0, 0, NX, NY)
       setMapData(data)
     })()
   }, [])
