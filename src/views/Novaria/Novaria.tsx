@@ -80,8 +80,7 @@ const Novaria = (props) => {
   return (
     <Grid nx={NX} ny={NY}>
       {times(NX * NY, (i) => {
-        const [handle, placeType, isDmz, isRefinery, isActive] = mockData[i]
-        return <GridCell>{handle || i}</GridCell>
+        return <GridCell>{(mapData && mapData[i].name) || i}</GridCell>
       })}
     </Grid>
   )
