@@ -12,7 +12,7 @@ const Menu = (props) => {
   const { isDark, toggleTheme } = useTheme()
   const novaPriceUsd = usePriceNovaBusd()
 
-  return (
+  return ( 
     <UikitMenu
       account={account}
       login={connect}
