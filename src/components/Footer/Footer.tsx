@@ -8,7 +8,7 @@ const Hero = styled(Flex)`
   position: relative;
   justify-content: center;
   background-position: bottom center;
-  background-image: url('/images/home/banner2bg.png');
+  background-image: url('/images/home/banner2bg.jpg');
   background-color: #00aaff20;
   border-top: solid 1px ${({ theme }) => theme.colors.primary};
   
@@ -44,6 +44,7 @@ const Img = styled.img`
 const Ul = styled.ul`
   list-style-type: none;  
   text-weight: bold;
+  font-size: 12px;
 `
 
 const Footer = () => (

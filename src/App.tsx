@@ -15,7 +15,7 @@ import './bubbles.scss'
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
-const LaunchPad = lazy(() => import('./views/LaunchPad'))
+const Novaria = lazy(() => import('./views/Novaria'))
 // const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Privacy = lazy(() => import('./views/Privacy'))
@@ -44,14 +44,14 @@ const App: React.FC = () => {
             {/* <Route path="/dashboard">
               <Dashboard />
             </Route> */}
-            <Route path="/farms">
+            <Route path="/traderoutes">
               <Farms />
             </Route>
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
-            <Route path="/novapad">
-              <LaunchPad />
+            <Route path="/novaria">
+              <Novaria />
             </Route>
             <Route path="/privacy">
               <Privacy />

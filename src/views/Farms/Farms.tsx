@@ -142,7 +142,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       backgroundPosition:"center",
       backgroundRepeat: "repeat-y",
       }}>
-      <Header>{tokenMode ? 'POOLS' : 'FARMS'}</Header>
+      <Header>{tokenMode ? 'POOLS' : 'TRADE ROUTES'}</Header>
       {/* <Divider /> */}
       <div>
         <Heading
@@ -158,10 +158,10 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
             fontSize: 22,
           }}
         >
-          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake LP Tokens to Earn NOVA and sNOVA'}
+          {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake Tokens to Earn NOVA and sNOVA'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
-          Deposit Fees are distributed to sNOVA holders
+          Trade routes fuel the economy of Novaria
         </Heading>
         <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} extremeOnly={extremeOnly} setExtremeOnly={setExtremeOnly} />
       </div>

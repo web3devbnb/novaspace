@@ -13,12 +13,15 @@ import Defi2Card from './components/DefiCard'
 import CandleCard from './components/CandleCard'
 import Banner1 from './components/Banner1'
 import Banner2 from './components/Banner2'
-import Divider from "./assets/divider.png"
+import Divider from './assets/divider.png'
+import teaserBanner from './assets/teaserBanner1.jpg'
 
 const Cards = styled(BaseLayout)` 
   justify-content: center;
   margin-bottom: 20px;
   margin-top: 15px;
+  max-width: 2800px;
+  text-align: center;
 
   ${({ theme }) => theme.mediaQueries.md} {
     grid-gap: 35px;
@@ -73,6 +76,41 @@ const Img = styled.img`
   object-position: center bottom;
 `
 
+const Teaser = styled.div`
+  text-align: center;
+  // object-position: center;
+  // justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+`
+
+const Banner = styled.img`
+  border-radius: 25px;
+  width: 0px;
+
+  // ${({ theme }) => theme.mediaQueries.xs} {
+  //   width: 0px;
+  // }
+  
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 100%;
+  }
+`
+
+const Video = styled.video`
+  border-radius: 25px;
+  width: 100%;
+  
+  // ${({ theme }) => theme.mediaQueries.xs} {
+  //   width: 100%;
+  // }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 0;
+  }
+`
+
 const Dashboard: React.FC = () => {
   return (
     <Page>
@@ -82,6 +120,13 @@ const Dashboard: React.FC = () => {
         The DEX, launchpad and yield farm that rewards holders with 75% of the platform fees in the daily <span style={{color:"gold"}} > MONEY POT</span>!
         <Img src={Divider} alt="divider"  />
       </Announcement>
+      <Teaser><a href='/novaria'>
+        <Banner src={teaserBanner} alt="Novaria, the battle is coming" />
+        <Video controls loop>
+          <source src='/videos/guy_2_3.mp4' type='video/mp4' />
+        </Video></a>
+      </Teaser>
+      
       <Cards>
         <FarmStakingCard />
         <SNovaStakingCard />
@@ -90,13 +135,13 @@ const Dashboard: React.FC = () => {
       <Body>
           <Col>  
             <FarmsCard />                          
-            <VaultsCard />
-            <CandleCard />
+            {/* <VaultsCard />
+            <CandleCard /> */}
           </Col>
           <Col>
-            <Banner1 />
+            {/* <Banner1 /> */}
             <Banner2 />
-            <TradesCard />              
+            {/* <TradesCard />               */}
           </Col>
 
       </Body>

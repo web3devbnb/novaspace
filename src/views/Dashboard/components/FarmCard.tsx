@@ -11,7 +11,7 @@ const Grid = styled.a`
   width: 100%;
   margin: 10px 5px;
   border-radius: 30px;
-  background-image: url('/images/home/farm.png');
+  background-image: url('/images/home/farm-min.png');
   display: grid;
   grid-template-columns: repeat(4,1fr);
   position: relative;
@@ -36,7 +36,7 @@ left: 6%;
 `
 
 const ColRight = styled.div`
-  background-image: url('/images/home/farmcoins.png');
+  background-image: url('/images/home/farmcoins-min.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0px 30px;
@@ -93,14 +93,14 @@ const FarmsCard = () => {
     <Grid href="/farms">
       <TextRow1>
         <Heading glowing>
-          FARMS
+          TRADE ROUTES
         </Heading>
       </TextRow1>
       <ColRight /> 
       
       <TextRow2>
         <SubHeading glowing> 
-          Earn up to <span style={{color:"#00aaff"}}>500%</span> APR      
+          Earn up to <span style={{color:"#00aaff"}}>100%</span> APR      
         </SubHeading>
       </TextRow2>
     </Grid>
