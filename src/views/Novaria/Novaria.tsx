@@ -42,6 +42,7 @@ const GridCell = styled.div`
   margin-left: -1px;
   margin-bottom: -1px;
 `
+
 const Body = styled.div``
 
 const CoordInput = styled.input`
@@ -50,6 +51,7 @@ const CoordInput = styled.input`
   -moz-appearance: textfield;
   color: white;
 `
+
 const InputControl = styled.div`
   display: flex;
   align-items: center;
@@ -85,7 +87,7 @@ const Novaria = (props) => {
           type="button"
           //  onClick={fetch}
         >
-          Find Location (x, y){' '}
+          Find Location (x, y)
         </button>
         <CoordInput
           type="number"
