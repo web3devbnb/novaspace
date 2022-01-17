@@ -68,6 +68,7 @@ const InputControl = styled.div`
   justify-content: center;
   padding: 10px;
   color: white;
+  gap: 5px;
 `
 
 const NX = 5
@@ -107,12 +108,14 @@ const Novaria = (props) => {
         <InputControl>
           <button type="button">Find Location (x, y)</button>
           <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+          x
           <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
         </InputControl>
 
         <InputControl>
           <button type="button">Set grid size (x, y)</button>
           <CoordInput type="number" value={maxX} />
+          x
           <CoordInput type="number" value={maxY} />
         </InputControl>
       </GridControls>
