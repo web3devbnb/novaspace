@@ -15,6 +15,7 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   const web3 = new Web3(httpProvider)
   const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, contracts.map[CHAIN_ID])
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
+  console.log("map data", data)
   return data
 }
 
@@ -41,27 +42,65 @@ const GridCell = styled.div`
   margin-left: -1px;
   margin-bottom: -1px;
 `
+const Body = styled.div`
+`
 
-const NX = 5
-const NY = 5
+const CoordInput = styled.input`
+  width: 4em;
+  background: transparent;
+  -moz-appearance: textfield;
+  color: white;
+`
+const InputControl = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: white;
+`
+
 
 const Novaria = (props) => {
   const [mapData, setMapData] = useState(null)
 
   useEffect(() => {
+
+
     const fetch = async () => {
-      const data = await fetchMapData(0, 0, NX, NY)
+      const data = await fetchMapData(0, 0, NX-1, NY-1)
       setMapData(data)
     }
     fetch()
   }, [])
 
+const NX = 5
+const NY = 5
+
+
   return (
+    <Body>
     <Grid nx={NX} ny={NY}>
       {times(NX * NY, (i) => {
         return <GridCell key={i}>{mapData && mapData[i].name}</GridCell>
       })}
     </Grid>
+    <InputControl>
+      {/* Find location sets the i=0 coordinate */}
+        <button 
+        type='button'
+       //  onClick={fetch}
+        >Find Location (x, y) </button> 
+        <CoordInput 
+        type="number" 
+        // value={valX} 
+        /> 
+        <CoordInput 
+        type="number" 
+        // value={valY}
+        />
+      
+    </InputControl>
+    </Body>
   )
 }
 
