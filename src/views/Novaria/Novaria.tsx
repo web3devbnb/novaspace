@@ -43,6 +43,11 @@ const GridCell = styled.div`
   margin-bottom: -1px;
 `
 
+const GridControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 const Body = styled.div``
 
 const CoordInput = styled.input`
@@ -88,17 +93,19 @@ const Novaria = (props) => {
         })}
       </Grid>
 
-      <InputControl>
-        <button type="button">Find Location (x, y)</button>
-        <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-        <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
-      </InputControl>
+      <GridControls>
+        <InputControl>
+          <button type="button">Find Location (x, y)</button>
+          <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+          <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+        </InputControl>
 
-      <InputControl>
-        <button type="button">Set grid size (x, y)</button>
-        <CoordInput type="number" value={maxX} />
-        <CoordInput type="number" value={maxY} />
-      </InputControl>
+        <InputControl>
+          <button type="button">Set grid size (x, y)</button>
+          <CoordInput type="number" value={maxX} />
+          <CoordInput type="number" value={maxY} />
+        </InputControl>
+      </GridControls>
     </Body>
   )
 }
