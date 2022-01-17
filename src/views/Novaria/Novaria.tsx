@@ -62,6 +62,8 @@ const InputControl = styled.div`
 
 const Novaria = (props) => {
   const [mapData, setMapData] = useState(null)
+  const [X, setX] = useState(0)
+  const [Y, setY] = useState(0)
 
   useEffect(() => {
     const fetch = async () => {
@@ -89,14 +91,8 @@ const Novaria = (props) => {
         >
           Find Location (x, y)
         </button>
-        <CoordInput
-          type="number"
-          // value={valX}
-        />
-        <CoordInput
-          type="number"
-          // value={valY}
-        />
+        <CoordInput type="number" value={X} />
+        <CoordInput type="number" value={Y} />
       </InputControl>
     </Body>
   )
