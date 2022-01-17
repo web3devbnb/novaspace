@@ -38,6 +38,14 @@ const GridCell = styled.div`
   align-items: center;
   color: white;
   outline: 1px solid black;
+  position: relative;
+`
+
+const GridCellId = styled.div`
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 0.5rem;
 `
 
 const GridControls = styled.div`
@@ -86,7 +94,12 @@ const Novaria = (props) => {
     <Body>
       <Grid nx={maxX} ny={maxY}>
         {times(maxX * maxY, (i) => {
-          return <GridCell key={i}>{mapData && mapData[i].name}</GridCell>
+          return (
+            <GridCell key={i}>
+              {mapData && mapData[i].name}
+              <GridCellId>{i}</GridCellId>
+            </GridCell>
+          )
         })}
       </Grid>
 
