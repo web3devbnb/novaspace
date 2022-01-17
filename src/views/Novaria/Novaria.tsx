@@ -83,16 +83,17 @@ const Novaria = (props) => {
           return <GridCell key={i}>{mapData && mapData[i].name}</GridCell>
         })}
       </Grid>
+
       <InputControl>
-        {/* Find location sets the i=0 coordinate */}
-        <button
-          type="button"
-          //  onClick={fetch}
-        >
-          Find Location (x, y)
-        </button>
+        <button type="button">Find Location (x, y)</button>
         <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
         <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+      </InputControl>
+
+      <InputControl>
+        <button type="button">Set grid size (x, y)</button>
+        <CoordInput type="number" value={NX} />
+        <CoordInput type="number" value={NY} />
       </InputControl>
     </Body>
   )
