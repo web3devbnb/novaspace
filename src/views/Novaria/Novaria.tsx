@@ -60,26 +60,30 @@ const InputControl = styled.div`
   color: white;
 `
 
+const NX = 5
+const NY = 5
+
 const Novaria = (props) => {
   const [mapData, setMapData] = useState(null)
+
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
 
+  const [maxX, setMaxX] = useState(NX)
+  const [maxY, setMaxY] = useState(NY)
+
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(0, 0, NX - 1, NY - 1)
+      const data = await fetchMapData(0, 0, maxX - 1, maxY - 1)
       setMapData(data)
     }
     fetch()
-  }, [])
-
-  const NX = 5
-  const NY = 5
+  }, [maxX, maxY])
 
   return (
     <Body>
-      <Grid nx={NX} ny={NY}>
-        {times(NX * NY, (i) => {
+      <Grid nx={maxX} ny={maxY}>
+        {times(maxX * maxY, (i) => {
           return <GridCell key={i}>{mapData && mapData[i].name}</GridCell>
         })}
       </Grid>
@@ -92,8 +96,8 @@ const Novaria = (props) => {
 
       <InputControl>
         <button type="button">Set grid size (x, y)</button>
-        <CoordInput type="number" value={NX} />
-        <CoordInput type="number" value={NY} />
+        <CoordInput type="number" value={maxX} />
+        <CoordInput type="number" value={maxY} />
       </InputControl>
     </Body>
   )
