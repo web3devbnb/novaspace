@@ -91,8 +91,8 @@ const Novaria = (props) => {
         >
           Find Location (x, y)
         </button>
-        <CoordInput type="number" value={X} />
-        <CoordInput type="number" value={Y} />
+        <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+        <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
       </InputControl>
     </Body>
   )
