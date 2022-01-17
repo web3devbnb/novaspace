@@ -37,10 +37,7 @@ const GridCell = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  margin-left: -1px;
-  margin-bottom: -1px;
+  outline: 1px solid black;
 `
 
 const GridControls = styled.div`
