@@ -27,8 +27,8 @@ export interface GridProps {
 const Grid = styled.div`
   height: calc(100vh - 68px - 145px);
   display: grid;
-  grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
-  grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
+  grid-template-columns: repeat(${(props: GridProps) => props.nx}, 1fr);
+  grid-template-rows: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-gap: 1px;
 `
 
@@ -98,7 +98,9 @@ const Novaria = (props) => {
           return (
             <GridCell key={i}>
               {mapData && mapData[i] && mapData[i].name}
-              <GridCellId>{i}</GridCellId>
+              <GridCellId>
+                {Math.trunc(i / maxY)} x {i % maxX}
+              </GridCellId>
             </GridCell>
           )
         })}
