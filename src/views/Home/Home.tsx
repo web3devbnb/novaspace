@@ -89,8 +89,8 @@ const Home: React.FC = () => {
         <Banner />
           <Col>  
             <FarmsCard />                          
-            <VaultsCard />
-            <CandleCard />
+            {/* <VaultsCard />
+            <CandleCard /> */}
           </Col>
           <Col>
             <MoneyPotCard />

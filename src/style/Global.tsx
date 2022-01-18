@@ -6,15 +6,19 @@ declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
   export interface DefaultTheme extends ShibanovaTheme {}
 }
+const spacebgMobile = "url('/images/home/bgspaceMobile.jpg')"
+const novariaMobileBG = "url('/images/home/novariaBGMobile.jpg')"
+const novariaBG = "url('/images/home/mainBackground-dark.jpg')"
+const spaceBG = "url('/images/home/bgspaceBig.jpg')"
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
   * {
     font-family: 'Montserrat', sans-serif;
   }
   body {
-     background-image: url('/images/home/dexmobilebg2.jpg');
+     background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : spacebgMobile)};
      background-size: 100% auto;
-    background-repeat: repeat-y;
+     background-repeat: repeat-y;
 
     img {
       height: auto;
@@ -22,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background-image: url('/images/home/dexbgbig.jpg');
+      background-image: ${({isNovaria}) => (isNovaria ? novariaBG : spaceBG)};
       background-size: 100% auto;
       background-repeat: repeat-y;
     }

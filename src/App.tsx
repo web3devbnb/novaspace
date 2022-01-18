@@ -29,41 +29,46 @@ BigNumber.config({
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
-
+  const isNovaria = window.location.pathname === './Novaria'
   return (
     <Router>
       <ResetCSS />
-      <GlobalStyle />
-      <Menu style={{ backgroundImage: 'transparent' }}>
+      <Menu>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
+            <GlobalStyle isNovaria={false} />
               <Home />
             </Route>
             {/* <Route path="/dashboard">
               <Dashboard />
             </Route> */}
-            <Route path="/farms">
+            <Route path="/traderoutes">
+            <GlobalStyle isNovaria={false} />
               <Farms />
             </Route>
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
-            <Route path="/novapad">
-              <LaunchPad />
+            <Route path="/novaria">
+            <GlobalStyle isNovaria />
+              <Novaria />
             </Route>
             <Route path="/novaria">
               <Novaria />
             </Route>
             <Route path="/privacy">
+            <GlobalStyle isNovaria={false} />
               <Privacy />
             </Route>
             <Route path="/terms">
+            <GlobalStyle isNovaria={false} />
               <Terms />
             </Route>
             <Route component={NotFound} />
+            <GlobalStyle isNovaria={false} />
           </Switch>
-          <Bubbles numberOfBubbles={150} />
+          {/* <Bubbles numberOfBubbles={150} /> */}
         </Suspense>
       </Menu>
       <Footer />

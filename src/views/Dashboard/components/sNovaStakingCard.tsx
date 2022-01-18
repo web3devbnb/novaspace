@@ -105,8 +105,8 @@ const SNovaStakingCard = () => {
     <StatsCard
       actions={
         account && sNovaBalance.comparedTo(0) > 0 ? (
-          <Row>
-            <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
+          <Row style={{marginTop:-15}}>
+            <Button  onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
             <Text fontSize="14px">
               {penalty}% {TranslateString(999, 'Penalty')}
             </Text>

@@ -4,25 +4,24 @@ import { Heading, Card, CardBody, CardHeader, CardFooter } from '@pancakeswap-li
 
 const StyledCard = styled(Card)`
   text-align: center;
+  flex: 1 1 auto;
+  max-width: 400px;
+ // min-width: 350px;
+  height: 610px;
 `
 
 const StyledCardHeader = styled(CardHeader)`
-  @media (min-width: 360px) and (max-width: 576px) {
     padding: 12px;
-  }
+  
 `
 
 const StyledHeading = styled(Heading)`
   font-size: 32px;
-  @media (min-width: 360px) and (max-width: 576px) {
-    font-size: 28px;
-  }
 `
 
 const StyledCardBody = styled(CardBody)`
-  @media (min-width: 360px) and (max-width: 576px) {
     padding: 10px;
-  }
+  
 `
 
 const StyledCardFooter = styled(CardFooter)`
