@@ -1,35 +1,19 @@
 export default {
   nova: {
     56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
-    97: '0x9249DAcc91cddB8C67E9a89e02E071085dE613cE',
+    97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
   },
   snova: {
     56: '0x0c0bf2bD544566A11f59dC70a8F43659ac2FE7c2',
-    97: '',
+    97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3',
   },
   masterChef: {
     56: '0x8A4f4c7F4804D30c718a76B3fde75f2e0cFd8712',
-    97: '0x4d22cd6370778650f8B23580248711f7e070130E',
+    97: '0xDDddD4d6a604A311CA2d90c54E81D2e31424B813',
   },
   wbnb: {
     56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
-  },
-  map: {
-    56: '',
-    97: '0x4ccCa81e520B424F37f0FBBa3731854519862aF7',
-  },
-  shadowPool: {
-    56: '',
-    97: '0xA219f7cC50d920855118d2A93ee99ad18e9a2BC5',
-  },
-  treasury: {
-    56: '',
-    97: '0x7dcFF46cF73373b790C7EcE5CB37aB979280Ed38',
-  },
-  placeManager: {
-    56: '',
-    97: '0xFD305CbcB6004A88cE2Ff16ACC2199BD49077fa9',
   },
   lottery: {
     56: '',
