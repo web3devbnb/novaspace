@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
@@ -17,15 +17,32 @@ const Body = styled(Flex)`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-family: 'Poppins', sans-serif;
+
+`
+const breatheAnimation = keyframes`
+  // 0% { width: 99%; }
+  // 50% {width: 49%; }
+  // 100% {width: 0%; }
+  // 0% { padding-top: 100px }
+  // 50% {padding-top: 50px }
+  // 100% {padding-top: 30px }
+  0% { opacity: 0.7}
+  40% { opacity: 1  }
+  70% { opacity: 1  }
+  100% { opacity: 0.7 }
 
 `
 
 const Logo = styled.img`
   max-Width: 800px;
-  padding-top: 50px;
-  padding-left: 20px;
+  padding-top: 80px;
+  padding-left: 0px;
   width: 99%;
+  animation-name: ${breatheAnimation};
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
 `
 
 const Column = styled.div`
@@ -44,7 +61,7 @@ const SubHeading = styled.div`
   max-width: 800px;
   text-align: center;
 
-  
+
   ${({ theme }) => theme.mediaQueries.xs} {
     font-size: 20px;
   }
@@ -56,13 +73,13 @@ const SubHeading = styled.div`
 
 const Novaria: React.FC = () => {
   return (
-    <Page1 >      
+    <Page1 >
       <Body >
         <Column>
           <Logo src={logo} alt="novaria logo" />
           <SubHeading>
             - Coming Soon - <br/> <br/>
-            A 4x space strategy game built on the Binance Smart Chain. 
+            A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
         </Column>
       </Body>

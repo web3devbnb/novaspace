@@ -14,29 +14,35 @@ import CandleCard from './components/CandleCard'
 import Banner1 from './components/Banner1'
 import Banner2 from './components/Banner2'
 import Divider from './assets/divider.png'
-import teaserBanner from './assets/teaserBanner1.jpg'
+import teaserBanner from './assets/teaserBanner2.jpg'
 
 const Cards = styled(BaseLayout)` 
+   display: flex;
+  flex-wrap: wrap;
+  wrap-direction: row;
   justify-content: center;
   margin-bottom: 20px;
   margin-top: 15px;
-  max-width: 2800px;
+  max-width: 95%;
   text-align: center;
+  align-items: stretch;
+  margin-left: auto;
+  margin-right: auto;
 
   ${({ theme }) => theme.mediaQueries.md} {
-    grid-gap: 35px;
-    padding: 0 25px;
+    // grid-gap: 35px;
+   // padding: 0 25px;
   }
   & > div {
-    grid-column: span 6;
-    width: 100%;
+     grid-column: span 2;
+   // width: 100%;
 
     // ${({ theme }) => theme.mediaQueries.md} {
     //   grid-column: span 4;
     // }
 
     ${({ theme }) => theme.mediaQueries.lg} {
-      grid-column: span 4;
+    //  grid-column: span 4;
     }
   }
 `
@@ -113,7 +119,7 @@ const Video = styled.video`
 
 const Dashboard: React.FC = () => {
   return (
-    <Page>
+    <Page style={{maxWidth: 1400, marginLeft: 'auto', marginRight: 'auto'}}>
       <Header>Welcome</Header>
       {/* <Divider /> */}
       <Announcement glowing>

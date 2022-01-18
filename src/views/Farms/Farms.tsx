@@ -22,25 +22,25 @@ export interface FarmsProps {
   tokenMode?: boolean
 }
 
-const Hero = styled.div`
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: grid;
-  margin: auto;
-  margin-bottom: 0px;
-  padding-top: 15px;
-  text-align: left;
+// const Hero = styled.div`
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: grid;
+//   margin: auto;
+//   margin-bottom: 0px;
+//   padding-top: 15px;
+//   text-align: left;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    text-align: left;
-    image-size: 100px;
-    height: 150px;
-    padding-top: 5px;
-    padding-right: 1px;
-  }
-`
+//   ${({ theme }) => theme.mediaQueries.lg} {
+//     text-align: left;
+//     image-size: 100px;
+//     height: 150px;
+//     padding-top: 5px;
+//     padding-right: 1px;
+//   }
+// `
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsLP = useFarms()
   const novaPrice = usePriceNovaBusd()
@@ -137,12 +137,8 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
 
   return (
-    <Page style={{
-      backgroundImage:"url('/images/dexbgbig.png')", 
-      backgroundPosition:"center",
-      backgroundRepeat: "repeat-y",
-      }}>
-      <Header>{tokenMode ? 'POOLS' : 'TRADE ROUTES'}</Header>
+    <Page>
+      <Header>TRADE ROUTES</Header>
       {/* <Divider /> */}
       <div>
         <Heading
@@ -161,7 +157,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           {tokenMode ? 'Stake Tokens to Earn NOVA' : 'Stake Tokens to Earn NOVA and sNOVA'}
         </Heading>
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
-          Trade routes fuel the economy of Novaria
+          Trade routes fuel the economy of Novaria and the decentralized exchange
         </Heading>
         <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} extremeOnly={extremeOnly} setExtremeOnly={setExtremeOnly} />
       </div>

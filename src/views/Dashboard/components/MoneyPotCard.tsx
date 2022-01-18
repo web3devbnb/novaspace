@@ -143,7 +143,7 @@ const MoneyPotCard = () => {
       </Row>
       <div>
         <Stats stats={stats} />
-        <Row style={{ justifyContent: 'center', padding: '7px 0 0px 0' }}>
+        <Row style={{ marginTop:0, justifyContent: 'center', padding: '7px 0 0px 0' }}>
           <NextMoneyPotCard>
             Next Moneypot starts rewarding at block{' '}
             <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
