@@ -74,7 +74,7 @@ const InputControl = styled.div`
 const NX = 5
 const NY = 5
 
-const Novaria = (props) => {
+const Map = (props) => {
   const [mapData, setMapData] = useState(null)
 
   const [X, setX] = useState(0)
@@ -125,4 +125,4 @@ const Novaria = (props) => {
   )
 }
 
-export default Novaria
+export default Map
