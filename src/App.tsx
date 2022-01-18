@@ -11,13 +11,12 @@ import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 import './bubbles.scss'
 
-
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
-const Novaria = lazy(() => import('./views/Novaria'))
-// const Dashboard = lazy(() => import('./views/Dashboard'))
+const LaunchPad = lazy(() => import('./views/LaunchPad'))
 const NotFound = lazy(() => import('./views/NotFound'))
+const Novaria = lazy(() => import('./views/Novaria'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
 
@@ -34,8 +33,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <ResetCSS />
-      
-      <Menu style={{ backgroundColor:"black" }}>
+      <Menu>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
@@ -54,6 +52,9 @@ const App: React.FC = () => {
             </Route> */}
             <Route path="/novaria">
             <GlobalStyle isNovaria />
+              <Novaria />
+            </Route>
+            <Route path="/novaria">
               <Novaria />
             </Route>
             <Route path="/privacy">
