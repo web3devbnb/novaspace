@@ -6,6 +6,7 @@ import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
+import GameMenu from '../components/GameMenu'
 
 const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
@@ -74,7 +75,7 @@ const InputControl = styled.div`
 const NX = 5
 const NY = 5
 
-const Map = (props) => {
+const Map: React.FC = (props) => {
   const [mapData, setMapData] = useState(null)
 
   const [X, setX] = useState(0)

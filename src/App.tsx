@@ -19,6 +19,7 @@ const NotFound = lazy(() => import('./views/NotFound'))
 const Novaria = lazy(() => import('./views/Novaria'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
+const Map = lazy(() => import('./views/Novaria/Map'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -54,8 +55,10 @@ const App: React.FC = () => {
             <GlobalStyle isNovaria />
               <Novaria />
             </Route>
-            <Route path="/novaria">
-              <Novaria />
+          
+            <Route path="/map">
+            <GlobalStyle isNovaria />
+              <Map />
             </Route>
             <Route path="/privacy">
             <GlobalStyle isNovaria={false} />
