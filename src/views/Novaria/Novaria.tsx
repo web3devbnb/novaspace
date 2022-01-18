@@ -97,7 +97,7 @@ const Novaria = (props) => {
         {times(maxX * maxY, (i) => {
           return (
             <GridCell key={i}>
-              {mapData && mapData[i].name}
+              {mapData && mapData[i] && mapData[i].name}
               <GridCellId>{i}</GridCellId>
             </GridCell>
           )
@@ -114,9 +114,9 @@ const Novaria = (props) => {
 
         <InputControl>
           <button type="button">Set grid size (x, y)</button>
-          <CoordInput type="number" value={maxX} />
+          <CoordInput type="number" value={maxX} onChange={(e) => setMaxX(parseFloat(e.target.value))} />
           x
-          <CoordInput type="number" value={maxY} />
+          <CoordInput type="number" value={maxY} onChange={(e) => setMaxY(parseFloat(e.target.value))} />
         </InputControl>
       </GridControls>
     </Body>
