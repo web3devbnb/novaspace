@@ -99,7 +99,7 @@ const Novaria = (props) => {
             <GridCell key={i}>
               {mapData && mapData[i] && mapData[i].name}
               <GridCellId>
-                {Math.trunc(i / maxY)} x {i % maxX}
+                {i % maxX} x {Math.trunc(i / maxY)}
               </GridCellId>
             </GridCell>
           )
