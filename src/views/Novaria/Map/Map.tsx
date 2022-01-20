@@ -109,7 +109,7 @@ const Map: React.FC = (props) => {
 
       <GridControls>
         <InputControl>
-          <button type="button">Find Location (x, y)</button>
+          <button type="button">Find location (x, y)</button>
           <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
           x
           <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
