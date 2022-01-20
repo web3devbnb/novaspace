@@ -5,11 +5,10 @@ import Header from 'components/Header'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import Divider from './components/Divider'
 import logo from './components/novariaLogoMain.png'
-import button from './components/button.png'
 
 const Page1 = styled(Page)`
-  background-image:url('/images/home/mainBackground-dark.jpg');
-  background-size:cover ;
+  background-image: url('/images/home/mainBackground-dark.jpg');
+  background-size: cover;
   background-position: center;
 `
 
@@ -19,7 +18,6 @@ const Body = styled(Flex)`
   align-items: center;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-
 `
 const breatheAnimation = keyframes`
   // 0% { width: 99%; }
@@ -36,7 +34,7 @@ const breatheAnimation = keyframes`
 `
 
 const Logo = styled.img`
-  max-Width: 800px;
+  max-width: 800px;
   padding-top: 80px;
   padding-left: 0px;
   width: 99%;
@@ -61,7 +59,6 @@ const SubHeading = styled.div`
   max-width: 800px;
   text-align: center;
 
-
   ${({ theme }) => theme.mediaQueries.xs} {
     font-size: 20px;
   }
@@ -73,13 +70,12 @@ const SubHeading = styled.div`
 
 const Novaria: React.FC = () => {
   return (
-    <Page1 >
-      <Body >
+    <Page1>
+      <Body>
         <Column>
           <Logo src={logo} alt="novaria logo" />
           <SubHeading>
-            - Coming Soon - <br/> <br/>
-            A 4x space strategy game built on the Binance Smart Chain.
+            - Coming Soon - <br /> <br />A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
         </Column>
       </Body>
