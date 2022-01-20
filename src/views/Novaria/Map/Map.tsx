@@ -100,7 +100,7 @@ const Map: React.FC = (props) => {
             <GridCell key={i}>
               {mapData && mapData[i] && mapData[i].name}
               <GridCellId>
-                {i % XLen} x {Math.trunc(i / YLen)}
+                {(i % XLen) + X} x {Math.trunc(i / YLen) + Y}
               </GridCellId>
             </GridCell>
           )
