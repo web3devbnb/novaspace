@@ -81,26 +81,26 @@ const Map: React.FC = (props) => {
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
 
-  const [maxX, setMaxX] = useState(NX)
-  const [maxY, setMaxY] = useState(NY)
+  const [XLen, setXLen] = useState(NX)
+  const [YLen, setYLen] = useState(NY)
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(0, 0, maxX - 1, maxY - 1)
+      const data = await fetchMapData(0, 0, XLen - 1, YLen - 1)
       setMapData(data)
     }
     fetch()
-  }, [maxX, maxY])
+  }, [XLen, YLen])
 
   return (
     <Body>
-      <Grid nx={maxX} ny={maxY}>
-        {times(maxX * maxY, (i) => {
+      <Grid nx={XLen} ny={YLen}>
+        {times(XLen * YLen, (i) => {
           return (
             <GridCell key={i}>
               {mapData && mapData[i] && mapData[i].name}
               <GridCellId>
-                {i % maxX} x {Math.trunc(i / maxY)}
+                {i % XLen} x {Math.trunc(i / YLen)}
               </GridCellId>
             </GridCell>
           )
@@ -117,9 +117,9 @@ const Map: React.FC = (props) => {
 
         <InputControl>
           <button type="button">Set grid size (x, y)</button>
-          <CoordInput type="number" value={maxX} onChange={(e) => setMaxX(parseFloat(e.target.value))} />
+          <CoordInput type="number" value={XLen} onChange={(e) => setXLen(parseFloat(e.target.value))} />
           x
-          <CoordInput type="number" value={maxY} onChange={(e) => setMaxY(parseFloat(e.target.value))} />
+          <CoordInput type="number" value={YLen} onChange={(e) => setYLen(parseFloat(e.target.value))} />
         </InputControl>
       </GridControls>
     </Body>
