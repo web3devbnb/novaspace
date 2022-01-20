@@ -86,11 +86,11 @@ const Map: React.FC = (props) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(0, 0, XLen - 1, YLen - 1)
+      const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
       setMapData(data)
     }
     fetch()
-  }, [XLen, YLen])
+  }, [X, Y, XLen, YLen])
 
   return (
     <Body>
