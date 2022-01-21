@@ -92,6 +92,14 @@ const Map: React.FC = (props) => {
     fetch()
   }, [X, Y, XLen, YLen])
 
+  const handleFindLocationClick = () => {
+    console.log(X, Y)
+  }
+
+  const handleSetGridSizeClick = () => {
+    console.log(XLen, YLen)
+  }
+
   return (
     <Body>
       <Grid nx={XLen} ny={YLen}>
@@ -109,14 +117,18 @@ const Map: React.FC = (props) => {
 
       <GridControls>
         <InputControl>
-          <button type="button">Find location (x, y)</button>
+          <button type="button" onClick={handleFindLocationClick}>
+            Find location (x, y)
+          </button>
           <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
           x
           <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
         </InputControl>
 
         <InputControl>
-          <button type="button">Set grid size (x, y)</button>
+          <button type="button" onClick={handleSetGridSizeClick}>
+            Set grid size (x, y)
+          </button>
           <CoordInput type="number" value={XLen} onChange={(e) => setXLen(parseFloat(e.target.value))} />
           x
           <CoordInput type="number" value={YLen} onChange={(e) => setYLen(parseFloat(e.target.value))} />
