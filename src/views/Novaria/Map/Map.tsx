@@ -20,6 +20,14 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   return data
 }
 
+const arrayToMatrix = (arr, size) => {
+  const res = []
+  for (let i = 0; i < arr.length; i += size) {
+    res.push(arr.slice(i, i + size))
+  }
+  return res
+}
+
 export interface GridProps {
   nx: number
   ny: number
