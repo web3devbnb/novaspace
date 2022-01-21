@@ -143,18 +143,30 @@ const Map: React.FC = (props) => {
           <button type="button" onClick={handleFindLocationClick}>
             Find location (x, y)
           </button>
-          <CoordInput type="number" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+          <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
           x
-          <CoordInput type="number" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
         </InputControl>
 
         <InputControl>
           <button type="button" onClick={handleSetGridSizeClick}>
             Set grid size (x, y)
           </button>
-          <CoordInput type="number" value={XLen} onChange={(e) => setXLen(parseFloat(e.target.value))} />
+          <CoordInput
+            type="number"
+            min="1"
+            max="16"
+            value={XLen}
+            onChange={(e) => setXLen(parseFloat(e.target.value))}
+          />
           x
-          <CoordInput type="number" value={YLen} onChange={(e) => setYLen(parseFloat(e.target.value))} />
+          <CoordInput
+            type="number"
+            min="1"
+            max="16"
+            value={YLen}
+            onChange={(e) => setYLen(parseFloat(e.target.value))}
+          />
         </InputControl>
       </GridControls>
     </Body>
