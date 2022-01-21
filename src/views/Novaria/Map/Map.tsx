@@ -101,11 +101,17 @@ const Map: React.FC = (props) => {
   }, [])
 
   const handleFindLocationClick = async () => {
+    if (mapData.x0 === X && mapData.y0 === Y) {
+      return
+    }
     const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
   const handleSetGridSizeClick = async () => {
+    if (mapData.data.length === YLen && mapData.data[0].length === XLen) {
+      return
+    }
     const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
@@ -116,7 +122,7 @@ const Map: React.FC = (props) => {
 
   return (
     <Body>
-      <Grid nx={mapData.data.length} ny={mapData.data[0].length}>
+      <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
         {mapData.data.map((arr, i) => {
           const ri = mapData.data.length - i - 1
           return mapData.data[ri].map((el, j) => {
