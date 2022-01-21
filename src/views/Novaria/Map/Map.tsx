@@ -94,32 +94,41 @@ const Map: React.FC = (props) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
-      setMapData(data)
+      const data = await fetchMapData(0, 0, NX - 1, NY - 1)
+      setMapData({ x0: 0, y0: 0, data: arrayToMatrix(data, NX) })
     }
     fetch()
-  }, [X, Y, XLen, YLen])
+  }, [])
 
-  const handleFindLocationClick = () => {
-    console.log(X, Y)
+  const handleFindLocationClick = async () => {
+    const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
+    setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
-  const handleSetGridSizeClick = () => {
-    console.log(XLen, YLen)
+  const handleSetGridSizeClick = async () => {
+    const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
+    setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
+  }
+
+  if (!mapData) {
+    return null
   }
 
   return (
     <Body>
-      <Grid nx={XLen} ny={YLen}>
-        {times(XLen * YLen, (i) => {
-          return (
-            <GridCell key={i}>
-              {mapData && mapData[i] && mapData[i].name}
-              <GridCellId>
-                {(i % XLen) + X} x {Math.trunc(i / YLen) + Y}
-              </GridCellId>
-            </GridCell>
-          )
+      <Grid nx={mapData.data.length} ny={mapData.data[0].length}>
+        {mapData.data.map((arr, i) => {
+          const ri = mapData.data.length - i - 1
+          return mapData.data[ri].map((el, j) => {
+            return (
+              <GridCell>
+                {el.name}
+                <GridCellId>
+                  {ri + mapData.x0} x {j + mapData.y0}
+                </GridCellId>
+              </GridCell>
+            )
+          })
         })}
       </Grid>
 
