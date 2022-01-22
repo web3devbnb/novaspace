@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { BaseLayout, Flex, Text } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
+import NeonButton from './components/NeonButton'
+import ExpandableSectionButton from './components/ExpandableSectionButton'
 import FarmStakingCard from './components/FarmStakingCard'
 import SNovaStakingCard from './components/sNovaStakingCard'
 import MoneyedPotCard from './components/MoneyPotCard'
-import VaultsCard from './components/VaultCard'
-import FarmsCard from './components/FarmCard'
-import TradesCard from './components/TradeCard'
-import Defi2Card from './components/DefiCard'
-import CandleCard from './components/CandleCard'
-import Banner1 from './components/Banner1'
+import TradeRouteCard from './components/TradeRouteCard'
+import SubHero from './components/SubHero'
 import Banner2 from './components/Banner2'
 import Divider from './assets/divider.png'
-import teaserBanner from './assets/teaserBanner2.jpg'
+import NovariaCard from './components/NovariaCard'
+import NovariaTeaser from './components/NovariaTeaser'
+
+const ExpandingWrapper = styled.div<{ expanded: boolean }>`
+  height: ${(props) => (props.expanded ? '100%' : '0px')};
+  overflow: hidden;
+`
 
 const Cards = styled(BaseLayout)` 
    display: flex;
@@ -22,7 +26,7 @@ const Cards = styled(BaseLayout)`
   wrap-direction: row;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 15px;
+  margin-top: 20px;
   max-width: 95%;
   text-align: center;
   align-items: stretch;
@@ -34,7 +38,7 @@ const Cards = styled(BaseLayout)`
    // padding: 0 25px;
   }
   & > div {
-     grid-column: span 2;
+   //  grid-column: span 2;
    // width: 100%;
 
     // ${({ theme }) => theme.mediaQueries.md} {
@@ -72,14 +76,16 @@ const Col = styled(Flex)`
   }
  
 `
-const Announcement = styled(Text)`
-  text-align: center;
-  text-weight: bold;
-  margin-top: 10px;
- 
+
+const Hero = styled.div`
+  margin-bottom: 30px;
 `
+
+
 const Img = styled.img`
-  object-position: center bottom;
+  width: 95%;
+  align-self: flex-end;
+
 `
 
 const Teaser = styled.div`
@@ -89,6 +95,8 @@ const Teaser = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 95%;
+  max-width: 1270px;
+  margin-top: 20px;
 `
 
 const Banner = styled.img`
@@ -104,53 +112,44 @@ const Banner = styled.img`
   }
 `
 
-const Video = styled.video`
-  border-radius: 25px;
-  width: 100%;
-  
-  // ${({ theme }) => theme.mediaQueries.xs} {
-  //   width: 100%;
-  // }
 
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: 0;
-  }
-`
 
 const Dashboard: React.FC = () => {
+
+  const [showExpandableSection, setShowExpandableSection] = useState(false)
+
   return (
-    <Page style={{maxWidth: 1400, marginLeft: 'auto', marginRight: 'auto'}}>
-      <Header>Welcome</Header>
-      {/* <Divider /> */}
-      <Announcement glowing>
-        The DEX, launchpad and yield farm that rewards holders with 75% of the platform fees in the daily <span style={{color:"gold"}} > MONEY POT</span>!
-        <Img src={Divider} alt="divider"  />
-      </Announcement>
-      <Teaser><a href='/novaria'>
-        <Banner src={teaserBanner} alt="Novaria, the battle is coming" />
-        <Video controls loop>
-          <source src='/videos/guy_2_3.mp4' type='video/mp4' />
-        </Video></a>
+    <Page 
+    // style={{maxWidth:"100%", marginLeft: 'auto', marginRight: 'auto'}}
+    >
+      <Hero>
+        <Header>Welcome</Header>
+        <SubHero />
+   
+      </Hero>     
+    
+      <NovariaCard title="novaria" />   
+        <Banner2 title="dex" />
+        <TradeRouteCard title="trade-routes" />
+
+      <Teaser>
+        <NovariaTeaser title="teaser" />    
       </Teaser>
-      
-      <Cards>
+
+   
+      {/* <ExpandableSectionButton
+        onClick={() => setShowExpandableSection(!showExpandableSection)}
+        expanded={showExpandableSection}
+      />
+      <ExpandingWrapper expanded={showExpandableSection}> */}
+      <Cards id="stats">
         <FarmStakingCard />
         <SNovaStakingCard />
         <MoneyedPotCard />
       </Cards>
-      <Body>
-          <Col>  
-            <FarmsCard />                          
-            {/* <VaultsCard />
-            <CandleCard /> */}
-          </Col>
-          <Col>
-            {/* <Banner1 /> */}
-            <Banner2 />
-            {/* <TradesCard />               */}
-          </Col>
+      {/* </ExpandingWrapper> */}
 
-      </Body>
+      
       
     </Page>
   )

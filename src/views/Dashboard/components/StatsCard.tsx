@@ -8,6 +8,17 @@ const StyledCard = styled(Card)`
   max-width: 400px;
  // min-width: 350px;
   height: 610px;
+  border: 2px solid;
+  color: #00aaff;
+ // box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px rgba(0,208,255, 0.6), 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px rgba(0,208,255, 0.6);
 `
 
 const StyledCardHeader = styled(CardHeader)`

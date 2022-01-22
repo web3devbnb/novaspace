@@ -15,6 +15,7 @@ import Banner from "./components/Banner"
 import Divider from "./assets/divider.png"
 
 
+
 const Body = styled(Flex)`
   flex-wrap: wrap;
   justify-content: center;
@@ -70,35 +71,8 @@ const Home: React.FC = () => {
 
   
   return (
-    <Page 
-      
-    >
-      <Header>WELCOME!</Header>
-      
-      <Body>
-        {/* TO-DO: replace static announcements banner with announcements.tsx?
-        <Announcements /> */}
-        <Main>
-          <Announcement glowing>
-            Want to Launch Your Project to the Moon? Apply 
-            <a target="_blank" rel="noreferrer" style={{color:"gold"}}
-            href="https://forms.gle/hH2ikfTqaznbTjAe8"> HERE!</a>
-          </Announcement>
-          <Img src={Divider} alt="divider" style={{}} />
-        </Main>
-        <Banner />
-          <Col>  
-            <FarmsCard />                          
-            {/* <VaultsCard />
-            <CandleCard /> */}
-          </Col>
-          <Col>
-            <MoneyPotCard />
-            <Defi2Card />
-            <TradesCard />              
-          </Col>
-        
-      </Body>
+    <Page>
+      good luck
     </Page>
   )
 }

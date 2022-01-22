@@ -7,10 +7,8 @@ const Hero = styled(Flex)`
   flex-direction: column;
   position: relative;
   justify-content: center;
-  background-position: bottom center;
-  background-image: url('/images/home/banner2bg.jpg');
-  background-color: #00aaff20;
-  border-top: solid 1px ${({ theme }) => theme.colors.primary};
+  background-image: transparent;
+  // border-top: solid 1px ${({ theme }) => theme.colors.primary};
   
 
   // ${({ theme }) => theme.mediaQueries.lg} {

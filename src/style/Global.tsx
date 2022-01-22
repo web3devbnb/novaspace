@@ -27,8 +27,8 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
 
     ${({ theme }) => theme.mediaQueries.md} {
       background-image: ${({isNovaria}) => (isNovaria ? novariaBG : spaceBG)};
-      background-size: 100% auto;
-      background-repeat: repeat-y;
+      background-size: ${({isNovaria}) => (isNovaria ? 'cover' : '100% auto')};
+      background-repeat: ${({isNovaria}) => (isNovaria ? 'none' : 'repeat-y')};
     }
   }
 `

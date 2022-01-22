@@ -8,9 +8,9 @@ import logo from './components/novariaLogoMain.png'
 import button from './components/button.png'
 
 const Page1 = styled(Page)`
-  background-image:url('/images/home/mainBackground-dark.jpg');
-  background-size:cover ;
-  background-position: center;
+  // background-image:url('/images/home/mainBackground-dark.jpg');
+  // background-size:cover ;
+  // background-position: center;
 `
 
 const Body = styled(Flex)`
