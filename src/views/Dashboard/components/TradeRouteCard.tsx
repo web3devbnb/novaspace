@@ -15,8 +15,10 @@ const Grid = styled(Flex)`
   background-image: url('/images/home/farm-min.png');
   // display: flex;
   flex-direction: column;
-  padding: 20px;
-
+  padding: 10px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 20px;
+  }
 
 `
 const Wrapper = styled.div`
@@ -59,7 +61,7 @@ const Heading = styled(Text)`
   }
 `
 const SubHeading = styled(Text)`
-  font-size: 20px;
+  font-size: 19px;
   font-weight: medium;
   text-align: center;
   

@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
       background-image: ${({isNovaria}) => (isNovaria ? novariaBG : spaceBG)};
       background-size: ${({isNovaria}) => (isNovaria ? 'cover' : '100% auto')};
       background-repeat: ${({isNovaria}) => (isNovaria ? 'none' : 'repeat-y')};
+      background-position: center;
     }
   }
 `
