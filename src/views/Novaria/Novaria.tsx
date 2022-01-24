@@ -74,6 +74,7 @@ const SubHeading = styled.div`
 `
 
 const Button = styled.button`
+  cursor: pointer;  
   margin: 10px;
   align-self: center;
   padding: .5rem 1.25rem;

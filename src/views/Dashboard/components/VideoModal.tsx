@@ -5,7 +5,7 @@ import "react-modal-video/scss/modal-video.scss";
 import PlayLogo from '../assets/play.png'
 
 const Button = styled.button`
-
+  cursor: pointer;
   align-self: center;
   padding: 1.5rem 1.25rem;
   font-family: sans-serif;
