@@ -35,8 +35,14 @@ export interface GridProps {
   ny: number
 }
 
-const Grid = styled.div`
+const Body = styled.div`
   height: calc(100vh - 68px - 145px);
+  display: flex;
+  flex-direction: column;
+`
+
+const Grid = styled.div`
+  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.ny}, 1fr);
@@ -63,8 +69,6 @@ const GridControls = styled.div`
   display: flex;
   justify-content: space-between;
 `
-
-const Body = styled.div``
 
 const CoordInput = styled.input`
   width: 4em;
