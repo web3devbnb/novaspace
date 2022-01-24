@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { BaseLayout, Flex, Text } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
@@ -117,6 +117,7 @@ const Banner = styled.img`
 const Dashboard: React.FC = () => {
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
+  const myRef = useRef(null)
 
   return (
     <Page 

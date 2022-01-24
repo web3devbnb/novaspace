@@ -114,11 +114,11 @@ const TradeRouteCard = ({
       </TextRow2>
 
       <ButtonRow>
-        <a href="https://swap.shibanova.io/#/pool" rel='noopener noreferrer' >
-          <Button style={{margin:"0 10px 10px"}}>Get Liquidity</Button>
-        </a>
         <a href="/traderoutes" rel='noopener noreferrer' >
-          <Button style={{margin:"0 10px"}}>Trade Routes</Button>
+          <Button style={{margin:"0 10px 10px"}}>Trade Routes</Button>
+        </a>
+        <a href="https://swap.shibanova.io/#/pool" rel='noopener noreferrer' >
+          <Button style={{margin:"0 10px"}}>Get Liquidity</Button>
         </a>
         <a href="https://docs.shibanova.io/shibanova-documentation/how-farming-works" target='blank' rel='noopener noreferrer'>
           <Button style={{margin:"0 10px"}}>Learn More</Button>
