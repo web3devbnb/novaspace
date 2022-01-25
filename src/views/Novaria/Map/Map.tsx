@@ -59,6 +59,8 @@ const GridCell = styled.div`
   position: relative;
 `
 
+const GridCellContent = styled.div``
+
 const GridCellId = styled.div`
   position: absolute;
   bottom: 5px;
@@ -136,14 +138,14 @@ const Map: React.FC = (props) => {
             return (
               <GridCell>
                 {el.name && (
-                  <div>
+                  <GridCellContent>
                     <Text bold glowing>
                       {el.name}
                     </Text>
                     <Text bold glowing>
                       {el.placeType}
                     </Text>
-                  </div>
+                  </GridCellContent>
                 )}
                 <GridCellId>
                   {ri + mapData.x0} x {j + mapData.y0}
