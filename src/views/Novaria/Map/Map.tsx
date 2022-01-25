@@ -5,8 +5,8 @@ import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
-import GameMenu from '../components/GameMenu'
 import { Text } from '@pancakeswap-libs/uikit'
+import GameMenu from '../components/GameMenu'
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
@@ -171,11 +171,11 @@ const Map: React.FC = (props) => {
         <InputControl>
           <button type="button" onClick={handleFindLocationClick}>
             Find location (x, y)
-          </button>(
+          </button>
+          (
           <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
           ,
-          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
-          )
+          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
         </InputControl>
 
         <InputControl>
