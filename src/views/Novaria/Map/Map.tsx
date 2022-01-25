@@ -182,11 +182,11 @@ const Map: React.FC = (props) => {
         <InputControl>
           <button type="button" onClick={handleFindLocationClick}>
             Find location (x, y)
-          </button>(
+          </button>
+          (
           <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
           ,
-          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
-          )
+          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
         </InputControl>
 
         <InputControl>
