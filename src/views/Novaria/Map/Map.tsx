@@ -134,7 +134,12 @@ const Map: React.FC = (props) => {
           return mapData.data[ri].map((el, j) => {
             return (
               <GridCell>
-                {el.name}
+                {el.name && (
+                  <div>
+                    <div>{el.name}</div>
+                    <div>{el.placeType}</div>
+                  </div>
+                )}
                 <GridCellId>
                   {ri + mapData.x0} x {j + mapData.y0}
                 </GridCellId>
