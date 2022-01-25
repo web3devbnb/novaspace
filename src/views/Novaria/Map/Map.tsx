@@ -90,7 +90,7 @@ const NX = 5
 const NY = 5
 
 const Map: React.FC = (props) => {
-  const [mapData, setMapData] = useState(null)
+  const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
