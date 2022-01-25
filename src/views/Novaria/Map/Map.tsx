@@ -51,21 +51,21 @@ const Grid = styled.div`
 `
 
 const GridCell = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
   outline: 1px solid black;
   position: relative;
 `
 
-const GridCellContent = styled.div``
+const GridCellContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const GridCellId = styled.div`
   position: absolute;
   bottom: 5px;
   right: 5px;
-  font-size: 0.5rem;
+  font-size: 0.4rem;
 `
 
 const GridControls = styled.div`
@@ -139,11 +139,14 @@ const Map: React.FC = (props) => {
               <GridCell>
                 {el.name && (
                   <GridCellContent>
-                    <Text bold glowing>
+                    <Text bold glowing fontSize="0.9rem">
                       {el.name}
                     </Text>
-                    <Text bold glowing>
+                    <Text glowing fontSize="0.7rem">
                       {el.placeType}
+                    </Text>
+                    <Text bold glowing fontSize="0.5rem">
+                      COLLECTED NOVA: 12345
                     </Text>
                   </GridCellContent>
                 )}
