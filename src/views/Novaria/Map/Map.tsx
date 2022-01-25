@@ -5,6 +5,7 @@ import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
+import { Text } from '@pancakeswap-libs/uikit'
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
@@ -136,8 +137,12 @@ const Map: React.FC = (props) => {
               <GridCell>
                 {el.name && (
                   <div>
-                    <div>{el.name}</div>
-                    <div>{el.placeType}</div>
+                    <Text bold glowing>
+                      {el.name}
+                    </Text>
+                    <Text bold glowing>
+                      {el.placeType}
+                    </Text>
                   </div>
                 )}
                 <GridCellId>
