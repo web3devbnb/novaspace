@@ -5,6 +5,7 @@ import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
+import GameMenu from '../components/GameMenu'
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
@@ -39,6 +40,7 @@ const Body = styled.div`
   height: calc(100vh - 68px - 145px);
   display: flex;
   flex-direction: column;
+  margin: 50px 50px 50px 150px;
 `
 
 const Grid = styled.div`
@@ -128,6 +130,7 @@ const Map: React.FC = (props) => {
 
   return (
     <Body>
+      <GameMenu />
       <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
         {mapData.data.map((arr, i) => {
           const ri = mapData.data.length - i - 1
@@ -136,7 +139,7 @@ const Map: React.FC = (props) => {
               <GridCell>
                 {el.name}
                 <GridCellId>
-                  {ri + mapData.x0} x {j + mapData.y0}
+                  ({ri + mapData.x0} , {j + mapData.y0})
                 </GridCellId>
               </GridCell>
             )
@@ -148,10 +151,11 @@ const Map: React.FC = (props) => {
         <InputControl>
           <button type="button" onClick={handleFindLocationClick}>
             Find location (x, y)
-          </button>
+          </button>(
           <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-          x
+          ,
           <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+          )
         </InputControl>
 
         <InputControl>

@@ -3,20 +3,35 @@ import styled from 'styled-components'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 
 const Frame = styled.div`
-    background-color: #48484880
+    width: 130px;
     position: fixed;
-    left: 20px;
-    top: 500px;
-    margin-left: 30px;
-    width: 30px;
-    height: 200px;
+    z-index: 1;
+    top: 120px;
+    left: 10px;
+    background: #00000080;
+    overflow-x: hidden;
+    padding: 8px 0;
 `
 
+const Link = styled.a`
+    padding: 6px 8px 6px 16px;
+    Link-decoration: none;
+    font-size: 20px;
+    color: #2196F3;
+    display: block;
+    &:hover {
+        color: #064579;
+    }
+
+`
 
 const GameMenu = () => (
 
     <Frame>
-       <Text> Icon</Text>
+       <Link href="/overview" > Overview</Link>
+       <Link href="/map"> Map</Link>
+       <Link href="/shipyard"> Shipyard</Link>
+       <Link href="/location"> Location</Link>
     </Frame>
 
 )
