@@ -6,6 +6,7 @@ import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
 import GameMenu from '../components/GameMenu'
+import { Text } from '@pancakeswap-libs/uikit'
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
@@ -52,12 +53,16 @@ const Grid = styled.div`
 `
 
 const GridCell = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
   outline: 1px solid black;
   position: relative;
+`
+
+const GridCellContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
 `
 
 const GridCellId = styled.div`
@@ -92,7 +97,7 @@ const NX = 5
 const NY = 5
 
 const Map: React.FC = (props) => {
-  const [mapData, setMapData] = useState(null)
+  const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
@@ -137,7 +142,22 @@ const Map: React.FC = (props) => {
           return mapData.data[ri].map((el, j) => {
             return (
               <GridCell>
-                {el.name}
+                {el.name && (
+                  <GridCellContent>
+                    <Text bold glowing>
+                      {el.name}
+                    </Text>
+                    <Text bold glowing>
+                      {el.placeType}
+                    </Text>
+                    <Text glowing fontSize="0.6rem" style={{ flexGrow: 1 }}>
+                      ...
+                    </Text>
+                    <Text bold glowing fontSize="0.8rem">
+                      COLLECTED NOVA: 12345
+                    </Text>
+                  </GridCellContent>
+                )}
                 <GridCellId>
                   ({ri + mapData.x0} , {j + mapData.y0})
                 </GridCellId>
