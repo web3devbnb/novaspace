@@ -1,19 +1,20 @@
 import { AbiItem } from 'web3-utils'
 import React, { useEffect, useState } from 'react'
+import { Text } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
+import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
-import { Text } from '@pancakeswap-libs/uikit'
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
 // the whole web application since it's never been tested on the BSC testnet ... So, for now,
 // hardcoding the BSC testnet configuration.
 const CHAIN_ID = '97'
-const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/' 
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
 
 const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
@@ -37,11 +38,18 @@ export interface GridProps {
   ny: number
 }
 
+const Page = styled.div`
+
+`
+
 const Body = styled.div`
   height: calc(100vh - 68px - 145px);
   display: flex;
   flex-direction: column;
-  margin: 50px 50px 50px 150px;
+  margin: 10px 50px 10px 150px;
+  // fix background later
+  background-Image: url('/images/home/starsBackground.jpg');
+  background-size: cover;
 `
 
 const Grid = styled.div`
@@ -134,7 +142,10 @@ const Map: React.FC = (props) => {
   }
 
   return (
+    <Page>
+      <GameHeader>MAP</GameHeader>
     <Body>
+      
       <GameMenu />
       <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
         {mapData.data.map((arr, i) => {
@@ -200,6 +211,7 @@ const Map: React.FC = (props) => {
         </InputControl>
       </GridControls>
     </Body>
+    </Page>
   )
 }
 

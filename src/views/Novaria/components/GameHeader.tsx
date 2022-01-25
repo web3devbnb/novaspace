@@ -1,0 +1,57 @@
+import React from 'react'
+import styled from 'styled-components'
+import { Heading, Text } from '@pancakeswap-libs/uikit'
+import useTokenBalance from '../../../hooks/useTokenBalance'
+import { getNovaAddress } from '../../../utils/addressHelpers'
+import { getBalanceNumber } from '../../../utils/formatBalance'
+import smallLogo from '../assets/novariaSmallLogo.png'
+
+
+const Hero = styled.div`
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    height: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+`
+
+const StyledHeading = styled(Heading)`
+    text-align: center;
+    align-items: center;
+  
+`
+
+const InfoBlock = styled.div`
+
+`
+
+const Logo = styled.img`
+    object-position: left;
+`
+
+const GameHeader = ({ children }) => {
+
+    
+    const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
+
+    return (
+        <Hero>
+            <Logo src={smallLogo} alt='Novaria Logo' />
+
+            <StyledHeading as="p" size="xl" glowing>
+                {children}
+            </StyledHeading>
+            <InfoBlock>
+                <Text glowing>
+                    Player Location: (0, 0)
+                </Text>
+                <Text glowing>
+                    Available NOVA: <span style={{color: 'gold'}}>{novaBalance.toFixed(2)}</span>                    
+                </Text>
+            </InfoBlock>
+        </Hero>
+    )
+}
+  export default GameHeader

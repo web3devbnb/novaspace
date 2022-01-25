@@ -5,7 +5,8 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 
 const Hero = styled.div`
   position: relative;
-  width: 98%;
+  width: 95%;
+  margin: 0 auto;
   background-position: right;
   border-bottom: solid 1px ${({ theme }) => theme.colors.primary};
   border-bottom-right-radius: 30px;
@@ -13,7 +14,7 @@ const Hero = styled.div`
 
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    margin-left: 50px;
+    // margin-left: 50px;
     width: 92%;
   }
   

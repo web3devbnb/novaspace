@@ -5,11 +5,11 @@ export default {
   },
   snova: {
     56: '0x0c0bf2bD544566A11f59dC70a8F43659ac2FE7c2',
-    97: '',
+    97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3',
   },
   masterChef: {
     56: '0x8A4f4c7F4804D30c718a76B3fde75f2e0cFd8712',
-    97: '0x4d22cd6370778650f8B23580248711f7e070130E',
+    97: '0xDDddD4d6a604A311CA2d90c54E81D2e31424B813',
   },
   wbnb: {
     56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
@@ -17,19 +17,15 @@ export default {
   },
   map: {
     56: '',
-    97: '0x4ccCa81e520B424F37f0FBBa3731854519862aF7',
+    97: '0xeb17Dd35e47B1a41ba4D86B3506ec1f9b680b56a',
   },
-  shadowPool: {
+  fleet: {
     56: '',
-    97: '0xA219f7cC50d920855118d2A93ee99ad18e9a2BC5',
+    97: '0xf0169bF317f53f405eD9655ca3b5141f9Ff5CD78',
   },
   treasury: {
     56: '',
-    97: '0x7dcFF46cF73373b790C7EcE5CB37aB979280Ed38',
-  },
-  placeManager: {
-    56: '',
-    97: '0xFD305CbcB6004A88cE2Ff16ACC2199BD49077fa9',
+    97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
   },
   lottery: {
     56: '',

@@ -1,115 +1,100 @@
 import React from "react";
-import { Flex} from '@pancakeswap-libs/uikit'
+import { Button, Flex, Text } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import logo1 from '../assets/fees-min.png'
 import logo2 from '../assets/novadexbig-min.png'
 import logo3 from '../assets/banner2logo-min.png'
 
 const Row = styled(Flex)`
-    height: 150px;
-    width: 100%;
-    flex-direction: row;
+    height: 500px;
+    width: 95%;
+    flex-direction: column;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('/images/home/dexbgbig.jpg');
     background-position: left ;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     border: 2px solid ${({ theme }) => theme.colors.primary};
     border-radius: 30px;
-    position: relative;
-    margin: 10px 5px;
+    // position: relative;
+    margin: 20px auto;
+    
 
     ${({ theme }) => theme.mediaQueries.md} {
-        flex-wrap: nowrap;
-        flex-direction: row;
+        flex-wrap: wrap;
+        flex-direction: column;
         background-position: left;
       }
   }
 `
-const Img1 = styled.img`
-    display: flex;
-    width: 50%;
-    height: auto;
-    ${({ theme }) => theme.mediaQueries.xs} {
-        width: 0;
-       }
-       ${({ theme }) => theme.mediaQueries.md} {
-           width: 25%;
-           // margin-left: -25%;
-          }
-          ${({ theme }) => theme.mediaQueries.lg} {
-            width: 20%;
-              }
-          ${({ theme }) => theme.mediaQueries.xl} {
-            width: 25%;
-             }
 
-`
 const Img2 = styled.img`
-    display: flex;
-    width: 80%;
-    height: auto;
-    margin-bottom: 70px;
-    ${({ theme }) => theme.mediaQueries.xs} {
-        width: 60%;
-        margin-top: 10px;
-        margin-left: -20%;
-        margin-bottom: 0px;
-       }
-       ${({ theme }) => theme.mediaQueries.md} {
-            width: 33%;
-            margin-top: auto;
-            margin-bottom: auto;
-            margin-left: 0%;
-          }
-          ${({ theme }) => theme.mediaQueries.lg} {
-            width: 33%;
-            padding-top: 0px;
-            margin-right: 40px;
-            margin-bottom: auto;
-              }
-        
-          ${({ theme }) => theme.mediaQueries.xl} {
-            
-             }
+  
+  ${({ theme }) => theme.mediaQueries.md} {
+      
+    }
+
 `
-const Img3 = styled.img`
-    display: flex;
-    width: 50%;
-    height: auto;
-    position: absolute;
-    bottom: -50px;
-    right: 50px;
-    ${({ theme }) => theme.mediaQueries.xs} {
-        width: 0;
-        bottom: 10px;
-        right: -11%;
-       }
-       ${({ theme }) => theme.mediaQueries.md} {
-        width: 20%;
-        position: static;
-        margin-right: -10px;
-          }
-          ${({ theme }) => theme.mediaQueries.lg} {
-            width: 20%;
-              }
-          ${({ theme }) => theme.mediaQueries.xl} {
-             
-             }
+const ColLeft = styled.div`
+  width: 90%;
+  // align-self: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  display: flex;
+`
+const ColRight = styled.div`
+  width: 90%;
+  align-self: center;
+  margin: 10px;
+  align-items: center;
+`
+
+const Description = styled(Text)`
+  font-size: 20px;
+  color: white;
+  font-weight: medium;
+  text-align: center;
+`
+
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 `
 
 
-
-const Banner2 = () => {
+const Banner2 = ({
+    title,
+  }: { 
+    title: string
+  }) => {
     return (
-      <a href="https://swap.shibanova.io" rel="noreferrer noopener">
+      
         <Row>
-            <Img1 src={logo1} alt="launchpad redefined" />
-            <Img2 src={logo2} alt="launchpad redefined" />
-            <Img3 src={logo3} alt="launchpad redefined" /> 
+            <ColLeft>
+              <a id={title} href="https://swap.shibanova.io" rel="noreferrer noopener">
+                <Img2 src={logo2} alt="launchpad redefined" />
+              </a>
+            </ColLeft>
+
+            <ColRight>
+              <Description glowing>
+                NovaDex is a dencentralized exchange (DEX) on the Binance Smart Chain.
+                 Users can exchange any tokens on the DEX that have provided liquidity. 
+                 Trade fees are disbursed to sNOVA holders in the daily money pot!
+              </Description>
+              <ButtonRow>
+                <a href="https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F" rel='noopener noreferrer' >
+                  <Button style={{margin:"0 10px"}}>Buy NOVA</Button>
+                </a>
+                <a href="https://docs.shibanova.io/shibanova-documentation/how-to-defi" target='blank' rel='noopener noreferrer'>
+                  <Button style={{margin:"0 10px"}}>Learn More</Button>
+                </a>  
+              </ButtonRow>
+            </ColRight>
         </Row>
-      </a>
     )
 }
 

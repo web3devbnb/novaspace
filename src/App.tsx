@@ -11,15 +11,17 @@ import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 import './bubbles.scss'
 
+
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
-const LaunchPad = lazy(() => import('./views/LaunchPad'))
-const NotFound = lazy(() => import('./views/NotFound'))
 const Novaria = lazy(() => import('./views/Novaria'))
+// const Dashboard = lazy(() => import('./views/Dashboard'))
+const NotFound = lazy(() => import('./views/NotFound'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
 const Map = lazy(() => import('./views/Novaria/Map'))
+const HomeNew = lazy(() => import('./views/Home'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -34,12 +36,17 @@ const App: React.FC = () => {
   return (
     <Router>
       <ResetCSS />
-      <Menu>
+      
+      <Menu style={{ backgroundColor:"black" }}>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
             <GlobalStyle isNovaria={false} />
               <Home />
+            </Route>
+            <Route path="/home" exact>
+            <GlobalStyle isNovaria={false} />
+              <HomeNew />
             </Route>
             {/* <Route path="/dashboard">
               <Dashboard />
