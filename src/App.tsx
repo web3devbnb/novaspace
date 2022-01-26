@@ -21,7 +21,9 @@ const NotFound = lazy(() => import('./views/NotFound'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
 const Map = lazy(() => import('./views/Novaria/Map'))
-const HomeNew = lazy(() => import('./views/Home'))
+const Location = lazy(() => import('./views/Novaria/Location'))
+const Shipyard = lazy(() => import('./views/Novaria/Shipyard'))
+const Overview = lazy(() => import('./views/Novaria/Overview'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -44,13 +46,6 @@ const App: React.FC = () => {
             <GlobalStyle isNovaria={false} />
               <Home />
             </Route>
-            <Route path="/home" exact>
-            <GlobalStyle isNovaria={false} />
-              <HomeNew />
-            </Route>
-            {/* <Route path="/dashboard">
-              <Dashboard />
-            </Route> */}
             <Route path="/traderoutes">
             <GlobalStyle isNovaria={false} />
               <Farms />
@@ -67,6 +62,22 @@ const App: React.FC = () => {
             <GlobalStyle isNovaria />
               <Map />
             </Route>
+            <Route path="/location">
+            <GlobalStyle isNovaria />
+              <Location />
+            </Route>
+            <Route path="/overview">
+            <GlobalStyle isNovaria />
+              <Overview />
+            </Route>
+            <Route path="/shipyard">
+            <GlobalStyle isNovaria />
+              <Shipyard />
+            </Route>
+            
+            
+            
+
             <Route path="/privacy">
             <GlobalStyle isNovaria={false} />
               <Privacy />
