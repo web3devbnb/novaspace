@@ -140,3 +140,12 @@ export const insertCoinHere = async (fleetContract, name, account) => {
       return tx.transactionHash
     })
 }
+
+export const buildShips = async (fleetContract, x, y, handle, amount, account) => {
+  return fleetContract.methods
+    .buildShips(x, y, handle, amount)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+  })
+}

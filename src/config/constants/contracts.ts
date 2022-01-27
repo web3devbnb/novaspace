@@ -5,7 +5,7 @@ export default {
   },
   snova: {
     56: '0x0c0bf2bD544566A11f59dC70a8F43659ac2FE7c2',
-    97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3',
+    97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3', 
   },
   masterChef: {
     56: '0x8A4f4c7F4804D30c718a76B3fde75f2e0cFd8712',

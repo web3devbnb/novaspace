@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { useDispatch } from 'react-redux'
 import { provider } from 'web3-core'
 import Web3 from 'web3'
 import novaABI from 'config/abi/nova.json'
@@ -17,7 +18,11 @@ import {
   getApprovalsAddress,
   getMapAddress
 } from 'utils/addressHelpers'
-import { insertCoinHere } from 'utils/callHelpers'
+import {
+  fetchFarmUserDataAsync,
+} from 'state/actions'
+import { buildShips, insertCoinHere } from 'utils/callHelpers'
+import { Wallet } from 'ethers'
 import { useFleet, useMap, useApprovals } from './useContract'
 import useRefresh from './useRefresh'
 
@@ -33,17 +38,32 @@ import useRefresh from './useRefresh'
 // Active functions
 
 export const useInsertCoinHere = () => {
-  
   const { account } = useWallet()
-
+  const useFleetContract = useFleet()
+  
   const handleInsertCoinHere = useCallback(
     async (name: string) => {
-      const txHash = await insertCoinHere(fleetContract, name, account)    
+      const txHash = await insertCoinHere(useFleetContract, name, account)    
       console.info(txHash)
     },
-    [account],
+    [account, useFleetContract],
   )
   return { onClick: handleInsertCoinHere }
+}
+
+export const useBuildShips = async () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+  
+  const handleBuildShips = useCallback(
+    async (x: string, y: string, handle: string, amount: string) => {
+      const txHash = await buildShips(useFleetContract, x, y, handle, amount, account)
+      
+      console.info(txHash)
+    },
+    [account, useFleetContract]
+  )
+  return { onBuild: handleBuildShips }
 }
 
 // View functions
@@ -51,14 +71,15 @@ export const useInsertCoinHere = () => {
 export const useGetShipClasses = (handle: string) => {
   const { slowRefresh } = useRefresh()
   const [shipClasses, setShipClasses] = useState({
-    name:'', size:'', attack:'', shield:'', mineralCap:'', miningCap:'', hanger:'', buildTime:'', cost:''
+    name:'', handle: '', size:'', attack:'', shield:'', mineralCap:'', miningCap:'', hanger:'', buildTime:'', cost:''
   })
 
   useEffect(() => {
     async function fetchshipClasses() {
       const data = await fleetContract.methods.getShipClass(handle).call()
       setShipClasses({
-        name: data[0], 
+        name: data[0],
+        handle: data[1], 
         size: data[2],
         attack: data[3],
         shield: data[4],
@@ -76,6 +97,7 @@ export const useGetShipClasses = (handle: string) => {
   return shipClasses
 }
 
+// ***PROBLEM - this function call reverts, needs debugging
 export const useGetShipyards = () => {
   const { slowRefresh } = useRefresh()
   const [shipyards, setShipyards] = useState('')
@@ -88,6 +110,21 @@ export const useGetShipyards = () => {
     fetchShipyards()
   }, [slowRefresh])
   return shipyards
+}
+
+// ***PROBLEM - need function to call the list of shipclass handles in shipClassesList
+export const useGetShipClassList = () => {
+  const { slowRefresh } = useRefresh()
+  const [shipClassList, setShipClassList] = useState('')
+
+  useEffect(() => {
+    async function fetchShipClassList() {
+      const data = await fleetContract.methods.shipClassesList().call()
+      setShipClassList(data)
+    }
+    fetchShipClassList()
+  }, [slowRefresh])
+  return shipClassList
 }
 
 // Map contract functions

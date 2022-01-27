@@ -145,7 +145,7 @@ const Map: React.FC = (props) => {
     <Page>
       <GameHeader>MAP</GameHeader>
     <Body>
-      
+       
       <GameMenu />
       <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
         {mapData.data.map((arr, i) => {
