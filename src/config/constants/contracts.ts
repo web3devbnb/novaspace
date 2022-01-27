@@ -27,6 +27,10 @@ export default {
     56: '',
     97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
   },
+  approvals: {
+    56: '',
+    97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
+  },
   lottery: {
     56: '',
     97: '',

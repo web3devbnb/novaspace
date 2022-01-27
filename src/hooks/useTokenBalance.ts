@@ -297,7 +297,7 @@ export const useDistributedMoneyPotBUSD = () => {
   const [distributedMoneyPotBUSD, setDistributedMoneyPotBUSD] = useState<Array<any>>([])
   const busdAddress = getBusdAddress()
 
-  useEffect(() => {
+  useEffect(() => { 
     async function fetchMoneyPotDistributedMoneyPotBUSD() {
       const moneyPotContract = getContract(moneypotABI, getMoneyPotAddress())
       const disMoneyPotBusd = await moneyPotContract.methods.distributedMoneyPot(busdAddress).call()

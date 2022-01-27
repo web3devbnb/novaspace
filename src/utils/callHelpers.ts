@@ -129,3 +129,14 @@ export const swapToNova = async (sNovaContract, amount, account) => {
       return tx.transactionHash
     })
 }
+
+// fleet functions
+
+export const insertCoinHere = async (fleetContract, name, account) => {
+  return fleetContract.methods
+    .insertCoinHere(name)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

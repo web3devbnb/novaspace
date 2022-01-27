@@ -9,14 +9,16 @@ import {
   getLotteryTicketAddress,
   getMoneyPotAddress,
   getSNovaAddress,
-  getMoneyPotOldAddress
+  getMoneyPotOldAddress,
+  getFleetAddress,
+  getMapAddress,
+  getApprovalsAddress
 } from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
 import ifo from 'config/abi/ifo.json'
 import erc20 from 'config/abi/erc20.json'
 import rabbitmintingfarm from 'config/abi/rabbitmintingfarm.json'
-
 import lottery from 'config/abi/lottery.json'
 import lotteryTicket from 'config/abi/lotteryNft.json'
 import masterChef from 'config/abi/masterchef.json'
@@ -24,6 +26,9 @@ import sousChef from 'config/abi/sousChef.json'
 import sousChefBnb from 'config/abi/sousChefBnb.json'
 import moneyPot from 'config/abi/moneypot.json'
 import sNova from 'config/abi/snova.json'
+import fleet from 'config/abi/Fleet.json'
+import map from 'config/abi/Map.json'
+import approvals from 'config/abi/Approvals.json'
 
 const useContract = (abi: AbiItem, address: string, contractOptions?: ContractOptions) => {
   const web3 = useWeb3()
@@ -94,6 +99,21 @@ export const useMoneyPotOld = () => {
 export const useSNova = () => {
   const sNovaAbi = sNova as unknown as AbiItem
   return useContract(sNovaAbi, getSNovaAddress())
+}
+
+export const useFleet = () => {
+  const fleetABI = fleet as unknown as AbiItem
+  return useContract(fleetABI, getFleetAddress())
+}
+
+export const useMap = () => {
+  const mapABI = map as unknown as AbiItem
+  return useContract(mapABI, getMapAddress())
+}
+
+export const useApprovals = () => {
+  const approvalsABI = approvals as unknown as AbiItem
+  return useContract(approvalsABI, getApprovalsAddress())
 }
 
 export default useContract

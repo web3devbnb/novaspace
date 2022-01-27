@@ -1,5 +1,6 @@
 import { AbiItem } from 'web3-utils'
 import React, { useEffect, useState } from 'react'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { Text } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
@@ -32,6 +33,7 @@ const Page = styled.div`
 `
 
 const Body = styled.div`
+  margin: 10px 50px 10px 150px;
   // fix background later
   background-Image: url('/images/home/starsBackground.jpg');
   background-size: cover;
