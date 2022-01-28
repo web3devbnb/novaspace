@@ -93,7 +93,7 @@ const Button = styled.button`
   align-self: center;
   padding: .25rem 1.25rem;
   font-family: sans-serif;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-decoration: none;
   text-shadow:
   -2px 4px 4px #091243, 
@@ -125,10 +125,7 @@ const Input = styled.input`
 
 const Shipyard = () => {
 
-  //  ** Eventually call the list of handles and input into shipclass function **
-  const handles = ['viper', 'mole']
-  // need to figure out how to loop the hook
-  const shipClass = [useGetShipClasses(handles[0]), useGetShipClasses(handles[1])] 
+  const shipClasses = useGetShipClasses()
 
    const [shipyard, setShipyard] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
@@ -137,7 +134,6 @@ const Shipyard = () => {
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipHandle, setShip] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
-  const [building, setBuilding] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
   
   const handleShipyardChange = (obj) => {
@@ -152,26 +148,26 @@ const Shipyard = () => {
     setShip(obj)
   }
   
-  // ** Throws Promise<void> error ***
-  // const { onBuild } = useBuildShips()
+  
+  const { onBuild } = useBuildShips()
  
-  // const sendTx = async () => {
-  //   setPendingTx(true)
-  //   try {
-  //     await onBuild(shipyardX, shipyardY, shipHandle, shipAmount)
-  //   } catch (error) {
-  //     console.log('error: ', error)
-  //   } finally {
-  //     setPendingTx(false)
-  //   }
-  // }
-    
-  // Work-around
-  const { account } = useWallet()
-  const fleetContract = useFleet()
-  const HandleShipBuy = async () => {
-    buildShips(fleetContract, shipyardX, shipyardY, shipHandle, shipAmount, account)
+  const sendTx = async () => {
+    setPendingTx(true)
+    try {
+      await onBuild(shipyardX, shipyardY, shipHandle, shipAmount)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
   }
+    
+  // // Work-around
+  // const { account } = useWallet()
+  // const fleetContract = useFleet()
+  // const HandleShipBuy = async () => {
+  //   buildShips(fleetContract, shipyardX, shipyardY, shipHandle, shipAmount, account)
+  // }
   
 
   // styles for the dropdown Selector
@@ -234,22 +230,24 @@ const Shipyard = () => {
             <Item>Build Time</Item>
             <Item>Cost</Item>
           </Col>
-          {shipClass.map(ship => {
+
+          {shipClasses.map(ship => {
             
             return (
               <Col key={ship.handle}>
                 <Item>{ship.name}</Item>
                 <Item>{ship.size}</Item>
-                <Item>{ship.attack}</Item>
+                <Item>{ship.attackPower}</Item>
                 <Item>{ship.shield}</Item>
-                <Item>{ship.mineralCap}</Item>
-                <Item>{ship.mineralCap}</Item>
-                <Item>{ship.hanger}</Item>
+                <Item>{ship.mineralCapacity}</Item>
+                <Item>{ship.miningCapacity}</Item>
+                <Item>{ship.hangarSize}</Item>
                 <Item>{ship.buildTime}</Item>
-                <Item>{ship.cost}</Item>
+                <Item>{ship.cost}</Item> 
               </Col>
             )     
           })}
+
         </Row>
       </ShipClassMenu>
 
@@ -272,17 +270,17 @@ const Shipyard = () => {
           <Select 
             placeholder='Select Ship'
             value={shipHandle}
-            options={shipClass}
+            options={shipClasses}
             onChange={handleShipChange}
-            getOptionLabel={x => x.handle}
+            getOptionLabel={ship => ship.handle}
             styles={customStyles}
             />
         </Row>
 
         <Row style={{marginTop:10}}>
           <Input type='number' min='0' placeholder='0' value={shipAmount} onChange={(e) => setShipAmount(parseFloat(e.target.value))} />
-          <Button type='button' onClick={HandleShipBuy} >
-            Buy Ships
+          <Button type='button' onClick={sendTx} >
+            Build Ships
           </Button>
         </Row>
 

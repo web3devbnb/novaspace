@@ -1,10 +1,5 @@
 [
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -43,45 +38,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "Map",
-		"outputs": [
-			{
-				"internalType": "contract IMap",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "Token",
-		"outputs": [
-			{
-				"internalType": "contract ShibaBEP20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "Treasury",
-		"outputs": [
-			{
-				"internalType": "contract ITreasury",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -113,25 +69,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "addressToName",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "_player",
 				"type": "address"
 			},
@@ -141,38 +78,9 @@
 				"type": "address"
 			}
 		],
-		"name": "attack",
+		"name": "attackFleet",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "battles",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "attackTarget",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "battleDeadline",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -245,7 +153,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "_attack",
+				"name": "_attackPower",
 				"type": "uint256"
 			},
 			{
@@ -297,7 +205,7 @@
 				"type": "address"
 			}
 		],
-		"name": "defend",
+		"name": "defendFleet",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -337,6 +245,176 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_target",
+				"type": "address"
+			}
+		],
+		"name": "goBattle",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "insertCoinHere",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "leaveBattle",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "recall",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_timeModifier",
+				"type": "uint256"
+			}
+		],
+		"name": "setTimeModifier",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_treasury",
+				"type": "address"
+			}
+		],
+		"name": "setTreasury",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "battles",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "attackTarget",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "battleDeadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "attackersAttackPower",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "attackersFleetSize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "defendersAttackPower",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "defendersFleetSize",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "coordinatesToShipyard",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			},
@@ -360,6 +438,25 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "getAddressByName",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "battleId",
 				"type": "uint256"
@@ -371,6 +468,25 @@
 				"internalType": "address[]",
 				"name": "",
 				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "getAttackPower",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -484,7 +600,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "attack",
+								"name": "attackPower",
 								"type": "uint256"
 							},
 							{
@@ -620,12 +736,25 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getNameByAddress",
+		"outputs": [
+			{
 				"internalType": "string",
-				"name": "_handle",
+				"name": "",
 				"type": "string"
 			}
 		],
-		"name": "getShipClass",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getShipClasses",
 		"outputs": [
 			{
 				"components": [
@@ -646,7 +775,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "attack",
+						"name": "attackPower",
 						"type": "uint256"
 					},
 					{
@@ -680,47 +809,7 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct Fleet.ShipClass",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getShipyards",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "coordX",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "coordY",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "feePercent",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "exists",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Fleet.Shipyard[]",
+				"internalType": "struct Fleet.ShipClass[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -731,27 +820,20 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_target",
-				"type": "address"
-			}
-		],
-		"name": "goBattle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "string",
-				"name": "_name",
+				"name": "",
 				"type": "string"
 			}
 		],
-		"name": "insertCoinHere",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "handleToShipClass",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -812,30 +894,11 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			}
-		],
-		"name": "leaveBattle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "names",
+		"inputs": [],
+		"name": "Map",
 		"outputs": [
 			{
-				"internalType": "address",
+				"internalType": "contract IMap",
 				"name": "",
 				"type": "address"
 			}
@@ -876,51 +939,11 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "recall",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_timeModifier",
-				"type": "uint256"
-			}
-		],
-		"name": "setTimeModifier",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_treasury",
-				"type": "address"
-			}
-		],
-		"name": "setTreasury",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"name": "shipClasses",
@@ -942,7 +965,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "attack",
+				"name": "attackPower",
 				"type": "uint256"
 			},
 			{
@@ -985,14 +1008,53 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "shipClassesList",
+		"name": "shipyardExists",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "bool",
 				"name": "",
-				"type": "string"
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "shipyards",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "coordX",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "coordY",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "feePercent",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1018,16 +1080,29 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "Token",
+		"outputs": [
 			{
-				"internalType": "address",
-				"name": "newOwner",
+				"internalType": "contract ShibaBEP20",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Treasury",
+		"outputs": [
+			{
+				"internalType": "contract ITreasury",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

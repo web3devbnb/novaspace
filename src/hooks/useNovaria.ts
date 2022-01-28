@@ -51,7 +51,7 @@ export const useInsertCoinHere = () => {
   return { onClick: handleInsertCoinHere }
 }
 
-export const useBuildShips = async () => {
+export const useBuildShips = () => {
   const { account } = useWallet()
   const useFleetContract = useFleet()
   
@@ -67,34 +67,21 @@ export const useBuildShips = async () => {
 }
 
 // View functions
-
-export const useGetShipClasses = (handle: string) => {
+// const shipClasses = useGetShipClasses()
+export const useGetShipClasses = () => {
   const { slowRefresh } = useRefresh()
-  const [shipClasses, setShipClasses] = useState({
-    name:'', handle: '', size:'', attack:'', shield:'', mineralCap:'', miningCap:'', hanger:'', buildTime:'', cost:''
-  })
+  const [shipClasses, setShipClasses] = useState([])
 
   useEffect(() => {
     async function fetchshipClasses() {
-      const data = await fleetContract.methods.getShipClass(handle).call()
-      setShipClasses({
-        name: data[0],
-        handle: data[1], 
-        size: data[2],
-        attack: data[3],
-        shield: data[4],
-        mineralCap: web3.utils.fromWei(data[5]),
-        miningCap: web3.utils.fromWei(data[6]),
-        hanger: data[7],
-        buildTime: data[8],
-        cost: web3.utils.fromWei(data[9])
-        })
+      const data = await fleetContract.methods.getShipClasses().call()
+       setShipClasses(data)
+
     }
 
     fetchshipClasses()
-  }, [handle, slowRefresh])
-
-  return shipClasses
+  }, [slowRefresh])
+    return shipClasses
 }
 
 // ***PROBLEM - this function call reverts, needs debugging
