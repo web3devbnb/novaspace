@@ -16,19 +16,19 @@ export default {
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
   map: {
-    56: '',
-    97: '0x3b9c7B7B75e8Dc8F4D3F04CF0006AB78ca1e3E7A',
+    56: '0x474F07F0E6272148566ff4A2e51d2004989750Af',
+    97: '0x474F07F0E6272148566ff4A2e51d2004989750Af',
   },
   fleet: {
-    56: '',
-    97: '0x1138a8d3852407d7920AFD862ce174872CBF8C2E',
+    56: '0xB988B52c2C3f8cfbf1D1E10354552F7f0ADbAe6F',
+    97: '0xB988B52c2C3f8cfbf1D1E10354552F7f0ADbAe6F',
   },
   treasury: {
-    56: '',
+    56: '0x12a8B6bc5DcBE9BD869ea8ad76a41c7D9f166d80',
     97: '0x42bCB57E0617728A7E4e13D8cD6458879cd576D1',
   },
   approvals: {
-    56: '',
+    56: '0x12a8B6bc5DcBE9BD869ea8ad76a41c7D9f166d80',
     97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
   },
   lottery: {

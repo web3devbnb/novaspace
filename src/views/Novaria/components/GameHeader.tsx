@@ -11,7 +11,7 @@ const Hero = styled.div`
     display: flex;
     text-align: center;
     justify-content: space-between;
-    height: 50px;
+    height: 75px;
     margin-right: 10px;
     margin-left: 10px;
     margin-top: 10px;
@@ -29,6 +29,9 @@ const InfoBlock = styled.div`
 
 const Logo = styled.img`
     object-position: left;
+    margin-top: -70px;
+    margin-bottom: 60px;
+    background-color: #000a17;
 `
 
 const GameHeader = ({ children }) => {

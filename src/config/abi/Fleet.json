@@ -68,24 +68,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_target",
-				"type": "address"
-			}
-		],
-		"name": "attackFleet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_x",
 				"type": "uint256"
@@ -96,9 +78,9 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "string",
-				"name": "_shipClass",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "_shipClassId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -115,18 +97,13 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_x",
+				"name": "spaceDockId",
 				"type": "uint256"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
+				"internalType": "uint16",
 				"name": "_amount",
-				"type": "uint256"
+				"type": "uint16"
 			}
 		],
 		"name": "claimShips",
@@ -139,11 +116,6 @@
 			{
 				"internalType": "string",
 				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_handle",
 				"type": "string"
 			},
 			{
@@ -195,27 +167,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_target",
-				"type": "address"
-			}
-		],
-		"name": "defendFleet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_handle",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "shipClassId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -232,11 +186,16 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_player",
+				"name": "_target",
 				"type": "address"
+			},
+			{
+				"internalType": "enum Fleet.BattleStatus",
+				"name": "mission",
+				"type": "uint8"
 			}
 		],
-		"name": "endBattle",
+		"name": "enterBattle",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -244,9 +203,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_target",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "battleId",
+				"type": "uint256"
 			}
 		],
 		"name": "goBattle",
@@ -268,19 +227,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			}
-		],
-		"name": "leaveBattle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "recall",
 		"outputs": [],
@@ -290,19 +236,6 @@
 	{
 		"inputs": [],
 		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_timeModifier",
-				"type": "uint256"
-			}
-		],
-		"name": "setTimeModifier",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -337,103 +270,6 @@
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "battles",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "attackTarget",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "battleDeadline",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "attackersAttackPower",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "attackersFleetSize",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "defendersAttackPower",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "defendersFleetSize",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "coordinatesToShipyard",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "fleets",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -495,9 +331,125 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_shipClass",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "battleId",
+				"type": "uint256"
+			}
+		],
+		"name": "getBattle",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "battleDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "attackers",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "attackersAttackPower",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "attackersFleetSize",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "defenders",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defendersAttackPower",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defendersFleetSize",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.Battle",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBattles",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "battleDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "attackers",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "attackersAttackPower",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "attackersFleetSize",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "defenders",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defendersAttackPower",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defendersFleetSize",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.Battle[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_shipClassId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -538,9 +490,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_shipClass",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "shipClassId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -562,96 +514,17 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			},
-			{
 				"internalType": "address",
 				"name": "_player",
 				"type": "address"
 			}
 		],
-		"name": "getDryDock",
+		"name": "getFleets",
 		"outputs": [
 			{
-				"components": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "handle",
-								"type": "string"
-							},
-							{
-								"internalType": "uint256",
-								"name": "size",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "attackPower",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "shield",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "mineralCapacity",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "miningCapacity",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "hangarSize",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "buildTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "cost",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct Fleet.ShipClass",
-						"name": "shipClass",
-						"type": "tuple"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "completionTime",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct Fleet.DryDock",
+				"internalType": "uint16[16]",
 				"name": "",
-				"type": "tuple"
+				"type": "uint16[16]"
 			}
 		],
 		"stateMutability": "view",
@@ -753,8 +626,27 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "getPlayerExists",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
-		"name": "getShipClasses",
+		"name": "getPlayers",
 		"outputs": [
 			{
 				"components": [
@@ -764,8 +656,121 @@
 						"type": "string"
 					},
 					{
+						"internalType": "uint256",
+						"name": "experience",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint16[16]",
+						"name": "ships",
+						"type": "uint16[16]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "shipClassId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "completionTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "coordX",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "coordY",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Fleet.SpaceDock[]",
+						"name": "spaceDocks",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "enum Fleet.BattleStatus",
+						"name": "battleStatus",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "battleId",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.Player[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "getPlayerSpaceDocks",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "shipClassId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "completionTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordX",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordY",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.SpaceDock[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getShipClasses",
+		"outputs": [
+			{
+				"components": [
+					{
 						"internalType": "string",
-						"name": "handle",
+						"name": "name",
 						"type": "string"
 					},
 					{
@@ -818,76 +823,91 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "handleToShipClass",
+		"inputs": [],
+		"name": "getShipyards",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordX",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordY",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "feePercent",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.Shipyard[]",
 				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "isPlayerAttacking",
+		"name": "getSpaceDocks",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "shipClassId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "completionTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordX",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "coordY",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Fleet.SpaceDock[]",
 				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "isPlayerDefending",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "isPlayerTargetted",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -914,166 +934,6 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "participantToBattle",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "shipClasses",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "handle",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "size",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "attackPower",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "shield",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "mineralCapacity",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "miningCapacity",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "hangarSize",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "buildTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "cost",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "shipyardExists",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "shipyards",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "coordX",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "coordY",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "feePercent",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "targetToBattle",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

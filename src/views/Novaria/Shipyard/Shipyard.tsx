@@ -4,6 +4,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import {  } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import Select from 'react-select'
+import { findIndex } from 'lodash'
 import MapAbi from 'config/abi/Map.json'
 import fleetABI from 'config/abi/Fleet.json'
 import Web3 from 'web3'
@@ -139,22 +140,22 @@ const Shipyard = () => {
 
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
-  const dryDocks =  [useGetDryDock(0,0), useGetDryDock(5,5)] 
-  console.log('dryDocks', dryDocks)
+  // const dryDocks =  useGetDryDock() 
+  const shipyards = useGetShipyards()
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
   const [shipyardFee, setShipyardFee] = useState(null)
-  const [shipHandle, setShip] = useState(null)
+  const [shipId, setShipId] = useState(null)
   const [buildTime, setBuildTime] = useState(null)
   const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
   const [pendingTx, setPendingTx] = useState(false)
   
   const handleShipyardChange = (obj) => {
-    setShipyard(obj)
+    setShipyard(shipyards.indexOf(obj))
     setShipyardX(obj.coordX)
     setShipyardY(obj.coordY)
     setShipyardOwner(obj.owner)
@@ -162,19 +163,19 @@ const Shipyard = () => {
   }
 
   const handleShipChange = (obj) => {
-    setShip(obj.handle)
+    setShipId(shipClasses.indexOf(obj))
     setBuildTime(obj.buildTime)
     setShipCost(obj.cost)
   }
-  
+  console.log('shipclassID, shipyardX, shipyardY', shipId, typeof shipyardX, shipyardY)
   
   const { onBuild } = useBuildShips()
  
   const sendTx = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipHandle, shipAmount)
-      console.log(shipyardX, shipyardY, shipHandle, shipAmount)
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount)
+      console.log(shipyardX, shipyardY, shipId, shipAmount)
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -186,7 +187,7 @@ const Shipyard = () => {
   // const { account } = useWallet()
   // const fleetContract = useFleet()
   // const HandleShipBuy = async () => {
-  //   buildShips(fleetContract, shipyardX, shipyardY, shipHandle, shipAmount, account)
+  //   buildShips(fleetContract, shipyardX, shipyardY, shipId, shipAmount, account)
   // }
   
 
@@ -206,12 +207,12 @@ const Shipyard = () => {
       width:180,
       Color: 'white',
       background: 'transparent',
-      height:25,
+      // height:25,
     }),
     option: (provided, state) => ({
       ...provided,
       color: 'white',
-      padding: 20,
+     // padding: 20,
       background: 'transparent'
     }),
     placeholder: (provided, state) => ({
@@ -219,14 +220,14 @@ const Shipyard = () => {
       color: 'white',
       background: 'transparent'
     }),
-    input: (provided, state) => ({
-      ...provided,
-      height:10,
-    }),
+    // input: (provided, state) => ({
+    //   ...provided,
+    //   height:10,
+    // }),
     singleValue: (provided, state) => ({
       ...provided,
       color: 'white',
-      background: 'transparent'
+     // background: 'transparent'
     }),
   }
 
@@ -277,9 +278,9 @@ const Shipyard = () => {
         <Select 
           placeholder='Select Shipyard'
           value={shipyard}
-          options={fakeData}
+          options={shipyards}
           onChange={handleShipyardChange}
-          getOptionLabel={x => x.name}
+          getOptionLabel={x => x.owner}
           styles={customStyles}
           /><br />
         <Text>Location: ({shipyardX}, {shipyardY})</Text><br />
@@ -290,10 +291,10 @@ const Shipyard = () => {
           {/* // Selector doesn't show selected option, but does input state values for it */}
           <Select 
             placeholder='Select Ship'
-            value={shipHandle}
+            value={shipId}
             options={shipClasses}
             onChange={handleShipChange}
-            getOptionLabel={ship => ship.handle}
+            getOptionLabel={ship => ship.name}
             styles={customStyles}
             />
         </Row>
@@ -305,7 +306,7 @@ const Shipyard = () => {
           </Button>
         </Row>
         <Row>
-          <Text>Cost: {(shipCost * shipAmount + ((shipyardFee / 100) * shipCost * shipAmount )) / 10**18} | Time: {buildTime * shipAmount} </Text>
+          <Text>Cost: {(shipCost * shipAmount + ((shipyardFee / 100) * shipCost * shipAmount )) / 10**18} NOVA | Time: {buildTime * shipAmount}s</Text>
         </Row>
 
       </BuildMenu>
@@ -319,7 +320,7 @@ const Shipyard = () => {
             <Item>Completion Time</Item>
           </Col>
           
-          {dryDocks.map(dock => {
+          {/* {dryDocks.map(dock => {
             return (
             <Col key={dock[0]}>
               <Item>{dock[0][0]}</Item>
@@ -327,7 +328,7 @@ const Shipyard = () => {
               <Item>{new Date(dock[2] * 1000).toLocaleString()}</Item>
             </Col>
             )
-          })}
+          })} */}
         </Row>
 
       </DryDockMenu>

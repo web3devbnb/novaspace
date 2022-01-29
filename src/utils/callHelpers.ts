@@ -141,18 +141,18 @@ export const insertCoinHere = async (fleetContract, name, account) => {
     })
 }
 
-export const buildShips = async (fleetContract, x, y, handle, amount, account) => {
+export const buildShips = async (fleetContract, x, y, classId, amount, account) => {
   return fleetContract.methods
-    .buildShips(x, y, handle, amount)
+    .buildShips(x, y, classId, amount)
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
   })
 }
 
-export const claimShips = async (fleetContract, x, y, amount, account) => {
+export const claimShips = async (fleetContract, dockId, amount, account) => {
   return fleetContract.methods
-    .claimShips(x, y, amount)
+    .claimShips(dockId, amount)
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -168,21 +168,23 @@ export const recall = async (fleetContract, account) => {
     })
 }
 
-export const attackFleet = async (fleetContract, player, target, account) => {
+export const enterBattle = async (fleetContract, target, mission, account) => {
   return fleetContract.methods
-    .attackFleet(player, target)
+    .enterBattle( target, mission )
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
 
-export const defendFleet = async (fleetContract, player, target, account) => {
+export const goBattle = async (fleetContract, battleId, account) => {
   return fleetContract.methods
-    .defendFleet(player, target)
+    .goBattle( battleId )
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
+
+
 

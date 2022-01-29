@@ -56,8 +56,8 @@ export const useBuildShips = () => {
   const useFleetContract = useFleet()
   
   const handleBuildShips = useCallback(
-    async (x: string, y: string, handle: string, amount: string) => {
-      const txHash = await buildShips(useFleetContract, x, y, handle, amount, account)
+    async (x: number, y: number, classId: number, amount: number) => {
+      const txHash = await buildShips(useFleetContract, x, y, classId, amount, account)
       
       console.info(txHash)
     },
@@ -71,8 +71,8 @@ export const useClaimShips = () => {
   const useFleetContract = useFleet()
 
   const handleClaimShips = useCallback(
-    async (x: string, y: string, amount: string) => {
-      const txHash = await claimShips(useFleetContract, x, y, amount, account)
+    async (dockId: number, amount: number) => {
+      const txHash = await claimShips(useFleetContract, dockId, amount, account)
       console.info(txHash)
     },
     [account, useFleetContract]
@@ -98,10 +98,10 @@ export const useGetShipClasses = () => {
     return shipClasses
 }
 
-// ***PROBLEM - this function call reverts, needs debugging
+
 export const useGetShipyards = () => {
   const { slowRefresh } = useRefresh()
-  const [shipyards, setShipyards] = useState('')
+  const [shipyards, setShipyards] = useState([])
 
   useEffect(() => {
     async function fetchShipyards() {
@@ -113,18 +113,18 @@ export const useGetShipyards = () => {
   return shipyards
 }
 
-export const useGetDryDock = (x: number, y: number) => {
+export const useGetDryDock = () => {
   const { account } = useWallet()
   const {slowRefresh} = useRefresh()
   const [dryDock, setDryDock] = useState([])
 
   useEffect(() => {
     async function fetchDryDock() {
-    const data = await fleetContract.methods.getDryDock(x, y, account).call()
+    const data = await fleetContract.methods.getPlayerSpaceDocks(account).call()
     setDryDock(data) 
   }
     fetchDryDock()
-  }, [slowRefresh, x, y, account] )
+  }, [slowRefresh, account] )
   return dryDock
 }
 
