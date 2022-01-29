@@ -7,9 +7,9 @@ import Select from 'react-select'
 import MapAbi from 'config/abi/Map.json'
 import fleetABI from 'config/abi/Fleet.json'
 import Web3 from 'web3'
-import { useGetShipClasses, 
-         useGetShipClassList, 
+import { useGetShipClasses,  
          useGetShipyards,
+         useGetDryDock,
          useBuildShips } from 'hooks/useNovaria'
 import { getContract, getWeb3 } from 'utils/web3'
 import {
@@ -64,6 +64,7 @@ const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
   align-items: center;
+  
 `
 
 const Item = styled.div`
@@ -122,17 +123,33 @@ const Input = styled.input`
   color: white;
 `
 
+const DryDockMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: white;
+`
+
+const FleetMenu = styled.div`
+  display: flex;  
+  color: white;
+
+`
 
 const Shipyard = () => {
 
+  const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
+  const dryDocks =  [useGetDryDock(0,0), useGetDryDock(5,5)] 
+  console.log('dryDocks', dryDocks)
 
-   const [shipyard, setShipyard] = useState(null)
+  const [shipyard, setShipyard] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipHandle, setShip] = useState(null)
+  const [buildTime, setBuildTime] = useState(null)
+  const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
   const [pendingTx, setPendingTx] = useState(false)
   
@@ -145,7 +162,9 @@ const Shipyard = () => {
   }
 
   const handleShipChange = (obj) => {
-    setShip(obj)
+    setShip(obj.handle)
+    setBuildTime(obj.buildTime)
+    setShipCost(obj.cost)
   }
   
   
@@ -155,6 +174,7 @@ const Shipyard = () => {
     setPendingTx(true)
     try {
       await onBuild(shipyardX, shipyardY, shipHandle, shipAmount)
+      console.log(shipyardX, shipyardY, shipHandle, shipAmount)
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -239,11 +259,11 @@ const Shipyard = () => {
                 <Item>{ship.size}</Item>
                 <Item>{ship.attackPower}</Item>
                 <Item>{ship.shield}</Item>
-                <Item>{ship.mineralCapacity}</Item>
-                <Item>{ship.miningCapacity}</Item>
+                <Item>{web3.utils.fromWei(ship.mineralCapacity)}</Item>
+                <Item>{web3.utils.fromWei(ship.miningCapacity)}</Item>
                 <Item>{ship.hangarSize}</Item>
                 <Item>{ship.buildTime}</Item>
-                <Item>{ship.cost}</Item> 
+                <Item>{web3.utils.fromWei(ship.cost)}</Item> 
               </Col>
             )     
           })}
@@ -267,6 +287,7 @@ const Shipyard = () => {
         <Text>Build Fee: {shipyardFee}%</Text><br />
 
         <Row style={{marginTop:10}}>
+          {/* // Selector doesn't show selected option, but does input state values for it */}
           <Select 
             placeholder='Select Ship'
             value={shipHandle}
@@ -283,8 +304,37 @@ const Shipyard = () => {
             Build Ships
           </Button>
         </Row>
+        <Row>
+          <Text>Cost: {(shipCost * shipAmount + ((shipyardFee / 100) * shipCost * shipAmount )) / 10**18} | Time: {buildTime * shipAmount} </Text>
+        </Row>
 
       </BuildMenu>
+
+      <DryDockMenu>
+        <Header>Build Queue</Header>
+        <Row>
+          <Col>
+            <Item>Ship</Item>
+            <Item>Amount</Item>
+            <Item>Completion Time</Item>
+          </Col>
+          
+          {dryDocks.map(dock => {
+            return (
+            <Col key={dock[0]}>
+              <Item>{dock[0][0]}</Item>
+              <Item>{dock[1]}</Item>
+              <Item>{new Date(dock[2] * 1000).toLocaleString()}</Item>
+            </Col>
+            )
+          })}
+        </Row>
+
+      </DryDockMenu>
+
+      <FleetMenu>
+        <Header>Current Fleet</Header>
+      </FleetMenu>
      
       
     </Body>

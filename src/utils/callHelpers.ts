@@ -149,3 +149,40 @@ export const buildShips = async (fleetContract, x, y, handle, amount, account) =
       return tx.transactionHash
   })
 }
+
+export const claimShips = async (fleetContract, x, y, amount, account) => {
+  return fleetContract.methods
+    .claimShips(x, y, amount)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const recall = async (fleetContract, account) => {
+  return fleetContract.methods
+    .recall()
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const attackFleet = async (fleetContract, player, target, account) => {
+  return fleetContract.methods
+    .attackFleet(player, target)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const defendFleet = async (fleetContract, player, target, account) => {
+  return fleetContract.methods
+    .defendFleet(player, target)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+

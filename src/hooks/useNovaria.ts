@@ -21,7 +21,7 @@ import {
 import {
   fetchFarmUserDataAsync,
 } from 'state/actions'
-import { buildShips, insertCoinHere } from 'utils/callHelpers'
+import { buildShips, claimShips, insertCoinHere } from 'utils/callHelpers'
 import { Wallet } from 'ethers'
 import { useFleet, useMap, useApprovals } from './useContract'
 import useRefresh from './useRefresh'
@@ -66,6 +66,20 @@ export const useBuildShips = () => {
   return { onBuild: handleBuildShips }
 }
 
+export const useClaimShips = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleClaimShips = useCallback(
+    async (x: string, y: string, amount: string) => {
+      const txHash = await claimShips(useFleetContract, x, y, amount, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract]
+  )
+  return {onClaim: handleClaimShips}
+}
+
 // View functions
 // const shipClasses = useGetShipClasses()
 export const useGetShipClasses = () => {
@@ -99,19 +113,34 @@ export const useGetShipyards = () => {
   return shipyards
 }
 
-// ***PROBLEM - need function to call the list of shipclass handles in shipClassesList
-export const useGetShipClassList = () => {
-  const { slowRefresh } = useRefresh()
-  const [shipClassList, setShipClassList] = useState('')
+export const useGetDryDock = (x: number, y: number) => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [dryDock, setDryDock] = useState([])
 
   useEffect(() => {
-    async function fetchShipClassList() {
-      const data = await fleetContract.methods.shipClassesList().call()
-      setShipClassList(data)
+    async function fetchDryDock() {
+    const data = await fleetContract.methods.getDryDock(x, y, account).call()
+    setDryDock(data) 
+  }
+    fetchDryDock()
+  }, [slowRefresh, x, y, account] )
+  return dryDock
+}
+
+export const useGetFleet = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [fleet, setFleet] = useState([])
+
+  useEffect(() => {
+    async function fetchFleet() {
+      const data = await fleetContract.methods.getFleet(account).call()
+      setFleet(data)
     }
-    fetchShipClassList()
-  }, [slowRefresh])
-  return shipClassList
+      fetchFleet()
+  }, [slowRefresh, account])
+  return fleet
 }
 
 // Map contract functions
