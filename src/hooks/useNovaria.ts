@@ -71,7 +71,7 @@ export const useClaimShips = () => {
   const useFleetContract = useFleet()
 
   const handleClaimShips = useCallback(
-    async (dockId: string, amount: string) => {
+    async (dockId: number, amount: number) => {
       const txHash = await claimShips(useFleetContract, dockId, amount, account)
       console.info(txHash)
     },

@@ -157,7 +157,7 @@ export const claimShips = async (fleetContract, dockId, amount, account) => {
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
-}
+} 
 
 export const recall = async (fleetContract, account) => {
   return fleetContract.methods

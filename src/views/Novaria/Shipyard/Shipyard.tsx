@@ -33,9 +33,17 @@ import { useFleet, useMap, useApprovals } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 
-// this data needs to be replaced with getShipyards function, but currently broken
-const fakeData = [{'name': 'shipyard1', 'owner':'fakeAddress', 'coordX': '0', 'coordY': '0', 'feePercent': '7'},
-                  {'name': 'shipyard2', 'owner':'fakeAddress', 'coordX': '5', 'coordY': '5', 'feePercent': '1'}]
+// export interface ShipClassProps {
+//   name: string
+//   size: number
+//   attack: number
+//   shield: number 
+//   mineralCapacity: number
+//   miningCapacity: number
+//   hangerSize: number
+//   buildTime: number
+//   cost: number
+// }
 
 const Page = styled.div`
 
@@ -144,11 +152,13 @@ const FleetMenu = styled.div`
 
 `
 
+
 const Shipyard = () => {
 
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
   const spaceDocks =  useGetSpaceDock() 
+  console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
   const playerFleet = useGetFleet()
   const fleetSize = useGetFleetSize()
@@ -167,7 +177,7 @@ const Shipyard = () => {
   const [shipAmount, setShipAmount] = useState(null)
   const [pendingTx, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
-  const [claimId, setClaimId] = useState(null)
+  // const [claimId, setClaimId] = useState(null)
   
   const handleShipyardChange = (obj) => {
     setShipyard(shipyards.indexOf(obj))
@@ -199,21 +209,17 @@ const Shipyard = () => {
     
   const { onClaim } = useClaimShips()
 
-  const sendClaimTx = async () => {
+  const sendClaimTx = async (claimId) => {
     setPendingTx(true)
+    console.log('claimId, claimAmount',typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
-      await onClaim(claimId, claimAmount)
-      console.log(claimId, claimAmount)
+      await onClaim(claimId, claimAmount)      
     } catch (error) {
-      console.log('error: ', error)
+      // console.log('error: ', error)
     } finally {
       setPendingTx(false)
     }
   }
-
-
-  console.log('claimAmount, claimId', claimAmount, claimId)
-
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -296,6 +302,32 @@ const Shipyard = () => {
         </Row>
       </ShipClassMenu>
 
+      <FleetMenu>
+        <Header>Current Fleet</Header>
+        <Row>
+          <Col>
+          {shipClasses.map(ship => {
+            return (
+              <Item key={ship.name}>{ship.name}s</Item>
+            )})}
+              <Item>Fleet Size</Item>
+              <Item>Max Fleet Size</Item>
+              <Item>Mining Capacity</Item>
+              <Item>Max Mineral Capacity</Item>
+          </Col>
+          <Col>
+              {/* Find a way to map this out based on shipclass? */}
+              <Item>{playerFleet[0]}</Item>
+              <Item>{playerFleet[1]}</Item>
+              <Item>{fleetSize}</Item>
+              <Item>{maxFleetSize}</Item>
+              <Item>{web3.utils.fromWei(miningCapacity)} </Item>
+              <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
+          </Col>
+        </Row>
+
+      </FleetMenu>
+     
       <BuildMenu>
         <Header >Build Ships</Header>
         <br /><br />
@@ -352,11 +384,12 @@ const Shipyard = () => {
           {spaceDocks.map(dock => {
             return (
             <Col key={dock.shipClassId}>
-              <Item>{dock.shipClassId}</Item>
+              <Item>{shipClasses[dock.shipClassId].name}</Item>
               <Item>({dock.coordX}, {dock.coordY})</Item>
               <Item>{dock.amount}</Item>
               <Item>{new Date(dock.completionTime * 1000).toLocaleString()}</Item>
-              <Button type='button' onClick={() => {setClaimId(spaceDocks.indexOf(dock)); sendClaimTx()}}>
+              <Button type='button' onClick={() => sendClaimTx(spaceDocks.indexOf(dock))
+                }>
                 Claim
               </Button>
             </Col>
@@ -365,33 +398,6 @@ const Shipyard = () => {
         </Row>
 
       </SpaceDockMenu>
-
-      <FleetMenu>
-        <Header>Current Fleet</Header>
-        <Row>
-          <Col>
-          {shipClasses.map(ship => {
-            return (
-              <Item key={ship.name}>{ship.name}</Item>
-            )})}
-              <Item>Fleet Size</Item>
-              <Item>Max Fleet Size</Item>
-              <Item>Mining Capacity</Item>
-              <Item>Max Mineral Capacity</Item>
-          </Col>
-          <Col>
-              {/* Find a way to map this out based on shipclass? */}
-              <Item>{playerFleet[0]}</Item>
-              <Item>{playerFleet[1]}</Item>
-              <Item>{fleetSize}</Item>
-              <Item>{maxFleetSize}</Item>
-              <Item>{web3.utils.fromWei(miningCapacity)} </Item>
-              <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
-          </Col>
-        </Row>
-
-      </FleetMenu>
-     
       
     </Body>
     </Page>
