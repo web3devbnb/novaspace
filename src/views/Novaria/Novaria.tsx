@@ -111,7 +111,7 @@ const Novaria: React.FC = () => {
             <ModalVideo
             channel="youtube"
             isOpen={isOpen}
-            videoId="HLKAscn2YAI"
+            videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
