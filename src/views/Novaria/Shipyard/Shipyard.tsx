@@ -10,8 +10,11 @@ import fleetABI from 'config/abi/Fleet.json'
 import Web3 from 'web3'
 import { useGetShipClasses,  
          useGetShipyards,
-         useGetDryDock,
-         useBuildShips } from 'hooks/useNovaria'
+         useGetSpaceDock,
+         useBuildShips,
+         useGetFleet,
+         useClaimShips,
+           } from 'hooks/useNovaria'
 import { getContract, getWeb3 } from 'utils/web3'
 import {
   getNovaAddress,
@@ -124,7 +127,7 @@ const Input = styled.input`
   color: white;
 `
 
-const DryDockMenu = styled.div`
+const SpaceDockMenu = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
@@ -132,6 +135,7 @@ const DryDockMenu = styled.div`
 
 const FleetMenu = styled.div`
   display: flex;  
+  flex-direction: column;
   color: white;
 
 `
@@ -140,19 +144,22 @@ const Shipyard = () => {
 
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
-  // const dryDocks =  useGetDryDock() 
+  const spaceDocks =  useGetSpaceDock() 
   const shipyards = useGetShipyards()
+  const playerFleet = useGetFleet()
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
-  const [shipyardOwner, setShipyardOwner] = useState(null)
+  const [shipyardOwner, setShipyardOwner] = useState(null) 
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipId, setShipId] = useState(null)
   const [buildTime, setBuildTime] = useState(null)
   const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
   const [pendingTx, setPendingTx] = useState(false)
+  const [claimAmount, setClaimAmount] = useState(null)
+  const [claimId, setClaimId] = useState(null)
   
   const handleShipyardChange = (obj) => {
     setShipyard(shipyards.indexOf(obj))
@@ -167,7 +174,6 @@ const Shipyard = () => {
     setBuildTime(obj.buildTime)
     setShipCost(obj.cost)
   }
-  console.log('shipclassID, shipyardX, shipyardY', shipId, typeof shipyardX, shipyardY)
   
   const { onBuild } = useBuildShips()
  
@@ -183,13 +189,23 @@ const Shipyard = () => {
     }
   }
     
-  // // Work-around
-  // const { account } = useWallet()
-  // const fleetContract = useFleet()
-  // const HandleShipBuy = async () => {
-  //   buildShips(fleetContract, shipyardX, shipyardY, shipId, shipAmount, account)
-  // }
-  
+  const { onClaim } = useClaimShips()
+
+  const sendClaimTx = async () => {
+    setPendingTx(true)
+    try {
+      await onClaim(claimId, claimAmount)
+      console.log(claimId, claimAmount)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+
+  console.log('claimAmount, claimId', claimAmount, claimId)
+
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -255,7 +271,7 @@ const Shipyard = () => {
           {shipClasses.map(ship => {
             
             return (
-              <Col key={ship.handle}>
+              <Col key={ship.name}>
                 <Item>{ship.name}</Item>
                 <Item>{ship.size}</Item>
                 <Item>{ship.attackPower}</Item>
@@ -311,30 +327,52 @@ const Shipyard = () => {
 
       </BuildMenu>
 
-      <DryDockMenu>
+      <SpaceDockMenu>
         <Header>Build Queue</Header>
         <Row>
           <Col>
             <Item>Ship</Item>
+            <Item>Location</Item>
             <Item>Amount</Item>
             <Item>Completion Time</Item>
+            <Item>
+              Claim Amount: <Input type='number' min='0' placeholder='0' value={claimAmount} onChange={(e) => setClaimAmount(parseFloat(e.target.value))} />
+            
+            </Item>
           </Col>
           
-          {/* {dryDocks.map(dock => {
+          {spaceDocks.map(dock => {
             return (
-            <Col key={dock[0]}>
-              <Item>{dock[0][0]}</Item>
-              <Item>{dock[1]}</Item>
-              <Item>{new Date(dock[2] * 1000).toLocaleString()}</Item>
+            <Col key={dock.shipClassId}>
+              <Item>{dock.shipClassId}</Item>
+              <Item>({dock.coordX}, {dock.coordY})</Item>
+              <Item>{dock.amount}</Item>
+              <Item>{new Date(dock.completionTime * 1000).toLocaleString()}</Item>
+              <Button type='button' onClick={() => {setClaimId(spaceDocks.indexOf(dock)); sendClaimTx()}}>
+                Claim
+              </Button>
             </Col>
             )
-          })} */}
+          })}
         </Row>
 
-      </DryDockMenu>
+      </SpaceDockMenu>
 
       <FleetMenu>
         <Header>Current Fleet</Header>
+        <Row>
+          <Col>
+          {shipClasses.map(ship => {
+            return (
+              <Item key={ship.name}>{ship.name}</Item>
+            )})}
+          </Col>
+          <Col>
+              <Item>{playerFleet[0]}</Item>
+              <Item>{playerFleet[1]}</Item>
+          </Col>
+        </Row>
+
       </FleetMenu>
      
       

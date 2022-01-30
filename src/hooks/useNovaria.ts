@@ -13,7 +13,7 @@ import erc20ABI from 'config/abi/erc20.json'
 import { getContract, getWeb3 } from 'utils/web3'
 import { getTokenBalance } from 'utils/erc20'
 import {
-  getNovaAddress,
+  getNovaAddress, 
   getFleetAddress,
   getApprovalsAddress,
   getMapAddress
@@ -56,7 +56,7 @@ export const useBuildShips = () => {
   const useFleetContract = useFleet()
   
   const handleBuildShips = useCallback(
-    async (x: number, y: number, classId: number, amount: number) => {
+    async (x: string, y: string, classId: string, amount: string) => {
       const txHash = await buildShips(useFleetContract, x, y, classId, amount, account)
       
       console.info(txHash)
@@ -71,7 +71,7 @@ export const useClaimShips = () => {
   const useFleetContract = useFleet()
 
   const handleClaimShips = useCallback(
-    async (dockId: number, amount: number) => {
+    async (dockId: string, amount: string) => {
       const txHash = await claimShips(useFleetContract, dockId, amount, account)
       console.info(txHash)
     },
@@ -113,19 +113,19 @@ export const useGetShipyards = () => {
   return shipyards
 }
 
-export const useGetDryDock = () => {
+export const useGetSpaceDock = () => {
   const { account } = useWallet()
   const {slowRefresh} = useRefresh()
-  const [dryDock, setDryDock] = useState([])
+  const [spaceDock, setSpaceDock] = useState([])
 
   useEffect(() => {
-    async function fetchDryDock() {
+    async function fetchSpaceDock() {
     const data = await fleetContract.methods.getPlayerSpaceDocks(account).call()
-    setDryDock(data) 
+    setSpaceDock(data) 
   }
-    fetchDryDock()
+    fetchSpaceDock()
   }, [slowRefresh, account] )
-  return dryDock
+  return spaceDock
 }
 
 export const useGetFleet = () => {
@@ -135,7 +135,7 @@ export const useGetFleet = () => {
 
   useEffect(() => {
     async function fetchFleet() {
-      const data = await fleetContract.methods.getFleet(account).call()
+      const data = await fleetContract.methods.getFleets(account).call()
       setFleet(data)
     }
       fetchFleet()

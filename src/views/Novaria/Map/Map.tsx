@@ -55,8 +55,8 @@ const Body = styled.div`
 const Grid = styled.div`
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(${(props: GridProps) => props.nx}, 1fr);
-  grid-template-rows: repeat(${(props: GridProps) => props.ny}, 1fr);
+  grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
+  grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
 `
 
