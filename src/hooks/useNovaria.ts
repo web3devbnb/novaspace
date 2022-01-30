@@ -32,7 +32,7 @@ import useRefresh from './useRefresh'
   const approvalsContract = getContract(approvalsABI, getApprovalsAddress())
   const web3 = getWeb3()
 
-// Fleet contract functions
+// ~~~Fleet contract functions~~~
 // player setup and current ships, building ships, combat 
 
 // Active functions
@@ -80,8 +80,8 @@ export const useClaimShips = () => {
   return {onClaim: handleClaimShips}
 }
 
-// View functions
-// const shipClasses = useGetShipClasses()
+// ***View functions***
+
 export const useGetShipClasses = () => {
   const { slowRefresh } = useRefresh()
   const [shipClasses, setShipClasses] = useState([])
@@ -143,6 +143,85 @@ export const useGetFleet = () => {
   return fleet
 }
 
-// Map contract functions
+export const useGetFleetSize = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [fleetSize, setFleetSize] = useState(null)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getFleetSize(account).call()
+      setFleetSize(data)
+    }
+      fetch()
+  }, [slowRefresh, account])
+  return fleetSize
+}
+
+export const useGetMaxFleetSize = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [maxFleetSize, setMAxFleetSize] = useState(null)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getMaxFleetSize(account).call()
+      setMAxFleetSize(data)
+    }
+      fetch()
+  }, [slowRefresh, account])
+  return maxFleetSize
+}
+
+export const useGetMaxMineralCapacity = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [maxMineralCapacity, setMaxMineralCapacity] = useState('')
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getMaxMineralCapacity(account).call()
+      setMaxMineralCapacity(data)
+    }
+      fetch()
+  }, [slowRefresh, account])
+  return maxMineralCapacity
+}
+
+export const useGetMiningCapacity = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [miningCapacity, setMiningCapacity] = useState('')
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getMiningCapacity(account).call()
+      setMiningCapacity(data)
+    }
+      fetch()
+  }, [slowRefresh, account])
+  return miningCapacity
+}
+
+// ~~~Map contract functions~~~
+// Active Functions
+
+
+// ***View Functions***
+
+export const useGetFleetLocation = () => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [fleetLocation, setFleetLocation] = useState([])
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetLocation(account).call()
+      setFleetLocation(data)
+    } fetch()
+  }, [slowRefresh, account])
+  return fleetLocation
+}
+
 // Movement, mining, refining, tracks mineral
 

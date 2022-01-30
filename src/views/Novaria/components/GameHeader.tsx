@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { useGetFleetLocation } from 'hooks/useNovaria'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
@@ -36,7 +37,7 @@ const Logo = styled.img`
 
 const GameHeader = ({ children }) => {
 
-    
+    const fleetLocation = useGetFleetLocation()
     const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
 
     return (
@@ -48,7 +49,7 @@ const GameHeader = ({ children }) => {
             </StyledHeading>
             <InfoBlock>
                 <Text glowing>
-                    Player Location: (0, 0)
+                    Player Location: ({fleetLocation[0]}, {fleetLocation[1]})
                 </Text>
                 <Text glowing>
                     Available NOVA: <span style={{color: 'gold'}}>{novaBalance.toFixed(2)}</span>                    

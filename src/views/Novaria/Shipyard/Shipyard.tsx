@@ -14,6 +14,10 @@ import { useGetShipClasses,
          useBuildShips,
          useGetFleet,
          useClaimShips,
+         useGetFleetSize,
+         useGetMaxFleetSize,
+         useGetMaxMineralCapacity,
+         useGetMiningCapacity,
            } from 'hooks/useNovaria'
 import { getContract, getWeb3 } from 'utils/web3'
 import {
@@ -147,6 +151,10 @@ const Shipyard = () => {
   const spaceDocks =  useGetSpaceDock() 
   const shipyards = useGetShipyards()
   const playerFleet = useGetFleet()
+  const fleetSize = useGetFleetSize()
+  const maxFleetSize = useGetMaxFleetSize()
+  const mineralCapacity = useGetMaxMineralCapacity()
+  const miningCapacity = useGetMiningCapacity()
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
@@ -296,7 +304,7 @@ const Shipyard = () => {
           value={shipyard}
           options={shipyards}
           onChange={handleShipyardChange}
-          getOptionLabel={x => x.owner}
+          getOptionLabel={x => x.name}
           styles={customStyles}
           /><br />
         <Text>Location: ({shipyardX}, {shipyardY})</Text><br />
@@ -366,10 +374,19 @@ const Shipyard = () => {
             return (
               <Item key={ship.name}>{ship.name}</Item>
             )})}
+              <Item>Fleet Size</Item>
+              <Item>Max Fleet Size</Item>
+              <Item>Mining Capacity</Item>
+              <Item>Max Mineral Capacity</Item>
           </Col>
           <Col>
+              {/* Find a way to map this out based on shipclass? */}
               <Item>{playerFleet[0]}</Item>
               <Item>{playerFleet[1]}</Item>
+              <Item>{fleetSize}</Item>
+              <Item>{maxFleetSize}</Item>
+              <Item>{web3.utils.fromWei(miningCapacity)} </Item>
+              <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
           </Col>
         </Row>
 
