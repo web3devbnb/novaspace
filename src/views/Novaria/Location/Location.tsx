@@ -40,15 +40,25 @@ const Location: React.FC = () => {
         <Content>
           <div>
             <PlanetImageCard />
-            <PlanetInfoCard />
+            <PlanetInfoCard>
+              <div>HAVEN</div>
+            </PlanetInfoCard>
           </div>
           <div>
-            <OpenBattlesCard />
-            <PlayersCard />
+            <OpenBattlesCard>
+              <div>OPEN BATTLES</div>
+            </OpenBattlesCard>
+            <PlayersCard>
+              <div>PLAYERS</div>
+            </PlayersCard>
           </div>
           <div>
-            <YourFleetCard />
-            <BattleProgressCard />
+            <YourFleetCard>
+              <div>YOUR FLEET</div>
+            </YourFleetCard>
+            <BattleProgressCard>
+              <div>BATTLE PROGRESS</div>
+            </BattleProgressCard>
           </div>
         </Content>
       </Body>
