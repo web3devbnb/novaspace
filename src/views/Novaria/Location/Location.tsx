@@ -19,12 +19,36 @@ const Body = styled.div`
   background-size: cover;
 `
 
+const Content = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`
+
+const PlanetCard = styled.div``
+const OpenBattlesCard = styled.div``
+const PlayersCard = styled.div``
+const YourFleetCard = styled.div``
+const BattleProgressCard = styled.div``
+
 const Location: React.FC = () => {
   return (
     <Page>
       <GameHeader>LOCATION</GameHeader>
       <Body>
         <GameMenu />
+        <Content>
+          <div>
+            <PlanetCard />
+          </div>
+          <div>
+            <OpenBattlesCard />
+            <PlayersCard />
+          </div>
+          <div>
+            <YourFleetCard />
+            <BattleProgressCard />
+          </div>
+        </Content>
       </Body>
     </Page>
   )
