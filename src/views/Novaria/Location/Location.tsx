@@ -29,7 +29,7 @@ const Page = styled.div`
 const Body = styled.div`
   margin: 10px 50px 10px 150px;
   // fix background later
-  background-Image: url('/images/home/starsBackground.jpg');
+  background-image: url('/images/home/starsBackground.jpg');
   background-size: cover;
   height: 500px;
   display: flex;
@@ -76,112 +76,49 @@ const Col = styled.div`
   display: flex;
 `
 
-const Row = styled.div`
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  display: flex;
-  align-items: center;
-  
+const Content = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 `
 
-const Button = styled.button`
-  cursor: pointer;  
-  height: 25px;
-  margin: 5px;
-  align-self: center;
-  padding: .15rem 1.25rem;
-  font-family: sans-serif;
-  font-size: .75rem;
-  text-decoration: none;
-  text-shadow:
-  -2px 4px 4px #091243, 
-  0 0 10px #00D0FF,
-  inset 1px 1px 1px white;
-  color: #1FFFFF;
-  border: 2px solid;
-  border-radius: 5px;
-  background-color: transparent;
-  box-shadow: 
-  0 1px 2px rgba(0,0,0, 0.6), 
-  2px 1px 4px rgba(0,0,0, 0.3), 
-  2px 4px 3px rgba(3,0,128, 0.3), 
-  0 0 7px 2px rgba(0,208,255, 0.6), 
-  inset 0 1px 2px rgba(0,0,0, 0.6), 
-  inset 2px 1px 4px rgba(0,0,0, 0.3), 
-  inset 2px 4px 3px rgba(3,0,128, 0.3), 
-  inset 0 0 7px 2px rgba(0,208,255, 0.6);
-`
+const PlanetImageCard = styled.div``
+const PlanetInfoCard = styled.div``
+const OpenBattlesCard = styled.div``
+const PlayersCard = styled.div``
+const YourFleetCard = styled.div``
+const BattleProgressCard = styled.div``
 
-const PlayerMenu = styled.div`
-  margin: 10px;
-  border: 1px solid gray;
-`
-
-const Location= () => {
-  
-  // load coordinates from the Map 
-  const location = useLocation()
-  const loadedCoords = (typeof location.state === 'undefined' ? {x: 0,y: 0} : location.state[0])
-  console.log('loadedCoords', loadedCoords)
-
-  const [X, setX] = useState(loadedCoords.x)
-  const [Y, setY] = useState(loadedCoords.y)
-
-  const placeInfo = useGetPlaceInfo(X,Y)
-  console.log(placeInfo)
-  console.log('x, y?', X, Y)
-
-  
-
-
+const Location: React.FC = () => {
   return (
     <Page>
-      <GameHeader>Location</GameHeader>
-    <Body>
-      
-      <GameMenu />
-
-        <PlaceMenu>
-                    
-            <Header style={{fontSize:35}}>
-              {placeInfo.name === '' ? 'Empty Space' : placeInfo.name} <span style={{fontSize:12, fontWeight:'normal'}}>({placeInfo.type})</span> 
-            </Header>
-          
-            <InputControl>
-              (
-              <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-              ,
-              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
-            </InputControl>
-            
-            <Item>
-              {(placeInfo.shipyard === true ? 
-                <Button><a href='/shipyard' >Shipyard</a></Button> : '')}
-            </Item>
-            <Item>
-              {(placeInfo.refinery === true ? 
-                <Button>Refine</Button> : '')}
-            </Item>
-            <Item>
-              {(placeInfo.mineral > 0 ? 
-                <Button>Mine Mineral ({placeInfo.mineral})</Button> : '')}
-            </Item>
-            <Item>
-              {(placeInfo.scrap > 0 ? 
-                <Button>Collect Scrap ({placeInfo.scrap})</Button> : '')}
-            </Item>
-
-        </PlaceMenu>
-
-        <PlayerMenu>
-          <Header>
-            Players at Location
-          </Header>
-          
-        </PlayerMenu>
-            
-
-    </Body>
+      <GameHeader>LOCATION</GameHeader>
+      <Body>
+        <GameMenu />
+        <Content>
+          <div>
+            <PlanetImageCard />
+            <PlanetInfoCard>
+              <div>HAVEN</div>
+            </PlanetInfoCard>
+          </div>
+          <div>
+            <OpenBattlesCard>
+              <div>OPEN BATTLES</div>
+            </OpenBattlesCard>
+            <PlayersCard>
+              <div>PLAYERS</div>
+            </PlayersCard>
+          </div>
+          <div>
+            <YourFleetCard>
+              <div>YOUR FLEET</div>
+            </YourFleetCard>
+            <BattleProgressCard>
+              <div>BATTLE PROGRESS</div>
+            </BattleProgressCard>
+          </div>
+        </Content>
+      </Body>
     </Page>
   )
 }
