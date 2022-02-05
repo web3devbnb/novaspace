@@ -24,7 +24,8 @@ const Content = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `
 
-const PlanetCard = styled.div``
+const PlanetImageCard = styled.div``
+const PlanetInfoCard = styled.div``
 const OpenBattlesCard = styled.div``
 const PlayersCard = styled.div``
 const YourFleetCard = styled.div``
@@ -38,7 +39,8 @@ const Location: React.FC = () => {
         <GameMenu />
         <Content>
           <div>
-            <PlanetCard />
+            <PlanetImageCard />
+            <PlanetInfoCard />
           </div>
           <div>
             <OpenBattlesCard />
