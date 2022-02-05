@@ -14,6 +14,7 @@ const spaceBG = "url('/images/home/bgspaceBig.jpg')"
 const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
   * {
     font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
   body {
      background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : spacebgMobile)};

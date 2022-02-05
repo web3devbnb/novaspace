@@ -46,20 +46,31 @@ import GameMenu from '../components/GameMenu'
 // }
 
 const Page = styled.div`
+  background-Image: url('/images/novaria/mapBG.jpg');
+  background-size: cover;
+  font-size: 15px;
+  margin-top: -105px;
+  padding: 10px;
+  color: #5affff;
 
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-top: -75px;
+  }
 `
 
 const Body = styled.div`
   margin: 10px 50px 10px 150px;
   // fix background later
-  background-Image: url('/images/home/starsBackground.jpg');
-  background-size: cover;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 10px;
   justify-content: space-evenly;
   min-height: 600px;
+  background-Image: url('/images/novaria/border.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 16/8;
 `
 
 const ShipClassMenu = styled.div`
@@ -149,19 +160,21 @@ const FleetMenu = styled.div`
   display: flex;  
   flex-direction: column;
   color: white;
-
+  border-left: 1px solid gray;
+  height: 100%;
 `
 
 
 const Shipyard = () => {
 
+  const { account } = useWallet()
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
   const spaceDocks =  useGetSpaceDock() 
   console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
   const playerFleet = useGetFleet()
-  const fleetSize = useGetFleetSize()
+  const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize()
   const mineralCapacity = useGetMaxMineralCapacity()
   const miningCapacity = useGetMiningCapacity()
@@ -267,67 +280,43 @@ const Shipyard = () => {
       <GameMenu />
       
     <Body>
-      <ShipClassMenu>
-        <Header>Ship Types</Header>
-        <Row>
-          <Col>
-            <Item>Ship</Item>
-            <Item>Size</Item>
-            <Item>Attack</Item>
-            <Item>Shield</Item>
-            <Item>Mineral Capactiy</Item>
-            <Item>Mining Capacity</Item>
-            <Item>Hanger Space</Item>
-            <Item>Build Time</Item>
-            <Item>Cost</Item>
-          </Col>
-
-          {shipClasses.map(ship => {
-            
-            return (
-              <Col key={ship.name}>
-                <Item>{ship.name}</Item>
-                <Item>{ship.size}</Item>
-                <Item>{ship.attackPower}</Item>
-                <Item>{ship.shield}</Item>
-                <Item>{web3.utils.fromWei(ship.mineralCapacity)}</Item>
-                <Item>{web3.utils.fromWei(ship.miningCapacity)}</Item>
-                <Item>{ship.hangarSize}</Item>
-                <Item>{ship.buildTime}</Item>
-                <Item>{web3.utils.fromWei(ship.cost)}</Item> 
-              </Col>
-            )     
-          })}
-
-        </Row>
-      </ShipClassMenu>
-
-      <FleetMenu>
-        <Header>Current Fleet</Header>
-        <Row>
-          <Col>
-          {shipClasses.map(ship => {
-            return (
-              <Item key={ship.name}>{ship.name}s</Item>
-            )})}
-              <Item>Fleet Size</Item>
-              <Item>Max Fleet Size</Item>
+      <Col>
+        <ShipClassMenu>
+          <Header>Ship Types</Header>
+          <Row>
+            <Col>
+              <Item>Ship</Item>
+              <Item>Size</Item>
+              <Item>Attack</Item>
+              <Item>Shield</Item>
+              <Item>Mineral Capactiy</Item>
               <Item>Mining Capacity</Item>
-              <Item>Max Mineral Capacity</Item>
-          </Col>
-          <Col>
-              {/* Find a way to map this out based on shipclass? */}
-              <Item>{playerFleet[0]}</Item>
-              <Item>{playerFleet[1]}</Item>
-              <Item>{fleetSize}</Item>
-              <Item>{maxFleetSize}</Item>
-              <Item>{web3.utils.fromWei(miningCapacity)} </Item>
-              <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
-          </Col>
-        </Row>
+              <Item>Hanger Space</Item>
+              <Item>Build Time</Item>
+              <Item>Cost</Item>
+            </Col>    
 
-      </FleetMenu>
-     
+            {shipClasses.map(ship => {
+              
+              return (
+                <Col key={ship.name}>
+                  <Item>{ship.name}</Item>
+                  <Item>{ship.size}</Item>
+                  <Item>{ship.attackPower}</Item>
+                  <Item>{ship.shield}</Item>
+                  <Item>{web3.utils.fromWei(ship.mineralCapacity)}</Item>
+                  <Item>{web3.utils.fromWei(ship.miningCapacity)}</Item>
+                  <Item>{ship.hangarSize}</Item>
+                  <Item>{ship.buildTime}</Item>
+                  <Item>{web3.utils.fromWei(ship.cost)}</Item> 
+                </Col>
+              )     
+            })}
+
+          </Row>
+        </ShipClassMenu>
+        <Row>
+          
       <BuildMenu>
         <Header >Build Ships</Header>
         <br /><br />
@@ -398,6 +387,38 @@ const Shipyard = () => {
         </Row>
 
       </SpaceDockMenu>
+        </Row>
+
+      </Col>
+
+      <Col>
+        <FleetMenu>
+          <Header>Current Fleet</Header>
+          <Row>
+            <Col>
+            {shipClasses.map(ship => {
+              return (
+                <Item key={ship.name}>{ship.name}s</Item>
+              )})}
+                <Item>Fleet Size</Item>
+                <Item>Max Fleet Size</Item>
+                <Item>Mining Capacity</Item>
+                <Item>Max Mineral Capacity</Item>
+            </Col>
+            <Col>
+                {/* Find a way to map this out based on shipclass? */}
+                <Item>{playerFleet[0]}</Item>
+                <Item>{playerFleet[1]}</Item>
+                <Item>{fleetSize}</Item>
+                <Item>{maxFleetSize}</Item>
+                <Item>{web3.utils.fromWei(miningCapacity)} </Item>
+                <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
+            </Col>
+          </Row>
+
+        </FleetMenu>
+      </Col>
+     
       
     </Body>
     </Page>

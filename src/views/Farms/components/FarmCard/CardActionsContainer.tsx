@@ -41,7 +41,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID]
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
-
+ 
   const novaPrice = usePriceNovaBusd()
   const bnbPrice = usePriceBnbBusd()
   const usdtPrice = usePriceUsdtBusd()

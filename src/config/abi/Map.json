@@ -45,7 +45,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "MineralMined",
+		"name": "MineralGathered",
 		"type": "event"
 	},
 	{
@@ -287,6 +287,24 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			}
+		],
+		"name": "addEmpty",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_name",
 				"type": "string"
@@ -353,6 +371,29 @@
 				"type": "uint256"
 			},
 			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "addSalvageToPlace",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			},
+			{
 				"internalType": "string",
 				"name": "_name",
 				"type": "string"
@@ -376,53 +417,21 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "baseTravelCooldown",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "baseTravelCost",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_x",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_y",
 				"type": "uint256"
 			}
 		],
-		"name": "coordinatePlaces",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"name": "collect",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -460,13 +469,43 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
 			}
 		],
-		"name": "fleetMineral",
+		"name": "getCoordinateInfo",
 		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
 			{
 				"internalType": "uint256",
 				"name": "",
@@ -532,6 +571,11 @@
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "salvage",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Map.Place[]",
@@ -599,11 +643,21 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_player",
+				"name": "_fleet",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
 			}
 		],
-		"name": "getFleetMineral",
+		"name": "getFleetTravelCooldown",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -731,6 +785,19 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "increasePreviousBalance",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_editor",
 				"type": "address"
@@ -797,38 +864,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "maxTravel",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "mine",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "_amount",
-				"type": "int256"
-			}
-		],
-		"name": "mineralGained",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -847,147 +883,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "placeExists",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "placeTypes",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "places",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "placeType",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "childId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "coordX",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "coordY",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "planets",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "placeId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "starId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "starDistance",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "isMiningPlanet",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "availableMineral",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "hasRefinery",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "hasShipyard",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "previousBalance",
 		"outputs": [
@@ -998,6 +893,13 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "recall",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1019,19 +921,6 @@
 		"name": "requestToken",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "rewardsMod",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1095,12 +984,22 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "_x",
+				"name": "_xFrom",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_y",
+				"name": "_yFrom",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_xTo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_yTo",
 				"type": "uint256"
 			}
 		],
@@ -1247,45 +1146,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "stars",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "placeId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "luminosity",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "totalMiningPlanets",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "totalMiningPlanetDistance",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "newOwner",
 				"type": "address"
@@ -1312,19 +1172,6 @@
 		"name": "travel",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "travelCooldownPerDistance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	}
 ]

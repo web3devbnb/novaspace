@@ -7,6 +7,12 @@ export const approve = async (lpContract, masterChefContract, account) => {
     .send({ from: account })
 }
 
+export const novaApprove = async (novaContract, novariaContract, account) => {
+  return novaContract.methods
+    .approve(novariaContract, ethers.constants.MaxUint256)
+    .send({ from: account })
+}
+
 export const stake = async (masterChefContract, pid, amount, account) => {
   return masterChefContract.methods
     .deposit(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
@@ -186,5 +192,42 @@ export const goBattle = async (fleetContract, battleId, account) => {
     })
 }
 
+// Map Functions
+
+export const mine = async (mapContract, account) => {
+  return mapContract.methods
+    .mine()
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const refine = async (mapContract, account) => {
+  return mapContract.methods
+    .refine()
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const collect = async (mapContract, x, y, account) => {
+  return mapContract.methods
+    .collect(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const travel = async (mapContract, x, y, account) => {
+  return mapContract.methods
+    .travel(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
 
 

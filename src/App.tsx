@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 import './bubbles.scss'
 
 
+
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
@@ -39,7 +40,7 @@ const App: React.FC = () => {
     <Router>
       <ResetCSS />
       
-      <Menu style={{ backgroundColor:"black" }}>
+      <Menu >
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
@@ -58,13 +59,13 @@ const App: React.FC = () => {
               <Novaria />
             </Route>
           
-            <Route path="/map">
+            <Route path="/map" >
             <GlobalStyle isNovaria />
               <Map />
             </Route>
-            <Route path="/location">
+            <Route path="/location" >
             <GlobalStyle isNovaria />
-              <Location />
+              <Location  />
             </Route>
             <Route path="/overview">
             <GlobalStyle isNovaria />

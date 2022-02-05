@@ -29,7 +29,15 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
 
 
 const Page = styled.div`
+  background-Image: url('/images/novaria/mapBG.jpg');
+  background-size: cover;
+  font-size: 15px;
+  margin-top: -105px;
+  color: #5affff;
 
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-top: -75px;
+  }
 `
 
 const Body = styled.div`
@@ -37,6 +45,7 @@ const Body = styled.div`
   // fix background later
   background-Image: url('/images/home/starsBackground.jpg');
   background-size: cover;
+  height: 500px;
 `
 
 const Overview: React.FC = (props) => {

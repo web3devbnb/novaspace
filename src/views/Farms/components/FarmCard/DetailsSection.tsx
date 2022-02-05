@@ -66,14 +66,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
           {lpLabel}
         </StyledLinkExternal>
       </Flex>
-      {!removed && (
-        <Flex justifyContent="space-between">
-          <Text bold fontSize="14px">
-            {TranslateString(999, 'DEPOSIT FEE')}:            
-          </Text>          
-          <Text>{depositFee}%</Text>
-        </Flex>
-      )}
+   
       {/* <Flex><Text fontSize="12px">(75% to sNova Rewards, 25% Marketing)</Text></Flex> */}
       <Flex justifyContent="flex-start">
         <Link external href={bscScanAddress} bold={false}>

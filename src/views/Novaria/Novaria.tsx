@@ -1,10 +1,18 @@
 import React, {useState} from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
 import ModalVideo from "react-modal-video";
-import Divider from './components/Divider'
+import { useGetAllowance, useApprove, useInsertCoinHere
+    } from 'hooks/useNovaria'
+    import {
+      getNovaAddress, 
+      getFleetAddress,
+      getMapAddress,
+      getTreasuryAddress
+    } from 'utils/addressHelpers'
 import logo from './assets/novariaLogoMain.png'
 import "react-modal-video/scss/modal-video.scss";
 
@@ -99,7 +107,57 @@ const Button = styled.button`
 
 
 const Novaria: React.FC = () => {
+  const { account } = useWallet()
   const [isOpen, setOpen] = useState(false)
+  const [pendingTx, setPendingTx] = useState(false)
+  const [name, setName] = useState('')
+
+  const fleetContract = getFleetAddress()
+  const mapContract = getMapAddress()
+  const treasuryContract = getTreasuryAddress()
+  console.log('fleet:', fleetContract, 'map:', mapContract, 'treasury:', treasuryContract)
+  const connected = account !== null
+  const allowanceFleet = useGetAllowance(fleetContract)
+  const allowanceMap = useGetAllowance(mapContract)
+  const allowanceTreasury = useGetAllowance(treasuryContract)
+  const isAllowed = connected && allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
+  const { onClick } = useApprove()
+  const { onCoin } = useInsertCoinHere()
+
+  
+  const sendInsertCoinTx = async () => {
+    setPendingTx(true)
+    try {
+      await onCoin(name)      
+    } catch (error) {
+       console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const sendApproveTx = async (contract) => {
+    setPendingTx(true)
+    try {
+      await onClick(contract)      
+    } catch (error) {
+       console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const handleApprove = () => {
+    if (allowanceFleet <= 0 ) {
+      sendApproveTx(fleetContract) }
+    if (allowanceMap <= 0 ) {
+      sendApproveTx(mapContract) }
+    if (allowanceTreasury <= 0 ) {
+      sendApproveTx(treasuryContract) }
+  }
+
+
+
   return (
     <Page1>
       <Body>
@@ -112,6 +170,16 @@ const Novaria: React.FC = () => {
             onClose={() => setOpen(false)}
           />
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
+         {/* eslint-disable-next-line no-nested-ternary */}
+          {isAllowed ? <Button type="button" ><a href = '/shipyard'>Enter</a></Button> 
+          : !connected ? <Button>Connect Wallet</Button> :
+            <Button type="button" onClick={handleApprove} >Approve Contracts </Button>}
+            <br />
+            {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
+            <input type='text' required maxLength={16} onChange={(e) => setName(e.target.value)} />
+            {console.log('player name', name)}
+            <Button onClick={sendInsertCoinTx} >Set Player Name</Button>
+
           <SubHeading>
             - Coming Soon - <br/> 
           <br />

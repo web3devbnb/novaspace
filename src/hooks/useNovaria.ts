@@ -21,15 +21,16 @@ import {
 import {
   fetchFarmUserDataAsync,
 } from 'state/actions'
-import { buildShips, claimShips, insertCoinHere } from 'utils/callHelpers'
+import { buildShips, claimShips, insertCoinHere,
+          mine, refine, collect, travel, novaApprove } from 'utils/callHelpers'
 import { Wallet } from 'ethers'
-import { useFleet, useMap, useApprovals } from './useContract'
+import { useFleet, useMap, useApprovals, useNova } from './useContract'
 import useRefresh from './useRefresh'
 
 // Contract constants
   const fleetContract = getContract(fleetABI, getFleetAddress())
   const mapContract = getContract(mapABI, getMapAddress())
-  const approvalsContract = getContract(approvalsABI, getApprovalsAddress())
+  const novaContract = getContract(novaABI, getNovaAddress())
   const web3 = getWeb3()
 
 // ~~~Fleet contract functions~~~
@@ -48,7 +49,7 @@ export const useInsertCoinHere = () => {
     },
     [account, useFleetContract],
   )
-  return { onClick: handleInsertCoinHere }
+  return { onCoin: handleInsertCoinHere }
 }
 
 export const useBuildShips = () => {
@@ -71,7 +72,7 @@ export const useClaimShips = () => {
   const useFleetContract = useFleet()
 
   const handleClaimShips = useCallback(
-    async (dockId: number, amount: number) => {
+    async (dockId: string, amount: string) => {
       const txHash = await claimShips(useFleetContract, dockId, amount, account)
       console.info(txHash)
     },
@@ -135,7 +136,7 @@ export const useGetFleet = () => {
 
   useEffect(() => {
     async function fetchFleet() {
-      const data = await fleetContract.methods.getFleets(account).call()
+      const data = await fleetContract.methods.getShips(account).call()
       setFleet(data)
     }
       fetchFleet()
@@ -143,18 +144,17 @@ export const useGetFleet = () => {
   return fleet
 }
 
-export const useGetFleetSize = () => {
-  const { account } = useWallet()
+export const useGetFleetSize = (fleet) => {
   const {slowRefresh} = useRefresh()
   const [fleetSize, setFleetSize] = useState(null)
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getFleetSize(account).call()
+      const data = await fleetContract.methods.getFleetSize(fleet).call()
       setFleetSize(data)
     }
       fetch()
-  }, [slowRefresh, account])
+  }, [slowRefresh, fleet])
   return fleetSize
 }
 
@@ -203,25 +203,252 @@ export const useGetMiningCapacity = () => {
   return miningCapacity
 }
 
-// ~~~Map contract functions~~~
-// Active Functions
-
-
-// ***View Functions***
-
-export const useGetFleetLocation = () => {
-  const { account } = useWallet()
+export const useGetBattlesAtLocation = (x, y) => {
   const {slowRefresh} = useRefresh()
-  const [fleetLocation, setFleetLocation] = useState([])
+  const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getFleetLocation(account).call()
-      setFleetLocation(data)
+      const data = await fleetContract.methods.getBattlesAtLocation(x, y).call()
+      setBattlesAtLocation(data)
+    }
+      fetch()
+  }, [slowRefresh, x, y])
+  return battlesAtLocation
+}
+
+// returns all battles
+export const useGetBattles = () => {
+  const {slowRefresh} = useRefresh()
+  const [battles, setBattles] = useState([])
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getBattles().call()
+      setBattles(data)
+    }
+      fetch()
+  }, [slowRefresh])
+  return battles
+}
+
+export const useGetBattle = (id) => {
+  const {slowRefresh} = useRefresh()
+  const [battle, setBattle] = useState()
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getBattle(id).call()
+      setBattle(data)
+    }
+      fetch()
+  }, [slowRefresh, id])
+  return battle
+}
+
+export const useGetAttackPower = (fleet) => {
+  const {slowRefresh} = useRefresh()
+  const [attackPower, setAttackPower] = useState('')
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getAttackPower(fleet).call()
+      setAttackPower(data)
+    }
+      fetch()
+  }, [slowRefresh, fleet])
+  return attackPower
+}
+
+
+
+
+// ~~~Map contract functions~~~
+// Movement, mining, refining, tracks mineral
+// Active Functions
+
+export const useMine = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+  
+  const handleMine = useCallback(
+    async () => {
+      const txHash = await mine(useMapContract, account)    
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onClick: handleMine }
+}
+
+export const useRefine = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+  
+  const handleRefine = useCallback(
+    async () => {
+      const txHash = await refine(useMapContract, account)    
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onClick: handleRefine }
+}
+
+export const useCollect = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+  
+  const handleCollect = useCallback(
+    async (x: number, y: number) => {
+      const txHash = await collect(useMapContract, x, y, account)    
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onClick: handleCollect }
+}
+
+export const useTravel = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+  
+  const handleTravel = useCallback(
+    async (x: number, y: number) => {
+      const txHash = await travel(useMapContract, x, y, account)    
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onClick: handleTravel }
+}
+
+// ***View Functions***
+
+export const useGetFleetLocation = (fleet) => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [fleetLocation, setFleetLocation] = useState({X: 0, Y: 0})
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetLocation(fleet).call()
+      setFleetLocation({X: data.x, Y: data.y})
     } fetch()
-  }, [slowRefresh, account])
+  }, [slowRefresh, fleet, account])
   return fleetLocation
 }
 
-// Movement, mining, refining, tracks mineral
+export const useGetPlaceId = (x: string, y: string) => {
+  const {slowRefresh} = useRefresh()
+  const [placeId, setPlaceId] = useState(null)
 
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.coordinatePlaces(x, y).call()
+      setPlaceId(data)
+    } fetch()
+  }, [slowRefresh, x, y])
+  return placeId
+}
+
+export const useGetPlaceInfo = (x: number, y: number) => {
+  const {slowRefresh} = useRefresh()
+  const [placeInfo, setPlaceInfo] = useState({name: '', type: '', scrap: 0, shipyard: false, refinery: false, mineral: 0})
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getCoordinateInfo(x, y).call()
+      setPlaceInfo(
+       { name: data.placeName, type: data.placeType, scrap: data.scrap, shipyard: data.hasShipyard, refinery: data.hasRefinery, mineral: data.mineral
+      }
+      )
+    } fetch( )
+  }, [slowRefresh, x, y ])
+  return placeInfo
+}
+
+export const useGetFleetsAtLocation = (x: string, y: string) => {
+  const {slowRefresh} = useRefresh()
+  const [fleetsAtLocation, setFleetsAtLocation] = useState([])
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetsAtLocation(x, y).call()
+      setFleetsAtLocation(data)
+    } fetch()
+  }, [slowRefresh, x, y])
+  return fleetsAtLocation
+}
+
+export const useGetFleetMineral = (fleet: string) => {
+  const {slowRefresh} = useRefresh()
+  const [fleetMineral, setFleetMineral] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetMineral(fleet).call()
+      setFleetMineral(data)
+    } fetch()
+  }, [slowRefresh, fleet])
+  return fleetMineral
+}
+
+export const useGetDistanceFromFleet = (fleet: string, x: string, y: string) => {
+  const {slowRefresh} = useRefresh()
+  const [DistanceFromFleet, setDistanceFromFleet] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getDistanceFromFleet(fleet, x, y).call()
+      setDistanceFromFleet(data)
+    } fetch()
+  }, [slowRefresh, fleet, x, y])
+  return DistanceFromFleet
+}
+
+export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
+  const {slowRefresh} = useRefresh()
+  const [FleetTravelCost, setFleetTravelCost] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetTravelCost(fleet, x, y).call()
+      setFleetTravelCost(data)
+    } fetch()
+  }, [slowRefresh, fleet, x, y])
+  return FleetTravelCost
+}
+
+
+
+// *** Nova token contract ***
+// used for approvals
+
+export const useApprove = () => {
+  const { account } = useWallet()
+  const useNovaContract = useNova()
+  
+  const handleApprove = useCallback(
+    async (contract) => {
+      const txHash = await novaApprove(useNovaContract, contract, account)    
+      console.info(txHash)
+    },
+    [account, useNovaContract],
+  )
+  return { onClick: handleApprove }
+}
+
+export const useGetAllowance = (contract) => {
+  const { account } = useWallet()
+  const {slowRefresh} = useRefresh()
+  const [allowance, setAllowance] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await novaContract.methods.allowance(account, contract).call()
+      setAllowance(data)
+    } fetch()
+  }, [slowRefresh, account, contract])
+  return allowance
+}

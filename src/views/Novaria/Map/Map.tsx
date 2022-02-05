@@ -1,6 +1,9 @@
 import { AbiItem } from 'web3-utils'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { useGetFleetLocation } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
@@ -8,6 +11,14 @@ import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import shipyardLogo from '../assets/shipyard.png'
+import starLogo from '../assets/star.png'
+import scrapLogo from '../assets/scrap.png'
+import refineryLogo from '../assets/refinery.png'
+import planetLogo from '../assets/planet.png'
+import emptyLogo from '../assets/emptyLocation.png'
+import youLogo from '../assets/you.png'
+
 
 // Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
 // and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
@@ -39,17 +50,22 @@ export interface GridProps {
 }
 
 const Page = styled.div`
+  background-Image: url('/images/novaria/mapBG.jpg');
+  background-size: cover;
+  font-size: 15px;
+  margin-top: -105px;
+  color: #5affff;
 
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-top: -75px;
+  }
 `
 
 const Body = styled.div`
-  height: calc(100vh - 68px - 145px);
+  height: auto;
   display: flex;
   flex-direction: column;
-  margin: 10px 50px 10px 150px;
-  // fix background later
-  background-Image: url('/images/home/starsBackground.jpg');
-  background-size: cover;
+  margin: 10px 50px 0px 150px;
 `
 
 const Grid = styled.div`
@@ -58,19 +74,51 @@ const Grid = styled.div`
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
+  margin: 10px 10px 10px;
+  background-Image: url('/images/novaria/border.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px;
+  aspect-ratio: 16/8;
 `
 
 const GridCell = styled.div`
+  display: flex;
   color: white;
-  outline: 1px solid black;
   position: relative;
+  z-index: 0;
+
+
+`
+
+const GridCellImg = styled.img`
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    align-items: center;
+    align-self: center;
+    height: 50%;
+    z-index: -1;
+`
+
+const IndicatorImg = styled.img`
+  width: 10%;
+  height: auto;
+  align-self: center;
+  // z-axis: 1;
 `
 
 const GridCellContent = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 10px;
+  z-index: 1;
+  opacity: 0;
+
+  &:Hover {
+    opacity: 1;
+
+  }
 `
 
 const GridCellId = styled.div`
@@ -99,10 +147,13 @@ const InputControl = styled.div`
   padding: 10px;
   color: white;
   gap: 5px;
+  margin: 10px;
 `
 
-const NX = 5
-const NY = 5
+
+
+const NX = 7
+const NY = 7
 
 const Map: React.FC = (props) => {
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
@@ -112,6 +163,11 @@ const Map: React.FC = (props) => {
 
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
+
+  
+  const { account } = useWallet()
+  const fleetLocation = useGetFleetLocation(account)
+  console.log(fleetLocation, fleetLocation.X, fleetLocation.Y)
 
   useEffect(() => {
     const fetch = async () => {
@@ -153,25 +209,31 @@ const Map: React.FC = (props) => {
           return mapData.data[ri].map((el, j) => {
             return (
               <GridCell>
-                {el.name && (
+              {(ri + mapData.x0).toString() === fleetLocation.X.toString() && (j + mapData.y0).toString() === fleetLocation.Y.toString() 
+                ? <IndicatorImg src={youLogo} alt='current location' /> : ''}  
+                 {/* {el.name && ( */}
                   <GridCellContent>
                     <Text bold glowing>
                       {el.name}
                     </Text>
-                    <Text bold glowing>
-                      {el.placeType}
+                    <Text>
+                      {el.placeType === 'empty' ? 'move' : ''}
                     </Text>
-                    <Text glowing fontSize="0.6rem" style={{ flexGrow: 1 }}>
-                      ...
-                    </Text>
-                    <Text bold glowing fontSize="0.8rem">
-                      COLLECTED NOVA: 12345
-                    </Text>
+                    <GridCellId>
+                      ({ri + mapData.x0} , {j + mapData.y0})
+                    </GridCellId>
+                    
+                  
+                    <Link  to={{
+                            pathname: "/location",
+                            state: [{x: ri + mapData.x0 , y: j + mapData.y0}]
+                          }} 
+                        >Details </Link>
                   </GridCellContent>
-                )}
-                <GridCellId>
-                  ({ri + mapData.x0} , {j + mapData.y0})
-                </GridCellId>
+                {/* )} */}
+                {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt='planet' /> : '' }
+                {el.placeType === 'star' ? <GridCellImg src={starLogo} alt='star' /> : ''}
+                {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt='star' /> : ''}
               </GridCell>
             )
           })
