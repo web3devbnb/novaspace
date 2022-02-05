@@ -12,39 +12,31 @@ import approvalsABI from 'config/abi/Approvals.json'
 import erc20ABI from 'config/abi/erc20.json'
 import { getContract, getWeb3 } from 'utils/web3'
 import { getTokenBalance } from 'utils/erc20'
-import {
-  getNovaAddress, 
-  getFleetAddress,
-  getApprovalsAddress,
-  getMapAddress
-} from 'utils/addressHelpers'
-import {
-  fetchFarmUserDataAsync,
-} from 'state/actions'
-import { buildShips, claimShips, insertCoinHere,
-          mine, refine, collect, travel, novaApprove } from 'utils/callHelpers'
+import { getNovaAddress, getFleetAddress, getApprovalsAddress, getMapAddress } from 'utils/addressHelpers'
+import { fetchFarmUserDataAsync } from 'state/actions'
+import { buildShips, claimShips, insertCoinHere, mine, refine, collect, travel, novaApprove } from 'utils/callHelpers'
 import { Wallet } from 'ethers'
 import { useFleet, useMap, useApprovals, useNova } from './useContract'
 import useRefresh from './useRefresh'
 
 // Contract constants
-  const fleetContract = getContract(fleetABI, getFleetAddress())
-  const mapContract = getContract(mapABI, getMapAddress())
-  const novaContract = getContract(novaABI, getNovaAddress())
-  const web3 = getWeb3()
+const fleetContract = getContract(fleetABI, getFleetAddress())
+const mapContract = getContract(mapABI, getMapAddress())
+const novaContract = getContract(novaABI, getNovaAddress())
+const web3 = getWeb3()
 
 // ~~~Fleet contract functions~~~
-// player setup and current ships, building ships, combat 
+// player setup and current ships, building ships, combat
 
 // Active functions
 
 export const useInsertCoinHere = () => {
   const { account } = useWallet()
   const useFleetContract = useFleet()
-  
+
   const handleInsertCoinHere = useCallback(
     async (name: string) => {
-      const txHash = await insertCoinHere(useFleetContract, name, account)    
+      const txHash = await insertCoinHere(useFleetContract, name, account)
       console.info(txHash)
     },
     [account, useFleetContract],
@@ -55,14 +47,14 @@ export const useInsertCoinHere = () => {
 export const useBuildShips = () => {
   const { account } = useWallet()
   const useFleetContract = useFleet()
-  
+
   const handleBuildShips = useCallback(
     async (x: string, y: string, classId: string, amount: string) => {
       const txHash = await buildShips(useFleetContract, x, y, classId, amount, account)
-      
+
       console.info(txHash)
     },
-    [account, useFleetContract]
+    [account, useFleetContract],
   )
   return { onBuild: handleBuildShips }
 }
@@ -76,9 +68,9 @@ export const useClaimShips = () => {
       const txHash = await claimShips(useFleetContract, dockId, amount, account)
       console.info(txHash)
     },
-    [account, useFleetContract]
+    [account, useFleetContract],
   )
-  return {onClaim: handleClaimShips}
+  return { onClaim: handleClaimShips }
 }
 
 // ***View functions***
@@ -90,15 +82,13 @@ export const useGetShipClasses = () => {
   useEffect(() => {
     async function fetchshipClasses() {
       const data = await fleetContract.methods.getShipClasses().call()
-       setShipClasses(data)
-
+      setShipClasses(data)
     }
 
     fetchshipClasses()
   }, [slowRefresh])
-    return shipClasses
+  return shipClasses
 }
-
 
 export const useGetShipyards = () => {
   const { slowRefresh } = useRefresh()
@@ -116,22 +106,22 @@ export const useGetShipyards = () => {
 
 export const useGetSpaceDock = () => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [spaceDock, setSpaceDock] = useState([])
 
   useEffect(() => {
     async function fetchSpaceDock() {
-    const data = await fleetContract.methods.getPlayerSpaceDocks(account).call()
-    setSpaceDock(data) 
-  }
+      const data = await fleetContract.methods.getPlayerSpaceDocks(account).call()
+      setSpaceDock(data)
+    }
     fetchSpaceDock()
-  }, [slowRefresh, account] )
+  }, [slowRefresh, account])
   return spaceDock
 }
 
 export const useGetFleet = () => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [fleet, setFleet] = useState([])
 
   useEffect(() => {
@@ -139,13 +129,13 @@ export const useGetFleet = () => {
       const data = await fleetContract.methods.getShips(account).call()
       setFleet(data)
     }
-      fetchFleet()
+    fetchFleet()
   }, [slowRefresh, account])
   return fleet
 }
 
 export const useGetFleetSize = (fleet) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [fleetSize, setFleetSize] = useState(null)
 
   useEffect(() => {
@@ -153,14 +143,14 @@ export const useGetFleetSize = (fleet) => {
       const data = await fleetContract.methods.getFleetSize(fleet).call()
       setFleetSize(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, fleet])
   return fleetSize
 }
 
 export const useGetMaxFleetSize = () => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [maxFleetSize, setMAxFleetSize] = useState(null)
 
   useEffect(() => {
@@ -168,14 +158,14 @@ export const useGetMaxFleetSize = () => {
       const data = await fleetContract.methods.getMaxFleetSize(account).call()
       setMAxFleetSize(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, account])
   return maxFleetSize
 }
 
 export const useGetMaxMineralCapacity = () => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [maxMineralCapacity, setMaxMineralCapacity] = useState('')
 
   useEffect(() => {
@@ -183,14 +173,14 @@ export const useGetMaxMineralCapacity = () => {
       const data = await fleetContract.methods.getMaxMineralCapacity(account).call()
       setMaxMineralCapacity(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, account])
   return maxMineralCapacity
 }
 
 export const useGetMiningCapacity = () => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [miningCapacity, setMiningCapacity] = useState('')
 
   useEffect(() => {
@@ -198,13 +188,13 @@ export const useGetMiningCapacity = () => {
       const data = await fleetContract.methods.getMiningCapacity(account).call()
       setMiningCapacity(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, account])
   return miningCapacity
 }
 
 export const useGetBattlesAtLocation = (x, y) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
@@ -212,14 +202,14 @@ export const useGetBattlesAtLocation = (x, y) => {
       const data = await fleetContract.methods.getBattlesAtLocation(x, y).call()
       setBattlesAtLocation(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, x, y])
   return battlesAtLocation
 }
 
 // returns all battles
 export const useGetBattles = () => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [battles, setBattles] = useState([])
 
   useEffect(() => {
@@ -227,13 +217,13 @@ export const useGetBattles = () => {
       const data = await fleetContract.methods.getBattles().call()
       setBattles(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh])
   return battles
 }
 
 export const useGetBattle = (id) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [battle, setBattle] = useState()
 
   useEffect(() => {
@@ -241,13 +231,13 @@ export const useGetBattle = (id) => {
       const data = await fleetContract.methods.getBattle(id).call()
       setBattle(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, id])
   return battle
 }
 
 export const useGetAttackPower = (fleet) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [attackPower, setAttackPower] = useState('')
 
   useEffect(() => {
@@ -255,13 +245,10 @@ export const useGetAttackPower = (fleet) => {
       const data = await fleetContract.methods.getAttackPower(fleet).call()
       setAttackPower(data)
     }
-      fetch()
+    fetch()
   }, [slowRefresh, fleet])
   return attackPower
 }
-
-
-
 
 // ~~~Map contract functions~~~
 // Movement, mining, refining, tracks mineral
@@ -270,38 +257,32 @@ export const useGetAttackPower = (fleet) => {
 export const useMine = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
-  
-  const handleMine = useCallback(
-    async () => {
-      const txHash = await mine(useMapContract, account)    
-      console.info(txHash)
-    },
-    [account, useMapContract],
-  )
+
+  const handleMine = useCallback(async () => {
+    const txHash = await mine(useMapContract, account)
+    console.info(txHash)
+  }, [account, useMapContract])
   return { onClick: handleMine }
 }
 
 export const useRefine = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
-  
-  const handleRefine = useCallback(
-    async () => {
-      const txHash = await refine(useMapContract, account)    
-      console.info(txHash)
-    },
-    [account, useMapContract],
-  )
+
+  const handleRefine = useCallback(async () => {
+    const txHash = await refine(useMapContract, account)
+    console.info(txHash)
+  }, [account, useMapContract])
   return { onClick: handleRefine }
 }
 
 export const useCollect = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
-  
+
   const handleCollect = useCallback(
     async (x: number, y: number) => {
-      const txHash = await collect(useMapContract, x, y, account)    
+      const txHash = await collect(useMapContract, x, y, account)
       console.info(txHash)
     },
     [account, useMapContract],
@@ -312,10 +293,10 @@ export const useCollect = () => {
 export const useTravel = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
-  
+
   const handleTravel = useCallback(
     async (x: number, y: number) => {
-      const txHash = await travel(useMapContract, x, y, account)    
+      const txHash = await travel(useMapContract, x, y, account)
       console.info(txHash)
     },
     [account, useMapContract],
@@ -327,100 +308,116 @@ export const useTravel = () => {
 
 export const useGetFleetLocation = (fleet) => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
-  const [fleetLocation, setFleetLocation] = useState({X: 0, Y: 0})
+  const { slowRefresh } = useRefresh()
+  const [fleetLocation, setFleetLocation] = useState({ X: 0, Y: 0 })
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getFleetLocation(fleet).call()
-      setFleetLocation({X: data.x, Y: data.y})
-    } fetch()
+      setFleetLocation({ X: data.x, Y: data.y })
+    }
+    fetch()
   }, [slowRefresh, fleet, account])
   return fleetLocation
 }
 
 export const useGetPlaceId = (x: string, y: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [placeId, setPlaceId] = useState(null)
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.coordinatePlaces(x, y).call()
       setPlaceId(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, x, y])
   return placeId
 }
 
 export const useGetPlaceInfo = (x: number, y: number) => {
-  const {slowRefresh} = useRefresh()
-  const [placeInfo, setPlaceInfo] = useState({name: '', type: '', scrap: 0, shipyard: false, refinery: false, mineral: 0})
+  const { slowRefresh } = useRefresh()
+  const [placeInfo, setPlaceInfo] = useState({
+    name: '',
+    type: '',
+    scrap: 0,
+    shipyard: false,
+    refinery: false,
+    mineral: 0,
+  })
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getCoordinateInfo(x, y).call()
-      setPlaceInfo(
-       { name: data.placeName, type: data.placeType, scrap: data.scrap, shipyard: data.hasShipyard, refinery: data.hasRefinery, mineral: data.mineral
-      }
-      )
-    } fetch( )
-  }, [slowRefresh, x, y ])
+      setPlaceInfo({
+        name: data.placeName,
+        type: data.placeType,
+        scrap: data.scrap,
+        shipyard: data.hasShipyard,
+        refinery: data.hasRefinery,
+        mineral: data.mineral,
+      })
+    }
+    fetch()
+  }, [slowRefresh, x, y])
   return placeInfo
 }
 
 export const useGetFleetsAtLocation = (x: string, y: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [fleetsAtLocation, setFleetsAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getFleetsAtLocation(x, y).call()
       setFleetsAtLocation(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, x, y])
   return fleetsAtLocation
 }
 
 export const useGetFleetMineral = (fleet: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [fleetMineral, setFleetMineral] = useState(0)
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getFleetMineral(fleet).call()
       setFleetMineral(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, fleet])
   return fleetMineral
 }
 
 export const useGetDistanceFromFleet = (fleet: string, x: string, y: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [DistanceFromFleet, setDistanceFromFleet] = useState(0)
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getDistanceFromFleet(fleet, x, y).call()
       setDistanceFromFleet(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, fleet, x, y])
   return DistanceFromFleet
 }
 
 export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [FleetTravelCost, setFleetTravelCost] = useState(0)
 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getFleetTravelCost(fleet, x, y).call()
       setFleetTravelCost(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, fleet, x, y])
   return FleetTravelCost
 }
-
-
 
 // *** Nova token contract ***
 // used for approvals
@@ -428,10 +425,10 @@ export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
 export const useApprove = () => {
   const { account } = useWallet()
   const useNovaContract = useNova()
-  
+
   const handleApprove = useCallback(
     async (contract) => {
-      const txHash = await novaApprove(useNovaContract, contract, account)    
+      const txHash = await novaApprove(useNovaContract, contract, account)
       console.info(txHash)
     },
     [account, useNovaContract],
@@ -441,14 +438,15 @@ export const useApprove = () => {
 
 export const useGetAllowance = (contract) => {
   const { account } = useWallet()
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [allowance, setAllowance] = useState(0)
 
   useEffect(() => {
     async function fetch() {
       const data = await novaContract.methods.allowance(account, contract).call()
       setAllowance(data)
-    } fetch()
+    }
+    fetch()
   }, [slowRefresh, account, contract])
   return allowance
 }
