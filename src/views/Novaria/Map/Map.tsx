@@ -9,6 +9,7 @@ import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import contracts from 'config/constants/contracts'
+import getRpcUrl from 'utils/getRpcUrl'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import shipyardLogo from '../assets/shipyard.png'
@@ -19,13 +20,8 @@ import planetLogo from '../assets/planet.png'
 import emptyLogo from '../assets/emptyLocation.png'
 import youLogo from '../assets/you.png'
 
-
-// Should really be using `process.env.REACT_APP_CHAIN_ID` and `utils.getRpcUrl()` here,
-// and point `.env.development` to the BSC testnet, but unfortunately doing so breaks
-// the whole web application since it's never been tested on the BSC testnet ... So, for now,
-// hardcoding the BSC testnet configuration.
-const CHAIN_ID = '97'
-const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/' 
+const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
+const RPC_URL = getRpcUrl()
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
 
 const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
@@ -38,7 +34,7 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
 
 const arrayToMatrix = (arr, size) => {
   const res = []
-  for (let i = 0; i < arr.length; i += size) { 
+  for (let i = 0; i < arr.length; i += size) {
     res.push(arr.slice(i, i + size))
   }
   return res
@@ -50,7 +46,7 @@ export interface GridProps {
 }
 
 const Page = styled.div`
-  background-Image: url('/images/novaria/mapBG.jpg');
+  background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
   margin-top: -105px;
@@ -75,7 +71,7 @@ const Grid = styled.div`
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
   margin: 10px 10px 10px;
-  background-Image: url('/images/novaria/border.png');
+  background-image: url('/images/novaria/border.png');
   background-size: cover;
   background-repeat: no-repeat;
   padding: 10px;
@@ -87,18 +83,16 @@ const GridCell = styled.div`
   color: white;
   position: relative;
   z-index: 0;
-
-
 `
 
 const GridCellImg = styled.img`
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    align-items: center;
-    align-self: center;
-    height: 50%;
-    z-index: -1;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  align-items: center;
+  align-self: center;
+  height: 50%;
+  z-index: -1;
 `
 
 const IndicatorImg = styled.img`
@@ -115,9 +109,8 @@ const GridCellContent = styled.div`
   z-index: 1;
   opacity: 0;
 
-  &:Hover {
+  &:hover {
     opacity: 1;
-
   }
 `
 
@@ -150,8 +143,6 @@ const InputControl = styled.div`
   margin: 10px;
 `
 
-
-
 const NX = 7
 const NY = 7
 
@@ -164,7 +155,6 @@ const Map: React.FC = (props) => {
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
 
-  
   const { account } = useWallet()
   const fleetLocation = useGetFleetLocation(account)
   console.log(fleetLocation, fleetLocation.X, fleetLocation.Y)
@@ -200,79 +190,82 @@ const Map: React.FC = (props) => {
   return (
     <Page>
       <GameHeader>MAP</GameHeader>
-    <Body>
-       
-      <GameMenu />
-      <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-        {mapData.data.map((arr, i) => {
-          const ri = mapData.data.length - i - 1
-          return mapData.data[ri].map((el, j) => {
-            return (
-              <GridCell>
-              {(ri + mapData.x0).toString() === fleetLocation.X.toString() && (j + mapData.y0).toString() === fleetLocation.Y.toString() 
-                ? <IndicatorImg src={youLogo} alt='current location' /> : ''}  
-                 {/* {el.name && ( */}
+      <Body>
+        <GameMenu />
+        <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
+          {mapData.data.map((arr, i) => {
+            const ri = mapData.data.length - i - 1
+            return mapData.data[ri].map((el, j) => {
+              return (
+                <GridCell>
+                  {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
+                  (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
+                    <IndicatorImg src={youLogo} alt="current location" />
+                  ) : (
+                    ''
+                  )}
+                  {/* {el.name && ( */}
                   <GridCellContent>
                     <Text bold glowing>
                       {el.name}
                     </Text>
-                    <Text>
-                      {el.placeType === 'empty' ? 'move' : ''}
-                    </Text>
+                    <Text>{el.placeType === 'empty' ? 'move' : ''}</Text>
                     <GridCellId>
                       ({ri + mapData.x0} , {j + mapData.y0})
                     </GridCellId>
-                    
-                  
-                    <Link  to={{
-                            pathname: "/location",
-                            state: [{x: ri + mapData.x0 , y: j + mapData.y0}]
-                          }} 
-                        >Details </Link>
+
+                    <Link
+                      to={{
+                        pathname: '/location',
+                        state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
+                      }}
+                    >
+                      Details{' '}
+                    </Link>
                   </GridCellContent>
-                {/* )} */}
-                {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt='planet' /> : '' }
-                {el.placeType === 'star' ? <GridCellImg src={starLogo} alt='star' /> : ''}
-                {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt='star' /> : ''}
-              </GridCell>
-            )
-          })
-        })}
-      </Grid>
+                  {/* )} */}
+                  {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
+                  {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
+                  {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
+                </GridCell>
+              )
+            })
+          })}
+        </Grid>
 
-      <GridControls>
-        <InputControl>
-          <button type="button" onClick={handleFindLocationClick}>
-            Find location (x, y)
-          </button>
-          (
-          <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-          ,
-          <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
-        </InputControl>
+        <GridControls>
+          <InputControl>
+            <button type="button" onClick={handleFindLocationClick}>
+              Find location (x, y)
+            </button>
+            (
+            <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+            ,
+            <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
+          </InputControl>
 
-        <InputControl>
-          <button type="button" onClick={handleSetGridSizeClick}>
-            Set grid size (x, y)
-          </button>
-          <CoordInput
-            type="number"
-            min="1"
-            max="16"
-            value={XLen}
-            onChange={(e) => setXLen(parseFloat(e.target.value))}
-          />
-          x
-          <CoordInput
-            type="number"
-            min="1"
-            max="16"
-            value={YLen}
-            onChange={(e) => setYLen(parseFloat(e.target.value))}
-          />
-        </InputControl>
-      </GridControls>
-    </Body>
+          <InputControl>
+            <button type="button" onClick={handleSetGridSizeClick}>
+              Set grid size (x, y)
+            </button>
+            <CoordInput
+              type="number"
+              min="1"
+              max="16"
+              value={XLen}
+              onChange={(e) => setXLen(parseFloat(e.target.value))}
+            />
+            x
+            <CoordInput
+              type="number"
+              min="1"
+              max="16"
+              value={YLen}
+              onChange={(e) => setYLen(parseFloat(e.target.value))}
+            />
+          </InputControl>
+        </GridControls>
+      </Body>
     </Page>
   )
 }
