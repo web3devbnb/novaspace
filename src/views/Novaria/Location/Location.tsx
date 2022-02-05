@@ -10,30 +10,22 @@ import contracts from 'config/constants/contracts'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 
-
-const Page = styled.div`
-
-`
+const Page = styled.div``
 
 const Body = styled.div`
   margin: 10px 50px 10px 150px;
   // fix background later
-  background-Image: url('/images/home/starsBackground.jpg');
+  background-image: url('/images/home/starsBackground.jpg');
   background-size: cover;
 `
 
 const Location: React.FC = () => {
-  
-
-
   return (
     <Page>
-      <GameHeader>MAP</GameHeader>
-    <Body>
-      
-      <GameMenu />
-      
-    </Body>
+      <GameHeader>LOCATION</GameHeader>
+      <Body>
+        <GameMenu />
+      </Body>
     </Page>
   )
 }
