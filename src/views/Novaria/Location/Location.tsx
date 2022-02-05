@@ -7,15 +7,13 @@ import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
-import { useGetPlaceId, useGetPlaceInfo, } from 'hooks/useNovaria'
+import { useGetPlaceId, useGetPlaceInfo } from 'hooks/useNovaria'
 import contracts from 'config/constants/contracts'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 
-
-
 const Page = styled.div`
-  background-Image: url('/images/novaria/mapBG.jpg');
+  background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
   margin-top: -105px;
@@ -33,7 +31,6 @@ const Body = styled.div`
   background-size: cover;
   height: 500px;
   display: flex;
-
 `
 
 const CoordInput = styled.input`
@@ -98,23 +95,23 @@ const Location: React.FC = () => {
           <div>
             <PlanetImageCard />
             <PlanetInfoCard>
-              <div>HAVEN</div>
+              <Header>HAVEN</Header>
             </PlanetInfoCard>
           </div>
           <div>
             <OpenBattlesCard>
-              <div>OPEN BATTLES</div>
+              <Header>OPEN BATTLES</Header>
             </OpenBattlesCard>
             <PlayersCard>
-              <div>PLAYERS</div>
+              <Header>PLAYERS</Header>
             </PlayersCard>
           </div>
           <div>
             <YourFleetCard>
-              <div>YOUR FLEET</div>
+              <Header>YOUR FLEET</Header>
             </YourFleetCard>
             <BattleProgressCard>
-              <div>BATTLE PROGRESS</div>
+              <Header>BATTLE PROGRESS</Header>
             </BattleProgressCard>
           </div>
         </Content>
