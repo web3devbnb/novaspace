@@ -1,15 +1,10 @@
-import { AbiItem } from 'web3-utils'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetFleetLocation } from 'hooks/useNovaria'
 import styled from 'styled-components'
-import MapAbi from 'config/abi/Map.json'
-import Web3 from 'web3'
-import { HttpProviderOptions } from 'web3-core-helpers'
-import contracts from 'config/constants/contracts'
-import getRpcUrl from 'utils/getRpcUrl'
+import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import shipyardLogo from '../assets/shipyard.png'
@@ -20,13 +15,7 @@ import planetLogo from '../assets/planet.png'
 import emptyLogo from '../assets/emptyLocation.png'
 import youLogo from '../assets/you.png'
 
-const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
-const RPC_URL = getRpcUrl()
-const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
-
-const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
-  const web3 = new Web3(httpProvider)
-  const contract = new web3.eth.Contract(MapAbi as unknown as AbiItem, contracts.map[CHAIN_ID])
+const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
   console.log('map data', data)
   return data
@@ -147,6 +136,8 @@ const NX = 7
 const NY = 7
 
 const Map: React.FC = (props) => {
+  const mapContract = useMap()
+
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
   const [X, setX] = useState(0)
@@ -161,17 +152,17 @@ const Map: React.FC = (props) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(0, 0, NX - 1, NY - 1)
+      const data = await fetchMapData(mapContract, 0, 0, NX - 1, NY - 1)
       setMapData({ x0: 0, y0: 0, data: arrayToMatrix(data, NX) })
     }
     fetch()
-  }, [])
+  }, [mapContract])
 
   const handleFindLocationClick = async () => {
     if (mapData.x0 === X && mapData.y0 === Y) {
       return
     }
-    const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
+    const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
@@ -179,7 +170,7 @@ const Map: React.FC = (props) => {
     if (mapData.data.length === YLen && mapData.data[0].length === XLen) {
       return
     }
-    const data = await fetchMapData(X, Y, X + XLen - 1, Y + YLen - 1)
+    const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
