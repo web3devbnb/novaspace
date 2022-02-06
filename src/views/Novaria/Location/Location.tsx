@@ -1,14 +1,7 @@
-import { AbiItem } from 'web3-utils'
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Text } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
-import MapAbi from 'config/abi/Map.json'
-import Web3 from 'web3'
-import { HttpProviderOptions } from 'web3-core-helpers'
-import { useGetFleetLocation, useGetPlaceId, useGetPlaceInfo } from 'hooks/useNovaria'
-import contracts from 'config/constants/contracts'
+import { useGetBattlesAtLocation, useGetFleetLocation, useGetPlaceInfo } from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 
@@ -89,8 +82,11 @@ const Location: React.FC = () => {
   const { account } = useWallet()
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
+  const battlesAtLocation = useGetBattlesAtLocation(location.X, location.Y)
+
   console.log('x, y:', location.X, location.Y)
   console.log('place info:', placeInfo)
+  console.log('battles:', battlesAtLocation)
 
   // An empty place is a place with no name.
   if (!placeInfo.name) {
@@ -112,6 +108,7 @@ const Location: React.FC = () => {
           <div>
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
+              {battlesAtLocation.map((el) => el)}
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
