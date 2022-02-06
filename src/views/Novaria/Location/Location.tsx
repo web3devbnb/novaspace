@@ -1,7 +1,13 @@
 import React from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
-import { useGetBattlesAtLocation, useGetFleetLocation, useGetPlaceInfo } from 'hooks/useNovaria'
+import {
+  useGetAttackPower,
+  useGetBattlesAtLocation,
+  useGetFleetLocation,
+  useGetFleetSize,
+  useGetPlaceInfo,
+} from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 
@@ -83,10 +89,15 @@ const Location: React.FC = () => {
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
   const battlesAtLocation = useGetBattlesAtLocation(location.X, location.Y)
+  const fleetSize = useGetFleetSize(account)
+  const fleetPower = useGetAttackPower(account)
 
+  console.log('account: ', typeof account, account)
   console.log('x, y:', location.X, location.Y)
   console.log('place info:', placeInfo)
   console.log('battles:', battlesAtLocation)
+  console.log('fleet size:', fleetSize)
+  console.log('fleet power:', fleetPower)
 
   // An empty place is a place with no name.
   if (!placeInfo.name) {
@@ -117,6 +128,8 @@ const Location: React.FC = () => {
           <div>
             <YourFleetCard>
               <Header>YOUR FLEET</Header>
+              {fleetSize}
+              {fleetPower}
             </YourFleetCard>
             <BattleProgressCard>
               <Header>BATTLE PROGRESS</Header>
