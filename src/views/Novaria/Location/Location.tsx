@@ -98,23 +98,45 @@ const Location: React.FC = () => {
           <div>
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
-              {battlesAtLocation.slice(0, 5).map((el) => (
+              <div>
                 <div>
-                  <div>{el}</div>
-                  <div>0x1234...</div>
-                  <div>17:00 UTC</div>
+                  <div>
+                    <div>NAME</div>
+                    <div>FLEET SIZE</div>
+                    <div>TOTAL MINERAL</div>
+                  </div>
                 </div>
-              ))}
+                <div>
+                  {battlesAtLocation.slice(0, 5).map((el) => (
+                    <div>
+                      <div>{el}</div>
+                      <div>0x1234...</div>
+                      <div>17:00 UTC</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
-              {fleetsAtLocation.slice(0, 5).map((el) => (
+              <div>
                 <div>
-                  <div>{el}</div>
-                  <div>1,234</div>
-                  <div>1234</div>
+                  <div>
+                    <div>NAME</div>
+                    <div>FLEET SIZE</div>
+                    <div>TOTAL MINERAL</div>
+                  </div>
                 </div>
-              ))}
+                <div>
+                  {fleetsAtLocation.slice(0, 5).map((el) => (
+                    <div>
+                      <div>{el}</div>
+                      <div>1,234</div>
+                      <div>1234</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </PlayersCard>
           </div>
           <div>
