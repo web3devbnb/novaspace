@@ -1,1 +1,1 @@
-export { default } from './OpenBattlesTableRow'
+export { default } from './OpenBattlesTable'

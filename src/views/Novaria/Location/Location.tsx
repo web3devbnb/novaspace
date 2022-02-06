@@ -13,8 +13,8 @@ import {
 } from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
-import PlayersTableRow from './PlayersTable/PlayersTableRow'
-import OpenBattlesTableRow from './OpenBattlesTable/OpenBattlesTableRow'
+import OpenBattlesTable from './OpenBattlesTable'
+import PlayersTable from './PlayersTable'
 
 const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
@@ -100,37 +100,11 @@ const Location: React.FC = () => {
           <div>
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
-              <div>
-                <div>
-                  <div>
-                    <div>ATTACKER</div>
-                    <div>DEFENDER</div>
-                    <div>START TIME</div>
-                  </div>
-                </div>
-                <div>
-                  {battlesAtLocation.slice(0, 5).map((battle) => (
-                    <OpenBattlesTableRow battle={battle} />
-                  ))}
-                </div>
-              </div>
+              <OpenBattlesTable battles={battlesAtLocation.slice(0, 5)} />
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
-              <div>
-                <div>
-                  <div>
-                    <div>PLAYER</div>
-                    <div>FLEET SIZE</div>
-                    <div>FLEET POWER</div>
-                  </div>
-                </div>
-                <div>
-                  {fleetsAtLocation.slice(0, 5).map((fleet) => (
-                    <PlayersTableRow fleet={fleet} />
-                  ))}
-                </div>
-              </div>
+              <PlayersTable fleets={fleetsAtLocation.slice(0, 5)} />
             </PlayersCard>
           </div>
           <div>

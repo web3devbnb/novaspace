@@ -1,1 +1,1 @@
-export { default } from './PlayersTableRow'
+export { default } from './PlayersTable'
