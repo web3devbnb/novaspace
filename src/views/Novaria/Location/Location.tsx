@@ -14,6 +14,7 @@ import {
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import PlayersTableRow from './PlayersTableRow'
+import OpenBattlesTableRow from './OpenBattlesTableRow'
 
 const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
@@ -108,12 +109,8 @@ const Location: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  {battlesAtLocation.slice(0, 5).map((el) => (
-                    <div>
-                      <div>{el}</div>
-                      <div>0x1234...</div>
-                      <div>17:00 UTC</div>
-                    </div>
+                  {battlesAtLocation.slice(0, 5).map((battle) => (
+                    <OpenBattlesTableRow battle={battle} />
                   ))}
                 </div>
               </div>
