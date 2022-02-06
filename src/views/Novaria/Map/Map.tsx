@@ -107,7 +107,9 @@ const GridCellContent = styled.div`
   z-index: 1;
   opacity: 0;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     opacity: 1;
   }
 `
@@ -144,7 +146,7 @@ const InputControl = styled.div`
 const NX = 7
 const NY = 7
 
-const Map: React.FC = (props) => {
+const Map: React.FC = () => {
   const mapContract = useMap()
 
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
@@ -183,23 +185,16 @@ const Map: React.FC = (props) => {
   }
 
   const HasRefinery = (x, y) => {
-    return(
-    useGetPlaceInfo(x, y).refinery
-    )
+    return useGetPlaceInfo(x, y).refinery
   }
 
   const HasShipyard = (x, y) => {
-    return(
-    useGetPlaceInfo(x, y).shipyard
-    )
+    return useGetPlaceInfo(x, y).shipyard
   }
 
   const HasMineral = (x, y) => {
-    return(
-    useGetPlaceInfo(x, y).mineral
-    )
+    return useGetPlaceInfo(x, y).mineral
   }
-
 
   if (!mapData) {
     return null
@@ -208,51 +203,64 @@ const Map: React.FC = (props) => {
   return (
     <Page>
       <GameHeader>MAP</GameHeader>
-    <Body>
-       
-      <GameMenu pageName='starmap'/>
-      <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-        {mapData.data.map((arr, i) => {
-          const ri = mapData.data.length - i - 1
-          return mapData.data[ri].map((el, j) => {
-            return (
-              <GridCell>
-                 {/* {el.name && ( */}
-                  <GridCellContent aria-haspopup='true'>
-                    <Link  to={{
-                            pathname: "/location",
-                            state: [{x: ri + mapData.x0 , y: j + mapData.y0}]
-                          }} >
+      <Body>
+        <GameMenu pageName="starmap" />
+        <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
+          {mapData.data.map((arr, i) => {
+            const ri = mapData.data.length - i - 1
+            return mapData.data[ri].map((el, j) => {
+              return (
+                <GridCell>
+                  {/* {el.name && ( */}
+                  <GridCellContent aria-haspopup="true">
+                    <Link
+                      to={{
+                        pathname: '/location',
+                        state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
+                      }}
+                    >
                       <Text bold glowing>
                         {el.name}
                       </Text>
                       <Text>{el.placeType === 'empty' ? 'move' : ''}</Text>
 
-                      {el.salvage > 0 ? <GridIcon src={scrapLogo} alt='has salvage' /> : '' }
-                      {HasRefinery(ri + mapData.x0, j + mapData.y0) === true ? <GridIcon src={refineryLogo} alt='planet has refinery' /> : ''}
-                      {HasShipyard(ri + mapData.x0, j + mapData.y0) === true ? <GridIcon src={shipyardLogo} alt='planet has shipyard' /> : ''}
-                      {HasMineral(ri + mapData.x0, j + mapData.y0) > 0 ? <GridIcon src={mineralLogo} alt='planet has minerals' /> : ''}
+                      {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
+                      {HasRefinery(ri + mapData.x0, j + mapData.y0) === true ? (
+                        <GridIcon src={refineryLogo} alt="planet has refinery" />
+                      ) : (
+                        ''
+                      )}
+                      {HasShipyard(ri + mapData.x0, j + mapData.y0) === true ? (
+                        <GridIcon src={shipyardLogo} alt="planet has shipyard" />
+                      ) : (
+                        ''
+                      )}
+                      {HasMineral(ri + mapData.x0, j + mapData.y0) > 0 ? (
+                        <GridIcon src={mineralLogo} alt="planet has minerals" />
+                      ) : (
+                        ''
+                      )}
 
                       <GridCellId>
                         ({ri + mapData.x0} , {j + mapData.y0})
                       </GridCellId>
-                    
-                  
                     </Link>
                   </GridCellContent>
-                {/* )} */}
-                {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt='planet' /> : '' }
-                {el.placeType === 'star' ? <GridCellImg src={starLogo} alt='star' /> : ''}
-                {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt='star' /> : ''}
-              {(ri + mapData.x0).toString() === fleetLocation.X.toString() && (j + mapData.y0).toString() === fleetLocation.Y.toString() 
-                ? <IndicatorImg src={youLogo} alt='current location' /> : ''}  
-              </GridCell>
-            )
-          })
-        })}
-      </Grid>
-
-    
+                  {/* )} */}
+                  {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
+                  {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
+                  {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
+                  {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
+                  (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
+                    <IndicatorImg src={youLogo} alt="current location" />
+                  ) : (
+                    ''
+                  )}
+                </GridCell>
+              )
+            })
+          })}
+        </Grid>
 
         <GridControls>
           <InputControl>

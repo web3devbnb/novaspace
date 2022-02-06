@@ -57,7 +57,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
   const [showInactive, setShowInactive] = useState(false)
   const [stakedOnly, setStakedOnly] = useState(false)
-  const [extremeOnly, setExtremeOnly] = useState(false)
 
   const activeFarms = farmsLP.filter((farm) => farm.multiplier !== '0X')
   const inactiveFarms = farmsLP.filter((farm) => farm.multiplier === '0X')
@@ -147,13 +146,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Trade routes fuel the economy of Novaria and the decentralized exchange
         </Heading>
-        <FarmTabButtons
-          setShowInactive={setShowInactive}
-          stakedOnly={stakedOnly}
-          setStakedOnly={setStakedOnly}
-          extremeOnly={extremeOnly}
-          setExtremeOnly={setExtremeOnly}
-        />
+        <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       </div>
       <div>
         <FlexLayout>

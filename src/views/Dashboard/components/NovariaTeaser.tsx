@@ -15,14 +15,6 @@ const Body = styled.div`
   border-radius: 30px;
 `
 
-const Img = styled.img`
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 0;
-  margin-top: 55px;
-`
-
 const NovariaTeaser = ({ title }: { title: string }) => {
   return (
     <Body id={title}>

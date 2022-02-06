@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StringTranslations } from '@crowdin/crowdin-api-client'
+// import { StringTranslations } from '@crowdin/crowdin-api-client'
 import { TranslationsContext } from 'contexts/Localisation/translationsContext'
 import { allLanguages, EN } from 'config/localisation/languageCodes'
 
@@ -24,7 +24,8 @@ const LanguageContext = React.createContext({
   setTranslatedLanguage: () => undefined,
 } as LanguageState)
 
-const fileId = 8
+// Unused code only left in for reference, just in case it's something that should actually be used.
+/* const fileId = 8
 const projectId = parseInt(process.env.REACT_APP_CROWDIN_PROJECTID)
 const stringTranslationsApi = new StringTranslations({
   token: process.env.REACT_APP_CROWDIN_APIKEY,
@@ -33,6 +34,7 @@ const stringTranslationsApi = new StringTranslations({
 const fetchTranslationsForSelectedLanguage = (selectedLanguage) => {
   return stringTranslationsApi.listLanguageTranslations(projectId, selectedLanguage.code, undefined, fileId, 200)
 }
+ */
 
 const LanguageContextProvider = ({ children }) => {
   const [selectedLanguage, setSelectedLanguage] = useState<any>(EN)

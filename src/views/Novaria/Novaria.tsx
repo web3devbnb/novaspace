@@ -92,7 +92,7 @@ const Button = styled.button`
 const Novaria: React.FC = () => {
   const { account } = useWallet()
   const [isOpen, setOpen] = useState(false)
-  const [pendingTx, setPendingTx] = useState(false)
+  const [, setPendingTx] = useState(false)
   const [name, setName] = useState('')
 
   const fleetContract = getFleetAddress()

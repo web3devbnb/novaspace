@@ -152,7 +152,7 @@ const Shipyard = () => {
   const [buildTime, setBuildTime] = useState(null)
   const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
-  const [pendingTx, setPendingTx] = useState(false)
+  const [, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
   // const [claimId, setClaimId] = useState(null)
 
@@ -200,7 +200,7 @@ const Shipyard = () => {
 
   // styles for the dropdown Selector
   const customStyles = {
-    menu: (provided, state) => ({
+    menu: (provided) => ({
       ...provided,
       width: 180,
       border: '2px solid gray',
@@ -215,13 +215,13 @@ const Shipyard = () => {
       background: 'transparent',
       // height:25,
     }),
-    option: (provided, state) => ({
+    option: (provided) => ({
       ...provided,
       color: 'white',
       // padding: 20,
       background: 'transparent',
     }),
-    placeholder: (provided, state) => ({
+    placeholder: (provided) => ({
       ...provided,
       color: 'white',
       background: 'transparent',
@@ -230,7 +230,7 @@ const Shipyard = () => {
     //   ...provided,
     //   height:10,
     // }),
-    singleValue: (provided, state) => ({
+    singleValue: (provided) => ({
       ...provided,
       color: 'white',
       // background: 'transparent'
