@@ -6,11 +6,16 @@ import { getContract } from 'utils/erc20'
 import { Button, Flex, Text } from '@pancakeswap-libs/uikit'
 import { Farm } from 'state/types'
 import useI18n from 'hooks/useI18n'
-import { QuoteToken } from 'config/constants/types'
 import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
-import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
-import { useFarmFromPid, useFarmUser, useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
+import {
+  useFarmFromPid,
+  useFarmUser,
+  usePriceBnbBusd,
+  usePriceNovaBusd,
+  usePriceUsdtBusd,
+  usePriceEthBusd,
+} from 'state/hooks'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
 
@@ -41,13 +46,12 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID]
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
- 
+
   const novaPrice = usePriceNovaBusd()
   const bnbPrice = usePriceBnbBusd()
   const usdtPrice = usePriceUsdtBusd()
   const ethPrice = usePriceEthBusd()
   const busdPrice = usePriceUsdtBusd()
-  const farms = useFarms()
 
   const lpContract = useMemo(() => {
     if (isTokenOnly) {
@@ -70,18 +74,18 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
 
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
-      <StakeAction 
+      <StakeAction
         farm={farm}
         stakedBalance={stakedBalance}
         tokenBalance={tokenBalance}
         tokenName={lpName}
         pid={pid}
         depositFeeBP={depositFeeBP}
-        novaPrice= {novaPrice}
-        bnbPrice= {bnbPrice}
-        busdPrice= {busdPrice}
-        usdtPrice= {usdtPrice}
-        ethPrice= {ethPrice}
+        novaPrice={novaPrice}
+        bnbPrice={bnbPrice}
+        busdPrice={busdPrice}
+        usdtPrice={usdtPrice}
+        ethPrice={ethPrice}
       />
     ) : (
       <Button style={{ fontSize: 14 }} mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
@@ -98,7 +102,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
           {/* {(farm.pid < 2) && 0716 */}
           {(farm.pid === 2 || farm.pid === 1 || farm.pid === 30) && <>sNOVA</>}
           {/* // {(farm.pid >= 2) && 0716 */}
-          {farm.pid !== 2 && farm.pid !== 1  && farm.pid !== 30 && <>NOVA</>}
+          {farm.pid !== 2 && farm.pid !== 1 && farm.pid !== 30 && <>NOVA</>}
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Earned')}
@@ -107,7 +111,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
       <HarvestAction earnings={earnings} pid={pid} />
       <Flex>
         <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {lpName} 
+          {lpName}
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Staked')}

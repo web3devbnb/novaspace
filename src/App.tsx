@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS } from '@pancakeswap-libs/uikit'
-import Bubbles from 'components/Bubbles'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -10,8 +9,6 @@ import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 import './bubbles.scss'
-
-
 
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
@@ -35,56 +32,52 @@ BigNumber.config({
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
-  const isNovaria = window.location.pathname === './Novaria'
   return (
     <Router>
       <ResetCSS />
-      
-      <Menu >
+
+      <Menu>
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
-            <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} />
               <Home />
             </Route>
             <Route path="/traderoutes">
-            <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} />
               <Farms />
             </Route>
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
             <Route path="/novaria">
-            <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria />
               <Novaria />
             </Route>
-          
-            <Route path="/map" >
-            <GlobalStyle isNovaria />
+
+            <Route path="/map">
+              <GlobalStyle isNovaria />
               <Map />
             </Route>
-            <Route path="/location" >
-            <GlobalStyle isNovaria />
-              <Location  />
+            <Route path="/location">
+              <GlobalStyle isNovaria />
+              <Location />
             </Route>
             <Route path="/overview">
-            <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria />
               <Overview />
             </Route>
             <Route path="/shipyard">
-            <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria />
               <Shipyard />
             </Route>
-            
-            
-            
 
             <Route path="/privacy">
-            <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} />
               <Privacy />
             </Route>
             <Route path="/terms">
-            <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} />
               <Terms />
             </Route>
             <Route component={NotFound} />

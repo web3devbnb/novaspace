@@ -1,20 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
-import Header from 'components/Header'
-import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
-import ModalVideo from "react-modal-video";
-import { useGetAllowance, useApprove, useInsertCoinHere
-    } from 'hooks/useNovaria'
-    import {
-      getNovaAddress, 
-      getFleetAddress,
-      getMapAddress,
-      getTreasuryAddress
-    } from 'utils/addressHelpers'
+import { Flex } from '@pancakeswap-libs/uikit'
+import ModalVideo from 'react-modal-video'
+import { useGetAllowance, useApprove, useInsertCoinHere } from 'hooks/useNovaria'
+import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import logo from './assets/novariaLogoMain.png'
-import "react-modal-video/scss/modal-video.scss";
+import 'react-modal-video/scss/modal-video.scss'
 
 const Page1 = styled(Page)`
   // background-image:url('/images/home/mainBackground-dark.jpg');
@@ -79,32 +72,22 @@ const SubHeading = styled.div`
 `
 
 const Button = styled.button`
-  cursor: pointer;  
+  cursor: pointer;
   margin: 10px;
   align-self: center;
-  padding: .5rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   font-family: sans-serif;
   font-size: 1.25rem;
   text-decoration: none;
-  text-shadow:
-  -2px 4px 4px #091243, 
-  0 0 10px #00D0FF,
-  inset 1px 1px 1px white;
-  color: #1FFFFF;
+  text-shadow: -2px 4px 4px #091243, 0 0 10px #00d0ff, inset 1px 1px 1px white;
+  color: #1fffff;
   border: 2px solid;
   border-radius: 10px;
   background-color: transparent;
-  box-shadow: 
-  0 1px 2px rgba(0,0,0, 0.6), 
-  2px 1px 4px rgba(0,0,0, 0.3), 
-  2px 4px 3px rgba(3,0,128, 0.3), 
-  0 0 7px 2px rgba(0,208,255, 0.6), 
-  inset 0 1px 2px rgba(0,0,0, 0.6), 
-  inset 2px 1px 4px rgba(0,0,0, 0.3), 
-  inset 2px 4px 3px rgba(3,0,128, 0.3), 
-  inset 0 0 7px 2px rgba(0,208,255, 0.6);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
+    0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
+    inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
 `
-
 
 const Novaria: React.FC = () => {
   const { account } = useWallet()
@@ -124,13 +107,12 @@ const Novaria: React.FC = () => {
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere()
 
-  
   const sendInsertCoinTx = async () => {
     setPendingTx(true)
     try {
-      await onCoin(name)      
+      await onCoin(name)
     } catch (error) {
-       console.log('error: ', error)
+      console.log('error: ', error)
     } finally {
       setPendingTx(false)
     }
@@ -139,51 +121,61 @@ const Novaria: React.FC = () => {
   const sendApproveTx = async (contract) => {
     setPendingTx(true)
     try {
-      await onClick(contract)      
+      await onClick(contract)
     } catch (error) {
-       console.log('error: ', error)
+      console.log('error: ', error)
     } finally {
       setPendingTx(false)
     }
   }
 
   const handleApprove = () => {
-    if (allowanceFleet <= 0 ) {
-      sendApproveTx(fleetContract) }
-    if (allowanceMap <= 0 ) {
-      sendApproveTx(mapContract) }
-    if (allowanceTreasury <= 0 ) {
-      sendApproveTx(treasuryContract) }
+    if (allowanceFleet <= 0) {
+      sendApproveTx(fleetContract)
+    }
+    if (allowanceMap <= 0) {
+      sendApproveTx(mapContract)
+    }
+    if (allowanceTreasury <= 0) {
+      sendApproveTx(treasuryContract)
+    }
   }
-
-
 
   return (
     <Page1>
       <Body>
         <Column>
           <Logo src={logo} alt="novaria logo" />
-            <ModalVideo
-            channel="youtube"
-            isOpen={isOpen}
-            videoId="HLKAscn2YAI"
-            onClose={() => setOpen(false)}
-          />
-          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
-         {/* eslint-disable-next-line no-nested-ternary */}
-          {isAllowed ? <Button type="button" ><a href = '/shipyard'>Enter</a></Button> 
-          : !connected ? <Button>Connect Wallet</Button> :
-            <Button type="button" onClick={handleApprove} >Approve Contracts </Button>}
-            <br />
-            {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
-            <input type='text' required maxLength={16} onChange={(e) => setName(e.target.value)} />
-            {console.log('player name', name)}
-            <Button onClick={sendInsertCoinTx} >Set Player Name</Button>
+          <ModalVideo channel="youtube" isOpen={isOpen} videoId="HLKAscn2YAI" onClose={() => setOpen(false)} />
+          <Button
+            type="button"
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            Trailer
+          </Button>
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {isAllowed ? (
+            <Button type="button">
+              <a href="/shipyard">Enter</a>
+            </Button>
+          ) : !connected ? (
+            <Button>Connect Wallet</Button>
+          ) : (
+            <Button type="button" onClick={handleApprove}>
+              Approve Contracts{' '}
+            </Button>
+          )}
+          <br />
+          {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
+          <input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
+          {console.log('player name', name)}
+          <Button onClick={sendInsertCoinTx}>Set Player Name</Button>
 
           <SubHeading>
-            - Coming Soon - <br/> 
-          <br />
-            A 4x space strategy game built on the Binance Smart Chain.
+            - Coming Soon - <br />
+            <br />A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
         </Column>
       </Body>

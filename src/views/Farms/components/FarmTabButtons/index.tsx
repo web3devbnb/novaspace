@@ -26,7 +26,6 @@ const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive, extremeOnl
         <ButtonMenuItem>{TranslateString(698, 'Active')}</ButtonMenuItem>
         <ButtonMenuItem>{TranslateString(700, 'Inactive')}</ButtonMenuItem>
       </ButtonMenu>
-      
     </Wrapper>
   )
 }

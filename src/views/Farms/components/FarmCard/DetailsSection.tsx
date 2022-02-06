@@ -39,8 +39,6 @@ const StyledLinkExternal = styled(LinkExternal)`
 const DetailsSection: React.FC<ExpandableSectionProps> = ({
   isTokenOnly,
   bscScanAddress,
-  removed,
-  depositFee,
   // totalValueFormated,
   lpLabel,
   quoteTokenAdresses,
@@ -66,7 +64,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
           {lpLabel}
         </StyledLinkExternal>
       </Flex>
-   
+
       {/* <Flex><Text fontSize="12px">(75% to sNova Rewards, 25% Marketing)</Text></Flex> */}
       <Flex justifyContent="flex-start">
         <Link external href={bscScanAddress} bold={false}>

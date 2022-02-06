@@ -3,7 +3,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import novaABI from 'config/abi/nova.json'
 import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
-import { getContract, getWeb3 } from 'utils/web3'
+import { getContract } from 'utils/web3'
 import { getNovaAddress, getFleetAddress, getMapAddress } from 'utils/addressHelpers'
 import { buildShips, claimShips, insertCoinHere, mine, refine, collect, travel, novaApprove } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
@@ -13,7 +13,6 @@ import useRefresh from './useRefresh'
 const fleetContract = getContract(fleetABI, getFleetAddress())
 const mapContract = getContract(mapABI, getMapAddress())
 const novaContract = getContract(novaABI, getNovaAddress())
-const web3 = getWeb3()
 
 // ~~~Fleet contract functions~~~
 // player setup and current ships, building ships, combat

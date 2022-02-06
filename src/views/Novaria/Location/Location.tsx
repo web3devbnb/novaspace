@@ -32,44 +32,11 @@ const Body = styled.div`
   display: flex;
 `
 
-const CoordInput = styled.input`
-  width: 4em;
-  background: transparent;
-  -moz-appearance: textfield;
-  color: white;
-`
-
-const InputControl = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding: 10px;
-  color: white;
-  gap: 5px;
-`
-
-const PlaceMenu = styled.div`
-  color: white;
-  display: flex;
-  flex-direction: column;
-`
-
 const Header = styled.text`
   color: white;
   font-weight: bold;
   font-size: 20px;
   margin: 10px;
-`
-
-const Item = styled.div`
-  margin: 2px;
-  margin-left: 8px;
-`
-
-const Col = styled.div`
-  flex-direction: column;
-  margin: 10px;
-  display: flex;
 `
 
 const Content = styled.div`

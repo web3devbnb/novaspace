@@ -1,7 +1,5 @@
 import { AbiItem } from 'web3-utils'
-import React, { useEffect, useState } from 'react'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Text } from '@pancakeswap-libs/uikit'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
@@ -15,7 +13,7 @@ import GameMenu from '../components/GameMenu'
 // the whole web application since it's never been tested on the BSC testnet ... So, for now,
 // hardcoding the BSC testnet configuration.
 const CHAIN_ID = '97'
-const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/' 
+const RPC_URL = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
 
 const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
@@ -26,10 +24,8 @@ const fetchMapData = async (lx: number, ly: number, rx: number, ry: number) => {
   return data
 }
 
-
-
 const Page = styled.div`
-  background-Image: url('/images/novaria/mapBG.jpg');
+  background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
   margin-top: -105px;
@@ -43,14 +39,12 @@ const Page = styled.div`
 const Body = styled.div`
   margin: 10px 50px 10px 150px;
   // fix background later
-  background-Image: url('/images/home/starsBackground.jpg');
+  background-image: url('/images/home/starsBackground.jpg');
   background-size: cover;
   height: 500px;
 `
 
 const Overview: React.FC = (props) => {
-  
-
   useEffect(() => {
     const fetch = async () => {
       // const data = await fetchMapData(0, 0, NX - 1, NY - 1)
@@ -59,15 +53,12 @@ const Overview: React.FC = (props) => {
     fetch()
   }, [])
 
-
   return (
     <Page>
       <GameHeader>MAP</GameHeader>
-    <Body>
-      
-      <GameMenu pageName='overview'/>
-      
-    </Body>
+      <Body>
+        <GameMenu pageName="overview" />
+      </Body>
     </Page>
   )
 }

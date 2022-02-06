@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
@@ -10,13 +9,11 @@ import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import { useFarms, usePriceBnbBusd, usePriceNovaBusd, usePriceUsdtBusd, usePriceEthBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
-import { orderBy } from 'lodash'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
 import Header from 'components/Header'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
-import Divider from './components/Divider'
 
 export interface FarmsProps {
   tokenMode?: boolean
@@ -61,19 +58,13 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const [showInactive, setShowInactive] = useState(false)
   const [stakedOnly, setStakedOnly] = useState(false)
   const [extremeOnly, setExtremeOnly] = useState(false)
-  const [sortByApy, setSortApy] = useState(false)
 
-  const activeFarms = farmsLP.filter((farm) =>  farm.multiplier !== '0X')
+  const activeFarms = farmsLP.filter((farm) => farm.multiplier !== '0X')
   const inactiveFarms = farmsLP.filter((farm) => farm.multiplier === '0X')
 
   const stakedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
-
-  const extremeOnlyFarms = activeFarms.filter(
-    (farm) => farm.risk === 19,
-  )
-  
 
   // /!\ This function will be removed soon
   // This function compute the APY for each farm and will be replaced when we have a reliable API
@@ -133,9 +124,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     [bnbPrice, busdPrice, account, novaPrice, usdtPrice, ethPrice, ethereum],
   )
 
- 
-
-
   return (
     <Page>
       <Header>TRADE ROUTES</Header>
@@ -159,7 +147,13 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         <Heading as="h6" color="#00aaff" mb="1.5rem" style={{ textAlign: 'center', fontSize: 16 }}>
           Trade routes fuel the economy of Novaria and the decentralized exchange
         </Heading>
-        <FarmTabButtons setShowInactive={setShowInactive} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} extremeOnly={extremeOnly} setExtremeOnly={setExtremeOnly} />
+        <FarmTabButtons
+          setShowInactive={setShowInactive}
+          stakedOnly={stakedOnly}
+          setStakedOnly={setStakedOnly}
+          extremeOnly={extremeOnly}
+          setExtremeOnly={setExtremeOnly}
+        />
       </div>
       <div>
         <FlexLayout>
@@ -168,24 +162,21 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
             // !showInactive
             //   ? stakedOnly
             //     ? farmsList(stakedOnlyFarms, false)
-                 
-            //     : farmsList(activeFarms, false) 
-              
-            //   : farmsList(inactiveFarms, true) 
 
-              // figure out how to add in extreme farm filter
-              // ? extremeOnly
-              // ? farmsList(extremeOnlyFarms, false)
-              // : farmsList(activeFarms, false)
-             
+            //     : farmsList(activeFarms, false)
+
+            //   : farmsList(inactiveFarms, true)
+
+            // figure out how to add in extreme farm filter
+            // ? extremeOnly
+            // ? farmsList(extremeOnlyFarms, false)
+            // : farmsList(activeFarms, false)
+
             !showInactive
               ? stakedOnly
-              
                 ? farmsList(stakedOnlyFarms, false)
-                 
-                : farmsList(activeFarms, false) 
-              
-              : farmsList(inactiveFarms, true) 
+                : farmsList(activeFarms, false)
+              : farmsList(inactiveFarms, true)
           }
         </FlexLayout>
       </div>

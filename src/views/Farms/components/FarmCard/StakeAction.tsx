@@ -1,9 +1,8 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal } from '@pancakeswap-libs/uikit'
 import { Farm } from 'state/types'
-import { provider } from 'web3-core'
 import { QuoteToken } from 'config/constants/types'
 import useI18n from 'hooks/useI18n'
 import useStake from 'hooks/useStake'
@@ -40,8 +39,12 @@ const IconButtonWrapper = styled.div`
   }
 `
 
-const StakeAction: React.FC<FarmCardActionsProps> = ({ 
-  stakedBalance, tokenBalance, tokenName, pid, depositFeeBP,
+const StakeAction: React.FC<FarmCardActionsProps> = ({
+  stakedBalance,
+  tokenBalance,
+  tokenName,
+  pid,
+  depositFeeBP,
   farm,
   // removed,
   novaPrice,
@@ -51,10 +54,10 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   ethPrice,
   // ethereum,
   // account,
- }) => {
+}) => {
   const TranslateString = useI18n()
   const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid) 
+  const { onUnstake } = useUnstake(pid)
 
   const rawStakedBalance = getBalanceNumber(stakedBalance)
   const displayBalance = rawStakedBalance.toLocaleString()
@@ -88,18 +91,17 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
     return farm.lpTotalInQuoteToken
   }, [bnbPrice, busdPrice, novaPrice, usdtPrice, ethPrice, farm])
 
-  
   const totalLP = getBalanceNumber(farm.LPSupply)
 
-  const stakedValue = 
-    (Number(totalValue)*Number(rawStakedBalance)/totalLP)
-    .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
+  const stakedValue = ((Number(totalValue) * Number(rawStakedBalance)) / totalLP).toLocaleString(undefined, {
+    style: 'decimal',
+    maximumFractionDigits: 2,
+  })
 
- 
-
-  
-  const novaValue = (rawStakedBalance*Number(novaPrice))
-    .toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2})
+  const novaValue = (rawStakedBalance * Number(novaPrice)).toLocaleString(undefined, {
+    style: 'decimal',
+    maximumFractionDigits: 2,
+  })
 
   const renderStakingButtons = () => {
     return rawStakedBalance === 0 ? (
@@ -118,7 +120,9 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 
   return (
     <Flex justifyContent="space-between" alignItems="center">
-      <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance} (${farm.pid === 0 ? novaValue : stakedValue})</Heading>
+      <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>
+        {displayBalance} (${farm.pid === 0 ? novaValue : stakedValue})
+      </Heading>
       {renderStakingButtons()}
     </Flex>
   )
