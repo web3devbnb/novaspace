@@ -59,14 +59,13 @@ const Page = styled.div`
 `
 
 const Body = styled.div`
-  margin: 10px 50px 10px 150px;
+  margin: 10px 10px 10px 150px;
   // fix background later
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 10px;
   justify-content: space-evenly;
-  min-height: 600px;
   background-Image: url('/images/novaria/border.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -74,7 +73,7 @@ const Body = styled.div`
 `
 
 const ShipClassMenu = styled.div`
-  color: white;
+  
   display: flex;
   flex-direction: column;
 `
@@ -103,13 +102,13 @@ const BuildMenu = styled.div`
 `
 
 const Text = styled.text`
-  color: white;
+  
   font-weight: medium;
   font-size: 15px;
 `
 
 const Header = styled.text`
-  color: white;
+  
   font-weight: bold;
   font-size: 20px;
   margin: 10px;
@@ -147,19 +146,16 @@ const Input = styled.input`
   height: 35px;
   background: transparent;
   -moz-appearance: textfield;
-  color: white;
 `
 
 const SpaceDockMenu = styled.div`
   display: flex;
   flex-direction: column;
-  color: white;
 `
 
 const FleetMenu = styled.div`
   display: flex;  
   flex-direction: column;
-  color: white;
   border-left: 1px solid gray;
   height: 100%;
 `
@@ -277,10 +273,10 @@ const Shipyard = () => {
   return (
     <Page>
       <GameHeader>SHIPYARD</GameHeader>
-      <GameMenu />
+      <GameMenu pageName='shipyard' />
       
     <Body>
-      <Col>
+      <Col style={{width:'75%'}}>
         <ShipClassMenu>
           <Header>Ship Types</Header>
           <Row>
@@ -391,7 +387,7 @@ const Shipyard = () => {
 
       </Col>
 
-      <Col>
+      <Col style={{width:'18%'}}>
         <FleetMenu>
           <Header>Current Fleet</Header>
           <Row>

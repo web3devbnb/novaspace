@@ -350,12 +350,12 @@ export const useGetPlaceInfo = (x: number, y: number) => {
     async function fetch() {
       const data = await mapContract.methods.getCoordinateInfo(x, y).call()
       setPlaceInfo({
-        name: data.placeName,
-        type: data.placeType,
-        scrap: data.scrap,
-        shipyard: data.hasShipyard,
-        refinery: data.hasRefinery,
-        mineral: data.mineral,
+        name: data[0],
+        type: data[1],
+        scrap: data[2],
+        shipyard: data[3],
+        refinery: data[4],
+        mineral: data[5],
       })
     }
     fetch()

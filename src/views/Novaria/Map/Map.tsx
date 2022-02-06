@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetFleetLocation } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetPlaceInfo } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
@@ -14,6 +14,7 @@ import refineryLogo from '../assets/refinery.png'
 import planetLogo from '../assets/planet.png'
 import emptyLogo from '../assets/emptyLocation.png'
 import youLogo from '../assets/you.png'
+import mineralLogo from '../assets/mineral.png'
 
 const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
@@ -50,7 +51,7 @@ const Body = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  margin: 10px 50px 0px 150px;
+  margin: 10px 10px 0px 150px;
 `
 
 const Grid = styled.div`
@@ -71,6 +72,7 @@ const GridCell = styled.div`
   display: flex;
   color: white;
   position: relative;
+  aspect-ratio: 17/8;
   z-index: 0;
 `
 
@@ -81,14 +83,21 @@ const GridCellImg = styled.img`
   align-items: center;
   align-self: center;
   height: 50%;
-  z-index: -1;
+  z-index: 0;
 `
 
 const IndicatorImg = styled.img`
-  width: 10%;
-  height: auto;
+  // width: 30px;
+  // height: auto;
   align-self: center;
+  position: absolute;
+  right: 5px;
   // z-axis: 1;
+`
+
+const GridIcon = styled.img`
+  width: 20px;
+  height: auto;
 `
 
 const GridCellContent = styled.div`
@@ -98,7 +107,7 @@ const GridCellContent = styled.div`
   z-index: 1;
   opacity: 0;
 
-  &:hover {
+  &:hover, &:focus, &:active {
     opacity: 1;
   }
 `
@@ -148,7 +157,6 @@ const Map: React.FC = (props) => {
 
   const { account } = useWallet()
   const fleetLocation = useGetFleetLocation(account)
-  console.log(fleetLocation, fleetLocation.X, fleetLocation.Y)
 
   useEffect(() => {
     const fetch = async () => {
@@ -174,6 +182,25 @@ const Map: React.FC = (props) => {
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
+  const HasRefinery = (x, y) => {
+    return(
+    useGetPlaceInfo(x, y).refinery
+    )
+  }
+
+  const HasShipyard = (x, y) => {
+    return(
+    useGetPlaceInfo(x, y).shipyard
+    )
+  }
+
+  const HasMineral = (x, y) => {
+    return(
+    useGetPlaceInfo(x, y).mineral
+    )
+  }
+
+
   if (!mapData) {
     return null
   }
@@ -181,48 +208,51 @@ const Map: React.FC = (props) => {
   return (
     <Page>
       <GameHeader>MAP</GameHeader>
-      <Body>
-        <GameMenu />
-        <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-          {mapData.data.map((arr, i) => {
-            const ri = mapData.data.length - i - 1
-            return mapData.data[ri].map((el, j) => {
-              return (
-                <GridCell>
-                  {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
-                  (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
-                    <IndicatorImg src={youLogo} alt="current location" />
-                  ) : (
-                    ''
-                  )}
-                  {/* {el.name && ( */}
-                  <GridCellContent>
-                    <Text bold glowing>
-                      {el.name}
-                    </Text>
-                    <Text>{el.placeType === 'empty' ? 'move' : ''}</Text>
-                    <GridCellId>
-                      ({ri + mapData.x0} , {j + mapData.y0})
-                    </GridCellId>
+    <Body>
+       
+      <GameMenu pageName='starmap'/>
+      <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
+        {mapData.data.map((arr, i) => {
+          const ri = mapData.data.length - i - 1
+          return mapData.data[ri].map((el, j) => {
+            return (
+              <GridCell>
+                 {/* {el.name && ( */}
+                  <GridCellContent aria-haspopup='true'>
+                    <Link  to={{
+                            pathname: "/location",
+                            state: [{x: ri + mapData.x0 , y: j + mapData.y0}]
+                          }} >
+                      <Text bold glowing>
+                        {el.name}
+                      </Text>
+                      <Text>{el.placeType === 'empty' ? 'move' : ''}</Text>
 
-                    <Link
-                      to={{
-                        pathname: '/location',
-                        state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
-                      }}
-                    >
-                      Details{' '}
+                      {el.salvage > 0 ? <GridIcon src={scrapLogo} alt='has salvage' /> : '' }
+                      {HasRefinery(ri + mapData.x0, j + mapData.y0) === true ? <GridIcon src={refineryLogo} alt='planet has refinery' /> : ''}
+                      {HasShipyard(ri + mapData.x0, j + mapData.y0) === true ? <GridIcon src={shipyardLogo} alt='planet has shipyard' /> : ''}
+                      {HasMineral(ri + mapData.x0, j + mapData.y0) > 0 ? <GridIcon src={mineralLogo} alt='planet has minerals' /> : ''}
+
+                      <GridCellId>
+                        ({ri + mapData.x0} , {j + mapData.y0})
+                      </GridCellId>
+                    
+                  
                     </Link>
                   </GridCellContent>
-                  {/* )} */}
-                  {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
-                  {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
-                  {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
-                </GridCell>
-              )
-            })
-          })}
-        </Grid>
+                {/* )} */}
+                {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt='planet' /> : '' }
+                {el.placeType === 'star' ? <GridCellImg src={starLogo} alt='star' /> : ''}
+                {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt='star' /> : ''}
+              {(ri + mapData.x0).toString() === fleetLocation.X.toString() && (j + mapData.y0).toString() === fleetLocation.Y.toString() 
+                ? <IndicatorImg src={youLogo} alt='current location' /> : ''}  
+              </GridCell>
+            )
+          })
+        })}
+      </Grid>
+
+    
 
         <GridControls>
           <InputControl>

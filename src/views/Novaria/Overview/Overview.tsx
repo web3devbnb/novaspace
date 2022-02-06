@@ -65,7 +65,7 @@ const Overview: React.FC = (props) => {
       <GameHeader>MAP</GameHeader>
     <Body>
       
-      <GameMenu />
+      <GameMenu pageName='overview'/>
       
     </Body>
     </Page>
