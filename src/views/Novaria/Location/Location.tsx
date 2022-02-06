@@ -86,13 +86,11 @@ const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
 
 const Location: React.FC = () => {
-
   const { account } = useWallet()
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
   console.log('x, y:', location.X, location.Y)
   console.log('place info:', placeInfo)
-
 
   // An empty place is a place with no name.
   if (!placeInfo.name) {
@@ -103,7 +101,7 @@ const Location: React.FC = () => {
     <Page>
       <GameHeader>LOCATION</GameHeader>
       <Body>
-        <GameMenu pageName='location' />
+        <GameMenu pageName="location" />
         <Content>
           <div>
             <PlanetImageCard />
