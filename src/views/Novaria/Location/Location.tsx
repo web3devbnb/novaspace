@@ -13,8 +13,8 @@ import {
 } from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
-import PlayersTableRow from './PlayersTableRow'
-import OpenBattlesTableRow from './OpenBattlesTableRow'
+import PlayersTableRow from './PlayersTable/PlayersTableRow'
+import OpenBattlesTableRow from './OpenBattlesTable/OpenBattlesTableRow'
 
 const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
