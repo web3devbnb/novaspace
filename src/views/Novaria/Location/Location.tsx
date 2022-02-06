@@ -97,7 +97,7 @@ const Location: React.FC = () => {
           <div>
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
-              {battlesAtLocation.map((el) => (
+              {battlesAtLocation.slice(0, 5).map((el) => (
                 <div>
                   <div>{el}</div>
                   <div>0x1234...</div>
@@ -107,7 +107,7 @@ const Location: React.FC = () => {
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
-              {fleetsAtLocation.map((el) => (
+              {fleetsAtLocation.slice(0, 5).map((el) => (
                 <div>
                   <div>{el}</div>
                   <div>1,234</div>
