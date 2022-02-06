@@ -97,20 +97,24 @@ const Location: React.FC = () => {
           <div>
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
-              {battlesAtLocation.map((el) => el)}
+              {battlesAtLocation.map((el) => (
+                <div>{el}</div>
+              ))}
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
-              {fleetsAtLocation.map((el) => el)}
+              {fleetsAtLocation.map((el) => (
+                <div>{el}</div>
+              ))}
             </PlayersCard>
           </div>
           <div>
             <YourFleetCard>
               <Header>YOUR FLEET</Header>
-              {fleetSize}
-              {fleetPower}
-              {fleetMineral}
-              {fleetMaxMineral}
+              <div>FLEET SIZE: {fleetSize}</div>
+              <div>FLEET POWER: {fleetPower}</div>
+              <div>FLEET MINERAL: {fleetMineral}</div>
+              <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
             </YourFleetCard>
             <BattleProgressCard>
               <Header>BATTLE PROGRESS</Header>
