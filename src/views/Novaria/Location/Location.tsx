@@ -90,7 +90,7 @@ const Location: React.FC = () => {
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
 
-  // An empty place, is a place with no name.
+  // An empty place is a place with no name.
   if (!placeInfo.name) {
     return null
   }
