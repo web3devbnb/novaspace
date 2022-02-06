@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import MapAbi from 'config/abi/Map.json'
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
-import { useGetPlaceId, useGetPlaceInfo } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetPlaceId, useGetPlaceInfo } from 'hooks/useNovaria'
 import contracts from 'config/constants/contracts'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -86,6 +86,15 @@ const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
 
 const Location: React.FC = () => {
+  const { account } = useWallet()
+  const location = useGetFleetLocation(account)
+  const placeInfo = useGetPlaceInfo(location.X, location.Y)
+
+  // An empty place, is a place with no name.
+  if (!placeInfo.name) {
+    return null
+  }
+
   return (
     <Page>
       <GameHeader>LOCATION</GameHeader>
@@ -95,7 +104,7 @@ const Location: React.FC = () => {
           <div>
             <PlanetImageCard />
             <PlanetInfoCard>
-              <Header>HAVEN</Header>
+              <Header>{placeInfo.name}</Header>
             </PlanetInfoCard>
           </div>
           <div>
