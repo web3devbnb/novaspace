@@ -13,6 +13,7 @@ import {
 } from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import PlayersTableRow from './PlayersTableRow'
 
 const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
@@ -128,12 +129,8 @@ const Location: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  {fleetsAtLocation.slice(0, 5).map((el) => (
-                    <div>
-                      <div>{el}</div>
-                      <div>1,234</div>
-                      <div>1234</div>
-                    </div>
+                  {fleetsAtLocation.slice(0, 5).map((fleet) => (
+                    <PlayersTableRow fleet={fleet} />
                   ))}
                 </div>
               </div>
