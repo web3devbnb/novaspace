@@ -98,13 +98,21 @@ const Location: React.FC = () => {
             <OpenBattlesCard>
               <Header>OPEN BATTLES</Header>
               {battlesAtLocation.map((el) => (
-                <div>{el}</div>
+                <div>
+                  <div>{el}</div>
+                  <div>0x1234...</div>
+                  <div>17:00 UTC</div>
+                </div>
               ))}
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
               {fleetsAtLocation.map((el) => (
-                <div>{el}</div>
+                <div>
+                  <div>{el}</div>
+                  <div>1,234</div>
+                  <div>1234</div>
+                </div>
               ))}
             </PlayersCard>
           </div>
