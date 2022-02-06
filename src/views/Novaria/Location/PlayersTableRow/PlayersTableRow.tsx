@@ -1,15 +1,15 @@
-import { useGetAttackPower, useGetFleetMineral } from 'hooks/useNovaria'
+import { useGetAttackPower, useGetFleetSize } from 'hooks/useNovaria'
 import React from 'react'
 
 const PlayersTableRow = ({ fleet }) => {
+  const fleetSize = useGetFleetSize(fleet)
   const fleetPower = useGetAttackPower(fleet)
-  const fleetMineral = useGetFleetMineral(fleet)
 
   return (
     <div>
       <div>{fleet}</div>
+      <div>{fleetSize}</div>
       <div>{fleetPower}</div>
-      <div>{fleetMineral}</div>
     </div>
   )
 }
