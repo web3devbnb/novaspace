@@ -372,7 +372,7 @@ export const useGetFleetMineral = (fleet: string) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getFleetMineral(fleet).call()
+      const data = await fleetContract.methods.getMineral(fleet).call()
       setFleetMineral(data)
     }
     fetch()
