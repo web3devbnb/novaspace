@@ -5,7 +5,10 @@ import {
   useGetAttackPower,
   useGetBattlesAtLocation,
   useGetFleetLocation,
+  useGetFleetMineral,
+  useGetFleetsAtLocation,
   useGetFleetSize,
+  useGetMaxMineralCapacity,
   useGetPlaceInfo,
 } from 'hooks/useNovaria'
 import GameHeader from '../components/GameHeader'
@@ -55,16 +58,24 @@ const Location: React.FC = () => {
   const { account } = useWallet()
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
+
   const battlesAtLocation = useGetBattlesAtLocation(location.X, location.Y)
+  const fleetsAtLocation = useGetFleetsAtLocation(location.X, location.Y)
+
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
+  const fleetMineral = useGetFleetMineral(account)
+  const fleetMaxMineral = useGetMaxMineralCapacity()
 
   console.log('account: ', typeof account, account)
   console.log('x, y:', location.X, location.Y)
   console.log('place info:', placeInfo)
   console.log('battles:', battlesAtLocation)
+  console.log('fleets:', fleetsAtLocation)
   console.log('fleet size:', fleetSize)
   console.log('fleet power:', fleetPower)
+  console.log('fleet mineral:', fleetMineral)
+  console.log('fleet max mineral:', fleetMaxMineral)
 
   // An empty place is a place with no name.
   if (!placeInfo.name) {
@@ -90,6 +101,7 @@ const Location: React.FC = () => {
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
+              {fleetsAtLocation.map((el) => el)}
             </PlayersCard>
           </div>
           <div>
@@ -97,6 +109,8 @@ const Location: React.FC = () => {
               <Header>YOUR FLEET</Header>
               {fleetSize}
               {fleetPower}
+              {fleetMineral}
+              {fleetMaxMineral}
             </YourFleetCard>
             <BattleProgressCard>
               <Header>BATTLE PROGRESS</Header>

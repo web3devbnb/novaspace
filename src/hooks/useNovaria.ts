@@ -352,7 +352,7 @@ export const useGetPlaceInfo = (x: number, y: number) => {
   return placeInfo
 }
 
-export const useGetFleetsAtLocation = (x: string, y: string) => {
+export const useGetFleetsAtLocation = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [fleetsAtLocation, setFleetsAtLocation] = useState([])
 
