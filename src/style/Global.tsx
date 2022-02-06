@@ -12,6 +12,10 @@ const novariaBG = "url('/images/home/mainBackground-dark.jpg')"
 const spaceBG = "url('/images/home/bgspaceBig.jpg')"
 
 const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
+@font-face {
+  font-family: 'BigNoodle';
+  src: local('BigNoodle'), url(./fonts/big_noodle_titling.ttf) format('truetype');
+}
   * {
     font-family: 'Montserrat', sans-serif;
     font-family: 'Poppins', sans-serif;

@@ -15,7 +15,8 @@ const Hero = styled.div`
   height: 75px;
   // margin-right: 10px;
   // margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 0px;
+  padding-top: 10px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 `
 

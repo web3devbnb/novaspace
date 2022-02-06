@@ -62,7 +62,7 @@ const Grid = styled.div`
   grid-gap: 1px;
   margin: 10px 10px 10px;
   background-image: url('/images/novaria/border.png');
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10px;
   aspect-ratio: 16/8;

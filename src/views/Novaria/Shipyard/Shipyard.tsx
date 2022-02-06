@@ -14,34 +14,38 @@ import {
   useGetMaxFleetSize,
   useGetMaxMineralCapacity,
   useGetMiningCapacity,
+  useGetFleetLocation,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import moleCard from '../assets/moleCard.png'
+import viperCard from '../assets/viperCard.png'
+import unknownCard from '../assets/newShipCard.png'
+import viperQueue from '../assets/viperQueue.png'
+import moleQueue from '../assets/moleQueue.png'
 
-// export interface ShipClassProps {
-//   name: string
-//   size: number
-//   attack: number
-//   shield: number
-//   mineralCapacity: number
-//   miningCapacity: number
-//   hangerSize: number
-//   buildTime: number
-//   cost: number
-// }
 
 const Page = styled.div`
-  background-image: url('/images/novaria/mapBG.jpg');
+
+  @font-face {
+    font-family: 'BigNoodle';
+    src: local('BigNoodle'), url(./fonts/big_noodle_titling.ttf) format('truetype');
+  }
+
+  background-image: url('/images/novaria/shipyardBG.jpg');
   background-size: cover;
   font-size: 15px;
   margin-top: -105px;
   padding: 10px;
   color: #5affff;
+  font-family: BigNoodle; sans-serif;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     margin-top: -75px;
   }
+
+  
 `
 
 const Body = styled.div`
@@ -50,17 +54,41 @@ const Body = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px;
+  
   justify-content: space-evenly;
   background-image: url('/images/novaria/border.png');
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  aspect-ratio: 16/8;
+  aspect-ratio: 15/8;
 `
 
 const ShipClassMenu = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+  border: 1px solid #8c8c8c;
+  margin: 10px;
+  background-color: #00000080;
+  width: 99%;
+
+  scrollbar-color: #5affff #289794;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 10px;
+    background-color: #289794;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #5affff;
+  }
+`
+
+const ShipClassCard = styled.img`
+  margin: 10px 5px;
+  max-height: 350px
 `
 
 const Col = styled.div`
@@ -80,10 +108,18 @@ const Item = styled.div``
 
 const BuildMenu = styled.div`
   margin: 10px;
+  display: block;
+  border: 1px solid #8c8c8c;
+  padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 30%;
+  height: 100%;
+  background-color: #00000080;
 `
 
 const Text = styled.text`
-  font-weight: medium;
+  font-weight: light;
   font-size: 15px;
 `
 
@@ -91,6 +127,7 @@ const Header = styled.text`
   font-weight: bold;
   font-size: 20px;
   margin: 10px;
+  margin-left: 0;
 `
 const Button = styled.button`
   cursor: pointer;
@@ -101,26 +138,132 @@ const Button = styled.button`
   font-family: sans-serif;
   font-size: 1rem;
   text-decoration: none;
-  text-shadow: -2px 4px 4px #091243, 0 0 10px #00d0ff, inset 1px 1px 1px white;
-  color: #1fffff;
-  border: 2px solid;
-  border-radius: 5px;
+  color: #5affff;
+  border: 2px solid #5affff;
+  border-radius: 0px;
   background-color: transparent;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
-    0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
-    inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
+  
 `
 
 const Input = styled.input`
-  width: 5em;
+  width: 4em;
+  padding: 2px;
   height: 35px;
   background: transparent;
-  -moz-appearance: textfield;
+  border: 1px solid #5affff;
+  color: #5affff;
+  // -moz-appearance: textfield;
 `
 
 const SpaceDockMenu = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #00000080;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+  border: 1px solid #8c8c8c;
+  padding: 10px;
+  position: relative;
+  width: 70%;
+  height: 100%;
+  
+  scrollbar-color: #5affff #289794;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 10px;
+    background-color: #289794;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #5affff;
+  }
+`
+
+const QueueCardImg = styled.img`
+  position: absolute;
+  z-index: -1;
+`
+
+const QueueCardItems = styled.div`
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 12px;
+  margin-top: 95%;
+`
+
+const QueueCard = styled.div`
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-right: 10px;
+`
+
+const ClaimControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+
+`
+
+const ClaimInput = styled.input`
+  width: 3em;
+  padding: 2px;
+  background: transparent;
+  border: 1px solid #5affff;
+  color: #5affff;
+
+`
+
+const ClaimButton = styled.button`
+  cursor: pointer;
+  margin: 5px;
+  align-self: center;
+  padding: 0.25rem 1rem;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #5affff;
+  border-radius: 0px;
+  background-color: #5affff;
+
+`
+
+const CountdownButton = styled.button`
+  margin: 5px;
+  align-self: center;
+  padding: 0.25rem 1rem;
+  font-family: sans-serif;
+  font-size: .75rem;
+  
+  text-decoration: none;
+  color: #8c8c8c;
+  border: 1px solid #8c8c8c;
+  border-radius: 0px;
+  background-color: transparent;
+`
+
+const WrongLocationButton = styled.button`
+  margin: 5px;
+  align-self: center;
+  padding: 0.25rem 1rem;
+  font-family: sans-serif;
+  font-size: .75rem;
+  
+  text-decoration: none;
+  color: #5affff;
+  border: 1px solid #5affff;
+  border-radius: 0px;
+  background-color: transparent;
 `
 
 const FleetMenu = styled.div`
@@ -137,18 +280,22 @@ const Shipyard = () => {
   const spaceDocks = useGetSpaceDock()
   console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
+  console.log('shipayrds', shipyards)
   const playerFleet = useGetFleet()
   const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize()
   const mineralCapacity = useGetMaxMineralCapacity()
   const miningCapacity = useGetMiningCapacity()
+  const fleetLocation = useGetFleetLocation(account)
 
   const [shipyard, setShipyard] = useState(null)
+  const [shipyardName, setShipyardName] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipId, setShipId] = useState(null)
+  const [shipName, setShipName] = useState(null)
   const [buildTime, setBuildTime] = useState(null)
   const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
@@ -158,6 +305,7 @@ const Shipyard = () => {
 
   const handleShipyardChange = (obj) => {
     setShipyard(shipyards.indexOf(obj))
+    setShipyardName(obj.name)
     setShipyardX(obj.coordX)
     setShipyardY(obj.coordY)
     setShipyardOwner(obj.owner)
@@ -168,6 +316,7 @@ const Shipyard = () => {
     setShipId(shipClasses.indexOf(obj))
     setBuildTime(obj.buildTime)
     setShipCost(obj.cost)
+    setShipName(obj.name)
   }
 
   const { onBuild } = useBuildShips()
@@ -198,41 +347,68 @@ const Shipyard = () => {
     }
   }
 
+  const CalculateTimeLeft = (endDate) => {
+    
+    const difference = +endDate - +new Date();
+  
+    let timeLeft = {};
+  
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      };
+    }
+  
+    return timeLeft;
+  }
+
   // styles for the dropdown Selector
   const customStyles = {
     menu: (provided) => ({
       ...provided,
-      width: 180,
-      border: '2px solid gray',
+      // width: '100%',
+      border: '2px solid #289794',
+      borderRadius: '0px',
       color: 'black',
       padding: 2,
-      background: 'gray',
+      background: 'black',
     }),
     control: (provided) => ({
       ...provided,
-      width: 180,
-      Color: 'white',
+      // width: 180,
+      Color: '#289794',
+      border: '1px solid #289794',
+      borderRadius: '0px',
       background: 'transparent',
-      // height:25,
+      height:15,
     }),
     option: (provided) => ({
       ...provided,
-      color: 'white',
+      color: '#289794',
       // padding: 20,
       background: 'transparent',
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: 'white',
+      color: '#289794',
       background: 'transparent',
+      height:10,
     }),
-    // input: (provided, state) => ({
-    //   ...provided,
-    //   height:10,
-    // }),
-    singleValue: (provided) => ({
+    input: (provided, state) => ({
       ...provided,
-      color: 'white',
+     height:15,
+    }),
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      color: '#289794',
+      // background: 'transparent'
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      fontSize: 12,
       // background: 'transparent'
     }),
   }
@@ -243,9 +419,16 @@ const Shipyard = () => {
       <GameMenu pageName="shipyard" />
 
       <Body>
-        <Col style={{ width: '75%' }}>
+        <Col style={{ width: '70%' }}>
           <ShipClassMenu>
-            <Header>Ship Types</Header>
+
+            <ShipClassCard src={viperCard} alt='viper' />
+            <ShipClassCard src={moleCard} alt='mole' />
+            <ShipClassCard src={unknownCard} alt='coming soon' />
+            <ShipClassCard src={unknownCard} alt='coming soon' />
+
+
+            {/* <Header>Ship Types</Header>
             <Row>
               <Col>
                 <Item>Ship</Item>
@@ -274,11 +457,13 @@ const Shipyard = () => {
                   </Col>
                 )
               })}
-            </Row>
+            </Row> */}
           </ShipClassMenu>
+
           <Row>
+
             <BuildMenu>
-              <Header>Build Ships</Header>
+              <Header>BUILD SHIPS</Header>
               <br />
               <br />
               <Select
@@ -287,17 +472,9 @@ const Shipyard = () => {
                 options={shipyards}
                 onChange={handleShipyardChange}
                 getOptionLabel={(x) => x.name}
+                getOptionValue={(x) => x.name}
                 styles={customStyles}
               />
-              <br />
-              <Text>
-                Location: ({shipyardX}, {shipyardY})
-              </Text>
-              <br />
-              <Text>Owner: {shipyardOwner}</Text>
-              <br />
-              <Text>Build Fee: {shipyardFee}%</Text>
-              <br />
 
               <Row style={{ marginTop: 10 }}>
                 {/* // Selector doesn't show selected option, but does input state values for it */}
@@ -306,7 +483,7 @@ const Shipyard = () => {
                   value={shipId}
                   options={shipClasses}
                   onChange={handleShipChange}
-                  getOptionLabel={(ship) => ship.name}
+                  getOptionLabel={(x) => x.name}
                   styles={customStyles}
                 />
               </Row>
@@ -320,50 +497,85 @@ const Shipyard = () => {
                   onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                 />
                 <Button type="button" onClick={sendTx}>
-                  Build Ships
+                  Build {shipName}
                 </Button>
               </Row>
-              <Row>
+              <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
                 <Text>
-                  Cost: {(shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / 10 ** 18} NOVA | Time:{' '}
+                  Cost: {(shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / 10 ** 18}  
+                  <span style={{fontSize:10}}> NOVA</span> 
+                </Text>
+                <Text>
+                   Time:{' '}
                   {buildTime * shipAmount}s
                 </Text>
               </Row>
+              <div style={{color: '#289794', marginTop: '5px'}}>
+              <Row style={{justifyContent: "space-between"}}>
+                <Text>
+                  Location: 
+                </Text>
+                <Text>
+                  ({shipyardX}, {shipyardY})
+                </Text>
+              </Row>
+              <Row style={{justifyContent: "space-between", textOverflow: 'ellipsis', width: '100%' }}>
+                <Text>Owner: </Text>
+                <Text style={{width: '50%', textOverflow: 'ellipsis', overflow: 'hidden'}}>{shipyardOwner}</Text>
+              </Row>
+              <Row style={{justifyContent: "space-between"}}>
+                <Text>Build Fee:</Text> 
+                <Text>{shipyardFee}%</Text>
+              </Row>
+              </div>
             </BuildMenu>
 
             <SpaceDockMenu>
-              <Header>Build Queue</Header>
+              <Header style={{marginTop: 0}}>BUILD QUEUE</Header>
               <Row>
-                <Col>
-                  <Item>Ship</Item>
-                  <Item>Location</Item>
-                  <Item>Amount</Item>
-                  <Item>Completion Time</Item>
-                  <Item>
-                    Claim Amount:{' '}
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="0"
-                      value={claimAmount}
-                      onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                    />
-                  </Item>
-                </Col>
-
+               
                 {spaceDocks.map((dock) => {
                   return (
-                    <Col key={dock.shipClassId}>
-                      <Item>{shipClasses[dock.shipClassId].name}</Item>
-                      <Item>
-                        ({dock.coordX}, {dock.coordY})
-                      </Item>
-                      <Item>{dock.amount}</Item>
-                      <Item>{new Date(dock.completionTime * 1000).toLocaleString()}</Item>
-                      <Button type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
-                        Claim
-                      </Button>
-                    </Col>
+                    <Col >
+                      <QueueCard key={dock.shipClassId}>
+                        {dock.shipClassId === 0 ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
+                          : <QueueCardImg src={moleQueue} alt='moles in queue' />
+                          }
+                        <QueueCardItems>
+                          <Row style={{justifyContent: 'space-between'}}>
+                            <Item>LOCATION  &nbsp;</Item>
+                            <br /><br />
+                            <Item style={{zIndex:1}}>
+                              ({dock.coordX}, {dock.coordY})
+                            </Item>
+                          </Row>
+                          <Row style={{justifyContent: 'space-between'}}>
+                            <Item>AMOUNT</Item>
+                            <Item style={{zIndex:1}}>{dock.amount}</Item>
+                          </Row>
+                        </QueueCardItems>
+                      </QueueCard>
+
+                        <ClaimControls>
+
+                          {CalculateTimeLeft(new Date(dock.completionTime * 1000)) > 0 
+                          ? <CountdownButton>{CalculateTimeLeft(new Date(dock.completionTime * 1000))}</CountdownButton> 
+                          : ''}
+                          
+                          {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?  
+                          <Item><ClaimInput
+                            type="number"
+                            min="0"
+                            placeholder="0"
+                            value={claimAmount}
+                            onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
+                          /> 
+                          <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                            CLAIM
+                          </ClaimButton></Item>
+                          : '' }
+                        </ClaimControls>
+                      </Col>
                   )
                 })}
               </Row>
@@ -371,27 +583,25 @@ const Shipyard = () => {
           </Row>
         </Col>
 
-        <Col style={{ width: '18%' }}>
+        <Col style={{ width: '25%' }}>
           <FleetMenu>
-            <Header>Current Fleet</Header>
+            <Header style={{marginLeft:10}}>FLEET STATS</Header>
             <Row>
               <Col>
+                <Item style={{marginBottom:10}}>Fleet Size</Item>
+                <Item style={{marginBottom:10}}>Mining Capacity</Item>
+                <Item style={{marginBottom:10}}>Max Mineral Capacity</Item>
                 {shipClasses.map((ship) => {
-                  return <Item key={ship.name}>{ship.name}s</Item>
+                  return <Item  style={{marginBottom:10}} key={ship.name}>{ship.name}s</Item>
                 })}
-                <Item>Fleet Size</Item>
-                <Item>Max Fleet Size</Item>
-                <Item>Mining Capacity</Item>
-                <Item>Max Mineral Capacity</Item>
               </Col>
-              <Col>
+              <Col style={{textAlign: 'right'}}>
                 {/* Find a way to map this out based on shipclass? */}
-                <Item>{playerFleet[0]}</Item>
-                <Item>{playerFleet[1]}</Item>
-                <Item>{fleetSize}</Item>
-                <Item>{maxFleetSize}</Item>
-                <Item>{web3.utils.fromWei(miningCapacity)} </Item>
-                <Item>{web3.utils.fromWei(mineralCapacity)} </Item>
+                <Item style={{marginBottom:10}}>{fleetSize}/{maxFleetSize}</Item>
+                <Item style={{marginBottom:10}}>{web3.utils.fromWei(miningCapacity)} </Item>
+                <Item style={{marginBottom:10}}>{web3.utils.fromWei(mineralCapacity)} </Item>
+                <Item style={{marginBottom:10}}>{playerFleet[0]}</Item>
+                <Item style={{marginBottom:10}}>{playerFleet[1]}</Item>
               </Col>
             </Row>
           </FleetMenu>
