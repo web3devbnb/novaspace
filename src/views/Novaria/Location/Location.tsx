@@ -102,9 +102,9 @@ const Location: React.FC = () => {
               <div>
                 <div>
                   <div>
-                    <div>NAME</div>
-                    <div>FLEET SIZE</div>
-                    <div>TOTAL MINERAL</div>
+                    <div>ATTACKER</div>
+                    <div>DEFENDER</div>
+                    <div>START TIME</div>
                   </div>
                 </div>
                 <div>
@@ -123,9 +123,9 @@ const Location: React.FC = () => {
               <div>
                 <div>
                   <div>
-                    <div>NAME</div>
+                    <div>PLAYER</div>
                     <div>FLEET SIZE</div>
-                    <div>TOTAL MINERAL</div>
+                    <div>FLEET POWER</div>
                   </div>
                 </div>
                 <div>
