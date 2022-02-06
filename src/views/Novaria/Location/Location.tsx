@@ -56,6 +56,7 @@ const BattleProgressCard = styled.div``
 
 const Location: React.FC = () => {
   const { account } = useWallet()
+
   const location = useGetFleetLocation(account)
   const placeInfo = useGetPlaceInfo(location.X, location.Y)
 
