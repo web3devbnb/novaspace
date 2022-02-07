@@ -5,7 +5,7 @@ import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
 import { getContract } from 'utils/web3'
 import { getNovaAddress, getFleetAddress, getMapAddress } from 'utils/addressHelpers'
-import { buildShips, claimShips, insertCoinHere, mine, refine, collect, travel, novaApprove } from 'utils/callHelpers'
+import { buildShips, claimShips, insertCoinHere, mine, refine, collect, travel, novaApprove, goBattle, enterBattle } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
 
@@ -61,6 +61,38 @@ export const useClaimShips = () => {
   )
   return { onClaim: handleClaimShips }
 }
+
+// mission options: ATTACK, DEFEND. target is address
+export const useEnterBattle = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleEnterBattle = useCallback(
+    async (target: string, mission: string) => {
+      const txHash = await enterBattle(useFleetContract, target, mission, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onEnterBattle: handleEnterBattle }
+}
+
+// function to initiate a battle after time expires
+export const useGoBattle = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleGoBattle = useCallback(
+    async (battleId: string) => {
+      const txHash = await goBattle(useFleetContract, battleId, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onClaim: handleGoBattle }
+}
+
+
 
 // ***View functions***
 

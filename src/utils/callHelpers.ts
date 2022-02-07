@@ -171,7 +171,7 @@ export const recall = async (fleetContract, account) => {
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
-    })
+    }) 
 }
 
 export const enterBattle = async (fleetContract, target, mission, account) => {

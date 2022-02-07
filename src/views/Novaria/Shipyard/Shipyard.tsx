@@ -538,9 +538,9 @@ const Shipyard = () => {
                   return (
                     <Col >
                       <QueueCard key={dock.shipClassId}>
-                        {dock.shipClassId === 0 ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
+                        {dock.shipClassId === '0' ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
                           : <QueueCardImg src={moleQueue} alt='moles in queue' />
-                          }
+                          }{console.log('shipclassID', dock.shipClassId)}
                         <QueueCardItems>
                           <Row style={{justifyContent: 'space-between'}}>
                             <Item>LOCATION  &nbsp;</Item>
