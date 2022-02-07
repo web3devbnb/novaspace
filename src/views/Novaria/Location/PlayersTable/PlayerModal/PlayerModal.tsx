@@ -37,6 +37,9 @@ const PlayerModal = ({ player }) => {
         <Button variant="primary" onClick={() => onEnterBattle(player, 1)}>
           ATTACK
         </Button>
+        <Button variant="primary" onClick={() => onEnterBattle(player, 2)}>
+          DEFEND
+        </Button>
       </ModalActions>
     </Modal>
   )
