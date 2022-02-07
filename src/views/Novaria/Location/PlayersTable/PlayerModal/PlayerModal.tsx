@@ -1,4 +1,5 @@
-import { Modal } from '@pancakeswap-libs/uikit'
+import { Button, Modal } from '@pancakeswap-libs/uikit'
+import ModalActions from 'components/ModalActions'
 import {
   useGetAttackPower,
   useGetFleet,
@@ -29,6 +30,9 @@ const PlayerModal = ({ player }) => {
         <div>FLEET MINERAL: {fleetMineral}</div>
         <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
       </div>
+      <ModalActions>
+        <Button variant="primary">ATTACK</Button>
+      </ModalActions>
     </Modal>
   )
 }
