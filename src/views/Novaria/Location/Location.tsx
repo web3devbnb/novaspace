@@ -104,7 +104,7 @@ const Location: React.FC = () => {
             </OpenBattlesCard>
             <PlayersCard>
               <Header>PLAYERS</Header>
-              <PlayersTable fleets={fleetsAtLocation.slice(0, 5)} />
+              <PlayersTable players={fleetsAtLocation.slice(0, 5)} />
             </PlayersCard>
           </div>
           <div>

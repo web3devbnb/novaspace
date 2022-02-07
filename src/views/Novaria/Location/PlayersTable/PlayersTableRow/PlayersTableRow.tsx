@@ -7,14 +7,14 @@ import PlayerModal from '../PlayerModal'
 const Row = styled.div``
 const Cell = styled.div``
 
-const PlayersTableRow = ({ fleet }) => {
-  const fleetSize = useGetFleetSize(fleet)
-  const fleetPower = useGetAttackPower(fleet)
-  const [handleClick] = useModal(<PlayerModal fleet={fleet} />)
+const PlayersTableRow = ({ player }) => {
+  const fleetSize = useGetFleetSize(player)
+  const fleetPower = useGetAttackPower(player)
+  const [handleClick] = useModal(<PlayerModal player={player} />)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
-      <Cell>{fleet}</Cell>
+      <Cell>{player}</Cell>
       <Cell>{fleetSize}</Cell>
       <Cell>{fleetPower}</Cell>
     </Row>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PlayersTableRow from './PlayersTableRow'
 
-const PlayersTable = ({ fleets }) => {
+const PlayersTable = ({ players }) => {
   return (
     <div>
       <div>
@@ -12,8 +12,8 @@ const PlayersTable = ({ fleets }) => {
         </div>
       </div>
       <div>
-        {fleets.map((fleet) => (
-          <PlayersTableRow fleet={fleet} />
+        {players.map((player) => (
+          <PlayersTableRow player={player} />
         ))}
       </div>
     </div>
