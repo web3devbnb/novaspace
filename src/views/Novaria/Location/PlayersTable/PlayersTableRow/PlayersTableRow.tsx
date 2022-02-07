@@ -2,7 +2,7 @@ import { useModal } from '@pancakeswap-libs/uikit'
 import { useGetAttackPower, useGetFleetSize } from 'hooks/useNovaria'
 import React from 'react'
 import styled from 'styled-components'
-import AttackPlayerModal from '../AttackPlayerModal'
+import PlayerModal from '../PlayerModal'
 
 const Row = styled.div``
 const Cell = styled.div``
@@ -10,7 +10,7 @@ const Cell = styled.div``
 const PlayersTableRow = ({ fleet }) => {
   const fleetSize = useGetFleetSize(fleet)
   const fleetPower = useGetAttackPower(fleet)
-  const [handleClick] = useModal(<AttackPlayerModal />)
+  const [handleClick] = useModal(<PlayerModal />)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>

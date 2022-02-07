@@ -1,8 +1,8 @@
 import { Modal } from '@pancakeswap-libs/uikit'
 import React from 'react'
 
-const AttackPlayerModal = () => {
+const PlayerModal = () => {
   return <Modal title="ATTACK PLAYER" />
 }
 
-export default AttackPlayerModal
+export default PlayerModal
