@@ -1,6 +1,7 @@
 import { Button, Modal } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
 import {
+  useEnterBattle,
   useGetAttackPower,
   useGetFleet,
   useGetFleetLocation,
@@ -18,6 +19,8 @@ const PlayerModal = ({ player }) => {
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity()
 
+  const { onEnterBattle } = useEnterBattle()
+
   return (
     <Modal title={`PLAYER ${player}`}>
       <div>
@@ -31,7 +34,9 @@ const PlayerModal = ({ player }) => {
         <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
       </div>
       <ModalActions>
-        <Button variant="primary">ATTACK</Button>
+        <Button variant="primary" onClick={() => onEnterBattle(player, 'ATTACK')}>
+          ATTACK
+        </Button>
       </ModalActions>
     </Modal>
   )
