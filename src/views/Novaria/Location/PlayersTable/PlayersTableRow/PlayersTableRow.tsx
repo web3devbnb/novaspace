@@ -10,7 +10,7 @@ const Cell = styled.div``
 const PlayersTableRow = ({ fleet }) => {
   const fleetSize = useGetFleetSize(fleet)
   const fleetPower = useGetAttackPower(fleet)
-  const [handleClick] = useModal(<PlayerModal />)
+  const [handleClick] = useModal(<PlayerModal fleet={fleet} />)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
