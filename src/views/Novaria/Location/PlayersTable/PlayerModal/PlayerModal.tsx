@@ -34,7 +34,7 @@ const PlayerModal = ({ player }) => {
         <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
       </div>
       <ModalActions>
-        <Button variant="primary" onClick={() => onEnterBattle(player, 'ATTACK')}>
+        <Button variant="primary" onClick={() => onEnterBattle(player, 1)}>
           ATTACK
         </Button>
       </ModalActions>
