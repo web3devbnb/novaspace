@@ -337,7 +337,6 @@ export const useTravel = () => {
 // ***View Functions***
 
 export const useGetFleetLocation = (fleet) => {
-  const { account } = useWallet()
   const { slowRefresh } = useRefresh()
   const [fleetLocation, setFleetLocation] = useState({ X: 0, Y: 0 })
 
@@ -347,7 +346,7 @@ export const useGetFleetLocation = (fleet) => {
       setFleetLocation({ X: data.x, Y: data.y })
     }
     fetch()
-  }, [slowRefresh, fleet, account])
+  }, [slowRefresh, fleet])
   return fleetLocation
 }
 
