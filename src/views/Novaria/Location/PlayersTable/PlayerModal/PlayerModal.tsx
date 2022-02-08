@@ -3,16 +3,16 @@ import ModalActions from 'components/ModalActions'
 import {
   useEnterBattle,
   useGetAttackPower,
-  useGetFleet,
   useGetFleetLocation,
   useGetFleetMineral,
   useGetFleetSize,
   useGetMaxMineralCapacity,
+  useGetShips,
 } from 'hooks/useNovaria'
 import React from 'react'
 
 const PlayerModal = ({ player }) => {
-  const fleet = useGetFleet()
+  const ships = useGetShips(player)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
@@ -24,7 +24,7 @@ const PlayerModal = ({ player }) => {
   return (
     <Modal title={`PLAYER ${player}`}>
       <div>
-        <div>FLEET: {fleet}</div>
+        <div>FLEET: {ships}</div>
         <div>
           FLEET LOCATION: {fleetLocation.X}, {fleetLocation.Y}
         </div>

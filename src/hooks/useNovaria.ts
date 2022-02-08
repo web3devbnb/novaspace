@@ -164,6 +164,20 @@ export const useGetFleet = () => {
   return fleet
 }
 
+export const useGetShips = (fleet) => {
+  const { slowRefresh } = useRefresh()
+  const [ships, setShips] = useState([])
+
+  useEffect(() => {
+    async function fetchShips() {
+      const data = await fleetContract.methods.getShips(fleet).call()
+      setShips(data)
+    }
+    fetchShips()
+  }, [slowRefresh, fleet])
+  return ships
+}
+
 export const useGetFleetSize = (fleet) => {
   const { slowRefresh } = useRefresh()
   const [fleetSize, setFleetSize] = useState(null)
