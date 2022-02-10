@@ -40,6 +40,8 @@ const Page = styled.div`
   padding: 10px;
   color: #5affff;
   font-family: BigNoodle; sans-serif;
+  display: flex;
+  flex-wrap: no-wrap;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     margin-top: -75px;
@@ -49,7 +51,7 @@ const Page = styled.div`
 `
 
 const Body = styled.div`
-  margin: 10px 10px 10px 150px;
+  margin: 10px 10px 10px 10px;
   // fix background later
   display: flex;
   flex-direction: row;

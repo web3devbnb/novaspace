@@ -21,7 +21,6 @@ import highPlayers from '../assets/highplayers.png'
 
 const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
-  console.log('map data', data)
   return data
 }
 
@@ -84,8 +83,8 @@ const GridCell = styled.div`
 
 const GridCellImg = styled.img`
   // position: absolute;
-  left: 50%;
-  right: 50%;
+  // left: 50%;
+  // right: 50%;
   align-items: center;
   align-self: center;
   height: 50%;
@@ -159,6 +158,7 @@ const InputControl = styled.div`
 
 const Legend = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   border: 1px solid gray;
   margin: 5px 10px;;
@@ -224,7 +224,7 @@ const Map: React.FC = () => {
     return fleets.length
   }
   
-  console.log('fleets', useGetFleetsAtLocation(0, 0))
+  console.log('hasFleets', HasFleets(0, 0))
 
   if (!mapData) {
     return null
@@ -273,11 +273,12 @@ const Map: React.FC = () => {
                           ''
                         )}
 
-                        {HasFleets(ri + mapData.x0, j + mapData.y0) > 0 && HasFleets(ri + mapData.x0, j + mapData.y0) < 11 
+                        {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 0 
+                        // && HasFleets(ri + mapData.x0, j + mapData.y0) < 11 
                           ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
-                          {HasFleets(ri + mapData.x0, j + mapData.y0) > 10 && HasFleets(ri + mapData.x0, j + mapData.y0) < 51 
+                          {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 10 && HasFleets(ri + mapData.x0, j + mapData.y0) < 51 
                             ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
-                            {HasFleets(ri + mapData.x0, j + mapData.y0) > 50  
+                            {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 50  
                               ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
                  
                         {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}

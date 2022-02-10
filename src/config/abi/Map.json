@@ -287,109 +287,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			}
-		],
-		"name": "addAsteroid",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			}
-		],
-		"name": "addEmpty",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			}
-		],
-		"name": "addHostile",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "string",
 				"name": "_name",
 				"type": "string"
 			}
 		],
 		"name": "addPlaceType",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_starId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "bool",
-				"name": "_isMiningPlanet",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "_hasRefinery",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "_hasShipyard",
-				"type": "bool"
-			}
-		],
-		"name": "addPlanet",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -413,34 +316,6 @@
 			}
 		],
 		"name": "addSalvageToPlace",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_luminosity",
-				"type": "uint256"
-			}
-		],
-		"name": "addStar",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -500,6 +375,24 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			}
+		],
+		"name": "explore",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
