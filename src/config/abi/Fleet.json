@@ -790,9 +790,9 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct Fleet.SpaceDock[16]",
+				"internalType": "struct Fleet.SpaceDock[]",
 				"name": "",
-				"type": "tuple[16]"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -850,9 +850,9 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct Fleet.ShipClass[32]",
+				"internalType": "struct Fleet.ShipClass[]",
 				"name": "",
-				"type": "tuple[32]"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -869,9 +869,9 @@
 		"name": "getShips",
 		"outputs": [
 			{
-				"internalType": "uint256[32]",
+				"internalType": "uint256[]",
 				"name": "",
-				"type": "uint256[32]"
+				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",
@@ -965,9 +965,9 @@
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct Fleet.SpaceDock[16]",
+				"internalType": "struct Fleet.SpaceDock[]",
 				"name": "",
-				"type": "tuple[16]"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",

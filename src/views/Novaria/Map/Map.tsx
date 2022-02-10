@@ -174,6 +174,8 @@ const Map: React.FC = () => {
 
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
+  console.log('map data', mapData)
+
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
 
@@ -224,7 +226,6 @@ const Map: React.FC = () => {
     return fleets.length
   }
   
-  console.log('hasFleets', HasFleets(0, 0))
 
   if (!mapData) {
     return null

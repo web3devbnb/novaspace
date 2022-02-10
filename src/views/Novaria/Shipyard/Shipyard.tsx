@@ -279,6 +279,7 @@ const Shipyard = () => {
   const { account } = useWallet()
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
+  console.log('shipclasses', shipClasses)
   const spaceDocks = useGetSpaceDock()
   console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
@@ -428,37 +429,6 @@ const Shipyard = () => {
             <ShipClassCard src={unknownCard} alt='coming soon' />
             <ShipClassCard src={unknownCard} alt='coming soon' />
 
-
-            {/* <Header>Ship Types</Header>
-            <Row>
-              <Col>
-                <Item>Ship</Item>
-                <Item>Size</Item>
-                <Item>Attack</Item>
-                <Item>Shield</Item>
-                <Item>Mineral Capactiy</Item>
-                <Item>Mining Capacity</Item>
-                <Item>Hanger Space</Item>
-                <Item>Build Time</Item>
-                <Item>Cost</Item>
-              </Col>
-
-              {shipClasses.map((ship) => {
-                return (
-                  <Col key={ship.name}>
-                    <Item>{ship.name}</Item>
-                    <Item>{ship.size}</Item>
-                    <Item>{ship.attackPower}</Item>
-                    <Item>{ship.shield}</Item>
-                    <Item>{web3.utils.fromWei(ship.mineralCapacity)}</Item>
-                    <Item>{web3.utils.fromWei(ship.miningCapacity)}</Item>
-                    <Item>{ship.hangarSize}</Item>
-                    <Item>{ship.buildTime}</Item>
-                    <Item>{web3.utils.fromWei(ship.cost)}</Item>
-                  </Col>
-                )
-              })}
-            </Row> */}
           </ShipClassMenu>
 
           <Row>

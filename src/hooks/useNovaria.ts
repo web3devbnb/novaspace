@@ -214,7 +214,7 @@ export const useGetMaxMineralCapacity = () => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getMaxMineralCapacity(account).call()
+      const data = await fleetContract.methods.getMineralCapacity(account).call()
       setMaxMineralCapacity(data)
     }
     fetch()
