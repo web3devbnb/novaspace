@@ -1,5 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
+import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { useGetFleetLocation, useGetFleetMineral } from 'hooks/useNovaria'
+import { usePriceNovaBusd } from 'state/hooks'
+import useTokenBalance from '../../../hooks/useTokenBalance'
+import { getNovaAddress } from '../../../utils/addressHelpers'
+import { getBalanceNumber } from '../../../utils/formatBalance'
+import smallLogo from '../assets/novariaSmallLogo.png'
 import overview from '../assets/overviewMenu.png'
 import shipyard from '../assets/shipyardMenu.png'
 import starmap from '../assets/starmapMenu.png'
@@ -7,18 +15,31 @@ import location from '../assets/locationMenu.png'
 import flag from '../assets/menuFlag.png'
 
 const Frame = styled.div`
-    width: auto;
-    position: fixed;
-    z-index: 1;
-    top: 120px;
-    left: 0px;
-   // background: #00000080;
-    overflow-x: hidden;
+    width: 150px;
+    // position: fixed;
+    // z-index: 0;
+    // top: -50px;
+    // left: 0px;
+    // overflow-x: hidden;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+    margin-top: 10px;
+`
+
+const SmallFrame = styled.div`
+    width: 60px;
+    // position: fixed;
+    // z-index: 0;
+    // top: -50px;
+    // left: 0px;
+    // overflow-x: hidden;
     padding: 8px 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-right: 5px;
+    // margin-right: 5px;
+    margin-top: 10px;
 `
 
 const Link = styled.a`
@@ -45,7 +66,7 @@ const Flag = styled.div`
     flex-direction: column;
     z-index: 0;
     position: absolute;
-    left: 52px;
+    left: 55px;
    
 `
 
@@ -55,6 +76,8 @@ const Flag1 = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    left: 55px;
     opacity: 0;
     color: #5affff;
     z-index: 1;    
@@ -63,27 +86,109 @@ const Flag1 = styled.div`
     }
 `
 
-const GameMenu = ({pageName}) => (
+const InfoBlock = styled.div`
+  margin-right: 15px;
+  margin-left: 10px;
+`
 
-    <Frame>
-        <Link href="/overview" ><Icon src={overview} alt='game overview' />
-            <Flag1 aria-haspopup='true'>OVERVIEW<img src={flag} alt='flag' />  </Flag1>
-            {pageName === 'overview' ? <Flag> OVERVIEW <img src={flag} alt='flag' /> </Flag> : '' }
-        </Link>
-        <Link href="/map"><Icon src={starmap} alt='game star map' />
-            <Flag1 aria-haspopup='true'>STAR MAP<img src={flag} alt='flag' />  </Flag1>
-            {pageName === 'starmap' ? <Flag>STAR MAP<img src={flag} alt='flag' />  </Flag> : '' }
-        </Link>
-        <Link href="/shipyard"><Icon src={shipyard} alt='game shipyard' />
-            <Flag1 aria-haspopup='true'>SHIPYARD<img src={flag} alt='flag' />  </Flag1>
-            {pageName === 'shipyard' ? <Flag>SHIPYARD <img src={flag} alt='flag' /> </Flag> : '' }    
-        </Link>
-        <Link href="/location"><Icon src={location} alt='game location' />
-            <Flag1 aria-haspopup='true'>LOCATION<img src={flag} alt='flag' />  </Flag1>
-            {pageName === 'location' ? <Flag> LOCATION<img src={flag} alt='flag' /> </Flag> : '' }
-        </Link>
-    </Frame>
+const ToggleButton = styled.button`
+    cursor: pointer;
+    color: gray;
+    background: transparent;
+    border: none;
+`
 
+const Logo = styled.img`
+    height: 63px;
+    width: 165px;
+    margin: -10px 0 10px;
+  // object-position: left;
+  // margin-top: -70px;
+  // margin-bottom: 60px;
+  // margin-bottom: 10px;
+  // background-color: #000a17;
+`
+
+const GameMenu = ({pageName}) => {
+    const [open, setOpen] = useState(true)
+
+    const { account } = useWallet()
+    const fleetLocation = useGetFleetLocation(account)
+    const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
+    const novaPrice = usePriceNovaBusd()
+    const playerMineral = useGetFleetMineral(account) / 10**18
+    
+    const toggleViewMenu = () => {
+        if (open === true) {
+            setOpen(false)
+        } else {
+            setOpen(true)
+        }
+    }
+
+    return (
+        <div>
+            {open === true ?
+                <Frame>
+                    <a href='/novaria'>
+                        <Logo src={smallLogo} alt="Novaria Logo" />
+                    </a>
+                    <ToggleButton type='button' onClick={toggleViewMenu}>
+                        {open === true ? '<<' : '>>'}
+                    </ToggleButton>
+                    <Link href="/overview" ><Icon src={overview} alt='game overview' />
+                        <Flag1 aria-haspopup='true'>OVERVIEW<img src={flag} alt='flag' />  </Flag1>
+                        {pageName === 'overview' ? <Flag> OVERVIEW <img src={flag} alt='flag' /> </Flag> : '' }
+                    </Link>
+                    <Link href="/map"><Icon src={starmap} alt='game star map' />
+                        <Flag1 aria-haspopup='true'>STAR MAP<img src={flag} alt='flag' />  </Flag1>
+                        {pageName === 'starmap' ? <Flag>STAR MAP<img src={flag} alt='flag' />  </Flag> : '' }
+                    </Link>
+                    <Link href="/shipyard"><Icon src={shipyard} alt='game shipyard' />
+                        <Flag1 aria-haspopup='true'>SHIPYARD<img src={flag} alt='flag' />  </Flag1>
+                        {pageName === 'shipyard' ? <Flag>SHIPYARD <img src={flag} alt='flag' /> </Flag> : '' }    
+                    </Link>
+                    <Link href="/location"><Icon src={location} alt='game location' />
+                        <Flag1 aria-haspopup='true'>LOCATION<img src={flag} alt='flag' />  </Flag1>
+                        {pageName === 'location' ? <Flag> LOCATION<img src={flag} alt='flag' /> </Flag> : '' }
+                    </Link>
+                    <InfoBlock>
+                        <Text glowing>
+                        Current
+                        </Text>
+                        <Text glowing>
+                        Location: ({fleetLocation.X}, {fleetLocation.Y})
+                        </Text>
+                        <div style={{flexDirection: 'row', display: 'flex', marginTop: 10}}>
+                            <img src='https://shibanova.io/logo.png' alt='nova logo' />
+                            <Text glowing>  $0.15
+                                {/* {novaPrice} see if this works on production? */}
+                            </Text>
+                        </div>
+                        <Text glowing>
+                        NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+                        </Text>
+                        <Text glowing>
+                        MINERAL: <span style={{ color: 'gold' }}>{playerMineral.toFixed(2)}</span>
+                        </Text>
+                    </InfoBlock>
+                </Frame>
+                :
+                <SmallFrame>
+                    <ToggleButton type='button' onClick={toggleViewMenu}>
+                        &gt;&gt;
+                    </ToggleButton>
+                     <Link href="/overview" ><Icon src={overview} alt='game overview' />
+                    </Link>
+                    <Link href="/map"><Icon src={starmap} alt='game star map' />
+                    </Link>
+                    <Link href="/shipyard"><Icon src={shipyard} alt='game shipyard' />   
+                    </Link>
+                    <Link href="/location"><Icon src={location} alt='game location' />
+                    </Link>
+                </SmallFrame>
+        }
+    </div>
 )
-
+    }
 export default GameMenu

@@ -415,7 +415,6 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <GameHeader>SHIPYARD</GameHeader>
       <GameMenu pageName="shipyard" />
 
       <Body>

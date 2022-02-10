@@ -422,7 +422,7 @@ export const useGetFleetsAtLocation = (x: number, y: number) => {
 
 export const useGetFleetMineral = (fleet: string) => {
   const { slowRefresh } = useRefresh()
-  const [fleetMineral, setFleetMineral] = useState(0)
+  const [fleetMineral, setFleetMineral] = useState(0) 
 
   useEffect(() => {
     async function fetch() {

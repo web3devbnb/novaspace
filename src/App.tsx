@@ -42,10 +42,12 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <GlobalStyle isNovaria={false} />
               <Home />
+              <Footer />
             </Route>
             <Route path="/traderoutes">
               <GlobalStyle isNovaria={false} />
               <Farms />
+              <Footer />
             </Route>
             {/* <Route path="/pools">
               <Farms tokenMode />
@@ -53,6 +55,7 @@ const App: React.FC = () => {
             <Route path="/novaria">
               <GlobalStyle isNovaria />
               <Novaria />
+              <Footer />
             </Route>
 
             <Route path="/map">
@@ -75,10 +78,12 @@ const App: React.FC = () => {
             <Route path="/privacy">
               <GlobalStyle isNovaria={false} />
               <Privacy />
+              <Footer />
             </Route>
             <Route path="/terms">
               <GlobalStyle isNovaria={false} />
               <Terms />
+              <Footer />
             </Route>
             <Route component={NotFound} />
             <GlobalStyle isNovaria={false} />
@@ -86,7 +91,6 @@ const App: React.FC = () => {
           {/* <Bubbles numberOfBubbles={150} /> */}
         </Suspense>
       </Menu>
-      <Footer />
     </Router>
   )
 }

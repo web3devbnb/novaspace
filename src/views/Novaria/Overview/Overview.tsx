@@ -26,7 +26,6 @@ const Body = styled.div`
 const Overview: React.FC = () => {
   return (
     <Page>
-      <GameHeader>MAP</GameHeader>
       <Body>
         <GameMenu pageName="overview" />
       </Body>

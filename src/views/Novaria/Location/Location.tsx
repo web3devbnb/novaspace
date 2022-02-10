@@ -87,7 +87,6 @@ const Location: React.FC = () => {
 
   return (
     <Page>
-      <GameHeader>LOCATION</GameHeader>
       <Body>
         <GameMenu pageName="location" />
         <Content>
