@@ -274,10 +274,13 @@ const Map: React.FC = () => {
                         )}
 
                         {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 0 
-                        // && HasFleets(ri + mapData.x0, j + mapData.y0) < 11 
+                          && HasFleets(ri + mapData.x0, j + mapData.y0) < 11 
                           ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
-                          {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 10 && HasFleets(ri + mapData.x0, j + mapData.y0) < 51 
+
+                          {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 10 
+                            && HasFleets(ri + mapData.x0, j + mapData.y0) < 51 
                             ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
+                            
                             {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 50  
                               ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
                  

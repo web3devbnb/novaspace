@@ -382,7 +382,7 @@ export const useGetPlaceInfo = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState({
     name: '',
-    type: '',
+    type: '', 
     scrap: 0,
     shipyard: false,
     refinery: false,
