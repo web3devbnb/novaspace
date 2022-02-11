@@ -130,9 +130,9 @@ const GameMenu = ({pageName}) => {
         <div>
             {open === true ?
                 <Frame>
-                    <a href='/novaria'>
+                    {/* <a href='/novaria'>
                         <Logo src={smallLogo} alt="Novaria Logo" />
-                    </a>
+                    </a> */}
                     <ToggleButton type='button' onClick={toggleViewMenu}>
                         {open === true ? '<<' : '>>'}
                     </ToggleButton>
@@ -152,6 +152,7 @@ const GameMenu = ({pageName}) => {
                         <Flag1 aria-haspopup='true'>LOCATION<img src={flag} alt='flag' />  </Flag1>
                         {pageName === 'location' ? <Flag> LOCATION<img src={flag} alt='flag' /> </Flag> : '' }
                     </Link>
+{/* 
                     <InfoBlock>
                         <Text glowing>
                         Current
@@ -163,7 +164,7 @@ const GameMenu = ({pageName}) => {
                             <img src='https://shibanova.io/logo.png' alt='nova logo' />
                             <Text glowing>  $0.15
                                 {/* {novaPrice} see if this works on production? */}
-                            </Text>
+                         { /* }   </Text>
                         </div>
                         <Text glowing>
                         NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
@@ -171,7 +172,9 @@ const GameMenu = ({pageName}) => {
                         <Text glowing>
                         MINERAL: <span style={{ color: 'gold' }}>{playerMineral.toFixed(2)}</span>
                         </Text>
-                    </InfoBlock>
+                    </InfoBlock> 
+                */}
+                    
                 </Frame>
                 :
                 <SmallFrame>

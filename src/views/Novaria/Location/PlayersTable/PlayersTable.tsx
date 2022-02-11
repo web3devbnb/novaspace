@@ -1,22 +1,51 @@
 import React from 'react'
+import styled from 'styled-components'
 import PlayersTableRow from './PlayersTableRow'
+
+const Body = styled.div`
+  margin: 10px 5px;
+  display: relative;
+`
+
+const HeaderRow = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  color: #289794;
+  font-size: 12px;
+`
+
+const TableContent = styled.div`
+  overflow-y: auto;
+  scrollbar-color: #5affff #289794;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar { 
+    width: 5px;
+    background-color: #289794;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #5affff;
+  }
+`
 
 const PlayersTable = ({ players }) => {
   return (
-    <div>
+    <Body>
       <div>
-        <div>
+        <HeaderRow>
           <div>PLAYER</div>
-          <div>FLEET SIZE</div>
-          <div>FLEET POWER</div>
-        </div>
+          <div>SIZE</div>
+          <div>POWER</div>
+          <div>MINERAL</div>
+        </HeaderRow>
       </div>
-      <div>
+      <TableContent>
         {players.map((player) => (
           <PlayersTableRow player={player} />
         ))}
-      </div>
-    </div>
+      </TableContent>
+    </Body>
   )
 }
 

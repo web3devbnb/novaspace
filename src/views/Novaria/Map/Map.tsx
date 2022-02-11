@@ -56,7 +56,7 @@ const Body = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px 0px 10px;
+  margin: 10px 0px 0px 0px;
 `
 
 const Grid = styled.div`
@@ -76,41 +76,53 @@ const Grid = styled.div`
 const GridCell = styled.div`
   display: flex;
   color: white;
-  position: relative;
-  aspect-ratio: 17/8;
-  z-index: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `
 
 const GridCellImg = styled.img`
-  // position: absolute;
+  //position: relative;
   // left: 50%;
   // right: 50%;
   align-items: center;
   align-self: center;
-  height: 50%;
-  // z-index: 0;
+  max-height: 70%;
 `
 
 const IndicatorImg = styled.img`
   // width: 30px;
   // height: auto;
   align-self: center;
-  position: absolute;
-  right: 5px;
-  // z-axis: 1;
+  // position: absolute;
+  // right: 5px;
 `
 
 const GridIcon = styled.img`
   width: 20px;
-  height: auto;
+  height: 20px;
 `
 
 const GridCellContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px 10px;
+  justify-content: center;
+  flex-wrap: no-wrap;
+  padding: 5px 5px ;
+  // border: 1px solid white;
+  position: relative;
+  aspect-ratio: 17/8;
+  width: 150px;
+  height: 80px;
+`
+
+const Row = styled.div`
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 
 `
+
 
 const GridCellId = styled.div`
   position: absolute;
@@ -164,10 +176,13 @@ const Legend = styled.div`
   margin: 5px 10px;;
   padding: 5px;
   align-items: center;
+  & > * {
+    margin: 5px;
+  }
 `
 
-const NX = (window.innerWidth < 1050 ? 5 : 7)
-const NY = (window.innerWidth < 1050 ? 5 : 7)
+const NX = (window.innerWidth < 1150 ? 5 : 7)
+const NY = (window.innerWidth < 1150 ? 5 : 7)
 
 const Map: React.FC = () => {
   const mapContract = useMap()
@@ -208,23 +223,6 @@ const Map: React.FC = () => {
     const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
-
-  const HasRefinery = (x, y) => {
-    return useGetPlaceInfo(x, y).refinery
-  }
-
-  const HasShipyard = (x, y) => {
-    return useGetPlaceInfo(x, y).shipyard
-  }
-
-  const HasMineral = (x, y) => {
-    return useGetPlaceInfo(x, y).mineral
-  }
-
-  const HasFleets = (x, y) => {
-    const fleets = useGetFleetsAtLocation(x, y)
-    return fleets.length
-  }
   
 
   if (!mapData) {
@@ -242,13 +240,13 @@ const Map: React.FC = () => {
             return mapData.data[ri].map((el, j) => {
               return (
                 <GridCell>
-                <GridCellContent aria-haspopup="true">
                 <Link
                   to={{
                     pathname: '/location',
                     state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
                   }}
                 >
+                <GridCellContent aria-haspopup="true">
                   {/* {el.name && ( */}
                         <Text bold glowing>
                           {el.name}
@@ -256,33 +254,33 @@ const Map: React.FC = () => {
                         <Unexplored>
                           {el.placeType === '' ? 'Location Unexplored' : ''}
                         </Unexplored>
-
+                      <Row>
                         {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
-                        {HasRefinery(ri + mapData.x0, j + mapData.y0) === true ? (
+                        {el.hasRefinery === true ? (
                           <GridIcon src={refineryLogo} alt="planet has refinery" />
                         ) : (
                           ''
                         )}
-                        {HasShipyard(ri + mapData.x0, j + mapData.y0) === true ? (
+                        {el.hasShipyard === true ? (
                           <GridIcon src={shipyardLogo} alt="planet has shipyard" />
                         ) : (
                           ''
                         )}
-                        {HasMineral(ri + mapData.x0, j + mapData.y0) > 0 ? (
+                        {el.availableMineral > 0 ? (
                           <GridIcon src={mineralLogo} alt="planet has minerals" />
                         ) : (
                           ''
                         )}
 
-                        {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 0 
-                          && HasFleets(ri + mapData.x0, j + mapData.y0) < 11 
+                        {el.fleetCount > 0 
+                          && el.fleetCount < 11 
                           ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
 
-                          {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 10 
-                            && HasFleets(ri + mapData.x0, j + mapData.y0) < 51 
+                          {el.fleetCount > 10 
+                            && el.fleetCount < 51 
                             ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
                             
-                            {() => HasFleets(ri + mapData.x0, j + mapData.y0) > 50  
+                            {el.fleetCount > 50  
                               ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
                  
                         {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
@@ -294,12 +292,13 @@ const Map: React.FC = () => {
                         ) : (
                           ''
                         )}
-
+                      </Row>
                         <GridCellId>
                           ({ri + mapData.x0} , {j + mapData.y0})
                         </GridCellId>
-                  </Link>
+                  
                     </GridCellContent>
+                    </Link>
                 </GridCell>
               )
             })
@@ -317,7 +316,7 @@ const Map: React.FC = () => {
             <CoordInput type="number" min="0" max="10"  value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
           </InputControl>
 
-          <InputControl>
+          {/* <InputControl>
             <button type="button" onClick={handleSetGridSizeClick}>
               Set grid size (x, y)
             </button>
@@ -336,16 +335,16 @@ const Map: React.FC = () => {
               value={YLen}
               onChange={(e) => setYLen(parseFloat(e.target.value))}
             />
-          </InputControl>
+          </InputControl> */}
         </GridControls>
         <Legend>
-          <span><GridIcon src={mineralLogo} alt="planet has minerals" /> - Mining Planet</span>
-          <span><GridIcon src={shipyardLogo} alt="planet has shipyard" /> - Shipyard</span>
-          <span><GridIcon src={refineryLogo} alt="planet has refinery" /> - Refinery (DMZ)</span>
-          <span><GridIcon src={youLogo} alt="your location" /> - Current Location</span>
-          <span><GridIcon src={lowPlayers} alt="planet has few players" /> - 1-10 players</span>
-          <span><GridIcon src={medPlayers} alt="planet many players" /> - 11-50 players</span>
-          <span><GridIcon src={highPlayers} alt="planet 50 plus players" /> - 51+ players</span>
+          <span><GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet</span>
+          <span><GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard</span>
+          <span><GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)</span>
+          <span><GridIcon src={youLogo} alt="your location" /> : Current Location</span>
+          <span><GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players</span>
+          <span><GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players</span>
+          <span><GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players</span>
         </Legend>
       </Body>
     </Page>

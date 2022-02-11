@@ -77,7 +77,7 @@ const ShipClassMenu = styled.div`
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
-  &::-webkit-scrollbar {
+  &::-webkit-scrollbar { 
     width: 0px;
     height: 10px;
     background-color: #289794;

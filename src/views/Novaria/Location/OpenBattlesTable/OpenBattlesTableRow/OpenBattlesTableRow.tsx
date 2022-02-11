@@ -3,8 +3,23 @@ import React from 'react'
 import styled from 'styled-components'
 import BattleModal from '../BattleModal'
 
-const Row = styled.div``
-const Cell = styled.div``
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid #289794;
+  padding: 3px;
+  margin: 4px 0;
+  &:hover {
+    background-color: #289794;
+  }
+`
+const Cell = styled.div`
+  // flex: 1;
+  // width: 33%;
+  // overflow-x: hidden;
+  text-overflow: ellipsis;
+`
 
 const OpenBattlesTableRow = ({ battle }) => {
   const [handleClick] = useModal(<BattleModal />)

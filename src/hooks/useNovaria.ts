@@ -294,6 +294,20 @@ export const useGetAttackPower = (fleet) => {
   return attackPower
 }
 
+export const useGetNameByAddress = (player) => {
+  const { slowRefresh } = useRefresh()
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getNameByAddress(player).call()
+      setName(data)
+    }
+    fetch()
+  }, [slowRefresh, player])
+  return name
+}
+
 // ~~~Map contract functions~~~
 // Movement, mining, refining, tracks mineral
 // Active Functions

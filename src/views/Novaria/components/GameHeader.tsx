@@ -13,6 +13,7 @@ const Hero = styled.div`
   text-align: center;
   justify-content: space-between;
   height: 75px;
+  width: 100%;
   // margin-right: 10px;
   // margin-left: 10px;
   margin-top: 0px;
@@ -37,24 +38,34 @@ const Logo = styled.img`
   // background-color: #000a17;
 `
 
-const GameHeader = ({ children }) => {
-  const { account } = useWallet()
-  const fleetLocation = useGetFleetLocation(account)
+const GameHeader = ({ location, playerMineral }) => {
+  // const { account } = useWallet()
+  // const fleetLocation = useGetFleetLocation(account)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
 
   return (
     <Hero>
-      <Logo src={smallLogo} alt="Novaria Logo" />
-
-      <StyledHeading as="p" size="xl" glowing>
+      <a href='/novaria'>
+        <Logo src={smallLogo} alt="Novaria Logo" />
+      </a>
+      {/* <StyledHeading as="p" size="xl" glowing>
         {children}
-      </StyledHeading>
+      </StyledHeading> */}
       <InfoBlock>
+         <div style={{flexDirection: 'row', display: 'flex', marginTop: 10}}>
+              <img src='https://shibanova.io/logo.png' alt='nova logo' />
+              <Text glowing>  $0.15
+                  {/* {novaPrice} see if this works on production? */}
+              </Text>
+          </div>
         <Text glowing>
-          Player Location: ({fleetLocation.X}, {fleetLocation.Y})
+          Player Location: ({location.X}, {location.Y})
         </Text>
         <Text glowing>
           Available NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+        </Text>
+        <Text glowing>
+           MINERAL: <span style={{ color: 'gold' }}>{playerMineral}</span>
         </Text>
       </InfoBlock>
     </Hero>
