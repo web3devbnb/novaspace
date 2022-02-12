@@ -18,11 +18,15 @@ import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
 
 const Page = styled.div`
+  font-family: 'BigNoodle', sans-serif;
+
   background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
+
   font-size: 15px;
   margin-top: -105px;
   color: #5affff;
+
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
@@ -38,55 +42,43 @@ const Row = styled.div`
 `
 
 const Body = styled.div`
-  margin: 10px 10px 10px 10px;
-  // fix background later
-  background-image: url('/images/novaria/border.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding: 15px;
-  width: 100%;
-  min-height: 550px;
+  margin: 10px 10px 10px 0px;
+  padding: 15px 15px 15px 0px;
+  // width: 100%;
+  // min-height: 550px;
   position: relative;
+  aspect-ratio: 15/8;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    // fix background later
+    background-image: url('/images/novaria/border.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 10px 10px 10px 10px;
+    padding: 15px;
+  }
 `
 
 const Header = styled.text`
   color: white;
   font-weight: bold;
-  font-size: 18px;
-  margin: 12px 0 10px;
+  font-size: 14px;
+  margin: 12px 0 10px; 
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 18px;
+  }
 `
 
 const Content = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 3fr 2fr;
+  // display: grid;
+  // grid-template-columns: 2fr 3fr 2fr;
   // position: inherit;
-  // display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
 
-`
-
-const LocationInfo = styled.div`
-  height: 100%;
-  margin: 15px 25px;
-`
-const LocationHeader = styled.text`
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 100px;
-
-`
-
-
-const HavenImageCard = styled.div`
-  background-image: url('/images/novaria/haven.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: clamp(300px, 300px, 300px);
-`
-const PlanetImageCard = styled.div``
-const PlanetInfoCard = styled.div`
- 
 `
 
 const OpenBattlesCard = styled.div`
@@ -95,9 +87,15 @@ const OpenBattlesCard = styled.div`
   background-repeat: no-repeat;
   margin: 20px 10px;
   padding: 10px;
-  max-height: 40%;
+  max-height: 45%;
   min-height: 200px;
-  max-width: 400px;
+  min-width: 350px
+  max-width: 450px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    min-width: 450px;
+  }
+
+
 
 `
 
@@ -107,15 +105,17 @@ const PlayersCard = styled.div`
   background-repeat: no-repeat;
   margin: 20px 10px;
   padding: 10px;
-  max-height: 40%;
+  max-height: 45%;
   min-height: 200px;
-  max-width: 400px;
+  min-width: 350px
+  max-width: 450px;
 `
 
 const RightCol = styled.div`
   padding: 15px;
   margin-left: 15px;
   border-left: 1px solid gray;
+  max-width: 250px;
 `
 
 
@@ -152,13 +152,22 @@ const Location: React.FC = () => {
   }
 
   return (
-    <Page>
+    <Page className='fontsforweb_bignoodletitling'>
       <GameHeader location={location} playerMineral={fleetMineral} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
           <Content>
-            <LocationCard />
+            <LocationCard 
+              placename={placeInfo.name} 
+              placetype={placeInfo.type} 
+              placeX={location.X} 
+              placeY={location.Y} 
+              mineral={placeInfo.mineral} 
+              salvage={placeInfo.scrap} 
+              shipyard={placeInfo.shipyard} 
+              refinery={placeInfo.refinery} 
+            />
             <div>
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>

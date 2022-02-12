@@ -70,7 +70,7 @@ const Banner2 = ({ title }: { title: string }) => {
 
       <ColRight>
         <Description glowing>
-          NovaDex is a dencentralized exchange (DEX) on the Binance Smart Chain. Users can exchange any tokens on the
+          NovaDex is a decentralized exchange (DEX) on the Binance Smart Chain. Users can exchange any tokens on the
           DEX that have provided liquidity. Trade fees are disbursed to sNOVA holders in the daily money pot!
         </Description>
         <ButtonRow>

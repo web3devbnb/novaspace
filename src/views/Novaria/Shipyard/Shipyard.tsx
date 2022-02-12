@@ -15,6 +15,7 @@ import {
   useGetMaxMineralCapacity,
   useGetMiningCapacity,
   useGetFleetLocation,
+  useGetFleetMineral,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import GameHeader from '../components/GameHeader'
@@ -27,20 +28,16 @@ import moleQueue from '../assets/moleQueue.png'
 
 
 const Page = styled.div`
-
-  @font-face {
-    font-family: 'BigNoodle';
-    src: local('BigNoodle'), url(./fonts/big_noodle_titling.ttf) format('truetype');
-  }
-
   background-image: url('/images/novaria/shipyardBG.jpg');
   background-size: cover;
+
   font-size: 15px;
   margin-top: -105px;
   padding: 10px;
   color: #5affff;
-  font-family: BigNoodle; sans-serif;
+
   display: flex;
+  flex-direction: column;
   flex-wrap: no-wrap;
 
   ${({ theme }) => theme.mediaQueries.lg} {
@@ -104,6 +101,12 @@ const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
   align-items: center;
+`
+
+const PageRow = styled.div`
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  display: flex;
 `
 
 const Item = styled.div``
@@ -290,6 +293,7 @@ const Shipyard = () => {
   const mineralCapacity = useGetMaxMineralCapacity()
   const miningCapacity = useGetMiningCapacity()
   const fleetLocation = useGetFleetLocation(account)
+  const fleetMineral = useGetFleetMineral(account)
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
@@ -418,166 +422,169 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <GameMenu pageName="shipyard" />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <PageRow>
+        <GameMenu pageName="shipyard" />
 
-      <Body>
-        <Col style={{ width: '70%' }}>
-          <ShipClassMenu>
+        <Body>
+          <Col style={{ width: '70%' }}>
+            <ShipClassMenu>
 
-            <ShipClassCard src={viperCard} alt='viper' />
-            <ShipClassCard src={moleCard} alt='mole' />
-            <ShipClassCard src={unknownCard} alt='coming soon' />
-            <ShipClassCard src={unknownCard} alt='coming soon' />
+              <ShipClassCard src={viperCard} alt='viper' />
+              <ShipClassCard src={moleCard} alt='mole' />
+              <ShipClassCard src={unknownCard} alt='coming soon' />
+              <ShipClassCard src={unknownCard} alt='coming soon' />
 
-          </ShipClassMenu>
+            </ShipClassMenu>
 
-          <Row>
+            <Row>
 
-            <BuildMenu>
-              <Header>BUILD SHIPS</Header>
-              <br />
-              <br />
-              <Select
-                placeholder="Select Shipyard"
-                value={shipyard}
-                options={shipyards}
-                onChange={handleShipyardChange}
-                getOptionLabel={(x) => x.name}
-                getOptionValue={(x) => x.name}
-                styles={customStyles}
-              />
-
-              <Row style={{ marginTop: 10 }}>
-                {/* // Selector doesn't show selected option, but does input state values for it */}
+              <BuildMenu>
+                <Header>BUILD SHIPS</Header>
+                <br />
+                <br />
                 <Select
-                  placeholder="Select Ship"
-                  value={shipId}
-                  options={shipClasses}
-                  onChange={handleShipChange}
+                  placeholder="Select Shipyard"
+                  value={shipyard}
+                  options={shipyards}
+                  onChange={handleShipyardChange}
                   getOptionLabel={(x) => x.name}
+                  getOptionValue={(x) => x.name}
                   styles={customStyles}
                 />
-              </Row>
 
-              <Row style={{ marginTop: 10 }}>
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="0"
-                  value={shipAmount}
-                  onChange={(e) => setShipAmount(parseFloat(e.target.value))}
-                />
-                <Button type="button" onClick={sendTx}>
-                  Build {shipName}
-                </Button>
-              </Row>
-              <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
-                <Text>
-                  Cost: {(shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / 10 ** 18}  
-                  <span style={{fontSize:10}}> NOVA</span> 
-                </Text>
-                <Text>
-                   Time:{' '}
-                  {buildTime * shipAmount}s
-                </Text>
-              </Row>
-              <div style={{color: '#289794', marginTop: '5px'}}>
-              <Row style={{justifyContent: "space-between"}}>
-                <Text>
-                  Location: 
-                </Text>
-                <Text>
-                  ({shipyardX}, {shipyardY})
-                </Text>
-              </Row>
-              <Row style={{justifyContent: "space-between", textOverflow: 'ellipsis', width: '100%' }}>
-                <Text>Owner: </Text>
-                <Text style={{width: '50%', textOverflow: 'ellipsis', overflow: 'hidden'}}>{shipyardOwner}</Text>
-              </Row>
-              <Row style={{justifyContent: "space-between"}}>
-                <Text>Build Fee:</Text> 
-                <Text>{shipyardFee}%</Text>
-              </Row>
-              </div>
-            </BuildMenu>
+                <Row style={{ marginTop: 10 }}>
+                  {/* // Selector doesn't show selected option, but does input state values for it */}
+                  <Select
+                    placeholder="Select Ship"
+                    value={shipId}
+                    options={shipClasses}
+                    onChange={handleShipChange}
+                    getOptionLabel={(x) => x.name}
+                    styles={customStyles}
+                  />
+                </Row>
 
-            <SpaceDockMenu>
-              <Header style={{marginTop: 0}}>BUILD QUEUE</Header>
-              <Row>
-               
-                {spaceDocks.map((dock) => {
-                  return (
-                    <Col >
-                      <QueueCard key={dock.shipClassId}>
-                        {dock.shipClassId === '0' ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
-                          : <QueueCardImg src={moleQueue} alt='moles in queue' />
-                          }{console.log('shipclassID', dock.shipClassId)}
-                        <QueueCardItems>
-                          <Row style={{justifyContent: 'space-between'}}>
-                            <Item>LOCATION  &nbsp;</Item>
-                            <br /><br />
-                            <Item style={{zIndex:1}}>
-                              ({dock.coordX}, {dock.coordY})
-                            </Item>
-                          </Row>
-                          <Row style={{justifyContent: 'space-between'}}>
-                            <Item>AMOUNT</Item>
-                            <Item style={{zIndex:1}}>{dock.amount}</Item>
-                          </Row>
-                        </QueueCardItems>
-                      </QueueCard>
+                <Row style={{ marginTop: 10 }}>
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="0"
+                    value={shipAmount}
+                    onChange={(e) => setShipAmount(parseFloat(e.target.value))}
+                  />
+                  <Button type="button" onClick={sendTx}>
+                    Build {shipName}
+                  </Button>
+                </Row>
+                <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
+                  <Text>
+                    Cost: {(shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / 10 ** 18}  
+                    <span style={{fontSize:10}}> NOVA</span> 
+                  </Text>
+                  <Text>
+                    Time:{' '}
+                    {buildTime * shipAmount}s
+                  </Text>
+                </Row>
+                <div style={{color: '#289794', marginTop: '5px'}}>
+                <Row style={{justifyContent: "space-between"}}>
+                  <Text>
+                    Location: 
+                  </Text>
+                  <Text>
+                    ({shipyardX}, {shipyardY})
+                  </Text>
+                </Row>
+                <Row style={{justifyContent: "space-between", textOverflow: 'ellipsis', width: '100%' }}>
+                  <Text>Owner: </Text>
+                  <Text style={{width: '50%', textOverflow: 'ellipsis', overflow: 'hidden'}}>{shipyardOwner}</Text>
+                </Row>
+                <Row style={{justifyContent: "space-between"}}>
+                  <Text>Build Fee:</Text> 
+                  <Text>{shipyardFee}%</Text>
+                </Row>
+                </div>
+              </BuildMenu>
 
-                        <ClaimControls>
+              <SpaceDockMenu>
+                <Header style={{marginTop: 0}}>BUILD QUEUE</Header>
+                <Row>
+                
+                  {spaceDocks.map((dock) => {
+                    return (
+                      <Col >
+                        <QueueCard key={dock.shipClassId}>
+                          {dock.shipClassId === '0' ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
+                            : <QueueCardImg src={moleQueue} alt='moles in queue' />
+                            }{console.log('shipclassID', dock.shipClassId)}
+                          <QueueCardItems>
+                            <Row style={{justifyContent: 'space-between'}}>
+                              <Item>LOCATION  &nbsp;</Item>
+                              <br /><br />
+                              <Item style={{zIndex:1}}>
+                                ({dock.coordX}, {dock.coordY})
+                              </Item>
+                            </Row>
+                            <Row style={{justifyContent: 'space-between'}}>
+                              <Item>AMOUNT</Item>
+                              <Item style={{zIndex:1}}>{dock.amount}</Item>
+                            </Row>
+                          </QueueCardItems>
+                        </QueueCard>
 
-                          {CalculateTimeLeft(new Date(dock.completionTime * 1000)) > 0 
-                          ? <CountdownButton>{CalculateTimeLeft(new Date(dock.completionTime * 1000))}</CountdownButton> 
-                          : ''}
-                          
-                          {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?  
-                          <Item><ClaimInput
-                            type="number"
-                            min="0"
-                            placeholder="0"
-                            value={claimAmount}
-                            onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                          /> 
-                          <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
-                            CLAIM
-                          </ClaimButton></Item>
-                          : '' }
-                        </ClaimControls>
-                      </Col>
-                  )
-                })}
-              </Row>
-            </SpaceDockMenu>
-          </Row>
-        </Col>
+                          <ClaimControls>
 
-        <Col style={{ width: '25%' }}>
-          <FleetMenu>
-            <Header style={{marginLeft:10}}>FLEET STATS</Header>
-            <Row>
-              <Col>
-                <Item style={{marginBottom:10}}>Fleet Size</Item>
-                <Item style={{marginBottom:10}}>Mining Capacity</Item>
-                <Item style={{marginBottom:10}}>Max Mineral Capacity</Item>
-                {shipClasses.map((ship) => {
-                  return <Item  style={{marginBottom:10}} key={ship.name}>{ship.name}s</Item>
-                })}
-              </Col>
-              <Col style={{textAlign: 'right'}}>
-                {/* Find a way to map this out based on shipclass? */}
-                <Item style={{marginBottom:10}}>{fleetSize}/{maxFleetSize}</Item>
-                <Item style={{marginBottom:10}}>{web3.utils.fromWei(miningCapacity)} </Item>
-                <Item style={{marginBottom:10}}>{web3.utils.fromWei(mineralCapacity)} </Item>
-                <Item style={{marginBottom:10}}>{playerFleet[0]}</Item>
-                <Item style={{marginBottom:10}}>{playerFleet[1]}</Item>
-              </Col>
+                            {CalculateTimeLeft(new Date(dock.completionTime * 1000)) > 0 
+                            ? <CountdownButton>{CalculateTimeLeft(new Date(dock.completionTime * 1000))}</CountdownButton> 
+                            : ''}
+                            
+                            {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?  
+                            <Item><ClaimInput
+                              type="number"
+                              min="0"
+                              placeholder="0"
+                              value={claimAmount}
+                              onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
+                            /> 
+                            <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                              CLAIM
+                            </ClaimButton></Item>
+                            : '' }
+                          </ClaimControls>
+                        </Col>
+                    )
+                  })}
+                </Row>
+              </SpaceDockMenu>
             </Row>
-          </FleetMenu>
-        </Col>
-      </Body>
+          </Col>
+
+          <Col style={{ width: '25%' }}>
+            <FleetMenu>
+              <Header style={{marginLeft:10}}>FLEET STATS</Header>
+              <Row>
+                <Col>
+                  <Item style={{marginBottom:10}}>Fleet Size</Item>
+                  <Item style={{marginBottom:10}}>Mining Capacity</Item>
+                  <Item style={{marginBottom:10}}>Max Mineral Capacity</Item>
+                  {shipClasses.map((ship) => {
+                    return <Item  style={{marginBottom:10}} key={ship.name}>{ship.name}s</Item>
+                  })}
+                </Col>
+                <Col style={{textAlign: 'right'}}>
+                  {/* Find a way to map this out based on shipclass? */}
+                  <Item style={{marginBottom:10}}>{fleetSize}/{maxFleetSize}</Item>
+                  <Item style={{marginBottom:10}}>{web3.utils.fromWei(miningCapacity)} </Item>
+                  <Item style={{marginBottom:10}}>{web3.utils.fromWei(mineralCapacity)} </Item>
+                  <Item style={{marginBottom:10}}>{playerFleet[0]}</Item>
+                  <Item style={{marginBottom:10}}>{playerFleet[1]}</Item>
+                </Col>
+              </Row>
+            </FleetMenu>
+          </Col>
+        </Body>
+      </PageRow>
     </Page>
   )
 }

@@ -40,12 +40,12 @@ const App: React.FC = () => {
         <Suspense fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
-              <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Home />
               <Footer />
             </Route>
             <Route path="/traderoutes">
-              <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Farms />
               <Footer />
             </Route>
@@ -53,40 +53,40 @@ const App: React.FC = () => {
               <Farms tokenMode />
             </Route> */}
             <Route path="/novaria">
-              <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
               <Novaria />
               <Footer />
             </Route>
 
             <Route path="/map">
-              <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
               <Map />
             </Route>
             <Route path="/location">
-              <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
               <Location />
             </Route>
             <Route path="/overview">
-              <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
               <Overview />
             </Route>
             <Route path="/shipyard">
-              <GlobalStyle isNovaria />
+              <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
               <Shipyard />
             </Route>
 
             <Route path="/privacy">
-              <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Privacy />
               <Footer />
             </Route>
             <Route path="/terms">
-              <GlobalStyle isNovaria={false} />
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Terms />
               <Footer />
             </Route>
             <Route component={NotFound} />
-            <GlobalStyle isNovaria={false} />
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
           </Switch>
           {/* <Bubbles numberOfBubbles={150} /> */}
         </Suspense>

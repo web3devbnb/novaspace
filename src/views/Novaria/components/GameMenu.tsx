@@ -15,27 +15,17 @@ import location from '../assets/locationMenu.png'
 import flag from '../assets/menuFlag.png'
 
 const Frame = styled.div`
-    width: 150px;
-    // position: fixed;
-    // z-index: 0;
-    // top: -50px;
-    // left: 0px;
-    // overflow-x: hidden;
+    width: 140px;
     padding: 20px 0;
     display: flex;
     flex-direction: column;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-top: 10px;
 `
 
 const SmallFrame = styled.div`
     width: 60px;
-    // position: fixed;
-    // z-index: 0;
-    // top: -50px;
-    // left: 0px;
-    // overflow-x: hidden;
-    padding: 8px 0;
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
     // margin-right: 5px;
@@ -56,7 +46,7 @@ const Link = styled.a`
 const Icon = styled.img`
     height: 40px;
     width: auto;
-    margin-right: 2px;
+   // margin-right: 2px;
 `
 
 const Flag = styled.div`
@@ -86,27 +76,12 @@ const Flag1 = styled.div`
     }
 `
 
-const InfoBlock = styled.div`
-  margin-right: 15px;
-  margin-left: 10px;
-`
 
 const ToggleButton = styled.button`
     cursor: pointer;
     color: gray;
     background: transparent;
     border: none;
-`
-
-const Logo = styled.img`
-    height: 63px;
-    width: 165px;
-    margin: -10px 0 10px;
-  // object-position: left;
-  // margin-top: -70px;
-  // margin-bottom: 60px;
-  // margin-bottom: 10px;
-  // background-color: #000a17;
 `
 
 const GameMenu = ({pageName}) => {
@@ -152,28 +127,6 @@ const GameMenu = ({pageName}) => {
                         <Flag1 aria-haspopup='true'>LOCATION<img src={flag} alt='flag' />  </Flag1>
                         {pageName === 'location' ? <Flag> LOCATION<img src={flag} alt='flag' /> </Flag> : '' }
                     </Link>
-{/* 
-                    <InfoBlock>
-                        <Text glowing>
-                        Current
-                        </Text>
-                        <Text glowing>
-                        Location: ({fleetLocation.X}, {fleetLocation.Y})
-                        </Text>
-                        <div style={{flexDirection: 'row', display: 'flex', marginTop: 10}}>
-                            <img src='https://shibanova.io/logo.png' alt='nova logo' />
-                            <Text glowing>  $0.15
-                                {/* {novaPrice} see if this works on production? */}
-                         { /* }   </Text>
-                        </div>
-                        <Text glowing>
-                        NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
-                        </Text>
-                        <Text glowing>
-                        MINERAL: <span style={{ color: 'gold' }}>{playerMineral.toFixed(2)}</span>
-                        </Text>
-                    </InfoBlock> 
-                */}
                     
                 </Frame>
                 :
