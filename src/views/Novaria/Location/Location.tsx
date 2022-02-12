@@ -16,6 +16,7 @@ import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
+import YourFleetStats from './YourFleetStats'
 
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
@@ -74,12 +75,38 @@ const Content = styled.div`
   // display: grid;
   // grid-template-columns: 2fr 3fr 2fr;
   // position: inherit;
+<<<<<<< HEAD
   display: flex;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
 
 `
+=======
+  // display: flex;
+`
+
+const LocationInfo = styled.div`
+  height: 100%;
+  margin: 15px 25px;
+`
+const LocationHeader = styled.text`
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 100px;
+`
+
+const HavenImageCard = styled.div`
+  background-image: url('/images/novaria/haven.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: clamp(300px, 300px, 300px);
+`
+const PlanetImageCard = styled.div``
+const PlanetInfoCard = styled.div``
+>>>>>>> 85802673c63a683ea28ad87a021a7b9b4958e3fa
 
 const OpenBattlesCard = styled.div`
   background-image: url('/images/novaria/locationTableBorder.png');
@@ -89,6 +116,7 @@ const OpenBattlesCard = styled.div`
   padding: 10px;
   max-height: 45%;
   min-height: 200px;
+<<<<<<< HEAD
   min-width: 350px
   max-width: 450px;
   ${({ theme }) => theme.mediaQueries.md} {
@@ -97,6 +125,9 @@ const OpenBattlesCard = styled.div`
 
 
 
+=======
+  max-width: 400px;
+>>>>>>> 85802673c63a683ea28ad87a021a7b9b4958e3fa
 `
 
 const PlayersCard = styled.div`
@@ -117,7 +148,6 @@ const RightCol = styled.div`
   border-left: 1px solid gray;
   max-width: 250px;
 `
-
 
 const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
@@ -181,10 +211,12 @@ const Location: React.FC = () => {
             <RightCol>
               <YourFleetCard>
                 <Header>YOUR FLEET</Header>
-                <div>FLEET SIZE: {fleetSize}</div>
-                <div>FLEET POWER: {fleetPower}</div>
-                <div>FLEET MINERAL: {fleetMineral}</div>
-                <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
+                <YourFleetStats
+                  fleetSize={fleetSize}
+                  fleetPower={fleetPower}
+                  fleetMineral={fleetMineral}
+                  fleetMaxMineral={fleetMaxMineral}
+                />
               </YourFleetCard>
               <BattleProgressCard>
                 <Header>BATTLE PROGRESS</Header>
