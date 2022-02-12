@@ -180,7 +180,7 @@ export const useGetShips = (fleet) => {
 
 export const useGetFleetSize = (fleet) => {
   const { slowRefresh } = useRefresh()
-  const [fleetSize, setFleetSize] = useState(null)
+  const [fleetSize, setFleetSize] = useState(0)
 
   useEffect(() => {
     async function fetch() {
@@ -282,7 +282,7 @@ export const useGetBattle = (id) => {
 
 export const useGetAttackPower = (fleet) => {
   const { slowRefresh } = useRefresh()
-  const [attackPower, setAttackPower] = useState('')
+  const [attackPower, setAttackPower] = useState(0)
 
   useEffect(() => {
     async function fetch() {
@@ -396,7 +396,7 @@ export const useGetPlaceInfo = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState({
     name: '',
-    type: '', 
+    type: '',
     scrap: 0,
     shipyard: false,
     refinery: false,
@@ -436,7 +436,7 @@ export const useGetFleetsAtLocation = (x: number, y: number) => {
 
 export const useGetFleetMineral = (fleet: string) => {
   const { slowRefresh } = useRefresh()
-  const [fleetMineral, setFleetMineral] = useState(0) 
+  const [fleetMineral, setFleetMineral] = useState(0)
 
   useEffect(() => {
     async function fetch() {
