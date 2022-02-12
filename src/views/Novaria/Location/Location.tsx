@@ -16,6 +16,7 @@ import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
+import YourFleetStats from './YourFleetStats'
 
 const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
@@ -61,7 +62,6 @@ const Content = styled.div`
   grid-template-columns: 2fr 3fr 2fr;
   // position: inherit;
   // display: flex;
-
 `
 
 const LocationInfo = styled.div`
@@ -73,9 +73,7 @@ const LocationHeader = styled.text`
   font-weight: bold;
   font-size: 18px;
   margin-top: 100px;
-
 `
-
 
 const HavenImageCard = styled.div`
   background-image: url('/images/novaria/haven.png');
@@ -85,9 +83,7 @@ const HavenImageCard = styled.div`
   width: clamp(300px, 300px, 300px);
 `
 const PlanetImageCard = styled.div``
-const PlanetInfoCard = styled.div`
- 
-`
+const PlanetInfoCard = styled.div``
 
 const OpenBattlesCard = styled.div`
   background-image: url('/images/novaria/locationTableBorder.png');
@@ -98,7 +94,6 @@ const OpenBattlesCard = styled.div`
   max-height: 40%;
   min-height: 200px;
   max-width: 400px;
-
 `
 
 const PlayersCard = styled.div`
@@ -117,7 +112,6 @@ const RightCol = styled.div`
   margin-left: 15px;
   border-left: 1px solid gray;
 `
-
 
 const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
@@ -172,10 +166,12 @@ const Location: React.FC = () => {
             <RightCol>
               <YourFleetCard>
                 <Header>YOUR FLEET</Header>
-                <div>FLEET SIZE: {fleetSize}</div>
-                <div>FLEET POWER: {fleetPower}</div>
-                <div>FLEET MINERAL: {fleetMineral}</div>
-                <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
+                <YourFleetStats
+                  fleetSize={fleetSize}
+                  fleetPower={fleetPower}
+                  fleetMineral={fleetMineral}
+                  fleetMaxMineral={fleetMaxMineral}
+                />
               </YourFleetCard>
               <BattleProgressCard>
                 <Header>BATTLE PROGRESS</Header>
