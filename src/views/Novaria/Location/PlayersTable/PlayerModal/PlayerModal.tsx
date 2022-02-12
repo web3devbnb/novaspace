@@ -11,7 +11,11 @@ import {
 } from 'hooks/useNovaria'
 import React from 'react'
 
-const PlayerModal = ({ player }) => {
+interface PlayerModalProps {
+  player: string
+}
+
+const PlayerModal: React.FC<PlayerModalProps> = ({ player }) => {
   const ships = useGetShips(player)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
