@@ -16,7 +16,7 @@ import {
   novaApprove,
   goBattle,
   enterBattle,
-  explore
+  explore,
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -238,7 +238,7 @@ export const useGetMiningCapacity = () => {
   return miningCapacity
 }
 
-export const useGetBattlesAtLocation = (x, y) => {
+export const useGetBattlesAtLocation = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
@@ -393,7 +393,7 @@ export const useGetFleetLocation = (fleet) => {
   return fleetLocation
 }
 
-export const useGetPlaceId = (x: string, y: string) => {
+export const useGetPlaceId = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [placeId, setPlaceId] = useState(null)
 
@@ -416,9 +416,9 @@ export const useGetPlaceInfo = (x: number, y: number) => {
     shipyard: false,
     refinery: false,
     mineral: 0,
-    mining: false
+    mining: false,
   })
- 
+
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getCoordinateInfo(x, y).call()
@@ -465,7 +465,7 @@ export const useGetFleetMineral = (fleet: string) => {
   return fleetMineral
 }
 
-export const useGetDistanceFromFleet = (fleet: string, x: string, y: string) => {
+export const useGetDistanceFromFleet = (fleet: string, x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [DistanceFromFleet, setDistanceFromFleet] = useState(0)
 
@@ -479,7 +479,7 @@ export const useGetDistanceFromFleet = (fleet: string, x: string, y: string) => 
   return DistanceFromFleet
 }
 
-export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
+export const useGetFleetTravelCost = (fleet: string, x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [FleetTravelCost, setFleetTravelCost] = useState(0)
 
@@ -493,7 +493,7 @@ export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
   return FleetTravelCost
 }
 
-export const useGetTravelCooldown = (fleet: string, x: string, y: string) => {
+export const useGetTravelCooldown = (fleet: string, x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [TravelCooldown, setTravelCooldown] = useState(0)
 
