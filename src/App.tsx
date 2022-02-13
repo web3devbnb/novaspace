@@ -1,14 +1,44 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap-libs/uikit'
+import { ResetCSS, Text } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import styled from 'styled-components'
+import Page from 'components/layout/Page'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 import './bubbles.scss'
+
+export const ConnectedAccountContext = React.createContext(null)
+
+const WalletProvider = ({ children }) => {
+  const wallet = useWallet()
+
+  if (wallet.status === 'connecting') {
+    return <PageLoader />
+  }
+
+  if (
+    wallet.status === 'disconnected' ||
+    wallet.status === 'error' ||
+    (wallet.status === 'connected' && wallet.account === null)
+  ) {
+    if (wallet.error) {
+      console.log(wallet.error)
+    }
+    return (
+      <Page style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Text fontSize="3rem">Please, connect your wallet.</Text>
+      </Page>
+    )
+  }
+
+  return <ConnectedAccountContext.Provider value={wallet.account}>{children}</ConnectedAccountContext.Provider>
+}
 
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
@@ -64,7 +94,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/location">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-              <Location />
+              <WalletProvider>
+                <Location />
+              </WalletProvider>
             </Route>
             <Route path="/overview">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />

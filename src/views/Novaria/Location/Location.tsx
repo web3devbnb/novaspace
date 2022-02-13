@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
@@ -12,6 +12,7 @@ import {
   useGetMaxMineralCapacity,
   useGetPlaceInfo,
 } from 'hooks/useNovaria'
+import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
@@ -65,7 +66,7 @@ const Header = styled.text`
   color: white;
   font-weight: bold;
   font-size: 14px;
-  margin: 12px 0 10px; 
+  margin: 12px 0 10px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 18px;
@@ -80,7 +81,6 @@ const Content = styled.div`
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-
 `
 
 const OpenBattlesCard = styled.div`
@@ -118,7 +118,7 @@ const RightCol = styled.div`
   margin-left: 15px;
   border-left: 1px solid gray;
   max-width: 250px;
-` 
+`
 
 const CoordInput = styled.input`
   width: 4em;
@@ -139,16 +139,16 @@ const InputControl = styled.div`
   border-bottom: 1px solid #5affff;
 `
 
-
 const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
 
 const Location: React.FC = () => {
-  const { account } = useWallet()
+  const account = useContext(ConnectedAccountContext)
 
   const fleetLocation = useGetFleetLocation(account)
   const location = useLocation()
-  const loadedCoords = (typeof location.state === 'undefined' ? {x: fleetLocation.X, y: fleetLocation.Y} : location.state[0])
+  const loadedCoords =
+    typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
   const [X, setX] = useState(loadedCoords.x)
   const [Y, setY] = useState(loadedCoords.y)
@@ -163,44 +163,33 @@ const Location: React.FC = () => {
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity()
 
-  console.log('account: ', typeof account, account)
-  console.log('x, y:', X, Y)
-  console.log('place info:', placeInfo)
-  console.log('battles:', battlesAtLocation)
-  console.log('fleets:', fleetsAtLocation)
-  console.log('fleet size:', fleetSize)
-  console.log('fleet power:', fleetPower)
-  console.log('fleet mineral:', fleetMineral)
-  console.log('fleet max mineral:', fleetMaxMineral)
-
   // An empty place is a place with no name.
   // if (!placeInfo.name) {
   //   return null
   // }
 
   return (
-    <Page className='fontsforweb_bignoodletitling'>
+    <Page className="fontsforweb_bignoodletitling">
       <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
           <Content>
-            <LocationCard 
-              placename={placeInfo.name} 
-              placetype={placeInfo.type} 
-              placeX={X} 
-              placeY={Y} 
-              mineral={placeInfo.mineral} 
-              salvage={placeInfo.scrap} 
-              shipyard={placeInfo.shipyard} 
-              refinery={placeInfo.refinery} 
+            <LocationCard
+              placename={placeInfo.name}
+              placetype={placeInfo.type}
+              placeX={X}
+              placeY={Y}
+              mineral={placeInfo.mineral}
+              salvage={placeInfo.scrap}
+              shipyard={placeInfo.shipyard}
+              refinery={placeInfo.refinery}
               isMining={placeInfo.mining}
               fleetLocation={fleetLocation}
             />
             <div>
               <InputControl>
-              SEARCH LOCATION: 
-                
+                SEARCH LOCATION:
                 <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
                 ,
                 <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
