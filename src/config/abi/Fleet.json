@@ -1,5 +1,10 @@
 [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -49,6 +54,45 @@
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "Map",
+		"outputs": [
+			{
+				"internalType": "contract IMap",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Token",
+		"outputs": [
+			{
+				"internalType": "contract ShibaBEP20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Treasury",
+		"outputs": [
+			{
+				"internalType": "contract ITreasury",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -177,6 +221,11 @@
 				"internalType": "uint256",
 				"name": "_cost",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_experienceRequired",
+				"type": "uint256"
 			}
 		],
 		"name": "createShipClass",
@@ -219,139 +268,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_target",
-				"type": "address"
-			},
-			{
-				"internalType": "enum Fleet.BattleStatus",
-				"name": "mission",
-				"type": "uint8"
-			}
-		],
-		"name": "enterBattle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "battleId",
-				"type": "uint256"
-			}
-		],
-		"name": "goBattle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "insertCoinHere",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "loadPlayers",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "_editor",
-				"type": "address[]"
-			}
-		],
-		"name": "setEditor",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_new",
-				"type": "address"
-			}
-		],
-		"name": "setMap",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "setMineral",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_treasury",
-				"type": "address"
-			}
-		],
-		"name": "setTreasury",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -365,6 +281,24 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_target",
+				"type": "address"
+			},
+			{
+				"internalType": "enum Fleet.BattleStatus",
+				"name": "mission",
+				"type": "uint8"
+			}
+		],
+		"name": "enterBattle",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -389,25 +323,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_battleId",
-				"type": "uint256"
-			}
-		],
-		"name": "getAttackers",
-		"outputs": [
-			{
-				"internalType": "address[]",
-				"name": "",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "_player",
 				"type": "address"
@@ -419,6 +334,25 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_battleId",
+				"type": "uint256"
+			}
+		],
+		"name": "getAttackers",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
 			}
 		],
 		"stateMutability": "view",
@@ -919,6 +853,11 @@
 						"internalType": "uint256",
 						"name": "cost",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "experienceRequired",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Fleet.ShipClass[]",
@@ -977,6 +916,26 @@
 					{
 						"internalType": "uint8",
 						"name": "feePercent",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastTakeoverTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "takeoverDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "takeoverAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "enum Fleet.BattleStatus",
+						"name": "status",
 						"type": "uint8"
 					}
 				],
@@ -1047,6 +1006,50 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "battleId",
+				"type": "uint256"
+			}
+		],
+		"name": "goBattle",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			}
+		],
+		"name": "initiateShipyardTakeover",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "insertCoinHere",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_editor",
 				"type": "address"
@@ -1084,15 +1087,9 @@
 	},
 	{
 		"inputs": [],
-		"name": "Map",
-		"outputs": [
-			{
-				"internalType": "contract IMap",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
+		"name": "loadPlayers",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1110,28 +1107,125 @@
 	},
 	{
 		"inputs": [],
-		"name": "Token",
-		"outputs": [
-			{
-				"internalType": "contract ShibaBEP20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "Treasury",
-		"outputs": [
+		"inputs": [
 			{
-				"internalType": "contract ITreasury",
-				"name": "",
+				"internalType": "address[]",
+				"name": "_editor",
+				"type": "address[]"
+			}
+		],
+		"name": "setEditor",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_new",
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
+		"name": "setMap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setMineral",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_feePercent",
+				"type": "uint8"
+			}
+		],
+		"name": "setShipyardFeePercent",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setShipyardName",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_treasury",
+				"type": "address"
+			}
+		],
+		"name": "setTreasury",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

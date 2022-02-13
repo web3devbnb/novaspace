@@ -230,4 +230,13 @@ export const travel = async (mapContract, x, y, account) => {
     })
 }
 
+export const explore = async (mapContract, x, y, account) => {
+  return mapContract.methods
+    .explore(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 

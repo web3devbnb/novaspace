@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useLocation } from 'react-router-dom'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 import {
@@ -117,7 +118,27 @@ const RightCol = styled.div`
   margin-left: 15px;
   border-left: 1px solid gray;
   max-width: 250px;
+` 
+
+const CoordInput = styled.input`
+  width: 4em;
+  background: transparent;
+  -moz-appearance: textfield;
+  color: white;
+  border: 1px solid #5affff;
+  border-radius: 5px;
 `
+
+const InputControl = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 0px 8px 0px 8px;
+  gap: 5px;
+  border-bottom: 1px solid #5affff;
+`
+
 
 const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
@@ -125,11 +146,17 @@ const BattleProgressCard = styled.div``
 const Location: React.FC = () => {
   const { account } = useWallet()
 
-  const location = useGetFleetLocation(account)
-  const placeInfo = useGetPlaceInfo(location.X, location.Y)
+  const fleetLocation = useGetFleetLocation(account)
+  const location = useLocation()
+  const loadedCoords = (typeof location.state === 'undefined' ? {x: fleetLocation.X, y: fleetLocation.Y} : location.state[0])
 
-  const battlesAtLocation = useGetBattlesAtLocation(location.X, location.Y)
-  const fleetsAtLocation = useGetFleetsAtLocation(location.X, location.Y)
+  const [X, setX] = useState(loadedCoords.x)
+  const [Y, setY] = useState(loadedCoords.y)
+
+  const placeInfo = useGetPlaceInfo(X, Y)
+
+  const battlesAtLocation = useGetBattlesAtLocation(X, Y)
+  const fleetsAtLocation = useGetFleetsAtLocation(X, Y)
 
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
@@ -137,7 +164,7 @@ const Location: React.FC = () => {
   const fleetMaxMineral = useGetMaxMineralCapacity()
 
   console.log('account: ', typeof account, account)
-  console.log('x, y:', location.X, location.Y)
+  console.log('x, y:', X, Y)
   console.log('place info:', placeInfo)
   console.log('battles:', battlesAtLocation)
   console.log('fleets:', fleetsAtLocation)
@@ -147,13 +174,13 @@ const Location: React.FC = () => {
   console.log('fleet max mineral:', fleetMaxMineral)
 
   // An empty place is a place with no name.
-  if (!placeInfo.name) {
-    return null
-  }
+  // if (!placeInfo.name) {
+  //   return null
+  // }
 
   return (
     <Page className='fontsforweb_bignoodletitling'>
-      <GameHeader location={location} playerMineral={fleetMineral} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
@@ -161,14 +188,24 @@ const Location: React.FC = () => {
             <LocationCard 
               placename={placeInfo.name} 
               placetype={placeInfo.type} 
-              placeX={location.X} 
-              placeY={location.Y} 
+              placeX={X} 
+              placeY={Y} 
               mineral={placeInfo.mineral} 
               salvage={placeInfo.scrap} 
               shipyard={placeInfo.shipyard} 
               refinery={placeInfo.refinery} 
+              isMining={placeInfo.mining}
+              fleetLocation={fleetLocation}
             />
             <div>
+              <InputControl>
+              SEARCH LOCATION: 
+                
+                <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+                ,
+                <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+              </InputControl>
+
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
                 <OpenBattlesTable battles={battlesAtLocation.slice(0, 5)} />

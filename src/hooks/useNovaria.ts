@@ -16,6 +16,7 @@ import {
   novaApprove,
   goBattle,
   enterBattle,
+  explore
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -362,6 +363,20 @@ export const useTravel = () => {
   return { onClick: handleTravel }
 }
 
+export const useExplore = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+
+  const handleExplore = useCallback(
+    async (x: number, y: number) => {
+      const txHash = await explore(useMapContract, x, y, account)
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onClick: handleExplore }
+}
+
 // ***View Functions***
 
 export const useGetFleetLocation = (fleet) => {
@@ -401,8 +416,9 @@ export const useGetPlaceInfo = (x: number, y: number) => {
     shipyard: false,
     refinery: false,
     mineral: 0,
+    mining: false
   })
-
+ 
   useEffect(() => {
     async function fetch() {
       const data = await mapContract.methods.getCoordinateInfo(x, y).call()
@@ -413,6 +429,7 @@ export const useGetPlaceInfo = (x: number, y: number) => {
         shipyard: data[3],
         refinery: data[4],
         mineral: data[5],
+        mining: data[6],
       })
     }
     fetch()
@@ -474,6 +491,34 @@ export const useGetFleetTravelCost = (fleet: string, x: string, y: string) => {
     fetch()
   }, [slowRefresh, fleet, x, y])
   return FleetTravelCost
+}
+
+export const useGetTravelCooldown = (fleet: string, x: string, y: string) => {
+  const { slowRefresh } = useRefresh()
+  const [TravelCooldown, setTravelCooldown] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getFleetTravelCooldown(fleet, x, y).call()
+      setTravelCooldown(data)
+    }
+    fetch()
+  }, [slowRefresh, fleet, x, y])
+  return TravelCooldown
+}
+
+export const useGetCurrentCooldown = (fleet: string) => {
+  const { slowRefresh } = useRefresh()
+  const [CurrentCooldown, setCurrentCooldown] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getCurrentTravelCooldown(fleet).call()
+      setCurrentCooldown(data)
+    }
+    fetch()
+  }, [slowRefresh, fleet])
+  return CurrentCooldown
 }
 
 // *** Nova token contract ***
