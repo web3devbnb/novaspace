@@ -91,7 +91,7 @@ const Footer = () => (
                     alt="instagram"
                   />
                 </a>
-                <a                  
+                {/* <a                  
                   target="_blank"
                   rel="noreferrer"
                   href="https://coinmarketcap.com/currencies/shibanova/"
@@ -110,7 +110,7 @@ const Footer = () => (
                     src="https://shibanova.io/images/home/coingecko.png"
                     alt="coin gecko"
                   />
-                </a> 
+                </a>  */}
 
         </Row>
       </Col>
