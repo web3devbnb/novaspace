@@ -51,9 +51,11 @@ const Body = styled.div`
   // min-height: 550px;
   position: relative;
   aspect-ratio: 15/8;
+  background: #00000050;
 
-  ${({ theme }) => theme.mediaQueries.md} {
+  ${({ theme }) => theme.mediaQueries.lg} {
     // fix background later
+    background: transparent;
     background-image: url('/images/novaria/border.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;

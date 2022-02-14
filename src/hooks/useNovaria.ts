@@ -332,7 +332,7 @@ export const useRefine = () => {
     const txHash = await refine(useMapContract, account)
     console.info(txHash)
   }, [account, useMapContract])
-  return { onClick: handleRefine }
+  return { onRefine: handleRefine }
 }
 
 export const useCollect = () => {
@@ -346,7 +346,7 @@ export const useCollect = () => {
     },
     [account, useMapContract],
   )
-  return { onClick: handleCollect }
+  return { onCollect: handleCollect }
 }
 
 export const useTravel = () => {
@@ -360,7 +360,7 @@ export const useTravel = () => {
     },
     [account, useMapContract],
   )
-  return { onClick: handleTravel }
+  return { onTravel: handleTravel }
 }
 
 export const useExplore = () => {
@@ -374,7 +374,7 @@ export const useExplore = () => {
     },
     [account, useMapContract],
   )
-  return { onClick: handleExplore }
+  return { onExplore: handleExplore }
 }
 
 // ***View Functions***

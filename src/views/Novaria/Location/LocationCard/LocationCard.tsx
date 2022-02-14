@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import {
   useTravel,
@@ -178,25 +178,40 @@ const Row = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
 `
+
  
 const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refinery, placeX, placeY, fleetLocation, isMining}) => {
+    const [pendingTx, setPendingTx] = useState(false)
+
     const {account} = useWallet()
-    const isCurrentLocation = (fleetLocation.X === placeX && fleetLocation.Y === placeY)
+    const isCurrentLocation = (fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString())
     const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10**18
     const travelCooldown = (new Date(useGetTravelCooldown(account, placeX, placeY) *1000)).toLocaleString()
     console.log('travel cooldown', travelCooldown)
 
-    // const HandleTravel = () =>{
+    const {onRefine} = useRefine()
+    const {onCollect} = useCollect()
+    const {onTravel} = useTravel()
+    const sendTravelTx = async () => {
+        setPendingTx(true)
+        try {
+            await onTravel(placeX, placeY)
+            console.log('Traveling To:', placeX, placeY)
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setPendingTx(false)
+        }
+    }
 
-    // }
 
 
     return(
         <Body>
             {placename === 'Haven' ? <HavenImageCard /> : ''}
             {placetype === 'empty' ? <EmptyImageCard /> : ''}
-            {shipyard && !refinery ? <ShipyardImageCard /> : ''}
-            {refinery && !shipyard ? <RefineryImageCard /> : ''}
+            {shipyard && !refinery && placename !== 'Haven' ? <ShipyardImageCard /> : ''}
+            {refinery && !shipyard && placename !== 'Haven' ? <RefineryImageCard /> : ''}
             {refinery && shipyard && placename !== 'Haven' ? <ShipyardRefineryImageCard /> : ''}
             {placetype === 'asteroid' ? <AsteroidImageCard /> : ''}
             {placetype === 'star' ? <StarImageCard /> : ''}
@@ -239,9 +254,9 @@ const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refiner
                 {mineral > 0 ? <Button type='button' >MINE</Button> : ''}
                 {salvage > 0 ? <Button type='button' >COLLECT</Button> : ''}
                 {refinery ? <Button type='button' >REFINE</Button> : '' }
-                {placetype !== 'star' && placetype !== 'hostile' && !isCurrentLocation ? <Button type='button' >TRAVEL</Button> : ''}
+                {placetype !== 'star' && placetype !== 'hostile' && !isCurrentLocation ? <Button type='button' onClick={sendTravelTx} >TRAVEL</Button> : ''}
                 {placetype === '' ? <Button type='button' >EXPLORE</Button> : ''}
-                <Row style={{marginTop: 5, color:'#289794'}}>
+                <Row style={{marginTop: 5, color:'#289794', fontSize: 11}}>
                     <span>Travel Cost (NOVA): {!isCurrentLocation ? travelCost : ''}</span>
                     <span>Travel Cooldown: {!isCurrentLocation ? travelCooldown : ''}</span>
                 </Row>

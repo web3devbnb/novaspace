@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { Heading, Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetFleetLocation } from 'hooks/useNovaria'
 import useTokenBalance from '../../../hooks/useTokenBalance'
@@ -12,7 +12,7 @@ const Hero = styled.div`
   display: flex;
   text-align: center;
   justify-content: space-between;
-  height: 75px;
+  // height: 75px;
   width: 100%;
   // margin-right: 10px;
   // margin-left: 10px;
@@ -28,44 +28,66 @@ const StyledHeading = styled(Heading)`
 
 const InfoBlock = styled.div`
   margin-right: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
 `
 
 const Logo = styled.img`
   object-position: left;
   // margin-top: -70px;
   // margin-bottom: 60px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   // background-color: #000a17;
 `
 
+const ConnectButton = styled.button`
+  cursor: pointer;
+  border: 1px solid #5affff;
+  color: #5affff;
+  background: transparent;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  width: 125px;
+`
+
 const GameHeader = ({ location, playerMineral }) => {
-  // const { account } = useWallet()
-  // const fleetLocation = useGetFleetLocation(account)
+  const { account, connect, reset, status } = useWallet()
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
+
+  function truncateString(str, num) {
+    return str
+  }
+  const connected = status === 'connected'
+  // eslint-disable-next-line prefer-template
+  const accountAddress = connected ? account.toString().slice(0,5)+'...'+account.toString().slice(37, 40) : ''
 
   return (
     <Hero>
       <a href='/novaria'>
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
-      {/* <StyledHeading as="p" size="xl" glowing>
-        {children}
-      </StyledHeading> */}
       <InfoBlock>
-         <div style={{flexDirection: 'row', display: 'flex', marginTop: 10}}>
-              <img src='https://shibanova.io/logo.png' alt='nova logo' />
+      <ConnectButton onClick={onPresentConnectModal} >
+        {connected ? accountAddress : 'Connect Wallet' }
+      </ConnectButton>
+         <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
+              <img src='https://shibanova.io/logo.png' alt='nova logo' style={{height: 30, margin:5}} />
               <Text glowing>  $0.15
                   {/* {novaPrice} see if this works on production? */}
               </Text>
           </div>
         <Text glowing>
-          Player Location: ({location.X}, {location.Y})
-        </Text>
-        <Text glowing>
-          Available NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+          NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
            MINERAL: <span style={{ color: 'gold' }}>{playerMineral}</span>
+        </Text>
+        <Text glowing>
+          Current Location: ({location.X}, {location.Y})
         </Text>
       </InfoBlock>
     </Hero>
