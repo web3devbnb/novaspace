@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading, Text, Flex } from '@pancakeswap-libs/uikit'
-import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
+import discordIcon from './Discord.svg'
+
 
 const Hero = styled(Flex)`
   flex-direction: column;
@@ -60,24 +61,14 @@ const Footer = () => (
                 <a                  
                   target="_blank"
                   rel="noreferrer"
-                  href="https://www.facebook.com/ShibaNovaDEFI"
+                  href="https://discord.gg/vQdxbGx9pV"
                 >
                   <Img
-                    src="https://shibanova.io/assets/images/facebook-icon.svg"
-                    alt="facebook"
-                    style={{paddingLeft:"0"}}
+                    src={discordIcon}
+                    alt="discord"
+                    style={{backgroundColor:'transparent'}}
                   />
                 </a> 
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.instagram.com/ShibaNovaDEFI"
-                >
-                  <Img
-                    src="https://shibanova.io/assets/images/instagram-icon.svg"
-                    alt="instagram"
-                  />
-                </a>
                 <a target="_blank" rel="noreferrer" href="https://t.me/ShibaNovaDEX">
                   <Img
                     src="https://shibanova.io/assets/images/telegram-icon.svg"
@@ -88,6 +79,16 @@ const Footer = () => (
                   <Img
                     src="https://shibanova.io/assets/images/twitter-icon.svg"
                     alt="twitter"                    
+                  />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.instagram.com/ShibaNovaDEFI"
+                >
+                  <Img
+                    src="https://shibanova.io/assets/images/instagram-icon.svg"
+                    alt="instagram"
                   />
                 </a>
                 <a                  
