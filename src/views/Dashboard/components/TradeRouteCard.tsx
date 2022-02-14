@@ -107,7 +107,7 @@ const TradeRouteCard = ({
       
       <TextRow2>
         <SubHeading glowing> 
-          Users can earn passive income by depositing liquidity into in trade routes. 
+          Users can earn passive income by depositing liquidity into trade routes. 
           Trade route liquidity fuels the decentralized exchange&apos;s tradeable token pairs. 
           Rewards are paid out in either NOVA or sNOVA, where sNOVA allows users to gain a share of the platform profits in the daily Money Pot.  
         </SubHeading>

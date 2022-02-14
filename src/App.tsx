@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS } from '@pancakeswap-libs/uikit'
-import Bubbles from 'components/Bubbles'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -9,7 +8,6 @@ import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
-import './bubbles.scss'
 
 
 // Route-based code splitting
@@ -31,7 +29,6 @@ BigNumber.config({
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
-  const isNovaria = window.location.pathname === './Novaria'
   return (
     <Router>
       <ResetCSS />
@@ -57,7 +54,7 @@ const App: React.FC = () => {
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
-            <Route path="/novaria">
+            <Route path="/legend-of-novaria">
             <GlobalStyle isNovaria />
               <Novaria />
             </Route>

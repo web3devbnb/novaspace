@@ -50,7 +50,7 @@ const Footer = () => (
      
     <Row>
       <Col>
-      <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract:</Text>
+      <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract: (ONLY ON NOVADEX)</Text>
     <Text style={{fontSize:"8px"}}> 
       <a  target="_blank"
         rel="noreferrer"

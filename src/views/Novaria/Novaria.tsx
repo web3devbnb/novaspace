@@ -87,7 +87,7 @@ const Button = styled.button`
   inset 1px 1px 1px white;
   color: #1FFFFF;
   border: 2px solid;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: transparent;
   box-shadow: 
   0 1px 2px rgba(0,0,0, 0.6), 
@@ -120,6 +120,7 @@ const Novaria: React.FC = () => {
           <br />
             A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
+          <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
         </Column>
       </Body>
     </Page1>
