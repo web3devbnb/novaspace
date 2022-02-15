@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Heading, Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetFleetLocation } from 'hooks/useNovaria'
+import { usePriceNovaBusd } from 'state/hooks'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
@@ -57,17 +58,16 @@ const GameHeader = ({ location, playerMineral }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
+  const novaPrice = Number(usePriceNovaBusd())
 
-  function truncateString(str, num) {
-    return str
-  }
+
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
   const accountAddress = connected ? account.toString().slice(0,5)+'...'+account.toString().slice(37, 40) : ''
 
   return (
     <Hero>
-      <a href='/novaria'>
+      <a href='/legend-of-novaria'>
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
@@ -76,8 +76,8 @@ const GameHeader = ({ location, playerMineral }) => {
       </ConnectButton>
          <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
               <img src='https://shibanova.io/logo.png' alt='nova logo' style={{height: 30, margin:5}} />
-              <Text glowing>  $0.15
-                  {/* {novaPrice} see if this works on production? */}
+              <Text glowing> 
+                   {novaPrice} 
               </Text>
           </div>
         <Text glowing>

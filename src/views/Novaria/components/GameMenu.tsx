@@ -88,10 +88,6 @@ const GameMenu = ({pageName}) => {
     const [open, setOpen] = useState(true)
 
     const { account } = useWallet()
-    const fleetLocation = useGetFleetLocation(account)
-    const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
-    const novaPrice = usePriceNovaBusd()
-    const playerMineral = useGetFleetMineral(account) / 10**18
     
     const toggleViewMenu = () => {
         if (open === true) {

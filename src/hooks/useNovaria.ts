@@ -457,7 +457,7 @@ export const useGetPlaceId = (x: number, y: number) => {
 }
 
 export const useGetPlaceInfo = (x: number, y: number) => {
-  const { slowRefresh } = useRefresh()
+  const { fastRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState({
     name: '',
     type: '',
@@ -465,6 +465,7 @@ export const useGetPlaceInfo = (x: number, y: number) => {
     shipyard: false,
     refinery: false,
     mineral: 0,
+    fleetCount: 0,
     mining: false,
   })
 
@@ -478,11 +479,12 @@ export const useGetPlaceInfo = (x: number, y: number) => {
         shipyard: data[3],
         refinery: data[4],
         mineral: data[5],
-        mining: data[6],
+        fleetCount: data[6],
+        mining: data[7],
       })
     }
     fetch()
-  }, [slowRefresh, x, y])
+  }, [fastRefresh, x, y])
   return placeInfo
 }
 

@@ -160,7 +160,8 @@ const Location: React.FC = () => {
   const placeInfo = useGetPlaceInfo(X, Y)
 
   const battlesAtLocation = useGetBattlesAtLocation(X, Y)
-
+  console.log('placeInfo', placeInfo)
+  console.log('X,Y', X, Y)
  
 
 
