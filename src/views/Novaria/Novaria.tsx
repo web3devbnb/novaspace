@@ -4,7 +4,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
 import { Flex } from '@pancakeswap-libs/uikit'
 import ModalVideo from 'react-modal-video'
-import { useGetAllowance, useApprove, useInsertCoinHere } from 'hooks/useNovaria'
+import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import logo from './assets/novariaLogoMain.png'
 import 'react-modal-video/scss/modal-video.scss'
@@ -92,7 +92,7 @@ const Button = styled.button`
 const Novaria: React.FC = () => {
   const { account } = useWallet()
   const [isOpen, setOpen] = useState(false)
-  const [, setPendingTx] = useState(false)
+  const [pendingTx, setPendingTx] = useState(false)
   const [name, setName] = useState('')
 
   const fleetContract = getFleetAddress()
@@ -104,6 +104,7 @@ const Novaria: React.FC = () => {
   const allowanceMap = useGetAllowance(mapContract)
   const allowanceTreasury = useGetAllowance(treasuryContract)
   const isAllowed = connected && allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
+  const playerExists = useGetPlayerExists(account)
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere()
 
@@ -129,13 +130,17 @@ const Novaria: React.FC = () => {
     }
   }
 
-  const handleApprove = () => {
+  const handleFleetApprove = () => {
     if (allowanceFleet <= 0) {
       sendApproveTx(fleetContract)
     }
+  }
+  const handleMapApprove = () => {
     if (allowanceMap <= 0) {
       sendApproveTx(mapContract)
     }
+  }
+  const handleTreasuryApprove = () => {
     if (allowanceTreasury <= 0) {
       sendApproveTx(treasuryContract)
     }
@@ -152,20 +157,24 @@ const Novaria: React.FC = () => {
             videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
-          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <SubHeading>
-            - Coming Soon - <br/> 
-          <br />
+
+          {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>Approve Fleet Contract</Button> : ''}
+          {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>Approve Treasury Contract</Button> : ''}
+          {allowanceMap <= 0 ? <Button onClick={handleMapApprove}>Approve Map Contract</Button> : ''}
+
           {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
-          <input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
-          {console.log('player name', name)}
-          <Button onClick={sendInsertCoinTx}>Set Player Name</Button>
+          {isAllowed && !playerExists ? <div><input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
+                      <Button onClick={sendInsertCoinTx}>Set Player Name</Button></div> : ''}
+          {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
 
 
-            <br />A 4x space strategy game built on the Binance Smart Chain.
-          </SubHeading>
+          <br /><br />A 4x space strategy game built on the Binance Smart Chain.<br />
+
+          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
-        </Column>
+        
+          </SubHeading></Column>
       </Body>
     </Page1>
   )

@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-<<<<<<< HEAD
-import { Text, Flex } from '@pancakeswap-libs/uikit'
-=======
-import { Heading, Text, Flex } from '@pancakeswap-libs/uikit'
+import {  Text, Flex } from '@pancakeswap-libs/uikit'
 import discordIcon from './Discord.svg'
 
->>>>>>> master
 
 const Hero = styled(Flex)`
   flex-direction: column;

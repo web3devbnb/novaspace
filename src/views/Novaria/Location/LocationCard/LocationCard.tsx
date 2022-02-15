@@ -7,9 +7,9 @@ import {
   useExplore,
   useGetTravelCooldown,
   useGetFleetTravelCost,
+  useMine,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { travel } from 'utils/callHelpers'
 
 const Body = styled.div`
     position: relative;
@@ -186,9 +186,10 @@ const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refiner
     const {account} = useWallet()
     const isCurrentLocation = (fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString())
     const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10**18
-    const travelCooldown = (new Date(useGetTravelCooldown(account, placeX, placeY) *1000)).toLocaleString()
-    console.log('travel cooldown', travelCooldown)
+    const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
 
+    const {onExplore} = useExplore()
+    const {onMine} = useMine()
     const {onRefine} = useRefine()
     const {onCollect} = useCollect()
     const {onTravel} = useTravel()
@@ -197,6 +198,50 @@ const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refiner
         try {
             await onTravel(placeX, placeY)
             console.log('Traveling To:', placeX, placeY)
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setPendingTx(false)
+        }
+    }
+    const sendCollectTx = async () => {
+        setPendingTx(true)
+        try {
+            await onCollect(placeX, placeY)
+            console.log('Collecting Salvage')
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setPendingTx(false)
+        }
+    }
+    const sendRefineTx = async () => {
+        setPendingTx(true)
+        try {
+            await onRefine()
+            console.log('Refining')
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setPendingTx(false)
+        }
+    }
+    const sendMineTx = async () => {
+        setPendingTx(true)
+        try {
+            await onMine()
+            console.log('Mining Mineral')
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setPendingTx(false)
+        }
+    }
+    const sendExploreTx = async () => {
+        setPendingTx(true)
+        try {
+            await onExplore(placeX, placeY)
+            console.log('Exploring')
         } catch (error) {
             console.log('error: ', error)
         } finally {
@@ -251,14 +296,14 @@ const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refiner
                 </Row>
             </PlaceHeader>
             <PlaceBody>
-                {mineral > 0 ? <Button type='button' >MINE</Button> : ''}
-                {salvage > 0 ? <Button type='button' >COLLECT</Button> : ''}
-                {refinery ? <Button type='button' >REFINE</Button> : '' }
+                {mineral > 0 ? <Button type='button' onClick={sendMineTx} >MINE</Button> : ''}
+                {salvage > 0 ? <Button type='button' onClick={sendCollectTx} >COLLECT</Button> : ''}
+                {refinery ? <Button type='button' onClick={sendRefineTx} >REFINE</Button> : '' }
                 {placetype !== 'star' && placetype !== 'hostile' && !isCurrentLocation ? <Button type='button' onClick={sendTravelTx} >TRAVEL</Button> : ''}
-                {placetype === '' ? <Button type='button' >EXPLORE</Button> : ''}
+                {placetype === '' ? <Button type='button' onClick={sendExploreTx} >EXPLORE</Button> : ''}
                 <Row style={{marginTop: 5, color:'#289794', fontSize: 11}}>
                     <span>Travel Cost (NOVA): {!isCurrentLocation ? travelCost : ''}</span>
-                    <span>Travel Cooldown: {!isCurrentLocation ? travelCooldown : ''}</span>
+                    <span>Travel Cooldown: {!isCurrentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
                 </Row>
             </PlaceBody>
         </Body>

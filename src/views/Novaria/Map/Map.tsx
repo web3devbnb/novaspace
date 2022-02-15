@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetFleetLocation, useGetPlaceInfo, useGetFleetsAtLocation } from 'hooks/useNovaria'
+import { ConnectedAccountContext } from 'App'
+import { useGetFleetLocation, useGetFleetMineral, useGetFleetsAtLocation } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
@@ -44,7 +45,7 @@ const Page = styled.div`
   margin-top: -105px;
   color: #5affff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: no-wrap;
 
   ${({ theme }) => theme.mediaQueries.lg} {
@@ -123,6 +124,13 @@ const Row = styled.div`
 
 `
 
+const MainRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+
+`
+
 
 const GridCellId = styled.div`
   position: absolute;
@@ -151,9 +159,25 @@ const GridControls = styled.div`
   justify-content: space-between;
 `
 
+const Button = styled.button`
+  cursor: pointer;
+  height: 35px;
+  align-self: center;
+  padding: 0.25rem 1.25rem;
+  font-family: sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #5affff;
+  border: 1px solid #5affff;
+  border-radius: 0px;
+  background-color: transparent;
+  
+`
+
 const CoordInput = styled.input`
   width: 4em;
   background: transparent;
+  border: 1px solid #5affff;
   -moz-appearance: textfield;
   color: white;
 `
@@ -197,8 +221,9 @@ const Map: React.FC = () => {
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
 
-  const { account } = useWallet()
+  const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
+  const fleetMineral = useGetFleetMineral(account)
 
   useEffect(() => {
     const fetch = async () => {
@@ -232,121 +257,125 @@ const Map: React.FC = () => {
   return (
     <Page>
       
-      <GameMenu pageName="starmap" />
-      <Body>
-        <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-          {mapData.data.map((arr, i) => {
-            const ri = mapData.data.length - i - 1
-            return mapData.data[ri].map((el, j) => {
-              return (
-                <GridCell>
-                <Link
-                  to={{
-                    pathname: '/location',
-                    state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
-                  }}
-                >
-                <GridCellContent aria-haspopup="true">
-                  {/* {el.name && ( */}
-                        <Text bold glowing>
-                          {el.name}
-                        </Text>
-                        <Unexplored>
-                          {el.placeType === '' ? 'Location Unexplored' : ''}
-                        </Unexplored>
-                      <Row>
-                        {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
-                        {el.hasRefinery === true ? (
-                          <GridIcon src={refineryLogo} alt="planet has refinery" />
-                        ) : (
-                          ''
-                        )}
-                        {el.hasShipyard === true ? (
-                          <GridIcon src={shipyardLogo} alt="planet has shipyard" />
-                        ) : (
-                          ''
-                        )}
-                        {el.availableMineral > 0 ? (
-                          <GridIcon src={mineralLogo} alt="planet has minerals" />
-                        ) : (
-                          ''
-                        )}
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <MainRow>
+        <GameMenu pageName="starmap" />
+        <Body>
+          <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
+            {mapData.data.map((arr, i) => {
+              const ri = mapData.data.length - i - 1
+              return mapData.data[ri].map((el, j) => {
+                return (
+                  <GridCell>
+                  <Link
+                    to={{
+                      pathname: '/location',
+                      state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
+                    }}
+                  >
+                  <GridCellContent aria-haspopup="true">
+                    {/* {el.name && ( */}
+                          <Text bold glowing>
+                            {el.name}
+                          </Text>
+                          <Unexplored>
+                            {el.placeType === '' ? 'Location Unexplored' : ''}
+                          </Unexplored>
+                        <Row>
+                          {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
+                          {el.hasRefinery === true ? (
+                            <GridIcon src={refineryLogo} alt="planet has refinery" />
+                          ) : (
+                            ''
+                          )}
+                          {el.hasShipyard === true ? (
+                            <GridIcon src={shipyardLogo} alt="planet has shipyard" />
+                          ) : (
+                            ''
+                          )}
+                          {el.availableMineral > 0 ? (
+                            <GridIcon src={mineralLogo} alt="planet has minerals" />
+                          ) : (
+                            ''
+                          )}
 
-                        {el.fleetCount > 0 
-                          && el.fleetCount < 11 
-                          ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
+                          {el.fleetCount > 0 
+                            && el.fleetCount < 11 
+                            ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
 
-                          {el.fleetCount > 10 
-                            && el.fleetCount < 51 
-                            ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
-                            
-                            {el.fleetCount > 50  
-                              ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
-                 
-                        {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
-                        {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
-                        {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
-                        {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
-                        (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
-                          <IndicatorImg src={youLogo} alt="current location" />
-                        ) : (
-                          ''
-                        )}
-                      </Row>
-                        <GridCellId>
-                          ({ri + mapData.x0} , {j + mapData.y0})
-                        </GridCellId>
+                            {el.fleetCount > 10 
+                              && el.fleetCount < 51 
+                              ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
+                              
+                              {el.fleetCount > 50  
+                                ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
                   
-                    </GridCellContent>
-                    </Link>
-                </GridCell>
-              )
-            })
-          })}
-        </Grid>
+                          {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
+                          {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
+                          {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
+                          {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
+                          (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
+                            <IndicatorImg src={youLogo} alt="current location" />
+                          ) : (
+                            ''
+                          )}
+                        </Row>
+                          <GridCellId>
+                            ({ri + mapData.x0} , {j + mapData.y0})
+                          </GridCellId>
+                    
+                      </GridCellContent>
+                      </Link>
+                  </GridCell>
+                )
+              })
+            })}
+          </Grid>
 
-        <GridControls>
-          <InputControl>
-            <button type="button" onClick={handleFindLocationClick}>
-              Find location (x, y)
-            </button>
-            (
-            <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-            ,
-            <CoordInput type="number" min="0" max="10"  value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
-          </InputControl>
+          <GridControls>
+            <InputControl>
+              <Button type="button" onClick={handleFindLocationClick}>
+                Find location (x, y)
+              </Button>
+              (
+              <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+              ,
+              <CoordInput type="number" min="0" max="10"  value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
+            </InputControl>
 
-          {/* <InputControl>
-            <button type="button" onClick={handleSetGridSizeClick}>
-              Set grid size (x, y)
-            </button>
-            <CoordInput
-              type="number"
-              min="1"
-              max="16"
-              value={XLen}
-              onChange={(e) => setXLen(parseFloat(e.target.value))}
-            />
-            x
-            <CoordInput
-              type="number"
-              min="1"
-              max="16"
-              value={YLen}
-              onChange={(e) => setYLen(parseFloat(e.target.value))}
-            />
-          </InputControl> */}
-        </GridControls>
-        <Legend>
-          <span><GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet</span>
-          <span><GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard</span>
-          <span><GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)</span>
-          <span><GridIcon src={youLogo} alt="your location" /> : Current Location</span>
-          <span><GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players</span>
-          <span><GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players</span>
-          <span><GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players</span>
-        </Legend>
-      </Body>
+            {/* <InputControl>
+              <button type="button" onClick={handleSetGridSizeClick}>
+                Set grid size (x, y)
+              </button>
+              <CoordInput
+                type="number"
+                min="1"
+                max="16"
+                value={XLen}
+                onChange={(e) => setXLen(parseFloat(e.target.value))}
+              />
+              x
+              <CoordInput
+                type="number"
+                min="1"
+                max="16"
+                value={YLen}
+                onChange={(e) => setYLen(parseFloat(e.target.value))}
+              />
+            </InputControl> */}
+          </GridControls>
+          <Legend>
+            <span><GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet</span>
+            <span><GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard</span>
+            <span><GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)</span>
+            <span><GridIcon src={scrapLogo} alt="has salvage" /> : Salvage</span>
+            <span><GridIcon src={youLogo} alt="your location" /> : Current Location</span>
+            <span><GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players</span>
+            <span><GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players</span>
+            <span><GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players</span>
+          </Legend>
+        </Body>
+      </MainRow>
     </Page>
   )
 }

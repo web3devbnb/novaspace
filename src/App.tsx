@@ -1,10 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-<<<<<<< HEAD
 import { ResetCSS, Text } from '@pancakeswap-libs/uikit'
-=======
-import { ResetCSS } from '@pancakeswap-libs/uikit'
->>>>>>> master
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -89,16 +85,15 @@ const App: React.FC = () => {
               <Novaria />
               <Footer />
             </Route>
-
+            <WalletProvider>
             <Route path="/map">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
               <Map />
             </Route>
             <Route path="/location">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-              <WalletProvider>
+              
                 <Location />
-              </WalletProvider>
             </Route>
             <Route path="/overview">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
@@ -108,6 +103,7 @@ const App: React.FC = () => {
               <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
               <Shipyard />
             </Route>
+              </WalletProvider>
 
             <Route path="/privacy">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />

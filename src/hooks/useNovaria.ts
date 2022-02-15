@@ -309,6 +309,22 @@ export const useGetNameByAddress = (player) => {
   return name
 }
 
+export const useGetPlayerExists = (player) => {
+  const { fastRefresh } = useRefresh()
+  const [PlayerExists, setPlayerExists] = useState(false)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getPlayerExists(player).call()
+      setPlayerExists(data)
+    }
+    fetch()
+  }, [fastRefresh, player])
+  return PlayerExists
+}
+
+
+
 // ~~~Map contract functions~~~
 // Movement, mining, refining, tracks mineral
 // Active Functions
@@ -321,7 +337,7 @@ export const useMine = () => {
     const txHash = await mine(useMapContract, account)
     console.info(txHash)
   }, [account, useMapContract])
-  return { onClick: handleMine }
+  return { onMine: handleMine }
 }
 
 export const useRefine = () => {
@@ -540,7 +556,7 @@ export const useApprove = () => {
 
 export const useGetAllowance = (contract) => {
   const { account } = useWallet()
-  const { slowRefresh } = useRefresh()
+  const { fastRefresh } = useRefresh()
   const [allowance, setAllowance] = useState(0)
 
   useEffect(() => {
@@ -549,6 +565,6 @@ export const useGetAllowance = (contract) => {
       setAllowance(data)
     }
     fetch()
-  }, [slowRefresh, account, contract])
+  }, [fastRefresh, account, contract])
   return allowance
 }

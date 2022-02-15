@@ -249,7 +249,7 @@ const CountdownButton = styled.button`
   padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: .75rem;
-  
+  width: 100%;
   text-decoration: none;
   color: #8c8c8c;
   border: 1px solid #8c8c8c;
@@ -535,8 +535,8 @@ const Shipyard = () => {
 
                           <ClaimControls>
 
-                            {CalculateTimeLeft(new Date(dock.completionTime * 1000)) > 0 
-                            ? <CountdownButton>{CalculateTimeLeft(new Date(dock.completionTime * 1000))}</CountdownButton> 
+                            {dock.completionTime * 1000 > Number(new Date()) 
+                            ? <CountdownButton>building...</CountdownButton> 
                             : ''}
                             
                             {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?  
