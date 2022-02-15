@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import {} from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
@@ -16,8 +16,11 @@ import {
   useGetMiningCapacity,
   useGetFleetLocation,
   useGetFleetMineral,
+  useGetCostMod,
+  useGetBuildTime,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
+import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import moleCard from '../assets/moleCard.png'
@@ -279,13 +282,13 @@ const FleetMenu = styled.div`
 `
 
 const Shipyard = () => {
-  const { account } = useWallet()
+  const account = useContext(ConnectedAccountContext)
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
   console.log('shipclasses', shipClasses)
   const spaceDocks = useGetSpaceDock()
   console.log('spaceDocks', spaceDocks)
-  const shipyards = useGetShipyards()
+  const shipyards = useGetShipyards() 
   console.log('shipayrds', shipyards)
   const playerFleet = useGetFleet()
   const fleetSize = useGetFleetSize(account)
@@ -306,6 +309,7 @@ const Shipyard = () => {
   const [buildTime, setBuildTime] = useState(null)
   const [shipCost, setShipCost] = useState(null)
   const [shipAmount, setShipAmount] = useState(null)
+  const [totalBuildTime, setTotalBuildTime] = useState(0)
   const [, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
   // const [claimId, setClaimId] = useState(null)
@@ -319,20 +323,22 @@ const Shipyard = () => {
     setShipyardFee(obj.feePercent)
   }
 
-  const handleShipChange = (obj) => {
+  const HandleShipChange = (obj) => {
     setShipId(shipClasses.indexOf(obj))
     setBuildTime(obj.buildTime)
     setShipCost(obj.cost)
     setShipName(obj.name)
+    setTotalBuildTime(useGetBuildTime(shipId, shipAmount))
   }
-
+  const costMod = useGetCostMod()
+  const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
   const { onBuild } = useBuildShips()
 
   const sendTx = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipId, shipAmount)
-      console.log(shipyardX, shipyardY, shipId, shipAmount)
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost)
+      console.log(shipyardX, shipyardY, shipId, shipAmount, buildCost)
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -459,7 +465,7 @@ const Shipyard = () => {
                     placeholder="Select Ship"
                     value={shipId}
                     options={shipClasses}
-                    onChange={handleShipChange}
+                    onChange={HandleShipChange}
                     getOptionLabel={(x) => x.name}
                     styles={customStyles}
                   />
@@ -479,12 +485,12 @@ const Shipyard = () => {
                 </Row>
                 <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
                   <Text>
-                    Cost: {(shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / 10 ** 18}  
+                    Cost: {buildCost / 10 ** 18}  
                     <span style={{fontSize:10}}> NOVA</span> 
                   </Text>
                   <Text>
                     Time:{' '}
-                    {buildTime * shipAmount}s
+                    {totalBuildTime}s
                   </Text>
                 </Row>
                 <div style={{color: '#289794', marginTop: '5px'}}>

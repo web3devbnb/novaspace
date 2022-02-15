@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { ConnectedAccountContext } from 'App'
 import Page from 'components/layout/Page'
 import { Flex } from '@pancakeswap-libs/uikit'
 import ModalVideo from 'react-modal-video'
@@ -90,7 +91,7 @@ const Button = styled.button`
 `
 
 const Novaria: React.FC = () => {
-  const { account } = useWallet()
+  const account = useContext(ConnectedAccountContext)
   const [isOpen, setOpen] = useState(false)
   const [pendingTx, setPendingTx] = useState(false)
   const [name, setName] = useState('')

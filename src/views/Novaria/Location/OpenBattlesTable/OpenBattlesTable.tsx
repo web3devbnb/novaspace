@@ -9,7 +9,7 @@ const Body = styled.div`
 
 const HeaderRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   color: #289794;
   font-size: 12px;
 `
@@ -30,22 +30,26 @@ const TableContent = styled.div`
 `
 
 const OpenBattlesTable = ({ battles }) => {
+
+
+
   return (
     <Body>
       <div>
         <HeaderRow>
-          <div>ATTACKER</div>
-          <div>DEFENDER</div>
+          <div>BATTLE ID</div>
+          <div>ATK POWER</div>
+          <div>DEF POWER</div>
           <div>START TIME</div>
         </HeaderRow>
       </div>
       <TableContent>
         {battles.map((battle) => (
-          <OpenBattlesTableRow battle={battle} />
+          <OpenBattlesTableRow battle={battle} index={battles.indexOf(battle)} />
         ))}
       </TableContent>
     </Body>
   )
 }
 
-export default OpenBattlesTable
+export default OpenBattlesTable 

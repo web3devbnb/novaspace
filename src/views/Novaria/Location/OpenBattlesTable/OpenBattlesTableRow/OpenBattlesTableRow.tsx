@@ -1,6 +1,7 @@
 import { useModal } from '@pancakeswap-libs/uikit'
 import React from 'react'
 import styled from 'styled-components'
+import { useGetBattle } from 'hooks/useNovaria'
 import BattleModal from '../BattleModal'
 
 
@@ -21,14 +22,16 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle }) => {
+const OpenBattlesTableRow = ({ battle, index,  }) => {
   const [handleClick] = useModal(<BattleModal />)
+  const battleInfo = useGetBattle(battle)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
-      <Cell>{battle}</Cell>
-      <Cell>0x1234...</Cell>
-      <Cell>17:00 UTC</Cell>
+      <Cell>{index}</Cell>
+      <Cell>{battleInfo[3][1]}</Cell>
+      <Cell>{battleInfo[4][1]}</Cell>
+      <Cell>{battleInfo[0]}</Cell>
     </Row>
   )
 }

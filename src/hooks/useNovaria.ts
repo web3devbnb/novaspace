@@ -3,8 +3,9 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import novaABI from 'config/abi/nova.json'
 import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
+import treasuryABI from 'config/abi/Treasury.json'
 import { getContract } from 'utils/web3'
-import { getNovaAddress, getFleetAddress, getMapAddress } from 'utils/addressHelpers'
+import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import {
   buildShips,
   claimShips,
@@ -25,6 +26,7 @@ import useRefresh from './useRefresh'
 const fleetContract = getContract(fleetABI, getFleetAddress())
 const mapContract = getContract(mapABI, getMapAddress())
 const novaContract = getContract(novaABI, getNovaAddress())
+const treasuryContract = getContract(treasuryABI, getTreasuryAddress())
 
 // ~~~Fleet contract functions~~~
 // player setup and current ships, building ships, combat
@@ -50,8 +52,8 @@ export const useBuildShips = () => {
   const useFleetContract = useFleet()
 
   const handleBuildShips = useCallback(
-    async (x: string, y: string, classId: string, amount: string) => {
-      const txHash = await buildShips(useFleetContract, x, y, classId, amount, account)
+    async (x: string, y: string, classId: string, amount: string, buildCost: number) => {
+      const txHash = await buildShips(useFleetContract, x, y, classId, amount, buildCost, account)
 
       console.info(txHash)
     },
@@ -119,6 +121,20 @@ export const useGetShipClasses = () => {
     fetchshipClasses()
   }, [slowRefresh])
   return shipClasses
+}
+
+export const useGetBuildTime = (shipId: number, amount: number) => {
+  const { fastRefresh } = useRefresh()
+  const [BuildTime, setBuildTime] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getBuildTime(shipId, amount).call()
+      setBuildTime(data)
+    }
+    fetch()
+  }, [fastRefresh, shipId, amount])
+  return BuildTime
 }
 
 export const useGetShipyards = () => {
@@ -238,6 +254,7 @@ export const useGetMiningCapacity = () => {
   return miningCapacity
 }
 
+// returns list of battle IDs at a location
 export const useGetBattlesAtLocation = (x: number, y: number) => {
   const { slowRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
@@ -252,33 +269,34 @@ export const useGetBattlesAtLocation = (x: number, y: number) => {
   return battlesAtLocation
 }
 
-// returns all battles
-export const useGetBattles = () => {
+// returns battle info
+export const useGetBattle = (Id: number) => {
   const { slowRefresh } = useRefresh()
-  const [battles, setBattles] = useState([])
+  const [battle, setBattle] = useState('[]')
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getBattles().call()
-      setBattles(data)
-    }
-    fetch()
-  }, [slowRefresh])
-  return battles
-}
-
-export const useGetBattle = (id) => {
-  const { slowRefresh } = useRefresh()
-  const [battle, setBattle] = useState()
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await fleetContract.methods.getBattle(id).call()
+      const data = await fleetContract.methods.battles(Id).call()
       setBattle(data)
     }
     fetch()
-  }, [slowRefresh, id])
+  }, [slowRefresh, Id])
   return battle
+}
+
+// returns battle info of player
+export const useGetPlayerBattle = (player) => {
+  const { slowRefresh } = useRefresh()
+  const [PlayerBattle, setPlayerBattle] = useState([])
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.battles(player).call()
+      setPlayerBattle(data)
+    }
+    fetch()
+  }, [slowRefresh, player])
+  return PlayerBattle
 }
 
 export const useGetAttackPower = (fleet) => {
@@ -301,7 +319,7 @@ export const useGetNameByAddress = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getNameByAddress(player).call()
+      const data = await fleetContract.methods._addressToPlayer(player).call()
       setName(data)
     }
     fetch()
@@ -315,13 +333,28 @@ export const useGetPlayerExists = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getPlayerExists(player).call()
+      const data = await fleetContract.methods._playerExists(player).call()
       setPlayerExists(data)
     }
     fetch()
   }, [fastRefresh, player])
   return PlayerExists
 }
+
+export const useGetDockCost = (shipClassId: number, amount: number) => {
+  const { fastRefresh } = useRefresh()
+  const [DockCost, setDockCost] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods._playerExists(shipClassId, amount).call()
+      setDockCost(data)
+    }
+    fetch()
+  }, [fastRefresh, shipClassId, amount])
+  return DockCost
+}
+
 
 
 
@@ -567,4 +600,22 @@ export const useGetAllowance = (contract) => {
     fetch()
   }, [fastRefresh, account, contract])
   return allowance
+}
+
+
+// *** Treasury Contract ***
+
+
+export const useGetCostMod = () => {
+  const { slowRefresh } = useRefresh()
+  const [CostMod, setCostMod] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await treasuryContract.methods.getCostMod().call()
+      setCostMod(data)
+    }
+    fetch()
+  }, [slowRefresh])
+  return CostMod
 }

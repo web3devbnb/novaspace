@@ -11,6 +11,7 @@ import {
   useGetFleetSize,
   useGetMaxMineralCapacity,
   useGetPlaceInfo,
+  useGetBattle,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -144,6 +145,7 @@ const InputControl = styled.div`
 const YourFleetCard = styled.div``
 const BattleProgressCard = styled.div``
 
+
 const Location: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
 
@@ -158,6 +160,10 @@ const Location: React.FC = () => {
   const placeInfo = useGetPlaceInfo(X, Y)
 
   const battlesAtLocation = useGetBattlesAtLocation(X, Y)
+
+ 
+
+
   const fleetsAtLocation = useGetFleetsAtLocation(X, Y)
 
   const fleetSize = useGetFleetSize(account)
@@ -199,11 +205,11 @@ const Location: React.FC = () => {
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation.slice(0, 5)} />
+                <OpenBattlesTable battles={battlesAtLocation} />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>
-                <PlayersTable players={fleetsAtLocation.slice(0, 5)} />
+                <PlayersTable players={fleetsAtLocation} />
               </PlayersCard>
             </div>
             <RightCol>

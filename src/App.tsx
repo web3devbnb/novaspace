@@ -80,12 +80,12 @@ const App: React.FC = () => {
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
+            <WalletProvider>
             <Route path="/legend-of-novaria">
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
               <Novaria />
               <Footer />
             </Route>
-            <WalletProvider>
             <Route path="/map">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
               <Map />

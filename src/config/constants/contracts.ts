@@ -25,7 +25,7 @@ export default {
   },
   treasury: {
     56: '0x12a8B6bc5DcBE9BD869ea8ad76a41c7D9f166d80',
-    97: '0x0c5a18Eb2748946d41f1EBe629fF2ecc378aFE91',
+    97: '0x0c5a18Eb2748946d41f1EBe629fF2ecc378aFE91', 
   },
   approvals: {
     56: '0x12a8B6bc5DcBE9BD869ea8ad76a41c7D9f166d80',
