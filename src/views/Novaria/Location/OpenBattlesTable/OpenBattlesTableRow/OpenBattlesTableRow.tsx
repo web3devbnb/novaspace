@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { useGetBattle } from 'hooks/useNovaria'
 import BattleModal from '../BattleModal'
 
-
 const Row = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -22,16 +21,16 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle, index,  }) => {
+const OpenBattlesTableRow = ({ battle, index }) => {
   const [handleClick] = useModal(<BattleModal />)
   const battleInfo = useGetBattle(battle)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
       <Cell>{index}</Cell>
-      <Cell>{battleInfo[3][1]}</Cell>
-      <Cell>{battleInfo[4][1]}</Cell>
-      <Cell>{battleInfo[0]}</Cell>
+      <Cell>{battleInfo['3'][1]}</Cell>
+      <Cell>{battleInfo['4'][1]}</Cell>
+      <Cell>{battleInfo['0']}</Cell>
     </Row>
   )
 }
