@@ -1,6 +1,10 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+<<<<<<< HEAD
 import { ResetCSS, Text } from '@pancakeswap-libs/uikit'
+=======
+import { ResetCSS } from '@pancakeswap-libs/uikit'
+>>>>>>> master
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -10,7 +14,6 @@ import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
-import './bubbles.scss'
 
 export const ConnectedAccountContext = React.createContext(null)
 
@@ -81,7 +84,7 @@ const App: React.FC = () => {
             {/* <Route path="/pools">
               <Farms tokenMode />
             </Route> */}
-            <Route path="/novaria">
+            <Route path="/legend-of-novaria">
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
               <Novaria />
               <Footer />

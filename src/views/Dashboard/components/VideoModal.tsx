@@ -32,22 +32,19 @@ const scrollToMiddle = () => window.scrollTo(50, document.body.scrollHeight / 2.
 
 const VideoModal = () => {
   const [isOpen, setOpen] = useState(false)
-  return (
-    <Body>
-      <div>
-        <ModalVideo channel="youtube" isOpen={isOpen} videoId="HLKAscn2YAI" onClose={() => setOpen(false)} />
-        <Button
-          type="button"
-          onClick={() => {
-            setOpen(true)
-            scrollToMiddle()
-          }}
-        >
-          <Img src={PlayLogo} alt="play" />
-        </Button>
-      </div>
-    </Body>
-  )
+    return (
+      <Body>
+        <div>
+          <ModalVideo
+            channel="youtube"
+            isOpen={isOpen}
+            videoId="VRH2LvKXKEQ"
+            onClose={() => setOpen(false)}
+          />
+          <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button>
+        </div>
+      </Body>
+    )
 }
 
 export default VideoModal

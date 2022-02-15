@@ -1,6 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+<<<<<<< HEAD
 import { Text, Flex } from '@pancakeswap-libs/uikit'
+=======
+import { Heading, Text, Flex } from '@pancakeswap-libs/uikit'
+import discordIcon from './Discord.svg'
+
+>>>>>>> master
 
 const Hero = styled(Flex)`
   flex-direction: column;
@@ -46,39 +52,67 @@ const Footer = () => (
   <Hero>
     <Row>
       <Col>
-        <Text style={{ fontSize: '12px', paddingBottom: '0px' }}>NOVA Contract:</Text>
-        <Text style={{ fontSize: '8px' }}>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://bscscan.com/address/0x56E344bE9A7a7A1d27C854628483Efd67c11214F#code"
-          >
-            0x56E344bE9A7a7A1d27C854628483Efd67c11214F{' '}
-          </a>
-        </Text>
-        <Row>
-          <a target="_blank" rel="noreferrer" href="https://www.facebook.com/ShibaNovaDEFI">
-            <Img
-              src="https://shibanova.io/assets/images/facebook-icon.svg"
-              alt="facebook"
-              style={{ paddingLeft: '0' }}
-            />
-          </a>
-          <a target="_blank" rel="noreferrer" href="https://www.instagram.com/ShibaNovaDEFI">
-            <Img src="https://shibanova.io/assets/images/instagram-icon.svg" alt="instagram" />
-          </a>
-          <a target="_blank" rel="noreferrer" href="https://t.me/ShibaNovaDEX">
-            <Img src="https://shibanova.io/assets/images/telegram-icon.svg" alt="telegram" />
-          </a>
-          <a target="_blank" rel="noreferrer" href="https://www.twitter.com/ShibaNovaDefi">
-            <Img src="https://shibanova.io/assets/images/twitter-icon.svg" alt="twitter" />
-          </a>
-          <a target="_blank" rel="noreferrer" href="https://coinmarketcap.com/currencies/shibanova/">
-            <Img src="https://shibanova.io/images/home/cmclogo.png" alt="coin marketcap" />
-          </a>
-          <a target="_blank" rel="noreferrer" href="https://www.coingecko.com/en/coins/shiba-nova">
-            <Img src="https://shibanova.io/images/home/coingecko.png" alt="coin gecko" />
-          </a>
+      <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract: (ONLY ON NOVADEX)</Text>
+    <Text style={{fontSize:"8px"}}> 
+      <a  target="_blank"
+        rel="noreferrer"
+        href="https://bscscan.com/address/0x56E344bE9A7a7A1d27C854628483Efd67c11214F#code"> 
+        0x56E344bE9A7a7A1d27C854628483Efd67c11214F </a></Text>
+        <Row >
+                <a                  
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://discord.gg/vQdxbGx9pV"
+                >
+                  <Img
+                    src={discordIcon}
+                    alt="discord"
+                    style={{backgroundColor:'transparent'}}
+                  />
+                </a> 
+                <a target="_blank" rel="noreferrer" href="https://t.me/ShibaNovaDEX">
+                  <Img
+                    src="https://shibanova.io/assets/images/telegram-icon.svg"
+                    alt="telegram"
+                  />
+                </a>
+                <a target="_blank" rel="noreferrer" href="https://www.twitter.com/ShibaNovaDefi">
+                  <Img
+                    src="https://shibanova.io/assets/images/twitter-icon.svg"
+                    alt="twitter"                    
+                  />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.instagram.com/ShibaNovaDEFI"
+                >
+                  <Img
+                    src="https://shibanova.io/assets/images/instagram-icon.svg"
+                    alt="instagram"
+                  />
+                </a>
+                {/* <a                  
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://coinmarketcap.com/currencies/shibanova/"
+                >
+                  <Img
+                    src="https://shibanova.io/images/home/cmclogo.png"
+                    alt="coin marketcap"
+                  />
+                </a> 
+                <a                  
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.coingecko.com/en/coins/shiba-nova"
+                >
+                  <Img
+                    src="https://shibanova.io/images/home/coingecko.png"
+                    alt="coin gecko"
+                  />
+                </a>  */}
+
         </Row>
       </Col>
       <Col>

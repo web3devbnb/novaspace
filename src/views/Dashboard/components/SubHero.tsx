@@ -60,27 +60,27 @@ const ButtonRow = styled.div`
 `
 
 const SubHero = () => {
-  return (
-    <Body>
-      <ColLeft>
-        <MainLogo src={mainLogo} alt="shibanova logo" />
-      </ColLeft>
-      <ColRight>
-        <Announcement glowing>
-          <p>
-            The DeFi platform featuring an exchange, trade route rewards, a play to earn strategy game, and a daily{' '}
-            <span style={{ color: 'gold' }}> MONEY POT</span> that rewards holders with 75% of all fees!
-          </p>
-        </Announcement>
-        <ButtonRow>
-          <NeonButton title="Novaria" link="#novaria" />
-          <NeonButton title="DEX" link="#dex" />
-          <NeonButton title="Trade Routes" link="#trade-routes" />
-          <NeonButton title="Stats" link="#stats" />
-        </ButtonRow>
-      </ColRight>
-    </Body>
-  )
+
+    return (
+        <Body>
+            <ColLeft>
+                <MainLogo src={mainLogo} alt="shibanova logo" />
+                </ColLeft>
+            <ColRight>
+                <Announcement glowing>
+                    <p>The DeFi platform featuring an exchange, trade route rewards, a play to earn strategy game, and a daily <span style={{color:"gold"}} > MONEY POT</span> that rewards holders with 75% of all fees! <a href='https://swap.shibanova.io' target='blank' rel='noreferrer noopener'>NOVADEX</a> is the ONLY place to buy $NOVA!</p>
+                                      
+                </Announcement>
+                <ButtonRow>
+                    <NeonButton title="Novaria" link="#novaria" />
+                    <NeonButton title="DEX" link="#dex" />
+                    <NeonButton title="Trade Routes" link="#trade-routes" />
+                    <NeonButton title="Stats" link="#stats" />
+                </ButtonRow>
+            </ColRight>
+        </Body>
+
+    )
 }
 
 export default SubHero

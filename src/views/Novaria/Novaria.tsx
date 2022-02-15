@@ -82,7 +82,7 @@ const Button = styled.button`
   text-shadow: -2px 4px 4px #091243, 0 0 10px #00d0ff, inset 1px 1px 1px white;
   color: #1fffff;
   border: 2px solid;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: transparent;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
     0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
@@ -146,37 +146,25 @@ const Novaria: React.FC = () => {
       <Body>
         <Column>
           <Logo src={logo} alt="novaria logo" />
-          <ModalVideo channel="youtube" isOpen={isOpen} videoId="HLKAscn2YAI" onClose={() => setOpen(false)} />
-          <Button
-            type="button"
-            onClick={() => {
-              setOpen(true)
-            }}
-          >
-            Trailer
-          </Button>
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {isAllowed ? (
-            <Button type="button">
-              <a href="/shipyard">Enter</a>
-            </Button>
-          ) : !connected ? (
-            <Button>Connect Wallet</Button>
-          ) : (
-            <Button type="button" onClick={handleApprove}>
-              Approve Contracts{' '}
-            </Button>
-          )}
+            <ModalVideo
+            channel="youtube"
+            isOpen={isOpen}
+            videoId="VRH2LvKXKEQ"
+            onClose={() => setOpen(false)}
+          />
+          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
+          <SubHeading>
+            - Coming Soon - <br/> 
           <br />
           {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
           <input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
           {console.log('player name', name)}
           <Button onClick={sendInsertCoinTx}>Set Player Name</Button>
 
-          <SubHeading>
-            - Coming Soon - <br />
+
             <br />A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
+          <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
         </Column>
       </Body>
     </Page1>

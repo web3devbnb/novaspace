@@ -77,33 +77,31 @@ const TradeRouteCard = ({ title }: { title: string }) => {
   return (
     <Grid id={title}>
       <Wrapper>
-        <TextRow1>
-          <Heading glowing>TRADE ROUTES</Heading>
-        </TextRow1>
+      <TextRow1>
+        <Heading glowing>
+          TRADE ROUTES
+        </Heading>
+      </TextRow1>
+      
+      <TextRow2>
+        <SubHeading glowing> 
+          Users can earn passive income by depositing liquidity into trade routes. 
+          Trade route liquidity fuels the decentralized exchange&apos;s tradeable token pairs. 
+          Rewards are paid out in either NOVA or sNOVA, where sNOVA allows users to gain a share of the platform profits in the daily Money Pot.  
+        </SubHeading>
+      </TextRow2>
 
-        <TextRow2>
-          <SubHeading glowing>
-            Users can earn passive income by depositing liquidity into in trade routes. Trade route liquidity fuels the
-            decentralized exchange&apos;s tradeable token pairs. Rewards are paid out in either NOVA or sNOVA, where
-            sNOVA allows users to gain a share of the platform profits in the daily Money Pot.
-          </SubHeading>
-        </TextRow2>
-
-        <ButtonRow>
-          <a href="/traderoutes" rel="noopener noreferrer">
-            <Button style={{ margin: '0 10px 10px' }}>Trade Routes</Button>
-          </a>
-          <a href="https://swap.shibanova.io/#/pool" rel="noopener noreferrer">
-            <Button style={{ margin: '0 10px' }}>Get Liquidity</Button>
-          </a>
-          <a
-            href="https://docs.shibanova.io/shibanova-documentation/how-farming-works"
-            target="blank"
-            rel="noopener noreferrer"
-          >
-            <Button style={{ margin: '0 10px' }}>Learn More</Button>
-          </a>
-        </ButtonRow>
+      <ButtonRow>
+        <a href="/traderoutes" rel='noopener noreferrer' >
+          <Button style={{margin:"0 10px 10px"}}>Trade Routes</Button>
+        </a>
+        <a href="https://swap.shibanova.io/#/pool" rel='noopener noreferrer' >
+          <Button style={{margin:"0 10px"}}>Get Liquidity</Button>
+        </a>
+        <a href="https://docs.shibanova.io/shibanova-documentation/how-farming-works" target='blank' rel='noopener noreferrer'>
+          <Button style={{margin:"0 10px"}}>Learn More</Button>
+        </a>
+      </ButtonRow>
       </Wrapper>
       {/* 
       <ColRight /> */}

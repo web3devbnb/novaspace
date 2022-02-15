@@ -4,7 +4,7 @@ import { Heading, Card, CardBody, CardHeader, CardFooter } from '@pancakeswap-li
 
 const StyledCard = styled(Card)`
   text-align: center;
-  flex: 1 1 auto;
+  flex: 1 ;
   max-width: 400px;
  // min-width: 350px;
   height: 610px;
