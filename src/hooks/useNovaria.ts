@@ -272,12 +272,18 @@ export const useGetBattlesAtLocation = (x: number, y: number) => {
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { slowRefresh } = useRefresh()
-  const [battle, setBattle] = useState('[]')
+  const [battle, setBattle] = useState({attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0})
 
   useEffect(() => {
     async function fetch() {
       const data = await fleetContract.methods.battles(Id).call()
-      setBattle(data)
+      setBattle({
+        attackTeam: data[3],
+        defendTeam: data[4],
+        deadline: data[0],
+        coordX: data[1],
+        coordY: data[2]
+      })
     }
     fetch()
   }, [slowRefresh, Id])
@@ -311,7 +317,7 @@ export const useGetAttackPower = (fleet) => {
     fetch()
   }, [slowRefresh, fleet])
   return attackPower
-}
+} 
 
 export const useGetNameByAddress = (player) => {
   const { slowRefresh } = useRefresh()

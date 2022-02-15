@@ -154,18 +154,18 @@ const Location: React.FC = () => {
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
-  const [X, setX] = useState(loadedCoords.x)
-  const [Y, setY] = useState(loadedCoords.y)
+  const [placeX, setX] = useState(loadedCoords.x)
+  const [placeY, setY] = useState(loadedCoords.y)
 
-  const placeInfo = useGetPlaceInfo(X, Y)
+  const placeInfo = useGetPlaceInfo(placeX, placeY)
 
-  const battlesAtLocation = useGetBattlesAtLocation(X, Y)
+  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
   console.log('placeInfo', placeInfo)
-  console.log('X,Y', X, Y)
- 
+  console.log('X,Y', placeX, placeY)
+  console.log('battles length', battlesAtLocation.length)
 
 
-  const fleetsAtLocation = useGetFleetsAtLocation(X, Y)
+  const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
@@ -187,8 +187,8 @@ const Location: React.FC = () => {
             <LocationCard
               placename={placeInfo.name}
               placetype={placeInfo.type}
-              placeX={X}
-              placeY={Y}
+              placeX={placeX}
+              placeY={placeY}
               mineral={placeInfo.mineral}
               salvage={placeInfo.scrap}
               shipyard={placeInfo.shipyard}
@@ -199,14 +199,14 @@ const Location: React.FC = () => {
             <div>
               <InputControl>
                 SEARCH LOCATION:
-                <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+                <CoordInput type="number" min="0" value={placeX} onChange={(e) => setX(parseFloat(e.target.value))} />
                 ,
-                <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+                <CoordInput type="number" min="0" value={placeY} onChange={(e) => setY(parseFloat(e.target.value))} />
               </InputControl>
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation} />
+                <OpenBattlesTable battles={battlesAtLocation}  placeX={placeX} placeY={placeY} />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>

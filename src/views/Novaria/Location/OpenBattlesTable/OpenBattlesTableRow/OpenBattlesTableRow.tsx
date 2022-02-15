@@ -6,7 +6,7 @@ import BattleModal from '../BattleModal'
 
 const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
   border: 1px solid #289794;
   padding: 3px;
   margin: 4px 0;
@@ -21,16 +21,23 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle, index }) => {
-  const [handleClick] = useModal(<BattleModal />)
+const OpenBattlesTableRow = ({ battle, placeX, placeY }) => {
+  const [handleClick] = useModal(<BattleModal battle={battle} />)
   const battleInfo = useGetBattle(battle)
+  const battleStart = new Date(battleInfo.deadline * 1000).toLocaleString()
+  console.log('battle info', battleInfo)
+  console.log('battle', battle)
+
+  // if (battleInfo.coordX !== placeX && battleInfo.coordY !== placeY) {
+  //   return (null)
+  // }
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
-      <Cell>{index}</Cell>
-      <Cell>{battleInfo['3'][1]}</Cell>
-      <Cell>{battleInfo['4'][1]}</Cell>
-      <Cell>{battleInfo['0']}</Cell>
+      <Cell>{battle}</Cell>
+      <Cell>{battleInfo.attackTeam[1]}</Cell>
+      <Cell>{battleInfo.defendTeam[1]}</Cell>
+      <Cell>{battleStart}</Cell>
     </Row>
   )
 }

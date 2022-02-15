@@ -9,7 +9,7 @@ const Body = styled.div`
 
 const HeaderRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
   color: #289794;
   font-size: 12px;
 `
@@ -29,7 +29,7 @@ const TableContent = styled.div`
   }
 `
 
-const OpenBattlesTable = ({ battles }) => {
+const OpenBattlesTable = ({ battles, placeX, placeY }) => {
 
 
 
@@ -45,7 +45,7 @@ const OpenBattlesTable = ({ battles }) => {
       </div>
       <TableContent>
         {battles.map((battle) => (
-          <OpenBattlesTableRow battle={battle} index={battles.indexOf(battle)} />
+          <OpenBattlesTableRow battle={battle} placeX={placeX} placeY={placeY} />
         ))}
       </TableContent>
     </Body>
