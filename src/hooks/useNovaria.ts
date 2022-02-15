@@ -52,7 +52,7 @@ export const useBuildShips = () => {
   const useFleetContract = useFleet()
 
   const handleBuildShips = useCallback(
-    async (x: string, y: string, classId: string, amount: string, buildCost: number) => {
+    async (x: string, y: string, classId: string, amount: number, buildCost: string) => {
       const txHash = await buildShips(useFleetContract, x, y, classId, amount, buildCost, account)
 
       console.info(txHash)
@@ -570,6 +570,20 @@ export const useGetCurrentCooldown = (fleet: string) => {
     fetch()
   }, [slowRefresh, fleet])
   return CurrentCooldown
+}
+
+export const useGetTimeModifier = () => {
+  const { slowRefresh } = useRefresh()
+  const [TimeModifier, setTimeModifier] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getTimeModifier().call()
+      setTimeModifier(data)
+    }
+    fetch()
+  }, [slowRefresh])
+  return TimeModifier
 }
 
 // *** Nova token contract ***

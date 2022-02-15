@@ -58,7 +58,7 @@ const GameHeader = ({ location, playerMineral }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
-  const novaPrice = Number(usePriceNovaBusd())
+  const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
 
 
   const connected = status === 'connected'

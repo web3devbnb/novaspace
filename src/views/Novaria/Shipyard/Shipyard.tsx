@@ -18,6 +18,7 @@ import {
   useGetFleetMineral,
   useGetCostMod,
   useGetBuildTime,
+  useGetTimeModifier,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -47,7 +48,7 @@ const Page = styled.div`
     margin-top: -75px;
   }
 
-  
+
 `
 
 const Body = styled.div`
@@ -56,8 +57,8 @@ const Body = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  
-  justify-content: space-evenly;
+
+  // justify-content: space-evenly;
   background-image: url('/images/novaria/border.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -77,7 +78,7 @@ const ShipClassMenu = styled.div`
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
-  &::-webkit-scrollbar { 
+  &::-webkit-scrollbar {
     width: 0px;
     height: 10px;
     background-color: #289794;
@@ -122,6 +123,7 @@ const BuildMenu = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 30%;
+  min-width: 240px;
   height: 100%;
   background-color: #00000080;
 `
@@ -150,7 +152,7 @@ const Button = styled.button`
   border: 2px solid #5affff;
   border-radius: 0px;
   background-color: transparent;
-  
+
 `
 
 const Input = styled.input`
@@ -174,7 +176,7 @@ const SpaceDockMenu = styled.div`
   position: relative;
   width: 70%;
   height: 100%;
-  
+
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
@@ -266,7 +268,7 @@ const WrongLocationButton = styled.button`
   padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: .75rem;
-  
+
   text-decoration: none;
   color: #5affff;
   border: 1px solid #5affff;
@@ -288,7 +290,7 @@ const Shipyard = () => {
   console.log('shipclasses', shipClasses)
   const spaceDocks = useGetSpaceDock()
   console.log('spaceDocks', spaceDocks)
-  const shipyards = useGetShipyards() 
+  const shipyards = useGetShipyards()
   console.log('shipayrds', shipyards)
   const playerFleet = useGetFleet()
   const fleetSize = useGetFleetSize(account)
@@ -306,10 +308,10 @@ const Shipyard = () => {
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipId, setShipId] = useState(null)
   const [shipName, setShipName] = useState(null)
-  const [buildTime, setBuildTime] = useState(null)
-  const [shipCost, setShipCost] = useState(null)
-  const [shipAmount, setShipAmount] = useState(null)
-  const [totalBuildTime, setTotalBuildTime] = useState(0)
+  const [buildTime, setBuildTime] = useState(0)
+  const [shipCost, setShipCost] = useState(0)
+  const [shipAmount, setShipAmount] = useState(0)
+  // const [totalBuildTime, setTotalBuildTime] = useState(0)
   const [, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
   // const [claimId, setClaimId] = useState(null)
@@ -325,20 +327,22 @@ const Shipyard = () => {
 
   const HandleShipChange = (obj) => {
     setShipId(shipClasses.indexOf(obj))
-    setBuildTime(obj.buildTime)
+    setBuildTime(obj.size * 300)
     setShipCost(obj.cost)
     setShipName(obj.name)
-    setTotalBuildTime(useGetBuildTime(shipId, shipAmount))
   }
   const costMod = useGetCostMod()
   const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
   const { onBuild } = useBuildShips()
 
+  const timeMod = useGetTimeModifier()
+  console.log('timeMod, shipAmount, buildTime', timeMod, shipAmount, buildTime)
+
   const sendTx = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost)
-      console.log(shipyardX, shipyardY, shipId, shipAmount, buildCost)
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
+      console.log(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -361,11 +365,11 @@ const Shipyard = () => {
   }
 
   const CalculateTimeLeft = (endDate) => {
-    
+
     const difference = +endDate - +new Date();
-  
+
     let timeLeft = {};
-  
+
     if (difference > 0) {
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -374,7 +378,7 @@ const Shipyard = () => {
         seconds: Math.floor((difference / 1000) % 60)
       };
     }
-  
+
     return timeLeft;
   }
 
@@ -443,7 +447,7 @@ const Shipyard = () => {
 
             </ShipClassMenu>
 
-            <Row>
+            <Row >
 
               <BuildMenu>
                 <Header>BUILD SHIPS</Header>
@@ -485,21 +489,21 @@ const Shipyard = () => {
                 </Row>
                 <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
                   <Text>
-                    Cost: {buildCost / 10 ** 18}  
-                    <span style={{fontSize:10}}> NOVA</span> 
+                    Cost: {buildCost / 10 ** 18}
+                    <span style={{fontSize:10}}> NOVA</span>
                   </Text>
                   <Text>
                     Time:{' '}
-                    {totalBuildTime}s
+                    {shipAmount * buildTime / timeMod}s
                   </Text>
                 </Row>
                 <div style={{color: '#289794', marginTop: '5px'}}>
                 <Row style={{justifyContent: "space-between"}}>
                   <Text>
-                    Location: 
+                    Shipyard:
                   </Text>
                   <Text>
-                    ({shipyardX}, {shipyardY})
+                    {shipyardName} ({shipyardX}, {shipyardY})
                   </Text>
                 </Row>
                 <Row style={{justifyContent: "space-between", textOverflow: 'ellipsis', width: '100%' }}>
@@ -507,7 +511,7 @@ const Shipyard = () => {
                   <Text style={{width: '50%', textOverflow: 'ellipsis', overflow: 'hidden'}}>{shipyardOwner}</Text>
                 </Row>
                 <Row style={{justifyContent: "space-between"}}>
-                  <Text>Build Fee:</Text> 
+                  <Text>Build Fee:</Text>
                   <Text>{shipyardFee}%</Text>
                 </Row>
                 </div>
@@ -516,7 +520,7 @@ const Shipyard = () => {
               <SpaceDockMenu>
                 <Header style={{marginTop: 0}}>BUILD QUEUE</Header>
                 <Row>
-                
+
                   {spaceDocks.map((dock) => {
                     return (
                       <Col >
@@ -540,19 +544,20 @@ const Shipyard = () => {
                         </QueueCard>
 
                           <ClaimControls>
-
-                            {dock.completionTime * 1000 > Number(new Date()) 
-                            ? <CountdownButton>building...</CountdownButton> 
+                            {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? '' :
+                            <WrongLocationButton>Not at Shipyard</WrongLocationButton>}
+                            {dock.completionTime * 1000 > Number(new Date())
+                            ? <CountdownButton>building...</CountdownButton>
                             : ''}
-                            
-                            {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?  
+
+                            {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?
                             <Item><ClaimInput
                               type="number"
                               min="0"
                               placeholder="0"
                               value={claimAmount}
                               onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                            /> 
+                            />
                             <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
                               CLAIM
                             </ClaimButton></Item>
