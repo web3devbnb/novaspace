@@ -36,10 +36,10 @@ const NovariaCard = ({
 
     return(
       <Body id={title}>
-          <a href="/novaria" style={{display: 'flex'}}>
+          <a href="/legend-of-novaria" style={{display: 'flex'}}>
             <Img src={NovariaLogo} alt="Legend of Novaria" />
           </a>
-          <a href="/novaria" style={{display: 'flex'}}>
+          <a href="/legend-of-novaria" style={{display: 'flex'}}>
             <Button style={{margin:"10px auto"}}>The Battle is Coming</Button>
           </a>
           {/* <VideoModal /> */}
