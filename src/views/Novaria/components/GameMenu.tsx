@@ -79,11 +79,7 @@ const GameMenu = ({ pageName }) => {
   const [open, setOpen] = useState(true)
 
   const toggleViewMenu = () => {
-    if (open === true) {
-      setOpen(false)
-    } else {
-      setOpen(true)
-    }
+    setOpen((prevState) => !prevState)
   }
 
   return (
