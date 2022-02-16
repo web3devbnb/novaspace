@@ -10,6 +10,8 @@ const Body = styled.div`
 
 const NoBattle = styled.div`
     border: 1px solid #5affff;
+    padding: 1rem;
+    height: 15px;
 `
 
 const BattleButton = styled.button`
@@ -19,22 +21,22 @@ const BattleButton = styled.button`
 
 const BattleStatus = ({ playerBattleStatus, playerBattleInfo }) => {
   
-    console.log('battle status', playerBattleInfo)
-    const attacking = playerBattleInfo[0] === 1
-    const defending = playerBattleInfo[0] === 2
-    const battleId = playerBattleInfo[1]
+    console.log('battle status', playerBattleStatus)
+    console.log('player battle info', playerBattleInfo)
+    const attacking = playerBattleInfo.battleStatus === '1'
+    const defending = playerBattleInfo.battleStatus === '2'
+    console.log()
+    const battleId = Number(playerBattleInfo.battleId)
     
-    const [handleClick] = useModal(<BattleModal battle={battleId} />)
+    const [handleClick] = useModal(<BattleModal battle={battleId} />) 
 
   return (
     <Body>
       {playerBattleStatus === false ? <NoBattle>Not in Battle</NoBattle> : ''}
-      {playerBattleStatus === true ? 
-        <div>
-            {defending ? <NoBattle> DEFENDING </NoBattle> : '' }
-            {attacking ?<NoBattle> ATTACKING </NoBattle>: '' }
-            <BattleButton type='button' onClick={handleClick}>BATTLE {battleId}</BattleButton>
-        </div> : ''}
+      {defending ? <NoBattle> DEFENDING </NoBattle> : '' }
+      {attacking ? <NoBattle> ATTACKING </NoBattle>: '' }
+      {playerBattleStatus === true ?  <BattleButton type='button' onClick={handleClick}>BATTLE {battleId}</BattleButton>: ''}
+        
     </Body>
   )
 }

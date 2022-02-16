@@ -81,34 +81,34 @@ const App: React.FC = () => {
               <Farms tokenMode />
             </Route> */}
             <Route path="/legend-of-novaria">
-            <WalletProvider>
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
-              <Novaria />
-              <Footer />
+              <WalletProvider>
+                <Novaria />
+                <Footer />
               </WalletProvider>
             </Route>
             <Route path="/map">
-            <WalletProvider>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+            <WalletProvider>
               <Map />
               </WalletProvider>
             </Route>
             <Route path="/location">
-            <WalletProvider>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+              <WalletProvider>
                 <Location />
               </WalletProvider>
             </Route>
             <Route path="/overview">
-            <WalletProvider>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-              <Overview />
+              <WalletProvider>
+                <Overview />
               </WalletProvider>
             </Route>
             <Route path="/shipyard">
-            <WalletProvider>
               <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
-              <Shipyard />
+              <WalletProvider>
+                <Shipyard />
               </WalletProvider>
             </Route>
 

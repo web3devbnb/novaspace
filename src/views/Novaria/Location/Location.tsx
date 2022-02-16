@@ -177,7 +177,7 @@ const Location: React.FC = () => {
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
 
-  const playerBattleStatus = useGetPlayerBattleStatus(account)
+  const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
 
   // An empty place is a place with no name.
