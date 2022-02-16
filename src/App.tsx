@@ -4,6 +4,7 @@ import { ResetCSS } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
+import ReactGA from 'react-ga'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
@@ -26,7 +27,17 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+
 const App: React.FC = () => {
+
+  ReactGA.initialize('UA-206876567-1', {
+    gaOptions: {
+      siteSpeedSampleRate: 100
+    }
+  }
+    );
+  ReactGA.pageview(window.location.pathname + window.location.search);
+  
   useEagerConnect()
   useFetchPublicData()
   return (
