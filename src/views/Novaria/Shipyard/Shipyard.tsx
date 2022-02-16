@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import {} from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import Select from 'react-select'
@@ -17,7 +16,6 @@ import {
   useGetFleetLocation,
   useGetFleetMineral,
   useGetCostMod,
-  useGetBuildTime,
   useGetTimeModifier,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
@@ -29,7 +27,6 @@ import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
 import viperQueue from '../assets/viperQueue.png'
 import moleQueue from '../assets/moleQueue.png'
-
 
 const Page = styled.div`
   background-image: url('/images/novaria/shipyardBG.jpg');
@@ -47,8 +44,6 @@ const Page = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     margin-top: -75px;
   }
-
-
 `
 
 const Body = styled.div`
@@ -91,7 +86,7 @@ const ShipClassMenu = styled.div`
 
 const ShipClassCard = styled.img`
   margin: 10px 5px;
-  max-height: 350px
+  max-height: 350px;
 `
 
 const Col = styled.div`
@@ -152,7 +147,6 @@ const Button = styled.button`
   border: 2px solid #5affff;
   border-radius: 0px;
   background-color: transparent;
-
 `
 
 const Input = styled.input`
@@ -220,7 +214,6 @@ const ClaimControls = styled.div`
   align-items: center;
   position: absolute;
   bottom: 10px;
-
 `
 
 const ClaimInput = styled.input`
@@ -229,7 +222,6 @@ const ClaimInput = styled.input`
   background: transparent;
   border: 1px solid #5affff;
   color: #5affff;
-
 `
 
 const ClaimButton = styled.button`
@@ -245,7 +237,6 @@ const ClaimButton = styled.button`
   border: 1px solid #5affff;
   border-radius: 0px;
   background-color: #5affff;
-
 `
 
 const CountdownButton = styled.button`
@@ -253,7 +244,7 @@ const CountdownButton = styled.button`
   align-self: center;
   padding: 0.25rem 1rem;
   font-family: sans-serif;
-  font-size: .75rem;
+  font-size: 0.75rem;
   width: 100%;
   text-decoration: none;
   color: #8c8c8c;
@@ -267,7 +258,7 @@ const WrongLocationButton = styled.button`
   align-self: center;
   padding: 0.25rem 1rem;
   font-family: sans-serif;
-  font-size: .75rem;
+  font-size: 0.75rem;
 
   text-decoration: none;
   color: #5affff;
@@ -365,21 +356,20 @@ const Shipyard = () => {
   }
 
   const CalculateTimeLeft = (endDate) => {
+    const difference = +endDate - +new Date()
 
-    const difference = +endDate - +new Date();
-
-    let timeLeft = {};
+    let timeLeft = {}
 
     if (difference > 0) {
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
+        seconds: Math.floor((difference / 1000) % 60),
+      }
     }
 
-    return timeLeft;
+    return timeLeft
   }
 
   // styles for the dropdown Selector
@@ -400,7 +390,7 @@ const Shipyard = () => {
       border: '1px solid #289794',
       borderRadius: '0px',
       background: 'transparent',
-      height:15,
+      height: 15,
     }),
     option: (provided) => ({
       ...provided,
@@ -412,11 +402,11 @@ const Shipyard = () => {
       ...provided,
       color: '#289794',
       background: 'transparent',
-      height:10,
+      height: 10,
     }),
     input: (provided, state) => ({
       ...provided,
-     height:15,
+      height: 15,
     }),
     dropdownIndicator: (provided, state) => ({
       ...provided,
@@ -439,16 +429,13 @@ const Shipyard = () => {
         <Body>
           <Col style={{ width: '70%' }}>
             <ShipClassMenu>
-
-              <ShipClassCard src={viperCard} alt='viper' />
-              <ShipClassCard src={moleCard} alt='mole' />
-              <ShipClassCard src={unknownCard} alt='coming soon' />
-              <ShipClassCard src={unknownCard} alt='coming soon' />
-
+              <ShipClassCard src={viperCard} alt="viper" />
+              <ShipClassCard src={moleCard} alt="mole" />
+              <ShipClassCard src={unknownCard} alt="coming soon" />
+              <ShipClassCard src={unknownCard} alt="coming soon" />
             </ShipClassMenu>
 
-            <Row >
-
+            <Row>
               <BuildMenu>
                 <Header>BUILD SHIPS</Header>
                 <br />
@@ -487,83 +474,90 @@ const Shipyard = () => {
                     Build {shipName}
                   </Button>
                 </Row>
-                <Row style={{justifyContent: "space-between", color: 'white', fontSize: 12}}>
+                <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
                     Cost: {buildCost / 10 ** 18}
-                    <span style={{fontSize:10}}> NOVA</span>
+                    <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>
-                    Time:{' '}
-                    {shipAmount * buildTime / timeMod}s
-                  </Text>
+                  <Text>Time: {(shipAmount * buildTime) / timeMod}s</Text>
                 </Row>
-                <div style={{color: '#289794', marginTop: '5px'}}>
-                <Row style={{justifyContent: "space-between"}}>
-                  <Text>
-                    Shipyard:
-                  </Text>
-                  <Text>
-                    {shipyardName} ({shipyardX}, {shipyardY})
-                  </Text>
-                </Row>
-                <Row style={{justifyContent: "space-between", textOverflow: 'ellipsis', width: '100%' }}>
-                  <Text>Owner: </Text>
-                  <Text style={{width: '50%', textOverflow: 'ellipsis', overflow: 'hidden'}}>{shipyardOwner}</Text>
-                </Row>
-                <Row style={{justifyContent: "space-between"}}>
-                  <Text>Build Fee:</Text>
-                  <Text>{shipyardFee}%</Text>
-                </Row>
+                <div style={{ color: '#289794', marginTop: '5px' }}>
+                  <Row style={{ justifyContent: 'space-between' }}>
+                    <Text>Shipyard:</Text>
+                    <Text>
+                      {shipyardName} ({shipyardX}, {shipyardY})
+                    </Text>
+                  </Row>
+                  <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
+                    <Text>Owner: </Text>
+                    <Text style={{ width: '50%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{shipyardOwner}</Text>
+                  </Row>
+                  <Row style={{ justifyContent: 'space-between' }}>
+                    <Text>Build Fee:</Text>
+                    <Text>{shipyardFee}%</Text>
+                  </Row>
                 </div>
               </BuildMenu>
 
               <SpaceDockMenu>
-                <Header style={{marginTop: 0}}>BUILD QUEUE</Header>
+                <Header style={{ marginTop: 0 }}>BUILD QUEUE</Header>
                 <Row>
-
                   {spaceDocks.map((dock) => {
                     return (
-                      <Col >
+                      <Col>
                         <QueueCard key={dock.shipClassId}>
-                          {dock.shipClassId === '0' ? <QueueCardImg src={viperQueue} alt='vipers in queue' />
-                            : <QueueCardImg src={moleQueue} alt='moles in queue' />
-                            }{console.log('shipclassID', dock.shipClassId)}
+                          {dock.shipClassId === '0' ? (
+                            <QueueCardImg src={viperQueue} alt="vipers in queue" />
+                          ) : (
+                            <QueueCardImg src={moleQueue} alt="moles in queue" />
+                          )}
+                          {console.log('shipclassID', dock.shipClassId)}
                           <QueueCardItems>
-                            <Row style={{justifyContent: 'space-between'}}>
-                              <Item>LOCATION  &nbsp;</Item>
-                              <br /><br />
-                              <Item style={{zIndex:1}}>
+                            <Row style={{ justifyContent: 'space-between' }}>
+                              <Item>LOCATION &nbsp;</Item>
+                              <br />
+                              <br />
+                              <Item style={{ zIndex: 1 }}>
                                 ({dock.coordX}, {dock.coordY})
                               </Item>
                             </Row>
-                            <Row style={{justifyContent: 'space-between'}}>
+                            <Row style={{ justifyContent: 'space-between' }}>
                               <Item>AMOUNT</Item>
-                              <Item style={{zIndex:1}}>{dock.amount}</Item>
+                              <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
                             </Row>
                           </QueueCardItems>
                         </QueueCard>
 
-                          <ClaimControls>
-                            {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? '' :
-                            <WrongLocationButton>Not at Shipyard</WrongLocationButton>}
-                            {dock.completionTime * 1000 > Number(new Date())
-                            ? <CountdownButton>building...</CountdownButton>
-                            : ''}
+                        <ClaimControls>
+                          {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
+                            ''
+                          ) : (
+                            <WrongLocationButton>Not at Shipyard</WrongLocationButton>
+                          )}
+                          {dock.completionTime * 1000 > Number(new Date()) ? (
+                            <CountdownButton>building...</CountdownButton>
+                          ) : (
+                            ''
+                          )}
 
-                            {(+new Date(dock.completionTime * 1000) - +new Date()) < 0 ?
-                            <Item><ClaimInput
-                              type="number"
-                              min="0"
-                              placeholder="0"
-                              value={claimAmount}
-                              onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                            />
-                            <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
-                              CLAIM
-                            </ClaimButton></Item>
-                            : '' }
-                          </ClaimControls>
-                        </Col>
+                          {+new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
+                            <Item>
+                              <ClaimInput
+                                type="number"
+                                min="0"
+                                placeholder="0"
+                                value={claimAmount}
+                                onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
+                              />
+                              <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                                CLAIM
+                              </ClaimButton>
+                            </Item>
+                          ) : (
+                            ''
+                          )}
+                        </ClaimControls>
+                      </Col>
                     )
                   })}
                 </Row>
@@ -573,23 +567,29 @@ const Shipyard = () => {
 
           <Col style={{ width: '25%' }}>
             <FleetMenu>
-              <Header style={{marginLeft:10}}>FLEET STATS</Header>
+              <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
               <Row>
                 <Col>
-                  <Item style={{marginBottom:10}}>Fleet Size</Item>
-                  <Item style={{marginBottom:10}}>Mining Capacity</Item>
-                  <Item style={{marginBottom:10}}>Mineral Capacity</Item>
+                  <Item style={{ marginBottom: 10 }}>Fleet Size</Item>
+                  <Item style={{ marginBottom: 10 }}>Mining Capacity</Item>
+                  <Item style={{ marginBottom: 10 }}>Mineral Capacity</Item>
                   {shipClasses.map((ship) => {
-                    return <Item  style={{marginBottom:10}} key={ship.name}>{ship.name}s</Item>
+                    return (
+                      <Item style={{ marginBottom: 10 }} key={ship.name}>
+                        {ship.name}s
+                      </Item>
+                    )
                   })}
                 </Col>
-                <Col style={{textAlign: 'right'}}>
+                <Col style={{ textAlign: 'right' }}>
                   {/* Find a way to map this out based on shipclass? */}
-                  <Item style={{marginBottom:10}}>{fleetSize}/{maxFleetSize}</Item>
-                  <Item style={{marginBottom:10}}>{web3.utils.fromWei(miningCapacity)} </Item>
-                  <Item style={{marginBottom:10}}>{web3.utils.fromWei(mineralCapacity)} </Item>
-                  <Item style={{marginBottom:10}}>{playerFleet[0]}</Item>
-                  <Item style={{marginBottom:10}}>{playerFleet[1]}</Item>
+                  <Item style={{ marginBottom: 10 }}>
+                    {fleetSize}/{maxFleetSize}
+                  </Item>
+                  <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(miningCapacity)} </Item>
+                  <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(mineralCapacity)} </Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[0]}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[1]}</Item>
                 </Col>
               </Row>
             </FleetMenu>
