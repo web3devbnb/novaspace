@@ -165,10 +165,6 @@ const Location: React.FC = () => {
   const placeInfo = useGetPlaceInfo(placeX, placeY)
 
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
-  console.log('placeInfo', placeInfo)
-  console.log('X,Y', placeX, placeY)
-  console.log('battles length', battlesAtLocation.length)
-
 
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 

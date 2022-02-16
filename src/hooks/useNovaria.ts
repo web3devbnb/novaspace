@@ -18,6 +18,7 @@ import {
   goBattle,
   enterBattle,
   explore,
+  recall,
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -444,6 +445,21 @@ export const useExplore = () => {
   )
   return { onExplore: handleExplore }
 }
+
+export const useRecall = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+
+  const handleRecall = useCallback(
+    async () => {
+      const txHash = await recall(useMapContract, account)
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onRecall: handleRecall }
+}
+
 
 // ***View Functions***
 

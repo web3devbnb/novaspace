@@ -10,15 +10,15 @@ interface BattleModalProps {
 const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
 
   const battleInfo = useGetBattle(battle)
-  const player = battleInfo.defendTeam[0]
   const atkPower = battleInfo.attackTeam[1]
   const defPower = battleInfo.defendTeam[1]
   const attackers = [battleInfo.attackTeam[0]]
   const defenders = [battleInfo.defendTeam[0]]
-  const startTime = battleInfo.deadline
+  const player = defenders.toString()
+  console.log('player', player)
+  const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
 
-  console.log('battle modal info', battleInfo)
-  
+
   
 
   const { onEnterBattle } = useEnterBattle()

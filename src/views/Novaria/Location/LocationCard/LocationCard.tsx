@@ -8,6 +8,7 @@ import {
   useGetTravelCooldown,
   useGetFleetTravelCost,
   useMine,
+  useRecall,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -282,10 +283,10 @@ const LocationCard = ({placename, placetype, mineral, salvage, shipyard, refiner
                         {refinery === true ? 'REFINERY' : ''}
                     </span>
                     <span>
-                        {salvage > 0 ? salvage : ''} {salvage > 0 ? 'SALVAGE' : ''}
+                        {salvage > 0 ? (salvage/10**18).toFixed(3) : ''} {salvage > 0 ? 'SALVAGE' : ''}
                     </span>
                     <span>
-                        {mineral > 0 ? mineral : ''} {mineral > 0 ? 'MINERAL' : ''}
+                        {mineral > 0 ? (mineral/10**18).toFixed(3) : ''} {mineral > 0 ? 'MINERAL' : ''}
                     </span>
                     <span>
                         {placetype === '' ? 'UNEXPLORED' : ''}

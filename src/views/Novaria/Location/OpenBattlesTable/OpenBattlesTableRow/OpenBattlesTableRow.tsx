@@ -25,8 +25,7 @@ const OpenBattlesTableRow = ({ battle, placeX, placeY }) => {
   const [handleClick] = useModal(<BattleModal battle={battle} />)
   const battleInfo = useGetBattle(battle)
   const battleStart = new Date(battleInfo.deadline * 1000).toLocaleString()
-  console.log('battle info', battleInfo)
-  console.log('battle', battle)
+  
 
   // if (battleInfo.coordX !== placeX && battleInfo.coordY !== placeY) {
   //   return (null)

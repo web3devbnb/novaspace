@@ -240,3 +240,4 @@ export const explore = async (mapContract, x, y, account) => {
 }
 
 
+
