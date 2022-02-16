@@ -209,18 +209,17 @@ export const useGetFleetSize = (fleet) => {
   return fleetSize
 }
 
-export const useGetMaxFleetSize = () => {
-  const { account } = useWallet()
+export const useGetMaxFleetSize = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [maxFleetSize, setMAxFleetSize] = useState(null)
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getMaxFleetSize(account).call()
+      const data = await fleetContract.methods.getMaxFleetSize(fleet).call()
       setMAxFleetSize(data)
     }
     fetch()
-  }, [slowRefresh, account])
+  }, [slowRefresh, fleet])
   return maxFleetSize
 }
 
@@ -252,18 +251,17 @@ export const useGetMaxMineralCapacity = (fleet: string) => {
   return maxMineralCapacity
 }
 
-export const useGetMiningCapacity = () => {
-  const { account } = useWallet()
+export const useGetMiningCapacity = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [miningCapacity, setMiningCapacity] = useState('')
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getMiningCapacity(account).call()
+      const data = await fleetContract.methods.getMiningCapacity(fleet).call()
       setMiningCapacity(data)
     }
     fetch()
-  }, [slowRefresh, account])
+  }, [slowRefresh, fleet])
   return miningCapacity
 }
 

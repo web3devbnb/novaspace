@@ -294,9 +294,9 @@ const Shipyard = () => {
   console.log('shipayrds', shipyards)
   const playerFleet = useGetFleet()
   const fleetSize = useGetFleetSize(account)
-  const maxFleetSize = useGetMaxFleetSize()
+  const maxFleetSize = useGetMaxFleetSize(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
-  const miningCapacity = useGetMiningCapacity()
+  const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
 
