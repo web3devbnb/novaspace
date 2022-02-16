@@ -124,6 +124,9 @@ const RightCol = styled.div`
   max-width: 250px;
 `
 
+const LeftCol = styled.div``
+const CenterCol = styled.div``
+
 const CoordInput = styled.input`
   width: 4em;
   background: transparent;
@@ -181,19 +184,21 @@ const Location: React.FC = () => {
         <GameMenu pageName="location" />
         <Body>
           <Content>
-            <LocationCard
-              placename={placeInfo.name}
-              placetype={placeInfo.type}
-              placeX={placeX}
-              placeY={placeY}
-              mineral={placeInfo.mineral}
-              salvage={placeInfo.scrap}
-              shipyard={placeInfo.shipyard}
-              refinery={placeInfo.refinery}
-              isMining={placeInfo.mining}
-              fleetLocation={fleetLocation}
-            />
-            <div>
+            <LeftCol>
+              <LocationCard
+                placename={placeInfo.name}
+                placetype={placeInfo.type}
+                placeX={placeX}
+                placeY={placeY}
+                mineral={placeInfo.mineral}
+                salvage={placeInfo.scrap}
+                shipyard={placeInfo.shipyard}
+                refinery={placeInfo.refinery}
+                isMining={placeInfo.mining}
+                fleetLocation={fleetLocation}
+              />
+            </LeftCol>
+            <CenterCol>
               <InputControl>
                 SEARCH LOCATION:
                 <CoordInput type="number" min="0" value={placeX} onChange={(e) => setX(parseFloat(e.target.value))} />
@@ -209,7 +214,7 @@ const Location: React.FC = () => {
                 <Header>PLAYERS</Header>
                 <PlayersTable players={fleetsAtLocation} />
               </PlayersCard>
-            </div>
+            </CenterCol>
             <RightCol>
               <YourFleetCard>
                 <Header>YOUR FLEET</Header>
