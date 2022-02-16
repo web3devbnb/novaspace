@@ -113,6 +113,20 @@ const GameMenu = ({ pageName }) => {
               ''
             )}
           </Link>
+          <Link href="/shipyard">
+            <Icon src={shipyard} alt="game shipyard" />
+            <Flag1 aria-haspopup="true">
+              SHIPYARD
+              <img src={flag} alt="flag" />{' '}
+            </Flag1>
+            {pageName === 'shipyard' ? (
+              <Flag>
+                SHIPYARD <img src={flag} alt="flag" />{' '}
+              </Flag>
+            ) : (
+              ''
+            )}
+          </Link>
           <Link href="/map">
             <Icon src={starmap} alt="game star map" />
             <Flag1 aria-haspopup="true">
@@ -123,20 +137,6 @@ const GameMenu = ({ pageName }) => {
               <Flag>
                 STAR MAP
                 <img src={flag} alt="flag" />{' '}
-              </Flag>
-            ) : (
-              ''
-            )}
-          </Link>
-          <Link href="/shipyard">
-            <Icon src={shipyard} alt="game shipyard" />
-            <Flag1 aria-haspopup="true">
-              SHIPYARD
-              <img src={flag} alt="flag" />{' '}
-            </Flag1>
-            {pageName === 'shipyard' ? (
-              <Flag>
-                SHIPYARD <img src={flag} alt="flag" />{' '}
               </Flag>
             ) : (
               ''
