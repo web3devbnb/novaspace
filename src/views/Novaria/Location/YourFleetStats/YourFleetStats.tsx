@@ -3,10 +3,10 @@ import React from 'react'
 const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral }) => {
   return (
     <div>
-      <div>FLEET SIZE: {fleetSize}</div>
-      <div>FLEET POWER: {fleetPower}</div>
-      <div>FLEET MINERAL: {fleetMineral}</div>
-      <div>FLEET MAX MINERAL: {fleetMaxMineral}</div>
+      <div>SIZE: {fleetSize}</div>
+      <div>POWER: {fleetPower}</div>
+      <div>MINERAL: {fleetMineral}</div>
+      <div>MAX MINERAL: {fleetMaxMineral}</div>
     </div>
   )
 }
