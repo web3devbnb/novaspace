@@ -7,7 +7,7 @@ const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral }
     <div>
       <div>SIZE: {fleetSize}</div>
       <div>POWER: {fleetPower}</div>
-      <div>MINERAL: {fleetMineral}/{web3.utils.fromWei(fleetMaxMineral)}</div>
+      <div>MINERAL: {web3.utils.fromWei(fleetMineral)}/{web3.utils.fromWei(fleetMaxMineral)}</div>
     </div>
   )
 }
