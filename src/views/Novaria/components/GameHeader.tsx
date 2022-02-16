@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, useWalletModal } from '@pancakeswap-libs/uikit'
+import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { getWeb3 } from 'utils/web3'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetFleetLocation } from 'hooks/useNovaria'
 import { usePriceNovaBusd } from 'state/hooks'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
@@ -21,11 +20,6 @@ const Hero = styled.div`
   margin-top: 0px;
   padding-top: 10px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-`
-
-const StyledHeading = styled(Heading)`
-  text-align: center;
-  align-items: center;
 `
 
 const InfoBlock = styled.div`
@@ -64,28 +58,24 @@ const GameHeader = ({ location, playerMineral }) => {
 
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
-  const accountAddress = connected ? account.toString().slice(0,5)+'...'+account.toString().slice(37, 40) : ''
+  const accountAddress = connected ? account.toString().slice(0, 5) + '...' + account.toString().slice(37, 40) : ''
 
   return (
     <Hero>
-      <a href='/legend-of-novaria'>
+      <a href="/legend-of-novaria">
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
-      <ConnectButton onClick={onPresentConnectModal} >
-        {connected ? accountAddress : 'Connect Wallet' }
-      </ConnectButton>
-         <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
-              <img src='https://shibanova.io/logo.png' alt='nova logo' style={{height: 30, margin:5}} />
-              <Text glowing> 
-                   {novaPrice} 
-              </Text>
-          </div>
+        <ConnectButton onClick={onPresentConnectModal}>{connected ? accountAddress : 'Connect Wallet'}</ConnectButton>
+        <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} />
+          <Text glowing>{novaPrice}</Text>
+        </div>
         <Text glowing>
           NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
-           MINERAL: <span style={{ color: 'gold' }}>{web3.utils.fromWei(playerMineral)}</span>
+          MINERAL: <span style={{ color: 'gold' }}>{web3.utils.fromWei(playerMineral)}</span>
         </Text>
         <Text glowing>
           Current Location: ({location.X}, {location.Y})

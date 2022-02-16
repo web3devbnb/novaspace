@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ConnectedAccountContext } from 'App'
-import { useGetFleetLocation, useGetFleetMineral, useGetFleetsAtLocation } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
@@ -109,7 +108,7 @@ const GridCellContent = styled.div`
   flex-direction: column;
   justify-content: center;
   flex-wrap: no-wrap;
-  padding: 5px 5px ;
+  padding: 5px 5px;
   // border: 1px solid white;
   position: relative;
   aspect-ratio: 17/8;
@@ -121,16 +120,13 @@ const Row = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-
 `
 
 const MainRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
-
 `
-
 
 const GridCellId = styled.div`
   position: absolute;
@@ -140,8 +136,7 @@ const GridCellId = styled.div`
   opacity: 0;
   ${GridCell} :hover & {
     opacity: 1;
-  
-}
+  }
 `
 
 const Unexplored = styled.div`
@@ -171,7 +166,6 @@ const Button = styled.button`
   border: 1px solid #5affff;
   border-radius: 0px;
   background-color: transparent;
-  
 `
 
 const CoordInput = styled.input`
@@ -197,7 +191,7 @@ const Legend = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   border: 1px solid gray;
-  margin: 5px 10px;;
+  margin: 5px 10px;
   padding: 5px;
   align-items: center;
   & > * {
@@ -205,8 +199,8 @@ const Legend = styled.div`
   }
 `
 
-const NX = (window.innerWidth < 1150 ? 5 : 7)
-const NY = (window.innerWidth < 1150 ? 5 : 7)
+const NX = window.innerWidth < 1150 ? 5 : 7
+const NY = window.innerWidth < 1150 ? 5 : 7
 
 const Map: React.FC = () => {
   const mapContract = useMap()
@@ -248,7 +242,6 @@ const Map: React.FC = () => {
     const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
-  
 
   if (!mapData) {
     return null
@@ -256,7 +249,6 @@ const Map: React.FC = () => {
 
   return (
     <Page>
-      
       <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
       <MainRow>
         <GameMenu pageName="starmap" />
@@ -267,49 +259,42 @@ const Map: React.FC = () => {
               return mapData.data[ri].map((el, j) => {
                 return (
                   <GridCell>
-                  <Link
-                    to={{
-                      pathname: '/location',
-                      state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
-                    }}
-                  >
-                  <GridCellContent aria-haspopup="true">
-                    {/* {el.name && ( */}
-                          <Text bold glowing>
-                            {el.name}
-                          </Text>
-                          <Unexplored>
-                            {el.placeType === '' ? 'Location Unexplored' : ''}
-                          </Unexplored>
+                    <Link
+                      to={{
+                        pathname: '/location',
+                        state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
+                      }}
+                    >
+                      <GridCellContent aria-haspopup="true">
+                        {/* {el.name && ( */}
+                        <Text bold glowing>
+                          {el.name}
+                        </Text>
+                        <Unexplored>{el.placeType === '' ? 'Location Unexplored' : ''}</Unexplored>
                         <Row>
                           {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
-                          {el.hasRefinery === true ? (
-                            <GridIcon src={refineryLogo} alt="planet has refinery" />
-                          ) : (
-                            ''
-                          )}
-                          {el.hasShipyard === true ? (
-                            <GridIcon src={shipyardLogo} alt="planet has shipyard" />
-                          ) : (
-                            ''
-                          )}
-                          {el.availableMineral > 0 ? (
-                            <GridIcon src={mineralLogo} alt="planet has minerals" />
+                          {el.hasRefinery === true ? <GridIcon src={refineryLogo} alt="planet has refinery" /> : ''}
+                          {el.hasShipyard === true ? <GridIcon src={shipyardLogo} alt="planet has shipyard" /> : ''}
+                          {el.availableMineral > 0 ? <GridIcon src={mineralLogo} alt="planet has minerals" /> : ''}
+
+                          {el.fleetCount > 0 && el.fleetCount < 11 ? (
+                            <GridIcon src={lowPlayers} alt="planet has few players" />
                           ) : (
                             ''
                           )}
 
-                          {el.fleetCount > 0 
-                            && el.fleetCount < 11 
-                            ? <GridIcon src={lowPlayers} alt="planet has few players" /> : '' }
+                          {el.fleetCount > 10 && el.fleetCount < 51 ? (
+                            <GridIcon src={medPlayers} alt="planet has many players" />
+                          ) : (
+                            ''
+                          )}
 
-                            {el.fleetCount > 10 
-                              && el.fleetCount < 51 
-                              ? <GridIcon src={medPlayers} alt="planet has many players" /> : '' }
-                              
-                              {el.fleetCount > 50  
-                                ? <GridIcon src={highPlayers} alt="planet has more than 50 players" /> : '' }
-                  
+                          {el.fleetCount > 50 ? (
+                            <GridIcon src={highPlayers} alt="planet has more than 50 players" />
+                          ) : (
+                            ''
+                          )}
+
                           {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
                           {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
                           {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
@@ -320,12 +305,11 @@ const Map: React.FC = () => {
                             ''
                           )}
                         </Row>
-                          <GridCellId>
-                            ({ri + mapData.x0} , {j + mapData.y0})
-                          </GridCellId>
-                    
+                        <GridCellId>
+                          ({ri + mapData.x0} , {j + mapData.y0})
+                        </GridCellId>
                       </GridCellContent>
-                      </Link>
+                    </Link>
                   </GridCell>
                 )
               })
@@ -340,7 +324,8 @@ const Map: React.FC = () => {
               (
               <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
               ,
-              <CoordInput type="number" min="0" max="10"  value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
+              <CoordInput type="number" min="0" max="10" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+              )
             </InputControl>
 
             {/* <InputControl>
@@ -365,14 +350,30 @@ const Map: React.FC = () => {
             </InputControl> */}
           </GridControls>
           <Legend>
-            <span><GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet</span>
-            <span><GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard</span>
-            <span><GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)</span>
-            <span><GridIcon src={scrapLogo} alt="has salvage" /> : Salvage</span>
-            <span><GridIcon src={youLogo} alt="your location" /> : Current Location</span>
-            <span><GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players</span>
-            <span><GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players</span>
-            <span><GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players</span>
+            <span>
+              <GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet
+            </span>
+            <span>
+              <GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard
+            </span>
+            <span>
+              <GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)
+            </span>
+            <span>
+              <GridIcon src={scrapLogo} alt="has salvage" /> : Salvage
+            </span>
+            <span>
+              <GridIcon src={youLogo} alt="your location" /> : Current Location
+            </span>
+            <span>
+              <GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players
+            </span>
+            <span>
+              <GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players
+            </span>
+            <span>
+              <GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players
+            </span>
           </Legend>
         </Body>
       </MainRow>

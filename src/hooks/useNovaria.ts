@@ -4,7 +4,7 @@ import novaABI from 'config/abi/nova.json'
 import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
 import treasuryABI from 'config/abi/Treasury.json'
-import { getContract, getWeb3 } from 'utils/web3'
+import { getContract } from 'utils/web3'
 import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import {
   buildShips,
@@ -269,7 +269,7 @@ export const useGetBattlesAtLocation = (x: number, y: number) => {
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { slowRefresh } = useRefresh()
-  const [battle, setBattle] = useState({attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0})
+  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0 })
 
   useEffect(() => {
     async function fetch() {
@@ -279,7 +279,7 @@ export const useGetBattle = (Id: number) => {
         defendTeam: data[4],
         deadline: data[0],
         coordX: data[1],
-        coordY: data[2]
+        coordY: data[2],
       })
     }
     fetch()
@@ -287,17 +287,17 @@ export const useGetBattle = (Id: number) => {
   return battle
 }
 
-// returns battle info of player 
+// returns battle info of player
 export const useGetPlayerBattle = (player) => {
   const { slowRefresh } = useRefresh()
-  const [PlayerBattle, setPlayerBattle] = useState({battleStatus: 0, battleId:null})
+  const [PlayerBattle, setPlayerBattle] = useState({ battleStatus: 0, battleId: null })
 
   useEffect(() => {
     async function fetch() {
       const data = await fleetContract.methods.getPlayerBattleInfo(player).call()
       setPlayerBattle({
         battleStatus: data[0],
-        battleId:data[1]
+        battleId: data[1],
       })
     }
     fetch()
@@ -331,7 +331,7 @@ export const useGetAttackPower = (fleet) => {
     fetch()
   }, [slowRefresh, fleet])
   return attackPower
-} 
+}
 
 export const useGetNameByAddress = (player) => {
   const { slowRefresh } = useRefresh()
@@ -374,9 +374,6 @@ export const useGetDockCost = (shipClassId: number, amount: number) => {
   }, [fastRefresh, shipClassId, amount])
   return DockCost
 }
-
-
-
 
 // ~~~Map contract functions~~~
 // Movement, mining, refining, tracks mineral
@@ -450,16 +447,12 @@ export const useRecall = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleRecall = useCallback(
-    async () => {
-      const txHash = await recall(useMapContract, account)
-      console.info(txHash)
-    },
-    [account, useMapContract],
-  )
+  const handleRecall = useCallback(async () => {
+    const txHash = await recall(useMapContract, account)
+    console.info(txHash)
+  }, [account, useMapContract])
   return { onRecall: handleRecall }
 }
-
 
 // ***View Functions***
 
@@ -639,9 +632,7 @@ export const useGetAllowance = (contract) => {
   return allowance
 }
 
-
 // *** Treasury Contract ***
-
 
 export const useGetCostMod = () => {
   const { slowRefresh } = useRefresh()

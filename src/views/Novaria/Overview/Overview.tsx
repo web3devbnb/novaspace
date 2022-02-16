@@ -1,15 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import {
-  useGetAttackPower,
-  useGetBattlesAtLocation,
-  useGetFleetLocation,
-  useGetFleetMineral,
-  useGetFleetsAtLocation,
-  useGetFleetSize,
-  useGetMaxMineralCapacity,
-  useGetPlaceInfo,
-} from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -43,12 +34,12 @@ const Body = styled.div`
 `
 
 const Header = styled.div`
-  font-size:20px;
-  padding-bottom:10px;
+  font-size: 20px;
+  padding-bottom: 10px;
 `
 
 const Text = styled.div`
-  font-size:14px;
+  font-size: 14px;
 `
 
 const Overview: React.FC = () => {
@@ -60,27 +51,26 @@ const Overview: React.FC = () => {
     <Page>
       <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
       <Row>
-          <GameMenu pageName="overview" />
+        <GameMenu pageName="overview" />
         <Body>
           <Header>Welcome to the Legend of Novaria</Header>
           <Text>
-            This is the testing phase of the game, 
-            so it&apos;s important to know that the game can be reset at any moment, 
-            and all progress and in game purchases will be lost. The point of testing is not 
-            to make money, but to find bugs and help us get them fixed!
-            <br /><br />
-            Normally, the overview page would have some game stats (implemented soon) 
-            and news. If you are unsure of how to start your adventure, we suggest 
-            heading over to the shipyard and building some ships! You will need a fleet 
-            size of at least 25 to be able to travel anywhere. 
-            <br /><br />
-            The basic premise of the game is to build ships, travel to mining planets,
-            and harvest mineral to refine into NOVA! However, the trip can be dangerous!
-            The only safe location is a planet with a refinery. Everywhere else, Players 
-            can attack each other and destroy each other&apos;s ships to create salvage. 
-            Salvage can be collected by your mining ships and stored as mineral to also 
-            be refined into NOVA. 
-            <br /><br />
+            This is the testing phase of the game, so it&apos;s important to know that the game can be reset at any
+            moment, and all progress and in game purchases will be lost. The point of testing is not to make money, but
+            to find bugs and help us get them fixed!
+            <br />
+            <br />
+            Normally, the overview page would have some game stats (implemented soon) and news. If you are unsure of how
+            to start your adventure, we suggest heading over to the shipyard and building some ships! You will need a
+            fleet size of at least 25 to be able to travel anywhere.
+            <br />
+            <br />
+            The basic premise of the game is to build ships, travel to mining planets, and harvest mineral to refine
+            into NOVA! However, the trip can be dangerous! The only safe location is a planet with a refinery.
+            Everywhere else, Players can attack each other and destroy each other&apos;s ships to create salvage.
+            Salvage can be collected by your mining ships and stored as mineral to also be refined into NOVA.
+            <br />
+            <br />
             Good Luck!
           </Text>
         </Body>
