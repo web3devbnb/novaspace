@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import styled from 'styled-components'
 import {
   useGetAttackPower,
@@ -11,11 +10,11 @@ import {
   useGetFleetSize,
   useGetMaxMineralCapacity,
   useGetPlaceInfo,
-  useGetBattle,
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
+import { Text } from '@pancakeswap-libs/uikit'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
@@ -68,7 +67,7 @@ const Body = styled.div`
   }
 `
 
-const Header = styled.text`
+const Header = styled(Text)`
   color: white;
   font-weight: bold;
   font-size: 14px;
@@ -99,12 +98,10 @@ const OpenBattlesCard = styled.div`
   min-height: 200px;
   min-width: 350px
   max-width: 450px;
+  
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
-
-
-
 `
 
 const PlayersCard = styled.div`
@@ -150,7 +147,6 @@ const BattleProgressCard = styled.div`
   margin-top: 10px;
 `
 
-
 const Location: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
 
@@ -173,7 +169,7 @@ const Location: React.FC = () => {
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
 
-  const playerBattleStatus = useGetPlayerBattleStatus(account) 
+  const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
 
   // An empty place is a place with no name.
@@ -210,7 +206,7 @@ const Location: React.FC = () => {
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation}  placeX={placeX} placeY={placeY} />
+                <OpenBattlesTable battles={battlesAtLocation} placeX={placeX} placeY={placeY} />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>
@@ -222,7 +218,7 @@ const Location: React.FC = () => {
                 <Header>YOUR FLEET</Header>
                 <YourFleetStats
                   fleetSize={fleetSize}
-                  fleetPower={fleetPower} 
+                  fleetPower={fleetPower}
                   fleetMineral={fleetMineral}
                   fleetMaxMineral={fleetMaxMineral}
                 />
