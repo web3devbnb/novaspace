@@ -316,7 +316,7 @@ const Shipyard = () => {
     setShipyardFee(obj.feePercent)
   }
 
-  const HandleShipChange = (obj) => {
+  const handleShipChange = (obj) => {
     setShipId(shipClasses.indexOf(obj))
     setBuildTime(obj.size * 300)
     setShipCost(obj.cost)
@@ -456,7 +456,7 @@ const Shipyard = () => {
                     placeholder="Select Ship"
                     value={shipId}
                     options={shipClasses}
-                    onChange={HandleShipChange}
+                    onChange={handleShipChange}
                     getOptionLabel={(x) => x.name}
                     styles={customStyles}
                   />
