@@ -254,19 +254,18 @@ const Map: React.FC = () => {
         <GameMenu pageName="starmap" />
         <Body>
           <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-            {mapData.data.map((arr, i) => {
-              const ri = mapData.data.length - i - 1
-              return mapData.data[ri].map((el, j) => {
+            {mapData.data.map((arr, y) => {
+              const ry = mapData.data.length - y - 1
+              return mapData.data[ry].map((el, x) => {
                 return (
                   <GridCell>
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: ri + mapData.x0, y: j + mapData.y0 }],
+                        state: [{ x: x + mapData.x0, y: ry + mapData.y0 }],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
-                        {/* {el.name && ( */}
                         <Text bold glowing>
                           {el.name}
                         </Text>
@@ -298,15 +297,15 @@ const Map: React.FC = () => {
                           {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
                           {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
                           {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
-                          {(ri + mapData.x0).toString() === fleetLocation.X.toString() &&
-                          (j + mapData.y0).toString() === fleetLocation.Y.toString() ? (
+                          {(x + mapData.x0).toString() === fleetLocation.X.toString() &&
+                          (ry + mapData.y0).toString() === fleetLocation.Y.toString() ? (
                             <IndicatorImg src={youLogo} alt="current location" />
                           ) : (
                             ''
                           )}
                         </Row>
                         <GridCellId>
-                          ({ri + mapData.x0} , {j + mapData.y0})
+                          ({x + mapData.x0} , {ry + mapData.y0})
                         </GridCellId>
                       </GridCellContent>
                     </Link>
