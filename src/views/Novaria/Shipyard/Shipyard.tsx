@@ -578,7 +578,7 @@ const Shipyard = () => {
                 <Col>
                   <Item style={{marginBottom:10}}>Fleet Size</Item>
                   <Item style={{marginBottom:10}}>Mining Capacity</Item>
-                  <Item style={{marginBottom:10}}>Max Mineral Capacity</Item>
+                  <Item style={{marginBottom:10}}>Mineral Capacity</Item>
                   {shipClasses.map((ship) => {
                     return <Item  style={{marginBottom:10}} key={ship.name}>{ship.name}s</Item>
                   })}
@@ -587,7 +587,7 @@ const Shipyard = () => {
                   {/* Find a way to map this out based on shipclass? */}
                   <Item style={{marginBottom:10}}>{fleetSize}/{maxFleetSize}</Item>
                   <Item style={{marginBottom:10}}>{web3.utils.fromWei(miningCapacity)} </Item>
-                  <Item style={{marginBottom:10}}>{web3.utils.fromWei(mineralCapacity)} </Item>
+                  <Item style={{marginBottom:10}}>{mineralCapacity} </Item>
                   <Item style={{marginBottom:10}}>{playerFleet[0]}</Item>
                   <Item style={{marginBottom:10}}>{playerFleet[1]}</Item>
                 </Col>

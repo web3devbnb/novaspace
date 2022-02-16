@@ -227,7 +227,7 @@ export const useGetMaxFleetSize = () => {
 export const useGetMaxMineralCapacity = () => {
   const { account } = useWallet()
   const { slowRefresh } = useRefresh()
-  const [maxMineralCapacity, setMaxMineralCapacity] = useState('')
+  const [maxMineralCapacity, setMaxMineralCapacity] = useState(0)
 
   useEffect(() => {
     async function fetch() {
@@ -236,7 +236,7 @@ export const useGetMaxMineralCapacity = () => {
     }
     fetch()
   }, [slowRefresh, account])
-  return maxMineralCapacity
+  return (maxMineralCapacity / 10**18).toFixed(2)
 }
 
 export const useGetMiningCapacity = () => {

@@ -5,8 +5,7 @@ const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral }
     <div>
       <div>SIZE: {fleetSize}</div>
       <div>POWER: {fleetPower}</div>
-      <div>MINERAL: {fleetMineral}</div>
-      <div>MAX MINERAL: {fleetMaxMineral}</div>
+      <div>MINERAL: {fleetMineral}/{fleetMaxMineral}</div>
     </div>
   )
 }
