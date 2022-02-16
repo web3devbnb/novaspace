@@ -75,11 +75,20 @@ const ToggleButton = styled.button`
   border: none;
 `
 
+// Local storage key we're using to store game menu open / closed status.
+const GAMEMENU_IS_OPEN_KEY = 'novaria_gamemenu_is_open'
+
 const GameMenu = ({ pageName }) => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState((): boolean => {
+    const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
+    return value ? JSON.parse(value) : true
+  })
 
   const toggleViewMenu = () => {
-    setOpen((prevState) => !prevState)
+    setOpen((prevState) => {
+      localStorage.setItem(GAMEMENU_IS_OPEN_KEY, JSON.stringify(!prevState))
+      return !prevState
+    })
   }
 
   return (
