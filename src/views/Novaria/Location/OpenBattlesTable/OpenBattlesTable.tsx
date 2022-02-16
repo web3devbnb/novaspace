@@ -19,7 +19,7 @@ const TableContent = styled.div`
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
-  &::-webkit-scrollbar { 
+  &::-webkit-scrollbar {
     width: 5px;
     background-color: #289794;
   }
@@ -30,9 +30,6 @@ const TableContent = styled.div`
 `
 
 const OpenBattlesTable = ({ battles, placeX, placeY }) => {
-
-
-
   return (
     <Body>
       <div>
@@ -45,11 +42,11 @@ const OpenBattlesTable = ({ battles, placeX, placeY }) => {
       </div>
       <TableContent>
         {battles.map((battle) => (
-          <OpenBattlesTableRow battle={battle} placeX={placeX} placeY={placeY} />
+          <OpenBattlesTableRow key={battle} battle={battle} placeX={placeX} placeY={placeY} />
         ))}
       </TableContent>
     </Body>
   )
 }
 
-export default OpenBattlesTable 
+export default OpenBattlesTable
