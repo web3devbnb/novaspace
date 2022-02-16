@@ -12,6 +12,8 @@ import {
   useGetMaxMineralCapacity,
   useGetPlaceInfo,
   useGetBattle,
+  useGetPlayerBattle,
+  useGetPlayerBattleStatus,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -20,6 +22,7 @@ import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
 import YourFleetStats from './YourFleetStats'
+import BattleStatus from './BattleStatus'
 
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
@@ -143,7 +146,9 @@ const InputControl = styled.div`
 `
 
 const YourFleetCard = styled.div``
-const BattleProgressCard = styled.div``
+const BattleProgressCard = styled.div`
+  margin-top: 10px;
+`
 
 
 const Location: React.FC = () => {
@@ -171,6 +176,9 @@ const Location: React.FC = () => {
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
+
+  const playerBattleStatus = useGetPlayerBattleStatus(account)
+  const playerBattleInfo = useGetPlayerBattle(account)
 
   // An empty place is a place with no name.
   // if (!placeInfo.name) {
@@ -218,13 +226,14 @@ const Location: React.FC = () => {
                 <Header>YOUR FLEET</Header>
                 <YourFleetStats
                   fleetSize={fleetSize}
-                  fleetPower={fleetPower}
+                  fleetPower={fleetPower} 
                   fleetMineral={fleetMineral}
                   fleetMaxMineral={fleetMaxMineral}
                 />
               </YourFleetCard>
               <BattleProgressCard>
                 <Header>BATTLE PROGRESS</Header>
+                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
               </BattleProgressCard>
             </RightCol>
           </Content>
