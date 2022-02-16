@@ -224,20 +224,32 @@ export const useGetMaxFleetSize = () => {
   return maxFleetSize
 }
 
-export const useGetMaxMineralCapacity = () => {
-  const web3 = getWeb3()
-  const { account } = useWallet()
+export const useGetFleetMineral = (fleet: string) => {
+  const { slowRefresh } = useRefresh()
+  const [fleetMineral, setFleetMineral] = useState('')
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.getMineral(fleet).call()
+      setFleetMineral(data)
+    }
+    fetch()
+  }, [slowRefresh, fleet])
+  return fleetMineral
+}
+
+export const useGetMaxMineralCapacity = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [maxMineralCapacity, setMaxMineralCapacity] = useState('')
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getMineralCapacity(account).call()
+      const data = await fleetContract.methods.getMineralCapacity(fleet).call()
       setMaxMineralCapacity(data)
     }
     fetch()
-  }, [slowRefresh, account])
-  return web3.utils.fromWei(maxMineralCapacity)
+  }, [slowRefresh, fleet])
+  return maxMineralCapacity
 }
 
 export const useGetMiningCapacity = () => {
@@ -507,20 +519,6 @@ export const useGetFleetsAtLocation = (x: number, y: number) => {
     fetch()
   }, [slowRefresh, x, y])
   return fleetsAtLocation
-}
-
-export const useGetFleetMineral = (fleet: string) => {
-  const { slowRefresh } = useRefresh()
-  const [fleetMineral, setFleetMineral] = useState(0)
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await fleetContract.methods.getMineral(fleet).call()
-      setFleetMineral(data)
-    }
-    fetch()
-  }, [slowRefresh, fleet])
-  return fleetMineral
 }
 
 export const useGetDistanceFromFleet = (fleet: string, x: number, y: number) => {

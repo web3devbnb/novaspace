@@ -22,7 +22,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, onDismiss }) => {
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
-  const fleetMaxMineral = useGetMaxMineralCapacity()
+  const fleetMaxMineral = useGetMaxMineralCapacity(player)
 
   const { onEnterBattle } = useEnterBattle()
 

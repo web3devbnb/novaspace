@@ -170,7 +170,7 @@ const Location: React.FC = () => {
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
-  const fleetMaxMineral = useGetMaxMineralCapacity()
+  const fleetMaxMineral = useGetMaxMineralCapacity(account)
 
   // An empty place is a place with no name.
   // if (!placeInfo.name) {

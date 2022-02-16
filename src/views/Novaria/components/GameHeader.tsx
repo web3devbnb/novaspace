@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Heading, Text, useWalletModal } from '@pancakeswap-libs/uikit'
+import { getWeb3 } from 'utils/web3'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetFleetLocation } from 'hooks/useNovaria'
 import { usePriceNovaBusd } from 'state/hooks'
@@ -59,7 +60,7 @@ const GameHeader = ({ location, playerMineral }) => {
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
-
+  const web3 = getWeb3()
 
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
@@ -84,7 +85,7 @@ const GameHeader = ({ location, playerMineral }) => {
           NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
-           MINERAL: <span style={{ color: 'gold' }}>{playerMineral}</span>
+           MINERAL: <span style={{ color: 'gold' }}>{web3.utils.fromWei(playerMineral)}</span>
         </Text>
         <Text glowing>
           Current Location: ({location.X}, {location.Y})
