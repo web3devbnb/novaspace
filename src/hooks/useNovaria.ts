@@ -4,7 +4,7 @@ import novaABI from 'config/abi/nova.json'
 import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
 import treasuryABI from 'config/abi/Treasury.json'
-import { getContract } from 'utils/web3'
+import { getContract, getWeb3 } from 'utils/web3'
 import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import {
   buildShips,
@@ -225,9 +225,10 @@ export const useGetMaxFleetSize = () => {
 }
 
 export const useGetMaxMineralCapacity = () => {
+  const web3 = getWeb3()
   const { account } = useWallet()
   const { slowRefresh } = useRefresh()
-  const [maxMineralCapacity, setMaxMineralCapacity] = useState(0)
+  const [maxMineralCapacity, setMaxMineralCapacity] = useState('')
 
   useEffect(() => {
     async function fetch() {
@@ -236,7 +237,7 @@ export const useGetMaxMineralCapacity = () => {
     }
     fetch()
   }, [slowRefresh, account])
-  return (maxMineralCapacity / 10**18).toFixed(2)
+  return web3.utils.fromWei(maxMineralCapacity)
 }
 
 export const useGetMiningCapacity = () => {
