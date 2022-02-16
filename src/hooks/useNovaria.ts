@@ -286,7 +286,7 @@ export const useGetBattle = (Id: number) => {
   return battle
 }
 
-// returns battle info of player
+// returns battle info of player 
 export const useGetPlayerBattle = (player) => {
   const { slowRefresh } = useRefresh()
   const [PlayerBattle, setPlayerBattle] = useState([])
@@ -299,6 +299,20 @@ export const useGetPlayerBattle = (player) => {
     fetch()
   }, [slowRefresh, player])
   return PlayerBattle
+}
+
+export const useGetPlayerBattleStatus = (player) => {
+  const { slowRefresh } = useRefresh()
+  const [PlayerBattleStatus, setPlayerBattleStatus] = useState(false)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.isInBattle(player).call()
+      setPlayerBattleStatus(data)
+    }
+    fetch()
+  }, [slowRefresh, player])
+  return PlayerBattleStatus
 }
 
 export const useGetAttackPower = (fleet) => {
