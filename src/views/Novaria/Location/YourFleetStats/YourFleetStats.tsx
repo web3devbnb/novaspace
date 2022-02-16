@@ -5,7 +5,7 @@ import { useRecall } from 'hooks/useNovaria'
 
 
 
-const Button = styled.button`
+const Button = styled.button` 
     cursor:pointer;
     border: 1px solid #5affff;
     background: transparent;
@@ -19,7 +19,7 @@ const Button = styled.button`
     }
 `
 
-const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral }) => {
+const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral, currentTravelCooldown, currentMiningCooldown }) => {
   const web3 = getWeb3()
   const [pendingTx, setPendingTx] = useState(false)
 
@@ -42,6 +42,9 @@ const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral }
       <div>SIZE: {fleetSize}</div>
       <div>POWER: {fleetPower}</div>
       <div>MINERAL: {web3.utils.fromWei(fleetMineral)}/{web3.utils.fromWei(fleetMaxMineral)}</div>
+      <div style={{marginTop:5}}>COOLDOWNS</div>
+      <div>MINING: {currentMiningCooldown}</div>
+      <div>TRAVEL: {currentTravelCooldown}</div>
       {fleetSize < 25 ? <Button onClick={sendRecallTx}>Recall to Shipyard</Button> : ''}
     </div>
   )

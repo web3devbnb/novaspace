@@ -98,13 +98,13 @@ export const useGoBattle = () => {
   const useFleetContract = useFleet()
 
   const handleGoBattle = useCallback(
-    async (battleId: string) => {
+    async (battleId: number) => {
       const txHash = await goBattle(useFleetContract, battleId, account)
       console.info(txHash)
     },
     [account, useFleetContract],
   )
-  return { onClaim: handleGoBattle }
+  return { onBattle: handleGoBattle }
 }
 
 // ***View functions***
@@ -210,7 +210,7 @@ export const useGetMaxFleetSize = (fleet: string) => {
 }
 
 export const useGetFleetMineral = (fleet: string) => {
-  const { slowRefresh } = useRefresh()
+  const { fastRefresh } = useRefresh()
   const [fleetMineral, setFleetMineral] = useState('')
 
   useEffect(() => {
@@ -219,7 +219,7 @@ export const useGetFleetMineral = (fleet: string) => {
       setFleetMineral(data)
     }
     fetch()
-  }, [slowRefresh, fleet])
+  }, [fastRefresh, fleet])
   return fleetMineral
 }
 
@@ -339,8 +339,9 @@ export const useGetNameByAddress = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods._addressToPlayer(player).call()
-      setName(data)
+      const id = await fleetContract.methods._addressToPlayer(player).call()
+      const data = await fleetContract.methods.players(id).call()
+      setName(data[0])
     }
     fetch()
   }, [slowRefresh, player])
@@ -572,7 +573,7 @@ export const useGetTravelCooldown = (fleet: string, x: number, y: number) => {
   return TravelCooldown
 }
 
-export const useGetCurrentCooldown = (fleet: string) => {
+export const useGetCurrentTravelCooldown = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [CurrentCooldown, setCurrentCooldown] = useState(0)
 

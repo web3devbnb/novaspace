@@ -12,6 +12,7 @@ import {
   useGetPlaceInfo,
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
+  useGetCurrentTravelCooldown,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -168,8 +169,9 @@ const Location: React.FC = () => {
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
-
-  const playerBattleStatus = useGetPlayerBattleStatus(account)
+  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account)*1000).toLocaleString()
+  const currentMiningCooldown = 'coming soon'
+  const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
 
   // An empty place is a place with no name.
@@ -221,6 +223,8 @@ const Location: React.FC = () => {
                   fleetPower={fleetPower}
                   fleetMineral={fleetMineral}
                   fleetMaxMineral={fleetMaxMineral}
+                  currentTravelCooldown={currentTravelCooldown}
+                  currentMiningCooldown={currentMiningCooldown}
                 />
               </YourFleetCard>
               <BattleProgressCard>

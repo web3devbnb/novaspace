@@ -27,7 +27,7 @@ const PlayersTableRow = ({ player }) => {
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const name = useGetNameByAddress(player)
-  const mineral = useGetFleetMineral(player)
+  const mineral = Number(useGetFleetMineral(player))
   const [handleClick] = useModal(<PlayerModal player={player} />)
 
   return (
@@ -35,7 +35,7 @@ const PlayersTableRow = ({ player }) => {
       <Cell>{name}</Cell>
       <Cell>{fleetSize}</Cell>
       <Cell>{fleetPower}</Cell>
-      <Cell>{web3.utils.fromWei(mineral)}</Cell>
+      <Cell>{(mineral/10**18).toFixed(2)}</Cell>
     </Row>
   )
 }
