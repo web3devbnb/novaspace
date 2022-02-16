@@ -8,7 +8,7 @@ import {
   useGetShipyards,
   useGetSpaceDock,
   useBuildShips,
-  useGetFleet,
+  useGetShips,
   useClaimShips,
   useGetFleetSize,
   useGetMaxFleetSize,
@@ -292,7 +292,7 @@ const Shipyard = () => {
   console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
   console.log('shipayrds', shipyards)
-  const playerFleet = useGetFleet()
+  const playerFleet = useGetShips(account)
   const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)

@@ -166,22 +166,7 @@ export const useGetSpaceDock = () => {
   return spaceDock
 }
 
-export const useGetFleet = () => {
-  const { account } = useWallet()
-  const { slowRefresh } = useRefresh()
-  const [fleet, setFleet] = useState([])
-
-  useEffect(() => {
-    async function fetchFleet() {
-      const data = await fleetContract.methods.getShips(account).call()
-      setFleet(data)
-    }
-    fetchFleet()
-  }, [slowRefresh, account])
-  return fleet
-}
-
-export const useGetShips = (fleet) => {
+export const useGetShips = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [ships, setShips] = useState([])
 
@@ -195,7 +180,7 @@ export const useGetShips = (fleet) => {
   return ships
 }
 
-export const useGetFleetSize = (fleet) => {
+export const useGetFleetSize = (fleet: string) => {
   const { slowRefresh } = useRefresh()
   const [fleetSize, setFleetSize] = useState(0)
 
