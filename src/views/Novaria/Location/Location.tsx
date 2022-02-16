@@ -172,11 +172,6 @@ const Location: React.FC = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
 
-  // An empty place is a place with no name.
-  // if (!placeInfo.name) {
-  //   return null
-  // }
-
   return (
     <Page className="fontsforweb_bignoodletitling">
       <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
