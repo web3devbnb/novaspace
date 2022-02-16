@@ -307,20 +307,26 @@ const Shipyard = () => {
   const [claimAmount, setClaimAmount] = useState(null)
   // const [claimId, setClaimId] = useState(null)
 
-  const handleShipyardChange = (obj) => {
-    setShipyard(shipyards.indexOf(obj))
-    setShipyardName(obj.name)
-    setShipyardX(obj.coordX)
-    setShipyardY(obj.coordY)
-    setShipyardOwner(obj.owner)
-    setShipyardFee(obj.feePercent)
+  const handleShipyardChange = (option) => {
+    const selectedShipyardId = option.value
+    const selectedShipyard = shipyards[selectedShipyardId]
+
+    setShipyard(selectedShipyardId)
+    setShipyardName(selectedShipyard.name)
+    setShipyardX(selectedShipyard.coordX)
+    setShipyardY(selectedShipyard.coordY)
+    setShipyardOwner(selectedShipyard.owner)
+    setShipyardFee(selectedShipyard.feePercent)
   }
 
-  const handleShipChange = (obj) => {
-    setShipId(shipClasses.indexOf(obj))
-    setBuildTime(obj.size * 300)
-    setShipCost(obj.cost)
-    setShipName(obj.name)
+  const handleShipChange = (option) => {
+    const selectedShipId = option.value
+    const selectedShip = shipClasses[selectedShipId]
+
+    setShipId(selectedShipId)
+    setBuildTime(selectedShip.size * 300)
+    setShipCost(selectedShip.cost)
+    setShipName(selectedShip.name)
   }
   const costMod = useGetCostMod()
   const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
@@ -442,22 +448,18 @@ const Shipyard = () => {
                 <br />
                 <Select
                   placeholder="Select Shipyard"
-                  value={shipyard}
-                  options={shipyards}
+                  // value={shipyard}
+                  options={shipyards.map((s, i) => ({ value: i, label: s.name }))}
                   onChange={handleShipyardChange}
-                  getOptionLabel={(x) => x.name}
-                  getOptionValue={(x) => x.name}
                   styles={customStyles}
                 />
 
                 <Row style={{ marginTop: 10 }}>
-                  {/* // Selector doesn't show selected option, but does input state values for it */}
                   <Select
                     placeholder="Select Ship"
-                    value={shipId}
-                    options={shipClasses}
+                    // value={shipId}
+                    options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                     onChange={handleShipChange}
-                    getOptionLabel={(x) => x.name}
                     styles={customStyles}
                   />
                 </Row>
