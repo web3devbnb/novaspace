@@ -269,40 +269,30 @@ const Map: React.FC = () => {
                         <Text bold glowing>
                           {el.name}
                         </Text>
-                        <Unexplored>{el.placeType === '' ? 'Location Unexplored' : ''}</Unexplored>
+                        <Unexplored>{el.placeType === '' && 'Location Unexplored'}</Unexplored>
                         <Row>
-                          {el.salvage > 0 ? <GridIcon src={scrapLogo} alt="has salvage" /> : ''}
-                          {el.hasRefinery === true ? <GridIcon src={refineryLogo} alt="planet has refinery" /> : ''}
-                          {el.hasShipyard === true ? <GridIcon src={shipyardLogo} alt="planet has shipyard" /> : ''}
-                          {el.availableMineral > 0 ? <GridIcon src={mineralLogo} alt="planet has minerals" /> : ''}
+                          {el.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
+                          {el.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
+                          {el.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
+                          {el.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
 
-                          {el.fleetCount > 0 && el.fleetCount < 11 ? (
+                          {el.fleetCount > 0 && el.fleetCount < 11 && (
                             <GridIcon src={lowPlayers} alt="planet has few players" />
-                          ) : (
-                            ''
                           )}
 
-                          {el.fleetCount > 10 && el.fleetCount < 51 ? (
+                          {el.fleetCount > 10 && el.fleetCount < 51 && (
                             <GridIcon src={medPlayers} alt="planet has many players" />
-                          ) : (
-                            ''
                           )}
 
-                          {el.fleetCount > 50 ? (
-                            <GridIcon src={highPlayers} alt="planet has more than 50 players" />
-                          ) : (
-                            ''
-                          )}
+                          {el.fleetCount > 50 && <GridIcon src={highPlayers} alt="planet has more than 50 players" />}
 
-                          {el.placeType === 'planet' ? <GridCellImg src={planetLogo} alt="planet" /> : ''}
-                          {el.placeType === 'star' ? <GridCellImg src={starLogo} alt="star" /> : ''}
-                          {el.placeType === 'empty' ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
+                          {el.placeType === 'planet' && <GridCellImg src={planetLogo} alt="planet" />}
+                          {el.placeType === 'star' && <GridCellImg src={starLogo} alt="star" />}
+                          {el.placeType === 'empty' && <GridCellImg src={emptyLogo} alt="star" />}
                           {(x + mapData.x0).toString() === fleetLocation.X.toString() &&
-                          (ry + mapData.y0).toString() === fleetLocation.Y.toString() ? (
-                            <IndicatorImg src={youLogo} alt="current location" />
-                          ) : (
-                            ''
-                          )}
+                            (ry + mapData.y0).toString() === fleetLocation.Y.toString() && (
+                              <IndicatorImg src={youLogo} alt="current location" />
+                            )}
                         </Row>
                         <GridCellId>
                           ({x + mapData.x0} , {ry + mapData.y0})
