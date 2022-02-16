@@ -167,11 +167,11 @@ const GameMenu = ({ pageName }) => {
           <Link href="/overview">
             <Icon src={overview} alt="game overview" />
           </Link>
-          <Link href="/map">
-            <Icon src={starmap} alt="game star map" />
-          </Link>
           <Link href="/shipyard">
             <Icon src={shipyard} alt="game shipyard" />
+          </Link>
+          <Link href="/map">
+            <Icon src={starmap} alt="game star map" />
           </Link>
           <Link href="/location">
             <Icon src={location} alt="game location" />
