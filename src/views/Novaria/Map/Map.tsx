@@ -246,13 +246,13 @@ const Map: React.FC = () => {
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
-  const handleSetGridSizeClick = async () => {
-    if (mapData.data.length === YLen && mapData.data[0].length === XLen) {
-      return
-    }
-    const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
-    setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
-  }
+  // const handleSetGridSizeClick = async () => {
+  //   if (mapData.data.length === YLen && mapData.data[0].length === XLen) {
+  //     return
+  //   }
+  //   const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
+  //   setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
+  // }
 
   const playerEXP = useGetPlayer(account.toString()).experience
 
@@ -327,9 +327,9 @@ const Map: React.FC = () => {
                 Find location (x, y)
               </Button>
               (
-              <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-              ,
               <CoordInput type="number" min="0" max="10" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
+              ,
+              <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
               )
             </InputControl>
 
