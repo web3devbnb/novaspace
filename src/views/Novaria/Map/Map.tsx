@@ -70,13 +70,11 @@ const Grid = styled.div`
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
-  grid-auto-flow: column;
   margin: 10px 10px 10px;
   background-image: url('/images/novaria/border.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10px;
-  direction: rtl;
   // aspect-ratio: 16/8;
 `
 
@@ -318,9 +316,9 @@ const Map: React.FC = () => {
                 Find location (x, y)
               </Button>
               (
-              <CoordInput type="number" min="0" max="10" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
-              ,
               <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+              ,
+              <CoordInput type="number" min="0" max="10" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
               )
             </InputControl>
           </GridControls>
