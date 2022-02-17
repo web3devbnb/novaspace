@@ -165,9 +165,9 @@ export const claimShips = async (fleetContract, dockId, amount, account) => {
     })
 } 
 
-export const recall = async (fleetContract, account) => {
+export const recall = async (fleetContract, haven, account) => {
   return fleetContract.methods
-    .recall()
+    .recall(haven)
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -232,6 +232,15 @@ export const travel = async (mapContract, x, y, account) => {
 
 export const explore = async (mapContract, x, y, account) => {
   return mapContract.methods
+    .explore(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const takeover = async (fleetContract, x, y, account) => {
+  return fleetContract.methods
     .explore(x, y)
     .send({from: account})
     .on('transactionHash', (tx) => {

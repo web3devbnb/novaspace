@@ -163,9 +163,10 @@ const Location: React.FC = () => {
   const [placeX, setX] = useState(loadedCoords.x)
   const [placeY, setY] = useState(loadedCoords.y)
 
-  const placeInfo = useGetPlaceInfo(placeX, placeY)
-
+  const placeInfo = useGetPlaceInfo(placeX, placeY, placeX, placeY)
+  console.log('PLACE INFO', placeInfo)
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
+  console.log('battles at location', battlesAtLocation)
 
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
@@ -196,7 +197,7 @@ const Location: React.FC = () => {
                 salvage={placeInfo.scrap}
                 shipyard={placeInfo.shipyard}
                 refinery={placeInfo.refinery}
-                isMining={placeInfo.mining}
+                isMining={placeInfo.isMining}
                 fleetLocation={fleetLocation}
               />
             </LeftCol>

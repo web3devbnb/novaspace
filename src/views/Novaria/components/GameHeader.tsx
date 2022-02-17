@@ -58,7 +58,7 @@ const GameHeader = ({ location, playerMineral, exp }) => {
 
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
-  const accountAddress = connected ? account.toString().slice(0, 5) + '...' + account.toString().slice(37, 40) : ''
+  const accountAddress = connected ? account.toString().slice(0, 5) + '...' + account.toString().slice(38, 42) : ''
 
   return (
     <Hero>

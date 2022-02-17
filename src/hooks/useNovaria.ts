@@ -19,6 +19,7 @@ import {
   enterBattle,
   explore,
   recall,
+  takeover,
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -75,6 +76,20 @@ export const useClaimShips = () => {
     [account, useFleetContract],
   )
   return { onClaim: handleClaimShips }
+}
+
+export const useShipyardTakeover = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleClaimShips = useCallback(
+    async (x: number, y: number) => {
+      const txHash = await takeover(useFleetContract, x, y, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onTakeover: handleClaimShips }
 }
 
 // mission options: ATTACK (1), DEFEND (2). target is address
@@ -269,17 +284,18 @@ export const useGetBattlesAtLocation = (x: number, y: number) => {
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { slowRefresh } = useRefresh()
-  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0 })
+  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolved: false })
 
   useEffect(() => {
     async function fetch() {
       const data = await fleetContract.methods.battles(Id).call()
       setBattle({
-        attackTeam: data[3],
-        defendTeam: data[4],
-        deadline: data[0],
-        coordX: data[1],
-        coordY: data[2],
+        attackTeam: data[4],
+        defendTeam: data[5],
+        deadline: data[1],
+        coordX: data[2],
+        coordY: data[3],
+        resolved: data[0],
       })
     }
     fetch()
@@ -403,6 +419,8 @@ export const useGetDockCost = (shipClassId: number, amount: number) => {
 // Movement, mining, refining, tracks mineral
 // Active Functions
 
+
+
 export const useMine = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
@@ -467,14 +485,14 @@ export const useExplore = () => {
   return { onExplore: handleExplore }
 }
 
-export const useRecall = () => {
+export const useRecall = (haven) => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
   const handleRecall = useCallback(async () => {
-    const txHash = await recall(useMapContract, account)
+    const txHash = await recall(useMapContract, haven, account)
     console.info(txHash)
-  }, [account, useMapContract])
+  }, [account, haven, useMapContract])
   return { onRecall: handleRecall }
 }
 
@@ -522,9 +540,10 @@ export const useGetPlaceId = (x: number, y: number) => {
   return placeId
 }
 
-export const useGetPlaceInfo = (x: number, y: number) => {
+export const useGetPlaceInfo = (x1: number, y1: number, x2: number, y2: number) => {
   const { fastRefresh } = useRefresh()
-  const [placeInfo, setPlaceInfo] = useState({
+  const [placeInfo, setPlaceInfo] = useState(
+    {
     name: '',
     type: '',
     scrap: 0,
@@ -532,25 +551,32 @@ export const useGetPlaceInfo = (x: number, y: number) => {
     refinery: false,
     mineral: 0,
     fleetCount: 0,
-    mining: false,
-  })
+    canTravel: false,
+    luminosity: 0,
+    isMining: false,
+  }
+  )
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getCoordinateInfo(x, y).call()
-      setPlaceInfo({
-        name: data[0],
-        type: data[1],
-        scrap: data[2],
-        shipyard: data[3],
-        refinery: data[4],
-        mineral: data[5],
-        fleetCount: data[6],
-        mining: data[7],
-      })
+      const data = await mapContract.methods.getCoordinatePlaces(x1, y1, x2, y2).call()
+      setPlaceInfo(
+        {
+        name: data[0][0],
+        type: data[0][1],
+        scrap: data[0][2],
+        fleetCount: data[0][3],
+        shipyard: data[0][4],
+        refinery: data[0][5],
+        mineral: data[0][6],
+        canTravel: data[0][7],
+        luminosity: data[0][8],
+        isMining: data[0][9],
+      }
+      )
     }
     fetch()
-  }, [fastRefresh, x, y])
+  }, [fastRefresh, x1, y1, x2, y2])
   return placeInfo
 }
 
