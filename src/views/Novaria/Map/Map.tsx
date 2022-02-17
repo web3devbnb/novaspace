@@ -21,7 +21,6 @@ import highPlayers from '../assets/highplayers.png'
 import asteroid from '../assets/asteroid.png'
 import star1 from '../assets/star1.png'
 
-
 const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
   return data
@@ -65,7 +64,7 @@ const Body = styled.div`
 const Grid = styled.div`
   // flex-grow: 1;
   // display: flex;
-  // flex-flow:  wrap; 
+  // flex-flow:  wrap;
   // box-sizing:border-box;
   display: grid;
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
@@ -89,7 +88,7 @@ const GridCell = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  direction:ltr;
+  direction: ltr;
 `
 
 const GridCellImg = styled.img`
@@ -246,14 +245,6 @@ const Map: React.FC = () => {
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
-  // const handleSetGridSizeClick = async () => {
-  //   if (mapData.data.length === YLen && mapData.data[0].length === XLen) {
-  //     return
-  //   }
-  //   const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
-  //   setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
-  // }
-
   const playerEXP = useGetPlayer(account.toString()).experience
 
   if (!mapData) {
@@ -271,7 +262,7 @@ const Map: React.FC = () => {
               const ry = mapData.data.length - y - 1
               return mapData.data[ry].map((planet, x) => {
                 return (
-                  <GridCell >
+                  <GridCell>
                     <Link
                       to={{
                         pathname: '/location',
@@ -332,27 +323,6 @@ const Map: React.FC = () => {
               <CoordInput type="number" min="0" max="10" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
               )
             </InputControl>
-
-            {/* <InputControl>
-              <button type="button" onClick={handleSetGridSizeClick}>
-                Set grid size (x, y)
-              </button>
-              <CoordInput
-                type="number"
-                min="1"
-                max="16"
-                value={XLen}
-                onChange={(e) => setXLen(parseFloat(e.target.value))}
-              />
-              x
-              <CoordInput
-                type="number"
-                min="1"
-                max="16"
-                value={YLen}
-                onChange={(e) => setYLen(parseFloat(e.target.value))}
-              />
-            </InputControl> */}
           </GridControls>
           <Legend>
             <span>
