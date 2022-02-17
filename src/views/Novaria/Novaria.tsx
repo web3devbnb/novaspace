@@ -166,7 +166,7 @@ const Novaria: React.FC = () => {
 
           {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
           {isAllowed && !playerExists ? <div><input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
-                      <Button onClick={sendInsertCoinTx}>Set Player Name</Button></div> : ''}
+                      <Button onClick={sendInsertCoinTx}>Set Player Name</Button><br />(costs 1 nova)</div> : ''}
           {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
 
 

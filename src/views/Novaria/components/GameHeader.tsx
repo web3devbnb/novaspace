@@ -49,7 +49,7 @@ const ConnectButton = styled.button`
   width: 125px;
 `
 
-const GameHeader = ({ location, playerMineral }) => {
+const GameHeader = ({ location, playerMineral, exp }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
@@ -75,7 +75,10 @@ const GameHeader = ({ location, playerMineral }) => {
           NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
-          MINERAL: <span style={{ color: 'gold' }}>{web3.utils.fromWei(playerMineral)}</span>
+          MINERAL: <span style={{ color: 'gold' }}>{(playerMineral/10**18).toFixed(3)}</span>
+        </Text>
+        <Text glowing>
+          EXP: <span style={{ color: 'gold' }}>{exp}</span>
         </Text>
         <Text glowing>
           Current Location: ({location.X}, {location.Y})

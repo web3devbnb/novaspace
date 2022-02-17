@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useGetFleetLocation, useGetFleetMineral } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
-  background-image: url('/images/novaria/mapBG.jpg');
-  background-size: cover;
+  background-image: url('/images/novaria/shipyardBG.jpg');
+   background-size: cover;
   margin-top: -105px;
   color: #5affff;
   display: flex;
@@ -24,13 +25,16 @@ const Row = styled.div`
   display: flex;
 `
 const Body = styled.div`
-  margin: 10px 50px 10px 150px;
-  // background: #00000080;
-  height: 500px;
+  margin: 40px 50px 200px 50px;
+ // background: #0000ae80;
+  //height: 500px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: left;
+  border: 1px solid #5affff;
+  padding: 10px;
+  color: white;
 `
 
 const Header = styled.div`
@@ -39,20 +43,22 @@ const Header = styled.div`
 `
 
 const Text = styled.div`
-  font-size: 14px;
+  font-size: 15px;
 `
 
 const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
+  const playerEXP = useGetPlayer(account.toString()).experience
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
       <Row>
         <GameMenu pageName="overview" />
-        <Body>
+        <Body><div style={{background:'#11427399', padding: 15, textAlign:'center'}}>
+          <img src={logo} style={{}} alt='novaria logo'/>
           <Header>Welcome to the Legend of Novaria</Header>
           <Text>
             This is the testing phase of the game, so it&apos;s important to know that the game can be reset at any
@@ -72,7 +78,7 @@ const Overview: React.FC = () => {
             <br />
             <br />
             Good Luck!
-          </Text>
+          </Text></div>
         </Body>
       </Row>
     </Page>

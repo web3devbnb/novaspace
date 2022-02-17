@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Text } from '@pancakeswap-libs/uikit'
 import { ConnectedAccountContext } from 'App'
-import { useGetFleetLocation, useGetFleetMineral } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
@@ -18,6 +18,9 @@ import mineralLogo from '../assets/mineral.png'
 import lowPlayers from '../assets/lowplayers.png'
 import medPlayers from '../assets/medplayers.png'
 import highPlayers from '../assets/highplayers.png'
+import asteroid from '../assets/asteroid.png'
+import star1 from '../assets/star1.png'
+
 
 const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
@@ -60,25 +63,33 @@ const Body = styled.div`
 `
 
 const Grid = styled.div`
-  flex-grow: 1;
+  // flex-grow: 1;
+  // display: flex;
+  // flex-flow:  wrap; 
+  // box-sizing:border-box;
   display: grid;
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
+  grid-auto-flow: column;
   margin: 10px 10px 10px;
   background-image: url('/images/novaria/border.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10px;
+  direction: rtl;
   // aspect-ratio: 16/8;
 `
 
 const GridCell = styled.div`
   display: flex;
+  // flex: 1;
+  // width:calc(100%/5);
   color: white;
   justify-content: center;
   align-items: center;
   text-align: center;
+  direction:ltr;
 `
 
 const GridCellImg = styled.img`
@@ -144,7 +155,7 @@ const Unexplored = styled.div`
   opacity: 0;
   text-align: center;
 
-  &:hover {
+  ${GridCell} :hover & {
     opacity: 1;
   }
 `
@@ -243,13 +254,15 @@ const Map: React.FC = () => {
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
+  const playerEXP = useGetPlayer(account.toString()).experience
+
   if (!mapData) {
     return null
   }
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
       <MainRow>
         <GameMenu pageName="starmap" />
         <Body>
@@ -258,11 +271,11 @@ const Map: React.FC = () => {
               const ry = mapData.data.length - y - 1
               return mapData.data[ry].map((planet, x) => {
                 return (
-                  <GridCell>
+                  <GridCell >
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: x + mapData.x0, y: ry + mapData.y0 }],
+                        state: [{ x: ry + mapData.y0, y: x + mapData.x0 }],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
@@ -289,15 +302,16 @@ const Map: React.FC = () => {
                           )}
 
                           {planet.placeType === 'planet' && <GridCellImg src={planetLogo} alt="planet" />}
-                          {planet.placeType === 'star' && <GridCellImg src={starLogo} alt="star" />}
+                          {planet.placeType === 'star' && <GridCellImg src={star1} alt="star" />}
                           {planet.placeType === 'empty' && <GridCellImg src={emptyLogo} alt="star" />}
-                          {(x + mapData.x0).toString() === fleetLocation.X.toString() &&
-                            (ry + mapData.y0).toString() === fleetLocation.Y.toString() && (
+                          {planet.placeType === 'asteroid' && <GridCellImg src={asteroid} alt="star" />}
+                          {(ry + mapData.y0).toString() === fleetLocation.X.toString() &&
+                            (x + mapData.x0).toString() === fleetLocation.Y.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />
                             )}
                         </Row>
                         <GridCellId>
-                          ({x + mapData.x0} , {ry + mapData.y0})
+                          ({ry + mapData.y0} , {x + mapData.x0})
                         </GridCellId>
                       </GridCellContent>
                     </Link>

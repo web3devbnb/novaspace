@@ -536,6 +536,11 @@
 		"name": "battles",
 		"outputs": [
 			{
+				"internalType": "bool",
+				"name": "isResolved",
+				"type": "bool"
+			},
+			{
 				"internalType": "uint256",
 				"name": "battleDeadline",
 				"type": "uint256"

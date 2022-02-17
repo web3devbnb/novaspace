@@ -8,6 +8,7 @@ import {
   useGetTravelCooldown,
   useGetFleetTravelCost,
   useMine,
+  useGetTimeModifier,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -196,7 +197,9 @@ const LocationCard = ({
   const { account } = useWallet()
   const isCurrentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
   const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10 ** 18
-  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60
+  const timeMod = useGetTimeModifier()
+  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 / timeMod
+  
 
   const { onExplore } = useExplore()
   const { onMine } = useMine()

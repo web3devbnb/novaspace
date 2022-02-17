@@ -13,6 +13,7 @@ import {
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
   useGetCurrentTravelCooldown,
+  useGetPlayer,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -176,10 +177,11 @@ const Location: React.FC = () => {
   const currentMiningCooldown = 'coming soon'
   const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
+  const playerEXP = useGetPlayer(account.toString()).experience
 
   return (
     <Page className="fontsforweb_bignoodletitling">
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}/>
       <Row>
         <GameMenu pageName="location" />
         <Body>

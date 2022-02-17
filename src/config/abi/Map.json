@@ -434,6 +434,44 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "fleetLastShipyardPlace",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "fleetMiningCooldown",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "_x",
 				"type": "uint256"
@@ -550,6 +588,16 @@
 					{
 						"internalType": "uint256",
 						"name": "availableMineral",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "canTravel",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "luminosity",
 						"type": "uint256"
 					}
 				],
@@ -914,7 +962,13 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_goToHaven",
+				"type": "bool"
+			}
+		],
 		"name": "recall",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -1190,6 +1244,25 @@
 		"name": "travel",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "travelCooldown",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

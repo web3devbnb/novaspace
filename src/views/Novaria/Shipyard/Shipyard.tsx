@@ -17,6 +17,7 @@ import {
   useGetFleetMineral,
   useGetCostMod,
   useGetTimeModifier,
+  useGetPlayer,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -290,6 +291,8 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
+  const playerEXP = useGetPlayer(account.toString()).experience
+   
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
@@ -428,7 +431,7 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
       <PageRow>
         <GameMenu pageName="shipyard" />
 
