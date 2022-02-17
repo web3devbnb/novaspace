@@ -3,12 +3,38 @@ import styled, { keyframes } from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ConnectedAccountContext } from 'App'
 import Page from 'components/layout/Page'
-import { Flex } from '@pancakeswap-libs/uikit'
+import { Flex, Text } from '@pancakeswap-libs/uikit'
 import ModalVideo from 'react-modal-video'
 import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
+import PageLoader from 'components/PageLoader'
 import logo from './assets/novariaLogoMain.png'
 import 'react-modal-video/scss/modal-video.scss'
+
+const WalletProvider = ({ children }) => {
+  const wallet = useWallet()
+
+  if (wallet.status === 'connecting') {
+    return <PageLoader />
+  }
+
+  if (
+    wallet.status === 'disconnected' ||
+    wallet.status === 'error' ||
+    (wallet.status === 'connected' && wallet.account === null)
+  ) {
+    if (wallet.error) {
+      console.log(wallet.error)
+    }
+    return (
+      <Page style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Text fontSize="3rem">Please, connect your wallet.</Text>
+      </Page>
+    )
+  }
+
+  return <ConnectedAccountContext.Provider value={wallet.account}>{children}</ConnectedAccountContext.Provider>
+}
 
 const Page1 = styled(Page)`
   // background-image:url('/images/home/mainBackground-dark.jpg');
@@ -104,10 +130,10 @@ const Novaria: React.FC = () => {
   const allowanceFleet = useGetAllowance(fleetContract)
   const allowanceMap = useGetAllowance(mapContract)
   const allowanceTreasury = useGetAllowance(treasuryContract)
-  const isAllowed = connected && allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
+  const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
   const playerExists = useGetPlayerExists(account)
   const { onClick } = useApprove()
-  const { onCoin } = useInsertCoinHere()
+  const { onCoin } = useInsertCoinHere() 
 
   const sendInsertCoinTx = async () => {
     setPendingTx(true)
@@ -159,7 +185,7 @@ const Novaria: React.FC = () => {
             onClose={() => setOpen(false)}
           />
           <SubHeading>
-
+          <WalletProvider>
           {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>Approve Fleet Contract</Button> : ''}
           {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>Approve Treasury Contract</Button> : ''}
           {allowanceMap <= 0 ? <Button onClick={handleMapApprove}>Approve Map Contract</Button> : ''}
@@ -174,7 +200,7 @@ const Novaria: React.FC = () => {
 
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
-        
+          </WalletProvider>
           </SubHeading></Column>
       </Body>
     </Page1>
