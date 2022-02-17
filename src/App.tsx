@@ -82,9 +82,10 @@ const App: React.FC = () => {
             </Route> */}
             <Route path="/legend-of-novaria">
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
-              
+              <WalletProvider>
                 <Novaria />
                 <Footer />
+                </WalletProvider>
             </Route>
             <Route path="/map">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />

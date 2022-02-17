@@ -11,6 +11,8 @@ import PageLoader from 'components/PageLoader'
 import logo from './assets/novariaLogoMain.png'
 import 'react-modal-video/scss/modal-video.scss'
 
+
+
 const WalletProvider = ({ children }) => {
   const wallet = useWallet()
 
@@ -132,6 +134,7 @@ const Novaria: React.FC = () => {
   const allowanceTreasury = useGetAllowance(treasuryContract)
   const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
   const playerExists = useGetPlayerExists(account)
+  console.log('allowed, exists', isAllowed, playerExists)
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere() 
 
@@ -185,14 +188,17 @@ const Novaria: React.FC = () => {
             onClose={() => setOpen(false)}
           />
           <SubHeading>
-          <WalletProvider>
           {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>Approve Fleet Contract</Button> : ''}
           {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>Approve Treasury Contract</Button> : ''}
           {allowanceMap <= 0 ? <Button onClick={handleMapApprove}>Approve Map Contract</Button> : ''}
 
           {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
-          {isAllowed && !playerExists ? <div><input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
-                      <Button onClick={sendInsertCoinTx}>Set Player Name</Button><br />(costs 1 nova)</div> : ''}
+          {isAllowed && !playerExists ? 
+            <div>
+              <input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
+              <Button onClick={sendInsertCoinTx}>Set Player Name</Button>
+              <br />(costs 1 nova)
+            </div> : ''}
           {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
 
 
@@ -200,7 +206,7 @@ const Novaria: React.FC = () => {
 
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
-          </WalletProvider>
+          
           </SubHeading></Column>
       </Body>
     </Page1>
