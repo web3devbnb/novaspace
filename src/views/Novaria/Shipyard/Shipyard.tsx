@@ -28,6 +28,7 @@ import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
 import viperQueue from '../assets/viperQueue.png'
 import moleQueue from '../assets/moleQueue.png'
+import fireflyCard from '../assets/fireflyCard.png'
 
 const Page = styled.div`
   background-image: url('/images/novaria/shipyardBG.jpg');
@@ -101,6 +102,8 @@ const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
   align-items: center;
+  
+  width: 100%;
 `
 
 const PageRow = styled.div`
@@ -440,7 +443,7 @@ const Shipyard = () => {
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" />
               <ShipClassCard src={moleCard} alt="mole" />
-              <ShipClassCard src={unknownCard} alt="coming soon" />
+              <ShipClassCard src={fireflyCard} alt="firefly" />
               <ShipClassCard src={unknownCard} alt="coming soon" />
             </ShipClassMenu>
 
@@ -573,7 +576,7 @@ const Shipyard = () => {
           <Col style={{ width: '25%' }}>
             <FleetMenu>
               <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
-              <Row>
+              <Row style={{justifyContent:'space-between'}}>
                 <Col>
                   <Item style={{ marginBottom: 10 }}>Fleet Size</Item>
                   <Item style={{ marginBottom: 10 }}>Mining Capacity</Item>
@@ -595,6 +598,7 @@ const Shipyard = () => {
                   <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(mineralCapacity)} </Item>
                   <Item style={{ marginBottom: 10 }}>{playerFleet[0]}</Item>
                   <Item style={{ marginBottom: 10 }}>{playerFleet[1]}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[2]}</Item>
                 </Col>
               </Row>
             </FleetMenu>
