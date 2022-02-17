@@ -351,7 +351,7 @@ export const useGetAttackPower = (fleet) => {
 
 export const useGetPlayer = (player) => {
   const { fastRefresh } = useRefresh()
-  const [Player, setPlayer] = useState({ name: '', experience: 0, ships: [], battleId: null, mineral: 0, battleStatus: 0, spaceDocks: [] })
+  const [Player, setPlayer] = useState({ name: '', experience: 0,  battleId: null, mineral: 0, battleStatus: 0 })
 
   useEffect(() => {
     async function fetch() {
@@ -360,11 +360,9 @@ export const useGetPlayer = (player) => {
       setPlayer({
         name: data[0],
         experience: data[1], 
-        ships: [data[2]], 
-        battleId: data[3], 
-        mineral: data[4], 
-        battleStatus: data[5], 
-        spaceDocks: [data[6]] 
+        battleId: data[2], 
+        mineral: data[3], 
+        battleStatus: data[4], 
       })
     }
     fetch()
@@ -648,6 +646,20 @@ export const useGetCurrentTravelCooldown = (fleet: string) => {
     fetch()
   }, [slowRefresh, fleet])
   return CurrentCooldown
+}
+
+export const useGetCurrentMiningCooldown = (fleet: string) => {
+  const { fastRefresh } = useRefresh()
+  const [currentCooldown, setCurrentCooldown] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.fleetMiningCooldown(fleet).call()
+      setCurrentCooldown(data)
+    }
+    fetch()
+  }, [fastRefresh, fleet])
+  return currentCooldown
 }
 
 export const useGetTimeModifier = () => {

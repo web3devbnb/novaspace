@@ -1,12 +1,28 @@
-import { Button, Modal } from '@pancakeswap-libs/uikit'
-import ModalActions from 'components/ModalActions'
-import { useEnterBattle, useGetBattle, useGoBattle } from 'hooks/useNovaria'
 import React, {useState} from 'react'
+import styled from 'styled-components'
+import { useEnterBattle, useGetBattle, useGoBattle } from 'hooks/useNovaria'
+import ModalActions from '../../../components/NovariaModalActions'
+import Modal from '../../../components/NovariaModal'
 
 interface BattleModalProps {
   battle: number
   onDismiss?: () => void
 }
+
+const Button = styled.button`
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #5affff;
+  color: #5affff;
+  font-weight: medium;
+  font-size: 16px;
+  padding: 5px 10px;
+  &:hover {
+    background: #5affff;
+    color: black;
+  }
+`
+
 const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
   const [pendingTx, setPendingTx] = useState(false)
   const battleInfo = useGetBattle(battle)
@@ -53,14 +69,14 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
         Deadline: {startTime}
       </div>
       <ModalActions>
-        <Button variant="primary" onClick={() => onEnterBattle(player, 1)}>
+        <Button  onClick={() => onEnterBattle(player, 1)}>
           ATTACK
         </Button>
-        <Button variant="primary" onClick={() => onEnterBattle(player, 2)}>
+        <Button  onClick={() => onEnterBattle(player, 2)}>
           DEFEND
         </Button>
         {battleReady ?
-          <Button variant="primary" onClick={sendBattleTx}>
+          <Button  onClick={sendBattleTx}>
             START BATTLE
           </Button>
         : ''}
