@@ -29,6 +29,7 @@ import unknownCard from '../assets/newShipCard.png'
 import viperQueue from '../assets/viperQueue.png'
 import moleQueue from '../assets/moleQueue.png'
 import fireflyCard from '../assets/fireflyCard.png'
+import fireflyQueue from '../assets/fireflyQueue.png'
 
 const Page = styled.div`
   background-image: url('/images/novaria/shipyardBG.jpg');
@@ -514,11 +515,10 @@ const Shipyard = () => {
                     return (
                       <Col>
                         <QueueCard key={dock.shipClassId}>
-                          {dock.shipClassId === '0' ? (
-                            <QueueCardImg src={viperQueue} alt="vipers in queue" />
-                          ) : (
-                            <QueueCardImg src={moleQueue} alt="moles in queue" />
-                          )}
+                          {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
+                          {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
+                          {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
+                          
                           {console.log('shipclassID', dock.shipClassId)}
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>
