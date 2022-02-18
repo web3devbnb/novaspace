@@ -103,7 +103,7 @@ const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
   align-items: center;
-  
+
   width: 100%;
 `
 
@@ -296,7 +296,6 @@ const Shipyard = () => {
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
   const playerEXP = useGetPlayer(account.toString()).experience
-   
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
@@ -519,8 +518,7 @@ const Shipyard = () => {
                           {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
-                          
-                     
+
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>
                               <Item>LOCATION &nbsp;</Item>
@@ -577,7 +575,7 @@ const Shipyard = () => {
           <Col style={{ width: '25%' }}>
             <FleetMenu>
               <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
-              <Row style={{justifyContent:'space-between'}}>
+              <Row style={{ justifyContent: 'space-between' }}>
                 <Col>
                   <Item style={{ marginBottom: 10 }}>Fleet Size</Item>
                   <Item style={{ marginBottom: 10 }}>Mining Capacity</Item>
@@ -597,9 +595,9 @@ const Shipyard = () => {
                   </Item>
                   <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(miningCapacity)} </Item>
                   <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(mineralCapacity)} </Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[0]}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[1]}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[2]}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[0] || '-'}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[1] || '-'}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[2] || '-'}</Item>
                 </Col>
               </Row>
             </FleetMenu>
