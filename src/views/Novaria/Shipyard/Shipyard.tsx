@@ -103,7 +103,7 @@ const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
   align-items: center;
-  
+
   width: 100%;
 `
 
@@ -279,6 +279,8 @@ const FleetMenu = styled.div`
   height: 100%;
 `
 
+const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
+
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const web3 = getWeb3()
@@ -296,7 +298,6 @@ const Shipyard = () => {
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
   const playerEXP = useGetPlayer(account.toString()).experience
-   
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
@@ -390,7 +391,6 @@ const Shipyard = () => {
   const customStyles = {
     menu: (provided) => ({
       ...provided,
-      // width: '100%',
       border: '2px solid #289794',
       borderRadius: '0px',
       color: 'black',
@@ -399,38 +399,35 @@ const Shipyard = () => {
     }),
     control: (provided) => ({
       ...provided,
-      // width: 180,
-      Color: '#289794',
+      color: '#289794',
       border: '1px solid #289794',
       borderRadius: '0px',
       background: 'transparent',
-      height: 15,
     }),
     option: (provided) => ({
       ...provided,
       color: '#289794',
-      // padding: 20,
       background: 'transparent',
     }),
     placeholder: (provided) => ({
       ...provided,
       color: '#289794',
       background: 'transparent',
-      height: 10,
     }),
     input: (provided, state) => ({
       ...provided,
-      height: 15,
     }),
     dropdownIndicator: (provided, state) => ({
       ...provided,
       color: '#289794',
-      // background: 'transparent'
     }),
     valueContainer: (provided, state) => ({
       ...provided,
-      fontSize: 12,
-      // background: 'transparent'
+      color: '#289794',
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: '#289794',
     }),
   }
 
@@ -494,17 +491,15 @@ const Shipyard = () => {
                 <div style={{ color: '#289794', marginTop: '5px' }}>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Text>Shipyard:</Text>
-                    <Text>
-                      {shipyardName} ({shipyardX}, {shipyardY})
-                    </Text>
+                    <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
                     <Text>Owner: </Text>
-                    <Text style={{ width: '50%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{shipyardOwner}</Text>
+                    <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Text>Build Fee:</Text>
-                    <Text>{shipyardFee}%</Text>
+                    <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
                 </div>
               </BuildMenu>
@@ -519,8 +514,7 @@ const Shipyard = () => {
                           {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
-                          
-                     
+
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>
                               <Item>LOCATION &nbsp;</Item>
@@ -577,7 +571,7 @@ const Shipyard = () => {
           <Col style={{ width: '25%' }}>
             <FleetMenu>
               <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
-              <Row style={{justifyContent:'space-between'}}>
+              <Row style={{ justifyContent: 'space-between' }}>
                 <Col>
                   <Item style={{ marginBottom: 10 }}>Fleet Size</Item>
                   <Item style={{ marginBottom: 10 }}>Mining Capacity</Item>
@@ -597,9 +591,9 @@ const Shipyard = () => {
                   </Item>
                   <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(miningCapacity)} </Item>
                   <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(mineralCapacity)} </Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[0]}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[1]}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[2]}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[0] || '-'}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[1] || '-'}</Item>
+                  <Item style={{ marginBottom: 10 }}>{playerFleet[2] || '-'}</Item>
                 </Col>
               </Row>
             </FleetMenu>
