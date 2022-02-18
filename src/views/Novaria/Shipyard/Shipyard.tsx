@@ -279,6 +279,8 @@ const FleetMenu = styled.div`
   height: 100%;
 `
 
+const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
+
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const web3 = getWeb3()
@@ -493,17 +495,17 @@ const Shipyard = () => {
                 <div style={{ color: '#289794', marginTop: '5px' }}>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Text>Shipyard:</Text>
-                    <Text>
-                      {shipyardName} ({shipyardX}, {shipyardY})
-                    </Text>
+                    <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
                     <Text>Owner: </Text>
-                    <Text style={{ width: '50%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{shipyardOwner}</Text>
+                    <Text style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                      {shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}
+                    </Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Text>Build Fee:</Text>
-                    <Text>{shipyardFee}%</Text>
+                    <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
                 </div>
               </BuildMenu>
