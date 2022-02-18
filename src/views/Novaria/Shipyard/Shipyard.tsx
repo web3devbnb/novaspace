@@ -587,10 +587,12 @@ const Shipyard = () => {
                 <Col style={{ textAlign: 'right' }}>
                   {/* Find a way to map this out based on shipclass? */}
                   <Item style={{ marginBottom: 10 }}>
-                    {fleetSize}/{maxFleetSize}
+                    {fleetSize || '-'}/{maxFleetSize || '-'}
                   </Item>
-                  <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(miningCapacity)} </Item>
-                  <Item style={{ marginBottom: 10 }}>{web3.utils.fromWei(mineralCapacity)} </Item>
+                  <Item style={{ marginBottom: 10 }}>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} </Item>
+                  <Item style={{ marginBottom: 10 }}>
+                    {mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}
+                  </Item>
                   <Item style={{ marginBottom: 10 }}>{playerFleet[0] || '-'}</Item>
                   <Item style={{ marginBottom: 10 }}>{playerFleet[1] || '-'}</Item>
                   <Item style={{ marginBottom: 10 }}>{playerFleet[2] || '-'}</Item>
