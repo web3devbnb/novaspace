@@ -499,9 +499,7 @@ const Shipyard = () => {
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
                     <Text>Owner: </Text>
-                    <Text style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                      {shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}
-                    </Text>
+                    <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Text>Build Fee:</Text>
