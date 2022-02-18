@@ -560,16 +560,16 @@ export const useGetPlaceInfo = (x1: number, y1: number) => {
       const data = await mapContract.methods.getCoordinatePlaces(x1, y1).call()
       setPlaceInfo(
         {
-        name: data[20][0],
-        type: data[20][1],
-        scrap: data[20][2],
-        fleetCount: data[20][3],
-        shipyard: data[20][4],
-        refinery: data[20][5],
-        mineral: data[20][6],
-        canTravel: data[20][7],
-        luminosity: data[20][8],
-        isMining: data[20][9],
+        name: data[42][0],
+        type: data[42][1],
+        scrap: data[42][2],
+        fleetCount: data[42][3],
+        shipyard: data[42][4],
+        refinery: data[42][5],
+        mineral: data[42][6],
+        canTravel: data[42][7],
+        luminosity: data[42][8],
+        isMining: data[42][9],
       }
       )
     }
@@ -640,7 +640,7 @@ export const useGetCurrentTravelCooldown = (fleet: string) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getCurrentTravelCooldown(fleet).call()
+      const data = await mapContract.methods.travelCooldown(fleet).call()
       setCurrentCooldown(data)
     }
     fetch()

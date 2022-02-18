@@ -16,11 +16,11 @@ export default {
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
   map: {
-    56: '0x9E59f908D040D6bb701fF0b5E2029e344B6885ec',
+    56: '0x9D7cDaF015fD2DaC7B2635fCdD858F3A10FA76cE',
     97: '0x731F300c2e54c49F5Dd332C0C1D341e58bC4Df8a',
   },
   fleet: {
-    56: '0xE23b0aaBB81b39A90E46FFCC2Abd085089DB2085',
+    56: '0x35dc149a85bafa0fd2059d07b849cfa22874b5f7',
     97: '0xBA3CA8221AbC55Def2b52b30A70090061D3aDc08',
   },
   treasury: {

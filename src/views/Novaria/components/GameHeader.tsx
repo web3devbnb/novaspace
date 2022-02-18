@@ -66,7 +66,9 @@ const GameHeader = ({ location, playerMineral, exp }) => {
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
-        <ConnectButton onClick={onPresentConnectModal}>{connected ? accountAddress : 'Connect Wallet'}</ConnectButton>
+        
+        {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
+        {connected && <ConnectButton onClick={reset}>{accountAddress}</ConnectButton>}
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
           <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} />
           <Text glowing>{novaPrice}</Text>

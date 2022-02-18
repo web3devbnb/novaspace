@@ -200,6 +200,7 @@ const Location: React.FC = () => {
                 refinery={placeInfo.refinery}
                 isMining={placeInfo.isMining}
                 fleetLocation={fleetLocation}
+                canTravel={placeInfo.canTravel}
               />
             </LeftCol>
             <CenterCol>

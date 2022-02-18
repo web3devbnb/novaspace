@@ -194,6 +194,7 @@ const LocationCard = ({
   placeY,
   fleetLocation,
   isMining,
+  canTravel,
 }) => {
   const [, setPendingTx] = useState(false)
 
@@ -282,14 +283,14 @@ const LocationCard = ({
   return (
     <Body>
       {placename === 'Haven' ? <HavenImageCard /> : ''}
-      {placetype === 'empty' ? <EmptyImageCard /> : ''}
+      {placetype === '0' && canTravel ? <EmptyImageCard /> : ''}
       {shipyard && !refinery && placename !== 'Haven' ? <ShipyardImageCard /> : ''}
       {refinery && !shipyard && placename !== 'Haven' ? <RefineryImageCard /> : ''}
       {refinery && shipyard && placename !== 'Haven' ? <ShipyardRefineryImageCard /> : ''}
-      {placetype === 'asteroid' ? <AsteroidImageCard /> : ''}
-      {placetype === 'star' ? <StarImageCard /> : ''}
-      {placetype === 'hostile' ? <HostileImageCard /> : ''}
-      {placetype === '' ? <UnexploredImageCard /> : ''}
+      {placetype === '4' ? <AsteroidImageCard /> : ''}
+      {placetype === '2' ? <StarImageCard /> : ''}
+      {placetype === '1' ? <HostileImageCard /> : ''}
+      {placetype === '0' && !canTravel  ? <UnexploredImageCard /> : ''}
       {isMining === true ? <MiningImageCard /> : ''}
       <PlaceHeader>
         <Row>

@@ -267,14 +267,14 @@ const Map: React.FC = () => {
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: x + mapData.x0, y:  y + mapData.y0}],
+                        state: [{ x: x + mapData.x0, y:  ry + mapData.y0}],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
                         <Text bold glowing>
                           {planet.name}
                         </Text>
-                        <Unexplored>{planet.placeType === '' && 'Location Unexplored'}</Unexplored>
+                        <Unexplored>{planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}</Unexplored>
                         <Row>
                           {planet.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
                           {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
@@ -293,11 +293,11 @@ const Map: React.FC = () => {
                             <GridIcon src={highPlayers} alt="planet has more than 50 players" />
                           )}
 
-                          {planet.placeType === 'planet' && <GridCellImg src={planetLogo} alt="planet" />}
-                          {planet.placeType === 'star' && <GridCellImg src={star1} alt="star" />}
-                          {planet.placeType === 'empty' && <GridCellImg src={emptyLogo} alt="star" />}
-                          {planet.placeType === 'asteroid' && <GridCellImg src={asteroid} alt="star" />}
-                          {(y + mapData.y0).toString() === fleetLocation.X.toString() &&
+                          {planet.placeType === '3' && <GridCellImg src={planetLogo} alt="planet" />}
+                          {planet.placeType === '2' && <GridCellImg src={star1} alt="star" />}
+                          {planet.placeType === '0' && planet.canTravel ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
+                          {planet.placeType === '4' && <GridCellImg src={asteroid} alt="star" />}
+                          {(ry + mapData.y0).toString() === fleetLocation.X.toString() &&
                             (x + mapData.x0).toString() === fleetLocation.Y.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />
                             )}
