@@ -283,11 +283,11 @@ const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
-  console.log('shipclasses', shipClasses)
+  // console.log('shipclasses', shipClasses)
   const spaceDocks = useGetSpaceDock()
-  console.log('spaceDocks', spaceDocks)
+  // console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
-  console.log('shipayrds', shipyards)
+  // console.log('shipayrds', shipyards)
   const playerFleet = useGetShips(account)
   const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize(account)
@@ -340,7 +340,7 @@ const Shipyard = () => {
   const { onBuild } = useBuildShips()
 
   const timeMod = useGetTimeModifier()
-  console.log('timeMod, shipAmount, buildTime', timeMod, shipAmount, buildTime)
+  // console.log('timeMod, shipAmount, buildTime', timeMod, shipAmount, buildTime)
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -368,23 +368,24 @@ const Shipyard = () => {
     }
   }
 
-  const CalculateTimeLeft = (endDate) => {
-    const difference = +endDate - +new Date()
+  // const endDate = new Date(1645233527 *1000)
+  // const CalculateTimeLeft = () => {
+  //   const difference = +endDate - +new Date()
 
-    let timeLeft = {}
+  //   let timeLeft = {}
 
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      }
-    }
+  //   if (difference > 0) {
+  //     timeLeft = {
+  //       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+  //       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+  //       minutes: Math.floor((difference / 1000 / 60) % 60),
+  //       seconds: Math.floor((difference / 1000) % 60),
+  //     }
+  //   }
 
-    return timeLeft
-  }
-
+  //   console.log('time left', timeLeft)
+  //   return timeLeft
+  // }
   // styles for the dropdown Selector
   const customStyles = {
     menu: (provided) => ({
@@ -519,7 +520,7 @@ const Shipyard = () => {
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
                           
-                          {console.log('shipclassID', dock.shipClassId)}
+                     
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>
                               <Item>LOCATION &nbsp;</Item>

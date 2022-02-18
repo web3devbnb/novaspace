@@ -21,8 +21,9 @@ import highPlayers from '../assets/highplayers.png'
 import asteroid from '../assets/asteroid.png'
 import star1 from '../assets/star1.png'
 
-const fetchMapData = async (contract, lx: number, ly: number, rx: number, ry: number) => {
-  const data = await contract.methods.getCoordinatePlaces(lx, ly, rx, ry).call()
+const fetchMapData = async (contract, lx: number, ly: number) => {
+  const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
+  console.log('array map data', data)
   return data
 }
 
@@ -70,11 +71,13 @@ const Grid = styled.div`
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
+  // grid-auto-flow: column;
   margin: 10px 10px 10px;
   background-image: url('/images/novaria/border.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10px;
+  // direction: rtl;
   // aspect-ratio: 16/8;
 `
 
@@ -115,6 +118,7 @@ const GridCellContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
   flex-wrap: no-wrap;
   padding: 5px 5px;
   // border: 1px solid white;
@@ -214,6 +218,13 @@ const Map: React.FC = () => {
   const mapContract = useMap()
 
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await fetchMapData(mapContract, 0, 0, )
+      setMapData({ x0: 0, y0: 0, data: arrayToMatrix(data, NX) })
+    }
+    fetch()
+  }, [mapContract])
 
   console.log('map data', mapData)
 
@@ -227,19 +238,11 @@ const Map: React.FC = () => {
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
 
-  useEffect(() => {
-    const fetch = async () => {
-      const data = await fetchMapData(mapContract, 0, 0, NX - 1, NY - 1)
-      setMapData({ x0: 0, y0: 0, data: arrayToMatrix(data, NX) })
-    }
-    fetch()
-  }, [mapContract])
-
   const handleFindLocationClick = async () => {
     if (mapData.x0 === X && mapData.y0 === Y) {
       return
     }
-    const data = await fetchMapData(mapContract, X, Y, X + XLen - 1, Y + YLen - 1)
+    const data = await fetchMapData(mapContract, X, Y)
     setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
   }
 
@@ -258,13 +261,13 @@ const Map: React.FC = () => {
           <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
             {mapData.data.map((arr, y) => {
               const ry = mapData.data.length - y - 1
-              return mapData.data[ry].map((planet, x) => {
+              return mapData.data[y].map((planet, x) => {
                 return (
                   <GridCell>
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: ry + mapData.y0, y: x + mapData.x0 }],
+                        state: [{ x: x + mapData.x0, y:  y + mapData.y0}],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
@@ -294,13 +297,13 @@ const Map: React.FC = () => {
                           {planet.placeType === 'star' && <GridCellImg src={star1} alt="star" />}
                           {planet.placeType === 'empty' && <GridCellImg src={emptyLogo} alt="star" />}
                           {planet.placeType === 'asteroid' && <GridCellImg src={asteroid} alt="star" />}
-                          {(ry + mapData.y0).toString() === fleetLocation.X.toString() &&
+                          {(y + mapData.y0).toString() === fleetLocation.X.toString() &&
                             (x + mapData.x0).toString() === fleetLocation.Y.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />
                             )}
                         </Row>
                         <GridCellId>
-                          ({ry + mapData.y0} , {x + mapData.x0})
+                          ( {x + mapData.x0} ,{ry + mapData.y0})
                         </GridCellId>
                       </GridCellContent>
                     </Link>

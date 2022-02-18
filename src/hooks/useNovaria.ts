@@ -538,7 +538,7 @@ export const useGetPlaceId = (x: number, y: number) => {
   return placeId
 }
 
-export const useGetPlaceInfo = (x1: number, y1: number, x2: number, y2: number) => {
+export const useGetPlaceInfo = (x1: number, y1: number) => {
   const { fastRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState(
     {
@@ -557,24 +557,24 @@ export const useGetPlaceInfo = (x1: number, y1: number, x2: number, y2: number) 
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getCoordinatePlaces(x1, y1, x2, y2).call()
+      const data = await mapContract.methods.getCoordinatePlaces(x1, y1).call()
       setPlaceInfo(
         {
-        name: data[0][0],
-        type: data[0][1],
-        scrap: data[0][2],
-        fleetCount: data[0][3],
-        shipyard: data[0][4],
-        refinery: data[0][5],
-        mineral: data[0][6],
-        canTravel: data[0][7],
-        luminosity: data[0][8],
-        isMining: data[0][9],
+        name: data[20][0],
+        type: data[20][1],
+        scrap: data[20][2],
+        fleetCount: data[20][3],
+        shipyard: data[20][4],
+        refinery: data[20][5],
+        mineral: data[20][6],
+        canTravel: data[20][7],
+        luminosity: data[20][8],
+        isMining: data[20][9],
       }
       )
     }
     fetch()
-  }, [fastRefresh, x1, y1, x2, y2])
+  }, [fastRefresh, x1, y1])
   return placeInfo
 }
 
