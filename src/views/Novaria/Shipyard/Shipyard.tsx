@@ -391,7 +391,6 @@ const Shipyard = () => {
   const customStyles = {
     menu: (provided) => ({
       ...provided,
-      // width: '100%',
       border: '2px solid #289794',
       borderRadius: '0px',
       color: 'black',
@@ -400,38 +399,35 @@ const Shipyard = () => {
     }),
     control: (provided) => ({
       ...provided,
-      // width: 180,
-      Color: '#289794',
+      color: '#289794',
       border: '1px solid #289794',
       borderRadius: '0px',
       background: 'transparent',
-      height: 15,
     }),
     option: (provided) => ({
       ...provided,
       color: '#289794',
-      // padding: 20,
       background: 'transparent',
     }),
     placeholder: (provided) => ({
       ...provided,
       color: '#289794',
       background: 'transparent',
-      height: 10,
     }),
     input: (provided, state) => ({
       ...provided,
-      height: 15,
     }),
     dropdownIndicator: (provided, state) => ({
       ...provided,
       color: '#289794',
-      // background: 'transparent'
     }),
     valueContainer: (provided, state) => ({
       ...provided,
-      fontSize: 12,
-      // background: 'transparent'
+      color: '#289794',
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: '#289794',
     }),
   }
 
