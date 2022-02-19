@@ -111,7 +111,7 @@ const AsteroidImageCard = styled.div`
 `
 
 const StarImageCard = styled.div`
-  background-image: url('/images/novaria/starCard-min.png');
+  background-image: url('/images/novaria/starCard2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;

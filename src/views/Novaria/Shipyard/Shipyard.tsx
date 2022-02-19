@@ -18,6 +18,7 @@ import {
   useGetCostMod,
   useGetTimeModifier,
   useGetPlayer,
+  useSetShipyardName,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -215,7 +216,7 @@ const QueueCard = styled.div`
 
 const ClaimControls = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   position: absolute;
   bottom: 5px;
@@ -246,8 +247,9 @@ const ClaimButton = styled.button`
 
 const CountdownButton = styled.button`
   margin: 5px;
+  margin-left: 0px;
   align-self: center;
-  padding: 0.25rem 1rem;
+ // padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: 0.75rem;
   width: 100%;
@@ -313,6 +315,7 @@ const Shipyard = () => {
   // const [totalBuildTime, setTotalBuildTime] = useState(0)
   const [pending, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
+  const [shipEXP, setShipEXP] = useState(0)
   // const [claimId, setClaimId] = useState(null)
 
   const handleShipyardChange = (option) => {
@@ -335,6 +338,7 @@ const Shipyard = () => {
     setBuildTime(selectedShip.size * 300)
     setShipCost(selectedShip.cost)
     setShipName(selectedShip.name)
+    setShipEXP(selectedShip.experienceRequired)
   }
   const costMod = useGetCostMod()
   const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
@@ -379,6 +383,21 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
+  
+  const isOwner = shipyardOwner === account.toString()
+  const [newName, setShipyardNewName] = useState('')
+  const {onShipyardChange} = useSetShipyardName()
+  const sendShipyardNameChange = async () =>{
+    setPendingTx(true)
+    try {
+      await onShipyardChange(shipyard.coordX, shipyard.coordY, newName)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+
+  }
 
   // const endDate = new Date(1645233527 *1000)
   // const CalculateTimeLeft = () => {
@@ -395,7 +414,6 @@ const Shipyard = () => {
   //     }
   //   }
 
-  //   console.log('time left', timeLeft)
   //   return timeLeft
   // }
 
@@ -478,9 +496,9 @@ const Shipyard = () => {
                     options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                     onChange={handleShipChange}
                     styles={customStyles}
-                  />
+                  />{playerEXP < shipEXP ? 'requires more EXP' : ''}
                 </Row>
-
+                
                 <Row style={{ marginTop: 10 }}>
                   <Input
                     type="number"
@@ -499,6 +517,7 @@ const Shipyard = () => {
                     </Button>
                   }
                 </Row>
+                 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
                     Cost: {buildCost / 10 ** 18}
@@ -519,11 +538,15 @@ const Shipyard = () => {
                     <Text>Build Fee:</Text>
                     <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
+                  <Row style={{ justifyContent: 'space-between' }}>
+                    <Text>EXP Required:</Text>
+                    <Text>{shipEXP ? `${shipEXP}` : '-'}</Text>
+                  </Row>
                 </div>
               </BuildMenu>
 
               <SpaceDockMenu>
-                <Header style={{ marginTop: 0 }}>BUILD QUEUE</Header>
+                <Header style={{ marginTop: 0 }}>BUILD QUEUE <span style={{fontSize:13}} >(Can only have 1 active order per shipyard)</span></Header>
                 <Row>
                   {spaceDocks.map((dock) => {
                     return (
@@ -556,7 +579,7 @@ const Shipyard = () => {
                               <div>
                                 <Row>
                                   <ClaimButton 
-                                    style={{margin:0, marginBottom: -2, marginRight: 5, padding: 3, fontSize: 11, width: '100%'}} 
+                                    style={{margin:0, marginBottom: -2, marginRight: 5, padding: 3, fontSize: 13, width: '100%'}} 
                                     type="button" 
                                     onClick={() => sendClaimMaxTx(spaceDocks.indexOf(dock), dock.amount)}
                                     >
@@ -583,7 +606,7 @@ const Shipyard = () => {
                             <WrongLocationButton>Not at Shipyard</WrongLocationButton>
                           )}
                           {dock.completionTime * 1000 > Number(new Date()) ? (
-                            <CountdownButton>building...</CountdownButton>
+                            <CountdownButton>{(new Date(dock.completionTime * 1000)).toLocaleString()}</CountdownButton>
                           ) : (
                             ''
                           )}
@@ -628,6 +651,14 @@ const Shipyard = () => {
                 </Col>
               </Row>
             </FleetMenu>
+            {isOwner &&
+              <div>
+                <Item>
+                  <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
+                  <Button onClick={sendShipyardNameChange} >{!pending ? 'Set Shipyard Name' : ''}</Button>
+                </Item>
+              </div>
+            }
           </Col>
         </Body>
       </PageRow>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { getWeb3 } from 'utils/web3'
-import { useChangeName, useGetPlaceInfo, useRecall, useSetShipyardName } from 'hooks/useNovaria'
+import { useChangeName, useGetPlaceInfo, useGetShipyards, useRecall, useSetShipyardName } from 'hooks/useNovaria'
 
 const Body = styled.div`
   display: flex;
@@ -33,9 +33,10 @@ const PlaceControls = ({ placeX, placeY }) => {
   const web3 = getWeb3()
   const [pending, setPendingTx] = useState(false)
   const [planetName, setPlanetName] = useState('')
-  const [shipyardName, setShipyardName] = useState('')
 
-  const planetOwner = useGetPlaceInfo(placeX, placeY)
+  // need to set so only the discoverer can set the name and it can only be set once
+  // const placeOwner = useGetPlaceInfo(placeX, placeY)
+
 
   const {onChange} = useChangeName()
   const sendPlanetNameChange = async () =>{
@@ -50,29 +51,13 @@ const PlaceControls = ({ placeX, placeY }) => {
 
   }
 
-  const {onShipyardChange} = useSetShipyardName()
-  const sendShipyardNameChange = async () =>{
-    setPendingTx(true)
-    try {
-      await onShipyardChange(placeX, placeY, shipyardName)
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-
-  }
-  
 
   return (
     <Body style={{marginTop:10}}>
+      (only use if you discovered the place)
       <Item>
         <input type="text" required maxLength={16} onChange={(e) => setPlanetName(e.target.value)} />
         <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Planet Name' : ''}</Button>
-      </Item>
-      <Item>
-        <input type="text" required maxLength={16} onChange={(e) => setShipyardName(e.target.value)} />
-        <Button onClick={sendShipyardNameChange} >{!pending ? 'Set Shipyard Name' : ''}</Button>
       </Item>
     </Body>
   )

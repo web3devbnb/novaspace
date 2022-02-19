@@ -176,8 +176,8 @@ const Location: React.FC = () => {
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
-  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account)*1000).toLocaleString()
-  const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account)*1000).toLocaleString()
+  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account)*1000)
+  const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account)*1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerEXP = useGetPlayer(account.toString()).experience
