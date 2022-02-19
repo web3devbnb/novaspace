@@ -42,7 +42,6 @@ const WalletProvider = ({ children }) => {
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
 const Novaria = lazy(() => import('./views/Novaria'))
-// const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
@@ -77,20 +76,17 @@ const App: React.FC = () => {
               <Farms />
               <Footer />
             </Route>
-            {/* <Route path="/pools">
-              <Farms tokenMode />
-            </Route> */}
             <Route path="/legend-of-novaria">
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
               <WalletProvider>
                 <Novaria />
                 <Footer />
-                </WalletProvider>
+              </WalletProvider>
             </Route>
             <Route path="/map">
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-            <WalletProvider>
-              <Map />
+              <WalletProvider>
+                <Map />
               </WalletProvider>
             </Route>
             <Route path="/location">
@@ -125,7 +121,6 @@ const App: React.FC = () => {
             <Route component={NotFound} />
             <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
           </Switch>
-          {/* <Bubbles numberOfBubbles={150} /> */}
         </Suspense>
       </Menu>
     </Router>
