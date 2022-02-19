@@ -336,7 +336,7 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {canTravel && !currentLocation && distance < 4 && fleetSize >= 25 ? (
+        {canTravel && !currentLocation && distance < 6 && fleetSize >= 25 ? (
           <Button type="button" onClick={sendTravelTx}>
             {pending ? 'pending...' : 'TRAVEL'}
           </Button>

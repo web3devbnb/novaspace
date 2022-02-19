@@ -76,8 +76,12 @@ const GameHeader = ({ location, playerMineral, exp }) => {
         {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
         {connected && <ConnectButton onClick={reset}>{accountAddress}</ConnectButton>}
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
-          <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} />
+        <a href='https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f' target='blank' rel='noreferrer noopener'  >
+          <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} /> 
+        </a>
+        <a href='https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f' target='blank' rel='noreferrer noopener'  >
           <Text glowing>{novaPrice}</Text>
+        </a>
         </div>
         <Text glowing>
           NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
