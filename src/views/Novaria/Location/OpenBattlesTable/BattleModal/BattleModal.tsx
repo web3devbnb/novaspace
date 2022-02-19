@@ -6,6 +6,7 @@ import Modal from '../../../components/NovariaModal'
 
 interface BattleModalProps {
   battle: number
+  status: boolean
   onDismiss?: () => void
 }
 
@@ -23,7 +24,7 @@ const Button = styled.button`
   }
 `
 
-const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
+const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) => {
   const [pendingTx, setPendingTx] = useState(false)
   const battleInfo = useGetBattle(battle)
   const atkPower = battleInfo.attackTeam[1]
@@ -35,6 +36,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
   console.log('battle info', battleInfo)
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
+  const inBattle = status === true
 
   const { onBattle } = useGoBattle()
   
@@ -68,19 +70,21 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, onDismiss}) => {
       <div>
         Deadline: {startTime}
       </div>
-      <ModalActions>
-        <Button  onClick={() => onEnterBattle(player, 1)}>
-          ATTACK
-        </Button>
-        <Button  onClick={() => onEnterBattle(player, 2)}>
-          DEFEND
-        </Button>
-        {battleReady ?
-          <Button  onClick={sendBattleTx}>
-            START BATTLE
+      {!inBattle &&
+        <ModalActions>
+          <Button  onClick={() => onEnterBattle(player, 1)}>
+            ATTACK
           </Button>
-        : ''}
-    </ModalActions>
+          <Button  onClick={() => onEnterBattle(player, 2)}>
+            DEFEND
+          </Button>
+          {battleReady ?
+            <Button  onClick={sendBattleTx}>
+              START BATTLE
+            </Button>
+          : ''}
+      </ModalActions> 
+    }
     </Modal>
   )
 }

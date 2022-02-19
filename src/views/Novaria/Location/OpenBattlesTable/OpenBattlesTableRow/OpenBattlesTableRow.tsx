@@ -21,8 +21,8 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle, placeX, placeY }) => {
-  const [handleClick] = useModal(<BattleModal battle={battle} />)
+const OpenBattlesTableRow = ({ battle, status}) => {
+  const [handleClick] = useModal(<BattleModal battle={battle} status={status} />)
   const battleInfo = useGetBattle(battle)
   const battleStart = new Date(battleInfo.deadline * 1000).toLocaleString()
   console.log('battle stats', battleInfo)

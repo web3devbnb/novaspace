@@ -16,6 +16,7 @@ import NovariaModal from '../../../components/NovariaModal'
 
 interface PlayerModalProps {
   player: string
+  status: boolean
   onDismiss?: () => void
 }
 
@@ -37,7 +38,7 @@ const Child = styled.div`
   margin-bottom: 5px;
 `
 
-const PlayerModal: React.FC<PlayerModalProps> = ({ player, onDismiss }) => {
+const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) => {
   const ships = useGetShips(player)
   console.log('ships', ships)
   const shipClasses = useGetShipClasses()
@@ -50,6 +51,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, onDismiss }) => {
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
+  const inBattle = status === true
 
   const { onEnterBattle } = useEnterBattle()
 
@@ -79,14 +81,16 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, onDismiss }) => {
           {playerBattleStatus === '2' && 'Defending'}
         </Child>
       </div>
-      <ModalActions>
-        <Button  onClick={() => onEnterBattle(player, 1)}>
-          ATTACK
-        </Button>
-        <Button  onClick={() => onEnterBattle(player, 2)}>
-          DEFEND
-        </Button>
-      </ModalActions>
+      {!inBattle &&
+        <ModalActions>
+          <Button  onClick={() => onEnterBattle(player, 1)}>
+            ATTACK
+          </Button>
+          <Button  onClick={() => onEnterBattle(player, 2)}>
+            DEFEND
+          </Button>
+        </ModalActions>
+      }
     </NovariaModal>
   )
 }

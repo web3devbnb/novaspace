@@ -293,10 +293,10 @@ const Map: React.FC = () => {
                             <GridIcon src={highPlayers} alt="planet has more than 50 players" />
                           )}
 
-                          {planet.placeType === '3' && <GridCellImg src={planetLogo} alt="planet" />}
-                          {planet.placeType === '2' && <GridCellImg src={star1} alt="star" />}
-                          {planet.placeType === '0' && planet.canTravel ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
-                          {planet.placeType === '4' && <GridCellImg src={asteroid} alt="star" />}
+                          {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
+                          {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
+                          {planet.placeType === '1' && planet.canTravel ? <GridCellImg src={emptyLogo} alt="empty" /> : ''}
+                          {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
                           {(ry + mapData.y0).toString() === fleetLocation.Y.toString() &&
                             (x + mapData.x0).toString() === fleetLocation.X.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />

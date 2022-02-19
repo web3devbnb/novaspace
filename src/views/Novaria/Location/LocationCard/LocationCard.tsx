@@ -195,18 +195,27 @@ const LocationCard = ({
   fleetLocation,
   isMining,
   canTravel,
+  currentLocation
 }) => {
-  const [, setPendingTx] = useState(false)
+  const [pending, setPendingTx] = useState(false)
 
   const { account } = useWallet()
-  const isCurrentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
   const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10 ** 18
   const timeMod = useGetTimeModifier()
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 / timeMod
   const exploreCost = useGetExploreCost(placeX, placeY)
-  const canExplore = (placetype === '0' && !canTravel)
-  const isEmpty = (placetype === '0' && canTravel)
-  // const shipyards = useGetShipyards()
+  const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
+ 
+
+  const unexplored = placetype === '0'
+  const isEmpty = placetype === '1' 
+  const hostile = placetype === '2'
+  const star = placetype === '3'
+  const planet = placetype === '4'
+  const asteroid = placetype === '5'
+  const wormhole = placetype === '6'
+  const haven = placename === 'Haven'
+
   
   
   const { onTakeover } = useShipyardTakeover()
@@ -284,22 +293,22 @@ const LocationCard = ({
 
   return (
     <Body>
-      {placename === 'Haven' ? <HavenImageCard /> : ''}
+      {haven ? <HavenImageCard /> : ''}
       {isEmpty ? <EmptyImageCard /> : ''}
-      {shipyard && !refinery && placename !== 'Haven' ? <ShipyardImageCard /> : ''}
-      {refinery && !shipyard && placename !== 'Haven' ? <RefineryImageCard /> : ''}
-      {refinery && shipyard && placename !== 'Haven' ? <ShipyardRefineryImageCard /> : ''}
-      {placetype === '4' ? <AsteroidImageCard /> : ''}
-      {placetype === '2' ? <StarImageCard /> : ''}
-      {placetype === '1' ? <HostileImageCard /> : ''}
-      {canExplore ? <UnexploredImageCard /> : ''}
+      {shipyard && !refinery && !haven ? <ShipyardImageCard /> : ''}
+      {refinery && !shipyard && !haven ? <RefineryImageCard /> : ''}
+      {refinery && shipyard && !haven ? <ShipyardRefineryImageCard /> : ''}
+      {asteroid ? <AsteroidImageCard /> : ''}
+      {star ? <StarImageCard /> : ''}
+      {hostile ? <HostileImageCard /> : ''}
+      {unexplored ? <UnexploredImageCard /> : ''}
       {isMining === true ? <MiningImageCard /> : ''}
       <PlaceHeader>
         <Row>
           <Name>
             {placename}
             {isEmpty ? 'EMPTY SPACE' : ''}
-            {placetype === '1' ? 'HOSTILE SPACE' : ''}
+            {hostile ? 'HOSTILE SPACE' : ''}
           </Name>
           <Location>
             ({placeX},{placeY})
@@ -314,52 +323,52 @@ const LocationCard = ({
           <span>
             {mineral > 0 ? (mineral / 10 ** 18).toFixed(3) : ''} {mineral > 0 ? 'MINERAL' : ''}
           </span>
-          <span>{canExplore ? 'UNEXPLORED' : ''}</span>
-          <span>{placetype === '2' ? 'STAR' : ''}</span>
+          <span>{unexplored ? 'UNEXPLORED' : ''}</span>
+          <span>{star ? 'STAR' : ''}</span>
         </Row>
       </PlaceHeader>
       <PlaceBody>
-        {mineral > 0 ? (
+        {mineral > 0 && currentLocation ? (
           <Button type="button" onClick={sendMineTx}>
-            MINE
+            {pending ? 'pending...' : 'MINE'}
           </Button>
         ) : (
           ''
         )}
-        {salvage > 0 ? (
+        {salvage > 0 && currentLocation ? (
           <Button type="button" onClick={sendCollectTx}>
-            COLLECT
+            {pending ? 'pending...' : 'COLLECT'}
           </Button>
         ) : (
           ''
         )}
-        {refinery ? (
+        {refinery && currentLocation ? (
           <Button type="button" onClick={sendRefineTx}>
-            REFINE
+            {pending ? 'pending...' : 'REFINE'}
           </Button>
         ) : (
           ''
         )}
-        {canTravel && !isCurrentLocation ? (
+        {canTravel && !currentLocation && distance < 4 ? (
           <Button type="button" onClick={sendTravelTx}>
-            TRAVEL
+            {pending ? 'pending...' : 'TRAVEL'}
           </Button>
         ) : (
           ''
         )}
-        {canExplore ? (
+        {unexplored && distance < 2 ? (
           <Button type="button" onClick={sendExploreTx}>
-            EXPLORE
+            {pending ? 'pending...' : 'EXPLORE'}
           </Button>
         ) : (
           ''
         )}
-        {placetype === 'shipyard' && placetype !== 'refinery' && 
+        {shipyard && refinery && 
           <Button type='button' onClick={sendTakeoverTx} >Takeover Shipyard</Button> }
         <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-          <span>Travel Cost (NOVA): {!isCurrentLocation ? travelCost : ''}</span>
-          <span>Travel Cooldown: {!isCurrentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
-          {placetype === '' && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
+          <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
+          <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
+          {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
         </Row>
       </PlaceBody>
     </Body>

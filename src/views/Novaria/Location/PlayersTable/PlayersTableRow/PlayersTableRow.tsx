@@ -22,13 +22,13 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const PlayersTableRow = ({ player }) => {
+const PlayersTableRow = ({ player, status }) => {
   const web3 = getWeb3()
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const name = useGetNameByAddress(player)
   const mineral = Number(useGetFleetMineral(player))
-  const [handleClick] = useModal(<PlayerModal player={player} />)
+  const [handleClick] = useModal(<PlayerModal player={player} status={status} />)
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>

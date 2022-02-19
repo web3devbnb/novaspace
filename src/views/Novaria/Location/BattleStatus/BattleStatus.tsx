@@ -34,14 +34,13 @@ const BattleButton = styled.button`
 
 const BattleStatus = ({ playerBattleStatus, playerBattleInfo }) => {
   
-    console.log('battle status', playerBattleStatus)
-    console.log('player battle info', playerBattleInfo)
+
     const attacking = playerBattleInfo.battleStatus === '1'
     const defending = playerBattleInfo.battleStatus === '2'
     const battleId = Number(playerBattleInfo.battleId)
     const startTime = new Date(useGetBattle(battleId).deadline * 1000).toLocaleString()
     
-    const [handleClick] = useModal(<BattleModal battle={battleId} />) 
+    const [handleClick] = useModal(<BattleModal battle={battleId} status={playerBattleStatus} />) 
 
   return (
     <Body>

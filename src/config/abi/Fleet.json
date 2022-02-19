@@ -9,19 +9,6 @@
 		"inputs": [
 			{
 				"indexed": false,
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "NewMap",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
 				"internalType": "uint256",
 				"name": "_x",
 				"type": "uint256"
@@ -1143,7 +1130,7 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_treasury",
+				"name": "_new",
 				"type": "address"
 			}
 		],

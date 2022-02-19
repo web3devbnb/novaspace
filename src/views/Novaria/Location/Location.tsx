@@ -176,11 +176,12 @@ const Location: React.FC = () => {
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account)*1000).toLocaleString()
-  console.log('travel cooldown', currentTravelCooldown)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account)*1000).toLocaleString()
   const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerEXP = useGetPlayer(account.toString()).experience
+
+  const currentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
 
   return (
     <Page className="fontsforweb_bignoodletitling">
@@ -202,6 +203,7 @@ const Location: React.FC = () => {
                 isMining={placeInfo.isMining}
                 fleetLocation={fleetLocation}
                 canTravel={placeInfo.canTravel}
+                currentLocation = {currentLocation}
               />
             </LeftCol>
             <CenterCol>
@@ -214,11 +216,11 @@ const Location: React.FC = () => {
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation} placeX={placeX} placeY={placeY} />
+                <OpenBattlesTable battles={battlesAtLocation} status={playerBattleStatus} />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>
-                <PlayersTable players={fleetsAtLocation} />
+                <PlayersTable players={fleetsAtLocation} playerBattleStatus={playerBattleStatus} />
               </PlayersCard>
             </CenterCol>
             <RightCol>
