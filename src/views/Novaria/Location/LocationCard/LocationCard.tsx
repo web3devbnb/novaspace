@@ -340,7 +340,7 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {placetype !== '2' && placetype !== '1' && !isCurrentLocation ? (
+        {canTravel && !isCurrentLocation ? (
           <Button type="button" onClick={sendTravelTx}>
             TRAVEL
           </Button>
