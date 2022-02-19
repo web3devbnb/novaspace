@@ -124,8 +124,12 @@ const GridCellContent = styled.div`
   // border: 1px solid white;
   position: relative;
   aspect-ratio: 17/8;
-  width: 150px;
+  width: 100px;
   height: 80px;
+  
+  ${({ theme }) => theme.mediaQueries.lg} {
+    width: 150px;
+  }
 `
 
 const Row = styled.div`
@@ -211,8 +215,8 @@ const Legend = styled.div`
   }
 `
 
-const NX = window.innerWidth < 1150 ? 5 : 7
-const NY = window.innerWidth < 1150 ? 5 : 7
+const NX =  7
+const NY =  7
 
 const Map: React.FC = () => {
   const mapContract = useMap()

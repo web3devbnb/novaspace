@@ -4,10 +4,15 @@ import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { getWeb3 } from 'utils/web3'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { usePriceNovaBusd } from 'state/hooks'
+import { useGetPlayerBattleStatus } from 'hooks/useNovaria'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import smallLogo from '../assets/novariaSmallLogo.png'
+
+export interface HeaderProps {
+  battleStatus: boolean
+}
 
 const Hero = styled.div`
   display: flex;
@@ -19,7 +24,7 @@ const Hero = styled.div`
   // margin-left: 10px;
   margin-top: 0px;
   padding-top: 10px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  background: ${(props: HeaderProps) => props.battleStatus === false ? 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)' : 'linear-gradient(180deg, rgba(255,0,0,1) 16%, rgba(255,0,0,0) 100%)'};
 `
 
 const InfoBlock = styled.div`
@@ -56,12 +61,13 @@ const GameHeader = ({ location, playerMineral, exp }) => {
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
   const web3 = getWeb3()
 
+  const inBattle = useGetPlayerBattleStatus(account)
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
   const accountAddress = connected ? account.toString().slice(0, 5) + '...' + account.toString().slice(38, 42) : ''
 
   return (
-    <Hero>
+    <Hero battleStatus={inBattle}>
       <a href="/legend-of-novaria">
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>

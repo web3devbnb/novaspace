@@ -195,7 +195,8 @@ const LocationCard = ({
   fleetLocation,
   isMining,
   canTravel,
-  currentLocation
+  currentLocation,
+  fleetSize
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -349,7 +350,7 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {canTravel && !currentLocation && distance < 4 ? (
+        {canTravel && !currentLocation && distance < 4 && fleetSize >= 25 ? (
           <Button type="button" onClick={sendTravelTx}>
             {pending ? 'pending...' : 'TRAVEL'}
           </Button>

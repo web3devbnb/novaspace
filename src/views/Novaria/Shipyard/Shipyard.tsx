@@ -218,7 +218,7 @@ const ClaimControls = styled.div`
   flex-direction: row;
   align-items: center;
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
 `
 
 const ClaimInput = styled.input`
@@ -239,7 +239,7 @@ const ClaimButton = styled.button`
   font-weight: bold;
   text-decoration: none;
   color: black;
-  border: 1px solid #5affff;
+  border: none;
   border-radius: 0px;
   background-color: #5affff;
 `
@@ -311,7 +311,7 @@ const Shipyard = () => {
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
   // const [totalBuildTime, setTotalBuildTime] = useState(0)
-  const [, setPendingTx] = useState(false)
+  const [pending, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
   // const [claimId, setClaimId] = useState(null)
 
@@ -356,12 +356,23 @@ const Shipyard = () => {
   }
 
   const { onClaim } = useClaimShips()
-
+  
   const sendClaimTx = async (claimId) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
       await onClaim(claimId, claimAmount)
+    } catch (error) {
+      // console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+  const sendClaimMaxTx = async (claimId, amount) => {
+    setPendingTx(true)
+    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
+    try {
+      await onClaim(claimId, amount)
     } catch (error) {
       // console.log('error: ', error)
     } finally {
@@ -387,6 +398,7 @@ const Shipyard = () => {
   //   console.log('time left', timeLeft)
   //   return timeLeft
   // }
+
   // styles for the dropdown Selector
   const customStyles = {
     menu: (provided) => ({
@@ -477,9 +489,15 @@ const Shipyard = () => {
                     value={shipAmount}
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
-                  <Button type="button" onClick={sendTx}>
-                    Build {shipName}
-                  </Button>
+                  {!pending ? 
+                    <Button type="button" onClick={sendTx}>
+                      Build {shipName}
+                    </Button>
+                    : 
+                    <Button type="button" >
+                      pending...
+                    </Button>
+                  }
                 </Row>
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
@@ -532,9 +550,36 @@ const Shipyard = () => {
                         </QueueCard>
 
                         <ClaimControls>
-                          {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
-                            ''
-                          ) : (
+                          {/* eslint-disable-next-line no-nested-ternary */}
+                          {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? 
+                              +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
+                              <div>
+                                <Row>
+                                  <ClaimButton 
+                                    style={{margin:0, marginBottom: -2, marginRight: 5, padding: 3, fontSize: 11, width: '100%'}} 
+                                    type="button" 
+                                    onClick={() => sendClaimMaxTx(spaceDocks.indexOf(dock), dock.amount)}
+                                    >
+                                    {!pending ? 'CLAIM MAX' : 'pending...'}
+                                  </ClaimButton>
+                                </Row>
+                                <Item>
+                                  <ClaimInput
+                                    type="number"
+                                    min="0"
+                                    placeholder="0"
+                                    value={claimAmount}
+                                    onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
+                                  />
+                                  <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                                    {!pending ? 'CLAIM' : 'pending...'}
+                                  </ClaimButton>
+                                </Item>
+                              </div>
+                              ) : (
+                                ''
+                              )
+                           : (
                             <WrongLocationButton>Not at Shipyard</WrongLocationButton>
                           )}
                           {dock.completionTime * 1000 > Number(new Date()) ? (
@@ -543,22 +588,6 @@ const Shipyard = () => {
                             ''
                           )}
 
-                          {+new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
-                            <Item>
-                              <ClaimInput
-                                type="number"
-                                min="0"
-                                placeholder="0"
-                                value={claimAmount}
-                                onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                              />
-                              <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
-                                CLAIM
-                              </ClaimButton>
-                            </Item>
-                          ) : (
-                            ''
-                          )}
                         </ClaimControls>
                       </Col>
                     )

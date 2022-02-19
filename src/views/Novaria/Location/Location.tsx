@@ -25,6 +25,7 @@ import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
 import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
+import PlaceControls from './PlaceControls'
 
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
@@ -192,6 +193,7 @@ const Location: React.FC = () => {
           <Content>
             <LeftCol>
               <LocationCard
+                fleetSize={fleetSize}
                 placename={placeInfo.name}
                 placetype={placeInfo.type}
                 placeX={placeX}
@@ -239,6 +241,7 @@ const Location: React.FC = () => {
                 <Header>BATTLE PROGRESS</Header>
                 <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
               </BattleProgressCard>
+              <PlaceControls placeX={placeX} placeY={placeY} />
             </RightCol>
           </Content>
         </Body>

@@ -239,9 +239,36 @@ export const explore = async (mapContract, x, y, account) => {
     })
 }
 
-export const takeover = async (fleetContract, x, y, account) => {
+export const initiateShipyardTakeover = async (fleetContract, x, y, account) => {
   return fleetContract.methods
-    .explore(x, y)
+    .initiateShipyardTakeover(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const completeShipyardTakeover = async (fleetContract, x, y, account) => {
+  return fleetContract.methods
+    .completeShipyardTakeover(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const changeName = async (mapContract, x, y, name, account) => {
+  return mapContract.methods
+    .changeName(x, y, name)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const setShipyardName = async (fleetContract, x, y, name, account) => {
+  return fleetContract.methods
+    .setShipyardName(x, y, name)
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash

@@ -19,7 +19,11 @@ import {
   enterBattle,
   explore,
   recall,
-  takeover,
+  initiateShipyardTakeover,
+  completeShipyardTakeover,
+  setShipyardName,
+  changeName,
+
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -84,13 +88,28 @@ export const useShipyardTakeover = () => {
 
   const handleClaimShips = useCallback(
     async (x: number, y: number) => {
-      const txHash = await takeover(useFleetContract, x, y, account)
+      const txHash = await initiateShipyardTakeover(useFleetContract, x, y, account)
       console.info(txHash)
     },
     [account, useFleetContract],
   )
   return { onTakeover: handleClaimShips }
 }
+
+export const useCompleteShipyardTakeover = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleClaimShips = useCallback(
+    async (x: number, y: number) => {
+      const txHash = await completeShipyardTakeover(useFleetContract, x, y, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onTakeover: handleClaimShips }
+}
+
 
 // mission options: ATTACK (1), DEFEND (2). target is address
 export const useEnterBattle = () => {
@@ -120,6 +139,20 @@ export const useGoBattle = () => {
     [account, useFleetContract],
   )
   return { onBattle: handleGoBattle }
+}
+
+export const useSetShipyardName = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleClaimShips = useCallback(
+    async (x: number, y: number, name: string) => {
+      const txHash = await setShipyardName(useFleetContract, x, y, name, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onShipyardChange: handleClaimShips }
 }
 
 // ***View functions***
@@ -483,6 +516,20 @@ export const useExplore = () => {
   return { onExplore: handleExplore }
 }
 
+export const useChangeName = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+
+  const handleChangeName = useCallback(
+    async (x: number, y: number, name: string) => {
+      const txHash = await changeName(useMapContract, x, y, name, account)
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
+  return { onChange: handleChangeName }
+}
+
 export const useRecall = (haven) => {
   const { account } = useWallet()
   const useMapContract = useMap()
@@ -564,8 +611,8 @@ export const useGetPlaceInfo = (x1: number, y1: number) => {
         type: data[42][1],
         scrap: data[42][2],
         fleetCount: data[42][3],
-        shipyard: data[42][4],
-        refinery: data[42][5],
+        shipyard: data[42][5],
+        refinery: data[42][4],
         mineral: data[42][6],
         canTravel: data[42][7],
         luminosity: data[42][8],
