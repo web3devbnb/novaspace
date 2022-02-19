@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
-import { getWeb3 } from 'utils/web3'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { usePriceNovaBusd } from 'state/hooks'
 import { useGetPlayerBattleStatus } from 'hooks/useNovaria'
@@ -24,7 +23,10 @@ const Hero = styled.div`
   // margin-left: 10px;
   margin-top: 0px;
   padding-top: 10px;
-  background: ${(props: HeaderProps) => props.battleStatus === false ? 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)' : 'linear-gradient(180deg, rgba(255,0,0,1) 16%, rgba(255,0,0,0) 100%)'};
+  background: ${(props: HeaderProps) =>
+    props.battleStatus === false
+      ? 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)'
+      : 'linear-gradient(180deg, rgba(255,0,0,1) 16%, rgba(255,0,0,0) 100%)'};
 `
 
 const InfoBlock = styled.div`
@@ -59,7 +61,6 @@ const GameHeader = ({ location, playerMineral, exp }) => {
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
-  const web3 = getWeb3()
 
   const inBattle = useGetPlayerBattleStatus(account)
   const connected = status === 'connected'
@@ -72,7 +73,6 @@ const GameHeader = ({ location, playerMineral, exp }) => {
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
-        
         {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
         {connected && <ConnectButton onClick={reset}>{accountAddress}</ConnectButton>}
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
@@ -83,7 +83,7 @@ const GameHeader = ({ location, playerMineral, exp }) => {
           NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
-          MINERAL: <span style={{ color: 'gold' }}>{(playerMineral/10**18).toFixed(3)}</span>
+          MINERAL: <span style={{ color: 'gold' }}>{(playerMineral / 10 ** 18).toFixed(3)}</span>
         </Text>
         <Text glowing>
           EXP: <span style={{ color: 'gold' }}>{exp}</span>
