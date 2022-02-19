@@ -29,7 +29,7 @@ const Button = styled.button`
     }
 `
 
-const PlaceControls = ({ placeX, placeY }) => {
+const PlaceControls = ({ placeX, placeY, placeName, isDiscoverer }) => {
   const web3 = getWeb3()
   const [pending, setPendingTx] = useState(false)
   const [planetName, setPlanetName] = useState('')
@@ -48,16 +48,22 @@ const PlaceControls = ({ placeX, placeY }) => {
     } finally {
       setPendingTx(false)
     }
-
   }
 
+  if (placeName !== '') {
+    return (null)
+  }
+
+  if (!isDiscoverer) {
+    return (null)
+  }
 
   return (
     <Body style={{marginTop:10}}>
-      (only use if you discovered the place)
       <Item>
-        <input type="text" required maxLength={16} onChange={(e) => setPlanetName(e.target.value)} />
-        <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Planet Name' : ''}</Button>
+        <input type="text" style={{maxWidth: 180}} required maxLength={16} onChange={(e) => setPlanetName(e.target.value)} />
+        <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Planet Name' : 'pending...'}</Button>
+        (The name can only be set once)
       </Item>
     </Body>
   )

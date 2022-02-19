@@ -217,9 +217,6 @@ const LocationCard = ({
   const wormhole = placetype === '6'
   const haven = placename === 'Haven'
 
-  
-  
-  const { onTakeover } = useShipyardTakeover()
   const { onExplore } = useExplore()
   const { onMine } = useMine()
   const { onRefine } = useRefine()
@@ -274,17 +271,6 @@ const LocationCard = ({
     try {
       await onExplore(placeX, placeY)
       console.log('Exploring')
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-  const sendTakeoverTx = async () => {
-    setPendingTx(true)
-    try {
-      await onTakeover(placeX, placeY)
-      console.log('attempting shipyard takeover')
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -364,8 +350,8 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {shipyard && refinery && 
-          <Button type='button' onClick={sendTakeoverTx} >Takeover Shipyard</Button> }
+        
+         
         <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
           <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
           <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>

@@ -360,6 +360,30 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "coordinatePlaces",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_editor",
 				"type": "address"
@@ -511,6 +535,11 @@
 						"internalType": "bool",
 						"name": "isMiningPlanet",
 						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "discoverer",
+						"type": "address"
 					}
 				],
 				"internalType": "struct Map.PlaceGetter[]",
@@ -849,6 +878,65 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "places",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum Map.PlaceType",
+				"name": "placeType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "childId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "coordX",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "coordY",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "salvage",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "discoverer",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "canTravel",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",

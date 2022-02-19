@@ -15,6 +15,7 @@ import {
   useGetCurrentTravelCooldown,
   useGetPlayer,
   useGetCurrentMiningCooldown,
+  useGetShipyards,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -26,6 +27,7 @@ import PlayersTable from './PlayersTable'
 import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
+import ShipyardTakeover from './ShipyardTakeover'
 
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
@@ -150,6 +152,10 @@ const InputControl = styled.div`
 `
 
 const YourFleetCard = styled.div``
+const TakeOverMenu = styled.div`
+  margin: 10px;
+  margin-left: 0px;
+`
 const BattleProgressCard = styled.div`
   margin-top: 10px;
 `
@@ -181,6 +187,8 @@ const Location: React.FC = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account) 
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerEXP = useGetPlayer(account.toString()).experience
+  const shipyards = useGetShipyards()
+  const isDiscoverer = placeInfo === account
 
   const currentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
 
@@ -241,7 +249,17 @@ const Location: React.FC = () => {
                 <Header>BATTLE PROGRESS</Header>
                 <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
               </BattleProgressCard>
-              <PlaceControls placeX={placeX} placeY={placeY} />
+              {shipyards.filter(
+                shipyard => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString()
+                ).map(
+                  shipyard => 
+                    <TakeOverMenu>
+                      <Header>Shipyard Takeover</Header>
+                      <ShipyardTakeover shipyard={shipyard} placeX={placeX} placeY={placeY} />
+                    </TakeOverMenu>                    
+                )                
+              }
+              <PlaceControls placeX={placeX} placeY={placeY} placeName={placeInfo.name} isDiscoverer={isDiscoverer} />
             </RightCol>
           </Content>
         </Body>
