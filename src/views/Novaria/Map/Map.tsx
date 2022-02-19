@@ -44,15 +44,10 @@ const Page = styled.div`
   background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
-  margin-top: -105px;
   color: #5affff;
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    margin-top: -75px;
-  }
 `
 
 const Body = styled.div`
@@ -118,7 +113,7 @@ const GridCellContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
   flex-wrap: no-wrap;
   padding: 5px 5px;
   // border: 1px solid white;
@@ -126,7 +121,7 @@ const GridCellContent = styled.div`
   aspect-ratio: 17/8;
   width: 100px;
   height: 80px;
-  
+
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 150px;
   }
@@ -215,8 +210,8 @@ const Legend = styled.div`
   }
 `
 
-const NX =  7
-const NY =  7
+const NX = 7
+const NY = 7
 
 const Map: React.FC = () => {
   const mapContract = useMap()
@@ -224,7 +219,7 @@ const Map: React.FC = () => {
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(mapContract, 0, 0, )
+      const data = await fetchMapData(mapContract, 0, 0)
       setMapData({ x0: 0, y0: 0, data: arrayToMatrix(data, NX) })
     }
     fetch()
@@ -271,14 +266,16 @@ const Map: React.FC = () => {
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: x + mapData.x0, y:  ry + mapData.y0}],
+                        state: [{ x: x + mapData.x0, y: ry + mapData.y0 }],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
                         <Text bold glowing>
                           {planet.name}
                         </Text>
-                        <Unexplored>{planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}</Unexplored>
+                        <Unexplored>
+                          {planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}
+                        </Unexplored>
                         <Row>
                           {planet.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
                           {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
@@ -299,7 +296,11 @@ const Map: React.FC = () => {
 
                           {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
                           {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
-                          {planet.placeType === '1' && planet.canTravel ? <GridCellImg src={emptyLogo} alt="empty" /> : ''}
+                          {planet.placeType === '1' && planet.canTravel ? (
+                            <GridCellImg src={emptyLogo} alt="empty" />
+                          ) : (
+                            ''
+                          )}
                           {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
                           {(ry + mapData.y0).toString() === fleetLocation.Y.toString() &&
                             (x + mapData.x0).toString() === fleetLocation.X.toString() && (

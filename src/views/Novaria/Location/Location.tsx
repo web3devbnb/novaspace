@@ -36,16 +36,11 @@ const Page = styled.div`
   background-size: cover;
 
   font-size: 15px;
-  margin-top: -105px;
   color: #5affff;
 
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    margin-top: -75px;
-  }
 `
 
 const Row = styled.div`
@@ -182,9 +177,9 @@ const Location: React.FC = () => {
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
   const fleetMaxMineral = useGetMaxMineralCapacity(account)
-  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account)*1000)
-  const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account)*1000)
-  const playerBattleStatus = useGetPlayerBattleStatus(account) 
+  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
+  const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
+  const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerEXP = useGetPlayer(account.toString()).experience
   const shipyards = useGetShipyards()
@@ -194,7 +189,7 @@ const Location: React.FC = () => {
 
   return (
     <Page className="fontsforweb_bignoodletitling">
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}/>
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
@@ -214,7 +209,7 @@ const Location: React.FC = () => {
                 isMining={placeInfo.isMining}
                 fleetLocation={fleetLocation}
                 canTravel={placeInfo.canTravel}
-                currentLocation = {currentLocation}
+                currentLocation={currentLocation}
               />
             </LeftCol>
             <CenterCol>
@@ -250,16 +245,20 @@ const Location: React.FC = () => {
                 <Header>BATTLE PROGRESS</Header>
                 <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
               </BattleProgressCard>
-              {shipyards.filter(
-                shipyard => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString()
-                ).map(
-                  shipyard => 
-                    <TakeOverMenu>
-                      <Header>Shipyard Takeover</Header>
-                      <ShipyardTakeover account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} refinery={placeInfo.refinery} />
-                    </TakeOverMenu>                    
-                )                
-              }
+              {shipyards
+                .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())
+                .map((shipyard) => (
+                  <TakeOverMenu>
+                    <Header>Shipyard Takeover</Header>
+                    <ShipyardTakeover
+                      account={account}
+                      shipyard={shipyard}
+                      placeX={placeX}
+                      placeY={placeY}
+                      refinery={placeInfo.refinery}
+                    />
+                  </TakeOverMenu>
+                ))}
               <PlaceControls placeX={placeX} placeY={placeY} placeName={placeInfo.name} isDiscoverer={isDiscoverer} />
             </RightCol>
           </Content>

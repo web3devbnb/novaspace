@@ -63,66 +63,74 @@ const App: React.FC = () => {
     <Router>
       <ResetCSS />
 
-      <Menu>
-        <Suspense fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/" exact>
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/" exact>
+            <Menu>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Home />
               <Footer />
-            </Route>
-            <Route path="/traderoutes">
+            </Menu>
+          </Route>
+          <Route path="/traderoutes">
+            <Menu>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Farms />
               <Footer />
-            </Route>
-            <Route path="/legend-of-novaria">
+            </Menu>
+          </Route>
+          <Route path="/legend-of-novaria">
+            <Menu>
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
               <WalletProvider>
                 <Novaria />
                 <Footer />
               </WalletProvider>
-            </Route>
-            <Route path="/map">
-              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-              <WalletProvider>
-                <Map />
-              </WalletProvider>
-            </Route>
-            <Route path="/location">
-              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
-              <WalletProvider>
-                <Location />
-              </WalletProvider>
-            </Route>
-            <Route path="/overview">
-              <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
-              <WalletProvider>
-                <Overview />
-              </WalletProvider>
-            </Route>
-            <Route path="/shipyard">
-              <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
-              <WalletProvider>
-                <Shipyard />
-              </WalletProvider>
-            </Route>
+            </Menu>
+          </Route>
+          <Route path="/map">
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+            <WalletProvider>
+              <Map />
+            </WalletProvider>
+          </Route>
+          <Route path="/location">
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+            <WalletProvider>
+              <Location />
+            </WalletProvider>
+          </Route>
+          <Route path="/overview">
+            <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
+            <WalletProvider>
+              <Overview />
+            </WalletProvider>
+          </Route>
+          <Route path="/shipyard">
+            <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
+            <WalletProvider>
+              <Shipyard />
+            </WalletProvider>
+          </Route>
 
-            <Route path="/privacy">
+          <Route path="/privacy">
+            <Menu>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Privacy />
               <Footer />
-            </Route>
-            <Route path="/terms">
+            </Menu>
+          </Route>
+          <Route path="/terms">
+            <Menu>
               <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Terms />
               <Footer />
-            </Route>
-            <Route component={NotFound} />
-            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
-          </Switch>
-        </Suspense>
-      </Menu>
+            </Menu>
+          </Route>
+          <Route component={NotFound} />
+          <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
+        </Switch>
+      </Suspense>
     </Router>
   )
 }

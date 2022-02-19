@@ -38,17 +38,12 @@ const Page = styled.div`
   background-size: cover;
 
   font-size: 15px;
-  margin-top: -105px;
   padding: 10px;
   color: #5affff;
 
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    margin-top: -75px;
-  }
 `
 
 const Body = styled.div`
@@ -250,7 +245,7 @@ const CountdownButton = styled.button`
   margin: 5px;
   margin-left: 0px;
   align-self: center;
- // padding: 0.25rem 1rem;
+  // padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: 0.75rem;
   width: 100%;
@@ -361,7 +356,7 @@ const Shipyard = () => {
   }
 
   const { onClaim } = useClaimShips()
-  
+
   const sendClaimTx = async (claimId) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
@@ -384,11 +379,11 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-  
+
   const isOwner = shipyardOwner === account.toString()
   const [newName, setShipyardNewName] = useState('')
-  const {onShipyardChange} = useSetShipyardName()
-  const sendShipyardNameChange = async () =>{
+  const { onShipyardChange } = useSetShipyardName()
+  const sendShipyardNameChange = async () => {
     setPendingTx(true)
     try {
       await onShipyardChange(shipyard.coordX, shipyard.coordY, newName)
@@ -400,8 +395,8 @@ const Shipyard = () => {
   }
 
   const [newFee, setNewFee] = useState(0)
-  const {onShipyardFeeChange} = useSetShipyardFee()
-  const sendShipyardFeeChange = async () =>{
+  const { onShipyardFeeChange } = useSetShipyardFee()
+  const sendShipyardFeeChange = async () => {
     setPendingTx(true)
     try {
       await onShipyardFeeChange(shipyard.coordX, shipyard.coordY, newFee)
@@ -411,7 +406,6 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-
 
   // const endDate = new Date(1645233527 *1000)
   // const CalculateTimeLeft = () => {
@@ -510,9 +504,10 @@ const Shipyard = () => {
                     options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                     onChange={handleShipChange}
                     styles={customStyles}
-                  />{playerEXP < shipEXP ? 'requires more EXP' : ''}
+                  />
+                  {playerEXP < shipEXP ? 'requires more EXP' : ''}
                 </Row>
-                
+
                 <Row style={{ marginTop: 10 }}>
                   <Input
                     type="number"
@@ -521,17 +516,15 @@ const Shipyard = () => {
                     value={shipAmount}
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
-                  {!pending ? 
+                  {!pending ? (
                     <Button type="button" onClick={sendTx}>
                       Build {shipName}
                     </Button>
-                    : 
-                    <Button type="button" >
-                      pending...
-                    </Button>
-                  }
+                  ) : (
+                    <Button type="button">pending...</Button>
+                  )}
                 </Row>
-                 
+
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
                     Cost: {buildCost / 10 ** 18}
@@ -560,7 +553,9 @@ const Shipyard = () => {
               </BuildMenu>
 
               <SpaceDockMenu>
-                <Header style={{ marginTop: 0 }}>BUILD QUEUE <span style={{fontSize:13}} >(Can only have 1 active order per shipyard)</span></Header>
+                <Header style={{ marginTop: 0 }}>
+                  BUILD QUEUE <span style={{ fontSize: 13 }}>(Can only have 1 active order per shipyard)</span>
+                </Header>
                 <Row>
                   {spaceDocks.map((dock) => {
                     return (
@@ -588,15 +583,22 @@ const Shipyard = () => {
 
                         <ClaimControls>
                           {/* eslint-disable-next-line no-nested-ternary */}
-                          {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? 
-                              +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
+                          {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
+                            +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
                               <div>
                                 <Row>
-                                  <ClaimButton 
-                                    style={{margin:0, marginBottom: -2, marginRight: 5, padding: 3, fontSize: 13, width: '100%'}} 
-                                    type="button" 
+                                  <ClaimButton
+                                    style={{
+                                      margin: 0,
+                                      marginBottom: -2,
+                                      marginRight: 5,
+                                      padding: 3,
+                                      fontSize: 13,
+                                      width: '100%',
+                                    }}
+                                    type="button"
                                     onClick={() => sendClaimMaxTx(spaceDocks.indexOf(dock), dock.amount)}
-                                    >
+                                  >
                                     {!pending ? 'CLAIM MAX' : 'pending...'}
                                   </ClaimButton>
                                 </Row>
@@ -613,18 +615,17 @@ const Shipyard = () => {
                                   </ClaimButton>
                                 </Item>
                               </div>
-                              ) : (
-                                ''
-                              )
-                           : (
+                            ) : (
+                              ''
+                            )
+                          ) : (
                             <WrongLocationButton>Not at Shipyard</WrongLocationButton>
                           )}
                           {dock.completionTime * 1000 > Number(new Date()) ? (
-                            <CountdownButton>{(new Date(dock.completionTime * 1000)).toLocaleString()}</CountdownButton>
+                            <CountdownButton>{new Date(dock.completionTime * 1000).toLocaleString()}</CountdownButton>
                           ) : (
                             ''
                           )}
-
                         </ClaimControls>
                       </Col>
                     )
@@ -665,33 +666,34 @@ const Shipyard = () => {
                 </Col>
               </Row>
             </FleetMenu>
-            {isOwner &&
+            {isOwner && (
               <div>
                 <Item>
                   <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
-                  <Button onClick={sendShipyardNameChange} >{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                  <Button onClick={sendShipyardNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
                 </Item>
               </div>
-            }
-            {isOwner &&
+            )}
+            {isOwner && (
               <div>
                 <Item>
-                  <input  type="number" 
-                          min="0"
-                          max="100"
-                          placeholder="0"
-                          value={newFee}
-                          onChange={(e) => setNewFee(parseFloat(e.target.value))} 
-                          />
-                  <Button onClick={sendShipyardFeeChange} >{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    placeholder="0"
+                    value={newFee}
+                    onChange={(e) => setNewFee(parseFloat(e.target.value))}
+                  />
+                  <Button onClick={sendShipyardFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                 </Item>
               </div>
-            }
+            )}
           </Col>
         </Body>
       </PageRow>
     </Page>
   )
-} 
+}
 
 export default Shipyard
