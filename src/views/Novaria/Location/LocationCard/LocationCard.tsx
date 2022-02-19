@@ -196,7 +196,8 @@ const LocationCard = ({
   isMining,
   canTravel,
   currentLocation,
-  fleetSize
+  fleetSize,
+  playerMineral
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -329,7 +330,7 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {refinery && currentLocation ? (
+        {refinery && currentLocation && Number(playerMineral) > 0  ? (
           <Button type="button" onClick={sendRefineTx}>
             {pending ? 'pending...' : 'REFINE'}
           </Button>

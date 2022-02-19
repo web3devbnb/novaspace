@@ -201,6 +201,7 @@ const Location: React.FC = () => {
           <Content>
             <LeftCol>
               <LocationCard
+                playerMineral={fleetMineral}
                 fleetSize={fleetSize}
                 placename={placeInfo.name}
                 placetype={placeInfo.type}

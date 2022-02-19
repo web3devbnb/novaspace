@@ -41,7 +41,7 @@ const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, fleetMaxMineral, 
     <div style={{marginTop:10}}>
       <div>SIZE: {fleetSize}</div>
       <div>POWER: {fleetPower}</div>
-      <div>MINERAL: {web3.utils.fromWei(fleetMineral)}/{web3.utils.fromWei(fleetMaxMineral)}</div>
+      <div>MINERAL: {(fleetMineral / 10**18).toFixed(3)}/{web3.utils.fromWei(fleetMaxMineral)}</div>
       <div style={{marginTop:5}}>COOLDOWNS</div>
       <div>MINING: {Number(currentMiningCooldown)> Number(+new Date()) && currentMiningCooldown.toLocaleString()}</div>
       <div>TRAVEL: { Number(currentTravelCooldown) > Number(+new Date()) ? currentTravelCooldown.toLocaleString() : ''}</div>
