@@ -26,23 +26,21 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account }) => {
     const underAttack = Number(new Date(shipyard.takeoverDeadline * 1000)) > Number(new Date())
     const [handleClick] = useModal(<TakeOverModal account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} inCooldownStage={inCooldownStage} underAttack={underAttack} />)
 
-//   if (shipyard.coordX !== placeX.toString() && shipyard.coordY !== placeY) {
-//       return(null)
-//   }
 
   return (
     <div>
-        {inCooldownStage && 
+        {inCooldownStage && !refinery &&
             <div style={{border:'1px solid #5affff'}}> 
                 Shipyard takeover on Cooldown
             </div>
         }
-        {!inCooldownStage && !underAttack &&
+        {!inCooldownStage && !underAttack && !refinery &&
             <Button type='button' onClick={handleClick} >Initiate</Button> 
         }
-        {underAttack &&
+        {underAttack && !refinery &&
             <Button type='button' onClick={handleClick} >Under Attack</Button>         
         }
+        {refinery && 'Shipyard cannot be taken over'}
     </div>
   )
 }
