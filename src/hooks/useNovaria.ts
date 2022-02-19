@@ -446,8 +446,8 @@ export const useCollect = () => {
   const useMapContract = useMap()
 
   const handleCollect = useCallback(
-    async (x: number, y: number) => {
-      const txHash = await collect(useMapContract, x, y, account)
+    async () => {
+      const txHash = await collect(useMapContract, account)
       console.info(txHash)
     },
     [account, useMapContract],

@@ -229,7 +229,7 @@ const LocationCard = ({
   const sendCollectTx = async () => {
     setPendingTx(true)
     try {
-      await onCollect(placeX, placeY)
+      await onCollect()
       console.log('Collecting Salvage')
     } catch (error) {
       console.log('error: ', error)

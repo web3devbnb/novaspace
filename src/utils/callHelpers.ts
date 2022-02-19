@@ -212,9 +212,9 @@ export const refine = async (mapContract, account) => {
     })
 }
 
-export const collect = async (mapContract, x, y, account) => {
+export const collect = async (mapContract, account) => {
   return mapContract.methods
-    .collect(x, y)
+    .collect()
     .send({from: account})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
