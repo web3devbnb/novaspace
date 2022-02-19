@@ -102,12 +102,11 @@ const GameMenu = ({ pageName }) => {
             <Icon src={overview} alt="game overview" />
             <Flag1 aria-haspopup="true">
               OVERVIEW
-              <img src={flag} alt="flag" />{' '}
+              <img src={flag} alt="flag" />
             </Flag1>
             {pageName === 'overview' && (
               <Flag>
-                {' '}
-                OVERVIEW <img src={flag} alt="flag" />{' '}
+                OVERVIEW <img src={flag} alt="flag" />
               </Flag>
             )}
           </Link>
@@ -115,11 +114,11 @@ const GameMenu = ({ pageName }) => {
             <Icon src={shipyard} alt="game shipyard" />
             <Flag1 aria-haspopup="true">
               SHIPYARD
-              <img src={flag} alt="flag" />{' '}
+              <img src={flag} alt="flag" />
             </Flag1>
             {pageName === 'shipyard' && (
               <Flag>
-                SHIPYARD <img src={flag} alt="flag" />{' '}
+                SHIPYARD <img src={flag} alt="flag" />
               </Flag>
             )}
           </Link>
@@ -127,12 +126,12 @@ const GameMenu = ({ pageName }) => {
             <Icon src={starmap} alt="game star map" />
             <Flag1 aria-haspopup="true">
               STAR MAP
-              <img src={flag} alt="flag" />{' '}
+              <img src={flag} alt="flag" />
             </Flag1>
             {pageName === 'starmap' && (
               <Flag>
                 STAR MAP
-                <img src={flag} alt="flag" />{' '}
+                <img src={flag} alt="flag" />
               </Flag>
             )}
           </Link>
@@ -140,13 +139,12 @@ const GameMenu = ({ pageName }) => {
             <Icon src={location} alt="game location" />
             <Flag1 aria-haspopup="true">
               LOCATION
-              <img src={flag} alt="flag" />{' '}
+              <img src={flag} alt="flag" />
             </Flag1>
             {pageName === 'location' && (
               <Flag>
-                {' '}
                 LOCATION
-                <img src={flag} alt="flag" />{' '}
+                <img src={flag} alt="flag" />
               </Flag>
             )}
           </Link>
