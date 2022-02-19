@@ -297,8 +297,8 @@ const Map: React.FC = () => {
                           {planet.placeType === '2' && <GridCellImg src={star1} alt="star" />}
                           {planet.placeType === '0' && planet.canTravel ? <GridCellImg src={emptyLogo} alt="star" /> : ''}
                           {planet.placeType === '4' && <GridCellImg src={asteroid} alt="star" />}
-                          {(ry + mapData.y0).toString() === fleetLocation.X.toString() &&
-                            (x + mapData.x0).toString() === fleetLocation.Y.toString() && (
+                          {(ry + mapData.y0).toString() === fleetLocation.Y.toString() &&
+                            (x + mapData.x0).toString() === fleetLocation.X.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />
                             )}
                         </Row>

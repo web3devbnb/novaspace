@@ -204,7 +204,9 @@ const LocationCard = ({
   const timeMod = useGetTimeModifier()
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 / timeMod
   const exploreCost = useGetExploreCost(placeX, placeY)
-  const shipyards = useGetShipyards()
+  const canExplore = (placetype === '0' && !canTravel)
+  const isEmpty = (placetype === '0' && canTravel)
+  // const shipyards = useGetShipyards()
   
   
   const { onTakeover } = useShipyardTakeover()
@@ -283,21 +285,21 @@ const LocationCard = ({
   return (
     <Body>
       {placename === 'Haven' ? <HavenImageCard /> : ''}
-      {placetype === '0' && canTravel ? <EmptyImageCard /> : ''}
+      {isEmpty ? <EmptyImageCard /> : ''}
       {shipyard && !refinery && placename !== 'Haven' ? <ShipyardImageCard /> : ''}
       {refinery && !shipyard && placename !== 'Haven' ? <RefineryImageCard /> : ''}
       {refinery && shipyard && placename !== 'Haven' ? <ShipyardRefineryImageCard /> : ''}
       {placetype === '4' ? <AsteroidImageCard /> : ''}
       {placetype === '2' ? <StarImageCard /> : ''}
       {placetype === '1' ? <HostileImageCard /> : ''}
-      {placetype === '0' && !canTravel  ? <UnexploredImageCard /> : ''}
+      {canExplore ? <UnexploredImageCard /> : ''}
       {isMining === true ? <MiningImageCard /> : ''}
       <PlaceHeader>
         <Row>
           <Name>
             {placename}
-            {placetype === 'empty' ? 'EMPTY SPACE' : ''}
-            {placetype === 'hostile' ? 'HOSTILE SPACE' : ''}
+            {isEmpty ? 'EMPTY SPACE' : ''}
+            {placetype === '1' ? 'HOSTILE SPACE' : ''}
           </Name>
           <Location>
             ({placeX},{placeY})
@@ -312,8 +314,8 @@ const LocationCard = ({
           <span>
             {mineral > 0 ? (mineral / 10 ** 18).toFixed(3) : ''} {mineral > 0 ? 'MINERAL' : ''}
           </span>
-          <span>{placetype === '' ? 'UNEXPLORED' : ''}</span>
-          <span>{placetype === 'star' ? 'STAR' : ''}</span>
+          <span>{canExplore ? 'UNEXPLORED' : ''}</span>
+          <span>{placetype === '2' ? 'STAR' : ''}</span>
         </Row>
       </PlaceHeader>
       <PlaceBody>
@@ -338,14 +340,14 @@ const LocationCard = ({
         ) : (
           ''
         )}
-        {placetype !== 'star' && placetype !== 'hostile' && !isCurrentLocation ? (
+        {placetype !== '2' && placetype !== '1' && !isCurrentLocation ? (
           <Button type="button" onClick={sendTravelTx}>
             TRAVEL
           </Button>
         ) : (
           ''
         )}
-        {placetype === '' ? (
+        {canExplore ? (
           <Button type="button" onClick={sendExploreTx}>
             EXPLORE
           </Button>
