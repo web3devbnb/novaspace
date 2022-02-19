@@ -275,5 +275,11 @@ export const setShipyardName = async (fleetContract, x, y, name, account) => {
     })
 }
 
-
-
+export const setShipyardFeePercent = async (fleetContract, x, y, amount, account) => {
+  return fleetContract.methods
+    .setShipyardFeePercent(x, y, amount)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

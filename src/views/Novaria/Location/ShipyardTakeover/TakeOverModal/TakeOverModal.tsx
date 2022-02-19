@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
 import {
   useEnterBattle,
@@ -10,12 +10,20 @@ import {
   useGetPlayer,
   useGetShipClasses,
   useGetShips,
+  useShipyardTakeover,
+  useCompleteShipyardTakeover,
 } from 'hooks/useNovaria'
+import { ConnectedAccountContext } from 'App'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
 interface TakeoverModalProps {
   shipyard: any
+  account: string
+  placeX: number
+  placeY: number
+  underAttack: boolean
+  inCooldownStage: boolean
   onDismiss?: () => void
 }
 
@@ -35,10 +43,12 @@ const Button = styled.button`
 
 const Child = styled.div`
   margin-bottom: 5px;
+  font-size: 12px;
 `
 
-const TakeoverModal: React.FC<TakeoverModalProps> = ({ shipyard, onDismiss }) => {
+const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, onDismiss }) => {
 
+  const [pendingTx, setPendingTx] = useState(false)
   const player = shipyard.takeoverAddress
   const ships = useGetShips(player)
   console.log('ships', ships)
@@ -52,42 +62,89 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ shipyard, onDismiss }) =>
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
+  const isTakeoverPlayer = player === account
 
+  console.log('player',player,'account', account, isTakeoverPlayer)
   const { onEnterBattle } = useEnterBattle()
+  
+  const { onTakeover } = useShipyardTakeover()
+  const { onCompleteTakeover } = useCompleteShipyardTakeover()
+  const sendTakeoverTx = async () => {
+    setPendingTx(true)
+    try {
+      await onTakeover(placeX, placeY)
+      console.log('attempting shipyard takeover')
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+  const sendCompleteTakeoverTx = async () => {
+    setPendingTx(true)
+    try {
+      await onCompleteTakeover(placeX, placeY)
+      console.log('attempting shipyard takeover completion')
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
 
   return (
-    <NovariaModal title={playerName} onDismiss={onDismiss}>
-      <div>
-        <Child>ADDRESS: {player}</Child>
-        <Child>SHIPS: {shipClasses.map((ship, index) => {
-                    return (
-                      <span key={ship.name}>
-                        {ships[index]} {ship.name}s, {' '}
-                      </span>
-                    )
-                  })}
+    <NovariaModal title={shipyard.name} onDismiss={onDismiss}>
+      
+        <Child>
+          Players can attempt to take control of a shipyard from the current owner by initiating a takeover event. 
+          The takeover event lasts 24 hours and during that time the player that initiated a takeover must survive 
+          to the end. Survival means the player has a fleet size &gt;= 200. The player can be attacked by anyone, 
+          and they cannot leave the shipyard location until the takeover is complete. During a takeover event,
+          if a larger player wants to attempt a takeover, they can kick out the smaller player currently attempting.
         </Child>
         <Child>
-          LOCATION: ({fleetLocation.X}, {fleetLocation.Y})
+          To initiate a takeover, you must have at least 1000 fleet size and the cost is 25 NOVA.
         </Child>
-        <Child>SIZE: {fleetSize}</Child>
-        <Child>POWER: {fleetPower}</Child>
-        <Child>MINERAL: {(Number(fleetMineral)/10**18).toFixed(3)}</Child>
-        <Child>MAX MINERAL: {(Number(fleetMaxMineral)/10**18).toFixed(2)}</Child>
-        <Child>
-          BATTLE STATUS: {' '}
-          {playerBattleStatus === '0' && 'Not in Battle'}
-          {playerBattleStatus === '1' && 'Attacking'}
-          {playerBattleStatus === '2' && 'Defending'}
-        </Child>
-      </div>
-      {'!inBattle' &&
+        {underAttack && !isTakeoverPlayer &&
+        <div>
+          <Child>Attacking Player: {playerName}</Child>
+          <Child>SHIPS: {shipClasses.map((ship, index) => {
+                      return (
+                        <span key={ship.name}>
+                          {ships[index]} {ship.name}s, {' '}
+                        </span>
+                      )
+                    })}
+          </Child>
+          <Child>SIZE: {fleetSize}</Child>
+          <Child>
+            BATTLE STATUS: {' '}
+            {playerBattleStatus === '0' && 'Not in Battle'}
+            {playerBattleStatus === '1' && 'Attacking'}
+            {playerBattleStatus === '2' && 'Defending'}
+          </Child>
+        
+          <ModalActions>
+            <Button  onClick={() => onEnterBattle(player, 1)}>
+              {!pending ? 'ATTACK PLAYER' : 'pending...'}
+            </Button>
+            <Button  onClick={() => onEnterBattle(player, 2)}>
+              {!pending ? 'DEFEND PLAYER' : 'pending...'}
+            </Button>
+          </ModalActions>                
+      </div> 
+      }
+      {!underAttack &&
         <ModalActions>
-          <Button  onClick={() => onEnterBattle(player, 1)}>
-            ATTACK
+          <Button onClick={sendTakeoverTx}>
+            {!pending ? 'Initiate Takeover' : 'pending...'}
           </Button>
-          <Button  onClick={() => onEnterBattle(player, 2)}>
-            DEFEND
+        </ModalActions>
+      }
+      {!underAttack && isTakeoverPlayer &&
+        <ModalActions>
+          <Button onClick={sendCompleteTakeoverTx}>
+            {!pending ? 'Complete Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }

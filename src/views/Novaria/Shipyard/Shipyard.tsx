@@ -19,6 +19,7 @@ import {
   useGetTimeModifier,
   useGetPlayer,
   useSetShipyardName,
+  useSetShipyardFee,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -396,8 +397,21 @@ const Shipyard = () => {
     } finally {
       setPendingTx(false)
     }
-
   }
+
+  const [newFee, setNewFee] = useState(0)
+  const {onShipyardFeeChange} = useSetShipyardFee()
+  const sendShipyardFeeChange = async () =>{
+    setPendingTx(true)
+    try {
+      await onShipyardFeeChange(shipyard.coordX, shipyard.coordY, newFee)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
 
   // const endDate = new Date(1645233527 *1000)
   // const CalculateTimeLeft = () => {
@@ -655,7 +669,21 @@ const Shipyard = () => {
               <div>
                 <Item>
                   <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
-                  <Button onClick={sendShipyardNameChange} >{!pending ? 'Set Shipyard Name' : ''}</Button>
+                  <Button onClick={sendShipyardNameChange} >{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                </Item>
+              </div>
+            }
+            {isOwner &&
+              <div>
+                <Item>
+                  <input  type="number" 
+                          min="0"
+                          max="100"
+                          placeholder="0"
+                          value={newFee}
+                          onChange={(e) => setNewFee(parseFloat(e.target.value))} 
+                          />
+                  <Button onClick={sendShipyardFeeChange} >{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                 </Item>
               </div>
             }
@@ -664,6 +692,6 @@ const Shipyard = () => {
       </PageRow>
     </Page>
   )
-}
+} 
 
 export default Shipyard

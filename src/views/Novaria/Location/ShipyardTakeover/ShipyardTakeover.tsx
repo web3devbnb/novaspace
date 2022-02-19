@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { getWeb3 } from 'utils/web3'
+import { useModal } from '@pancakeswap-libs/uikit'
 import { useRecall, useShipyardTakeover } from 'hooks/useNovaria'
+import TakeOverModal from './TakeOverModal'
 
 
 
@@ -11,7 +13,6 @@ const Button = styled.button`
     background: transparent;
     color: #5affff;
     width: 100%;
-    margin: 5px;
     margin-top: 10px;
     &:hover {
         background-color: #5affff;
@@ -19,33 +20,29 @@ const Button = styled.button`
     }
 `
 
-const ShpiyardTakeover = ({ shipyard, placeX, placeY }) => {
-  const web3 = getWeb3()
-  const [pendingTx, setPendingTx] = useState(false)
-
-  const { onTakeover } = useShipyardTakeover()
+const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account }) => {
   
-  const sendTakeoverTx = async () => {
-    setPendingTx(true)
-    try {
-      await onTakeover(placeX, placeY)
-      console.log('attempting shipyard takeover')
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-
-  console.log('shipyard filter', shipyard, placeX, placeY)
+    const inCooldownStage = Number(new Date((shipyard.lastTakeoverTime + 604800) * 1000)) > Number(new Date())
+    const underAttack = Number(new Date(shipyard.takeoverDeadline * 1000)) > Number(new Date())
+    const [handleClick] = useModal(<TakeOverModal account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} inCooldownStage={inCooldownStage} underAttack={underAttack} />)
 
 //   if (shipyard.coordX !== placeX.toString() && shipyard.coordY !== placeY) {
 //       return(null)
 //   }
 
   return (
-    <div style={{}}>
-         <Button type='button' onClick={sendTakeoverTx} >Initiate</Button> 
+    <div>
+        {inCooldownStage && 
+            <div style={{border:'1px solid #5affff'}}> 
+                Shipyard takeover on Cooldown
+            </div>
+        }
+        {!inCooldownStage && !underAttack &&
+            <Button type='button' onClick={handleClick} >Initiate</Button> 
+        }
+        {underAttack &&
+            <Button type='button' onClick={handleClick} >Under Attack</Button>         
+        }
     </div>
   )
 }

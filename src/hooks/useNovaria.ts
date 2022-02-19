@@ -23,7 +23,7 @@ import {
   completeShipyardTakeover,
   setShipyardName,
   changeName,
-
+  setShipyardFeePercent,
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -107,7 +107,7 @@ export const useCompleteShipyardTakeover = () => {
     },
     [account, useFleetContract],
   )
-  return { onTakeover: handleClaimShips }
+  return { onCompleteTakeover: handleClaimShips }
 }
 
 
@@ -145,14 +145,28 @@ export const useSetShipyardName = () => {
   const { account } = useWallet()
   const useFleetContract = useFleet()
 
-  const handleClaimShips = useCallback(
+  const handleSetShipyardName = useCallback(
     async (x: number, y: number, name: string) => {
       const txHash = await setShipyardName(useFleetContract, x, y, name, account)
       console.info(txHash)
     },
     [account, useFleetContract],
   )
-  return { onShipyardChange: handleClaimShips }
+  return { onShipyardChange: handleSetShipyardName }
+}
+
+export const useSetShipyardFee = () => {
+  const { account } = useWallet()
+  const useFleetContract = useFleet()
+
+  const handleSetShipyardFee = useCallback(
+    async (x: number, y: number, amount: number) => {
+      const txHash = await setShipyardFeePercent(useFleetContract, x, y, amount, account)
+      console.info(txHash)
+    },
+    [account, useFleetContract],
+  )
+  return { onShipyardFeeChange: handleSetShipyardFee }
 }
 
 // ***View functions***
@@ -599,6 +613,7 @@ export const useGetPlaceInfo = (x1: number, y1: number) => {
     canTravel: false,
     luminosity: 0,
     isMining: false,
+    discoverer: '',
   }
   )
 
@@ -617,6 +632,7 @@ export const useGetPlaceInfo = (x1: number, y1: number) => {
         canTravel: data[42][7],
         luminosity: data[42][8],
         isMining: data[42][9],
+        discoverer: data[42][10],
       }
       )
     }

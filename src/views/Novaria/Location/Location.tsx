@@ -188,7 +188,7 @@ const Location: React.FC = () => {
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerEXP = useGetPlayer(account.toString()).experience
   const shipyards = useGetShipyards()
-  const isDiscoverer = placeInfo === account
+  const isDiscoverer = placeInfo.discoverer === account
 
   const currentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
 
@@ -255,7 +255,7 @@ const Location: React.FC = () => {
                   shipyard => 
                     <TakeOverMenu>
                       <Header>Shipyard Takeover</Header>
-                      <ShipyardTakeover shipyard={shipyard} placeX={placeX} placeY={placeY} />
+                      <ShipyardTakeover account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} refinery={placeInfo.refinery} />
                     </TakeOverMenu>                    
                 )                
               }
