@@ -104,13 +104,11 @@ const GameMenu = ({ pageName }) => {
               OVERVIEW
               <img src={flag} alt="flag" />{' '}
             </Flag1>
-            {pageName === 'overview' ? (
+            {pageName === 'overview' && (
               <Flag>
                 {' '}
                 OVERVIEW <img src={flag} alt="flag" />{' '}
               </Flag>
-            ) : (
-              ''
             )}
           </Link>
           <Link href="/shipyard">
@@ -119,12 +117,10 @@ const GameMenu = ({ pageName }) => {
               SHIPYARD
               <img src={flag} alt="flag" />{' '}
             </Flag1>
-            {pageName === 'shipyard' ? (
+            {pageName === 'shipyard' && (
               <Flag>
                 SHIPYARD <img src={flag} alt="flag" />{' '}
               </Flag>
-            ) : (
-              ''
             )}
           </Link>
           <Link href="/map">
@@ -133,13 +129,11 @@ const GameMenu = ({ pageName }) => {
               STAR MAP
               <img src={flag} alt="flag" />{' '}
             </Flag1>
-            {pageName === 'starmap' ? (
+            {pageName === 'starmap' && (
               <Flag>
                 STAR MAP
                 <img src={flag} alt="flag" />{' '}
               </Flag>
-            ) : (
-              ''
             )}
           </Link>
           <Link href="/location">
@@ -148,14 +142,12 @@ const GameMenu = ({ pageName }) => {
               LOCATION
               <img src={flag} alt="flag" />{' '}
             </Flag1>
-            {pageName === 'location' ? (
+            {pageName === 'location' && (
               <Flag>
                 {' '}
                 LOCATION
                 <img src={flag} alt="flag" />{' '}
               </Flag>
-            ) : (
-              ''
             )}
           </Link>
         </Frame>
