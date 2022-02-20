@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { getWeb3 } from 'utils/web3'
 import { useRecall } from 'hooks/useNovaria'
 
 const Stats = styled.div`
@@ -36,8 +35,31 @@ const YourFleetStats = ({
   currentTravelCooldown,
   currentMiningCooldown,
 }) => {
-  const web3 = getWeb3()
   const [pendingTx, setPendingTx] = useState(false)
+
+  function twoDigits(num) {
+    return ("0".concat(num < 0 ? "0": num.toString())).slice(-2)
+  }
+
+  function showCountdown(countDownDate) {
+    const now = new Date().getTime()
+    const timeleft = countDownDate - now
+        
+    const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((timeleft % (1000 * 60)) / 1000)
+
+    let clock = twoDigits(hours)
+    clock += ':'
+    clock += twoDigits(minutes)
+    clock += ':'
+    clock += twoDigits(seconds)
+
+    return clock
+  }
+
+  const miningCooldown = showCountdown(currentMiningCooldown)
+  const travelCooldown = showCountdown(currentTravelCooldown)
 
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {
@@ -65,7 +87,7 @@ const YourFleetStats = ({
       <Stat>
         <div>Mineral</div>
         <div>
-          {(fleetMineral / 10 ** 18).toFixed(3)}/{web3.utils.fromWei(fleetMaxMineral)}
+          {(fleetMineral / 10 ** 18).toFixed(2)}
         </div>
       </Stat>
 
@@ -73,11 +95,11 @@ const YourFleetStats = ({
 
       <Stat>
         <div>Mining</div>
-        <div>{Number(currentMiningCooldown) > Number(+new Date()) ? currentMiningCooldown.toLocaleString() : '-'}</div>
+        <div>{miningCooldown}</div>
       </Stat>
       <Stat>
         <div>Travel</div>
-        <div>{Number(currentTravelCooldown) > Number(+new Date()) ? currentTravelCooldown.toLocaleString() : '-'}</div>
+        <div>{travelCooldown}</div>
       </Stat>
 
       {fleetSize < 25 && <Button onClick={sendRecallTx}>Recall to Haven</Button>}

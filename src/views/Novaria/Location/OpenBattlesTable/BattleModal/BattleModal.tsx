@@ -71,21 +71,22 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
       <div>
         Deadline: {startTime}
       </div>
+      <ModalActions>
       {!inBattle &&
-        <ModalActions>
+        <div>
           <Button  onClick={() => onEnterBattle(player, 1)}>
             ATTACK
           </Button>
           <Button  onClick={() => onEnterBattle(player, 2)}>
             DEFEND
           </Button>
-          {battleReady ?
+        </div> }
+          {inBattle && battleReady ?
             <Button  onClick={sendBattleTx}>
               START BATTLE
             </Button>
           : ''}
       </ModalActions> 
-    }
     </Modal>
   )
 }
