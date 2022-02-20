@@ -29,7 +29,7 @@ const Button = styled.button`
     }
 `
 
-const PlaceControls = ({ placeX, placeY, placeName, isDiscoverer }) => {
+const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) => {
   const web3 = getWeb3()
   const [pending, setPendingTx] = useState(false)
   const [planetName, setPlanetName] = useState('')
@@ -55,6 +55,10 @@ const PlaceControls = ({ placeX, placeY, placeName, isDiscoverer }) => {
   }
 
   if (!isDiscoverer) {
+    return (null)
+  }
+
+  if(placeType !== 3 && placeType !== 4) {
     return (null)
   }
 

@@ -259,7 +259,7 @@ const Location: React.FC = () => {
                     />
                   </TakeOverMenu>
                 ))}
-              <PlaceControls placeX={placeX} placeY={placeY} placeName={placeInfo.name} isDiscoverer={isDiscoverer} />
+              <PlaceControls placeType={Number(placeInfo.type)} placeX={placeX} placeY={placeY} placeName={placeInfo.name} isDiscoverer={isDiscoverer} />
             </RightCol>
           </Content>
         </Body>
