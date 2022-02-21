@@ -40,34 +40,22 @@ const Icon = styled.img`
   // margin-right: 2px;
 `
 
-const Flag = styled.div`
+const Flag = styled.div<{ active: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  z-index: 0;
-  position: absolute;
-  left: 55px;
-`
-
-const Flag1 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  z-index: 1;
   position: absolute;
   left: 55px;
 
-  padding-bottom: 10px;
-  opacity: 0;
-  color: #5affff;
+  opacity: ${(props) => (props.active ? 1 : 0)};
+
   &:hover,
   &:focus,
   &:active {
     opacity: 1;
+    color: #5affff;
   }
 `
 
@@ -103,53 +91,31 @@ const GameMenu = ({ pageName }) => {
           </ToggleButton>
           <Link href="/overview">
             <Icon src={overview} alt="game overview" />
-            <Flag1 aria-haspopup="true">
+            <Flag active={pageName === 'overview'} aria-haspopup="true">
               OVERVIEW
               <img src={flag} alt="flag" />
-            </Flag1>
-            {pageName === 'overview' && (
-              <Flag>
-                OVERVIEW <img src={flag} alt="flag" />
-              </Flag>
-            )}
+            </Flag>
           </Link>
           <Link href="/shipyard">
             <Icon src={shipyard} alt="game shipyard" />
-            <Flag1 aria-haspopup="true">
+            <Flag active={pageName === 'shipyard'} aria-haspopup="true">
               SHIPYARD
               <img src={flag} alt="flag" />
-            </Flag1>
-            {pageName === 'shipyard' && (
-              <Flag>
-                SHIPYARD <img src={flag} alt="flag" />
-              </Flag>
-            )}
+            </Flag>
           </Link>
           <Link href="/map">
             <Icon src={starmap} alt="game star map" />
-            <Flag1 aria-haspopup="true">
+            <Flag active={pageName === 'starmap'} aria-haspopup="true">
               STAR MAP
               <img src={flag} alt="flag" />
-            </Flag1>
-            {pageName === 'starmap' && (
-              <Flag>
-                STAR MAP
-                <img src={flag} alt="flag" />
-              </Flag>
-            )}
+            </Flag>
           </Link>
           <Link href="/location">
             <Icon src={location} alt="game location" />
-            <Flag1 aria-haspopup="true">
+            <Flag active={pageName === 'location'} aria-haspopup="true">
               LOCATION
               <img src={flag} alt="flag" />
-            </Flag1>
-            {pageName === 'location' && (
-              <Flag>
-                LOCATION
-                <img src={flag} alt="flag" />
-              </Flag>
-            )}
+            </Flag>
           </Link>
         </Frame>
       ) : (
