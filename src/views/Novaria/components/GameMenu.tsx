@@ -41,26 +41,29 @@ const Icon = styled.img`
 `
 
 const Flag = styled.div`
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+
   z-index: 0;
   position: absolute;
   left: 55px;
 `
 
 const Flag1 = styled.div`
-  justify-content: center;
-  padding-bottom: 10px;
-  align-items: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+
+  z-index: 1;
   position: absolute;
   left: 55px;
+
+  padding-bottom: 10px;
   opacity: 0;
   color: #5affff;
-  z-index: 1;
   &:hover,
   &:focus,
   &:active {
