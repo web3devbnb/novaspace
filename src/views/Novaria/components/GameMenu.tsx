@@ -37,7 +37,6 @@ const Link = styled.a`
 const Icon = styled.img`
   height: 40px;
   width: auto;
-  // margin-right: 2px;
 `
 
 const Flag = styled.div<{ active: boolean }>`
