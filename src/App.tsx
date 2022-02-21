@@ -11,7 +11,7 @@ import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 
-export const ConnectedAccountContext = React.createContext(null)
+export const ConnectedAccountContext = React.createContext<string | null>(null)
 
 const WalletProvider = ({ children }) => {
   const wallet = useWallet()

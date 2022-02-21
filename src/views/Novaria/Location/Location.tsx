@@ -181,7 +181,7 @@ const Location: React.FC = () => {
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
-  const playerEXP = useGetPlayer(account.toString()).experience
+  const playerEXP = useGetPlayer(account).experience
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
@@ -259,7 +259,13 @@ const Location: React.FC = () => {
                     />
                   </TakeOverMenu>
                 ))}
-              <PlaceControls placeType={Number(placeInfo.type)} placeX={placeX} placeY={placeY} placeName={placeInfo.name} isDiscoverer={isDiscoverer} />
+              <PlaceControls
+                placeType={Number(placeInfo.type)}
+                placeX={placeX}
+                placeY={placeY}
+                placeName={placeInfo.name}
+                isDiscoverer={isDiscoverer}
+              />
             </RightCol>
           </Content>
         </Body>
