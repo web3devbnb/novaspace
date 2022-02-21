@@ -81,9 +81,9 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
             DEFEND
           </Button>
         </div> }
-          {inBattle && battleReady ?
+          {battleReady ?
             <Button  onClick={sendBattleTx}>
-              START BATTLE
+              RESOLVE
             </Button>
           : ''}
       </ModalActions> 

@@ -277,6 +277,10 @@ const FleetMenu = styled.div`
   height: 100%;
 `
 
+const ShipyardEditor = styled.div`
+  margin-left:
+`
+
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
 const Shipyard = () => {
@@ -385,6 +389,7 @@ const Shipyard = () => {
   const { onShipyardChange } = useSetShipyardName()
   const sendShipyardNameChange = async () => {
     setPendingTx(true)
+    console.log('name change', shipyard.coordX, shipyard.coordY, newName)
     try {
       await onShipyardChange(shipyard.coordX, shipyard.coordY, newName)
     } catch (error) {
@@ -665,30 +670,32 @@ const Shipyard = () => {
                   <Item style={{ marginBottom: 10 }}>{playerFleet[2] || '-'}</Item>
                 </Col>
               </Row>
+              <ShipyardEditor>
+                {isOwner && (
+                  <div>
+                    <Item>
+                      <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
+                      <Button onClick={sendShipyardNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                    </Item>
+                  </div>
+                )}
+                {isOwner && (
+                  <div>
+                    <Item>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        placeholder="0"
+                        value={newFee}
+                        onChange={(e) => setNewFee(parseFloat(e.target.value))}
+                      />
+                      <Button onClick={sendShipyardFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
+                    </Item>
+                  </div>
+                )}
+              </ShipyardEditor>
             </FleetMenu>
-            {isOwner && (
-              <div>
-                <Item>
-                  <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
-                  <Button onClick={sendShipyardNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
-                </Item>
-              </div>
-            )}
-            {isOwner && (
-              <div>
-                <Item>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    placeholder="0"
-                    value={newFee}
-                    onChange={(e) => setNewFee(parseFloat(e.target.value))}
-                  />
-                  <Button onClick={sendShipyardFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
-                </Item>
-              </div>
-            )}
           </Col>
         </Body>
       </PageRow>

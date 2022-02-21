@@ -48,7 +48,7 @@ const Child = styled.div`
 
 const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, onDismiss }) => {
 
-  const [pendingTx, setPendingTx] = useState(false)
+  const [pending, setPendingTx] = useState(false)
   const player = shipyard.takeoverAddress
   const ships = useGetShips(player)
   console.log('ships', ships)
