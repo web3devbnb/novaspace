@@ -277,9 +277,7 @@ const FleetMenu = styled.div`
   height: 100%;
 `
 
-const ShipyardEditor = styled.div`
-  margin-left:
-`
+const ShipyardEditor = styled.div``
 
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
@@ -644,30 +642,24 @@ const Shipyard = () => {
             <FleetMenu>
               <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
               <Row style={{ justifyContent: 'space-between' }}>
-                <Col>
-                  <Item style={{ marginBottom: 10 }}>Fleet Size</Item>
-                  <Item style={{ marginBottom: 10 }}>Mining Capacity</Item>
-                  <Item style={{ marginBottom: 10 }}>Mineral Capacity</Item>
+                <Col style={{ gap: 10 }}>
+                  <Item>Fleet Size</Item>
+                  <Item>Mining Capacity</Item>
+                  <Item>Mineral Capacity</Item>
                   {shipClasses.map((ship) => {
-                    return (
-                      <Item style={{ marginBottom: 10 }} key={ship.name}>
-                        {ship.name}s
-                      </Item>
-                    )
+                    return <Item key={ship.name}>{ship.name}s</Item>
                   })}
                 </Col>
-                <Col style={{ textAlign: 'right' }}>
+                <Col style={{ textAlign: 'right', gap: 10 }}>
                   {/* Find a way to map this out based on shipclass? */}
-                  <Item style={{ marginBottom: 10 }}>
+                  <Item>
                     {fleetSize || '-'}/{maxFleetSize || '-'}
                   </Item>
-                  <Item style={{ marginBottom: 10 }}>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} </Item>
-                  <Item style={{ marginBottom: 10 }}>
-                    {mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}
-                  </Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[0] || '-'}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[1] || '-'}</Item>
-                  <Item style={{ marginBottom: 10 }}>{playerFleet[2] || '-'}</Item>
+                  <Item>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} </Item>
+                  <Item>{mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}</Item>
+                  <Item>{playerFleet[0] || '-'}</Item>
+                  <Item>{playerFleet[1] || '-'}</Item>
+                  <Item>{playerFleet[2] || '-'}</Item>
                 </Col>
               </Row>
               <ShipyardEditor>
