@@ -550,19 +550,19 @@ const Shipyard = () => {
                 </Row>
                 <div style={{ color: '#289794', marginTop: '5px' }}>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>Shipyard:</Text>
+                    <Text>Shipyard</Text>
                     <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
-                    <Text>Owner: </Text>
+                    <Text>Owner</Text>
                     <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>Build Fee:</Text>
+                    <Text>Build Fee</Text>
                     <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>EXP Required:</Text>
+                    <Text>EXP Required</Text>
                     <Text>{shipEXP ? `${shipEXP}` : '-'}</Text>
                   </Row>
                 </div>
