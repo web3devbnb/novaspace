@@ -8,7 +8,6 @@ import {
   useGetFleetMineral,
   useGetFleetsAtLocation,
   useGetFleetSize,
-  useGetMaxMineralCapacity,
   useGetPlaceInfo,
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
@@ -176,7 +175,6 @@ const Location: React.FC = () => {
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
-  const fleetMaxMineral = useGetMaxMineralCapacity(account)
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
@@ -236,7 +234,6 @@ const Location: React.FC = () => {
                   fleetSize={fleetSize}
                   fleetPower={fleetPower}
                   fleetMineral={fleetMineral}
-                  fleetMaxMineral={fleetMaxMineral}
                   currentTravelCooldown={currentTravelCooldown}
                   currentMiningCooldown={currentMiningCooldown}
                 />

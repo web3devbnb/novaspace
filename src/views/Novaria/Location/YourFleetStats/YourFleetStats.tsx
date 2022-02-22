@@ -27,24 +27,17 @@ const Button = styled.button`
   }
 `
 
-const YourFleetStats = ({
-  fleetSize,
-  fleetPower,
-  fleetMineral,
-  fleetMaxMineral,
-  currentTravelCooldown,
-  currentMiningCooldown,
-}) => {
-  const [pendingTx, setPendingTx] = useState(false)
+const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, currentTravelCooldown, currentMiningCooldown }) => {
+  const [, setPendingTx] = useState(false)
 
   function twoDigits(num) {
-    return ("0".concat(num < 0 ? "0": num.toString())).slice(-2)
+    return '0'.concat(num < 0 ? '0' : num.toString()).slice(-2)
   }
 
   function showCountdown(countDownDate) {
     const now = new Date().getTime()
     const timeleft = countDownDate - now
-        
+
     const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))
     const seconds = Math.floor((timeleft % (1000 * 60)) / 1000)
@@ -86,9 +79,7 @@ const YourFleetStats = ({
       </Stat>
       <Stat>
         <div>Mineral</div>
-        <div>
-          {(fleetMineral / 10 ** 18).toFixed(2)}
-        </div>
+        <div>{(fleetMineral / 10 ** 18).toFixed(2)}</div>
       </Stat>
 
       <div>COOLDOWNS</div>
