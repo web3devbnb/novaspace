@@ -20,6 +20,7 @@ import {
   useGetPlayer,
   useSetShipyardName,
   useSetShipyardFee,
+  useGetAttackPower,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -303,6 +304,7 @@ const Shipyard = () => {
   // console.log('shipayrds', shipyards)
   const playerFleet = useGetShips(account)
   const fleetSize = useGetFleetSize(account)
+  const fleetPower = useGetAttackPower(account)
   const maxFleetSize = useGetMaxFleetSize(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
   const miningCapacity = useGetMiningCapacity(account)
@@ -653,26 +655,29 @@ const Shipyard = () => {
 
           <Col style={{ width: '25%' }}>
             <FleetMenu>
-              <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
+              <Header style={{ marginLeft: 10 }}>MY FLEET</Header>
               <Stats style={{ margin: 10 }}>
                 <Stat>
-                  <div>Fleet Size</div>
+                  <div>SIZE</div>
                   <div>
                     {fleetSize || '-'}/{maxFleetSize || '-'}
                   </div>
                 </Stat>
                 <Stat>
-                  <div>Mining Capacity</div>
-                  <div>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'}</div>
+                  <div>POWER</div>
+                  <div>{fleetPower || '-'}</div>
                 </Stat>
                 <Stat>
-                  <div>Mineral Capacity</div>
-                  <div>{mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}</div>
+                  <div>MINERAL</div>
+                  <div>
+                    {miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} /{' '}
+                    {mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}
+                  </div>
                 </Stat>
                 {shipClasses.map((ship, i) => {
                   return (
                     <Stat key={ship.name}>
-                      <div>{ship.name}s</div>
+                      <div>{ship.name.toUpperCase()}S</div>
                       <div>{playerFleet[i] || '-'}</div>
                     </Stat>
                   )
