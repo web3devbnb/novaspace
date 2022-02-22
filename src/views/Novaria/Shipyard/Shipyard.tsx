@@ -441,6 +441,10 @@ const Shipyard = () => {
 
   // styles for the dropdown Selector
   const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      margin: '10px 0',
+    }),
     menu: (provided) => ({
       ...provided,
       border: '2px solid #289794',
@@ -501,8 +505,7 @@ const Shipyard = () => {
             <Row>
               <BuildMenu>
                 <Header>BUILD SHIPS</Header>
-                <br />
-                <br />
+
                 <Select
                   placeholder="Select Shipyard"
                   // value={shipyard}
@@ -511,16 +514,15 @@ const Shipyard = () => {
                   styles={customStyles}
                 />
 
-                <Row style={{ marginTop: 10 }}>
-                  <Select
-                    placeholder="Select Ship"
-                    // value={shipId}
-                    options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
-                    onChange={handleShipChange}
-                    styles={customStyles}
-                  />
-                  {playerEXP < shipEXP ? 'requires more EXP' : ''}
-                </Row>
+                <Select
+                  placeholder="Select Ship"
+                  // value={shipId}
+                  options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
+                  onChange={handleShipChange}
+                  styles={customStyles}
+                />
+
+                {playerEXP < shipEXP ? 'requires more EXP' : ''}
 
                 <Row style={{ marginTop: 10 }}>
                   <Input
