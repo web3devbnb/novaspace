@@ -279,6 +279,17 @@ const FleetMenu = styled.div`
 
 const ShipyardEditor = styled.div``
 
+const Stats = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
+
+const Stat = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
 const Shipyard = () => {
@@ -641,27 +652,30 @@ const Shipyard = () => {
           <Col style={{ width: '25%' }}>
             <FleetMenu>
               <Header style={{ marginLeft: 10 }}>FLEET STATS</Header>
-              <Row style={{ justifyContent: 'space-between' }}>
-                <Col style={{ gap: 10 }}>
-                  <Item>Fleet Size</Item>
-                  <Item>Mining Capacity</Item>
-                  <Item>Mineral Capacity</Item>
-                  {shipClasses.map((ship) => {
-                    return <Item key={ship.name}>{ship.name}s</Item>
-                  })}
-                </Col>
-                <Col style={{ textAlign: 'right', gap: 10 }}>
-                  {/* Find a way to map this out based on shipclass? */}
-                  <Item>
+              <Stats style={{ margin: 10 }}>
+                <Stat>
+                  <div>Fleet Size</div>
+                  <div>
                     {fleetSize || '-'}/{maxFleetSize || '-'}
-                  </Item>
-                  <Item>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} </Item>
-                  <Item>{mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}</Item>
-                  <Item>{playerFleet[0] || '-'}</Item>
-                  <Item>{playerFleet[1] || '-'}</Item>
-                  <Item>{playerFleet[2] || '-'}</Item>
-                </Col>
-              </Row>
+                  </div>
+                </Stat>
+                <Stat>
+                  <div>Mining Capacity</div>
+                  <div>{miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'}</div>
+                </Stat>
+                <Stat>
+                  <div>Mineral Capacity</div>
+                  <div>{mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}</div>
+                </Stat>
+                {shipClasses.map((ship, i) => {
+                  return (
+                    <Stat key={ship.name}>
+                      <div>{ship.name}s</div>
+                      <div>{playerFleet[i] || '-'}</div>
+                    </Stat>
+                  )
+                })}
+              </Stats>
               <ShipyardEditor>
                 {isOwner && (
                   <div>
