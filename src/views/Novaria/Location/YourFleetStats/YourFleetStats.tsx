@@ -38,7 +38,7 @@ const YourFleetStats = ({
   currentTravelCooldown,
   currentMiningCooldown,
 }) => {
-  const [, setPendingTx] = useState(false)
+  const [pending, setPendingTx] = useState(false)
 
   function twoDigits(num) {
     return '0'.concat(num < 0 ? '0' : num.toString()).slice(-2)
@@ -116,7 +116,7 @@ const YourFleetStats = ({
         <div>{travelCooldown}</div>
       </Stat>
 
-      {fleetSize < 25 && <Button onClick={sendRecallTx}>RECALL TO HAVEN</Button>}
+      {fleetSize < 25 && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
     </Stats>
   )
 }

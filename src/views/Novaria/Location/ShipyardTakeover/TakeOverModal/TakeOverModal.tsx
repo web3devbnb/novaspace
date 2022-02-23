@@ -64,6 +64,8 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const isTakeoverPlayer = player === account
 
+  console.log('shipyard info', shipyard)
+
   console.log('player',player,'account', account, isTakeoverPlayer)
   const { onEnterBattle } = useEnterBattle()
   
