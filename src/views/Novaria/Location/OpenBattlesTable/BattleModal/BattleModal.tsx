@@ -32,9 +32,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
   const attackers = [battleInfo.attackTeam[0]]
   const defenders = [battleInfo.defendTeam[0]]
   // const target = useGetBattle(battle).defendTeam[0][0]
-  const player = defenders.toString() 
-  console.log('player', player)
-  console.log('battle info', battleInfo)
+  const player = defenders[0][0]
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
   const inBattle = status === true
