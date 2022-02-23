@@ -7,7 +7,7 @@ import GameMenu from '../components/GameMenu'
 import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
-  background-image: url('/images/novaria/shipyardBG.jpg');
+  // background-image: url('/images/novaria/shipyardBG.jpg');
   background-size: cover;
   color: #5affff;
   display: flex;
@@ -45,11 +45,13 @@ const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const playerEXP = useGetPlayer(account.toString()).experience
+  const player = useGetPlayer(account.toString())
+  const playerEXP = player.experience
+  const playerName = player.name
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
       <Row>
         <GameMenu pageName="overview" />
         <Body>

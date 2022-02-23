@@ -38,7 +38,7 @@ import fireflyQueue from '../assets/fireflyQueue.png'
 import YourFleetStats from '../Location/YourFleetStats'
 
 const Page = styled.div`
-  background-image: url('/images/novaria/shipyardBG.jpg');
+  // background-image: url('/images/novaria/shipyardBG.jpg');
   background-size: cover;
 
   font-size: 15px;
@@ -300,7 +300,9 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const playerEXP = useGetPlayer(account.toString()).experience
+  const player = useGetPlayer(account.toString())
+  const playerEXP = player.experience
+  const playerName = player.name
 
   const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
@@ -481,7 +483,7 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
       <PageRow>
         <GameMenu pageName="shipyard" />
 

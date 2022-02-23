@@ -12,32 +12,6 @@ import logo from './assets/novariaLogoMain.png'
 import 'react-modal-video/scss/modal-video.scss'
 
 
-
-const WalletProvider = ({ children }) => {
-  const wallet = useWallet()
-
-  if (wallet.status === 'connecting') {
-    return <PageLoader />
-  }
-
-  if (
-    wallet.status === 'disconnected' ||
-    wallet.status === 'error' ||
-    (wallet.status === 'connected' && wallet.account === null)
-  ) {
-    if (wallet.error) {
-      console.log(wallet.error)
-    }
-    return (
-      <Page style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Text fontSize="3rem">Please, connect your wallet.</Text>
-      </Page>
-    )
-  }
-
-  return <ConnectedAccountContext.Provider value={wallet.account}>{children}</ConnectedAccountContext.Provider>
-}
-
 const Page1 = styled(Page)`
   // background-image:url('/images/home/mainBackground-dark.jpg');
   // background-size:cover ;
@@ -121,7 +95,7 @@ const Button = styled.button`
 const Novaria: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const [isOpen, setOpen] = useState(false)
-  const [pendingTx, setPendingTx] = useState(false)
+  const [pending, setPendingTx] = useState(false)
   const [name, setName] = useState('')
 
   const fleetContract = getFleetAddress()
@@ -132,7 +106,7 @@ const Novaria: React.FC = () => {
   const allowanceFleet = useGetAllowance(fleetContract)
   const allowanceMap = useGetAllowance(mapContract)
   const allowanceTreasury = useGetAllowance(treasuryContract)
-  const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 && allowanceMap > 0
+  const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 
   const playerExists = useGetPlayerExists(account)
   console.log('allowed, exists', isAllowed, playerExists)
   const { onClick } = useApprove()
@@ -187,18 +161,17 @@ const Novaria: React.FC = () => {
             videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
-          <SubHeading>
+         <SubHeading>
             {!isAllowed && 'Step 1 - approve Fleet, Treasury, and Map contracts for the game'}<br />
-          {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>Approve Fleet Contract</Button> : ''}
-          {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>Approve Treasury Contract</Button> : ''}
-          {allowanceMap <= 0 ? <Button onClick={handleMapApprove}>Approve Map Contract</Button> : ''}
+          {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pending ? 'Approve Fleet Contract' : 'pending...'}</Button> : ''}
+          {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
 
           {/* Eventually this needs to have a confirm popup to make sure name set correctly */}
           {isAllowed && !playerExists ? 
             <div>
               Step 2 - Set your player name <br />
               <input type="text" required maxLength={16} onChange={(e) => setName(e.target.value)} />
-              <Button onClick={sendInsertCoinTx}>Set Player Name</Button>
+              <Button onClick={sendInsertCoinTx}>{!pending ? 'Set Player Name' : 'pending...'}</Button>
               <br />(costs 1 nova)
             </div> : ''}
           {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
@@ -209,7 +182,8 @@ const Novaria: React.FC = () => {
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
           
-          </SubHeading></Column>
+          </SubHeading>
+          </Column>
       </Body>
     </Page1>
   )

@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ResetCSS, Text } from '@pancakeswap-libs/uikit'
+import { ResetCSS, Text, Button, useWalletModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -15,6 +15,8 @@ export const ConnectedAccountContext = React.createContext<string | null>(null)
 
 const WalletProvider = ({ children }) => {
   const wallet = useWallet()
+  const {connect, reset} = useWallet()
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
 
   if (wallet.status === 'connecting') {
     return <PageLoader />
@@ -30,7 +32,7 @@ const WalletProvider = ({ children }) => {
     }
     return (
       <Page style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Text fontSize="3rem">Please, connect your wallet.</Text>
+        <Button onClick={onPresentConnectModal}>Please Connect Wallet</Button>
       </Page>
     )
   }

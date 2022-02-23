@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Text, useModal } from '@pancakeswap-libs/uikit'
 import { ConnectedAccountContext } from 'App'
 import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
 import styled from 'styled-components'
@@ -47,7 +46,7 @@ export interface GridProps {
 }
 
 const Page = styled.div`
-  background-image: url('/images/novaria/mapBG.jpg');
+  // background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
   color: #5affff;
@@ -61,6 +60,11 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0px 0px 0px;
+`
+
+const Text = styled.text`
+  color: #5affff;
+  font-weight: medium;
 `
 
 const Grid = styled.div`
@@ -318,8 +322,9 @@ const Map: React.FC = () => {
 
   }
 
-  const playerEXP = useGetPlayer(account.toString()).experience
-
+  const player = useGetPlayer(account.toString())
+  const playerEXP = player.experience
+  const playerName = player.name
 
   if (!mapData) {
     return null
@@ -330,7 +335,7 @@ const Map: React.FC = () => {
   return (
     <Page >
       <FlipScreenModal isMobile={isMobile}/>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}  playerName={playerName} />
       <MainRow>
         <GameMenu pageName="starmap" />
         <Body>
@@ -347,7 +352,7 @@ const Map: React.FC = () => {
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
-                        <Text bold glowing>
+                        <Text >
                           {planet.name}
                         </Text>
                         {/* <Unexplored>
@@ -358,6 +363,11 @@ const Map: React.FC = () => {
                           {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
                           {planet.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
                           {planet.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
+                          {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
+                          {(Number(ry)+Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
+                            (Number(x)+Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
+                              <IndicatorImg src={youLogo} alt="current location" />
+                            )}
 
                           {planet.fleetCount > 0 && planet.fleetCount < 11 && (
                             <GridIcon src={lowPlayers} alt="planet has few players" />
@@ -379,11 +389,6 @@ const Map: React.FC = () => {
                           ) : (
                             ''
                           )}
-                          {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
-                          {(Number(ry)+Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
-                            (Number(x)+Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
-                              <IndicatorImg src={youLogo} alt="current location" />
-                            )}
                         </Row>
                         <GridCellId>
                           ( {Number(x)+Number(mapData.x0) } ,{Number(ry)+Number(mapData.y0)})

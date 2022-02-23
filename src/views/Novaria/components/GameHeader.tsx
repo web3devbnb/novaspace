@@ -56,12 +56,15 @@ const ConnectButton = styled.button`
   width: 125px;
 `
 
-const GameHeader = ({ location, playerMineral, exp }) => {
+const GameHeader = ({ location, playerMineral, exp, playerName }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
 
+  const logout = async () => {
+    reset()
+  }
   const inBattle = useGetPlayerBattleStatus(account)
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
@@ -73,8 +76,6 @@ const GameHeader = ({ location, playerMineral, exp }) => {
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
-        {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
-        {connected && <ConnectButton onClick={reset}>{accountAddress}</ConnectButton>}
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
         <a href='https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f' target='blank' rel='noreferrer noopener'  >
           <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} /> 
@@ -84,7 +85,7 @@ const GameHeader = ({ location, playerMineral, exp }) => {
         </a>
         </div>
         <Text glowing>
-          NOVA Balance: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+          NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
           MINERAL: <span style={{ color: 'gold' }}>{(playerMineral / 10 ** 18).toFixed(3)}</span>
@@ -93,8 +94,13 @@ const GameHeader = ({ location, playerMineral, exp }) => {
           EXP: <span style={{ color: 'gold' }}>{exp}</span>
         </Text>
         <Text glowing>
-          Current Location: ({location.X}, {location.Y})
+          Location: ({location.X}, {location.Y})
         </Text>
+        <Text glowing>
+        <span style={{ color: 'gold' }}>{playerName}</span>
+        </Text>
+        {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
+        {connected && <ConnectButton onClick={logout}>{accountAddress}</ConnectButton>}
       </InfoBlock>
     </Hero>
   )

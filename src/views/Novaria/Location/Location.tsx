@@ -37,7 +37,7 @@ import ShipyardTakeover from './ShipyardTakeover'
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
 
-  background-image: url('/images/novaria/mapBG.jpg');
+ // background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
 
   font-size: 15px;
@@ -191,7 +191,9 @@ const Location: React.FC = () => {
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
-  const playerEXP = useGetPlayer(account).experience
+  const player = useGetPlayer(account.toString())
+  const playerEXP = player.experience
+  const playerName = player.name
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
@@ -199,7 +201,7 @@ const Location: React.FC = () => {
 
   return (
     <Page className="fontsforweb_bignoodletitling">
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}  playerName={playerName} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
