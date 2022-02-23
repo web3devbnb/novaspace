@@ -316,6 +316,7 @@ const LocationCard = ({
         </Row>
       </PlaceHeader>
       <PlaceBody>
+        {hostile && 'Fleets cannot travel to hostile space'}
         {mineral > 0 && currentLocation ? (
           <Button type="button" onClick={sendMineTx}>
             {pending ? 'pending...' : 'MINE'}
@@ -352,12 +353,15 @@ const LocationCard = ({
           ''
         )}
         
-         
-        <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-          <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
-          <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
-          {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
-        </Row>
+        {!hostile && 
+          <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
+            {distance < 6 ? <div>
+                <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
+                <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
+              </div> : 'Location too far to travel directly'}
+            {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
+          </Row>
+        }
       </PlaceBody>
     </Body>
   )

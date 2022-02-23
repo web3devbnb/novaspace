@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import {
@@ -161,7 +161,7 @@ const BattleProgressCard = styled.div`
 `
 
 const Location: React.FC = () => {
-  const web3 = getWeb3()
+  const web3 = getWeb3() 
 
   const account = useContext(ConnectedAccountContext)
 
@@ -172,9 +172,23 @@ const Location: React.FC = () => {
   const location = useLocation()
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
+  
+  console.log('location state',location.state)
+  console.log('loadedCoords', loadedCoords)
+  console.log('fleet location', fleetLocation)
+  const [placeX, setX] = useState(0)
+  const [placeY, setY] = useState(0)
+  
+  useEffect(() => {
+    if (typeof location.state === 'undefined') {
+    setX(fleetLocation.X)
+    setY(fleetLocation.Y)
+    } else {
+      setX(loadedCoords.x)
+      setY(loadedCoords.y)
+    }
+  },[location.state, fleetLocation.X, fleetLocation.Y, loadedCoords.x, loadedCoords.y])
 
-  const [placeX, setX] = useState(loadedCoords.x)
-  const [placeY, setY] = useState(loadedCoords.y)
 
   const placeInfo = useGetPlaceInfo(placeX, placeY)
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
@@ -197,7 +211,8 @@ const Location: React.FC = () => {
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
-  const currentLocation = fleetLocation.X === placeX.toString() && fleetLocation.Y === placeY.toString()
+  const currentLocation = fleetLocation.X === placeX && fleetLocation.Y === placeY
+  console.log('current location?', currentLocation)
 
   return (
     <Page className="fontsforweb_bignoodletitling">
