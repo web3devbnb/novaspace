@@ -486,7 +486,13 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
+      <GameHeader
+        location={fleetLocation}
+        playerMineral={fleetMineral}
+        playerMineralCapacity={mineralCapacity}
+        exp={playerEXP}
+        playerName={playerName}
+      />
       <PageRow>
         <GameMenu pageName="shipyard" />
 

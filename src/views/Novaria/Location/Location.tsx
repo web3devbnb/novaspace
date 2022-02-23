@@ -210,7 +210,13 @@ const Location: React.FC = () => {
 
   return (
     <Page className="fontsforweb_bignoodletitling">
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
+      <GameHeader
+        location={fleetLocation}
+        playerMineral={fleetMineral}
+        playerMineralCapacity={mineralCapacity}
+        exp={playerEXP}
+        playerName={playerName}
+      />
       <Row>
         <GameMenu pageName="location" />
         <Body>
