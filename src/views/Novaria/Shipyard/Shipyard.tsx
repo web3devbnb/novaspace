@@ -99,9 +99,9 @@ const Col = styled.div`
 `
 
 const Row = styled.div`
+  display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
-  display: flex;
   align-items: center;
 
   width: 100%;
@@ -514,8 +514,9 @@ const Shipyard = () => {
 
                 {playerEXP < shipEXP ? 'requires more EXP' : ''}
 
-                <Row style={{ marginTop: 10 }}>
+                <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <Input
+                    style={{ flexGrow: 2 }}
                     type="number"
                     min="0"
                     placeholder="0"
@@ -524,7 +525,7 @@ const Shipyard = () => {
                   />
                   {!pending ? (
                     <Button type="button" onClick={sendTx}>
-                      BUILD {shipName && shipName.toUpperCase()}
+                      BUILD
                     </Button>
                   ) : (
                     <Button type="button">pending...</Button>
