@@ -15,9 +15,13 @@ import {
   useGetPlayer,
   useGetCurrentMiningCooldown,
   useGetShipyards,
+  useGetMaxFleetSize,
+  useGetMaxMineralCapacity,
+  useGetMiningCapacity,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
+import { getWeb3 } from 'utils/web3'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
@@ -155,6 +159,8 @@ const BattleProgressCard = styled.div`
 `
 
 const Location: React.FC = () => {
+  const web3 = getWeb3()
+
   const account = useContext(ConnectedAccountContext)
 
   const fleetLocation = useGetFleetLocation(account)
@@ -173,8 +179,11 @@ const Location: React.FC = () => {
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
+  const maxFleetSize = useGetMaxFleetSize(account)
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
+  const mineralCapacity = useGetMaxMineralCapacity(account)
+  const miningCapacity = useGetMiningCapacity(account)
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
@@ -229,11 +238,13 @@ const Location: React.FC = () => {
             </CenterCol>
             <RightCol>
               <YourFleetCard>
-                <Header>YOUR FLEET</Header>
+                <Header>MY FLEET</Header>
                 <YourFleetStats
                   fleetSize={fleetSize}
+                  maxFleetSize={maxFleetSize}
                   fleetPower={fleetPower}
-                  fleetMineral={fleetMineral}
+                  miningCapacity={web3.utils.fromWei(miningCapacity)}
+                  mineralCapacity={web3.utils.fromWei(mineralCapacity)}
                   currentTravelCooldown={currentTravelCooldown}
                   currentMiningCooldown={currentMiningCooldown}
                 />

@@ -27,7 +27,15 @@ const Button = styled.button`
   }
 `
 
-const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, currentTravelCooldown, currentMiningCooldown }) => {
+const YourFleetStats = ({
+  fleetSize,
+  maxFleetSize,
+  fleetPower,
+  miningCapacity,
+  mineralCapacity,
+  currentTravelCooldown,
+  currentMiningCooldown,
+}) => {
   const [, setPendingTx] = useState(false)
 
   function twoDigits(num) {
@@ -70,30 +78,34 @@ const YourFleetStats = ({ fleetSize, fleetPower, fleetMineral, currentTravelCool
   return (
     <Stats>
       <Stat>
-        <div>Size</div>
-        <div>{fleetSize}</div>
+        <div>SIZE</div>
+        <div>
+          {fleetSize}/{maxFleetSize}
+        </div>
       </Stat>
       <Stat>
-        <div>Power</div>
+        <div>POWER</div>
         <div>{fleetPower}</div>
       </Stat>
       <Stat>
-        <div>Mineral</div>
-        <div>{(fleetMineral / 10 ** 18).toFixed(2)}</div>
+        <div>MINERAL</div>
+        <div>
+          {miningCapacity}/{mineralCapacity}
+        </div>
       </Stat>
 
       <div>COOLDOWNS</div>
 
       <Stat>
-        <div>Mining</div>
+        <div>MINING</div>
         <div>{miningCooldown}</div>
       </Stat>
       <Stat>
-        <div>Travel</div>
+        <div>TRAVEL</div>
         <div>{travelCooldown}</div>
       </Stat>
 
-      {fleetSize < 25 && <Button onClick={sendRecallTx}>Recall to Haven</Button>}
+      {fleetSize < 25 && <Button onClick={sendRecallTx}>RECALL TO HAVEN</Button>}
     </Stats>
   )
 }
