@@ -96,7 +96,7 @@ const YourFleetStats = ({
         </div>
       </Stat>
 
-      <div>COOLDOWNS</div>
+      <div style={{ fontWeight: 'bold' }}>COOLDOWNS</div>
 
       <Stat>
         <div>MINING</div>
