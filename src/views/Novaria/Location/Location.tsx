@@ -34,14 +34,8 @@ import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
 
 const Page = styled.div`
-  font-family: 'BigNoodle', sans-serif;
-
-  // background-image: url('/images/novaria/mapBG.jpg');
-  background-size: cover;
-
   font-size: 15px;
   color: #5affff;
-
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
@@ -55,10 +49,7 @@ const Row = styled.div`
 const Body = styled.div`
   margin: 10px 10px 10px 0px;
   padding: 15px 15px 15px 0px;
-  // width: 100%;
-  // min-height: 550px;
   position: relative;
-  aspect-ratio: 15/8;
   background: #00000050;
 
   ${({ theme }) => theme.mediaQueries.lg} {
@@ -76,7 +67,7 @@ const Header = styled(Text)`
   color: white;
   font-weight: bold;
   font-size: 14px;
-  margin: 12px 0 10px;
+  margin: 5px 0 10px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 18px;
@@ -125,7 +116,7 @@ const RightCol = styled.div`
   padding: 15px;
   margin-left: 15px;
   border-left: 1px solid gray;
-  max-width: 250px;
+  // max-width: 250px;
 `
 
 const LeftCol = styled.div``

@@ -35,15 +35,11 @@ import moleQueue from '../assets/moleQueue.png'
 import fireflyCard from '../assets/fireflyCard.png'
 import fireflyQueue from '../assets/fireflyQueue.png'
 import YourFleetStats from '../Location/YourFleetStats'
+import BattleStatus from '../Location/BattleStatus'
 
 const Page = styled.div`
-  // background-image: url('/images/novaria/shipyardBG.jpg');
-  background-size: cover;
-
   font-size: 15px;
-  padding: 10px;
   color: #5affff;
-
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
@@ -60,7 +56,8 @@ const Body = styled.div`
   background-image: url('/images/novaria/border.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  aspect-ratio: 15/8;
+  padding-bottom: 10px;
+  //aspect-ratio: 15/8;
 `
 
 const ShipClassMenu = styled.div`
@@ -638,7 +635,7 @@ const Shipyard = () => {
             </Row>
           </Col>
 
-          <Col style={{ width: '25%' }}>
+          <Col >
             <FleetMenu>
               <Header>MY FLEET</Header>
               <YourFleetStats
