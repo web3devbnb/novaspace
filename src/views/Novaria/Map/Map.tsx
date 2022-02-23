@@ -427,7 +427,7 @@ const Map: React.FC = () => {
               </MoveButton>
             </MoveControls>
             <Button type='button' onClick={handleFleetLocation} >
-              Go to Home
+              My Location
             </Button>
 
           </GridControls>
