@@ -241,68 +241,29 @@ const Map: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
 
+  // adjust coordinates to keep map centered
+  function adjCoords(newX, newY) {
+    const adjFleetX = Math.max(0, newX - Math.floor(NX / 2))
+    const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
+    setX(newX)
+    setY(newY)
+    return [adjFleetX, adjFleetY]
+  }
+
+  // get map data
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
+
+  // set map data on inital page load
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchMapData(mapContract, fleetLocation.X, fleetLocation.Y)
-      setMapData({ x0: fleetLocation.X, y0: fleetLocation.Y, data: arrayToMatrix(data, NX) })
+      const [mapX, mapY] = adjCoords(fleetLocation.X, fleetLocation.Y)
+      const data = await fetchMapData(mapContract, mapX, mapY)
+      setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, NX) })
     }
     fetch()
   }, [mapContract, fleetLocation.X, fleetLocation.Y])
 
-  const [X, setX] = useState(0)
-  const [Y, setY] = useState(0)
-  console.log('map x y', X, Y)
-
-  useEffect(() => {
-    setX(fleetLocation.X)
-    setY(fleetLocation.Y)
-  }, [fleetLocation.X, fleetLocation.Y])
-
-  const [XLen, setXLen] = useState(NX)
-  const [YLen, setYLen] = useState(NY)
-
-  const fleetMineral = useGetFleetMineral(account)
-  const mineralCapacity = useGetMaxMineralCapacity(account)
-
-  const handleMapLeft = async () => {
-    let newX = 0
-    if (X < 2) {
-      setX(0)
-    } else {
-      newX = Number(X) - 2
-      setX(Number(X) - 2)
-    }
-    const data = await fetchMapData(mapContract, newX, Y)
-    setMapData({ x0: newX, y0: Y, data: arrayToMatrix(data, XLen) })
-  }
-
-  const handleMapDown = async () => {
-    let newY = 0
-    if (Y < 2) {
-      setY(0)
-    } else {
-      newY = Number(Y) - 2
-      setY(Number(Y) - 2)
-    }
-    const data = await fetchMapData(mapContract, X, newY)
-    setMapData({ x0: X, y0: newY, data: arrayToMatrix(data, XLen) })
-  }
-
-  const handleMapUp = async () => {
-    setY(Number(Y) + 2)
-    const newY = Number(Y) + 2
-    const data = await fetchMapData(mapContract, X, newY)
-    setMapData({ x0: X, y0: newY, data: arrayToMatrix(data, XLen) })
-  }
-
-  const handleMapRight = async () => {
-    setX(Number(X) + 2)
-    const newX = Number(X) + 2
-    const data = await fetchMapData(mapContract, newX, Y)
-    setMapData({ x0: newX, y0: Y, data: arrayToMatrix(data, XLen) })
-  }
-
+  // Find location button
   const handleFindLocationClick = async () => {
     if (mapData.x0 === X && mapData.y0 === Y) {
       return
@@ -310,14 +271,32 @@ const Map: React.FC = () => {
     handleFleetLocation(X, Y)
   }
 
+  // My Location button
   const handleFleetLocation = async (newX, newY) => {
-    const adjFleetX = Math.max(0, newX - Math.floor(NX / 2))
-    const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
-    setX(newX)
-    setY(newY)
-    const data = await fetchMapData(mapContract, adjFleetX, adjFleetY)
-    setMapData({ x0: adjFleetX, y0: adjFleetY, data: arrayToMatrix(data, XLen) })
+    const [mapX, mapY] = adjCoords(newX, newY)
+    const data = await fetchMapData(mapContract, mapX, mapY)
+    setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
   }
+
+  // Map Arrows
+  const handleMapArrow = async(moveX, moveY) => {
+    const newX = Math.max(Math.min(Math.floor(NX / 2), Number(X)), (Number(X) + moveX))
+    const newY = Math.max(Math.min(Math.floor(NX / 2), Number(X)), (Number(Y) + moveY))
+    const [mapX, mapY] = adjCoords(newX, newY)
+
+    const data = await fetchMapData(mapContract, mapX, mapY)
+    setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
+  }
+
+  const [X, setX] = useState(0)
+  const [Y, setY] = useState(0)
+  console.log('map x y', X, Y)
+
+  const [XLen, setXLen] = useState(NX)
+  const [YLen, setYLen] = useState(NY)
+
+  const fleetMineral = useGetFleetMineral(account)
+  const mineralCapacity = useGetMaxMineralCapacity(account)
 
   const player = useGetPlayer(account.toString())
   const playerEXP = player.experience
@@ -417,16 +396,16 @@ const Map: React.FC = () => {
               <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
             </InputControl>
             <MoveControls>
-              <MoveButton type="button" onClick={handleMapLeft}>
+              <MoveButton type="button" onClick={() => handleMapArrow(-2, 0)}>
                 <img src={leftArrow} alt="left" />
               </MoveButton>
-              <MoveButton type="button" onClick={handleMapUp}>
-                <img src={upArrow} alt="up" />
-              </MoveButton>
-              <MoveButton type="button" onClick={handleMapDown}>
+              <MoveButton type="button" onClick={() => handleMapArrow(0, -2)}>
                 <img src={downArrow} alt="down" />
               </MoveButton>
-              <MoveButton type="button" onClick={handleMapRight}>
+              <MoveButton type="button" onClick={() => handleMapArrow(0, 2)}>
+                <img src={upArrow} alt="up" />
+              </MoveButton>
+              <MoveButton type="button" onClick={() => handleMapArrow(2, 0)}>
                 <img src={rightArrow} alt="right" />
               </MoveButton>
             </MoveControls>
