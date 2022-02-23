@@ -662,7 +662,7 @@ const Shipyard = () => {
                 {isOwner && (
                   <div>
                     <Item>
-                      <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
+                      <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} /><br />
                       <Button onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
                     </Item>
                   </div>
@@ -677,7 +677,7 @@ const Shipyard = () => {
                         placeholder="0"
                         value={newFee}
                         onChange={(e) => setNewFee(parseFloat(e.target.value))}
-                      />
+                      /><br />
                       <Button onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                     </Item>
                   </div>
