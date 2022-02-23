@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -45,13 +45,20 @@ const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
+  const mineralCapacity = useGetMaxMineralCapacity(account)
   const player = useGetPlayer(account.toString())
   const playerEXP = player.experience
   const playerName = player.name
 
   return (
     <Page>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
+      <GameHeader
+        location={fleetLocation}
+        playerMineral={fleetMineral}
+        playerMineralCapacity={mineralCapacity}
+        exp={playerEXP}
+        playerName={playerName}
+      />
       <Row>
         <GameMenu pageName="overview" />
         <Body>

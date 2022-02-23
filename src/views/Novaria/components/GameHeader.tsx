@@ -17,10 +17,7 @@ const Hero = styled.div`
   display: flex;
   text-align: center;
   justify-content: space-between;
-  // height: 75px;
   width: 100%;
-  // margin-right: 10px;
-  // margin-left: 10px;
   margin-top: 0px;
   padding-top: 10px;
   background: ${(props: HeaderProps) =>
@@ -40,10 +37,7 @@ const InfoBlock = styled.div`
 
 const Logo = styled.img`
   object-position: left;
-  // margin-top: -70px;
-  // margin-bottom: 60px;
   margin-top: 10px;
-  // background-color: #000a17;
 `
 
 const ConnectButton = styled.button`
@@ -56,7 +50,7 @@ const ConnectButton = styled.button`
   width: 125px;
 `
 
-const GameHeader = ({ location, playerMineral, exp, playerName }) => {
+const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playerName }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
@@ -86,7 +80,10 @@ const GameHeader = ({ location, playerMineral, exp, playerName }) => {
           NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
         <Text glowing>
-          MINERAL: <span style={{ color: 'gold' }}>{(playerMineral / 10 ** 18).toFixed(3)}</span>
+          MINERAL:{' '}
+          <span style={{ color: 'gold' }}>
+            {(playerMineral / 10 ** 18).toFixed(3)} ({Math.round(playerMineral / playerMineralCapacity)}%)
+          </span>
         </Text>
         <Text glowing>
           LOCATION: ({location.X}, {location.Y})

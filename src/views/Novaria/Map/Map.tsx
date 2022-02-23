@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ConnectedAccountContext } from 'App'
-import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
@@ -173,7 +173,7 @@ const Unexplored = styled.div`
 const GridControls = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-right:10px;
+  margin-right: 10px;
 `
 
 const Button = styled.button`
@@ -231,7 +231,6 @@ const MoveButton = styled.button`
   cursor: pointer;
 `
 
-
 const isMobile = window.innerWidth < 800
 const NX = 7
 const NY = 7
@@ -251,8 +250,6 @@ const Map: React.FC = () => {
     fetch()
   }, [mapContract, fleetLocation.X, fleetLocation.Y])
 
-  
-
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
   console.log('map x y', X, Y)
@@ -260,21 +257,21 @@ const Map: React.FC = () => {
   useEffect(() => {
     setX(fleetLocation.X)
     setY(fleetLocation.Y)
-  },[fleetLocation.X, fleetLocation.Y])
+  }, [fleetLocation.X, fleetLocation.Y])
 
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
 
   const fleetMineral = useGetFleetMineral(account)
+  const mineralCapacity = useGetMaxMineralCapacity(account)
 
   const handleMapLeft = async () => {
     let newX = 0
     if (X < 2) {
       setX(0)
     } else {
-      newX = Number(X)-2
-      setX(Number(X)-2)
-      
+      newX = Number(X) - 2
+      setX(Number(X) - 2)
     }
     const data = await fetchMapData(mapContract, newX, Y)
     setMapData({ x0: newX, y0: Y, data: arrayToMatrix(data, XLen) })
@@ -285,23 +282,23 @@ const Map: React.FC = () => {
     if (Y < 2) {
       setY(0)
     } else {
-      newY = Number(Y)-2
-      setY(Number(Y)-2)
+      newY = Number(Y) - 2
+      setY(Number(Y) - 2)
     }
     const data = await fetchMapData(mapContract, X, newY)
     setMapData({ x0: X, y0: newY, data: arrayToMatrix(data, XLen) })
   }
 
   const handleMapUp = async () => {
-    setY(Number(Y)+2)
+    setY(Number(Y) + 2)
     const newY = Number(Y) + 2
     const data = await fetchMapData(mapContract, X, newY)
     setMapData({ x0: X, y0: newY, data: arrayToMatrix(data, XLen) })
   }
 
   const handleMapRight = async () => {
-    setX(Number(X)+2)
-    const newX = Number(X)+2
+    setX(Number(X) + 2)
+    const newX = Number(X) + 2
     const data = await fetchMapData(mapContract, newX, Y)
     setMapData({ x0: newX, y0: Y, data: arrayToMatrix(data, XLen) })
   }
@@ -319,7 +316,6 @@ const Map: React.FC = () => {
     setY(fleetLocation.Y)
     const data = await fetchMapData(mapContract, fleetLocation.X, fleetLocation.Y)
     setMapData({ x0: fleetLocation.X, y0: fleetLocation.Y, data: arrayToMatrix(data, XLen) })
-
   }
 
   const player = useGetPlayer(account.toString())
@@ -330,12 +326,16 @@ const Map: React.FC = () => {
     return null
   }
 
-  
-
   return (
-    <Page >
-      <FlipScreenModal isMobile={isMobile}/>
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}  playerName={playerName} />
+    <Page>
+      <FlipScreenModal isMobile={isMobile} />
+      <GameHeader
+        location={fleetLocation}
+        playerMineral={fleetMineral}
+        playerMineralCapacity={mineralCapacity}
+        exp={playerEXP}
+        playerName={playerName}
+      />
       <MainRow>
         <GameMenu pageName="starmap" />
         <Body>
@@ -348,13 +348,11 @@ const Map: React.FC = () => {
                     <Link
                       to={{
                         pathname: '/location',
-                        state: [{ x: (Number(x)+Number(mapData.x0)), y: (Number(ry)+Number(mapData.y0)) }],
+                        state: [{ x: Number(x) + Number(mapData.x0), y: Number(ry) + Number(mapData.y0) }],
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
-                        <Text >
-                          {planet.name}
-                        </Text>
+                        <Text>{planet.name}</Text>
                         {/* <Unexplored>
                           {planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}
                         </Unexplored> */}
@@ -364,8 +362,8 @@ const Map: React.FC = () => {
                           {planet.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
                           {planet.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
                           {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
-                          {(Number(ry)+Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
-                            (Number(x)+Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
+                          {(Number(ry) + Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
+                            (Number(x) + Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
                               <IndicatorImg src={youLogo} alt="current location" />
                             )}
 
@@ -381,7 +379,13 @@ const Map: React.FC = () => {
                             <GridIcon src={highPlayers} alt="planet has more than 50 players" />
                           )}
 
-                          {planet.placeType === '0' && <GridCellImg style={{width:'50%', height: 'auto'}} src={unexploredIcon} alt="unexplored" />}
+                          {planet.placeType === '0' && (
+                            <GridCellImg
+                              style={{ width: '50%', height: 'auto' }}
+                              src={unexploredIcon}
+                              alt="unexplored"
+                            />
+                          )}
                           {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
                           {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
                           {planet.placeType === '1' && planet.canTravel ? (
@@ -391,7 +395,7 @@ const Map: React.FC = () => {
                           )}
                         </Row>
                         <GridCellId>
-                          ( {Number(x)+Number(mapData.x0) } ,{Number(ry)+Number(mapData.y0)})
+                          ( {Number(x) + Number(mapData.x0)} ,{Number(ry) + Number(mapData.y0)})
                         </GridCellId>
                       </GridCellContent>
                     </Link>
@@ -409,27 +413,25 @@ const Map: React.FC = () => {
               (
               <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
               ,
-              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />
-              )
+              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
             </InputControl>
             <MoveControls>
-              <MoveButton type='button' onClick={handleMapLeft}>
-                <img src={leftArrow} alt='left'  />
+              <MoveButton type="button" onClick={handleMapLeft}>
+                <img src={leftArrow} alt="left" />
               </MoveButton>
-              <MoveButton type='button'  onClick={handleMapUp}>
-                <img src={upArrow} alt='up'  />
+              <MoveButton type="button" onClick={handleMapUp}>
+                <img src={upArrow} alt="up" />
               </MoveButton>
-              <MoveButton type='button'  onClick={handleMapDown} >
-                <img src={downArrow} alt='down' />
+              <MoveButton type="button" onClick={handleMapDown}>
+                <img src={downArrow} alt="down" />
               </MoveButton>
-              <MoveButton type='button'  onClick={handleMapRight} >
-                <img src={rightArrow} alt='right' />
+              <MoveButton type="button" onClick={handleMapRight}>
+                <img src={rightArrow} alt="right" />
               </MoveButton>
             </MoveControls>
-            <Button type='button' onClick={handleFleetLocation} >
+            <Button type="button" onClick={handleFleetLocation}>
               My Location
             </Button>
-
           </GridControls>
           <Legend>
             <span>
