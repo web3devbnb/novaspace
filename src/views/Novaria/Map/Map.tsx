@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Text } from '@pancakeswap-libs/uikit'
+import { Text, useModal } from '@pancakeswap-libs/uikit'
 import { ConnectedAccountContext } from 'App'
 import { useGetFleetLocation, useGetFleetMineral, useGetPlayer } from 'hooks/useNovaria'
 import styled from 'styled-components'
@@ -25,6 +25,7 @@ import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
+import FlipScreenModal from './FlipScreenModal'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
@@ -227,6 +228,7 @@ const MoveButton = styled.button`
 `
 
 
+const isMobile = window.innerWidth < 800
 const NX = 7
 const NY = 7
 
@@ -318,12 +320,16 @@ const Map: React.FC = () => {
 
   const playerEXP = useGetPlayer(account.toString()).experience
 
+
   if (!mapData) {
     return null
   }
 
+  
+
   return (
-    <Page>
+    <Page >
+      <FlipScreenModal isMobile={isMobile}/>
       <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} />
       <MainRow>
         <GameMenu pageName="starmap" />
