@@ -551,10 +551,6 @@ const Shipyard = () => {
                     <Text>BUILD FEE</Text>
                     <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>EXP REQUIRED</Text>
-                    <Text>{shipEXP ? `${shipEXP}` : '-'}</Text>
-                  </Row>
                 </div>
               </BuildMenu>
 
