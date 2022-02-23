@@ -464,18 +464,18 @@ const Shipyard = () => {
       color: '#289794',
       background: 'transparent',
     }),
-    input: (provided, state) => ({
+    input: (provided) => ({
       ...provided,
     }),
-    dropdownIndicator: (provided, state) => ({
-      ...provided,
-      color: '#289794',
-    }),
-    valueContainer: (provided, state) => ({
+    dropdownIndicator: (provided) => ({
       ...provided,
       color: '#289794',
     }),
-    singleValue: (provided, state) => ({
+    valueContainer: (provided) => ({
+      ...provided,
+      color: '#289794',
+    }),
+    singleValue: (provided) => ({
       ...provided,
       color: '#289794',
     }),
@@ -502,7 +502,6 @@ const Shipyard = () => {
 
                 <Select
                   placeholder="Select Shipyard"
-                  // value={shipyard}
                   options={shipyards.map((s, i) => ({ value: i, label: s.name }))}
                   onChange={handleShipyardChange}
                   styles={customStyles}
@@ -510,7 +509,6 @@ const Shipyard = () => {
 
                 <Select
                   placeholder="Select Ship"
-                  // value={shipId}
                   options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                   onChange={handleShipChange}
                   styles={customStyles}
@@ -528,7 +526,7 @@ const Shipyard = () => {
                   />
                   {!pending ? (
                     <Button type="button" onClick={sendTx}>
-                      Build {shipName}
+                      BUILD {shipName && shipName.toUpperCase()}
                     </Button>
                   ) : (
                     <Button type="button">pending...</Button>
@@ -537,26 +535,26 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    Cost: {buildCost / 10 ** 18}
+                    COST: {buildCost / 10 ** 18}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>Time: {(shipAmount * buildTime) / timeMod}s</Text>
+                  <Text>TIME: {(shipAmount * buildTime) / timeMod}s</Text>
                 </Row>
                 <div style={{ color: '#289794', marginTop: '5px' }}>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>Shipyard</Text>
+                    <Text>LOCATION</Text>
                     <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
-                    <Text>Owner</Text>
+                    <Text>OWNER</Text>
                     <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>Build Fee</Text>
+                    <Text>BUILD FEE</Text>
                     <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>EXP Required</Text>
+                    <Text>EXP REQUIRED</Text>
                     <Text>{shipEXP ? `${shipEXP}` : '-'}</Text>
                   </Row>
                 </div>
