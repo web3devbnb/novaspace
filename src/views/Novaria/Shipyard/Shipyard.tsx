@@ -24,7 +24,6 @@ import {
   useGetCurrentTravelCooldown,
   useGetCurrentMiningCooldown,
 } from 'hooks/useNovaria'
-import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -288,7 +287,6 @@ const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.sub
 
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
-  const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
   const spaceDocks = useGetSpaceDock()
   const shipyards = useGetShipyards()
@@ -650,8 +648,8 @@ const Shipyard = () => {
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
                 fleetPower={fleetPower}
-                miningCapacity={web3.utils.fromWei(miningCapacity)}
-                mineralCapacity={web3.utils.fromWei(mineralCapacity)}
+                miningCapacity={miningCapacity}
+                mineralCapacity={mineralCapacity}
                 shipClasses={shipClasses}
                 playerFleet={playerFleet}
                 currentTravelCooldown={currentTravelCooldown}

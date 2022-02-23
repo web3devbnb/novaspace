@@ -23,7 +23,6 @@ import {
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
-import { getWeb3 } from 'utils/web3'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import LocationCard from './LocationCard'
@@ -37,7 +36,7 @@ import ShipyardTakeover from './ShipyardTakeover'
 const Page = styled.div`
   font-family: 'BigNoodle', sans-serif;
 
- // background-image: url('/images/novaria/mapBG.jpg');
+  // background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
 
   font-size: 15px;
@@ -161,8 +160,6 @@ const BattleProgressCard = styled.div`
 `
 
 const Location: React.FC = () => {
-  const web3 = getWeb3() 
-
   const account = useContext(ConnectedAccountContext)
 
   const shipClasses = useGetShipClasses()
@@ -172,23 +169,22 @@ const Location: React.FC = () => {
   const location = useLocation()
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
-  
-  console.log('location state',location.state)
+
+  console.log('location state', location.state)
   console.log('loadedCoords', loadedCoords)
   console.log('fleet location', fleetLocation)
   const [placeX, setX] = useState(0)
   const [placeY, setY] = useState(0)
-  
+
   useEffect(() => {
     if (typeof location.state === 'undefined') {
-    setX(fleetLocation.X)
-    setY(fleetLocation.Y)
+      setX(fleetLocation.X)
+      setY(fleetLocation.Y)
     } else {
       setX(loadedCoords.x)
       setY(loadedCoords.y)
     }
-  },[location.state, fleetLocation.X, fleetLocation.Y, loadedCoords.x, loadedCoords.y])
-
+  }, [location.state, fleetLocation.X, fleetLocation.Y, loadedCoords.x, loadedCoords.y])
 
   const placeInfo = useGetPlaceInfo(placeX, placeY)
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
@@ -216,7 +212,7 @@ const Location: React.FC = () => {
 
   return (
     <Page className="fontsforweb_bignoodletitling">
-      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP}  playerName={playerName} />
+      <GameHeader location={fleetLocation} playerMineral={fleetMineral} exp={playerEXP} playerName={playerName} />
       <Row>
         <GameMenu pageName="location" />
         <Body>
@@ -263,8 +259,8 @@ const Location: React.FC = () => {
                   fleetSize={fleetSize}
                   maxFleetSize={maxFleetSize}
                   fleetPower={fleetPower}
-                  miningCapacity={web3.utils.fromWei(miningCapacity)}
-                  mineralCapacity={web3.utils.fromWei(mineralCapacity)}
+                  miningCapacity={miningCapacity}
+                  mineralCapacity={mineralCapacity}
                   shipClasses={shipClasses}
                   playerFleet={playerFleet}
                   currentTravelCooldown={currentTravelCooldown}

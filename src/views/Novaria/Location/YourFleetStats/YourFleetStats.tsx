@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRecall } from 'hooks/useNovaria'
+import { getWeb3 } from 'utils/web3'
 
 const Stats = styled.div`
   display: flex;
@@ -38,6 +39,8 @@ const YourFleetStats = ({
   currentTravelCooldown,
   currentMiningCooldown,
 }) => {
+  const web3 = getWeb3()
+
   const [pending, setPendingTx] = useState(false)
 
   function twoDigits(num) {
@@ -92,7 +95,8 @@ const YourFleetStats = ({
       <Stat>
         <div>MINING</div>
         <div>
-          {miningCapacity}/{mineralCapacity}
+          {Number(web3.utils.fromWei(miningCapacity)).toFixed(1)}/
+          {Number(web3.utils.fromWei(mineralCapacity)).toFixed(1)}
         </div>
       </Stat>
 
