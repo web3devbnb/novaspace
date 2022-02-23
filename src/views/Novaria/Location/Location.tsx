@@ -18,6 +18,8 @@ import {
   useGetMaxFleetSize,
   useGetMaxMineralCapacity,
   useGetMiningCapacity,
+  useGetShipClasses,
+  useGetShips,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -163,6 +165,9 @@ const Location: React.FC = () => {
 
   const account = useContext(ConnectedAccountContext)
 
+  const shipClasses = useGetShipClasses()
+  const playerFleet = useGetShips(account)
+
   const fleetLocation = useGetFleetLocation(account)
   const location = useLocation()
   const loadedCoords =
@@ -172,9 +177,7 @@ const Location: React.FC = () => {
   const [placeY, setY] = useState(loadedCoords.y)
 
   const placeInfo = useGetPlaceInfo(placeX, placeY)
-  console.log('PLACE INFO', placeInfo)
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
-  console.log('battles at location', battlesAtLocation)
 
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
@@ -245,6 +248,8 @@ const Location: React.FC = () => {
                   fleetPower={fleetPower}
                   miningCapacity={web3.utils.fromWei(miningCapacity)}
                   mineralCapacity={web3.utils.fromWei(mineralCapacity)}
+                  shipClasses={shipClasses}
+                  playerFleet={playerFleet}
                   currentTravelCooldown={currentTravelCooldown}
                   currentMiningCooldown={currentMiningCooldown}
                 />

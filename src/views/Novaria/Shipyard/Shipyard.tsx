@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import {} from '@pancakeswap-libs/uikit'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Select from 'react-select'
 import {
   useGetShipClasses,
@@ -21,6 +21,8 @@ import {
   useSetShipyardName,
   useSetShipyardFee,
   useGetAttackPower,
+  useGetCurrentTravelCooldown,
+  useGetCurrentMiningCooldown,
 } from 'hooks/useNovaria'
 import { getWeb3 } from 'utils/web3'
 import { ConnectedAccountContext } from 'App'
@@ -33,6 +35,7 @@ import viperQueue from '../assets/viperQueue.png'
 import moleQueue from '../assets/moleQueue.png'
 import fireflyCard from '../assets/fireflyCard.png'
 import fireflyQueue from '../assets/fireflyQueue.png'
+import YourFleetStats from '../Location/YourFleetStats'
 
 const Page = styled.div`
   background-image: url('/images/novaria/shipyardBG.jpg');
@@ -276,20 +279,10 @@ const FleetMenu = styled.div`
   flex-direction: column;
   border-left: 1px solid gray;
   height: 100%;
+  padding: 10px;
 `
 
 const ShipyardEditor = styled.div``
-
-const Stats = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`
-
-const Stat = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
 
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
@@ -297,11 +290,8 @@ const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const web3 = getWeb3()
   const shipClasses = useGetShipClasses()
-  // console.log('shipclasses', shipClasses)
   const spaceDocks = useGetSpaceDock()
-  // console.log('spaceDocks', spaceDocks)
   const shipyards = useGetShipyards()
-  // console.log('shipayrds', shipyards)
   const playerFleet = useGetShips(account)
   const fleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(account)
@@ -323,11 +313,12 @@ const Shipyard = () => {
   const [buildTime, setBuildTime] = useState(0)
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
-  // const [totalBuildTime, setTotalBuildTime] = useState(0)
   const [pending, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
   const [shipEXP, setShipEXP] = useState(0)
-  // const [claimId, setClaimId] = useState(null)
+
+  const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
+  const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
@@ -356,7 +347,6 @@ const Shipyard = () => {
   const { onBuild } = useBuildShips()
 
   const timeMod = useGetTimeModifier()
-  // console.log('timeMod, shipAmount, buildTime', timeMod, shipAmount, buildTime)
 
   const sendTx = async () => {
     setPendingTx(true)
@@ -655,34 +645,18 @@ const Shipyard = () => {
 
           <Col style={{ width: '25%' }}>
             <FleetMenu>
-              <Header style={{ marginLeft: 10 }}>MY FLEET</Header>
-              <Stats style={{ margin: 10 }}>
-                <Stat>
-                  <div>SIZE</div>
-                  <div>
-                    {fleetSize || '-'}/{maxFleetSize || '-'}
-                  </div>
-                </Stat>
-                <Stat>
-                  <div>POWER</div>
-                  <div>{fleetPower || '-'}</div>
-                </Stat>
-                <Stat>
-                  <div>MINERAL</div>
-                  <div>
-                    {miningCapacity ? web3.utils.fromWei(miningCapacity) : '-'} /{' '}
-                    {mineralCapacity ? web3.utils.fromWei(mineralCapacity) : '-'}
-                  </div>
-                </Stat>
-                {shipClasses.map((ship, i) => {
-                  return (
-                    <Stat key={ship.name}>
-                      <div>{ship.name.toUpperCase()}S</div>
-                      <div>{playerFleet[i] || '-'}</div>
-                    </Stat>
-                  )
-                })}
-              </Stats>
+              <Header>MY FLEET</Header>
+              <YourFleetStats
+                fleetSize={fleetSize}
+                maxFleetSize={maxFleetSize}
+                fleetPower={fleetPower}
+                miningCapacity={web3.utils.fromWei(miningCapacity)}
+                mineralCapacity={web3.utils.fromWei(mineralCapacity)}
+                shipClasses={shipClasses}
+                playerFleet={playerFleet}
+                currentTravelCooldown={currentTravelCooldown}
+                currentMiningCooldown={currentMiningCooldown}
+              />
               <ShipyardEditor>
                 {isOwner && (
                   <div>

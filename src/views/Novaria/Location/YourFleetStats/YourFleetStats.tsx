@@ -33,6 +33,8 @@ const YourFleetStats = ({
   fleetPower,
   miningCapacity,
   mineralCapacity,
+  shipClasses,
+  playerFleet,
   currentTravelCooldown,
   currentMiningCooldown,
 }) => {
@@ -104,6 +106,15 @@ const YourFleetStats = ({
         <div>TRAVEL</div>
         <div>{travelCooldown}</div>
       </Stat>
+
+      {shipClasses.map((ship, i) => {
+        return (
+          <Stat key={ship.name}>
+            <div>{ship.name.toUpperCase()}S</div>
+            <div>{playerFleet[i] || '-'}</div>
+          </Stat>
+        )
+      })}
 
       {fleetSize < 25 && <Button onClick={sendRecallTx}>RECALL TO HAVEN</Button>}
     </Stats>
