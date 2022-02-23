@@ -82,7 +82,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         <Text glowing>
           MINERAL:{' '}
           <span style={{ color: 'gold' }}>
-            {(playerMineral / 10 ** 18).toFixed(3)} ({Math.round(playerMineral / playerMineralCapacity)}%)
+            {(playerMineral / 10 ** 18).toFixed(2)} ({(playerMineral / playerMineralCapacity).toFixed(2)}%)
           </span>
         </Text>
         <Text glowing>
