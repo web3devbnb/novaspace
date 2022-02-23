@@ -307,15 +307,16 @@ const Map: React.FC = () => {
     if (mapData.x0 === X && mapData.y0 === Y) {
       return
     }
-    const data = await fetchMapData(mapContract, X, Y)
-    setMapData({ x0: X, y0: Y, data: arrayToMatrix(data, XLen) })
+    handleFleetLocation(X, Y)
   }
 
-  const handleFleetLocation = async () => {
-    setX(fleetLocation.X)
-    setY(fleetLocation.Y)
-    const data = await fetchMapData(mapContract, fleetLocation.X, fleetLocation.Y)
-    setMapData({ x0: fleetLocation.X, y0: fleetLocation.Y, data: arrayToMatrix(data, XLen) })
+  const handleFleetLocation = async (newX, newY) => {
+    const adjFleetX = Math.max(0, newX - Math.floor(NX / 2))
+    const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
+    setX(newX)
+    setY(newY)
+    const data = await fetchMapData(mapContract, adjFleetX, adjFleetY)
+    setMapData({ x0: adjFleetX, y0: adjFleetY, data: arrayToMatrix(data, XLen) })
   }
 
   const player = useGetPlayer(account.toString())
@@ -429,7 +430,7 @@ const Map: React.FC = () => {
                 <img src={rightArrow} alt="right" />
               </MoveButton>
             </MoveControls>
-            <Button type="button" onClick={handleFleetLocation}>
+            <Button type="button" onClick={() => handleFleetLocation(fleetLocation.X, fleetLocation.Y)}>
               My Location
             </Button>
           </GridControls>
