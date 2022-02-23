@@ -131,17 +131,12 @@ const Novaria: React.FC = () => {
       console.log('error: ', error)
     } finally {
       setPendingTx(false)
-    }
+    } 
   }
 
   const handleFleetApprove = () => {
     if (allowanceFleet <= 0) {
       sendApproveTx(fleetContract)
-    }
-  }
-  const handleMapApprove = () => {
-    if (allowanceMap <= 0) {
-      sendApproveTx(mapContract)
     }
   }
   const handleTreasuryApprove = () => {

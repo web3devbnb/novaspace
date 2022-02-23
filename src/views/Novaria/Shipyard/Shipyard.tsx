@@ -393,24 +393,27 @@ const Shipyard = () => {
   const isOwner = shipyardOwner === account.toString()
   const [newName, setShipyardNewName] = useState('')
   const { onShipyardChange } = useSetShipyardName()
-  const sendShipyardNameChange = async () => {
+  const sendShipyardNameChange = async (nameX, nameY, name) => {
     setPendingTx(true)
-    console.log('name change', shipyard.coordX, shipyard.coordY, newName)
     try {
-      await onShipyardChange(shipyard.coordX, shipyard.coordY, newName)
+      await onShipyardChange(nameX, nameY, name)
     } catch (error) {
       console.log('error: ', error)
     } finally {
       setPendingTx(false)
     }
+  }
+
+  const handleNameChange = () => {
+    sendShipyardNameChange(shipyardX, shipyardY, newName)
   }
 
   const [newFee, setNewFee] = useState(0)
   const { onShipyardFeeChange } = useSetShipyardFee()
-  const sendShipyardFeeChange = async () => {
+  const sendShipyardFeeChange = async (nameX, nameY, amount) => {
     setPendingTx(true)
     try {
-      await onShipyardFeeChange(shipyard.coordX, shipyard.coordY, newFee)
+      await onShipyardFeeChange(nameX, nameY, amount)
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -418,23 +421,10 @@ const Shipyard = () => {
     }
   }
 
-  // const endDate = new Date(1645233527 *1000)
-  // const CalculateTimeLeft = () => {
-  //   const difference = +endDate - +new Date()
-
-  //   let timeLeft = {}
-
-  //   if (difference > 0) {
-  //     timeLeft = {
-  //       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-  //       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-  //       minutes: Math.floor((difference / 1000 / 60) % 60),
-  //       seconds: Math.floor((difference / 1000) % 60),
-  //     }
-  //   }
-
-  //   return timeLeft
-  // }
+  const handleFeeChange = () => {
+    sendShipyardFeeChange(shipyardX, shipyardY, newFee)
+  }
+  
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -673,7 +663,7 @@ const Shipyard = () => {
                   <div>
                     <Item>
                       <input type="text" required maxLength={16} onChange={(e) => setShipyardNewName(e.target.value)} />
-                      <Button onClick={sendShipyardNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                      <Button onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
                     </Item>
                   </div>
                 )}
@@ -688,7 +678,7 @@ const Shipyard = () => {
                         value={newFee}
                         onChange={(e) => setNewFee(parseFloat(e.target.value))}
                       />
-                      <Button onClick={sendShipyardFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
+                      <Button onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                     </Item>
                   </div>
                 )}
