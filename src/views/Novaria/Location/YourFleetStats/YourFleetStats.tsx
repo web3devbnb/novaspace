@@ -95,7 +95,7 @@ const YourFleetStats = ({
       <Stat>
         <div>MINING</div>
         <div>
-          {Number(web3.utils.fromWei(miningCapacity)).toFixed(1)}/
+          {Number(web3.utils.fromWei(miningCapacity)).toFixed(2)}/
           {Number(web3.utils.fromWei(mineralCapacity)).toFixed(1)}
         </div>
       </Stat>
