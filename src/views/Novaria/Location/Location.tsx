@@ -113,10 +113,17 @@ const PlayersCard = styled.div`
 `
 
 const RightCol = styled.div`
-  padding: 15px;
   margin-left: 15px;
   border-left: 1px solid gray;
   // max-width: 250px;
+`
+
+const FleetMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid gray;
+  height: 100%;
+  padding: 10px;
 `
 
 const LeftCol = styled.div``
@@ -198,7 +205,7 @@ const Location: React.FC = () => {
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
-  const currentLocation = fleetLocation.X === placeX && fleetLocation.Y === placeY
+  const currentLocation = (fleetLocation.X).toString() === (placeX).toString() && (fleetLocation.Y).toString() === (placeY).toString()
   console.log('current location?', currentLocation)
 
   return (
@@ -244,45 +251,47 @@ const Location: React.FC = () => {
               </PlayersCard>
             </CenterCol>
             <RightCol>
-              <YourFleetCard>
-                <Header>MY FLEET</Header>
-                <YourFleetStats
-                  fleetSize={fleetSize}
-                  maxFleetSize={maxFleetSize}
-                  fleetPower={fleetPower}
-                  miningCapacity={miningCapacity}
-                  mineralCapacity={mineralCapacity}
-                  shipClasses={shipClasses}
-                  playerFleet={playerFleet}
-                  currentTravelCooldown={currentTravelCooldown}
-                  currentMiningCooldown={currentMiningCooldown}
+              <FleetMenu>
+                <YourFleetCard>
+                  <Header>MY FLEET</Header>
+                  <YourFleetStats
+                    fleetSize={fleetSize}
+                    maxFleetSize={maxFleetSize}
+                    fleetPower={fleetPower}
+                    miningCapacity={miningCapacity}
+                    mineralCapacity={mineralCapacity}
+                    shipClasses={shipClasses}
+                    playerFleet={playerFleet}
+                    currentTravelCooldown={currentTravelCooldown}
+                    currentMiningCooldown={currentMiningCooldown}
+                  />
+                </YourFleetCard>
+                <BattleProgressCard>
+                  <Header>BATTLE PROGRESS</Header>
+                  <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
+                </BattleProgressCard>
+                {shipyards
+                  .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())
+                  .map((shipyard) => (
+                    <TakeOverMenu>
+                      <Header>Shipyard Takeover</Header>
+                      <ShipyardTakeover
+                        account={account}
+                        shipyard={shipyard}
+                        placeX={placeX}
+                        placeY={placeY}
+                        refinery={placeInfo.refinery}
+                      />
+                    </TakeOverMenu>
+                  ))}
+                <PlaceControls
+                  placeType={Number(placeInfo.type)}
+                  placeX={placeX}
+                  placeY={placeY}
+                  placeName={placeInfo.name}
+                  isDiscoverer={isDiscoverer}
                 />
-              </YourFleetCard>
-              <BattleProgressCard>
-                <Header>BATTLE PROGRESS</Header>
-                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
-              </BattleProgressCard>
-              {shipyards
-                .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())
-                .map((shipyard) => (
-                  <TakeOverMenu>
-                    <Header>Shipyard Takeover</Header>
-                    <ShipyardTakeover
-                      account={account}
-                      shipyard={shipyard}
-                      placeX={placeX}
-                      placeY={placeY}
-                      refinery={placeInfo.refinery}
-                    />
-                  </TakeOverMenu>
-                ))}
-              <PlaceControls
-                placeType={Number(placeInfo.type)}
-                placeX={placeX}
-                placeY={placeY}
-                placeName={placeInfo.name}
-                isDiscoverer={isDiscoverer}
-              />
+              </FleetMenu>
             </RightCol>
           </Content>
         </Body>

@@ -23,6 +23,8 @@ import {
   useGetAttackPower,
   useGetCurrentTravelCooldown,
   useGetCurrentMiningCooldown,
+  useGetPlayerBattle,
+  useGetPlayerBattleStatus
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -68,7 +70,7 @@ const ShipClassMenu = styled.div`
   border: 1px solid #8c8c8c;
   margin: 10px;
   background-color: #00000080;
-  width: 99%;
+  max-width: 780px;
 
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
@@ -170,7 +172,7 @@ const SpaceDockMenu = styled.div`
   border: 1px solid #8c8c8c;
   padding: 10px;
   position: relative;
-  width: 70%;
+  max-width: 600px;
   height: 100%;
 
   scrollbar-color: #5affff #289794;
@@ -275,7 +277,11 @@ const FleetMenu = styled.div`
   flex-direction: column;
   border-left: 1px solid gray;
   height: 100%;
-  padding: 10px;
+  padding: 11px;
+`
+
+const BattleProgressCard = styled.div`
+  margin-top: 15px;
 `
 
 const ShipyardEditor = styled.div``
@@ -316,6 +322,8 @@ const Shipyard = () => {
 
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
+  const playerBattleStatus = useGetPlayerBattleStatus(account)
+  const playerBattleInfo = useGetPlayerBattle(account)
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
@@ -483,7 +491,7 @@ const Shipyard = () => {
         <GameMenu pageName="shipyard" />
 
         <Body>
-          <Col style={{ width: '70%' }}>
+          <Col>
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" />
               <ShipClassCard src={moleCard} alt="mole" />
@@ -637,7 +645,7 @@ const Shipyard = () => {
 
           <Col >
             <FleetMenu>
-              <Header>MY FLEET</Header>
+              <Header style={{color:'white'}}>MY FLEET</Header>
               <YourFleetStats
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
@@ -649,6 +657,11 @@ const Shipyard = () => {
                 currentTravelCooldown={currentTravelCooldown}
                 currentMiningCooldown={currentMiningCooldown}
               />
+              
+              <BattleProgressCard>
+                <Header style={{color:'white'}}>BATTLE PROGRESS</Header>
+                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
+              </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (
                   <div>

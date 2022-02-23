@@ -356,7 +356,7 @@ const LocationCard = ({
         {!hostile && 
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
             {distance < 6 ? <div>
-                <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
+                <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
               </div> : 'Location too far to travel directly'}
             {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
