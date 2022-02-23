@@ -90,7 +90,7 @@ const YourFleetStats = ({
         <div>{fleetPower}</div>
       </Stat>
       <Stat>
-        <div>MINERAL</div>
+        <div>MINING</div>
         <div>
           {miningCapacity}/{mineralCapacity}
         </div>
