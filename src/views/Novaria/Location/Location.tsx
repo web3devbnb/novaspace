@@ -168,9 +168,6 @@ const Location: React.FC = () => {
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
-  console.log('location state', location.state)
-  console.log('loadedCoords', loadedCoords)
-  console.log('fleet location', fleetLocation)
   const [placeX, setX] = useState(0)
   const [placeY, setY] = useState(0)
 
@@ -206,7 +203,7 @@ const Location: React.FC = () => {
   const isDiscoverer = placeInfo.discoverer === account
 
   const currentLocation = (fleetLocation.X).toString() === (placeX).toString() && (fleetLocation.Y).toString() === (placeY).toString()
-  console.log('current location?', currentLocation)
+  
 
   return (
     <Page className="fontsforweb_bignoodletitling">
