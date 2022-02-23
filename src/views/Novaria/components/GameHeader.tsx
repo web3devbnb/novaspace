@@ -76,14 +76,12 @@ const GameHeader = ({ location, playerMineral, exp, playerName }) => {
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
-        <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
-        <a href='https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f' target='blank' rel='noreferrer noopener'  >
-          <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} /> 
-        </a>
-        <a href='https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f' target='blank' rel='noreferrer noopener'  >
-          <Text glowing>{novaPrice}</Text>
-        </a>
-        </div>
+        <Text glowing>
+          <span style={{ color: 'gold' }}>{playerName}</span>
+        </Text>
+        <Text glowing>
+          EXP: <span style={{ color: 'gold' }}>{exp}</span>
+        </Text>
         <Text glowing>
           NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
         </Text>
@@ -91,14 +89,24 @@ const GameHeader = ({ location, playerMineral, exp, playerName }) => {
           MINERAL: <span style={{ color: 'gold' }}>{(playerMineral / 10 ** 18).toFixed(3)}</span>
         </Text>
         <Text glowing>
-          EXP: <span style={{ color: 'gold' }}>{exp}</span>
+          LOCATION: ({location.X}, {location.Y})
         </Text>
-        <Text glowing>
-          Location: ({location.X}, {location.Y})
-        </Text>
-        <Text glowing>
-        <span style={{ color: 'gold' }}>{playerName}</span>
-        </Text>
+        <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          <a
+            href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            target="blank"
+            rel="noreferrer noopener"
+          >
+            <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} />
+          </a>
+          <a
+            href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            target="blank"
+            rel="noreferrer noopener"
+          >
+            <Text glowing>{novaPrice}</Text>
+          </a>
+        </div>
         {!connected && <ConnectButton onClick={onPresentConnectModal}>Connect Wallet</ConnectButton>}
         {connected && <ConnectButton onClick={logout}>{accountAddress}</ConnectButton>}
       </InfoBlock>
