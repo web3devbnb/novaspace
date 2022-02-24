@@ -150,6 +150,12 @@ const Button = styled.button`
   border: 2px solid #5affff;
   border-radius: 0px;
   background-color: transparent;
+
+  &:disabled {
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+  }
 `
 
 const InputIcon = styled.span`
@@ -545,7 +551,7 @@ const Shipyard = () => {
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
                   {!pending ? (
-                    <Button type="button" onClick={sendTx}>
+                    <Button type="button" onClick={sendTx} disabled={shipId === null || playerEXP < shipEXP}>
                       BUILD
                     </Button>
                   ) : (
