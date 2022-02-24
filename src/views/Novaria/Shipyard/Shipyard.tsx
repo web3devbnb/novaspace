@@ -369,7 +369,7 @@ const Shipyard = () => {
 
   const timeMod = useGetTimeModifier()
 
-  const sendTx = async () => {
+  const handleBuild = async () => {
     setPendingTx(true)
     try {
       await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
@@ -547,7 +547,7 @@ const Shipyard = () => {
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
                   <Button
-                    onClick={sendTx}
+                    onClick={handleBuild}
                     disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
                   >
                     {pending ? 'pending...' : 'BUILD'}
