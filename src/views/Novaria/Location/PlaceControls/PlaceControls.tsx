@@ -64,8 +64,8 @@ const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) =
   return (
     <Body style={{marginTop:10}}>
       <Item>
-        <input type="text" style={{maxWidth: 180}} required maxLength={12} onChange={(e) => setPlanetName(e.target.value)} />
-        <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Planet Name' : 'pending...'}</Button>
+        <input type="text" style={{maxWidth: 180}} required maxLength={12} onChange={(e) => setPlanetName(e.target.value)} /><br />
+        <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Place Name' : 'pending...'}</Button><br />
         (The name can only be set once)
       </Item>
     </Body>
