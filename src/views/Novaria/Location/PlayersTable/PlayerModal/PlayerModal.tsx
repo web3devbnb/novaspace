@@ -43,6 +43,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) 
   console.log('ships', ships)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
+  const exp = playerInfo.experience
   const playerName = playerInfo.name
   const playerBattleStatus =(playerInfo.battleStatus).toString()
   console.log('playermodal info', playerInfo)
@@ -58,7 +59,10 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) 
   return (
     <NovariaModal title={playerName} onDismiss={onDismiss}>
       <div>
-        <Child>ADDRESS: {player}</Child>
+        <Child>ADDRESS:<span style={{fontSize:10}}> {player}</span></Child>
+        <Child>
+          EXP: {exp}
+        </Child>
         <Child>SHIPS: {shipClasses.map((ship, index) => {
                     return (
                       <span key={ship.name}>

@@ -182,6 +182,7 @@ const SpaceDockMenu = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 312px;
 
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;

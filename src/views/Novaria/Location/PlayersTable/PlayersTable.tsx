@@ -12,6 +12,7 @@ const HeaderRow = styled.div`
   grid-template-columns: 2fr 1fr 1fr 1fr;
   color: #289794;
   font-size: 12px;
+  text-align: right;
 `
 
 const TableContent = styled.div`
@@ -36,10 +37,10 @@ const PlayersTable = ({ players, playerBattleStatus }) => {
     <Body>
       <div>
         <HeaderRow>
-          <div>PLAYER</div>
+          <div style={{textAlign:'left'}}>PLAYER</div>
           <div>SIZE</div>
           <div>POWER</div>
-          <div>MINERAL</div>
+          <div style={{marginRight:6}}>MINERAL</div>
         </HeaderRow>
       </div>
       <TableContent>

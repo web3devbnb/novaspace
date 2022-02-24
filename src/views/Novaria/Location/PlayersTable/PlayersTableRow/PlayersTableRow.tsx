@@ -20,6 +20,7 @@ const Cell = styled.div`
   // width: 33%;
   // overflow-x: hidden;
   text-overflow: ellipsis;
+  text-align: right;
 `
 
 const PlayersTableRow = ({ player, status }) => {
@@ -33,7 +34,7 @@ const PlayersTableRow = ({ player, status }) => {
 
   return (
     <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
-      <Cell>{name}</Cell>
+      <Cell style={{textAlign:'left'}}>{name}</Cell>
       <Cell>{fleetSize}</Cell>
       <Cell>{fleetPower}</Cell>
       <Cell>{(mineral/10**18).toFixed(2)}</Cell>
