@@ -546,13 +546,12 @@ const Shipyard = () => {
                     value={shipAmount}
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
-                  {!pending ? (
-                    <Button type="button" onClick={sendTx} disabled={shipId === null || playerEXP < shipEXP}>
-                      BUILD
-                    </Button>
-                  ) : (
-                    <Button type="button">pending...</Button>
-                  )}
+                  <Button
+                    onClick={sendTx}
+                    disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
+                  >
+                    {pending ? 'pending...' : 'BUILD'}
+                  </Button>
                 </Row>
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
