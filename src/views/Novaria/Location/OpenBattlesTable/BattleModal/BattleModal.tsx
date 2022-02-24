@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { useEnterBattle, useGetBattle, useGoBattle } from 'hooks/useNovaria'
+import { useEnterBattle, useGetBattle, useGoBattle, useGetNameByAddress } from 'hooks/useNovaria'
 import ModalActions from '../../../components/NovariaModalActions'
 import Modal from '../../../components/NovariaModal'
+import PlayerList from './PlayerList'
 
 interface BattleModalProps {
   battle: number
@@ -29,14 +30,16 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
   const battleInfo = useGetBattle(battle)
   const atkPower = battleInfo.attackTeam[1]
   const defPower = battleInfo.defendTeam[1]
-  const attackers = [battleInfo.attackTeam[0]]
-  const defenders = [battleInfo.defendTeam[0]]
-  // const target = useGetBattle(battle).defendTeam[0][0]
-  const player = defenders[0][0]
+  const attackers = battleInfo.attackers
+  const defenders = battleInfo.defenders
+  const defender = defenders[0]
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
   const inBattle = status === true
 
+  const GetPlayerName = (address) => {
+    useGetNameByAddress(address)
+  }
   const { onBattle } = useGoBattle()
   
   const sendBattleTx = async () => {
@@ -61,10 +64,15 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
         Defend Power: {defPower}
       </div>
       <div>
-        Attackers: {attackers}
+        Attackers({attackers.length}): {attackers.map((player) => (
+          <PlayerList  player={player}  />
+        ))}
+        
       </div>
       <div>
-        Defenders: {defenders}
+        Defenders({defenders.length}): {defenders.map((player) => (
+          <PlayerList player={player}  />
+        ))}
       </div>
       <div>
         Deadline: {startTime}
@@ -72,10 +80,10 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
       <ModalActions>
       {!inBattle &&
         <div>
-          <Button  onClick={() => onEnterBattle(player, 1)}>
+          <Button  onClick={() => onEnterBattle(defender, 1)}>
             ATTACK
           </Button>
-          <Button  onClick={() => onEnterBattle(player, 2)}>
+          <Button  onClick={() => onEnterBattle(defender, 2)}>
             DEFEND
           </Button>
         </div> }

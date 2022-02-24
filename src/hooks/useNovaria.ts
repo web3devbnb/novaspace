@@ -331,7 +331,7 @@ export const useGetBattlesAtLocation = (x: number, y: number) => {
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { fastRefresh } = useRefresh()
-  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolved: false })
+  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolved: false, attackers: [], defenders: []})
 
   useEffect(() => {
     async function fetch() {
@@ -343,6 +343,8 @@ export const useGetBattle = (Id: number) => {
         coordX: data[2],
         coordY: data[3],
         resolved: data[0],
+        attackers: data[4][0],
+        defenders: data[5][0],
       })
     }
     fetch()

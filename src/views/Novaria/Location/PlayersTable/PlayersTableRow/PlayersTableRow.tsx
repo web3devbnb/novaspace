@@ -27,6 +27,7 @@ const PlayersTableRow = ({ player, status }) => {
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const name = useGetNameByAddress(player)
+  console.log('player list name', name)
   const mineral = Number(useGetFleetMineral(player))
   const [handleClick] = useModal(<PlayerModal player={player} status={status} />)
 
