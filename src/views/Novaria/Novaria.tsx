@@ -157,7 +157,7 @@ const Novaria: React.FC = () => {
             onClose={() => setOpen(false)}
           />
          <SubHeading>
-            {!isAllowed && 'Step 1 - approve Fleet, Treasury, and Map contracts for the game'}<br />
+            {!isAllowed && 'Step 1 - approve Fleet and Treasury contracts for the game'}<br />
           {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pending ? 'Approve Fleet Contract' : 'pending...'}</Button> : ''}
           {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
 
