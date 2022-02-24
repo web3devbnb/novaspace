@@ -281,7 +281,7 @@ const Map: React.FC = () => {
   // Map Arrows
   const handleMapArrow = async(moveX, moveY) => {
     const newX = Math.max(Math.min(Math.floor(NX / 2), Number(X)), (Number(X) + moveX))
-    const newY = Math.max(Math.min(Math.floor(NX / 2), Number(X)), (Number(Y) + moveY))
+    const newY = Math.max(Math.min(Math.floor(NY / 2), Number(Y)), (Number(Y) + moveY))
     const [mapX, mapY] = adjCoords(newX, newY)
 
     const data = await fetchMapData(mapContract, mapX, mapY)
