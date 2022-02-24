@@ -18,6 +18,7 @@ const TableContent = styled.div`
   overflow-y: auto;
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
+  max-height: 140px;
 
   &::-webkit-scrollbar { 
     width: 5px;
