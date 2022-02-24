@@ -24,7 +24,7 @@ import {
   useGetCurrentTravelCooldown,
   useGetCurrentMiningCooldown,
   useGetPlayerBattle,
-  useGetPlayerBattleStatus
+  useGetPlayerBattleStatus,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -172,7 +172,7 @@ const SpaceDockMenu = styled.div`
   border: 1px solid #8c8c8c;
   padding: 10px;
   position: relative;
-  max-width: 600px;
+  width: 100%;
   height: 100%;
 
   scrollbar-color: #5affff #289794;
@@ -424,7 +424,6 @@ const Shipyard = () => {
   const handleFeeChange = () => {
     sendShipyardFeeChange(shipyardX, shipyardY, newFee)
   }
-  
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -639,9 +638,9 @@ const Shipyard = () => {
             </Row>
           </Col>
 
-          <Col >
+          <Col>
             <FleetMenu>
-              <Header style={{color:'white'}}>MY FLEET</Header>
+              <Header style={{ color: 'white' }}>MY FLEET</Header>
               <YourFleetStats
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
@@ -654,16 +653,17 @@ const Shipyard = () => {
                 currentMiningCooldown={currentMiningCooldown}
                 fleetLocation={fleetLocation}
               />
-              
+
               <BattleProgressCard>
-                <Header style={{color:'white'}}>BATTLE PROGRESS</Header>
+                <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
                 <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (
                   <div>
                     <Item>
-                      <input type="text" required maxLength={12} onChange={(e) => setShipyardNewName(e.target.value)} /><br />
+                      <input type="text" required maxLength={12} onChange={(e) => setShipyardNewName(e.target.value)} />
+                      <br />
                       <Button onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
                     </Item>
                   </div>
@@ -678,7 +678,8 @@ const Shipyard = () => {
                         placeholder="0"
                         value={newFee}
                         onChange={(e) => setNewFee(parseFloat(e.target.value))}
-                      /><br />
+                      />
+                      <br />
                       <Button onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                     </Item>
                   </div>
