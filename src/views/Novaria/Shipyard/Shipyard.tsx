@@ -652,6 +652,7 @@ const Shipyard = () => {
                 playerFleet={playerFleet}
                 currentTravelCooldown={currentTravelCooldown}
                 currentMiningCooldown={currentMiningCooldown}
+                fleetLocation={fleetLocation}
               />
               
               <BattleProgressCard>

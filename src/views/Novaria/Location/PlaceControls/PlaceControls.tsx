@@ -20,7 +20,6 @@ const Button = styled.button`
     border: 1px solid #5affff;
     background: transparent;
     color: #5affff;
-    width: 100%;
     margin: 5px;
     margin-top: 10px;
     &:hover {

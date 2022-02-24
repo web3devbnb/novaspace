@@ -38,6 +38,7 @@ const YourFleetStats = ({
   playerFleet,
   currentTravelCooldown,
   currentMiningCooldown,
+  fleetLocation,
 }) => {
   const web3 = getWeb3()
 
@@ -66,6 +67,7 @@ const YourFleetStats = ({
 
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
+  const notHaven = fleetLocation.X !== 0 && fleetLocation.Y !== 0
 
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {
@@ -120,7 +122,7 @@ const YourFleetStats = ({
         <div>{travelCooldown}</div>
       </Stat>
 
-      {fleetSize < 25 && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {fleetSize < 25 && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
     </Stats>
   )
 }
