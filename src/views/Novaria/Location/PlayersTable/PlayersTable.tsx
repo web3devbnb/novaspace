@@ -32,7 +32,6 @@ const TableContent = styled.div`
 `
 
 const PlayersTable = ({ players, playerBattleStatus }) => {
-  console.log('player table players', players)
   return (
     <Body>
       <div>

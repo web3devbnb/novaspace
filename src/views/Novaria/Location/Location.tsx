@@ -32,6 +32,7 @@ import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
+import BodyWrapper from '../components/BodyWrapper'
 
 const Page = styled.div`
   font-size: 15px;
@@ -216,7 +217,7 @@ const Location: React.FC = () => {
       />
       <Row>
         <GameMenu pageName="location" />
-        <Body>
+        <BodyWrapper>
           <Content>
             <LeftCol>
               <LocationCard
@@ -298,7 +299,7 @@ const Location: React.FC = () => {
               </FleetMenu>
             </RightCol>
           </Content>
-        </Body>
+        </BodyWrapper>
       </Row>
     </Page>
   )

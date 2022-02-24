@@ -38,6 +38,8 @@ import fireflyCard from '../assets/fireflyCard.png'
 import fireflyQueue from '../assets/fireflyQueue.png'
 import YourFleetStats from '../Location/YourFleetStats'
 import BattleStatus from '../Location/BattleStatus'
+import FlipScreenModal from '../components/FlipScreenModal'
+import BodyWrapper from '../components/BodyWrapper'
 
 const Page = styled.div`
   font-size: 15px;
@@ -299,7 +301,7 @@ const ShipyardEditor = styled.div``
 const BuildStatsText = styled(Text)`
   font-size: 0.65rem;
 `
-
+const isMobile = window.innerWidth < 800
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
 const Shipyard = () => {
@@ -495,6 +497,7 @@ const Shipyard = () => {
 
   return (
     <Page>
+      <FlipScreenModal isMobile={isMobile} />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
@@ -505,7 +508,7 @@ const Shipyard = () => {
       <PageRow>
         <GameMenu pageName="shipyard" />
 
-        <Body>
+        <BodyWrapper>
           <Col>
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" />
@@ -702,7 +705,7 @@ const Shipyard = () => {
               </ShipyardEditor>
             </FleetMenu>
           </Col>
-        </Body>
+        </BodyWrapper>
       </PageRow>
     </Page>
   )

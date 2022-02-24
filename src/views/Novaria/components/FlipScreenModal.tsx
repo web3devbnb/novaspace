@@ -1,6 +1,6 @@
 import React, {useContext, createContext, useState} from 'react'
 import styled from 'styled-components'
-import NovariaModal from '../components/NovariaModal'
+import NovariaModal from './NovariaModal'
 
 interface TakeoverModalProps {
     isMobile: boolean

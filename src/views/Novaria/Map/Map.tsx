@@ -24,7 +24,8 @@ import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
-import FlipScreenModal from './FlipScreenModal'
+import FlipScreenModal from '../components/FlipScreenModal'
+import BodyWrapper from '../components/BodyWrapper'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
@@ -78,9 +79,6 @@ const Grid = styled.div`
   grid-gap: 1px;
   // grid-auto-flow: column;
   margin: 10px 10px 10px;
-  background-image: url('/images/novaria/border.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   padding: 10px;
   // direction: rtl;
   // aspect-ratio: 16/8;
@@ -319,6 +317,7 @@ const Map: React.FC = () => {
       <MainRow>
         <GameMenu pageName="starmap" />
         <Body>
+        <BodyWrapper>
           <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
             {mapData.data.map((arr, y) => {
               const ry = Number(mapData.data.length - y - 1)
@@ -384,7 +383,7 @@ const Map: React.FC = () => {
               })
             })}
           </Grid>
-
+          </BodyWrapper>
           <GridControls>
             <InputControl>
               <Button type="button" onClick={handleFindLocationClick}>

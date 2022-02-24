@@ -81,10 +81,10 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
       {!inBattle &&
         <div>
           <Button  onClick={() => onEnterBattle(defender, 1)}>
-            ATTACK
+            JOIN ATTACKERS
           </Button>
           <Button  onClick={() => onEnterBattle(defender, 2)}>
-            DEFEND
+            JOIN DEFENDERS
           </Button>
         </div> }
           {battleReady ?

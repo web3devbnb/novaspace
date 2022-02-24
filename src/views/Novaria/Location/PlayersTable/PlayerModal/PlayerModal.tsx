@@ -40,13 +40,11 @@ const Child = styled.div`
 
 const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) => {
   const ships = useGetShips(player)
-  console.log('ships', ships)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
   const exp = playerInfo.experience
   const playerName = playerInfo.name
   const playerBattleStatus =(playerInfo.battleStatus).toString()
-  console.log('playermodal info', playerInfo)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
@@ -55,6 +53,26 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) 
   const inBattle = status === true
 
   const { onEnterBattle } = useEnterBattle()
+
+  const handleEnterBattle = (target, mission) => {
+    if (mission === 'attack') {
+     if (playerBattleStatus === '1') {
+        onEnterBattle(target, 2)
+      }
+      else {
+        onEnterBattle(target, 1)
+      } 
+    }
+    else if (mission === 'defend') {
+      if (playerBattleStatus === '2') {
+        onEnterBattle(target, 2)
+      }
+      else if (playerBattleStatus === '1') {
+        onEnterBattle(target, 1)
+      }
+    }
+  }
+  
 
   return (
     <NovariaModal title={playerName} onDismiss={onDismiss}>
@@ -87,12 +105,14 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) 
       </div>
       {!inBattle &&
         <ModalActions>
-          <Button  onClick={() => onEnterBattle(player, 1)}>
+          <Button  onClick={() => handleEnterBattle(player, 'attack')}>
             ATTACK
           </Button>
-          <Button  onClick={() => onEnterBattle(player, 2)}>
-            DEFEND
-          </Button>
+          {playerBattleStatus !== '0' &&
+            <Button  onClick={() => handleEnterBattle(player, 'defend')}>
+              DEFEND
+            </Button>
+          }
         </ModalActions>
       }
     </NovariaModal>
