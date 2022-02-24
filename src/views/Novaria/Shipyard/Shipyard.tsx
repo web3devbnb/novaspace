@@ -153,6 +153,14 @@ const Button = styled.button`
   background-color: transparent;
 `
 
+const InputIcon = styled.span`
+  display: flex;
+  align-items: center;
+  height: 35px;
+  background: transparent;
+  border: 1px solid #5affff;
+`
+
 const Input = styled.input`
   width: 4em;
   padding: 2px;
@@ -160,7 +168,6 @@ const Input = styled.input`
   background: transparent;
   border: 1px solid #5affff;
   color: #5affff;
-  // -moz-appearance: textfield;
 `
 
 const SpaceDockMenu = styled.div`
@@ -515,6 +522,7 @@ const Shipyard = () => {
                 {playerEXP < shipEXP ? 'requires more EXP' : ''}
 
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
+                  <InputIcon>QTY</InputIcon>
                   <Input
                     style={{ flexGrow: 2 }}
                     type="number"
