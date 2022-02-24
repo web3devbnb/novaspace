@@ -152,6 +152,12 @@ const Button = styled.button`
   border: 2px solid #5affff;
   border-radius: 0px;
   background-color: transparent;
+
+  &:disabled {
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+  }
 `
 
 const InputIcon = styled.span`
@@ -321,14 +327,12 @@ const Shipyard = () => {
   const playerEXP = player.experience
   const playerName = player.name
 
-  const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipId, setShipId] = useState(null)
-  const [shipName, setShipName] = useState(null)
   const [buildTime, setBuildTime] = useState(0)
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
@@ -345,7 +349,6 @@ const Shipyard = () => {
     const selectedShipyardId = option.value
     const selectedShipyard = shipyards[selectedShipyardId]
 
-    setShipyard(selectedShipyardId)
     setShipyardName(selectedShipyard.name)
     setShipyardX(selectedShipyard.coordX)
     setShipyardY(selectedShipyard.coordY)
@@ -360,7 +363,6 @@ const Shipyard = () => {
     setShipId(selectedShipId)
     setBuildTime(selectedShip.size * 300)
     setShipCost(selectedShip.cost)
-    setShipName(selectedShip.name)
     setShipEXP(selectedShip.experienceRequired)
   }
   const costMod = useGetCostMod()
@@ -369,7 +371,7 @@ const Shipyard = () => {
 
   const timeMod = useGetTimeModifier()
 
-  const sendTx = async () => {
+  const handleBuild = async () => {
     setPendingTx(true)
     try {
       await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
@@ -383,7 +385,7 @@ const Shipyard = () => {
 
   const { onClaim } = useClaimShips()
 
-  const sendClaimTx = async (claimId) => {
+  const handleClaim = async (claimId) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
@@ -394,7 +396,7 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-  const sendClaimMaxTx = async (claimId, amount) => {
+  const handleClaimMax = async (claimId, amount) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
@@ -547,13 +549,12 @@ const Shipyard = () => {
                     value={shipAmount}
                     onChange={(e) => setShipAmount(parseFloat(e.target.value))}
                   />
-                  {!pending ? (
-                    <Button type="button" onClick={sendTx}>
-                      BUILD
-                    </Button>
-                  ) : (
-                    <Button type="button">pending...</Button>
-                  )}
+                  <Button
+                    onClick={handleBuild}
+                    disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
+                  >
+                    {pending ? 'pending...' : 'BUILD'}
+                  </Button>
                 </Row>
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
@@ -617,8 +618,7 @@ const Shipyard = () => {
                                       fontSize: 13,
                                       width: '100%',
                                     }}
-                                    type="button"
-                                    onClick={() => sendClaimMaxTx(spaceDocks.indexOf(dock), dock.amount)}
+                                    onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
                                   >
                                     {!pending ? 'CLAIM MAX' : 'pending...'}
                                   </ClaimButton>
@@ -631,7 +631,7 @@ const Shipyard = () => {
                                     value={claimAmount}
                                     onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
                                   />
-                                  <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                                  <ClaimButton onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
                                     {!pending ? 'CLAIM' : 'pending...'}
                                   </ClaimButton>
                                 </Item>
