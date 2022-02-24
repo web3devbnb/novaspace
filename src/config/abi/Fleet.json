@@ -1,6 +1,22 @@
 [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "contract IMap",
+				"name": "_map",
+				"type": "address"
+			},
+			{
+				"internalType": "contract ITreasury",
+				"name": "_treasury",
+				"type": "address"
+			},
+			{
+				"internalType": "contract ShibaBEP20",
+				"name": "_token",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
