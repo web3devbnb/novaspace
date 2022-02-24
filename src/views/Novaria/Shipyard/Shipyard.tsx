@@ -102,7 +102,6 @@ const Row = styled.div`
   flex-direction: row;
   flex-wrap: no-wrap;
   align-items: center;
-
   width: 100%;
 `
 
@@ -159,6 +158,8 @@ const InputIcon = styled.span`
   height: 35px;
   background: transparent;
   border: 1px solid #5affff;
+  font-size: 0.9rem;
+  padding: 0.15rem;
 `
 
 const Input = styled.input`
@@ -293,6 +294,10 @@ const BattleProgressCard = styled.div`
 `
 
 const ShipyardEditor = styled.div``
+
+const BuildStatsText = styled(Text)`
+  font-size: 0.65rem;
+`
 
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
@@ -548,18 +553,20 @@ const Shipyard = () => {
                   </Text>
                   <Text>TIME: {(shipAmount * buildTime) / timeMod}s</Text>
                 </Row>
-                <div style={{ color: '#289794', marginTop: '5px' }}>
+                <div style={{ color: '#289794', marginTop: '10px' }}>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>LOCATION</Text>
-                    <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
+                    <BuildStatsText>LOCATION</BuildStatsText>
+                    <BuildStatsText>
+                      {shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}
+                    </BuildStatsText>
                   </Row>
                   <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
-                    <Text>OWNER</Text>
-                    <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
+                    <BuildStatsText>OWNER</BuildStatsText>
+                    <BuildStatsText>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</BuildStatsText>
                   </Row>
                   <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>BUILD FEE</Text>
-                    <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
+                    <BuildStatsText>BUILD FEE</BuildStatsText>
+                    <BuildStatsText>{shipyardFee ? `${shipyardFee}%` : '-'}</BuildStatsText>
                   </Row>
                 </div>
               </BuildMenu>
