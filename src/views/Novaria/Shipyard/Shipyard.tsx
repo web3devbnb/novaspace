@@ -560,7 +560,7 @@ const Shipyard = () => {
                       {shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}
                     </BuildStatsText>
                   </Row>
-                  <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
+                  <Row style={{ justifyContent: 'space-between' }}>
                     <BuildStatsText>OWNER</BuildStatsText>
                     <BuildStatsText>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</BuildStatsText>
                   </Row>
