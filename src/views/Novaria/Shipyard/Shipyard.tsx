@@ -554,10 +554,10 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    COST: {buildCost / 10 ** 18}
+                    COST: {buildCost / 10 ** 18 || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>TIME: {(shipAmount * buildTime) / timeMod}s</Text>
+                  <Text>TIME: {(shipAmount * buildTime) / timeMod || 0}s</Text>
                 </Row>
                 <div style={{ color: '#289794', marginTop: '10px' }}>
                   {buildStats.map((buildStat) => (
