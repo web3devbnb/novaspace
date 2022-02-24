@@ -553,7 +553,7 @@ const Shipyard = () => {
                     onClick={handleBuild}
                     disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
                   >
-                    {pending ? 'pending...' : 'BUILD'}
+                    {pending || spaceDocks.length ? 'pending...' : 'BUILD'}
                   </Button>
                 </Row>
 
