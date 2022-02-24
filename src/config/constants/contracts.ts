@@ -16,7 +16,7 @@ export default {
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
   map: {
-    56: '0x5bb7857F22383974ed99baa83A587ca913D0b0d7',
+    56: '0x62e33A917904d60285af8A96Ff4bacDf16041714',
     97: '0xd9468B311C950868f1f01F8155Ad646d5F0a5e65',
   },
   fleet: {
