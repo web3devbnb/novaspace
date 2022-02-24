@@ -615,7 +615,6 @@ const Shipyard = () => {
                                       fontSize: 13,
                                       width: '100%',
                                     }}
-                                    type="button"
                                     onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
                                   >
                                     {!pending ? 'CLAIM MAX' : 'pending...'}
@@ -629,7 +628,7 @@ const Shipyard = () => {
                                     value={claimAmount}
                                     onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
                                   />
-                                  <ClaimButton type="button" onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
+                                  <ClaimButton onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
                                     {!pending ? 'CLAIM' : 'pending...'}
                                   </ClaimButton>
                                 </Item>
