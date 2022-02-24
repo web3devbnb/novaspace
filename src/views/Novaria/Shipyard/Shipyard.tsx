@@ -168,6 +168,7 @@ const Input = styled.input`
   background: transparent;
   border: 1px solid #5affff;
   color: #5affff;
+  text-align: right;
 `
 
 const SpaceDockMenu = styled.div`
