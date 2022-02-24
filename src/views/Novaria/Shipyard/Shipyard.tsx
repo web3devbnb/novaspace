@@ -486,6 +486,12 @@ const Shipyard = () => {
     }),
   }
 
+  const buildStats = [
+    { label: 'LOCATION', value: shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-' },
+    { label: 'OWNER', value: shipyardOwner ? accountEllipsis(shipyardOwner) : '-' },
+    { label: 'BUILD FEE', value: shipyardFee ? `${shipyardFee}%` : '-' },
+  ]
+
   return (
     <Page>
       <GameHeader
@@ -525,7 +531,7 @@ const Shipyard = () => {
                   styles={customStyles}
                 />
 
-                {playerEXP < shipEXP ? 'requires more EXP' : ''}
+                {playerEXP < shipEXP && '*requires more EXP'}
 
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <InputIcon>QTY</InputIcon>
@@ -554,20 +560,12 @@ const Shipyard = () => {
                   <Text>TIME: {(shipAmount * buildTime) / timeMod}s</Text>
                 </Row>
                 <div style={{ color: '#289794', marginTop: '10px' }}>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <BuildStatsText>LOCATION</BuildStatsText>
-                    <BuildStatsText>
-                      {shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}
-                    </BuildStatsText>
-                  </Row>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <BuildStatsText>OWNER</BuildStatsText>
-                    <BuildStatsText>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</BuildStatsText>
-                  </Row>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <BuildStatsText>BUILD FEE</BuildStatsText>
-                    <BuildStatsText>{shipyardFee ? `${shipyardFee}%` : '-'}</BuildStatsText>
-                  </Row>
+                  {buildStats.map((buildStat) => (
+                    <Row style={{ justifyContent: 'space-between' }}>
+                      <BuildStatsText>{buildStat.label}</BuildStatsText>
+                      <BuildStatsText>{buildStat.value}</BuildStatsText>
+                    </Row>
+                  ))}
                 </div>
               </BuildMenu>
 
