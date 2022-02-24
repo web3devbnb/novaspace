@@ -102,7 +102,6 @@ const Row = styled.div`
   flex-direction: row;
   flex-wrap: no-wrap;
   align-items: center;
-
   width: 100%;
 `
 
@@ -159,6 +158,8 @@ const InputIcon = styled.span`
   height: 35px;
   background: transparent;
   border: 1px solid #5affff;
+  font-size: 0.9rem;
+  padding: 0.15rem;
 `
 
 const Input = styled.input`
@@ -294,6 +295,10 @@ const BattleProgressCard = styled.div`
 `
 
 const ShipyardEditor = styled.div``
+
+const BuildStatsText = styled(Text)`
+  font-size: 0.65rem;
+`
 
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
@@ -482,6 +487,12 @@ const Shipyard = () => {
     }),
   }
 
+  const buildStats = [
+    { label: 'LOCATION', value: shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-' },
+    { label: 'OWNER', value: shipyardOwner ? accountEllipsis(shipyardOwner) : '-' },
+    { label: 'BUILD FEE', value: shipyardFee ? `${shipyardFee}%` : '-' },
+  ]
+
   return (
     <Page>
       <GameHeader
@@ -521,7 +532,7 @@ const Shipyard = () => {
                   styles={customStyles}
                 />
 
-                {playerEXP < shipEXP ? 'requires more EXP' : ''}
+                {playerEXP < shipEXP && '*requires more EXP'}
 
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <InputIcon>QTY</InputIcon>
@@ -544,24 +555,18 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    COST: {buildCost / 10 ** 18}
+                    COST: {buildCost / 10 ** 18 || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>TIME: {(shipAmount * buildTime) / timeMod}s</Text>
+                  <Text>TIME: {(shipAmount * buildTime) / timeMod || 0}s</Text>
                 </Row>
-                <div style={{ color: '#289794', marginTop: '5px' }}>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>LOCATION</Text>
-                    <Text>{shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-'}</Text>
-                  </Row>
-                  <Row style={{ justifyContent: 'space-between', textOverflow: 'ellipsis', width: '100%' }}>
-                    <Text>OWNER</Text>
-                    <Text>{shipyardOwner ? accountEllipsis(shipyardOwner) : '-'}</Text>
-                  </Row>
-                  <Row style={{ justifyContent: 'space-between' }}>
-                    <Text>BUILD FEE</Text>
-                    <Text>{shipyardFee ? `${shipyardFee}%` : '-'}</Text>
-                  </Row>
+                <div style={{ color: '#289794', marginTop: '10px' }}>
+                  {buildStats.map((buildStat) => (
+                    <Row style={{ justifyContent: 'space-between' }}>
+                      <BuildStatsText>{buildStat.label}</BuildStatsText>
+                      <BuildStatsText>{buildStat.value}</BuildStatsText>
+                    </Row>
+                  ))}
                 </div>
               </BuildMenu>
 
