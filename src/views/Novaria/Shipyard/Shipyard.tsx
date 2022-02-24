@@ -325,14 +325,12 @@ const Shipyard = () => {
   const playerEXP = player.experience
   const playerName = player.name
 
-  const [shipyard, setShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
   const [shipyardFee, setShipyardFee] = useState(null)
   const [shipId, setShipId] = useState(null)
-  const [shipName, setShipName] = useState(null)
   const [buildTime, setBuildTime] = useState(0)
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
@@ -349,7 +347,6 @@ const Shipyard = () => {
     const selectedShipyardId = option.value
     const selectedShipyard = shipyards[selectedShipyardId]
 
-    setShipyard(selectedShipyardId)
     setShipyardName(selectedShipyard.name)
     setShipyardX(selectedShipyard.coordX)
     setShipyardY(selectedShipyard.coordY)
@@ -364,7 +361,6 @@ const Shipyard = () => {
     setShipId(selectedShipId)
     setBuildTime(selectedShip.size * 300)
     setShipCost(selectedShip.cost)
-    setShipName(selectedShip.name)
     setShipEXP(selectedShip.experienceRequired)
   }
   const costMod = useGetCostMod()
