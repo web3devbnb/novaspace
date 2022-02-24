@@ -383,7 +383,7 @@ const Shipyard = () => {
 
   const { onClaim } = useClaimShips()
 
-  const sendClaimTx = async (claimId) => {
+  const handleClaim = async (claimId) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
@@ -394,7 +394,7 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-  const sendClaimMaxTx = async (claimId, amount) => {
+  const handleClaimMax = async (claimId, amount) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
     try {
@@ -616,7 +616,7 @@ const Shipyard = () => {
                                       width: '100%',
                                     }}
                                     type="button"
-                                    onClick={() => sendClaimMaxTx(spaceDocks.indexOf(dock), dock.amount)}
+                                    onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
                                   >
                                     {!pending ? 'CLAIM MAX' : 'pending...'}
                                   </ClaimButton>
@@ -629,7 +629,7 @@ const Shipyard = () => {
                                     value={claimAmount}
                                     onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
                                   />
-                                  <ClaimButton type="button" onClick={() => sendClaimTx(spaceDocks.indexOf(dock))}>
+                                  <ClaimButton type="button" onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
                                     {!pending ? 'CLAIM' : 'pending...'}
                                   </ClaimButton>
                                 </Item>
