@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { usePriceNovaBusd } from 'state/hooks'
-import { useGetPlayerBattleStatus } from 'hooks/useNovaria'
+import { useGetPlayerBattleStatus, useGetPlayerExists } from 'hooks/useNovaria'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
@@ -50,11 +50,25 @@ const ConnectButton = styled.button`
   width: 125px;
 `
 
+const Button = styled.button`
+  cursor: pointer;
+  border: 1px solid #5affff;
+  color: #5affff;
+  background: transparent;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  &:hover{
+    background: #5affff;
+    color: black;
+  }
+`
+
 const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playerName }) => {
   const { account, connect, reset, status } = useWallet()
   const { onPresentConnectModal } = useWalletModal(connect, reset)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
+  const playerExists = useGetPlayerExists(account)
 
   const logout = async () => {
     reset()
@@ -71,10 +85,15 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
       </a>
       <InfoBlock>
         <Text glowing>
-          <span style={{ color: 'gold' }}>{playerName}</span>
+          {playerExists ?
+            <span style={{ color: 'gold' }}>{playerName}</span>
+            : <Button><a href='/legend-of-novaria'>Register Here</a></Button>
+          }
         </Text>
         <Text glowing>
-          EXP: <span style={{ color: 'gold' }}>{exp}</span>
+        {playerExists &&
+          <span>EXP: <span style={{ color: 'gold' }}>{exp}</span></span>
+        }
         </Text>
         <Text glowing>
           NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
