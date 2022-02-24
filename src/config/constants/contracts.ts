@@ -20,7 +20,7 @@ export default {
     97: '0xd9468B311C950868f1f01F8155Ad646d5F0a5e65',
   },
   fleet: {
-    56: '0x88c1D80C5e013B70a76Ea8C64B429f650Ebcc052',
+    56: '0x8DA323a273002B408D49de98E72eA18c403C41e2',
     97: '0xb8Ad4732C42b7bb75fa0DAD9E1AE477aee06AA1e',
   },
   treasury: {
