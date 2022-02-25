@@ -169,8 +169,8 @@ const Location: React.FC = () => {
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
-  const [placeX, setX] = useState(0)
-  const [placeY, setY] = useState(0)
+  const [placeX, setX] = useState(null)
+  const [placeY, setY] = useState(null)
 
   useEffect(() => {
     if (typeof location.state === 'undefined') {
@@ -182,9 +182,9 @@ const Location: React.FC = () => {
     }
   }, [location.state, fleetLocation.X, fleetLocation.Y, loadedCoords.x, loadedCoords.y])
 
+  // Main place info functions
   const placeInfo = useGetPlaceInfo(placeX, placeY)
-  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
-
+  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY) 
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
@@ -203,7 +203,8 @@ const Location: React.FC = () => {
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
-  const currentLocation = (fleetLocation.X).toString() === (placeX).toString() && (fleetLocation.Y).toString() === (placeY).toString()
+  const currentLocation = fleetLocation.X === Number(placeX) && fleetLocation.Y === Number(placeY)
+  console.log(typeof placeX, fleetLocation.X, currentLocation)
   
 
   return (
@@ -219,7 +220,7 @@ const Location: React.FC = () => {
         <GameMenu pageName="location" />
         <BodyWrapper>
           <Content>
-            <LeftCol>
+            <LeftCol>{placeX !== null &&
               <LocationCard
                 playerMineral={fleetMineral}
                 fleetSize={fleetSize}
@@ -235,7 +236,7 @@ const Location: React.FC = () => {
                 fleetLocation={fleetLocation}
                 canTravel={placeInfo.canTravel}
                 currentLocation={currentLocation}
-              />
+              />}
             </LeftCol>
             <CenterCol>
               <InputControl>

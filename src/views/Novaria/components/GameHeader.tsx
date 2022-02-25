@@ -8,6 +8,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import smallLogo from '../assets/novariaSmallLogo.png'
+import tokenLogo from '../assets/shibanovaTokenLogo.svg'
 
 export interface HeaderProps {
   battleStatus: boolean
@@ -113,7 +114,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
             target="blank"
             rel="noreferrer noopener"
           >
-            <img src="https://shibanova.io/logo.png" alt="nova logo" style={{ height: 30, margin: 5 }} />
+            <img src={tokenLogo} alt="nova logo" style={{ height: 30, margin: 5 }} />
           </a>
           <a
             href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"

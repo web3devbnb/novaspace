@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import {
   useEnterBattle,
@@ -11,6 +11,7 @@ import {
   useGetShipClasses,
   useGetShips,
 } from 'hooks/useNovaria'
+import { ConnectedAccountContext } from 'App'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
@@ -39,6 +40,7 @@ const Child = styled.div`
 `
 
 const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) => {
+  const account = useContext(ConnectedAccountContext)
   const ships = useGetShips(player)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
@@ -103,7 +105,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, onDismiss }) 
           {playerBattleStatus === '2' && 'Defending'}
         </Child>
       </div>
-      {!inBattle &&
+      {!inBattle && (player.toString() !== account.toString()) &&
         <ModalActions>
           <Button  onClick={() => handleEnterBattle(player, 'attack')}>
             ATTACK

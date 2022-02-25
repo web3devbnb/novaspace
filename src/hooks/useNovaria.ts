@@ -314,14 +314,16 @@ export const useGetMiningCapacity = (fleet: string) => {
 }
 
 // returns list of battle IDs at a location
-export const useGetBattlesAtLocation = (x: number, y: number) => {
+export const useGetBattlesAtLocation = (x: any, y: any) => {
   const { fastRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.getBattlesAtLocation(x, y).call()
-      setBattlesAtLocation(data)
+      if (x !== null) {
+        const data = await fleetContract.methods.getBattlesAtLocation(x, y).call()
+        setBattlesAtLocation(data)
+      }
     }
     fetch()
   }, [fastRefresh, x, y])
@@ -601,7 +603,7 @@ export const useGetPlaceId = (x: number, y: number) => {
   return placeId
 }
 
-export const useGetPlaceInfo = (x1: number, y1: number) => {
+export const useGetPlaceInfo = (x1: any, y1: any) => {
   const { fastRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState(
     {
@@ -621,36 +623,40 @@ export const useGetPlaceInfo = (x1: number, y1: number) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getCoordinatePlaces(x1, y1).call()
-      setPlaceInfo(
-        {
-        name: data[42][0],
-        type: data[42][1],
-        scrap: data[42][2],
-        fleetCount: data[42][3],
-        shipyard: data[42][5],
-        refinery: data[42][4],
-        mineral: data[42][6],
-        canTravel: data[42][7],
-        luminosity: data[42][8],
-        isMining: data[42][9],
-        discoverer: data[42][10],
+      if (x1 !== null) {
+        const data = await mapContract.methods.getCoordinatePlaces(x1, y1).call()
+        setPlaceInfo(
+          {
+          name: data[42][0],
+          type: data[42][1],
+          scrap: data[42][2],
+          fleetCount: data[42][3],
+          shipyard: data[42][5],
+          refinery: data[42][4],
+          mineral: data[42][6],
+          canTravel: data[42][7],
+          luminosity: data[42][8],
+          isMining: data[42][9],
+          discoverer: data[42][10],
+        }
+        )
       }
-      )
     }
     fetch()
   }, [fastRefresh, x1, y1])
   return placeInfo
 }
 
-export const useGetFleetsAtLocation = (x: number, y: number) => {
+export const useGetFleetsAtLocation = (x: any, y: any) => {
   const { fastRefresh } = useRefresh()
   const [fleetsAtLocation, setFleetsAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getFleetsAtLocation(x, y).call()
-      setFleetsAtLocation(data)
+      if (x !== null) {
+        const data = await mapContract.methods.getFleetsAtLocation(x, y).call()
+        setFleetsAtLocation(data)
+      }
     }
     fetch()
   }, [fastRefresh, x, y])

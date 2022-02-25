@@ -316,17 +316,17 @@ const LocationCard = ({
         </Row>
       </PlaceHeader>
       <PlaceBody>
-        {hostile && 'Fleets cannot travel to hostile space'}
-        {mineral > 0 && currentLocation ? (
-          <Button type="button" onClick={sendMineTx}>
-            {pending ? 'pending...' : 'MINE'}
+        {salvage > 0 && currentLocation ? (
+          <Button type="button" onClick={sendCollectTx}>
+            {pending ? 'pending...' : 'COLLECT'}
           </Button>
         ) : (
           ''
         )}
-        {salvage > 0 && currentLocation ? (
-          <Button type="button" onClick={sendCollectTx}>
-            {pending ? 'pending...' : 'COLLECT'}
+        {hostile && 'Fleets cannot travel to hostile space'}
+        {mineral > 0 && currentLocation ? (
+          <Button type="button" onClick={sendMineTx}>
+            {pending ? 'pending...' : 'MINE'}
           </Button>
         ) : (
           ''
