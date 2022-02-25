@@ -29,7 +29,6 @@ import BodyWrapper from '../components/BodyWrapper'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
-  console.log('array map data', data)
   return data
 }
 
@@ -92,6 +91,10 @@ const GridCell = styled.div`
   align-items: center;
   text-align: center;
   direction: ltr;
+  @media (mmin-width: 800px) {
+    width: 100px;
+    height: 80px;
+  }
 `
 
 const GridCellImg = styled.img`
@@ -112,11 +115,28 @@ const GridIcon = styled.img`
 
 const GridCellContent = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   min-width: 20px;
   flex-wrap: no-wrap;
   position: relative;
+  aspect-ratio: 17/8;
+  padding: 5px 5px;
+  
+  width: 100px;
+  height: 80px;
+  @media (max-width: 380px) {
+    width: 45px;
+    height: 100px;
+
+  }
+  @media (min-width: 900px) {
+    width: 110px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    width: 150px;
+  }
 
 `
 
@@ -146,15 +166,6 @@ const GridCellId = styled.div`
   }
 `
 
-const Unexplored = styled.div`
-  color: gray;
-  opacity: 0;
-  text-align: center;
-
-  ${GridCell} :hover & {
-    opacity: 1;
-  }
-`
 
 const GridControls = styled.div`
   display: flex;
@@ -267,17 +278,26 @@ const Map: React.FC = () => {
 
   // Map Arrows
   const handleMapArrow = async(moveX, moveY) => {
-    const newX = Math.max(Math.min(Math.floor(NX / 2), Number(X)), (Number(X) + moveX))
-    const newY = Math.max(Math.min(Math.floor(NY / 2), Number(Y)), (Number(Y) + moveY))
+    let calcX = X
+    let calcY = Y
+    if (X < 3) {
+      calcX = 3
+    }
+    if (Y < 3 ) {
+      calcY = 3
+    }
+    const newX = Math.max(Math.min(Math.floor(NX / 2), Number(calcX)), (Number(calcX) + moveX))
+    const newY = Math.max(Math.min(Math.floor(NY / 2), Number(calcY)), (Number(calcY) + moveY))
+    console.log('oldx, oldy,newX, newY',X, Y, newX, newY)
     const [mapX, mapY] = adjCoords(newX, newY)
-
+    console.log('mapX, mapY', mapX, mapY)
     const data = await fetchMapData(mapContract, mapX, mapY)
     setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
   }
-
+  
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
-
+  console.log('x, y', X, Y)
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
 
@@ -294,7 +314,7 @@ const Map: React.FC = () => {
 
   return (
     <Page>
-      <FlipScreenModal isMobile={isMobile} />
+      {/* <FlipScreenModal isMobile={isMobile} /> */}
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
@@ -320,9 +340,7 @@ const Map: React.FC = () => {
                     >
                       <GridCellContent aria-haspopup="true">
                         <Text isStar={planet.placeType === '3'}>{planet.name}</Text>
-                        {/* <Unexplored>
-                          {planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}
-                        </Unexplored> */}
+                     
                         <Row>
                           {planet.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
                           {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
@@ -348,7 +366,7 @@ const Map: React.FC = () => {
 
                           {planet.placeType === '0' && (
                             <GridCellImg
-                              style={{ width: '50%', height: 'auto' }}
+                              style={{ width: '50px', height: 'auto' }}
                               src={unexploredIcon}
                               alt="unexplored"
                             />
