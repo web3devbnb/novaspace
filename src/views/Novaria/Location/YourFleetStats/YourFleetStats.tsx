@@ -91,7 +91,7 @@ const YourFleetStats = ({
         </div>
       </Stat>
       <Stat>
-        <div>POWER</div>
+        <div>ATTACK</div>
         <div>{fleetPower}</div>
       </Stat>
       <Stat>

@@ -204,7 +204,8 @@ const LocationCard = ({
   canTravel,
   currentLocation,
   fleetSize,
-  playerMineral
+  playerMineral,
+  playerMaxMineral
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -214,6 +215,7 @@ const LocationCard = ({
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 / timeMod
   const exploreCost = useGetExploreCost(placeX, placeY)
   const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
+  const atMaxMineral = Number(playerMaxMineral) === Number(playerMineral)
  
 
   const unexplored = placetype === '0'
@@ -338,7 +340,7 @@ const LocationCard = ({
             Draken technology was found here, and helped us build the legendary ship, &quot;Novaria.&quot;
           </Text>
         }
-        {salvage > 0 && currentLocation ? (
+        {salvage > 0 && currentLocation && !atMaxMineral ? (
           <Button type="button" onClick={sendCollectTx}>
             {pending ? 'pending...' : 'COLLECT'}
           </Button>
@@ -346,7 +348,7 @@ const LocationCard = ({
           ''
         )}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {mineral > 0 && currentLocation ? (
+        {mineral > 0 && currentLocation && !atMaxMineral ? (
           <Button type="button" onClick={sendMineTx}>
             {pending ? 'pending...' : 'MINE'}
           </Button>

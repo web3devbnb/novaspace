@@ -591,20 +591,6 @@ export const useGetExploreCost = (x: number, y: number) => {
   return ExploreCost
 }
 
-export const useGetPlaceId = (x: number, y: number) => {
-  const { fastRefresh } = useRefresh()
-  const [placeId, setPlaceId] = useState(null)
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await mapContract.methods.coordinatePlaces(x, y).call()
-      setPlaceId(data)
-    }
-    fetch()
-  }, [fastRefresh, x, y])
-  return placeId
-}
-
 export const useGetPlaceInfo = (x1: any, y1: any) => {
   const { fastRefresh } = useRefresh()
   const [placeInfo, setPlaceInfo] = useState(

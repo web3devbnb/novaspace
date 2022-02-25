@@ -281,7 +281,7 @@ const CountdownButton = styled.button`
   // padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: 0.75rem;
-  width: 100%;
+  width: 125px;
   text-decoration: none;
   color: #8c8c8c;
   border: 1px solid #8c8c8c;
@@ -361,6 +361,28 @@ const Shipyard = () => {
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
+
+  
+  function twoDigits(num) {
+    return '0'.concat(num < 0 ? '0' : num.toString()).slice(-2)
+  }
+
+  function showCountdown(countDownDate) {
+    const now = new Date().getTime()
+    const timeleft = countDownDate - now
+
+    const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((timeleft % (1000 * 60)) / 1000)
+
+    let clock = twoDigits(hours)
+    clock += ':'
+    clock += twoDigits(minutes)
+    clock += ':'
+    clock += twoDigits(seconds)
+
+    return clock
+  }
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
@@ -659,7 +681,7 @@ const Shipyard = () => {
                             <WrongLocationButton>Not at Shipyard</WrongLocationButton>
                           )}
                           {dock.completionTime * 1000 > Number(new Date()) ? (
-                            <CountdownButton>{new Date(dock.completionTime * 1000).toLocaleString()}</CountdownButton>
+                            <CountdownButton>{showCountdown(new Date(dock.completionTime * 1000))}</CountdownButton>
                           ) : (
                             ''
                           )}

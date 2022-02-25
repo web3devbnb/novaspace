@@ -54,6 +54,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const inBattle = status === true
+  const bscscan = 'https://bscscan.com/address/'
 
   console.log('battlestatus', playerBattleStatus)
 
@@ -82,7 +83,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
   return (
     <NovariaModal title={playerName} onDismiss={onDismiss}>
       <div>
-        <Child>ADDRESS:<span style={{fontSize:10}}> {player}</span></Child>
+        <Child>ADDRESS:<span style={{fontSize:10}}><a href={bscscan+player} target='blank' rel='noreferrer noopener'> {player}</a></span></Child>
         <Child>
           EXP: {exp}
         </Child>
