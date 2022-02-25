@@ -152,6 +152,13 @@ const Location = styled.div`
   text-align: right;
 `
 
+const Text = styled.text`
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #289794;
+`
+
 const PlaceBody = styled.div`
   position: absolute;
   top: 330px;
@@ -316,6 +323,21 @@ const LocationCard = ({
         </Row>
       </PlaceHeader>
       <PlaceBody>
+        {placename === 'Haven' && 
+          <Text>
+            The last planet of Humanity. Your journey starts here.
+          </Text>
+        }
+        {placename === 'Cetrus 22A' && 
+          <Text>
+            Planet with huge chunks of Nova Mineral. A powerful resource.
+          </Text>
+        }
+        {placename === 'Cetrus 22B' && 
+          <Text>
+            Draken technology was found here, and helped us build the legendary ship, &quot;Novaria.&quot;
+          </Text>
+        }
         {salvage > 0 && currentLocation ? (
           <Button type="button" onClick={sendCollectTx}>
             {pending ? 'pending...' : 'COLLECT'}
@@ -353,7 +375,7 @@ const LocationCard = ({
           ''
         )}
         
-        {!hostile && 
+        {canTravel && 
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
             {distance < 6 ? <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />

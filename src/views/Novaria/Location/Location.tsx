@@ -40,11 +40,17 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
+  @media (max-width: 380px) {
+    flex-wrap: wrap;
+  }
 `
 
 const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
+  @media (max-width: 380px) {
+    flex-wrap: wrap;
+  }
 `
 
 const Body = styled.div`
@@ -115,14 +121,16 @@ const PlayersCard = styled.div`
 
 const RightCol = styled.div`
   margin-left: 15px;
-  border-left: 1px solid gray;
-  // max-width: 250px;
 `
 
 const FleetMenu = styled.div`
   display: flex;
   flex-direction: column;
-  border-left: 1px solid gray;
+  border-left: none;
+  @media (min-width: 1170px) {
+    flex-wrap: wrap;
+    border-left: 1px solid gray;
+  }
   height: 100%;
   padding: 10px;
 `

@@ -51,7 +51,6 @@ export interface TextProps {
 }
 
 const Page = styled.div`
-  // background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
   font-size: 15px;
   color: #5affff;
@@ -70,28 +69,24 @@ const Body = styled.div`
 const Text = styled.text`
   color: ${(props: TextProps) => props.isStar ? '#ff7300' : '#5affff'};
   font-weight: medium;
+  font-size: 12px;
 `
 
 const Grid = styled.div`
-  // flex-grow: 1;
-  // display: flex;
-  // flex-flow:  wrap;
-  // box-sizing:border-box;
   display: grid;
   grid-template-columns: repeat(${(props: GridProps) => props.ny}, 1fr);
   grid-template-rows: repeat(${(props: GridProps) => props.nx}, 1fr);
   grid-gap: 1px;
-  // grid-auto-flow: column;
   margin: 10px 10px 10px;
   padding: 10px;
-  // direction: rtl;
-  // aspect-ratio: 16/8;
+  @media (min-width: 380px) {
+    max-height: 600px;
+  }
+  
 `
 
 const GridCell = styled.div`
   display: flex;
-  // flex: 1;
-  // width:calc(100%/5);
   color: white;
   justify-content: center;
   align-items: center;
@@ -101,19 +96,13 @@ const GridCell = styled.div`
 
 const GridCellImg = styled.img`
   //position: relative;
-  // left: 50%;
-  // right: 50%;
   align-items: center;
   align-self: center;
   max-height: 70%;
 `
 
 const IndicatorImg = styled.img`
-  // width: 30px;
-  // height: auto;
   align-self: center;
-  // position: absolute;
-  // right: 5px;
 `
 
 const GridIcon = styled.img`
@@ -125,18 +114,10 @@ const GridCellContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  min-width: 20px;
   flex-wrap: no-wrap;
-  padding: 5px 5px;
-  // border: 1px solid white;
   position: relative;
-  aspect-ratio: 17/8;
-  width: 100px;
-  height: 80px;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    width: 150px;
-  }
 `
 
 const Row = styled.div`
@@ -149,6 +130,9 @@ const MainRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
+  @media (max-width: 380px) {
+    flex-wrap: wrap;
+  }
 `
 
 const GridCellId = styled.div`
@@ -175,12 +159,13 @@ const Unexplored = styled.div`
 const GridControls = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-right: 10px;
 `
 
 const Button = styled.button`
   cursor: pointer;
-  height: 35px;
+  min-height: 35px;
   align-self: center;
   padding: 0.25rem 1.25rem;
   font-family: sans-serif;
@@ -233,7 +218,7 @@ const MoveButton = styled.button`
   cursor: pointer;
 `
 
-const isMobile = window.innerWidth < 800
+const isMobile = window.innerWidth < 500
 const NX = 7
 const NY = 7
 
@@ -388,15 +373,6 @@ const Map: React.FC = () => {
           </Grid>
           </BodyWrapper>
           <GridControls>
-            <InputControl>
-              <Button type="button" onClick={handleFindLocationClick}>
-                Find location (x, y)
-              </Button>
-              (
-              <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
-              ,
-              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
-            </InputControl>
             <MoveControls>
               <MoveButton type="button" onClick={() => handleMapArrow(-2, 0)}>
                 <img src={leftArrow} alt="left" />
@@ -414,6 +390,15 @@ const Map: React.FC = () => {
             <Button type="button" onClick={() => handleFleetLocation(fleetLocation.X, fleetLocation.Y)}>
               My Location
             </Button>
+            <InputControl>
+              <Button type="button" onClick={handleFindLocationClick}>
+                Find location (x, y)
+              </Button>
+              (
+              <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+              ,
+              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
+            </InputControl>
           </GridControls>
           <Legend>
             <span>

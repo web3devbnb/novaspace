@@ -72,7 +72,10 @@ const ShipClassMenu = styled.div`
   border: 1px solid #8c8c8c;
   margin: 10px;
   background-color: #00000080;
-  max-width: 780px;
+  max-width: 100%;
+  @media (max-width: 1520px) {
+    max-width: 740px;
+  }
 
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
@@ -90,7 +93,7 @@ const ShipClassMenu = styled.div`
 
 const ShipClassCard = styled.img`
   margin: 10px 5px;
-  max-height: 350px;
+  //height: 350px;
 `
 
 const Col = styled.div`
@@ -107,10 +110,20 @@ const Row = styled.div`
   width: 100%;
 `
 
-const PageRow = styled.div`
-  flex-direction: row;
+const BuildRow=styled(Row)`
   flex-wrap: no-wrap;
-  display: flex;
+  
+  @media (max-width: 715px) {
+    flex-wrap: wrap;
+  }
+`
+
+const PageRow = styled.div`
+flex-wrap: no-wrap;
+display: flex;
+@media (max-width: 380px) {
+  flex-wrap: wrap;
+}
 `
 
 const Item = styled.div``
@@ -124,7 +137,7 @@ const BuildMenu = styled.div`
   text-overflow: ellipsis;
   width: 30%;
   min-width: 240px;
-  height: 100%;
+  min-height: 312px;
   background-color: #00000080;
 `
 
@@ -190,7 +203,7 @@ const SpaceDockMenu = styled.div`
   padding: 10px;
   position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 100%;
   min-height: 312px;
 
   scrollbar-color: #5affff #289794;
@@ -293,7 +306,11 @@ const WrongLocationButton = styled.button`
 const FleetMenu = styled.div`
   display: flex;
   flex-direction: column;
-  border-left: 1px solid gray;
+  border-left: none;
+  @media (min-width: 1140px) {
+    flex-wrap: wrap;
+    border-left: 1px solid gray;
+  }
   height: 100%;
   padding: 11px;
 `
@@ -307,7 +324,7 @@ const ShipyardEditor = styled.div``
 const BuildStatsText = styled(Text)`
   font-size: 0.65rem;
 `
-const isMobile = window.innerWidth < 800
+
 const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
 
 const Shipyard = () => {
@@ -499,7 +516,6 @@ const Shipyard = () => {
 
   return (
     <Page>
-      <FlipScreenModal isMobile={isMobile} />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
@@ -519,7 +535,7 @@ const Shipyard = () => {
               <ShipClassCard src={unknownCard} alt="coming soon" />
             </ShipClassMenu>
 
-            <Row>
+            <BuildRow>
               <BuildMenu>
                 <Header>BUILD SHIPS</Header>
 
@@ -553,7 +569,7 @@ const Shipyard = () => {
                     onClick={handleBuild}
                     disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
                   >
-                    {pending || spaceDocks.length ? 'pending...' : 'BUILD'}
+                    {pending  ? 'pending...' : 'BUILD'}
                   </Button>
                 </Row>
 
@@ -653,7 +669,7 @@ const Shipyard = () => {
                   })}
                 </Row>
               </SpaceDockMenu>
-            </Row>
+            </BuildRow>
           </Col>
 
           <Col>

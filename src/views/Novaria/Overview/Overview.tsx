@@ -7,7 +7,6 @@ import GameMenu from '../components/GameMenu'
 import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
-  // background-image: url('/images/novaria/shipyardBG.jpg');
   background-size: cover;
   color: #5affff;
   display: flex;
@@ -18,11 +17,12 @@ const Page = styled.div`
 const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
+  @media (max-width: 380px) {
+    flex-wrap: wrap;
+  }
 `
 const Body = styled.div`
-  margin: 40px 50px 200px 50px;
-  // background: #0000ae80;
-  //height: 500px;
+  margin: 40px 10px 200px 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;

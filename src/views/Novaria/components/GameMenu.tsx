@@ -11,17 +11,23 @@ const Frame = styled.div`
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-right: 15px;
   margin-top: 10px;
 `
 
 const SmallFrame = styled.div`
-  width: 60px;
+  //width: 60px;
   padding: 20px 0;
   display: flex;
-  flex-direction: column;
-  // margin-right: 5px;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 25px;
   margin-top: 10px;
+  @media (min-width: 380px) { 
+    flex-direction: column;
+    margin-left: 0px;
+    width: 60px;
+  }
 `
 
 const Link = styled.a`
@@ -46,7 +52,7 @@ const Flag = styled.div<{ active: boolean }>`
   flex-direction: column;
 
   position: absolute;
-  left: 55px;
+  left: 45px;
 
   opacity: ${(props) => (props.active ? 1 : 0)};
 
@@ -56,6 +62,7 @@ const Flag = styled.div<{ active: boolean }>`
     opacity: 1;
     color: #5affff;
   }
+  
 `
 
 const ToggleButton = styled.button`

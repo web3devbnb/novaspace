@@ -29,8 +29,9 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
      background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
      background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
 
-     background-size: 100% auto;
+     background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
      background-repeat: repeat-y;
+     background-position: center;
 
     img {
       height: auto;
@@ -43,7 +44,7 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
       background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
       background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
       
-      background-size: ${({isNovaria}) => (isNovaria ? 'cover' : '100% auto')};
+      background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
       background-repeat: ${({isNovaria}) => (isNovaria ? 'none' : 'repeat-y')};
       background-position: center;
     }
