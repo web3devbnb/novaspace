@@ -674,7 +674,7 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
+                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} currentLocation={fleetLocation} />
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (

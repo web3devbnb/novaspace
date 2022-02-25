@@ -46,6 +46,10 @@ export interface GridProps {
   ny: number
 }
 
+export interface TextProps {
+  isStar: boolean
+}
+
 const Page = styled.div`
   // background-image: url('/images/novaria/mapBG.jpg');
   background-size: cover;
@@ -64,7 +68,7 @@ const Body = styled.div`
 `
 
 const Text = styled.text`
-  color: #5affff;
+  color: ${(props: TextProps) => props.isStar ? '#ff7300' : '#5affff'};
   font-weight: medium;
 `
 
@@ -288,7 +292,6 @@ const Map: React.FC = () => {
 
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
-  console.log('map x y', X, Y)
 
   const [XLen, setXLen] = useState(NX)
   const [YLen, setYLen] = useState(NY)
@@ -331,7 +334,7 @@ const Map: React.FC = () => {
                       }}
                     >
                       <GridCellContent aria-haspopup="true">
-                        <Text>{planet.name}</Text>
+                        <Text isStar={planet.placeType === '3'}>{planet.name}</Text>
                         {/* <Unexplored>
                           {planet.placeType === '0' && !planet.canTravel ? 'Location Unexplored' : ''}
                         </Unexplored> */}

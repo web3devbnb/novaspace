@@ -32,15 +32,17 @@ const BattleButton = styled.button`
     }
 `
 
-const BattleStatus = ({ playerBattleStatus, playerBattleInfo }) => {
-  
+const BattleStatus = ({ playerBattleStatus, playerBattleInfo, currentLocation }) => {
+   
 
     const attacking = playerBattleInfo.battleStatus === '1'
     const defending = playerBattleInfo.battleStatus === '2'
     const battleId = Number(playerBattleInfo.battleId)
     const startTime = new Date(useGetBattle(battleId).deadline * 1000).toLocaleString()
+
+    const isSameLocation = Number(currentLocation.X) === Number(playerBattleInfo.coordX) && Number(currentLocation.Y) === Number(playerBattleInfo.coordY)
     
-    const [handleClick] = useModal(<BattleModal battle={battleId} status={playerBattleStatus} />) 
+    const [handleClick] = useModal(<BattleModal battle={battleId} status={playerBattleStatus} currentLocation={isSameLocation} />) 
 
   return (
     <Body>

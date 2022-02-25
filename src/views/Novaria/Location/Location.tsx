@@ -204,7 +204,6 @@ const Location: React.FC = () => {
   const isDiscoverer = placeInfo.discoverer === account
 
   const currentLocation = Number(fleetLocation.X) === Number(placeX) && Number(fleetLocation.Y) === Number(placeY)
-  console.log(typeof placeX, typeof fleetLocation.X, currentLocation)
   
 
   return (
@@ -271,10 +270,10 @@ const Location: React.FC = () => {
                     currentMiningCooldown={currentMiningCooldown}
                     fleetLocation={fleetLocation}
                   />
-                </YourFleetCard>
+                </YourFleetCard> 
                 <BattleProgressCard>
                   <Header>BATTLE PROGRESS</Header>
-                  <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} />
+                  <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} currentLocation={fleetLocation} />
                 </BattleProgressCard>
                 {shipyards
                   .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())
