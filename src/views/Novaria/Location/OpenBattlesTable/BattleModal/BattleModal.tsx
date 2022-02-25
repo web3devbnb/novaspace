@@ -8,6 +8,7 @@ import PlayerList from './PlayerList'
 interface BattleModalProps {
   battle: number
   status: boolean
+  currentLocation: boolean
   onDismiss?: () => void
 }
 
@@ -25,7 +26,7 @@ const Button = styled.button`
   }
 `
 
-const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) => {
+const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocation, onDismiss}) => {
   const [pendingTx, setPendingTx] = useState(false)
   const battleInfo = useGetBattle(battle)
   const atkPower = battleInfo.attackTeam[1]
@@ -78,7 +79,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, onDismiss}) =>
         Deadline: {startTime}
       </div>
       <ModalActions>
-      {!inBattle &&
+      {!inBattle && currentLocation &&
         <div>
           <Button  onClick={() => onEnterBattle(defender, 1)}>
             JOIN ATTACKERS

@@ -248,11 +248,11 @@ const Location: React.FC = () => {
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation} status={playerBattleStatus} />
+                <OpenBattlesTable battles={battlesAtLocation} status={playerBattleStatus} currentLocation={currentLocation} />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>
-                <PlayersTable players={fleetsAtLocation} playerBattleStatus={playerBattleStatus} />
+                <PlayersTable players={fleetsAtLocation} playerBattleStatus={playerBattleStatus} currentLocation={currentLocation} />
               </PlayersCard>
             </CenterCol>
             <RightCol>

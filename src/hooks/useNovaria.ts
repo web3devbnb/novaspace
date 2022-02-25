@@ -406,15 +406,17 @@ export const useGetPlayer = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const playerId = await fleetContract.methods._addressToPlayer(player).call()
-      const data = await fleetContract.methods.players(playerId).call()
-      setPlayer({
-        name: data[0],
-        experience: data[1], 
-        battleId: data[2], 
-        mineral: data[3], 
-        battleStatus: data[4], 
-      })
+      if (player !== null) {
+        const playerId = await fleetContract.methods._addressToPlayer(player).call()
+        const data = await fleetContract.methods.players(playerId).call()
+        setPlayer({
+          name: data[0],
+          experience: data[1], 
+          battleId: data[2], 
+          mineral: data[3], 
+          battleStatus: data[4], 
+        })
+      }
     }
     fetch()
   }, [fastRefresh, player])
