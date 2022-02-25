@@ -203,8 +203,8 @@ const Location: React.FC = () => {
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
 
-  const currentLocation = fleetLocation.X === Number(placeX) && fleetLocation.Y === Number(placeY)
-  console.log(typeof placeX, fleetLocation.X, currentLocation)
+  const currentLocation = Number(fleetLocation.X) === Number(placeX) && Number(fleetLocation.Y) === Number(placeY)
+  console.log(typeof placeX, typeof fleetLocation.X, currentLocation)
   
 
   return (
