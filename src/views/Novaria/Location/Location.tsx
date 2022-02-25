@@ -192,7 +192,7 @@ const Location: React.FC = () => {
 
   // Main place info functions
   const placeInfo = useGetPlaceInfo(placeX, placeY)
-  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY) 
+  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
@@ -212,10 +212,9 @@ const Location: React.FC = () => {
   const isDiscoverer = placeInfo.discoverer === account
 
   const currentLocation = Number(fleetLocation.X) === Number(placeX) && Number(fleetLocation.Y) === Number(placeY)
-  
 
   return (
-    <Page className="fontsforweb_bignoodletitling">
+    <Page>
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
@@ -227,23 +226,25 @@ const Location: React.FC = () => {
         <GameMenu pageName="location" />
         <BodyWrapper>
           <Content>
-            <LeftCol>{placeX !== null &&
-              <LocationCard
-                playerMineral={fleetMineral}
-                fleetSize={fleetSize}
-                placename={placeInfo.name}
-                placetype={placeInfo.type}
-                placeX={placeX}
-                placeY={placeY}
-                mineral={placeInfo.mineral}
-                salvage={placeInfo.scrap}
-                shipyard={placeInfo.shipyard}
-                refinery={placeInfo.refinery}
-                isMining={placeInfo.isMining}
-                fleetLocation={fleetLocation}
-                canTravel={placeInfo.canTravel}
-                currentLocation={currentLocation}
-              />}
+            <LeftCol>
+              {placeX !== null && (
+                <LocationCard
+                  playerMineral={fleetMineral}
+                  fleetSize={fleetSize}
+                  placename={placeInfo.name}
+                  placetype={placeInfo.type}
+                  placeX={placeX}
+                  placeY={placeY}
+                  mineral={placeInfo.mineral}
+                  salvage={placeInfo.scrap}
+                  shipyard={placeInfo.shipyard}
+                  refinery={placeInfo.refinery}
+                  isMining={placeInfo.isMining}
+                  fleetLocation={fleetLocation}
+                  canTravel={placeInfo.canTravel}
+                  currentLocation={currentLocation}
+                />
+              )}
             </LeftCol>
             <CenterCol>
               <InputControl>
@@ -255,11 +256,19 @@ const Location: React.FC = () => {
 
               <OpenBattlesCard>
                 <Header>OPEN BATTLES</Header>
-                <OpenBattlesTable battles={battlesAtLocation} status={playerBattleStatus} currentLocation={currentLocation} />
+                <OpenBattlesTable
+                  battles={battlesAtLocation}
+                  status={playerBattleStatus}
+                  currentLocation={currentLocation}
+                />
               </OpenBattlesCard>
               <PlayersCard>
                 <Header>PLAYERS</Header>
-                <PlayersTable players={fleetsAtLocation} playerBattleStatus={playerBattleStatus} currentLocation={currentLocation} />
+                <PlayersTable
+                  players={fleetsAtLocation}
+                  playerBattleStatus={playerBattleStatus}
+                  currentLocation={currentLocation}
+                />
               </PlayersCard>
             </CenterCol>
             <RightCol>
@@ -278,10 +287,14 @@ const Location: React.FC = () => {
                     currentMiningCooldown={currentMiningCooldown}
                     fleetLocation={fleetLocation}
                   />
-                </YourFleetCard> 
+                </YourFleetCard>
                 <BattleProgressCard>
                   <Header>BATTLE PROGRESS</Header>
-                  <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} currentLocation={fleetLocation} />
+                  <BattleStatus
+                    playerBattleInfo={playerBattleInfo}
+                    playerBattleStatus={playerBattleStatus}
+                    currentLocation={fleetLocation}
+                  />
                 </BattleProgressCard>
                 {shipyards
                   .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())
