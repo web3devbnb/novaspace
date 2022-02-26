@@ -244,6 +244,7 @@ const Location: React.FC = () => {
                   fleetLocation={fleetLocation}
                   canTravel={placeInfo.canTravel}
                   currentLocation={currentLocation}
+                  Luminosity = {placeInfo.luminosity}
                 />
               )}
             </LeftCol>

@@ -205,7 +205,8 @@ const LocationCard = ({
   currentLocation,
   fleetSize,
   playerMineral,
-  playerMaxMineral
+  playerMaxMineral,
+  Luminosity
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -321,7 +322,7 @@ const LocationCard = ({
             {mineral > 0 ? (mineral / 10 ** 18).toFixed(3) : ''} {mineral > 0 ? 'MINERAL' : ''}
           </span>
           <span>{unexplored ? 'UNEXPLORED' : ''}</span>
-          <span>{star ? 'STAR' : ''}</span>
+          <span>{star ? <span>STAR Luminosity {Luminosity}</span> : ''}</span>
         </Row>
       </PlaceHeader>
       <PlaceBody>
@@ -377,15 +378,15 @@ const LocationCard = ({
           ''
         )}
         
-        {canTravel && 
+        
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-            {distance < 6 ? <div>
+            {distance < 6 && !unexplored  && canTravel ? <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
-              </div> : 'Location too far to travel directly'}
+              </div> : 'Location too far to travel directly or cannot be traveled to.'}
             {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
           </Row>
-        }
+        
       </PlaceBody>
     </Body>
   )
