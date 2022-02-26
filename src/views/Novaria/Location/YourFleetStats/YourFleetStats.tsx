@@ -67,7 +67,7 @@ const YourFleetStats = ({
 
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
-  const notHaven = fleetLocation.X !== 0 && fleetLocation.Y !== 0
+  const notHaven = Number(fleetLocation.X) !== 0 && Number(fleetLocation.Y) !== 0
 
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {
