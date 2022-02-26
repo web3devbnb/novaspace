@@ -1,6 +1,17 @@
 [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "contract ShibaBEP20",
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "contract ITreasury",
+				"name": "_treasury",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -713,45 +724,78 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_x",
+				"name": "_lx",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_y",
+				"name": "_ly",
 				"type": "uint256"
 			}
 		],
-		"name": "getPlaceId",
+		"name": "getPlaceInfo",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "enum Map.PlaceType",
+						"name": "placeType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "salvage",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fleetCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasRefinery",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasShipyard",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "availableMineral",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "canTravel",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "luminosity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isMiningPlanet",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "discoverer",
+						"type": "address"
+					}
+				],
+				"internalType": "struct Map.PlaceGetter",
 				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			}
-		],
-		"name": "getPlaceName",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",

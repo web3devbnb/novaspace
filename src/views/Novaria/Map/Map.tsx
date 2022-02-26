@@ -288,9 +288,7 @@ const Map: React.FC = () => {
     }
     const newX = Math.max(Math.min(Math.floor(NX / 2), Number(calcX)), (Number(calcX) + moveX))
     const newY = Math.max(Math.min(Math.floor(NY / 2), Number(calcY)), (Number(calcY) + moveY))
-    console.log('oldx, oldy,newX, newY',X, Y, newX, newY)
     const [mapX, mapY] = adjCoords(newX, newY)
-    console.log('mapX, mapY', mapX, mapY)
     const data = await fetchMapData(mapContract, mapX, mapY)
     setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
   }

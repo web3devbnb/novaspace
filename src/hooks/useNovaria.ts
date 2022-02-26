@@ -612,20 +612,20 @@ export const useGetPlaceInfo = (x1: any, y1: any) => {
   useEffect(() => {
     async function fetch() {
       if (x1 !== null) {
-        const data = await mapContract.methods.getCoordinatePlaces(x1, y1).call()
+        const data = await mapContract.methods.getPlaceInfo(x1, y1).call()
         setPlaceInfo(
           {
-          name: data[42][0],
-          type: data[42][1],
-          scrap: data[42][2],
-          fleetCount: data[42][3],
-          shipyard: data[42][5],
-          refinery: data[42][4],
-          mineral: data[42][6],
-          canTravel: data[42][7],
-          luminosity: data[42][8],
-          isMining: data[42][9],
-          discoverer: data[42][10],
+          name: data[0],
+          type: data[1],
+          scrap: data[2],
+          fleetCount: data[3],
+          shipyard: data[5],
+          refinery: data[4],
+          mineral: data[6],
+          canTravel: data[7],
+          luminosity: data[8],
+          isMining: data[9],
+          discoverer: data[10],
         }
         )
       }
