@@ -13,6 +13,7 @@ import {
   useShipyardTakeover,
   useCompleteShipyardTakeover,
 } from 'hooks/useNovaria'
+import showCountdown from 'utils/countdownTimer'
 import { ConnectedAccountContext } from 'App'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
@@ -24,6 +25,7 @@ interface TakeoverModalProps {
   placeY: number
   underAttack: boolean
   inCooldownStage: boolean
+  currentLocation: boolean
   onDismiss?: () => void
 }
 
@@ -46,27 +48,24 @@ const Child = styled.div`
   font-size: 12px;
 `
 
-const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, onDismiss }) => {
+const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, currentLocation, onDismiss }) => {
 
   const [pending, setPendingTx] = useState(false)
   const player = shipyard.takeoverAddress
   const ships = useGetShips(player)
-  console.log('ships', ships)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
   const playerName = playerInfo.name
   const playerBattleStatus =(playerInfo.battleStatus).toString()
-  console.log('playermodal info', playerInfo)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
-  const isTakeoverPlayer = player === account
+  const isTakeoverPlayer = player.toString() === account.toString()
 
-  console.log('shipyard info', shipyard)
+  const takeoverTimer = showCountdown(shipyard.takeoverDeadline * 1000)
 
-  console.log('player',player,'account', account, isTakeoverPlayer)
   const { onEnterBattle } = useEnterBattle()
   
   const { onTakeover } = useShipyardTakeover()
@@ -136,14 +135,15 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
           </ModalActions>                
       </div> 
       }
-      {!underAttack &&
+      {underAttack && <Child>Takeover completes in {takeoverTimer}</Child>}
+      {!underAttack && currentLocation &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'Initiate Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {!underAttack && isTakeoverPlayer &&
+      {!underAttack && isTakeoverPlayer && 
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'Complete Takeover' : 'pending...'}

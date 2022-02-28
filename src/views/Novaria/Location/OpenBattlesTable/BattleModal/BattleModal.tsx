@@ -7,7 +7,7 @@ import PlayerList from './PlayerList'
 
 interface BattleModalProps {
   battle: number
-  status: boolean
+  status: string
   currentLocation: boolean
   onDismiss?: () => void
 }
@@ -36,7 +36,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const defender = defenders[0]
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
-  const inBattle = status === true
+  const inBattle = status !== '0'
 
   const GetPlayerName = (address) => {
     useGetNameByAddress(address)

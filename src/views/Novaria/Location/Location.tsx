@@ -294,7 +294,7 @@ const Location: React.FC = () => {
                   <Header>BATTLE PROGRESS</Header>
                   <BattleStatus
                     playerBattleInfo={playerBattleInfo}
-                    playerBattleStatus={playerBattleStatus}
+                    playerBattleStatus={playerBattleInfo.battleStatus}
                     currentLocation={fleetLocation}
                   />
                 </BattleProgressCard>
@@ -303,12 +303,14 @@ const Location: React.FC = () => {
                   .map((shipyard) => (
                     <TakeOverMenu>
                       <Header>Shipyard Takeover</Header>
+                      <Header style={{color:'#5affff', fontSize:14}}>{shipyard.name}</Header>
                       <ShipyardTakeover
                         account={account}
-                        shipyard={shipyard}
+                        shipyard={shipyard} 
                         placeX={placeX}
                         placeY={placeY}
                         refinery={placeInfo.refinery}
+                        currentLocation={currentLocation}
                       />
                     </TakeOverMenu>
                   ))}

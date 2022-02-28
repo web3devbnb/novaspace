@@ -26,6 +26,7 @@ import {
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
 } from 'hooks/useNovaria'
+import showCountdown from 'utils/countdownTimer'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -361,28 +362,6 @@ const Shipyard = () => {
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
-
-  
-  function twoDigits(num) {
-    return '0'.concat(num < 0 ? '0' : num.toString()).slice(-2)
-  }
-
-  function showCountdown(countDownDate) {
-    const now = new Date().getTime()
-    const timeleft = countDownDate - now
-
-    const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((timeleft % (1000 * 60)) / 1000)
-
-    let clock = twoDigits(hours)
-    clock += ':'
-    clock += twoDigits(minutes)
-    clock += ':'
-    clock += twoDigits(seconds)
-
-    return clock
-  }
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value

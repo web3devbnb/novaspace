@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRecall } from 'hooks/useNovaria'
+import showCountdown from 'utils/countdownTimer'
 import { getWeb3 } from 'utils/web3'
 
 const Stats = styled.div`
@@ -43,27 +44,6 @@ const YourFleetStats = ({
   const web3 = getWeb3()
 
   const [pending, setPendingTx] = useState(false)
-
-  function twoDigits(num) {
-    return '0'.concat(num < 0 ? '0' : num.toString()).slice(-2)
-  }
-
-  function showCountdown(countDownDate) {
-    const now = new Date().getTime()
-    const timeleft = countDownDate - now
-
-    const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((timeleft % (1000 * 60)) / 1000)
-
-    let clock = twoDigits(hours)
-    clock += ':'
-    clock += twoDigits(minutes)
-    clock += ':'
-    clock += twoDigits(seconds)
-
-    return clock
-  }
 
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)

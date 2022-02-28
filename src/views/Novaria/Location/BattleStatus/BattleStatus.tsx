@@ -46,7 +46,7 @@ const BattleStatus = ({ playerBattleStatus, playerBattleInfo, currentLocation })
 
   return (
     <Body>
-      {playerBattleStatus === false ? <NoBattle>Not in Battle</NoBattle> : ''}
+      {playerBattleInfo.battleStatus === '0' ? <NoBattle>Not in Battle</NoBattle> : ''}
       {defending ? <NoBattle> DEFENDING </NoBattle> : '' }
       {attacking ? <NoBattle> ATTACKING </NoBattle>: '' }
       {playerBattleStatus === true ?  <BattleButton type='button' onClick={handleClick}>BATTLE {battleId} <br /> {startTime}</BattleButton>: ''}

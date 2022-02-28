@@ -12,6 +12,7 @@ import {
   useGetShips,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
@@ -41,10 +42,11 @@ const Child = styled.div`
 `
 
 const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocation, onDismiss }) => {
-  const account = useContext(ConnectedAccountContext)
+  const {account} = useWallet()
   const ships = useGetShips(player)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
+  const battleStatus = playerInfo.battleStatus
   const exp = playerInfo.experience
   const playerName = playerInfo.name
   const playerBattleStatus =(playerInfo.battleStatus).toString()
@@ -53,10 +55,12 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
-  const inBattle = status === true
+  const inBattle = battleStatus.toString() !== '0'
   const bscscan = 'https://bscscan.com/address/'
+  const accountAddress = account !== null ? account : ''
+  const isPlayer = player.toString() === accountAddress.toString()
 
-  console.log('battlestatus', playerBattleStatus)
+  console.log(accountAddress, account)
 
   const { onEnterBattle } = useEnterBattle()
 
@@ -109,7 +113,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
           {playerBattleStatus === '2' && 'Defending'}
         </Child>
       </div>
-      {!inBattle && (player !== account) && currentLocation &&
+      {!inBattle && !isPlayer && currentLocation &&
         <ModalActions>
           <Button  onClick={() => handleEnterBattle(player, 'attack')}>
             ATTACK
