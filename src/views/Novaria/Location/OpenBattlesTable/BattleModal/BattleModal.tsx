@@ -59,10 +59,10 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   return (
     <Modal title="BATTLE" onDismiss={onDismiss} >
       <div>
-        Attack Power: {atkPower}
+        Attackers Attack Power: {atkPower}
       </div>
       <div>
-        Defend Power: {defPower}
+        Defenders Attack Power: {defPower}
       </div>
       <div>
         Attackers({attackers.length}): {attackers.map((player) => (

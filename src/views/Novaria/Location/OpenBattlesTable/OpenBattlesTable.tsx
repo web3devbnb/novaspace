@@ -36,9 +36,9 @@ const OpenBattlesTable = ({ battles, status, currentLocation }) => {
       <div>
         <HeaderRow>
           <div>BATTLE ID</div>
-          <div>ATK POWER</div>
-          <div>DEF POWER</div>
-          <div>START TIME</div>
+          <div>ATK ATTACK</div>
+          <div>DEF ATTACK</div>
+          <div>RESOLVE TIME</div>
         </HeaderRow>
       </div>
       <TableContent>

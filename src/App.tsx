@@ -84,10 +84,9 @@ const App: React.FC = () => {
           <Route path="/legend-of-novaria">
             <Menu>
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
-              <WalletProvider>
+              
                 <Novaria />
                 <Footer />
-              </WalletProvider>
             </Menu>
           </Route>
           <Route path="/map">

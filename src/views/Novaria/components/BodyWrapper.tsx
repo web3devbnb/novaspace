@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const ImgWrap = styled.div`
     position: relative;
@@ -8,9 +8,13 @@ const ImgWrap = styled.div`
     // background-size: 100% 100%;
     background-repeat: no-repeat;
     background-color: #00000080;
-    z-index: 10;
+    
 `
 
+const borderAnimation = keyframes`
+    from { background-position: 0 0, -80px 0, 100% -80px, 0 100%; }
+    to { background-position: 0 -80px, 0 0, 100% 0, -80px 100%; }
+`
 const ChildWrapper = styled.div`
     margin: 10px;
     display: flex;
@@ -19,19 +23,17 @@ const ChildWrapper = styled.div`
     padding-bottom: 10px;
    
     border: 2px solid #a0bbd5;
-    z-index: -1;
+    
     position: relative;
+
+    // background-image: repeating-linear-gradient(240deg, #9e9e9e, #9e9e9e 25.2px, transparent 30px, transparent 38.4px, #9e9e9e 40px), repeating-linear-gradient(330deg, #9e9e9e, #9e9e9e 25.2px, transparent 30px, transparent 38.4px, #9e9e9e 40px), repeating-linear-gradient(60deg, #9e9e9e, #9e9e9e 25.2px, transparent 30px, transparent 38.4px, #9e9e9e 40px), repeating-linear-gradient(150deg, #9e9e9e, #9e9e9e 25.2px, transparent 30px, transparent 38.4px, #9e9e9e 40px);
+    // background-size: 2px calc(100% + 80px), calc(100% + 80px) 2px, 2px calc(100% + 80px) , calc(100% + 80px) 2px;
+    // background-position: 0 0, 0 0, 100% 0, 0 100%;
+    // background-repeat: no-repeat;
+    // animation: ${borderAnimation} 2s infinite linear reverse;
 `
 
-const Children = styled.div`
-    z-index:20;
-    position: relative;
-`
 
-const OverWrap = styled.div`
-    position: relative;
-    z-index: 10
-`
 
 
 const BodyWrapper = ({children}) => {
