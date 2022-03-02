@@ -602,17 +602,17 @@ export const useGetFleetLocation = (fleet) => {
   return fleetLocation
 }
 
-export const useGetExploreCost = (x: number, y: number) => {
+export const useGetExploreCost = () => {
   const { fastRefresh } = useRefresh()
   const [ExploreCost, setExploreCost] = useState(0)
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getExploreCost(x, y).call()
+      const data = await mapContract.methods.getExploreCost().call()
       setExploreCost(data)
     }
     fetch()
-  }, [fastRefresh, x, y])
+  }, [fastRefresh])
   return ExploreCost
 }
 
