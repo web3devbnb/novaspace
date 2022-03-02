@@ -344,7 +344,7 @@ const Shipyard = () => {
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
   const player = useGetPlayer(account.toString())
-  const playerEXP = player.experience
+  const playerEXP = Number(player.experience)
   const playerName = player.name
 
   const [shipyardName, setShipyardName] = useState(null)
@@ -383,7 +383,7 @@ const Shipyard = () => {
     setShipId(selectedShipId)
     setBuildTime(selectedShip.size * 300)
     setShipCost(selectedShip.cost)
-    setShipEXP(selectedShip.experienceRequired)
+    setShipEXP(Number(selectedShip.experienceRequired))
   }
   const costMod = useGetCostMod()
   const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
