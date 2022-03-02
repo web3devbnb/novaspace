@@ -97,7 +97,12 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         }
         </Text>
         <Text glowing>
-          NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+          <a 
+          href='https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' 
+          target="blank"
+          rel="noreferrer noopener">
+            NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)}</span>
+          </a>
         </Text>
         <Text glowing>
           MINERAL:{' '}

@@ -23,7 +23,7 @@ const SmallFrame = styled.div`
   flex-direction: row;
   margin-left: 25px;
   margin-top: 10px;
-  @media (min-width: 380px) { 
+  @media (min-width: 425px) { 
     flex-direction: column;
     margin-left: 0px;
     width: 60px;

@@ -246,7 +246,7 @@ const Location: React.FC = () => {
                   refinery={placeInfo.refinery}
                   isMining={placeInfo.isMining}
                   fleetLocation={fleetLocation}
-                  canTravel={placeInfo.canTravel}
+                  canTravel={placeInfo.canTravel && currentTravelCooldown < new Date()}
                   currentLocation={currentLocation}
                   Luminosity = {placeInfo.luminosity}
                   atWormhole = {atWormhole}

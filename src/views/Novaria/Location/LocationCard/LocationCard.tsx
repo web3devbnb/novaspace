@@ -173,7 +173,7 @@ const Text = styled.text`
 
 const PlaceBody = styled.div`
   position: absolute;
-  top: 330px;
+  top: 310px;
   left: 10px;
   width: 260px;
   display: flex;
@@ -422,7 +422,7 @@ const LocationCard = ({
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
               </div> : 'Location too far to travel directly or cannot be traveled to.'}
               <span>Distance: {Math.floor(distance)} AU(s)</span>
-            {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
+            {unexplored && <span>Explore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
             {wormhole && 'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
             {canTunnel && <span>Tunnel Cost (NOVA): {travelCooldown/10} minutes</span>}
           </Row>
