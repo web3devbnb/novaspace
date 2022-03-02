@@ -463,6 +463,16 @@ const Shipyard = () => {
     sendShipyardFeeChange(shipyardX, shipyardY, newFee)
   }
 
+  // make sure player can't build more than 1 dock at the same location
+  let dockInUse = false
+  for(let i=0; i< spaceDocks.length; i++) {
+    const sDock = spaceDocks[i];
+    if(sDock.coordX === shipyardX && sDock.coordY === shipyardY) {
+      dockInUse = true;
+    }
+  }
+
+
   // styles for the dropdown Selector
   const customStyles = {
     container: (provided) => ({
@@ -571,7 +581,7 @@ const Shipyard = () => {
                   />
                   <Button
                     onClick={handleBuild}
-                    disabled={shipId === null || playerEXP < shipEXP || pending || !!spaceDocks.length}
+                    disabled={shipId === null || playerEXP < shipEXP || pending || dockInUse}
                   >
                     {pending  ? 'pending...' : 'BUILD'}
                   </Button>
