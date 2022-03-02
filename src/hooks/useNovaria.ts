@@ -580,7 +580,7 @@ export const useGetPlayerCount = () => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getPlayerCount().call()
+      const data = await fleetContract.methods.getPlayerCount().call()
       setPlayerCount(data)
     }
     fetch()
