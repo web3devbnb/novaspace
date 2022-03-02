@@ -33,10 +33,12 @@ import GameMenu from '../components/GameMenu'
 import moleCard from '../assets/moleCard.png'
 import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
+import gorianCard from '../assets/gorianCard.png'
 import viperQueue from '../assets/viperQueue.png'
 import moleQueue from '../assets/moleQueue.png'
 import fireflyCard from '../assets/fireflyCard.png'
 import fireflyQueue from '../assets/fireflyQueue.png'
+import gorianQueue from '../assets/gorianQueue.png'
 import YourFleetStats from '../Location/YourFleetStats'
 import BattleStatus from '../Location/BattleStatus'
 import FlipScreenModal from '../components/FlipScreenModal'
@@ -533,6 +535,7 @@ const Shipyard = () => {
               <ShipClassCard src={viperCard} alt="viper" />
               <ShipClassCard src={moleCard} alt="mole" />
               <ShipClassCard src={fireflyCard} alt="firefly" />
+              <ShipClassCard src={gorianCard} alt="gorian" />
               <ShipClassCard src={unknownCard} alt="coming soon" />
             </ShipClassMenu>
 
@@ -579,7 +582,7 @@ const Shipyard = () => {
                     COST: {buildCost / 10 ** 18 || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>TIME: {(shipAmount * buildTime) / timeMod || 0}s</Text>
+                  <Text>TIME: {(shipAmount * buildTime) / timeMod / 60 || 0}m</Text>
                 </Row>
                 <div style={{ color: '#289794', marginTop: '10px' }}>
                   {buildStats.map((buildStat) => (
@@ -603,6 +606,7 @@ const Shipyard = () => {
                           {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
+                          {dock.shipClassId === '3' && <QueueCardImg src={gorianQueue} alt="gorians in queue" />}
 
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>

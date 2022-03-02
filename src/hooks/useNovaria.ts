@@ -24,6 +24,7 @@ import {
   setShipyardName,
   changeName,
   setShipyardFeePercent,
+  tunnel,
 } from 'utils/callHelpers'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
@@ -470,7 +471,17 @@ export const useGetDockCost = (shipClassId: number, amount: number) => {
 // Movement, mining, refining, tracks mineral
 // Active Functions
 
+export const useTunnel = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
 
+  const handleTunnel = useCallback (
+    async (x: number, y: number) => {
+    const txHash = await tunnel(useMapContract, x, y, account)
+    console.info(txHash)
+  }, [account, useMapContract])
+  return { onTunnel: handleTunnel }
+}
 
 export const useMine = () => {
   const { account } = useWallet()

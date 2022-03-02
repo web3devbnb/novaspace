@@ -26,6 +26,7 @@ import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
 import FlipScreenModal from '../components/FlipScreenModal'
 import BodyWrapper from '../components/BodyWrapper'
+import wormholeLogo from '../assets/wormhole.png'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
@@ -369,6 +370,7 @@ const Map: React.FC = () => {
                               alt="unexplored"
                             />
                           )}
+                          {planet.placeType === '6' && <GridCellImg src={wormholeLogo} alt="wormhole" />}
                           {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
                           {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
                           {planet.placeType === '1' && planet.canTravel ? (

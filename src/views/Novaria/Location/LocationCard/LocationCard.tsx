@@ -12,6 +12,7 @@ import {
   useGetExploreCost,
   useShipyardTakeover,
   useGetShipyards,
+  useTunnel,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -132,6 +133,17 @@ const UnexploredImageCard = styled.div`
   }
 `
 
+const WormholeImageCard = styled.div`
+  background-image: url('/images/novaria/wormholeCard.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: clamp(270px, 280px, 290px);
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: clamp(300px, 300px, 300px);
+  }
+`
+
 const PlaceHeader = styled.div`
   position: absolute;
   top: 230px;
@@ -206,7 +218,8 @@ const LocationCard = ({
   fleetSize,
   playerMineral,
   playerMaxMineral,
-  Luminosity
+  Luminosity,
+  atWormhole
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -228,11 +241,27 @@ const LocationCard = ({
   const wormhole = placetype === '6'
   const haven = placename === 'Haven'
 
+  const canTunnel = wormhole && atWormhole
+
   const { onExplore } = useExplore()
   const { onMine } = useMine()
   const { onRefine } = useRefine()
   const { onCollect } = useCollect()
   const { onTravel } = useTravel()
+  const { onTunnel } = useTunnel()
+
+    
+  const sendTunnelTx = async () => {
+    setPendingTx(true)
+    try {
+      await onTunnel(placeX, placeY)
+      console.log('Tunneling To:', placeX, placeY)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
   const sendTravelTx = async () => {
     setPendingTx(true)
     try {
@@ -301,6 +330,7 @@ const LocationCard = ({
       {hostile ? <HostileImageCard /> : ''}
       {unexplored ? <UnexploredImageCard /> : ''}
       {isMining === true ? <MiningImageCard /> : ''}
+      {wormhole && <WormholeImageCard />}
       <PlaceHeader>
         <Row>
           <Name>
@@ -323,6 +353,7 @@ const LocationCard = ({
           </span>
           <span>{unexplored ? 'UNEXPLORED' : ''}</span>
           <span>{star ? <span>STAR Luminosity {Luminosity}</span> : ''}</span>
+          <span>{wormhole && 'WORMHOLE'}</span>
         </Row>
       </PlaceHeader>
       <PlaceBody>
@@ -341,6 +372,7 @@ const LocationCard = ({
             Draken technology was found here, and helped us build the legendary ship, &quot;Novaria.&quot;
           </Text>
         }
+        
         {salvage > 0 && currentLocation && !atMaxMineral ? (
           <Button type="button" onClick={sendCollectTx}>
             {pending ? 'pending...' : 'COLLECT'}
@@ -377,6 +409,11 @@ const LocationCard = ({
         ) : (
           ''
         )}
+        {canTunnel && 
+          <Button onClick={sendTunnelTx}>
+            {pending ? 'pending...' : 'TUNNEL'}
+          </Button>
+          }
         
         
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
@@ -384,7 +421,9 @@ const LocationCard = ({
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
               </div> : 'Location too far to travel directly or cannot be traveled to.'}
-            {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}
+            {unexplored && <span>Exlpore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
+            {wormhole && 'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
+            {canTunnel && <span>Tunnel Cost (NOVA): {travelCooldown/10} minutes</span>}
           </Row>
         
       </PlaceBody>

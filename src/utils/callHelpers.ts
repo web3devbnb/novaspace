@@ -283,3 +283,12 @@ export const setShipyardFeePercent = async (fleetContract, x, y, amount, account
       return tx.transactionHash
     })
 }
+
+export const tunnel = async (mapContract, x, y, account) => {
+  return mapContract.methods
+    .tunnel(x, y)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

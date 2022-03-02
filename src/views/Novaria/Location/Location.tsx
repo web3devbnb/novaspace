@@ -210,6 +210,7 @@ const Location: React.FC = () => {
   const playerName = player.name
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
+  const atWormhole = useGetPlaceInfo(fleetLocation.X, fleetLocation.Y).type === '6'
 
   const currentLocation = Number(fleetLocation.X) === Number(placeX) && Number(fleetLocation.Y) === Number(placeY)
 
@@ -245,6 +246,7 @@ const Location: React.FC = () => {
                   canTravel={placeInfo.canTravel}
                   currentLocation={currentLocation}
                   Luminosity = {placeInfo.luminosity}
+                  atWormhole = {atWormhole}
                 />
               )}
             </LeftCol>
