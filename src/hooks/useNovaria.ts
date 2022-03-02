@@ -408,7 +408,7 @@ export const useGetPlayer = (player) => {
   useEffect(() => {
     async function fetch() {
       if (player !== null) {
-        const playerId = await fleetContract.methods._addressToPlayer(player).call()
+        const playerId = await fleetContract.methods.addressToPlayer(player).call()
         const data = await fleetContract.methods.players(playerId).call()
         setPlayer({
           name: data[0],
@@ -430,7 +430,7 @@ export const useGetNameByAddress = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const id = await fleetContract.methods._addressToPlayer(player).call()
+      const id = await fleetContract.methods.addressToPlayer(player).call()
       const data = await fleetContract.methods.players(id).call()
       setName(data[0])
     }
@@ -445,7 +445,7 @@ export const useGetPlayerExists = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods._playerExists(player).call()
+      const data = await fleetContract.methods.playerExists(player).call()
       setPlayerExists(data)
     }
     fetch()
@@ -459,7 +459,7 @@ export const useGetDockCost = (shipClassId: number, amount: number) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods._playerExists(shipClassId, amount).call()
+      const data = await fleetContract.methods.playerExists(shipClassId, amount).call()
       setDockCost(data)
     }
     fetch()
