@@ -21,31 +21,6 @@
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "int256",
-				"name": "_amountGained",
-				"type": "int256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amountBurned",
-				"type": "uint256"
-			}
-		],
-		"name": "MineralGained",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
 				"name": "_fleet",
 				"type": "address"
 			},
@@ -76,43 +51,6 @@
 			}
 		],
 		"name": "MineralRefined",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amountSent",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amountReceived",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amountBurned",
-				"type": "uint256"
-			}
-		],
-		"name": "MineralTransferred",
 		"type": "event"
 	},
 	{
@@ -591,18 +529,7 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_x",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_y",
-				"type": "uint256"
-			}
-		],
+		"inputs": [],
 		"name": "getExploreCost",
 		"outputs": [
 			{
@@ -822,6 +749,31 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getWormholes",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "placeId",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Map.Wormhole[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -1230,6 +1182,13 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "startingPlaces",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -1277,6 +1236,24 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_x",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_y",
+				"type": "uint256"
+			}
+		],
+		"name": "tunnel",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
