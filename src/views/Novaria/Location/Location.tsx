@@ -20,6 +20,7 @@ import {
   useGetMiningCapacity,
   useGetShipClasses,
   useGetShips,
+  useGetTimeModifier,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -192,7 +193,7 @@ const Location: React.FC = () => {
 
   // Main place info functions
   const placeInfo = useGetPlaceInfo(placeX, placeY)
-  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY)
+  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY, false)
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
@@ -213,6 +214,8 @@ const Location: React.FC = () => {
   const atWormhole = useGetPlaceInfo(fleetLocation.X, fleetLocation.Y).type === '6'
 
   const currentLocation = Number(fleetLocation.X) === Number(placeX) && Number(fleetLocation.Y) === Number(placeY)
+  const openbattles = false
+  const timeMod = useGetTimeModifier()
 
   return (
     <Page>
@@ -264,6 +267,8 @@ const Location: React.FC = () => {
                   battles={battlesAtLocation}
                   status={playerBattleStatus}
                   currentLocation={currentLocation}
+                  resolved = {openbattles}
+                  account={account}
                 />
               </OpenBattlesCard>
               <PlayersCard>
@@ -313,6 +318,7 @@ const Location: React.FC = () => {
                         placeY={placeY}
                         refinery={placeInfo.refinery}
                         currentLocation={currentLocation}
+                        timeMod = {timeMod}
                       />
                     </TakeOverMenu>
                   ))}

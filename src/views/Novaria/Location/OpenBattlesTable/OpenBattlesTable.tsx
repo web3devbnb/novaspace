@@ -30,7 +30,7 @@ const TableContent = styled.div`
   }
 `
 
-const OpenBattlesTable = ({ battles, status, currentLocation }) => {
+const OpenBattlesTable = ({ battles, status, currentLocation, resolved, account }) => {
   return (
     <Body>
       <div>
@@ -43,7 +43,7 @@ const OpenBattlesTable = ({ battles, status, currentLocation }) => {
       </div>
       <TableContent>
         {battles.map((battle) => (
-          <OpenBattlesTableRow key={battle} battle={battle} status={status} currentLocation={currentLocation}  />
+          <OpenBattlesTableRow key={battle} account={account} battle={battle} status={status} currentLocation={currentLocation} resolved={resolved} />
         ))}
       </TableContent>
     </Body>

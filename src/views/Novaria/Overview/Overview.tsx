@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer } from 'hooks/useNovaria'
+import { useGetBattlesAtLocation, useGetPlayerBattleStatus, useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer, useGetPlayerCount } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import OpenBattlesTable from '../Location/OpenBattlesTable'
 import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
@@ -41,6 +42,22 @@ const Text = styled.div`
   font-size: 15px;
 `
 
+const OpenBattlesCard = styled.div`
+  margin: 20px 10px;
+  padding: 10px;
+  max-height: 45%;
+  min-height: 200px;
+  min-width: 350px
+  max-width: 450px;
+  border: 1px solid #5affff;
+  background: #00000099;
+  
+  ${({ theme }) => theme.mediaQueries.md} {
+    min-width: 450px;
+  }
+`
+
+
 const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
@@ -49,6 +66,11 @@ const Overview: React.FC = () => {
   const player = useGetPlayer(account.toString())
   const playerEXP = player.experience
   const playerName = player.name
+  const playerBattleStatus = useGetPlayerBattleStatus(account)
+
+  const playerCount = useGetPlayerCount()
+  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, true) 
+ 
 
   return (
     <Page>
@@ -84,6 +106,19 @@ const Overview: React.FC = () => {
               <br />
               Good Luck!
             </Text>
+          </div>
+          <div style={{ background: '#11427399', padding: 15, textAlign: 'center' }}>
+            Total Players: {playerCount}
+            <OpenBattlesCard>
+              <Header>Your Recent Battles</Header>
+              <OpenBattlesTable
+                battles={recentLocationBattles}
+                status={playerBattleStatus}
+                currentLocation
+                resolved
+                account={account}
+              />
+            </OpenBattlesCard>
           </div>
         </Body>
       </Row>

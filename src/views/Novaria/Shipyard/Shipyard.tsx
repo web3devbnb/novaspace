@@ -579,7 +579,7 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    COST: {buildCost / 10 ** 18 || 0}
+                    COST: {(buildCost / 10 ** 18).toFixed(2) || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
                   <Text>TIME: {(shipAmount * buildTime) / timeMod / 60 || 0}m</Text>

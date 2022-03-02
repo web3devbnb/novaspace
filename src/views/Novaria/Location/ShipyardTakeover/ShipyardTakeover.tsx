@@ -29,9 +29,9 @@ const Disabled = styled.button`
 `
 
 
-const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, currentLocation }) => {
+const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, currentLocation, timeMod }) => {
   
-    const cooldownTime = new Date((Number(shipyard.lastTakeoverTime) + 604800) * 1000)
+    const cooldownTime = new Date((Number(shipyard.lastTakeoverTime) + (604800 / timeMod)) * 1000)
     const inCooldownStage = Number(cooldownTime) > Number(new Date())
     const underAttack = Number(new Date(shipyard.takeoverDeadline * 1000)) > Number(new Date())
     const [handleClick] = useModal(<TakeOverModal account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} inCooldownStage={inCooldownStage} underAttack={underAttack} currentLocation={currentLocation} />)

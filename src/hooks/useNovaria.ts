@@ -315,19 +315,19 @@ export const useGetMiningCapacity = (fleet: string) => {
 }
 
 // returns list of battle IDs at a location
-export const useGetBattlesAtLocation = (x: any, y: any) => {
+export const useGetBattlesAtLocation = (x: any, y: any, showResolved: boolean) => {
   const { fastRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
       if (x !== null) {
-        const data = await fleetContract.methods.getBattlesAtLocation(x, y).call()
+        const data = await fleetContract.methods.getBattlesAtLocation(x, y, showResolved).call()
         setBattlesAtLocation(data)
       }
     }
     fetch()
-  }, [fastRefresh, x, y])
+  }, [fastRefresh, x, y, showResolved])
   return battlesAtLocation
 }
 
@@ -573,6 +573,20 @@ export const useRecall = (haven) => {
 }
 
 // ***View Functions***
+
+export const useGetPlayerCount = () => {
+  const { fastRefresh } = useRefresh()
+  const [playerCount, setPlayerCount] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.getPlayerCount().call()
+      setPlayerCount(data)
+    }
+    fetch()
+  }, [fastRefresh])
+  return playerCount
+}
 
 export const useGetFleetLocation = (fleet) => {
   const { fastRefresh } = useRefresh()

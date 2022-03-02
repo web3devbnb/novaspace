@@ -21,23 +21,36 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle, status, currentLocation}) => {
+const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, account}) => {
   const [handleClick] = useModal(<BattleModal battle={battle} status={status} currentLocation={currentLocation} />)
   const battleInfo = useGetBattle(battle)
+  const attackTeam = battleInfo.attackers
+  const defendTeam = battleInfo.defenders
   const battleStart = new Date(battleInfo.deadline * 1000).toLocaleString()
+  let playerInBattle = false
+  for (let i = 0; i < attackTeam.length; i++) {
+    if (attackTeam[i].toString() === account.toString()) {
+      playerInBattle = true
+    }
+  } 
+  for (let i = 0; i < defendTeam.length; i++) {
+    if (defendTeam[i].toString() === account.toString()) {
+      playerInBattle = true
+    }
+  } 
 
-  // if (battleInfo.coordX !== placeX && battleInfo.coordY !== placeY) {
-  //   return (null)
-  // }
-
-  return (
-    <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
-      <Cell>{battle}</Cell>
-      <Cell>{battleInfo.attackTeam[1]}</Cell>
-      <Cell>{battleInfo.defendTeam[1]}</Cell>
-      <Cell>{battleStart}</Cell>
-    </Row>
-  )
+ 
+  if (resolved || playerInBattle) {
+    return (
+      <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
+        <Cell>{battle}</Cell>
+        <Cell>{battleInfo.attackTeam[1]}</Cell>
+        <Cell>{battleInfo.defendTeam[1]}</Cell>
+        <Cell>{battleStart}</Cell> 
+      </Row>
+    )
+  } 
+  return (<Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}> </Row>)
 }
 
 export default OpenBattlesTableRow
