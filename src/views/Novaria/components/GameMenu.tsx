@@ -23,7 +23,7 @@ const SmallFrame = styled.div`
   flex-direction: row;
   margin-left: 25px;
   margin-top: 10px;
-  @media (min-width: 420px) { 
+  @media (min-width: 420px) {
     flex-direction: column;
     margin-left: 0px;
     width: 60px;
@@ -62,7 +62,6 @@ const Flag = styled.div<{ active: boolean }>`
     opacity: 1;
     color: #5affff;
   }
-  
 `
 
 const ToggleButton = styled.button`
@@ -74,6 +73,13 @@ const ToggleButton = styled.button`
 
 // Local storage key we're using to store game menu open / closed status.
 const GAMEMENU_IS_OPEN_KEY = 'novaria_gamemenu_is_open'
+
+const MENU_DATA = [
+  { href: '/overview', title: 'OVERVIEW', internalPageName: 'overview', img: { src: overview, alt: 'game overview' } },
+  { href: '/shipyard', title: 'SHIPYARD', internalPageName: 'shipyard', img: { src: shipyard, alt: 'game shipyard' } },
+  { href: '/map', title: 'STAR MAP', internalPageName: 'starmap', img: { src: starmap, alt: 'game star map' } },
+  { href: '/location', title: 'LOCATION', internalPageName: 'location', img: { src: location, alt: 'game location' } },
+]
 
 const GameMenu = ({ pageName }) => {
   const [open, setOpen] = useState((): boolean => {
@@ -95,52 +101,27 @@ const GameMenu = ({ pageName }) => {
           <ToggleButton type="button" onClick={toggleViewMenu}>
             {open === true ? '<<' : '>>'}
           </ToggleButton>
-          <Link href="/overview">
-            <Icon src={overview} alt="game overview" />
-            <Flag active={pageName === 'overview'} aria-haspopup="true">
-              OVERVIEW
-              <img src={flag} alt="flag" />
-            </Flag>
-          </Link>
-          <Link href="/shipyard">
-            <Icon src={shipyard} alt="game shipyard" />
-            <Flag active={pageName === 'shipyard'} aria-haspopup="true">
-              SHIPYARD
-              <img src={flag} alt="flag" />
-            </Flag>
-          </Link>
-          <Link href="/map">
-            <Icon src={starmap} alt="game star map" />
-            <Flag active={pageName === 'starmap'} aria-haspopup="true">
-              STAR MAP
-              <img src={flag} alt="flag" />
-            </Flag>
-          </Link>
-          <Link href="/location">
-            <Icon src={location} alt="game location" />
-            <Flag active={pageName === 'location'} aria-haspopup="true">
-              LOCATION
-              <img src={flag} alt="flag" />
-            </Flag>
-          </Link>
+
+          {MENU_DATA.map((item) => (
+            <Link href={item.href}>
+              <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+              <Flag active={pageName === item.internalPageName} aria-haspopup="true">
+                {item.title}
+                <img src={flag} alt="flag" />
+              </Flag>
+            </Link>
+          ))}
         </Frame>
       ) : (
         <SmallFrame>
           <ToggleButton type="button" onClick={toggleViewMenu}>
             &gt;&gt;
           </ToggleButton>
-          <Link href="/overview">
-            <Icon src={overview} alt="game overview" />
-          </Link>
-          <Link href="/shipyard">
-            <Icon src={shipyard} alt="game shipyard" />
-          </Link>
-          <Link href="/map">
-            <Icon src={starmap} alt="game star map" />
-          </Link>
-          <Link href="/location">
-            <Icon src={location} alt="game location" />
-          </Link>
+          {MENU_DATA.map((item) => (
+            <Link href={item.href}>
+              <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+            </Link>
+          ))}
         </SmallFrame>
       )}
     </div>
