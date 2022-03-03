@@ -226,7 +226,7 @@ const LocationCard = ({
   const { account } = useWallet()
   const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10 ** 18
   const timeMod = useGetTimeModifier()
-  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 / timeMod
+  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
   const exploreCost = useGetExploreCost()
   const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
   const atMaxMineral = Number(playerMaxMineral) === Number(playerMineral)
@@ -424,7 +424,7 @@ const LocationCard = ({
               <span>Distance: {Math.floor(distance)} AU(s)</span>
             {unexplored && <span>Explore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
             {wormhole && 'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
-            {canTunnel && <span>Tunnel Cost (NOVA): {travelCooldown/10} minutes</span>}
+            {canTunnel && <span>Tunnel Cost (NOVA): {travelCost/10}</span>}
           </Row>
         
       </PlaceBody>
