@@ -124,7 +124,7 @@ const BuildRow=styled(Row)`
 const PageRow = styled.div`
 flex-wrap: no-wrap;
 display: flex;
-@media (max-width: 380px) {
+@media (max-width: 420px) {
   flex-wrap: wrap;
 }
 `
@@ -142,6 +142,9 @@ const BuildMenu = styled.div`
   min-width: 240px;
   min-height: 312px;
   background-color: #00000080;
+  @media (max-width: 420px) {
+    width: 100%;
+  }
 `
 
 const Text = styled.text`
@@ -198,6 +201,7 @@ const Input = styled.input`
 
 const SpaceDockMenu = styled.div`
   display: flex;
+  margin: 10px;
   flex-direction: column;
   background-color: #00000080;
   flex-wrap: no-wrap;
@@ -225,6 +229,7 @@ const SpaceDockMenu = styled.div`
 
 const QueueCardImg = styled.img`
   position: absolute;
+  margin-top: -10px;
   z-index: -1;
 `
 
@@ -233,9 +238,10 @@ const QueueCardItems = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px;
-  font-size: 12px;
+  font-size: .75rem;
   margin-top: 95%;
+  width: 110px;
+  margin-left:10px;
 `
 
 const QueueCard = styled.div`
@@ -243,7 +249,6 @@ const QueueCard = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-right: 10px;
 `
 
 const ClaimControls = styled.div`
@@ -316,6 +321,9 @@ const FleetMenu = styled.div`
   }
   height: 100%;
   padding: 11px;
+  @media (max-width: 420px) {
+    width: 100%;
+  }
 `
 
 const BattleProgressCard = styled.div`

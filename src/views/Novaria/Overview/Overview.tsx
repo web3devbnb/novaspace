@@ -18,12 +18,12 @@ const Page = styled.div`
 const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     flex-wrap: wrap;
   }
 `
 const Body = styled.div`
-  margin: 40px 10px 200px 10px;
+  margin: 20px 10px 200px 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -55,6 +55,11 @@ const OpenBattlesCard = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
+`
+
+const SubHeader = styled.div`
+  font-size: .75rem;
+  color: gray;
 `
 
 
@@ -111,6 +116,7 @@ const Overview: React.FC = () => {
             Total Players: {playerCount}
             <OpenBattlesCard>
               <Header>Your Recent Battles</Header>
+              <SubHeader>(Only shows your battles at your current location)</SubHeader>
               <OpenBattlesTable
                 battles={recentLocationBattles}
                 status={playerBattleStatus}

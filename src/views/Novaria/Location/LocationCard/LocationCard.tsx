@@ -21,6 +21,10 @@ const Body = styled.div`
   margin: 15px;
   width: 300px;
   height: 450px;
+  
+  @media (max-width: 420px) {
+    margin-left: 40px;
+  }
 `
 
 const HavenImageCard = styled.div`

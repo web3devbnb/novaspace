@@ -92,7 +92,7 @@ const StartMenu = () => {
           Step 2 - Set your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} />
           <Button onClick={sendInsertCoinTx}>{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <br />(costs 5 nova)
+          <br />(costs 20 nova)
         </div> : ''}
       {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
     </div>

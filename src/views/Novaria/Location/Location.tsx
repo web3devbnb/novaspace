@@ -49,7 +49,7 @@ const Page = styled.div`
 const Row = styled.div`
   flex-wrap: no-wrap;
   display: flex;
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     flex-wrap: wrap;
   }
 `
@@ -134,6 +134,9 @@ const FleetMenu = styled.div`
   }
   height: 100%;
   padding: 10px;
+  @media (max-width: 420px) {
+    margin-left: 35px;
+  }
 `
 
 const LeftCol = styled.div``

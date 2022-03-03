@@ -79,9 +79,6 @@ const Grid = styled.div`
   grid-gap: 1px;
   margin: 10px 10px 10px;
   padding: 10px;
-  @media (min-width: 380px) {
-    max-height: 600px;
-  }
   
 `
 
@@ -127,7 +124,7 @@ const GridCellContent = styled.div`
   
   width: 100px;
   height: 80px;
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     width: 45px;
     height: 100px;
 
@@ -151,7 +148,7 @@ const MainRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     flex-wrap: wrap;
   }
 `
