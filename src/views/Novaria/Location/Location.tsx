@@ -208,6 +208,7 @@ const Location: React.FC = () => {
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
+  console.log('playerbattlestatus', playerBattleStatus)
   const playerBattleInfo = useGetPlayerBattle(account)
   const player = useGetPlayer(account.toString())
   const playerEXP = player.experience

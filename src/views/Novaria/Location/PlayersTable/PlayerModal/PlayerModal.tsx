@@ -55,7 +55,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
-  const inBattle = battleStatus.toString() !== '0'
+  const inBattle = battleStatus.toString() === 'true'
   const bscscan = 'https://bscscan.com/address/'
   const accountAddress = account !== null ? account : ''
   const isPlayer = player.toString() === accountAddress.toString()

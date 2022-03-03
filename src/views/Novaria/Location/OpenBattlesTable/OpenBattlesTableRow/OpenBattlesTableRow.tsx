@@ -40,7 +40,7 @@ const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, accoun
   } 
 
  
-  if (resolved || playerInBattle) {
+  if (!resolved || playerInBattle) {
     return (
       <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
         <Cell>{battle}</Cell>
