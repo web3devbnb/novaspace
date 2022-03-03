@@ -48,7 +48,6 @@ const YourFleetStats = ({
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
   const notHaven = Number(fleetLocation.X) !== 0 && Number(fleetLocation.Y) !== 0
-
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {
     setPendingTx(true)
@@ -102,7 +101,7 @@ const YourFleetStats = ({
         <div>{travelCooldown}</div>
       </Stat>
 
-      {fleetSize < 25 && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {Number(fleetSize) < 25 && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
     </Stats>
   )
 }

@@ -17,6 +17,7 @@ import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
 interface PlayerModalProps {
+  refinery: boolean
   player: string
   status: boolean
   currentLocation: boolean
@@ -41,7 +42,7 @@ const Child = styled.div`
   margin-bottom: 5px;
 `
 
-const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocation, onDismiss }) => {
+const PlayerModal: React.FC<PlayerModalProps> = ({ refinery, player, status, currentLocation, onDismiss }) => {
   const {account} = useWallet()
   const ships = useGetShips(player)
   const shipClasses = useGetShipClasses()
@@ -60,7 +61,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
   const accountAddress = account !== null ? account : ''
   const isPlayer = player.toString() === accountAddress.toString()
 
-  console.log(accountAddress, account)
+
 
   const { onEnterBattle } = useEnterBattle()
 
@@ -113,7 +114,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, status, currentLocati
           {playerBattleStatus === '2' && 'Defending'}
         </Child>
       </div>
-      {!inBattle && !isPlayer && currentLocation &&
+      {!inBattle && !isPlayer && currentLocation && !refinery &&
         <ModalActions>
           <Button  onClick={() => handleEnterBattle(player, 'attack')}>
             ATTACK

@@ -24,13 +24,13 @@ const Cell = styled.div`
   text-align: right;
 `
 
-const PlayersTableRow = ({ player, status, currentLocation }) => {
+const PlayersTableRow = ({ refinery, player, status, currentLocation }) => {
   const web3 = getWeb3()
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const name = useGetNameByAddress(player)
   const mineral = Number(useGetFleetMineral(player))
-  const [handleClick] = useModal(<PlayerModal player={player} status={status} currentLocation={currentLocation} />)
+  const [handleClick] = useModal(<PlayerModal refinery={refinery} player={player} status={status} currentLocation={currentLocation} />)
 
   return (
     <Row status={player.battleStatus} onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0} >

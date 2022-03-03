@@ -40,8 +40,6 @@ const BattleStatus = ({ playerBattleStatus, playerBattleInfo, currentLocation })
     const battleId = Number(playerBattleInfo.battleId)
     const startTime = new Date(useGetBattle(battleId).deadline * 1000).toLocaleString()
 
-    console.log('battle status menu', playerBattleStatus)
-
     const isSameLocation = Number(currentLocation.X) === Number(playerBattleInfo.coordX) && Number(currentLocation.Y) === Number(playerBattleInfo.coordY)
     
     const [handleClick] = useModal(<BattleModal battle={battleId} status={playerBattleStatus} currentLocation={isSameLocation} />) 

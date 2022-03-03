@@ -43,6 +43,7 @@ import YourFleetStats from '../Location/YourFleetStats'
 import BattleStatus from '../Location/BattleStatus'
 import FlipScreenModal from '../components/FlipScreenModal'
 import BodyWrapper from '../components/BodyWrapper'
+import BuildQueue from './BuildQueue'
 
 const Page = styled.div`
   font-size: 15px;
@@ -52,34 +53,25 @@ const Page = styled.div`
   flex-wrap: no-wrap;
 `
 
-const Body = styled.div`
-  margin: 10px 10px 10px 10px;
-  // fix background later
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  // justify-content: space-evenly;
-  background-image: url('/images/novaria/border.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding-bottom: 10px;
-  //aspect-ratio: 15/8;
+const LeftCol = styled.div`
+  max-width: 80%;
 `
 
 const ShipClassMenu = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  overflow-x: auto;
+  // flex-direction: row;
+  // flex-wrap: no-wrap;
+
   border: 1px solid #8c8c8c;
   margin: 10px;
   background-color: #00000080;
   max-width: 100%;
-  @media (max-width: 1520px) {
-    max-width: 740px;
-  }
 
+  // @media (max-width: 1520px) {
+  //   max-width: 740px;
+  // }
+
+  overflow-x: auto;
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
@@ -113,20 +105,29 @@ const Row = styled.div`
   width: 100%;
 `
 
-const BuildRow=styled(Row)`
+
+const BuildRow=styled.div`
+  display: flex;
+  flex-direction: row;
   flex-wrap: no-wrap;
-  
+  max-width: 100%;
   @media (max-width: 715px) {
     flex-wrap: wrap;
+    
   }
+  // @media (max-width: 1520px) {
+  //   max-width: 740px;
+  // }
+
 `
 
 const PageRow = styled.div`
-flex-wrap: no-wrap;
-display: flex;
-@media (max-width: 420px) {
-  flex-wrap: wrap;
-}
+  
+  display: flex;
+  flex-wrap: no-wrap;
+  @media (max-width: 420px) {
+    flex-wrap: wrap;
+  }
 `
 
 const Item = styled.div``
@@ -139,10 +140,11 @@ const BuildMenu = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 30%;
+  height: auto;
   min-width: 240px;
-  min-height: 312px;
+  // min-height: 312px;
   background-color: #00000080;
-  @media (max-width: 420px) {
+  @media (max-width: 715px) {
     width: 100%;
   }
 `
@@ -200,19 +202,29 @@ const Input = styled.input`
 `
 
 const SpaceDockMenu = styled.div`
-  display: flex;
-  margin: 10px;
+  display: inline-block;
   flex-direction: column;
-  background-color: #00000080;
-  flex-wrap: no-wrap;
-  overflow-x: auto;
+  
+  // position: relative;
+  max-width: 65%;
   border: 1px solid #8c8c8c;
+  margin: 10px;
   padding: 10px;
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  min-height: 312px;
+  background-color: #00000080;
 
+`
+
+const QueueRow = styled.div`
+
+  display: grid;
+  grid-auto-flow: column;
+  // position: relative;
+  // flex-direction: row;
+  // flex-wrap: no-wrap;
+  // align-items: center;
+  // width: 100%;
+
+  overflow-x: auto;
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
 
@@ -227,36 +239,38 @@ const SpaceDockMenu = styled.div`
   }
 `
 
-const QueueCardImg = styled.img`
-  position: absolute;
-  margin-top: -10px;
-  z-index: -1;
+const QueueCol = styled(Col)<{shipclass: string}>`
+  background: ${props => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
+  background: ${props => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
+  background: ${props => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
+  background: ${props => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
+  background-size: fit;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+  height: 265px;
+  width: 195px;
+  position: relative;
 `
+
 
 const QueueCardItems = styled.div`
-  z-index: 1;
+  
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   font-size: .75rem;
-  margin-top: 95%;
-  width: 110px;
-  margin-left:10px;
-`
-
-const QueueCard = styled.div`
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  // margin-top: 95%;
+  
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
 `
 
 const ClaimControls = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  bottom: 5px;
+  margin-bottom: 10px;
 `
 
 const ClaimInput = styled.input`
@@ -278,13 +292,13 @@ const ClaimButton = styled.button`
   text-decoration: none;
   color: black;
   border: none;
-  border-radius: 0px;
+  border-radius: 0px 0 10px  0;
   background-color: #5affff;
 `
 
 const CountdownButton = styled.button`
-  margin: 5px;
-  margin-left: 0px;
+  // margin: 5px;
+  // margin-left: 0px;
   align-self: center;
   // padding: 0.25rem 1rem;
   font-family: sans-serif;
@@ -314,16 +328,12 @@ const WrongLocationButton = styled.button`
 const FleetMenu = styled.div`
   display: flex;
   flex-direction: column;
-  border-left: none;
-  @media (min-width: 1140px) {
-    flex-wrap: wrap;
-    border-left: 1px solid gray;
-  }
+  // border-left: none;
+  border-left: 1px solid gray;
+ 
   height: 100%;
   padding: 11px;
-  @media (max-width: 420px) {
-    width: 100%;
-  }
+
 `
 
 const BattleProgressCard = styled.div`
@@ -351,7 +361,7 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const player = useGetPlayer(account.toString())
+  const player = useGetPlayer(account.toString()) 
   const playerEXP = Number(player.experience)
   const playerName = player.name
 
@@ -479,7 +489,7 @@ const Shipyard = () => {
       dockInUse = true;
     }
   }
-
+ 
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -548,7 +558,7 @@ const Shipyard = () => {
         <GameMenu pageName="shipyard" />
 
         <BodyWrapper>
-          <Col>
+          <LeftCol>
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" />
               <ShipClassCard src={moleCard} alt="mole" />
@@ -614,17 +624,18 @@ const Shipyard = () => {
 
               <SpaceDockMenu>
                 <Header style={{ marginTop: 0 }}>
-                  BUILD QUEUE <span style={{ fontSize: 13 }}>(Can only have 1 active order per shipyard)</span>
+                  BUILD QUEUE <span style={{ fontSize: '.75rem' }}>(Can only have 1 active order per shipyard)</span>
                 </Header>
-                <Row>
+                <QueueRow>
                   {spaceDocks.map((dock) => {
                     return (
-                      <Col>
-                        <QueueCard key={dock.shipClassId}>
-                          {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
+                      // <BuildQueue dock={dock} fleetLocation={fleetLocation} />
+                      <QueueCol shipclass={dock.shipClassId}>
+                        
+                          {/* {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
-                          {dock.shipClassId === '3' && <QueueCardImg src={gorianQueue} alt="gorians in queue" />}
+                          {dock.shipClassId === '3' && <QueueCardImg src={gorianQueue} alt="gorians in queue" />} */}
 
                           <QueueCardItems>
                             <Row style={{ justifyContent: 'space-between' }}>
@@ -640,7 +651,7 @@ const Shipyard = () => {
                               <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
                             </Row>
                           </QueueCardItems>
-                        </QueueCard>
+                        
 
                         <ClaimControls>
                           {/* eslint-disable-next-line no-nested-ternary */}
@@ -687,13 +698,13 @@ const Shipyard = () => {
                             ''
                           )}
                         </ClaimControls>
-                      </Col>
+                      </QueueCol>
                     )
                   })}
-                </Row>
+                </QueueRow>
               </SpaceDockMenu>
             </BuildRow>
-          </Col>
+          </LeftCol>
 
           <Col>
             <FleetMenu>
@@ -713,7 +724,7 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleStatus} currentLocation={fleetLocation} />
+                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleInfo.battleStatus} currentLocation={fleetLocation} />
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (

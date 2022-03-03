@@ -31,7 +31,7 @@ const TableContent = styled.div`
   }
 `
 
-const PlayersTable = ({ players, playerBattleStatus, currentLocation }) => {
+const PlayersTable = ({ refinery, players, playerBattleStatus, currentLocation }) => {
   return (
     <Body>
       <div>
@@ -44,7 +44,7 @@ const PlayersTable = ({ players, playerBattleStatus, currentLocation }) => {
       </div>
       <TableContent>
         {players.map((player) => (
-          <PlayersTableRow player={player} status={playerBattleStatus} currentLocation={currentLocation} />
+          <PlayersTableRow refinery={refinery} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
         ))}
       </TableContent>
     </Body>

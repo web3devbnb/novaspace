@@ -37,8 +37,8 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
   const inBattle = status 
+  const resolved = battleInfo.resolved 
 
-  console.log('current location, inBattle', currentLocation, inBattle, status)
 
   const GetPlayerName = (address) => {
     useGetNameByAddress(address)
@@ -80,22 +80,24 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
       <div>
         Deadline: {startTime}
       </div>
-      <ModalActions>
-      {!inBattle && currentLocation &&
-        <div>
-          <Button  onClick={() => onEnterBattle(defender, 1)}>
-            JOIN ATTACKERS
-          </Button>
-          <Button  onClick={() => onEnterBattle(defender, 2)}>
-            JOIN DEFENDERS
-          </Button>
-        </div> }
-          {battleReady ?
-            <Button  onClick={sendBattleTx}>
-              RESOLVE
+      {!resolved &&
+        <ModalActions>
+        {!inBattle && currentLocation &&
+          <div>
+            <Button  onClick={() => onEnterBattle(defender, 1)}>
+              JOIN ATTACKERS
             </Button>
-          : ''}
-      </ModalActions> 
+            <Button  onClick={() => onEnterBattle(defender, 2)}>
+              JOIN DEFENDERS
+            </Button>
+          </div> }
+            {battleReady ?
+              <Button  onClick={sendBattleTx}>
+                RESOLVE
+              </Button>
+            : ''}
+        </ModalActions> 
+      }
     </Modal>
   )
 }

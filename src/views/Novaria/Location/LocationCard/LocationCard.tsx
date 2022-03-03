@@ -223,7 +223,8 @@ const LocationCard = ({
   playerMineral,
   playerMaxMineral,
   Luminosity,
-  atWormhole
+  atWormhole,
+  miningCooldownActive,
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -377,7 +378,7 @@ const LocationCard = ({
           </Text>
         }
         
-        {salvage > 0 && currentLocation && !atMaxMineral ? (
+        {salvage > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
           <Button type="button" onClick={sendCollectTx}>
             {pending ? 'pending...' : 'COLLECT'}
           </Button>
@@ -385,7 +386,7 @@ const LocationCard = ({
           ''
         )}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {mineral > 0 && currentLocation && !atMaxMineral ? (
+        {mineral > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
           <Button type="button" onClick={sendMineTx}>
             {pending ? 'pending...' : 'MINE'}
           </Button>

@@ -24,7 +24,6 @@ import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
-import FlipScreenModal from '../components/FlipScreenModal'
 import BodyWrapper from '../components/BodyWrapper'
 import wormholeLogo from '../assets/wormhole.png'
 
