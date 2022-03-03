@@ -57,6 +57,13 @@ const LeftCol = styled.div`
   max-width: 80%;
 `
 
+const RightCol = styled.div`
+  flex: 1;
+  flex-direction: column;
+  margin: 10px;
+  display: flex;
+`
+
 const ShipClassMenu = styled.div`
   display: flex;
   // flex-direction: row;
@@ -105,24 +112,20 @@ const Row = styled.div`
   width: 100%;
 `
 
-
-const BuildRow=styled.div`
+const BuildRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   max-width: 100%;
   @media (max-width: 715px) {
     flex-wrap: wrap;
-    
   }
   // @media (max-width: 1520px) {
   //   max-width: 740px;
   // }
-
 `
 
 const PageRow = styled.div`
-  
   display: flex;
   flex-wrap: no-wrap;
   @media (max-width: 420px) {
@@ -204,18 +207,16 @@ const Input = styled.input`
 const SpaceDockMenu = styled.div`
   display: inline-block;
   flex-direction: column;
-  
+
   // position: relative;
   max-width: 65%;
   border: 1px solid #8c8c8c;
   margin: 10px;
   padding: 10px;
   background-color: #00000080;
-
 `
 
 const QueueRow = styled.div`
-
   display: grid;
   grid-auto-flow: column;
   // position: relative;
@@ -239,11 +240,11 @@ const QueueRow = styled.div`
   }
 `
 
-const QueueCol = styled(Col)<{shipclass: string}>`
-  background: ${props => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
-  background: ${props => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
-  background: ${props => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
-  background: ${props => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
+const QueueCol = styled(Col)<{ shipclass: string }>`
+  background: ${(props) => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
+  background: ${(props) => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
+  background: ${(props) => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
+  background: ${(props) => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
   background-size: fit;
   background-repeat: no-repeat;
   justify-content: flex-end;
@@ -252,15 +253,13 @@ const QueueCol = styled(Col)<{shipclass: string}>`
   position: relative;
 `
 
-
 const QueueCardItems = styled.div`
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: .75rem;
+  font-size: 0.75rem;
   // margin-top: 95%;
-  
+
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5px;
@@ -292,7 +291,7 @@ const ClaimButton = styled.button`
   text-decoration: none;
   color: black;
   border: none;
-  border-radius: 0px 0 10px  0;
+  border-radius: 0px 0 10px 0;
   background-color: #5affff;
 `
 
@@ -330,10 +329,9 @@ const FleetMenu = styled.div`
   flex-direction: column;
   // border-left: none;
   border-left: 1px solid gray;
- 
+
   height: 100%;
   padding: 11px;
-
 `
 
 const BattleProgressCard = styled.div`
@@ -361,7 +359,7 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const player = useGetPlayer(account.toString()) 
+  const player = useGetPlayer(account.toString())
   const playerEXP = Number(player.experience)
   const playerName = player.name
 
@@ -483,13 +481,12 @@ const Shipyard = () => {
 
   // make sure player can't build more than 1 dock at the same location
   let dockInUse = false
-  for(let i=0; i< spaceDocks.length; i++) {
-    const sDock = spaceDocks[i];
-    if(sDock.coordX === shipyardX && sDock.coordY === shipyardY) {
-      dockInUse = true;
+  for (let i = 0; i < spaceDocks.length; i++) {
+    const sDock = spaceDocks[i]
+    if (sDock.coordX === shipyardX && sDock.coordY === shipyardY) {
+      dockInUse = true
     }
   }
- 
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -601,7 +598,7 @@ const Shipyard = () => {
                     onClick={handleBuild}
                     disabled={shipId === null || playerEXP < shipEXP || pending || dockInUse}
                   >
-                    {pending  ? 'pending...' : 'BUILD'}
+                    {pending ? 'pending...' : 'BUILD'}
                   </Button>
                 </Row>
 
@@ -631,27 +628,25 @@ const Shipyard = () => {
                     return (
                       // <BuildQueue dock={dock} fleetLocation={fleetLocation} />
                       <QueueCol shipclass={dock.shipClassId}>
-                        
-                          {/* {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
+                        {/* {dock.shipClassId === '0' && <QueueCardImg src={viperQueue} alt="vipers in queue" />}
                           {dock.shipClassId === '1' && <QueueCardImg src={moleQueue} alt="moles in queue" />}
                           {dock.shipClassId === '2' && <QueueCardImg src={fireflyQueue} alt="fireflys in queue" />}
                           {dock.shipClassId === '3' && <QueueCardImg src={gorianQueue} alt="gorians in queue" />} */}
 
-                          <QueueCardItems>
-                            <Row style={{ justifyContent: 'space-between' }}>
-                              <Item>LOCATION &nbsp;</Item>
-                              <br />
-                              <br />
-                              <Item style={{ zIndex: 1 }}>
-                                ({dock.coordX}, {dock.coordY})
-                              </Item>
-                            </Row>
-                            <Row style={{ justifyContent: 'space-between' }}>
-                              <Item>AMOUNT</Item>
-                              <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
-                            </Row>
-                          </QueueCardItems>
-                        
+                        <QueueCardItems>
+                          <Row style={{ justifyContent: 'space-between' }}>
+                            <Item>LOCATION &nbsp;</Item>
+                            <br />
+                            <br />
+                            <Item style={{ zIndex: 1 }}>
+                              ({dock.coordX}, {dock.coordY})
+                            </Item>
+                          </Row>
+                          <Row style={{ justifyContent: 'space-between' }}>
+                            <Item>AMOUNT</Item>
+                            <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
+                          </Row>
+                        </QueueCardItems>
 
                         <ClaimControls>
                           {/* eslint-disable-next-line no-nested-ternary */}
@@ -706,7 +701,7 @@ const Shipyard = () => {
             </BuildRow>
           </LeftCol>
 
-          <Col>
+          <RightCol>
             <FleetMenu>
               <Header style={{ color: 'white' }}>MY FLEET</Header>
               <YourFleetStats
@@ -724,7 +719,11 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleInfo.battleStatus} currentLocation={fleetLocation} />
+                <BattleStatus
+                  playerBattleInfo={playerBattleInfo}
+                  playerBattleStatus={playerBattleInfo.battleStatus}
+                  currentLocation={fleetLocation}
+                />
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (
@@ -754,7 +753,7 @@ const Shipyard = () => {
                 )}
               </ShipyardEditor>
             </FleetMenu>
-          </Col>
+          </RightCol>
         </BodyWrapper>
       </PageRow>
     </Page>
