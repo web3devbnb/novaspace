@@ -1,6 +1,14 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useGetBattlesAtLocation, useGetPlayerBattleStatus, useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer, useGetPlayerCount } from 'hooks/useNovaria'
+import {
+  useGetBattlesAtLocation,
+  useGetPlayerBattleStatus,
+  useGetFleetLocation,
+  useGetFleetMineral,
+  useGetMaxMineralCapacity,
+  useGetPlayer,
+  useGetPlayerCount,
+} from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
@@ -16,10 +24,10 @@ const Page = styled.div`
 `
 
 const Row = styled.div`
-  flex-wrap: no-wrap;
+  flex-wrap: wrap;
   display: flex;
-  @media (max-width: 420px) {
-    flex-wrap: wrap;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-wrap: nowrap;
   }
 `
 const Body = styled.div`
@@ -58,10 +66,9 @@ const OpenBattlesCard = styled.div`
 `
 
 const SubHeader = styled.div`
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: gray;
 `
-
 
 const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
@@ -74,8 +81,7 @@ const Overview: React.FC = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account)
 
   const playerCount = useGetPlayerCount()
-  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, true) 
- 
+  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, true)
 
   return (
     <Page>

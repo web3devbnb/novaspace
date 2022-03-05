@@ -103,12 +103,10 @@ const BuildRow=styled.div`
   width: 100%;
   @media (max-width: 715px) {
     flex-wrap: wrap;
-    
   }
   // @media (max-width: 1520px) {
   //   max-width: 740px;
   // }
-
 `
 
 const ShipClassCard = styled.img`
@@ -203,10 +201,9 @@ const FleetMenu = styled.div`
   flex-direction: column;
   // border-left: none;
   border-left: 1px solid gray;
- 
+
   height: 100%;
   padding: 11px;
-
 `
 
 const BattleProgressCard = styled.div`
@@ -234,7 +231,7 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const player = useGetPlayer(account.toString()) 
+  const player = useGetPlayer(account.toString())
   const playerEXP = Number(player.experience)
   const playerName = player.name
 
@@ -356,13 +353,12 @@ const Shipyard = () => {
 
   // make sure player can't build more than 1 dock at the same location
   let dockInUse = false
-  for(let i=0; i< spaceDocks.length; i++) {
-    const sDock = spaceDocks[i];
-    if(sDock.coordX === shipyardX && sDock.coordY === shipyardY) {
-      dockInUse = true;
+  for (let i = 0; i < spaceDocks.length; i++) {
+    const sDock = spaceDocks[i]
+    if (sDock.coordX === shipyardX && sDock.coordY === shipyardY) {
+      dockInUse = true
     }
   }
- 
 
   // styles for the dropdown Selector
   const customStyles = {
@@ -470,7 +466,7 @@ const Shipyard = () => {
                     onClick={handleBuild}
                     disabled={shipId === null || playerEXP < shipEXP || pending || dockInUse}
                   >
-                    {pending  ? 'pending...' : 'BUILD'}
+                    {pending ? 'pending...' : 'BUILD'}
                   </Button>
                 </Row>
 
@@ -512,7 +508,11 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                <BattleStatus playerBattleInfo={playerBattleInfo} playerBattleStatus={playerBattleInfo.battleStatus} currentLocation={fleetLocation} />
+                <BattleStatus
+                  playerBattleInfo={playerBattleInfo}
+                  playerBattleStatus={playerBattleInfo.battleStatus}
+                  currentLocation={fleetLocation}
+                />
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (
