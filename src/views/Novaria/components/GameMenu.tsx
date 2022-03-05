@@ -28,7 +28,7 @@ const SmallFrame = styled.div`
   margin-left: 25px;
   margin-top: 10px;
 
-  @media (min-width: 420px) {
+  ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: column;
     margin-left: 0px;
     width: 60px;

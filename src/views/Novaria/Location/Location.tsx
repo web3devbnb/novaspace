@@ -40,17 +40,17 @@ const Page = styled.div`
   color: #5affff;
   display: flex;
   flex-direction: column;
-  flex-wrap: no-wrap;
-  @media (max-width: 380px) {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-wrap: nowrap;
   }
 `
 
 const Row = styled.div`
-  flex-wrap: no-wrap;
+  flex-wrap: wrap;
   display: flex;
-  @media (max-width: 420px) {
-    flex-wrap: wrap;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-wrap: nowrap;
   }
 `
 
@@ -251,9 +251,9 @@ const Location: React.FC = () => {
                   fleetLocation={fleetLocation}
                   canTravel={placeInfo.canTravel && currentTravelCooldown < new Date()}
                   currentLocation={currentLocation}
-                  Luminosity = {placeInfo.luminosity}
-                  atWormhole = {atWormhole}
-                  miningCooldownActive = {currentMiningCooldown > new Date()}
+                  Luminosity={placeInfo.luminosity}
+                  atWormhole={atWormhole}
+                  miningCooldownActive={currentMiningCooldown > new Date()}
                 />
               )}
             </LeftCol>
@@ -271,7 +271,7 @@ const Location: React.FC = () => {
                   battles={battlesAtLocation}
                   status={playerBattleStatus}
                   currentLocation={currentLocation}
-                  resolved = {openbattles}
+                  resolved={openbattles}
                   account={account}
                 />
               </OpenBattlesCard>
@@ -315,15 +315,15 @@ const Location: React.FC = () => {
                   .map((shipyard) => (
                     <TakeOverMenu>
                       <Header>Shipyard Takeover</Header>
-                      <Header style={{color:'#5affff', fontSize:14}}>{shipyard.name}</Header>
+                      <Header style={{ color: '#5affff', fontSize: 14 }}>{shipyard.name}</Header>
                       <ShipyardTakeover
                         account={account}
-                        shipyard={shipyard} 
+                        shipyard={shipyard}
                         placeX={placeX}
                         placeY={placeY}
                         refinery={placeInfo.refinery}
                         currentLocation={currentLocation}
-                        timeMod = {timeMod}
+                        timeMod={timeMod}
                       />
                     </TakeOverMenu>
                   ))}

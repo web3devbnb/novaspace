@@ -66,7 +66,7 @@ const Body = styled.div`
 `
 
 const Text = styled.text`
-  color: ${(props: TextProps) => props.isStar ? '#ff7300' : '#5affff'};
+  color: ${(props: TextProps) => (props.isStar ? '#ff7300' : '#5affff')};
   font-weight: medium;
   font-size: 12px;
 `
@@ -78,7 +78,6 @@ const Grid = styled.div`
   grid-gap: 1px;
   margin: 10px 10px 10px;
   padding: 10px;
-  
 `
 
 const GridCell = styled.div`
@@ -120,13 +119,12 @@ const GridCellContent = styled.div`
   position: relative;
   aspect-ratio: 17/8;
   padding: 5px 5px;
-  
+
   width: 100px;
   height: 80px;
   @media (max-width: 420px) {
     width: 45px;
     height: 100px;
-
   }
   @media (min-width: 900px) {
     width: 110px;
@@ -134,7 +132,6 @@ const GridCellContent = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 150px;
   }
-
 `
 
 const Row = styled.div`
@@ -146,9 +143,9 @@ const Row = styled.div`
 const MainRow = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: no-wrap;
-  @media (max-width: 420px) {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-wrap: nowrap;
   }
 `
 
@@ -162,7 +159,6 @@ const GridCellId = styled.div`
     opacity: 1;
   }
 `
-
 
 const GridControls = styled.div`
   display: flex;
@@ -274,22 +270,22 @@ const Map: React.FC = () => {
   }
 
   // Map Arrows
-  const handleMapArrow = async(moveX, moveY) => {
+  const handleMapArrow = async (moveX, moveY) => {
     let calcX = X
     let calcY = Y
     if (X < 3) {
       calcX = 3
     }
-    if (Y < 3 ) {
+    if (Y < 3) {
       calcY = 3
     }
-    const newX = Math.max(Math.min(Math.floor(NX / 2), Number(calcX)), (Number(calcX) + moveX))
-    const newY = Math.max(Math.min(Math.floor(NY / 2), Number(calcY)), (Number(calcY) + moveY))
+    const newX = Math.max(Math.min(Math.floor(NX / 2), Number(calcX)), Number(calcX) + moveX)
+    const newY = Math.max(Math.min(Math.floor(NY / 2), Number(calcY)), Number(calcY) + moveY)
     const [mapX, mapY] = adjCoords(newX, newY)
     const data = await fetchMapData(mapContract, mapX, mapY)
     setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
   }
-  
+
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
   console.log('x, y', X, Y)
@@ -320,71 +316,71 @@ const Map: React.FC = () => {
       <MainRow>
         <GameMenu pageName="starmap" />
         <Body>
-        <BodyWrapper>
-          <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
-            {mapData.data.map((arr, y) => {
-              const ry = Number(mapData.data.length - y - 1)
-              return mapData.data[y].map((planet, x) => {
-                return (
-                  <GridCell>
-                    <Link
-                      to={{
-                        pathname: '/location',
-                        state: [{ x: Number(x) + Number(mapData.x0), y: Number(ry) + Number(mapData.y0) }],
-                      }}
-                    >
-                      <GridCellContent aria-haspopup="true">
-                        <Text isStar={planet.placeType === '3'}>{planet.name}</Text>
-                     
-                        <Row>
-                          {planet.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
-                          {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
-                          {planet.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
-                          {planet.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
-                          {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
-                          {(Number(ry) + Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
-                            (Number(x) + Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
-                              <IndicatorImg src={youLogo} alt="current location" />
+          <BodyWrapper>
+            <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
+              {mapData.data.map((arr, y) => {
+                const ry = Number(mapData.data.length - y - 1)
+                return mapData.data[y].map((planet, x) => {
+                  return (
+                    <GridCell>
+                      <Link
+                        to={{
+                          pathname: '/location',
+                          state: [{ x: Number(x) + Number(mapData.x0), y: Number(ry) + Number(mapData.y0) }],
+                        }}
+                      >
+                        <GridCellContent aria-haspopup="true">
+                          <Text isStar={planet.placeType === '3'}>{planet.name}</Text>
+
+                          <Row>
+                            {planet.salvage > 0 && <GridIcon src={scrapLogo} alt="has salvage" />}
+                            {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
+                            {planet.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
+                            {planet.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
+                            {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
+                            {(Number(ry) + Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
+                              (Number(x) + Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
+                                <IndicatorImg src={youLogo} alt="current location" />
+                              )}
+
+                            {planet.fleetCount > 0 && planet.fleetCount < 11 && (
+                              <GridIcon src={lowPlayers} alt="planet has few players" />
                             )}
 
-                          {planet.fleetCount > 0 && planet.fleetCount < 11 && (
-                            <GridIcon src={lowPlayers} alt="planet has few players" />
-                          )}
+                            {planet.fleetCount > 10 && planet.fleetCount < 51 && (
+                              <GridIcon src={medPlayers} alt="planet has many players" />
+                            )}
 
-                          {planet.fleetCount > 10 && planet.fleetCount < 51 && (
-                            <GridIcon src={medPlayers} alt="planet has many players" />
-                          )}
+                            {planet.fleetCount > 50 && (
+                              <GridIcon src={highPlayers} alt="planet has more than 50 players" />
+                            )}
 
-                          {planet.fleetCount > 50 && (
-                            <GridIcon src={highPlayers} alt="planet has more than 50 players" />
-                          )}
-
-                          {planet.placeType === '0' && (
-                            <GridCellImg
-                              style={{ width: '50px', height: 'auto' }}
-                              src={unexploredIcon}
-                              alt="unexplored"
-                            />
-                          )}
-                          {planet.placeType === '6' && <GridCellImg src={wormholeLogo} alt="wormhole" />}
-                          {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
-                          {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
-                          {planet.placeType === '1' && planet.canTravel ? (
-                            <GridCellImg src={emptyLogo} alt="empty" />
-                          ) : (
-                            ''
-                          )}
-                        </Row>
-                        <GridCellId>
-                          ( {Number(x) + Number(mapData.x0)} ,{Number(ry) + Number(mapData.y0)})
-                        </GridCellId>
-                      </GridCellContent>
-                    </Link>
-                  </GridCell>
-                )
-              })
-            })}
-          </Grid>
+                            {planet.placeType === '0' && (
+                              <GridCellImg
+                                style={{ width: '50px', height: 'auto' }}
+                                src={unexploredIcon}
+                                alt="unexplored"
+                              />
+                            )}
+                            {planet.placeType === '6' && <GridCellImg src={wormholeLogo} alt="wormhole" />}
+                            {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
+                            {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
+                            {planet.placeType === '1' && planet.canTravel ? (
+                              <GridCellImg src={emptyLogo} alt="empty" />
+                            ) : (
+                              ''
+                            )}
+                          </Row>
+                          <GridCellId>
+                            ( {Number(x) + Number(mapData.x0)} ,{Number(ry) + Number(mapData.y0)})
+                          </GridCellId>
+                        </GridCellContent>
+                      </Link>
+                    </GridCell>
+                  )
+                })
+              })}
+            </Grid>
           </BodyWrapper>
           <GridControls>
             <MoveControls>
