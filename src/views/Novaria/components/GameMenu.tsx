@@ -116,15 +116,27 @@ const GameMenu = ({ pageName }) => {
     })
   }
 
+  if (isMobile) {
+    return (
+      <SmallFrame>
+        {MENU_DATA.map((item) => (
+          <Link href={item.href}>
+            <IconContainer active={pageName === item.internalPageName}>
+              <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+            </IconContainer>
+          </Link>
+        ))}
+      </SmallFrame>
+    )
+  }
+
   return (
     <div>
       {open ? (
         <Frame>
-          {!isMobile && (
-            <ToggleButton type="button" onClick={toggleViewMenu}>
-              &lt;&lt;
-            </ToggleButton>
-          )}
+          <ToggleButton type="button" onClick={toggleViewMenu}>
+            &lt;&lt;
+          </ToggleButton>
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
               <IconContainer active={pageName === item.internalPageName}>
@@ -139,11 +151,9 @@ const GameMenu = ({ pageName }) => {
         </Frame>
       ) : (
         <SmallFrame>
-          {!isMobile && (
-            <ToggleButton type="button" onClick={toggleViewMenu}>
-              &gt;&gt;
-            </ToggleButton>
-          )}
+          <ToggleButton type="button" onClick={toggleViewMenu}>
+            &gt;&gt;
+          </ToggleButton>
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
               <IconContainer active={pageName === item.internalPageName}>
