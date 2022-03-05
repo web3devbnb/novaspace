@@ -23,10 +23,11 @@ const SmallFrame = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+
+  width: 100%;
 
   padding: 20px 0;
-
-  margin-left: 25px;
   margin-top: 10px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
