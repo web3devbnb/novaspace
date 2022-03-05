@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useMatchBreakpoints } from '@pancakeswap-libs/uikit'
 import overview from '../assets/overviewMenu.png'
 import shipyard from '../assets/shipyardMenu.png'
 import starmap from '../assets/starmapMenu.png'
@@ -91,10 +92,22 @@ const MENU_DATA = [
 ]
 
 const GameMenu = ({ pageName }) => {
+  const { isXs, isSm } = useMatchBreakpoints()
+  const isMobile = isXs || isSm
+
   const [open, setOpen] = useState((): boolean => {
+    if (isMobile) {
+      return false
+    }
     const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
     return value ? JSON.parse(value) : true
   })
+
+  useEffect(() => {
+    if (isMobile) {
+      setOpen(false)
+    }
+  }, [isMobile])
 
   const toggleViewMenu = () => {
     setOpen((prevState) => {
@@ -107,10 +120,11 @@ const GameMenu = ({ pageName }) => {
     <div>
       {open ? (
         <Frame>
-          <ToggleButton type="button" onClick={toggleViewMenu}>
-            &lt;&lt;
-          </ToggleButton>
-
+          {!isMobile && (
+            <ToggleButton type="button" onClick={toggleViewMenu}>
+              &lt;&lt;
+            </ToggleButton>
+          )}
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
               <IconContainer active={pageName === item.internalPageName}>
@@ -125,9 +139,11 @@ const GameMenu = ({ pageName }) => {
         </Frame>
       ) : (
         <SmallFrame>
-          <ToggleButton type="button" onClick={toggleViewMenu}>
-            &gt;&gt;
-          </ToggleButton>
+          {!isMobile && (
+            <ToggleButton type="button" onClick={toggleViewMenu}>
+              &gt;&gt;
+            </ToggleButton>
+          )}
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
               <IconContainer active={pageName === item.internalPageName}>
