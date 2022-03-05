@@ -11,6 +11,7 @@ const novariaMobileBG = "url('/images/home/novariaBGMobile.jpg')"
 const novariaBG = "url('/images/home/mainBackground-dark.jpg')"
 const spaceBG = "url('/images/home/bgspaceBig.jpg')"
 const novariaSpace = "url('/images/novaria/mapBG.jpg')"
+const novariaSpaceMobile = "url('/images/novaria/starsbg_portrait.png')"
 const novariaShipyard = "url('/images/novaria/shipyardBG.jpg')"
 
 const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boolean, isShipyard: boolean, isStandard: boolean}>`
@@ -26,7 +27,7 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
   body {
      background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : '')};
      background-image: ${({isStandard}) => (isStandard ? spacebgMobile : '')};
-     background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
+     background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpaceMobile : '')};
      background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
 
      background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};

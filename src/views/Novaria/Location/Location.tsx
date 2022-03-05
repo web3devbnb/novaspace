@@ -121,7 +121,7 @@ const PlayersCard = styled.div`
 `
 
 const RightCol = styled.div`
-  margin-left: 15px;
+  flex:1;
 `
 
 const FleetMenu = styled.div`
@@ -134,12 +134,15 @@ const FleetMenu = styled.div`
   }
   height: 100%;
   padding: 10px;
-  @media (max-width: 420px) {
-    margin-left: 35px;
-  }
+  // @media (max-width: 420px) {
+  //   margin-left: 35px;
+  // }
 `
 
-const LeftCol = styled.div``
+const LeftCol = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+`
 const CenterCol = styled.div``
 
 const CoordInput = styled.input`

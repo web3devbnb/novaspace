@@ -22,9 +22,6 @@ const Body = styled.div`
   width: 300px;
   height: 450px;
   
-  @media (max-width: 420px) {
-    margin-left: 40px;
-  }
 `
 
 const HavenImageCard = styled.div`
@@ -32,7 +29,7 @@ const HavenImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -43,7 +40,7 @@ const ShipyardImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -54,7 +51,7 @@ const RefineryImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -65,7 +62,7 @@ const ShipyardRefineryImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -76,7 +73,7 @@ const MiningImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -87,7 +84,7 @@ const EmptyImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -98,7 +95,7 @@ const HostileImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -109,7 +106,7 @@ const AsteroidImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -120,7 +117,7 @@ const StarImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -131,7 +128,7 @@ const UnexploredImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
@@ -142,7 +139,7 @@ const WormholeImageCard = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
-  width: clamp(270px, 280px, 290px);
+  width: clamp(300px, 300px, 300px);
   ${({ theme }) => theme.mediaQueries.md} {
     width: clamp(300px, 300px, 300px);
   }
