@@ -39,6 +39,10 @@ const Link = styled.a`
   flex-wrap: no-wrap;
 `
 
+const IconContainer = styled.div<{ active: boolean }>`
+  border-bottom: 2px ${(props) => (props.active ? 'solid' : 'transparent')};
+`
+
 const Icon = styled.img`
   height: 40px;
   width: auto;
@@ -103,7 +107,9 @@ const GameMenu = ({ pageName }) => {
 
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
-              <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+              <IconContainer active={pageName === item.internalPageName}>
+                <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+              </IconContainer>
               <Flag active={pageName === item.internalPageName} aria-haspopup="true">
                 {item.title}
                 <img src={flag} alt="flag" />
@@ -118,7 +124,9 @@ const GameMenu = ({ pageName }) => {
           </ToggleButton>
           {MENU_DATA.map((item) => (
             <Link href={item.href}>
-              <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+              <IconContainer active={pageName === item.internalPageName}>
+                <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
+              </IconContainer>
             </Link>
           ))}
         </SmallFrame>
