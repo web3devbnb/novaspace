@@ -16,7 +16,6 @@ const Frame = styled.div`
 `
 
 const SmallFrame = styled.div`
-  //width: 60px;
   padding: 20px 0;
   display: flex;
   align-items: center;
@@ -96,10 +95,10 @@ const GameMenu = ({ pageName }) => {
 
   return (
     <div>
-      {open === true ? (
+      {open ? (
         <Frame>
           <ToggleButton type="button" onClick={toggleViewMenu}>
-            {open === true ? '<<' : '>>'}
+            &lt;&lt;
           </ToggleButton>
 
           {MENU_DATA.map((item) => (
