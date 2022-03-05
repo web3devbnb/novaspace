@@ -68,6 +68,7 @@ const RightCol = styled.div`
   flex-direction: column;
   margin: 10px;
   display: flex;
+  flex: 1;
 `
 
 // left col wraps shipclassmenu and buildrow
