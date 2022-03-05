@@ -107,6 +107,9 @@ const GameMenu = ({ pageName }) => {
   useEffect(() => {
     if (isMobile) {
       setOpen(false)
+    } else {
+      const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
+      setOpen(value ? JSON.parse(value) : true)
     }
   }, [isMobile])
 
