@@ -357,14 +357,12 @@ const Map: React.FC = () => {
                             {planet.placeType === '6' && <GridCellImg src={wormholeLogo} alt="wormhole" />}
                             {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
                             {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
-                            {planet.placeType === '1' && planet.canTravel ? (
+                            {planet.placeType === '1' && planet.canTravel && (
                               <GridCellImg src={emptyLogo} alt="empty" />
-                            ) : (
-                              ''
                             )}
                           </Row>
                           <GridCellId>
-                            ( {Number(x) + Number(mapData.x0)} ,{Number(ry) + Number(mapData.y0)})
+                            ( {Number(x) + Number(mapData.x0)} ,{Number(ry) + Number(mapData.y0)} )
                           </GridCellId>
                         </GridCellContent>
                       </Link>
