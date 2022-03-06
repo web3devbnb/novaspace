@@ -792,6 +792,19 @@ export const useGetAllowance = (contract) => {
   return allowance
 }
 
+export const useGetNovaBalance = (account) => {
+  const { fastRefresh } = useRefresh()
+  const [balance, setBalance] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await novaContract.methods.balanceOf(account).call()
+      setBalance(data)
+    }
+    fetch()
+  }, [fastRefresh, account])
+  return balance
+}
 // *** Treasury Contract ***
 
 export const useGetCostMod = () => {

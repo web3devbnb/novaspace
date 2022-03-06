@@ -13,8 +13,10 @@ import {
   useShipyardTakeover,
   useGetShipyards,
   useTunnel,
+  useGetNovaBalance,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import NovaWalletBalance from 'views/Dashboard/components/NovaWalletBalance'
 
 const Body = styled.div`
   position: relative;
@@ -194,6 +196,11 @@ const Button = styled.button`
     background-color: #5affff;
     color: black;
   }
+  &:disabled {
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+  }
 `
 
 const Row = styled.div`
@@ -222,6 +229,7 @@ const LocationCard = ({
   Luminosity,
   atWormhole,
   miningCooldownActive,
+  currentTravelCooldown,
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -233,7 +241,6 @@ const LocationCard = ({
   const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
   const atMaxMineral = Number(playerMaxMineral) === Number(playerMineral)
  
-
   const unexplored = placetype === '0'
   const isEmpty = placetype === '1' 
   const hostile = placetype === '2'
@@ -244,6 +251,10 @@ const LocationCard = ({
   const haven = placename === 'Haven'
 
   const canTunnel = wormhole && atWormhole && !currentLocation
+  const travelOnCooldown = currentTravelCooldown > new Date()
+  const novaBalance = useGetNovaBalance(account)
+
+  const travelIsDisabled = !travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost
 
   const { onExplore } = useExplore()
   const { onMine } = useMine()
@@ -376,7 +387,7 @@ const LocationCard = ({
         }
         
         {salvage > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
-          <Button type="button" onClick={sendCollectTx}>
+          <Button onClick={sendCollectTx}>
             {pending ? 'pending...' : 'COLLECT'}
           </Button>
         ) : (
@@ -384,28 +395,26 @@ const LocationCard = ({
         )}
         {hostile && 'Fleets cannot travel to hostile space'}
         {mineral > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
-          <Button type="button" onClick={sendMineTx}>
+          <Button onClick={sendMineTx}>
             {pending ? 'pending...' : 'MINE'}
           </Button>
         ) : (
           ''
         )}
         {refinery && currentLocation && Number(playerMineral) > 0  ? (
-          <Button type="button" onClick={sendRefineTx}>
+          <Button onClick={sendRefineTx}>
             {pending ? 'pending...' : 'REFINE'}
           </Button>
         ) : (
           ''
         )}
-        {canTravel && !currentLocation && distance < 6 && fleetSize >= 25 ? (
-          <Button type="button" onClick={sendTravelTx}>
+        {canTravel && !currentLocation && 
+          <Button onClick={sendTravelTx} disabled={travelIsDisabled} >
             {pending ? 'pending...' : 'TRAVEL'}
           </Button>
-        ) : (
-          ''
-        )}
-        {unexplored && distance < 2 ? (
-          <Button type="button" onClick={sendExploreTx}>
+        }
+        {unexplored && distance < 3 ? (
+          <Button  onClick={sendExploreTx}>
             {pending ? 'pending...' : 'EXPLORE'}
           </Button>
         ) : (
@@ -419,10 +428,15 @@ const LocationCard = ({
         
         
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-            {distance < 6 && !unexplored ? <div>
+            {distance > 5 && !currentLocation && !hostile && <span>Too far to travel</span>}
+            {unexplored && !currentLocation && !hostile && <span>Location must be explored</span>}
+            {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25) to travel </span> }
+            {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
+            {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
+            {distance < 6 && !unexplored && !hostile && <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
-              </div> : 'Location too far to travel directly or cannot be traveled to.'}
+              </div>}
               <span>Distance: {Math.floor(distance)} AU(s)</span>
             {unexplored && <span>Explore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
             {wormhole && 'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
