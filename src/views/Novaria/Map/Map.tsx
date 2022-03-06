@@ -247,8 +247,8 @@ const Map: React.FC = () => {
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
   // load previous map locations
-  const savedLocationX = localStorage.getItem('locationX')
-  const savedLocationY = localStorage.getItem('locationY')
+  const savedLocationX = Number(localStorage.getItem('locationX'))
+  const savedLocationY = Number(localStorage.getItem('locationY'))
 
   // set map data on inital page load
   useEffect(() => {
