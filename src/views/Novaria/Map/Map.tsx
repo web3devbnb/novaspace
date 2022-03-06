@@ -215,12 +215,10 @@ const NX = 7
 const NY = 7
 
 const Map: React.FC = () => {
+  const account = useContext(ConnectedAccountContext)
+
   const mapContract = useMap()
 
-  const account = useContext(ConnectedAccountContext)
-  const fleetLocation = useGetFleetLocation(account)
-
-  // get map data
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
   // load previous map locations
@@ -232,12 +230,10 @@ const Map: React.FC = () => {
   console.log('x, y', X, Y)
   const XLen = useState(NX)
 
+  const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
-
-  const player = useGetPlayer(account.toString())
-  const playerEXP = player.experience
-  const playerName = player.name
+  const player = useGetPlayer(account)
 
   // adjust coordinates to keep map centered
   const adjCoords = (newX, newY) => {
@@ -302,8 +298,8 @@ const Map: React.FC = () => {
         location={fleetLocation}
         playerMineral={fleetMineral}
         playerMineralCapacity={mineralCapacity}
-        exp={playerEXP}
-        playerName={playerName}
+        exp={player.experience}
+        playerName={player.name}
       />
       <MainRow>
         <GameMenu pageName="starmap" />
