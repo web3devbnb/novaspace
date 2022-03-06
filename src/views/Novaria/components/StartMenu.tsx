@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists } from 'hooks/useNovaria'
+import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 
 
@@ -26,6 +26,11 @@ const Button = styled.button`
 
 `
 
+const BetaWarning = styled.p`
+  color: gold;
+  margin-bottom: 10px;
+`
+
 const StartMenu = () => {
     const {account} = useWallet()
     const accountAddress = account === null ? '' : account
@@ -43,7 +48,9 @@ const StartMenu = () => {
     const allowanceTreasury = useGetAllowance(treasuryContract)
     const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 
     const playerExists = useGetPlayerExists(accountAddress)
-    console.log('allowed, exists', isAllowed, playerExists)
+    const startCost = 100 / useGetCostMod()
+
+
     const { onClick } = useApprove()
     const { onCoin } = useInsertCoinHere() 
   
@@ -82,6 +89,9 @@ const StartMenu = () => {
 
     return (
     <div>
+      <BetaWarning>
+        ***NOTICE - THIS GAME IS CURRENTLY IN BETA. Players can still earn NOVA and profit, but there is no garauntee and the game will be fully reset with no refund provided.***
+      </BetaWarning>
       {!isAllowed && 'Step 1 - approve Fleet and Treasury contracts for the game'}<br />
       {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pending ? 'Approve Fleet Contract' : 'pending...'}</Button> : ''}
       {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
@@ -92,7 +102,7 @@ const StartMenu = () => {
           Step 2 - Set your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} />
           <Button onClick={sendInsertCoinTx}>{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <br />(costs 20 nova)
+          <br />(costs {startCost} nova)
         </div> : ''}
       {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
     </div>
