@@ -363,10 +363,10 @@ const LocationCard = ({
           <span>{shipyard === true ? 'SHIPYARD' : ''}</span>
           <span>{refinery === true ? 'REFINERY' : ''}</span>
           <span>
-            {salvage > 0 ? (salvage / 10 ** 18).toFixed(3) : ''} {salvage > 0 ? 'SALVAGE' : ''}
+            {Number(salvage) > 0 ? (salvage / 10 ** 18).toFixed(3) : ''} {Number(salvage) > 0 ? 'SALVAGE' : ''}
           </span>
           <span>
-            {mineral > 0 ? (mineral / 10 ** 18).toFixed(3) : ''} {mineral > 0 ? 'MINERAL' : ''}
+            {Number(mineral) > 0 ? (mineral / 10 ** 18).toFixed(3) : ''} {Number(mineral) > 0 ? 'MINERAL' : ''}
           </span>
           <span>{unexplored ? 'UNEXPLORED' : ''}</span>
           <span>{star ? <span>STAR Luminosity {Luminosity}</span> : ''}</span>
@@ -390,13 +390,13 @@ const LocationCard = ({
           </Text>
         }
         
-        {salvage > 0  &&
+        {Number(salvage) > 0  &&
           <Button onClick={sendCollectTx}
             disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'COLLECT'}
           </Button>}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {mineral > 0 && 
+        {isMining && 
           <Button onClick={sendMineTx}
             disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'MINE'}
@@ -430,6 +430,7 @@ const LocationCard = ({
             {!notInBattle && !currentLocation && !hostile && <span>Cannot travel while in battle</span>}
             {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
             {atMaxMineral && !hostile && (isMining || salvage > 0) && <span>You are at max mineral capacity</span>}
+            {isMining && Number(mineral) === 0 && <span>Waiting for mines to refill</span>}
             {miningCooldownActive && (isMining || salvage > 0) && currentLocation && <span>Mining/collecting on cooldown</span>}
             {distance < 6 && !unexplored && !hostile && <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
