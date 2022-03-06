@@ -25,6 +25,7 @@ import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
 import BodyWrapper from '../components/BodyWrapper'
 import wormholeLogo from '../assets/wormhole.png'
+import Legend from './Legend'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
@@ -198,18 +199,7 @@ const InputControl = styled.div`
   margin: 10px;
 `
 
-const Legend = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  border: 1px solid gray;
-  margin: 5px 10px;
-  padding: 5px;
-  align-items: center;
-  & > * {
-    margin: 5px;
-  }
-`
+
 
 const MoveControls = styled.div`
   display: flex;
@@ -412,32 +402,7 @@ const Map: React.FC = () => {
               <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
             </InputControl>
           </GridControls>
-          <Legend>
-            <span>
-              <GridIcon src={mineralLogo} alt="planet has minerals" /> : Mining Planet
-            </span>
-            <span>
-              <GridIcon src={shipyardLogo} alt="planet has shipyard" /> : Shipyard
-            </span>
-            <span>
-              <GridIcon src={refineryLogo} alt="planet has refinery" /> : Refinery (DMZ)
-            </span>
-            <span>
-              <GridIcon src={scrapLogo} alt="has salvage" /> : Salvage
-            </span>
-            <span>
-              <GridIcon src={youLogo} alt="your location" /> : Current Location
-            </span>
-            <span>
-              <GridIcon src={lowPlayers} alt="planet has few players" /> : 1-10 players
-            </span>
-            <span>
-              <GridIcon src={medPlayers} alt="planet many players" /> : 11-50 players
-            </span>
-            <span>
-              <GridIcon src={highPlayers} alt="planet 50 plus players" /> : 51+ players
-            </span>
-          </Legend>
+          <Legend />
         </Body>
       </MainRow>
     </Page>
