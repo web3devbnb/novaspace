@@ -238,21 +238,27 @@ const Map: React.FC = () => {
     const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
     setX(newX)
     setY(newY)
+    localStorage.setItem('locationX', String(newX))
+    localStorage.setItem('locationY', String(newY))
     return [adjFleetX, adjFleetY]
   }
 
   // get map data
   const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
 
+  // load previous map locations
+  const savedLocationX = localStorage.getItem('locationX')
+  const savedLocationY = localStorage.getItem('locationY')
+
   // set map data on inital page load
   useEffect(() => {
     const fetch = async () => {
-      const [mapX, mapY] = adjCoords(fleetLocation.X, fleetLocation.Y)
+      const [mapX, mapY] = adjCoords(savedLocationX, savedLocationY)
       const data = await fetchMapData(mapContract, mapX, mapY)
       setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, NX) })
     }
     fetch()
-  }, [mapContract, fleetLocation.X, fleetLocation.Y])
+  }, [mapContract, savedLocationX, savedLocationY])
 
   // Find location button
   const handleFindLocationClick = async () => {
