@@ -231,6 +231,7 @@ const LocationCard = ({
   atWormhole,
   miningCooldownActive,
   currentTravelCooldown,
+  notInBattle,
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -257,7 +258,7 @@ const LocationCard = ({
 
  
   const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive
-  const travelIsDisabled = !travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost
+  const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle
 
   const { onExplore } = useExplore()
   const { onMine } = useMine()
@@ -426,6 +427,7 @@ const LocationCard = ({
             {unexplored && distance > 2 && <span>Can only explore within 2 AU</span>}
             {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25) to travel </span> }
             {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
+            {!notInBattle && !currentLocation && !hostile && <span>Cannot travel while in battle</span>}
             {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
             {atMaxMineral && !hostile && (isMining || salvage > 0) && <span>You are at max mineral capacity</span>}
             {miningCooldownActive && (isMining || salvage > 0) && currentLocation && <span>Mining/collecting on cooldown</span>}

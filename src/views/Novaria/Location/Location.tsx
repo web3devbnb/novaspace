@@ -272,6 +272,7 @@ const Location: React.FC = () => {
                   Luminosity={placeInfo.luminosity}
                   atWormhole={atWormhole}
                   miningCooldownActive={currentMiningCooldown > new Date()}
+                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0'}
                 />
               )}
             </LeftCol>
