@@ -7,7 +7,6 @@ import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import shipyardLogo from '../assets/shipyard.png'
-import starLogo from '../assets/star.png'
 import scrapLogo from '../assets/scrap.png'
 import refineryLogo from '../assets/refinery.png'
 import planetLogo from '../assets/planet.png'
@@ -222,7 +221,6 @@ const MoveButton = styled.button`
   cursor: pointer;
 `
 
-const isMobile = window.innerWidth < 500
 const NX = 7
 const NY = 7
 
@@ -295,8 +293,7 @@ const Map: React.FC = () => {
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
   console.log('x, y', X, Y)
-  const [XLen, setXLen] = useState(NX)
-  const [YLen, setYLen] = useState(NY)
+  const XLen = useState(NX)
 
   const fleetMineral = useGetFleetMineral(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
@@ -311,7 +308,6 @@ const Map: React.FC = () => {
 
   return (
     <Page>
-      {/* <FlipScreenModal isMobile={isMobile} /> */}
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
