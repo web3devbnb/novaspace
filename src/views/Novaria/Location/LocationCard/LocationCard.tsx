@@ -419,7 +419,7 @@ const LocationCard = ({
         
         
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-            {distance < 6 && !unexplored  && canTravel ? <div>
+            {distance < 6 && !unexplored ? <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
               </div> : 'Location too far to travel directly or cannot be traveled to.'}
