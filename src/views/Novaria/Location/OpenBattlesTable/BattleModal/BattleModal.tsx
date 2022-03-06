@@ -58,8 +58,10 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   }
 
   const { onEnterBattle } = useEnterBattle()
+  let battleTitle = 'BATTLE '
+  battleTitle += battle.toString()
   return (
-    <Modal title="BATTLE" onDismiss={onDismiss} >
+    <Modal title={battleTitle} onDismiss={onDismiss} >
       <div>
         Attackers Attack Power: {atkPower}
       </div>
