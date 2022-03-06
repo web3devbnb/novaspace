@@ -85,6 +85,15 @@ const ToggleButton = styled.button`
 // Local storage key we're using to store game menu open / closed status.
 const GAMEMENU_IS_OPEN_KEY = 'novaria_gamemenu_is_open'
 
+const getMenuOpenStatus = () => {
+  const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
+  return value ? JSON.parse(value) : true
+}
+
+const setMenuOpenStatus = (status: boolean) => {
+  localStorage.setItem(GAMEMENU_IS_OPEN_KEY, JSON.stringify(status))
+}
+
 const MENU_DATA = [
   { href: '/overview', title: 'OVERVIEW', internalPageName: 'overview', img: { src: overview, alt: 'game overview' } },
   { href: '/shipyard', title: 'SHIPYARD', internalPageName: 'shipyard', img: { src: shipyard, alt: 'game shipyard' } },
@@ -97,25 +106,16 @@ const GameMenu = ({ pageName }) => {
   const isMobile = isXs || isSm
 
   const [open, setOpen] = useState((): boolean => {
-    if (isMobile) {
-      return false
-    }
-    const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
-    return value ? JSON.parse(value) : true
+    return isMobile ? false : getMenuOpenStatus()
   })
 
   useEffect(() => {
-    if (isMobile) {
-      setOpen(false)
-    } else {
-      const value = localStorage.getItem(GAMEMENU_IS_OPEN_KEY)
-      setOpen(value ? JSON.parse(value) : true)
-    }
+    setOpen(isMobile ? false : getMenuOpenStatus())
   }, [isMobile])
 
   const toggleViewMenu = () => {
     setOpen((prevState) => {
-      localStorage.setItem(GAMEMENU_IS_OPEN_KEY, JSON.stringify(!prevState))
+      setMenuOpenStatus(!prevState)
       return !prevState
     })
   }
