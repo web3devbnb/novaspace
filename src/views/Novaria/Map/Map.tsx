@@ -220,8 +220,27 @@ const Map: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
 
+  // get map data
+  const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
+
+  // load previous map locations
+  const savedLocationX = Number(localStorage.getItem('locationX'))
+  const savedLocationY = Number(localStorage.getItem('locationY'))
+
+  const [X, setX] = useState(0)
+  const [Y, setY] = useState(0)
+  console.log('x, y', X, Y)
+  const XLen = useState(NX)
+
+  const fleetMineral = useGetFleetMineral(account)
+  const mineralCapacity = useGetMaxMineralCapacity(account)
+
+  const player = useGetPlayer(account.toString())
+  const playerEXP = player.experience
+  const playerName = player.name
+
   // adjust coordinates to keep map centered
-  function adjCoords(newX, newY) {
+  const adjCoords = (newX, newY) => {
     const adjFleetX = Math.max(0, newX - Math.floor(NX / 2))
     const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
     setX(newX)
@@ -230,13 +249,6 @@ const Map: React.FC = () => {
     localStorage.setItem('locationY', String(newY))
     return [adjFleetX, adjFleetY]
   }
-
-  // get map data
-  const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
-
-  // load previous map locations
-  const savedLocationX = Number(localStorage.getItem('locationX'))
-  const savedLocationY = Number(localStorage.getItem('locationY'))
 
   // set map data on inital page load
   useEffect(() => {
@@ -279,18 +291,6 @@ const Map: React.FC = () => {
     const data = await fetchMapData(mapContract, mapX, mapY)
     setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
   }
-
-  const [X, setX] = useState(0)
-  const [Y, setY] = useState(0)
-  console.log('x, y', X, Y)
-  const XLen = useState(NX)
-
-  const fleetMineral = useGetFleetMineral(account)
-  const mineralCapacity = useGetMaxMineralCapacity(account)
-
-  const player = useGetPlayer(account.toString())
-  const playerEXP = player.experience
-  const playerName = player.name
 
   if (!mapData) {
     return null
