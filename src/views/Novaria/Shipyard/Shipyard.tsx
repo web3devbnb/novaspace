@@ -211,7 +211,9 @@ const BattleProgressCard = styled.div`
   margin-top: 15px;
 `
 
-const ShipyardEditor = styled.div``
+const ShipyardEditor = styled.div`
+  margin-top: 10px;
+`
 
 const BuildStatsText = styled(Text)`
   font-size: 0.65rem;

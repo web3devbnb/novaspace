@@ -34,6 +34,10 @@ import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
 import BodyWrapper from '../components/BodyWrapper'
+import upArrow from '../assets/upArrow.png'
+import downArrow from '../assets/downArrow.png'
+import leftArrow from '../assets/leftArrow.png'
+import rightArrow from '../assets/rightArrow.png'
 
 const Page = styled.div`
   font-size: 15px;
@@ -173,6 +177,16 @@ const BattleProgressCard = styled.div`
   margin-top: 10px;
 `
 
+const MoveControls = styled.div`
+  display: flex;
+`
+
+const MoveButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+`
+
 const Location: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
 
@@ -267,6 +281,20 @@ const Location: React.FC = () => {
                 <CoordInput type="number" min="0" value={placeX} onChange={(e) => setX(parseFloat(e.target.value))} />
                 ,
                 <CoordInput type="number" min="0" value={placeY} onChange={(e) => setY(parseFloat(e.target.value))} />
+                <MoveControls>
+                  <MoveButton onClick={() => setX(Number(placeX) - 1 < 0 ? 0 : Number(placeX) - 1)}>
+                    <img src={leftArrow} alt="left" />
+                  </MoveButton>
+                  <MoveButton onClick={() => setY(Number(placeY) - 1 < 0 ? 0 : Number(placeY) - 1)}>
+                    <img src={downArrow} alt="down" />
+                  </MoveButton>
+                  <MoveButton onClick={() => setY(Number(placeY) + 1)}>
+                    <img src={upArrow} alt="up" />
+                  </MoveButton>
+                  <MoveButton onClick={() => setX(Number(placeX) + 1)}>
+                    <img src={rightArrow} alt="right" />
+                  </MoveButton>
+                </MoveControls>
               </InputControl>
 
               <OpenBattlesCard>

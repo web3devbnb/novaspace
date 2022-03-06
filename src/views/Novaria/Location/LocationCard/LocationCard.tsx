@@ -17,6 +17,7 @@ import {
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import NovaWalletBalance from 'views/Dashboard/components/NovaWalletBalance'
+import { current } from '@reduxjs/toolkit'
 
 const Body = styled.div`
   position: relative;
@@ -239,7 +240,7 @@ const LocationCard = ({
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
   const exploreCost = useGetExploreCost()
   const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
-  const atMaxMineral = Number(playerMaxMineral) === Number(playerMineral)
+  const atMaxMineral = Number(playerMaxMineral) <= Number(playerMineral)
  
   const unexplored = placetype === '0'
   const isEmpty = placetype === '1' 
@@ -254,6 +255,8 @@ const LocationCard = ({
   const travelOnCooldown = currentTravelCooldown > new Date()
   const novaBalance = useGetNovaBalance(account)
 
+ 
+  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive
   const travelIsDisabled = !travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost
 
   const { onExplore } = useExplore()
@@ -386,40 +389,30 @@ const LocationCard = ({
           </Text>
         }
         
-        {salvage > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
-          <Button onClick={sendCollectTx}>
+        {salvage > 0  &&
+          <Button onClick={sendCollectTx}
+            disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'COLLECT'}
-          </Button>
-        ) : (
-          ''
-        )}
+          </Button>}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {mineral > 0 && currentLocation && !atMaxMineral && !miningCooldownActive ? (
-          <Button onClick={sendMineTx}>
+        {mineral > 0 && 
+          <Button onClick={sendMineTx}
+            disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'MINE'}
-          </Button>
-        ) : (
-          ''
-        )}
-        {refinery && currentLocation && Number(playerMineral) > 0  ? (
+          </Button>}
+        {refinery && currentLocation && Number(playerMineral) > 0  && 
           <Button onClick={sendRefineTx}>
             {pending ? 'pending...' : 'REFINE'}
-          </Button>
-        ) : (
-          ''
-        )}
+          </Button>}
         {canTravel && !currentLocation && 
           <Button onClick={sendTravelTx} disabled={travelIsDisabled} >
             {pending ? 'pending...' : 'TRAVEL'}
           </Button>
         }
-        {unexplored && distance < 3 ? (
+        {unexplored && distance < 3 && 
           <Button  onClick={sendExploreTx}>
             {pending ? 'pending...' : 'EXPLORE'}
-          </Button>
-        ) : (
-          ''
-        )}
+          </Button>}
         {canTunnel && 
           <Button onClick={sendTunnelTx}>
             {pending ? 'pending...' : 'TUNNEL'}
@@ -430,9 +423,12 @@ const LocationCard = ({
           <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
             {distance > 5 && !currentLocation && !hostile && <span>Too far to travel</span>}
             {unexplored && !currentLocation && !hostile && <span>Location must be explored</span>}
+            {unexplored && distance > 2 && <span>Can only explore within 2 AU</span>}
             {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25) to travel </span> }
             {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
             {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
+            {atMaxMineral && !hostile && (isMining || salvage > 0) && <span>You are at max mineral capacity</span>}
+            {miningCooldownActive && (isMining || salvage > 0) && currentLocation && <span>Mining/collecting on cooldown</span>}
             {distance < 6 && !unexplored && !hostile && <div>
                 <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
                 <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
