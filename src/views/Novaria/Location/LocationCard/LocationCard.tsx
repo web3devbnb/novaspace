@@ -425,7 +425,7 @@ const LocationCard = ({
             {distance > 5 && !currentLocation && !hostile && <span>Too far to travel</span>}
             {unexplored && !currentLocation && !hostile && <span>Location must be explored</span>}
             {unexplored && distance > 2 && <span>Can only explore within 2 AU</span>}
-            {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25) to travel </span> }
+            {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25 fleet size) to travel </span> }
             {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
             {!notInBattle && !currentLocation && !hostile && <span>Cannot travel while in battle</span>}
             {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
