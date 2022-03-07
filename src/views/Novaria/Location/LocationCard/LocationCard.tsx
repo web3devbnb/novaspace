@@ -396,7 +396,7 @@ const LocationCard = ({
             {pending ? 'pending...' : 'COLLECT'}
           </Button>}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {isMining && 
+        {Number(mineral) > 0 && 
           <Button onClick={sendMineTx}
             disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'MINE'}
