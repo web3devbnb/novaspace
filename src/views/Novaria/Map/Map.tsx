@@ -228,7 +228,8 @@ const Map: React.FC = () => {
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
   console.log('x, y', X, Y)
-  const XLen = useState(NX)
+
+  const [XLen, setXLen] = useState(NX)
 
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
