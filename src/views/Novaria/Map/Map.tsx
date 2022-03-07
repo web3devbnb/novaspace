@@ -217,59 +217,57 @@ const NY = 7
 const Map: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
 
-  const mapContract = useMap()
-
-  const [mapData, setMapData] = useState({ x0: 0, y0: 0, data: Array(NY).fill(Array(NX).fill({})) })
-
-  // load previous map locations
-  const savedLocationX = Number(localStorage.getItem('locationX'))
-  const savedLocationY = Number(localStorage.getItem('locationY'))
-
-  const [X, setX] = useState(0)
-  const [Y, setY] = useState(0)
-  console.log('x, y', X, Y)
-
-  const [XLen, setXLen] = useState(NX)
-
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
   const player = useGetPlayer(account)
 
-  // adjust coordinates to keep map centered
-  const adjCoords = (newX, newY) => {
-    const adjFleetX = Math.max(0, newX - Math.floor(NX / 2))
-    const adjFleetY = Math.max(0, newY - Math.floor(NY / 2))
-    setX(newX)
-    setY(newY)
-    localStorage.setItem('locationX', String(newX))
-    localStorage.setItem('locationY', String(newY))
-    return [adjFleetX, adjFleetY]
+  const mapContract = useMap()
+
+  const [X, _setX] = useState(() => Number(localStorage.getItem('locationX')) || 0)
+  const setX = (value: number) => {
+    localStorage.setItem('locationX', String(value))
+    _setX(value)
   }
 
-  // set map data on inital page load
+  const [Y, _setY] = useState(() => Number(localStorage.getItem('locationY')) || 0)
+  const setY = (value: number) => {
+    localStorage.setItem('locationY', String(value))
+    _setY(value)
+  }
+
+  const [mapData, setMapData] = useState(null)
   useEffect(() => {
     const fetch = async () => {
-      const [mapX, mapY] = adjCoords(savedLocationX, savedLocationY)
-      const data = await fetchMapData(mapContract, mapX, mapY)
-      setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, NX) })
+      const adjustedX = Math.max(0, X - Math.floor(NX / 2))
+      const adjustedY = Math.max(0, Y - Math.floor(NY / 2))
+      const data = await fetchMapData(mapContract, adjustedX, adjustedY)
+      setMapData({ x0: adjustedX, y0: adjustedY, data: arrayToMatrix(data, NX) })
     }
     fetch()
-  }, [mapContract, savedLocationX, savedLocationY])
+  }, [mapContract, X, Y])
+
+  const [formX, setFormX] = useState(X)
+  const [formY, setFormY] = useState(Y)
 
   // Find location button
-  const handleFindLocationClick = async () => {
-    if (mapData.x0 === X && mapData.y0 === Y) {
+  const handleFindLocationClick = () => {
+    if (X === formX && Y === formY) {
       return
     }
-    handleFleetLocation(X, Y)
+    setX(formX)
+    setY(formY)
   }
 
   // My Location button
   const handleFleetLocation = async (newX, newY) => {
-    const [mapX, mapY] = adjCoords(newX, newY)
-    const data = await fetchMapData(mapContract, mapX, mapY)
-    setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
+    if (X === newX && Y === newY) {
+      return
+    }
+    setX(newX)
+    setY(newY)
+    setFormX(newX)
+    setFormY(newY)
   }
 
   // Map Arrows
@@ -284,9 +282,15 @@ const Map: React.FC = () => {
     }
     const newX = Math.max(Math.min(Math.floor(NX / 2), Number(calcX)), Number(calcX) + moveX)
     const newY = Math.max(Math.min(Math.floor(NY / 2), Number(calcY)), Number(calcY) + moveY)
-    const [mapX, mapY] = adjCoords(newX, newY)
-    const data = await fetchMapData(mapContract, mapX, mapY)
-    setMapData({ x0: mapX, y0: mapY, data: arrayToMatrix(data, XLen) })
+
+    if (X === newX && Y === newY) {
+      return
+    }
+
+    setX(newX)
+    setY(newY)
+    setFormX(newX)
+    setFormY(newY)
   }
 
   if (!mapData) {
@@ -392,9 +396,9 @@ const Map: React.FC = () => {
                 Find location (x, y)
               </Button>
               (
-              <CoordInput type="number" min="0" value={X} onChange={(e) => setX(parseFloat(e.target.value))} />
+              <CoordInput type="number" min="0" value={formX} onChange={(e) => setFormX(parseFloat(e.target.value))} />
               ,
-              <CoordInput type="number" min="0" value={Y} onChange={(e) => setY(parseFloat(e.target.value))} />)
+              <CoordInput type="number" min="0" value={formY} onChange={(e) => setFormY(parseFloat(e.target.value))} />)
             </InputControl>
           </GridControls>
           <Legend />
