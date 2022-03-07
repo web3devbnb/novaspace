@@ -612,7 +612,7 @@ export const useGetExploreCost = (x, y) => {
       setExploreCost(data)
     }
     fetch()
-  }, [fastRefresh])
+  }, [fastRefresh, x, y])
   return ExploreCost
 }
 
