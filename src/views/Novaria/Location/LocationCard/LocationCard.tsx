@@ -240,7 +240,7 @@ const LocationCard = ({
   const timeMod = useGetTimeModifier()
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
   const exploreCost = useGetExploreCost(placeX, placeY)
-  const distance = Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2) 
+  const distance = Math.floor(Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2)) 
   const atMaxMineral = Number(playerMaxMineral) <= Number(playerMineral)
  
   const unexplored = placetype === '0'
