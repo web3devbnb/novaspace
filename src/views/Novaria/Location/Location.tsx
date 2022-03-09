@@ -38,6 +38,7 @@ import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
+import homeIcon from '../assets/homeicon.png'
 
 const Page = styled.div`
   font-size: 15px;
@@ -96,7 +97,7 @@ const Content = styled.div`
   margin-right: auto;
 `
 
-const OpenBattlesCard = styled.div`
+const OpenBattlesCard = styled.div<{refinery: boolean}>`
   background-image: url('/images/novaria/locationTableBorder.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -106,19 +107,20 @@ const OpenBattlesCard = styled.div`
   min-height: 200px;
   min-width: 350px
   max-width: 450px;
+  display: ${props => props.refinery && 'none'}; 
   
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
 `
 
-const PlayersCard = styled.div`
+const PlayersCard = styled.div<{refinery: boolean}>`
   background-image: url('/images/novaria/locationTableBorder.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 20px 10px;
   padding: 10px;
-  max-height: 45%;
+  max-height: ${props => props.refinery ? '100%' :  '45%'};
   min-height: 200px;
   min-width: 350px
   max-width: 450px;
@@ -211,6 +213,11 @@ const Location: React.FC = () => {
     }
   }, [location.state, fleetLocation.X, fleetLocation.Y, loadedCoords.x, loadedCoords.y])
 
+  const handleHome = () => {
+    setX(fleetLocation.X)
+    setY(fleetLocation.Y)
+  }
+
   // Main place info functions
   const placeInfo = useGetPlaceInfo(placeX, placeY)
   const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY, false)
@@ -295,10 +302,14 @@ const Location: React.FC = () => {
                   <MoveButton onClick={() => setX(Number(placeX) + 1)}>
                     <img src={rightArrow} alt="right" />
                   </MoveButton>
+                  <MoveButton onClick={handleHome}>
+                    <img src={homeIcon} alt="right" />
+                  </MoveButton>
                 </MoveControls>
               </InputControl>
 
-              <OpenBattlesCard>
+              <OpenBattlesCard
+                  refinery={placeInfo.refinery}>
                 <Header>OPEN BATTLES</Header>
                 <OpenBattlesTable
                   battles={battlesAtLocation}
@@ -308,7 +319,8 @@ const Location: React.FC = () => {
                   account={account}
                 />
               </OpenBattlesCard>
-              <PlayersCard>
+              <PlayersCard
+                  refinery={placeInfo.refinery}>
                 <Header>PLAYERS</Header>
                 <PlayersTable
                   players={fleetsAtLocation}

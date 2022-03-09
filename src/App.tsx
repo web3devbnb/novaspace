@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ResetCSS, Text, Button, useWalletModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
@@ -88,6 +88,9 @@ const App: React.FC = () => {
                 <Novaria />
                 <Footer />
             </Menu>
+          </Route>
+          <Route path="/novaria">
+            <Redirect to="/legend-of-novaria" />  
           </Route>
           <Route path="/map">
             <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />

@@ -10,14 +10,10 @@ import {
   useMine,
   useGetTimeModifier,
   useGetExploreCost,
-  useShipyardTakeover,
-  useGetShipyards,
   useTunnel,
   useGetNovaBalance,
 } from 'hooks/useNovaria'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import NovaWalletBalance from 'views/Dashboard/components/NovaWalletBalance'
-import { current } from '@reduxjs/toolkit'
 
 const Body = styled.div`
   position: relative;
@@ -201,6 +197,9 @@ const Button = styled.button`
     color: gray;
     border-color: gray;
     cursor: not-allowed;
+    &:hover {
+      background-color: transparent;
+    }
   }
 `
 
@@ -257,8 +256,8 @@ const LocationCard = ({
   const novaBalance = useGetNovaBalance(account)
 
  
-  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive
-  const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle
+  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending
+  const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle || pending
 
   const { onExplore } = useExplore()
   const { onMine } = useMine()
