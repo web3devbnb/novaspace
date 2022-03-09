@@ -116,7 +116,7 @@ const Novaria: React.FC = () => {
           />
           <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
           <SubHeading>
-            - Coming Soon - <br/> 
+          <Button><a href='https://novaria-beta.shibanova.io/legend-of-novaria' rel='noreferrer noopener'>Join the Beta!</a></Button>
           <br />
             A 4x space strategy game built on the Binance Smart Chain.
           </SubHeading>
