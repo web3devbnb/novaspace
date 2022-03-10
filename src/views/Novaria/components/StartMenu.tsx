@@ -4,8 +4,8 @@ import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
-
-
+import ReactGA from 'react-ga'
+import { useHistory } from 'react-router-dom'
 
 const Button = styled.button`
   cursor: pointer;
@@ -32,62 +32,69 @@ const BetaWarning = styled.p`
 `
 
 const StartMenu = () => {
-    const {account} = useWallet()
-    const accountAddress = account === null ? '' : account
-    const [isOpen, setOpen] = useState(false)
-    const [pending, setPendingTx] = useState(false)
-    const [name, setName] = useState('')
-  
-    const fleetContract = getFleetAddress()
-    const mapContract = getMapAddress()
-    const treasuryContract = getTreasuryAddress()
-    console.log('fleet:', fleetContract, 'map:', mapContract, 'treasury:', treasuryContract)
-    const connected = account !== null
-    const allowanceFleet = useGetAllowance(fleetContract)
-    const allowanceMap = useGetAllowance(mapContract)
-    const allowanceTreasury = useGetAllowance(treasuryContract)
-    const isAllowed =  allowanceTreasury > 0 && allowanceFleet > 0 
-    const playerExists = useGetPlayerExists(accountAddress)
-    const startCost = 100 / useGetCostMod()
+  const { account } = useWallet()
+  const accountAddress = account === null ? '' : account
+  const [isOpen, setOpen] = useState(false)
+  const [pending, setPendingTx] = useState(false)
+  const [name, setName] = useState('')
 
+  const fleetContract = getFleetAddress()
+  const mapContract = getMapAddress()
+  const treasuryContract = getTreasuryAddress()
+  console.log('fleet:', fleetContract, 'map:', mapContract, 'treasury:', treasuryContract)
+  const connected = account !== null
+  const allowanceFleet = useGetAllowance(fleetContract)
+  const allowanceMap = useGetAllowance(mapContract)
+  const allowanceTreasury = useGetAllowance(treasuryContract)
+  const isAllowed = allowanceTreasury > 0 && allowanceFleet > 0
+  const playerExists = useGetPlayerExists(accountAddress)
+  const startCost = 100 / useGetCostMod()
 
-    const { onClick } = useApprove()
-    const { onCoin } = useInsertCoinHere() 
-  
-    const sendInsertCoinTx = async () => {
-      setPendingTx(true)
-      try {
-        await onCoin(name)
-      } catch (error) {
-        console.log('error: ', error)
-      } finally {
-        setPendingTx(false)
-      }
-    }
-  
-    const sendApproveTx = async (contract) => {
-      setPendingTx(true)
-      try {
-        await onClick(contract)
-      } catch (error) {
-        console.log('error: ', error)
-      } finally {
-        setPendingTx(false)
-      } 
-    }
-  
-    const handleFleetApprove = () => {
-      if (allowanceFleet <= 0) {
-        sendApproveTx(fleetContract)
-      }
-    }
-    const handleTreasuryApprove = () => {
-      if (allowanceTreasury <= 0) {
-        sendApproveTx(treasuryContract)
-      }
-    }
+  const history = useHistory()
 
-    return (
+  const { onClick } = useApprove()
+  const { onCoin } = useInsertCoinHere()
+
+  const sendInsertCoinTx = async () => {
+    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/r_S1CJHU06IDEMy0rNID' })
+    setPendingTx(true)
+    try {
+      await onCoin(name)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const sendApproveTx = async (contract) => {
+    setPendingTx(true)
+    try {
+      await onClick(contract)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const handleFleetApprove = () => {
+    if (allowanceFleet <= 0) {
+      sendApproveTx(fleetContract)
+    }
+  }
+  const handleTreasuryApprove = () => {
+    if (allowanceTreasury <= 0) {
+      sendApproveTx(treasuryContract)
+    }
+  }
+
+  const handleStartGameClick = () => {
+    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/DassCIH906IDEMy0rNID' })
+    history.push('/overview')
+  }
+
+  return (
     <div>
       <BetaWarning>
         ***NOTICE - THIS GAME IS CURRENTLY IN BETA. Players can still earn NOVA and profit, but there is no guarantee. The game will be fully reset around March 14 (no refund provided).***
@@ -97,17 +104,17 @@ const StartMenu = () => {
       {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
 
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
-      {isAllowed && !playerExists ? 
+      {isAllowed && !playerExists ?
         <div>
           Step 2 - Set your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} />
           <Button onClick={sendInsertCoinTx}>{!pending ? 'Set Player Name' : 'pending...'}</Button>
           <br />(costs {startCost} nova)
         </div> : ''}
-      {playerExists ? <a href='/overview'><Button>Start Game</Button></a> : ''}
+      {playerExists ? <Button onClick={handleStartGameClick}>Start Game</Button> : ''}
     </div>
 
-    )
+  )
 }
 
 export default StartMenu
