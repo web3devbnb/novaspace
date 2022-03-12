@@ -66,7 +66,7 @@ const Button = styled.button`
 
 const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playerName }) => {
   const { account, connect, reset, status } = useWallet()
-  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(connect, reset)
+  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(connect, reset, account)
   const novaBalance = getBalanceNumber(useTokenBalance(getNovaAddress()))
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
   const playerExists = useGetPlayerExists(account)

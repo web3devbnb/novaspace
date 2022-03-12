@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import {} from '@pancakeswap-libs/uikit'
+import {useModal} from '@pancakeswap-libs/uikit'
 import styled from 'styled-components/macro'
 import Select from 'react-select'
 import {
@@ -29,6 +29,7 @@ import {
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import ShipCardModal from './ShipCardModal'
 import moleCard from '../assets/moleCard.png'
 import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
@@ -256,6 +257,12 @@ const Shipyard = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
 
+  const [handleViperClick] = useModal(<ShipCardModal shipclass='Viper' />)
+  const [handleMoleClick] = useModal(<ShipCardModal shipclass='Mole' />)
+  const [handleFireflyClick] = useModal(<ShipCardModal shipclass='Firefly' />)
+  const [handleGorianClick] = useModal(<ShipCardModal shipclass='Gorian' />)
+  const [handleUnknownClick] = useModal(<ShipCardModal shipclass='Unknown' />)
+
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
     const selectedShipyard = shipyards[selectedShipyardId]
@@ -318,6 +325,7 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
+
 
   const isOwner = shipyardOwner === account.toString()
   const [newName, setShipyardNewName] = useState('')
@@ -432,11 +440,16 @@ const Shipyard = () => {
         <BodyWrapper>
           <LeftCol>
             <ShipClassMenu>
-              <ShipClassCard src={viperCard} alt="viper" />
-              <ShipClassCard src={moleCard} alt="mole" />
-              <ShipClassCard src={fireflyCard} alt="firefly" />
-              <ShipClassCard src={gorianCard} alt="gorian" />
-              <ShipClassCard src={unknownCard} alt="coming soon" />
+              <ShipClassCard src={viperCard} alt="viper" role='button' 
+                onClick={handleViperClick} />
+              <ShipClassCard src={moleCard} alt="mole" role='button' 
+                onClick={handleMoleClick} />
+              <ShipClassCard src={fireflyCard} alt="firefly" role='button' 
+                onClick={handleFireflyClick} />
+              <ShipClassCard src={gorianCard} alt="gorian" role='button' 
+                onClick={handleGorianClick} />
+              <ShipClassCard src={unknownCard} alt="coming soon" role='button' 
+                onClick={handleUnknownClick} />
             </ShipClassMenu>
 
             <BuildRow>
