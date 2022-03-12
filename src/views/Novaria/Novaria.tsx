@@ -4,10 +4,10 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
 import { Flex, useWalletModal } from '@pancakeswap-libs/uikit'
 import ModalVideo from 'react-modal-video'
+import ReactGA from 'react-ga'
 import logo from './assets/novariaLogoMain.png'
 import StartMenu from './components/StartMenu'
 import 'react-modal-video/scss/modal-video.scss'
-
 
 const Page1 = styled(Page)`
   // background-image:url('/images/home/mainBackground-dark.jpg');
@@ -92,37 +92,42 @@ const Button = styled.button`
 
 const Novaria: React.FC = () => {
   // const account = useContext(ConnectedAccountContext)
-  const {account, connect, reset} = useWallet()
+  const { account, connect, reset } = useWallet()
   const accountAddress = account === null ? '' : account
   const connected = account !== null
   const [isOpen, setOpen] = useState(false)
-  const { onPresentConnectModal} = useWalletModal(connect, reset)
-  
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
+
+  const handleConnectWalletClick = () => {
+    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/HXWoCKXCyaIDEMy0rNID' })
+    onPresentConnectModal()
+  }
+
   return (
     <Page1>
       <Body>
         <Column>
           <Logo src={logo} alt="novaria logo" />
-            <ModalVideo
+          <ModalVideo
             channel="youtube"
             isOpen={isOpen}
             videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
-          
+
           <SubHeading>
             {connected ? <StartMenu />
-            : <Button onClick={onPresentConnectModal}>CONNECT WALLET</Button>
+              : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
             }
 
 
-          <br /><br /><br />A 4x space strategy game built on the Binance Smart Chain.<br />
+            <br /><br /><br />A 4x space strategy game built on the Binance Smart Chain.<br />
 
-          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
-          <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
-          
+            <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
+            <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
+
           </SubHeading>
-          </Column>
+        </Column>
       </Body>
     </Page1>
   )
