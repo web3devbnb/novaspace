@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {  Text, Flex } from '@pancakeswap-libs/uikit'
 import discordIcon from './Discord.svg'
+import coinBrain from './coinBrain.png'
 
 
 const Hero = styled(Flex)`
@@ -86,6 +87,16 @@ const Footer = () => (
                   <Img
                     src="https://shibanova.io/assets/images/instagram-icon.svg"
                     alt="instagram"
+                  />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+                >
+                  <Img
+                    src={coinBrain}
+                    alt="coinBrain"
                   />
                 </a>
                 {/* <a                  

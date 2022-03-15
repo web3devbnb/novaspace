@@ -78,6 +78,7 @@ ReactPixel.init(
 ReactPixel.pageView()
 
 const App: React.FC = () => {
+  
   useEagerConnect()
   useFetchPublicData()
   return (
