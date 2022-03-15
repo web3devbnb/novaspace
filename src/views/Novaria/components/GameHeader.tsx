@@ -122,7 +122,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
             <img src={tokenLogo} alt="nova logo" style={{ height: 30, margin: 5 }} />
           </a>
           <a
-            href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
             target="blank"
             rel="noreferrer noopener"
           >

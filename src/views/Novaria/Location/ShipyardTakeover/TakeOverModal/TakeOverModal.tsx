@@ -63,6 +63,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const isTakeoverPlayer = player.toString() === account.toString()
+  const isBiggerFleet = Number(useGetFleetSize(account)) > Number(fleetSize)
 
   const takeoverTimer = showCountdown(shipyard.takeoverDeadline * 1000)
 
@@ -147,6 +148,13 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'Complete Takeover' : 'pending...'}
+          </Button>
+        </ModalActions>
+      }
+      {underAttack && !isTakeoverPlayer && isBiggerFleet &&
+        <ModalActions>
+          <Button onClick={sendTakeoverTx}>
+            {!pending ? 'Hijack Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
