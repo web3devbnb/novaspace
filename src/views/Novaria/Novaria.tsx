@@ -5,6 +5,7 @@ import Page from 'components/layout/Page'
 import { Flex, useWalletModal } from '@pancakeswap-libs/uikit'
 import ModalVideo from 'react-modal-video'
 import ReactGA from 'react-ga'
+import ReactPixel from 'react-facebook-pixel'
 import logo from './assets/novariaLogoMain.png'
 import StartMenu from './components/StartMenu'
 import 'react-modal-video/scss/modal-video.scss'
@@ -100,6 +101,7 @@ const Novaria: React.FC = () => {
 
   const handleConnectWalletClick = () => {
     ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/HXWoCKXCyaIDEMy0rNID' })
+    ReactPixel.trackSingle('964799387574791', 'InitiateCheckout')
     onPresentConnectModal()
   }
 

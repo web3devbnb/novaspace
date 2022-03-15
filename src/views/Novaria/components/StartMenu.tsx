@@ -5,6 +5,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import ReactGA from 'react-ga'
+import ReactPixel from 'react-facebook-pixel'
 import { useHistory } from 'react-router-dom'
 
 const Button = styled.button`
@@ -57,6 +58,7 @@ const StartMenu = () => {
 
   const sendInsertCoinTx = async () => {
     ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/r_S1CJHU06IDEMy0rNID' })
+    ReactPixel.trackSingle('964799387574791', 'Purchase', {value: 0.00, currency: 'USD'})
     setPendingTx(true)
     try {
       await onCoin(name)
@@ -91,6 +93,7 @@ const StartMenu = () => {
 
   const handleStartGameClick = () => {
     ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/DassCIH906IDEMy0rNID' })
+    ReactPixel.trackSingle('964799387574791', 'Lead')
     history.push('/overview')
   }
 

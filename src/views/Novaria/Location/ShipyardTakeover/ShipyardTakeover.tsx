@@ -15,6 +15,7 @@ const Button = styled.button`
     color: #5affff;
     width: 100%;
     margin-top: 10px;
+    padding: .6em;
     &:hover {
         background-color: #5affff;
         color: black
@@ -26,6 +27,7 @@ const Disabled = styled.button`
     border: 1px solid gray;
     width: 100%;
     background: transparent;
+    
 `
 
 
@@ -49,7 +51,7 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, current
             <Button type='button' onClick={handleClick} >STATUS</Button> 
         }
         {underAttack && !refinery &&
-            <Button type='button' onClick={handleClick} >Shipyard Under Attack</Button>         
+            <Button type='button' onClick={handleClick} ><span style={{color:'red', fontSize:15}}>TAKEOVER IN PROGRESS</span></Button>         
         }
         {refinery && 'Shipyard cannot be taken over'}
     </div>

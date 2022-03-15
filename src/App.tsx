@@ -7,6 +7,7 @@ import useEagerConnect from 'hooks/useEagerConnect'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
 import ReactGA from 'react-ga'
+import ReactPixel from 'react-facebook-pixel'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
@@ -59,8 +60,22 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-ReactGA.initialize('AW-978000460', { debug: true });
+ReactGA.initialize(
+  [
+    {trackingId: 'AW-978000460'}, 
+    {trackingId: 'UA-206876567-1', 
+      gaOptions: {
+        siteSpeedSampleRate: 100
+        }
+    }
+  ], 
+    { debug: true });
 ReactGA.pageview(window.location.pathname + window.location.search);
+
+ReactPixel.init(
+  '964799387574791'
+)
+ReactPixel.pageView()
 
 const App: React.FC = () => {
   useEagerConnect()
