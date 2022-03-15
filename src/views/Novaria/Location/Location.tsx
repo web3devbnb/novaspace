@@ -246,7 +246,6 @@ const Location: React.FC = () => {
   const timeMod = useGetTimeModifier()
 
   const playerInBattle = useGetPlayerInBattle(account)
-  console.log(playerInBattle)
 
   return (
     <Page>
