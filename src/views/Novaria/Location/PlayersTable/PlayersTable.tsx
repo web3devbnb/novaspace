@@ -32,7 +32,7 @@ const TableContent = styled.div<{isRefinery: boolean}>`
   }
 `
 
-const PlayersTable = ({ refinery, players, playerBattleStatus, currentLocation }) => {
+const PlayersTable = ({ account, refinery, players, playerBattleStatus, currentLocation }) => {
   return (
     <Body>
       <div>
@@ -45,7 +45,7 @@ const PlayersTable = ({ refinery, players, playerBattleStatus, currentLocation }
       </div>
       <TableContent isRefinery={refinery}>
         {players.map((player) => (
-          <PlayersTableRow refinery={refinery} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
+          <PlayersTableRow refinery={refinery} account={account} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
         ))}
       </TableContent>
     </Body>

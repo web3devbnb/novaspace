@@ -18,6 +18,7 @@ import NovariaModal from '../../../components/NovariaModal'
 
 interface PlayerModalProps {
   refinery: boolean
+  account: string
   player: string
   status: boolean
   currentLocation: boolean
@@ -42,8 +43,8 @@ const Child = styled.div`
   margin-bottom: 5px;
 `
 
-const PlayerModal: React.FC<PlayerModalProps> = ({ refinery, player, status, currentLocation, onDismiss }) => {
-  const {account} = useWallet()
+const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, status, currentLocation, onDismiss }) => {
+  // const account = useContext(ConnectedAccountContext)
   const ships = useGetShips(player)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
@@ -53,6 +54,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ refinery, player, status, cur
   const playerBattleStatus =(playerInfo.battleStatus).toString()
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
+  const playerFleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
@@ -60,7 +62,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ refinery, player, status, cur
   const bscscan = 'https://bscscan.com/address/'
   const accountAddress = account !== null ? account : ''
   const isPlayer = player.toString() === accountAddress.toString()
-
+  const canAttack = playerFleetSize >= fleetSize / 4 || playerFleetSize / 4 <= fleetSize
 
 
   const { onEnterBattle } = useEnterBattle()
@@ -116,9 +118,11 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ refinery, player, status, cur
       </div>
       {!inBattle && !isPlayer && currentLocation && !refinery &&
         <ModalActions>
-          <Button  onClick={() => handleEnterBattle(player, 'attack')}>
-            ATTACK
-          </Button>
+          {(playerBattleStatus === '0' && canAttack || playerBattleStatus !== '0') &&
+            <Button  onClick={() => handleEnterBattle(player, 'attack')}>
+              ATTACK
+            </Button>
+          }
           {playerBattleStatus !== '0' &&
             <Button  onClick={() => handleEnterBattle(player, 'defend')}>
               DEFEND

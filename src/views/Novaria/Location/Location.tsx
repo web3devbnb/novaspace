@@ -246,6 +246,7 @@ const Location: React.FC = () => {
   const timeMod = useGetTimeModifier()
 
   const playerInBattle = useGetPlayerInBattle(account)
+  console.log(playerInBattle)
 
   return (
     <Page>
@@ -283,7 +284,7 @@ const Location: React.FC = () => {
                   Luminosity={placeInfo.luminosity}
                   atWormhole={atWormhole}
                   miningCooldownActive={currentMiningCooldown > new Date()}
-                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0' || playerInBattle}
+                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0' && playerInBattle === false}
                 />
               )}
             </LeftCol>
@@ -327,6 +328,7 @@ const Location: React.FC = () => {
                   refinery={placeInfo.refinery}>
                 <Header>PLAYERS</Header>
                 <PlayersTable
+                  account = {account}
                   players={fleetsAtLocation}
                   playerBattleStatus={playerBattleStatus}
                   currentLocation={currentLocation}

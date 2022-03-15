@@ -474,7 +474,7 @@ export const useGetPlayerInBattle = (account) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await fleetContract.methods.isInBattle(account)
+      const data = await fleetContract.methods.isInBattle(account).call()
       setPlayerInBattle(data)
     }
     fetch()
