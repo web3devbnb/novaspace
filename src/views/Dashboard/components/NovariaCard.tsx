@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
-import { Card, CardBody, CardHeader, CardFooter, Text, Button } from '@pancakeswap-libs/uikit'
+import React from 'react'
+import { Button } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import NovariaLogo from '../assets/novariaLogoMain.png'
-import VideoModal from './VideoModal'
-
-
 
 const Body = styled.div`
     display: flex;
@@ -22,30 +19,24 @@ const Body = styled.div`
 `
 
 const Img = styled.img`
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  align-self: center;
 `
 
-const NovariaCard = ({
-    title,
-  }: {
-    title: string
-  }) => {
-
-    return(
-      <Body id={title}>
-          <a href="/legend-of-novaria" style={{display: 'flex'}}>
-            <Img src={NovariaLogo} alt="Legend of Novaria" />
-          </a>
-          <a href="/legend-of-novaria" style={{display: 'flex'}}>
-            <Button style={{margin:"10px auto"}}>The Battle is Coming</Button>
-          </a>
-          {/* <VideoModal /> */}
-      </Body>
-    
-    )
+const NovariaCard = ({ title }: { title: string }) => {
+  return (
+    <Body id={title}>
+      <a href="/legend-of-novaria" style={{ display: 'flex' }}>
+        <Img src={NovariaLogo} alt="Legend of Novaria" />
+      </a>
+      <a href="/legend-of-novaria" style={{ display: 'flex' }}>
+        <Button style={{ margin: '10px auto' }}>The Battle is Coming</Button>
+      </a>
+      {/* <VideoModal /> */}
+    </Body>
+  )
 }
 
 export default NovariaCard

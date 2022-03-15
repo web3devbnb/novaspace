@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react'
 import { Button, Flex, Text } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
-import logo1 from '../assets/fees-min.png'
 import logo2 from '../assets/novadexbig-min.png'
-import logo3 from '../assets/banner2logo-min.png'
 
 const Row = styled(Flex)`
     height: 500px;
@@ -30,11 +28,8 @@ const Row = styled(Flex)`
 `
 
 const Img2 = styled.img`
-  
   ${({ theme }) => theme.mediaQueries.md} {
-      
-    }
-
+  }
 `
 const ColLeft = styled.div`
   width: 90%;

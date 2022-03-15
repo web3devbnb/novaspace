@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, Flex } from '@pancakeswap-libs/uikit'
+import {  Text, Flex } from '@pancakeswap-libs/uikit'
 import discordIcon from './Discord.svg'
 import coinBrain from './coinBrain.png'
 
@@ -11,7 +11,6 @@ const Hero = styled(Flex)`
   justify-content: center;
   background-image: transparent;
   // border-top: solid 1px ${({ theme }) => theme.colors.primary};
-  
 
   // ${({ theme }) => theme.mediaQueries.lg} {
   //   display: flex;
@@ -21,7 +20,7 @@ const Hero = styled(Flex)`
   // ${({ theme }) => theme.mediaQueries.xl} {
   //   // padding: 0 5vw;
   // }
-` 
+`
 
 const Row = styled(Flex)`
   flex-direction: row;
@@ -33,7 +32,6 @@ const Col = styled(Flex)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 `
 const Img = styled.img`
   height: 25px;
@@ -42,14 +40,13 @@ const Img = styled.img`
   border-radius: 5px;
 `
 const Ul = styled.ul`
-  list-style-type: none;  
+  list-style-type: none;
   text-weight: bold;
   font-size: 12px;
 `
 
 const Footer = () => (
   <Hero>
-     
     <Row>
       <Col>
       <Text style={{fontSize:"12px", paddingBottom:"0px"}} >NOVA Contract: (ONLY ON NOVADEX)</Text>
@@ -127,28 +124,36 @@ const Footer = () => (
       </Col>
       <Col>
         {/* <Text>Links</Text>       */}
-        <Ul >
-            <li style={{color:"white", marginTop:"2px"}}>
-              <a target="_blank" rel="noreferrer" href="https://shibanova.io/terms">Terms</a>
-            </li>
-            <li style={{color:"white", marginTop:"4px"}}>
-              <a target="_blank" rel="noreferrer" href="https://shibanova.io/privacy">Privacy</a>
-            </li>
-            <li style={{color:"white", marginTop:"4px"}}>
-              <a target="_blank" rel="noreferrer" href="https://docs.shibanova.io/shibanova-documentation/"
-                >Documentation</a
-              >
-            </li>
-            <li style={{color:"white", marginTop:"4px"}}>
-              <a target="_blank" rel="noreferrer" href="https://docs.shibanova.io/shibanova-documentation/security/audits"
-                >Audits</a
-              >
-            </li>
+        <Ul>
+          <li style={{ color: 'white', marginTop: '2px' }}>
+            <a target="_blank" rel="noreferrer" href="https://shibanova.io/terms">
+              Terms
+            </a>
+          </li>
+          <li style={{ color: 'white', marginTop: '4px' }}>
+            <a target="_blank" rel="noreferrer" href="https://shibanova.io/privacy">
+              Privacy
+            </a>
+          </li>
+          <li style={{ color: 'white', marginTop: '4px' }}>
+            <a target="_blank" rel="noreferrer" href="https://docs.shibanova.io/shibanova-documentation/">
+              Documentation
+            </a>
+          </li>
+          <li style={{ color: 'white', marginTop: '4px' }}>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://docs.shibanova.io/shibanova-documentation/security/audits"
+            >
+              Audits
+            </a>
+          </li>
         </Ul>
       </Col>
     </Row>
-    <Row style={{marginBottom:"15px"}}>
-      <Text style={{fontSize:"12px"}}>Copyright © 2021. All rights reserved. Shibanova.io</Text>
+    <Row style={{ marginBottom: '15px' }}>
+      <Text style={{ fontSize: '12px' }}>Copyright © 2021. All rights reserved. Shibanova.io</Text>
     </Row>
   </Hero>
 )

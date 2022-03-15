@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import VideoModal from './VideoModal'
 
-
-
 const Body = styled.div`
     display: flex;
     justify-content: center;
@@ -28,10 +26,9 @@ const NovariaTeaser = ({
           {/* <a href="/novaria">
             <Img src={NovariaLogo} alt="Legend of Novaria" />
         </a> */}
-          <VideoModal />
-      </Body>
-    
-    )
+      <VideoModal />
+    </Body>
+  )
 }
 
 export default NovariaTeaser

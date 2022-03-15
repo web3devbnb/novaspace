@@ -1,25 +1,58 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap-libs/uikit'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { ResetCSS, Text, Button, useWalletModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import Page from 'components/layout/Page'
 import ReactGA from 'react-ga'
+import ReactPixel from 'react-facebook-pixel'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
 import Footer from './components/Footer'
 
+export const ConnectedAccountContext = React.createContext<string | null>(null)
+
+const WalletProvider = ({ children }) => {
+  const wallet = useWallet()
+  const { connect, reset } = useWallet()
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
+
+  if (wallet.status === 'connecting') {
+    return <PageLoader />
+  }
+
+  if (
+    wallet.status === 'disconnected' ||
+    wallet.status === 'error' ||
+    (wallet.status === 'connected' && wallet.account === null)
+  ) {
+    if (wallet.error) {
+      console.log(wallet.error)
+    }
+    return (
+      <Page style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Button onClick={onPresentConnectModal}>Please Connect Wallet</Button>
+      </Page>
+    )
+  }
+
+  return <ConnectedAccountContext.Provider value={wallet.account}>{children}</ConnectedAccountContext.Provider>
+}
 
 // Route-based code splitting
 const Home = lazy(() => import('./views/Dashboard'))
 const Farms = lazy(() => import('./views/Farms'))
 const Novaria = lazy(() => import('./views/Novaria'))
-// const Dashboard = lazy(() => import('./views/Dashboard'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Privacy = lazy(() => import('./views/Privacy'))
 const Terms = lazy(() => import('./views/Terms'))
-const HomeNew = lazy(() => import('./views/Home'))
+const Map = lazy(() => import('./views/Novaria/Map'))
+const Location = lazy(() => import('./views/Novaria/Location'))
+const Shipyard = lazy(() => import('./views/Novaria/Shipyard'))
+const Overview = lazy(() => import('./views/Novaria/Overview'))
 
 // This config is required for number formating
 BigNumber.config({
@@ -27,63 +60,101 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+ReactGA.initialize(
+  [
+    {trackingId: 'AW-978000460'}, 
+    {trackingId: 'UA-206876567-1', 
+      gaOptions: {
+        siteSpeedSampleRate: 100
+        }
+    }
+  ], 
+    { debug: true });
+ReactGA.pageview(window.location.pathname + window.location.search);
+
+ReactPixel.init(
+  '964799387574791'
+)
+ReactPixel.pageView()
 
 const App: React.FC = () => {
-
-  ReactGA.initialize('UA-206876567-1', {
-    gaOptions: {
-      siteSpeedSampleRate: 100
-    }
-  }
-    );
-  ReactGA.pageview(window.location.pathname + window.location.search);
   
   useEagerConnect()
   useFetchPublicData()
   return (
     <Router>
       <ResetCSS />
-      
-      <Menu style={{ backgroundColor:"black" }}>
-        <Suspense fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/" exact>
-            <GlobalStyle isNovaria={false} />
+
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/" exact>
+            <Menu>
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Home />
-            </Route>
-            <Route path="/home" exact>
-            <GlobalStyle isNovaria={false} />
-              <HomeNew />
-            </Route>
-            {/* <Route path="/dashboard">
-              <Dashboard />
-            </Route> */}
-            <Route path="/traderoutes">
-            <GlobalStyle isNovaria={false} />
+              <Footer />
+            </Menu>
+          </Route>
+          <Route path="/traderoutes">
+            <Menu>
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Farms />
-            </Route>
-            {/* <Route path="/pools">
-              <Farms tokenMode />
-            </Route> */}
-            <Route path="/legend-of-novaria">
-            <GlobalStyle isNovaria />
+              <Footer />
+            </Menu>
+          </Route>
+          <Route path="/legend-of-novaria">
+            <Menu>
+              <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
+
               <Novaria />
-            </Route>
-            <Route path="/privacy">
-            <GlobalStyle isNovaria={false} />
+              <Footer />
+            </Menu>
+          </Route>
+          <Route path="/novaria">
+            <Redirect to="/legend-of-novaria" />
+          </Route>
+          <Route path="/map">
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+            <WalletProvider>
+              <Map />
+            </WalletProvider>
+          </Route>
+          <Route path="/location">
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />
+            <WalletProvider>
+              <Location />
+            </WalletProvider>
+          </Route>
+          <Route path="/overview">
+            <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
+            <WalletProvider>
+              <Overview />
+            </WalletProvider>
+          </Route>
+          <Route path="/shipyard">
+            <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
+            <WalletProvider>
+              <Shipyard />
+            </WalletProvider>
+          </Route>
+
+          <Route path="/privacy">
+            <Menu>
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Privacy />
-            </Route>
-            <Route path="/terms">
-            <GlobalStyle isNovaria={false} />
+              <Footer />
+            </Menu>
+          </Route>
+          <Route path="/terms">
+            <Menu>
+              <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
               <Terms />
-            </Route>
-            <Route component={NotFound} />
-            <GlobalStyle isNovaria={false} />
-          </Switch>
-          {/* <Bubbles numberOfBubbles={150} /> */}
-        </Suspense>
-      </Menu>
-      <Footer />
+              <Footer />
+            </Menu>
+          </Route>
+          <Route component={NotFound} />
+          <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
+        </Switch>
+      </Suspense>
     </Router>
   )
 }

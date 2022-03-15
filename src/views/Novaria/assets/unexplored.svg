@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 109.23 109.23" style="enable-background:new 0 0 109.23 109.23;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+</style>
+<radialGradient id="SVGID_1_" cx="1331.7421" cy="-4545.0107" r="54.6161" gradientTransform="matrix(0 1 -1 0 -4490.3945 -1277.1259)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0.0452" style="stop-color:#FFFFFF"/>
+	<stop  offset="0.0456" style="stop-color:#FBFDF6"/>
+	<stop  offset="0.0478" style="stop-color:#E6F6C8"/>
+	<stop  offset="0.0502" style="stop-color:#D3EE9D"/>
+	<stop  offset="0.0528" style="stop-color:#C2E877"/>
+	<stop  offset="0.0556" style="stop-color:#B3E357"/>
+	<stop  offset="0.0587" style="stop-color:#A7DE3B"/>
+	<stop  offset="0.0622" style="stop-color:#9DDA25"/>
+	<stop  offset="0.0664" style="stop-color:#95D714"/>
+	<stop  offset="0.0714" style="stop-color:#90D509"/>
+	<stop  offset="0.0786" style="stop-color:#8DD402"/>
+	<stop  offset="0.0984" style="stop-color:#8CD400"/>
+	<stop  offset="0.1337" style="stop-color:#A9DF13;stop-opacity:0.841"/>
+	<stop  offset="0.2151" style="stop-color:#E7F63D;stop-opacity:0.4743"/>
+	<stop  offset="0.2538" style="stop-color:#FFFF4D;stop-opacity:0.3"/>
+	<stop  offset="0.3757" style="stop-color:#C0C055;stop-opacity:0.2441"/>
+	<stop  offset="0.5199" style="stop-color:#7D7D5D;stop-opacity:0.178"/>
+	<stop  offset="0.6507" style="stop-color:#474764;stop-opacity:0.118"/>
+	<stop  offset="0.763" style="stop-color:#202069;stop-opacity:0.0665"/>
+	<stop  offset="0.8525" style="stop-color:#09096C;stop-opacity:0.0255"/>
+	<stop  offset="0.9081" style="stop-color:#00006D;stop-opacity:0"/>
+</radialGradient>
+<path class="st0" d="M54.62,109.23C24.45,109.23,0,84.78,0,54.62C0,24.45,24.45,0,54.62,0c30.16,0,54.62,24.45,54.62,54.62
+	C109.23,84.78,84.78,109.23,54.62,109.23z"/>
+</svg>

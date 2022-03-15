@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, CardBody, CardHeader, CardFooter, Text, Flex } from '@pancakeswap-libs/uikit'
+import { Button, Text, Flex } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
-import logo from '../assets/farmcoins.png'
 
 const Grid = styled(Flex)`
   border: 2px solid ${({ theme }) => theme.colors.primary};
@@ -19,7 +18,6 @@ const Grid = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 20px;
   }
-
 `
 const Wrapper = styled.div`
   margin: auto 0;
@@ -32,48 +30,34 @@ const TextRow1 = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     margin: 20px 0;
   }
-
 `
 const TextRow2 = styled.div`
   align-self: center;
-  
 `
 
-const ColRight = styled.div`
-  background-image: url('/images/home/farmcoins-min.png');
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    
-  }
-`
 const Heading = styled(Text)`
   font-size: 35px;
   font-weight: bold;
   text-align: center;
-
 
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 50px;
     text-align: right;
   }
   ${({ theme }) => theme.mediaQueries.lg} {
-
   }
 `
 const SubHeading = styled(Text)`
   font-size: 19px;
   font-weight: medium;
   text-align: center;
-  
+
   ${({ theme }) => theme.mediaQueries.sm} {
-    
   }
   ${({ theme }) => theme.mediaQueries.md} {
     text-align: right;
-
   }
   ${({ theme }) => theme.mediaQueries.lg} {
-
   }
 `
 
@@ -83,19 +67,13 @@ const ButtonRow = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 10px;
-  
+
   ${({ theme }) => theme.mediaQueries.md} {
     justify-content: right;
-
   }
 `
 
-const TradeRouteCard = ({
-    title,
-  }: {
-    title: string
-  }) => {
-
+const TradeRouteCard = ({ title }: { title: string }) => {
   return (
     <Grid id={title}>
       <Wrapper>
@@ -125,10 +103,9 @@ const TradeRouteCard = ({
         </a>
       </ButtonRow>
       </Wrapper>
-{/* 
+      {/* 
       <ColRight /> */}
     </Grid>
-
   )
 }
 

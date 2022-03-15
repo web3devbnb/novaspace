@@ -7,7 +7,7 @@ import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
   useDistributedMoneyPotBNB,
-  useDistributedMoneyPotBUSD,
+  useDistributedMoneyPotBUSD, 
   useNextMoneyPot,
   useSNovaTotalSupply,
 } from 'hooks/useTokenBalance'

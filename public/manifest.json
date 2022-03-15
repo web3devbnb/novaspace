@@ -1,10 +1,10 @@
 {
-  "short_name": "ShibaNova",
-  "name": "ShibaNova",
-  "description": "Earn Nova and sNova through trade routes and playing Novaria",
+  "short_name": "ShibaNova - Legend of Novaria",
+  "name": "ShibaNova - Legend of Novaria",
+  "description": "Earn Nova and sNova through trade routes, money pots and playing Legend of Novaria",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "shibanovaTokenLogo.svg",
       "type": "image/x-icon",
       "sizes": "256x256"
     }

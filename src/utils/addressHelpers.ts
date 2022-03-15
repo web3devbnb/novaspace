@@ -32,3 +32,15 @@ export const getMoneyPotOldAddress = () => {
 export const getBusdAddress = () => {
   return addresses.busd[chainId]
 }
+export const getMapAddress = () => {
+  return addresses.map[chainId]
+}
+export const getFleetAddress = () => {
+  return addresses.fleet[chainId]
+}
+export const getApprovalsAddress = () => {
+  return addresses.approvals[chainId]
+}
+export const getTreasuryAddress = () => {
+  return addresses.treasury[chainId]
+}

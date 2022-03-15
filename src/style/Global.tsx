@@ -10,15 +10,29 @@ const spacebgMobile = "url('/images/home/bgspaceMobile.jpg')"
 const novariaMobileBG = "url('/images/home/novariaBGMobile.jpg')"
 const novariaBG = "url('/images/home/mainBackground-dark.jpg')"
 const spaceBG = "url('/images/home/bgspaceBig.jpg')"
+const novariaSpace = "url('/images/novaria/mapBG.jpg')"
+const novariaSpaceMobile = "url('/images/novaria/starsbg_portrait.png')"
+const novariaShipyard = "url('/images/novaria/shipyardBG.jpg')"
 
-const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
+const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boolean, isShipyard: boolean, isStandard: boolean}>`
+@font-face {
+  font-family: 'BigNoodle';
+  src:  url('./fonts/bignoodletitling.woff') format('woff'), url('./fonts/bignoodletitling.ttf') format('truetype');
+}
   * {
     font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    // font-family: 'BigNoodle';
   }
   body {
-     background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : spacebgMobile)};
-     background-size: 100% auto;
+     background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : '')};
+     background-image: ${({isStandard}) => (isStandard ? spacebgMobile : '')};
+     background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpaceMobile : '')};
+     background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
+
+     background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
      background-repeat: repeat-y;
+     background-position: center;
 
     img {
       height: auto;
@@ -26,8 +40,12 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean}>`
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background-image: ${({isNovaria}) => (isNovaria ? novariaBG : spaceBG)};
-      background-size: ${({isNovaria}) => (isNovaria ? 'cover' : '100% auto')};
+      background-image: ${({isNovaria}) => (isNovaria ? novariaBG : '')};
+      background-image: ${({isStandard}) => (isStandard ? spaceBG : '')};
+      background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
+      background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
+      
+      background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
       background-repeat: ${({isNovaria}) => (isNovaria ? 'none' : 'repeat-y')};
       background-position: center;
     }

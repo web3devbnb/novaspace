@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
-import Header from 'components/Header'
-import { Flex, Text, Heading, Tag } from '@pancakeswap-libs/uikit'
-import ModalVideo from "react-modal-video";
-import Divider from './components/Divider'
-import logo from './components/novariaLogoMain.png'
-import button from './components/button.png'
-import "react-modal-video/scss/modal-video.scss";
+import { Flex, useWalletModal } from '@pancakeswap-libs/uikit'
+import ModalVideo from 'react-modal-video'
+import ReactGA from 'react-ga'
+import ReactPixel from 'react-facebook-pixel'
+import logo from './assets/novariaLogoMain.png'
+import StartMenu from './components/StartMenu'
+import 'react-modal-video/scss/modal-video.scss'
 
 const Page1 = styled(Page)`
   // background-image:url('/images/home/mainBackground-dark.jpg');
@@ -21,7 +22,6 @@ const Body = styled(Flex)`
   align-items: center;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-
 `
 const breatheAnimation = keyframes`
   // 0% { width: 99%; }
@@ -38,7 +38,7 @@ const breatheAnimation = keyframes`
 `
 
 const Logo = styled.img`
-  max-Width: 800px;
+  max-width: 800px;
   padding-top: 80px;
   padding-left: 0px;
   width: 99%;
@@ -63,7 +63,6 @@ const SubHeading = styled.div`
   max-width: 800px;
   text-align: center;
 
-
   ${({ theme }) => theme.mediaQueries.xs} {
     font-size: 20px;
   }
@@ -74,53 +73,62 @@ const SubHeading = styled.div`
 `
 
 const Button = styled.button`
-  cursor: pointer;  
+  cursor: pointer;
   margin: 10px;
   align-self: center;
-  padding: .5rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   font-family: sans-serif;
   font-size: 1.25rem;
   text-decoration: none;
-  text-shadow:
-  -2px 4px 4px #091243, 
-  0 0 10px #00D0FF,
-  inset 1px 1px 1px white;
-  color: #1FFFFF;
+  text-shadow: -2px 4px 4px #091243, 0 0 10px #00d0ff, inset 1px 1px 1px white;
+  color: #1fffff;
   border: 2px solid;
   border-radius: 5px;
   background-color: transparent;
-  box-shadow: 
-  0 1px 2px rgba(0,0,0, 0.6), 
-  2px 1px 4px rgba(0,0,0, 0.3), 
-  2px 4px 3px rgba(3,0,128, 0.3), 
-  0 0 7px 2px rgba(0,208,255, 0.6), 
-  inset 0 1px 2px rgba(0,0,0, 0.6), 
-  inset 2px 1px 4px rgba(0,0,0, 0.3), 
-  inset 2px 4px 3px rgba(3,0,128, 0.3), 
-  inset 0 0 7px 2px rgba(0,208,255, 0.6);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
+    0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
+    inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
+
 `
 
-
 const Novaria: React.FC = () => {
+  // const account = useContext(ConnectedAccountContext)
+  const { account, connect, reset } = useWallet()
+  const accountAddress = account === null ? '' : account
+  const connected = account !== null
   const [isOpen, setOpen] = useState(false)
+  const { onPresentConnectModal } = useWalletModal(connect, reset)
+
+  const handleConnectWalletClick = () => {
+    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/HXWoCKXCyaIDEMy0rNID' })
+    ReactPixel.trackSingle('964799387574791', 'InitiateCheckout')
+    onPresentConnectModal()
+  }
+
   return (
-    <Page1 >
-      <Body >
+    <Page1>
+      <Body>
         <Column>
           <Logo src={logo} alt="novaria logo" />
-            <ModalVideo
+          <ModalVideo
             channel="youtube"
             isOpen={isOpen}
             videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
-          <Button type="button" onClick={()=> {setOpen(true)}} >Trailer</Button>
+
           <SubHeading>
-          <Button><a href='https://novaria-beta.shibanova.io/legend-of-novaria' rel='noreferrer noopener'>Join the Beta!</a></Button>
-          <br />
-            A 4x space strategy game built on the Binance Smart Chain.
+            {connected ? <StartMenu />
+              : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
+            }
+
+
+            <br /><br /><br />A 4x space strategy game built on the Binance Smart Chain.<br />
+
+            <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
+            <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
+
           </SubHeading>
-          <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
         </Column>
       </Body>
     </Page1>

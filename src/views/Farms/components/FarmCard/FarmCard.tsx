@@ -6,9 +6,7 @@ import { Farm } from 'state/types'
 import { provider } from 'web3-core'
 import useI18n from 'hooks/useI18n'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
-import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import { QuoteToken } from 'config/constants/types'
-import { getBalanceNumber } from 'utils/formatBalance'
 import { calculateNovaEarnedPerThousandDollars, apyModalRoi } from 'utils/compoundApyHelpers'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
@@ -18,8 +16,6 @@ import ApyButton from './ApyButton'
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
 }
- 
-
 
 const StyledCardAccent = styled.div`
   border-radius: 30px;
@@ -37,7 +33,6 @@ const StyledCardAccent = styled.div`
   //  background-position: center;
   //  background-size: auto ;
   //  opacity: .75;
-   
 `
 // background: ${(props) => props.theme.card.background}
 const FCard = styled(Card)`
@@ -95,8 +90,6 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
-  const { pid, lpAddresses, isTokenOnly, depositFeeBP } = useFarmFromPid(farm.pid)
-  const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid)
 
   // const isCommunityFarm = communityFarms.includes(farm.tokenSymbol)
   // We assume the token name is coin pair + lp e.g. NOVA-BNB LP, LINK-BNB LP,
@@ -132,14 +125,9 @@ const FarmCard: React.FC<FarmCardProps> = ({
     ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
     : '-'
 
- 
-
-
-
   const lpLabel = farm.lpSymbol
   let earnLabel = ''
 
-  
   if (farm.pid === 1 || farm.pid === 2 || farm.pid === 30) {
     earnLabel = 'sNOVA'
   } else {
@@ -153,7 +141,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
     })
 
   const farmApy = farm.apy.times(new BigNumber(100)).toNumber()
-  const novaEarnedPerThousand365D = calculateNovaEarnedPerThousandDollars({ numberOfDays: 365, farmApy, novaPrice }) 
+  const novaEarnedPerThousand365D = calculateNovaEarnedPerThousandDollars({ numberOfDays: 365, farmApy, novaPrice })
   const oneThousandDollarsWorthOfNova = 1000 / novaPrice.toNumber()
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
   const APY = apyModalRoi({ amountEarned: novaEarnedPerThousand365D, amountInvested: oneThousandDollarsWorthOfNova })
@@ -168,32 +156,23 @@ const FarmCard: React.FC<FarmCardProps> = ({
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       />
-         {!removed && (
-        
+      {!removed && (
         <Flex justifyContent="space-between" alignItems="center">
           <Text bold glowing fontSize="14px">
             {TranslateString(999, 'APR')}:
           </Text>
-          <Text glowing bold style={{ display: 'flex', alignItems: 'center', fontSize:'14px' }}>
-            {farm.apy ? (
-              <>
-                 {farmAPY}% 
-              </>
-            ) : (
-              <Skeleton height={24} width={80} />
-            )}
+          <Text glowing bold style={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>
+            {farm.apy ? <>{farmAPY}%</> : <Skeleton height={24} width={80} />}
           </Text>
         </Flex>
-       
       )}
 
       {!removed && (
-        
         <Flex justifyContent="space-between" alignItems="center">
           <Text bold glowing fontSize="14px">
             {TranslateString(999, 'APY')}:
           </Text>
-          <Text glowing bold style={{ display: 'flex', alignItems: 'center', fontSize:'18px' }}>
+          <Text glowing bold style={{ display: 'flex', alignItems: 'center', fontSize: '18px' }}>
             {farm.apy ? (
               <>
                 <ApyButton
@@ -206,20 +185,19 @@ const FarmCard: React.FC<FarmCardProps> = ({
                   earnLabel={earnLabel}
                 />
                 {/* {farmAPY}% */}
-                {Number(APY).toLocaleString() }%
+                {Number(APY).toLocaleString()}%
               </>
             ) : (
               <Skeleton height={24} width={80} />
             )}
           </Text>
         </Flex>
-       
       )}
       <Flex justifyContent="space-between">
         <Text bold fontSize="12px">
           {TranslateString(318, 'EARN')}:
         </Text>
-        <Text color={earnLabel === 'sNOVA' ? 'gold' : null} >{earnLabel}</Text>
+        <Text color={earnLabel === 'sNOVA' ? 'gold' : null}>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text bold glowing style={{ fontSize: '14px' }}>

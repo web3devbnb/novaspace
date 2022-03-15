@@ -4,7 +4,7 @@ import { Button, Flex, Heading } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { usePriceNovaBusd, useFarms } from 'state/hooks'
+import { usePriceNovaBusd } from 'state/hooks'
 import styled from 'styled-components'
 import useStake from '../../../../hooks/useStake'
 import HarvestButton from '../../../Home/components/HarvestButton'
@@ -30,13 +30,18 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const rawEarningsBalance = getBalanceNumber(earnings)
   const novaPrice = usePriceNovaBusd().toNumber()
   const displayBalance = rawEarningsBalance.toLocaleString()
-  const earnedValue = (Number(displayBalance)*novaPrice).toLocaleString(undefined,{ style: 'decimal', maximumFractionDigits : 2} )
-  console.log('earned value',earnedValue)
+  const earnedValue = (Number(displayBalance) * novaPrice).toLocaleString(undefined, {
+    style: 'decimal',
+    maximumFractionDigits: 2,
+  })
+  console.log('earned value', earnedValue)
   console.log('nova price', novaPrice)
   console.log('displayBalance', Number(displayBalance))
   return (
     <Flex mb="8px" justifyContent="space-between" alignItems="center">
-      <Heading color={rawEarningsBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance} (${earnedValue})</Heading>
+      <Heading color={rawEarningsBalance === 0 ? 'textDisabled' : 'text'}>
+        {displayBalance} (${earnedValue})
+      </Heading>
       <BalanceAndCompound>
         {/* {pid === 5 ? //0716 */}
         {pid === 0 ? (
