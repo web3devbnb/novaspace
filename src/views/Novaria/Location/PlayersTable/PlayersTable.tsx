@@ -39,7 +39,7 @@ const PlayersTable = ({ refinery, players, playerBattleStatus, currentLocation }
         <HeaderRow isRefinery={refinery} >
           <div style={{textAlign:'left'}}>PLAYER</div>
           <div>SIZE</div>
-          <div>POWER</div>
+          <div>ATTACK</div>
           <div style={{marginRight:6}}>MINERAL</div>
         </HeaderRow>
       </div>

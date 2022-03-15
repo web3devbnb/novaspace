@@ -29,6 +29,9 @@ const StyledModal = styled.div`
     min-width: 360px;
     max-width: 100%;
   }
+  ${({ theme }) => theme.mediaQueries.md} {
+    max-width: 50vw;
+  }
 `;
 
 const ModalHeader = styled.div`

@@ -48,6 +48,10 @@ const Child = styled.div`
   font-size: 12px;
 `
 
+const White = styled.span`
+  color: white;
+`
+
 const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, currentLocation, onDismiss }) => {
 
   const [pending, setPendingTx] = useState(false)
@@ -109,8 +113,8 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
         </Child>
         {underAttack && !isTakeoverPlayer &&
         <div>
-          <Child>Attacking Player: {playerName}</Child>
-          <Child>SHIPS: {shipClasses.map((ship, index) => {
+          <Child><White>TAKEOVER PLAYER:</White> {playerName}</Child>
+          <Child><White>SHIPS:</White> {shipClasses.map((ship, index) => {
                       return (
                         <span key={ship.name}>
                           {ships[index]} {ship.name}s, {' '}
@@ -118,43 +122,45 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
                       )
                     })}
           </Child>
-          <Child>SIZE: {fleetSize}</Child>
+          <Child><White>SIZE:</White> {fleetSize}</Child>
           <Child>
-            BATTLE STATUS: {' '}
+            <White>BATTLE STATUS:</White> {' '}
             {playerBattleStatus === '0' && 'Not in Battle'}
             {playerBattleStatus === '1' && 'Attacking'}
             {playerBattleStatus === '2' && 'Defending'}
           </Child>
         
-          <ModalActions>
+          {/* <ModalActions>
             <Button  onClick={() => onEnterBattle(player, 1)}>
               {!pending ? 'ATTACK PLAYER' : 'pending...'}
             </Button>
-            <Button  onClick={() => onEnterBattle(player, 2)}>
-              {!pending ? 'DEFEND PLAYER' : 'pending...'}
-            </Button>
-          </ModalActions>                
+            {playerBattleStatus !== '0' && 
+              <Button  onClick={() => onEnterBattle(player, 2)}>
+                {!pending ? 'DEFEND PLAYER' : 'pending...'}
+              </Button>
+            }
+          </ModalActions>                 */}
       </div> 
       }
       {underAttack && <Child>Takeover completes in {takeoverTimer}</Child>}
       {!underAttack && currentLocation &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
-            {!pending ? 'Initiate Takeover' : 'pending...'}
+            {!pending ? 'INITIATE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {!underAttack && isTakeoverPlayer && 
+      {!underAttack && isTakeoverPlayer && currentLocation &&
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
-            {!pending ? 'Complete Takeover' : 'pending...'}
+            {!pending ? 'COMPLETE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {underAttack && !isTakeoverPlayer && isBiggerFleet &&
+      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
-            {!pending ? 'Hijack Takeover' : 'pending...'}
+            {!pending ? 'HIJACK Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
