@@ -36,6 +36,7 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, current
     const cooldownTime = new Date((Number(shipyard.lastTakeoverTime) + (604800 / timeMod)) * 1000)
     const inCooldownStage = Number(cooldownTime) > Number(new Date())
     const underAttack = Number(new Date(shipyard.takeoverDeadline * 1000)) > Number(new Date())
+    const takeoverTimer = showCountdown(new Date(shipyard.takeoverDeadline * 1000))
     const [handleClick] = useModal(<TakeOverModal account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} inCooldownStage={inCooldownStage} underAttack={underAttack} currentLocation={currentLocation} />)
 
  
@@ -48,10 +49,10 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, current
             </Disabled>
         }
         {!inCooldownStage && !underAttack && !refinery && 
-            <Button type='button' onClick={handleClick} >STATUS</Button> 
+            <Button type='button' onClick={handleClick} >TAKEOVER POSSIBLE</Button> 
         }
         {underAttack && !refinery &&
-            <Button type='button' onClick={handleClick} ><span style={{color:'red', fontSize:15}}>TAKEOVER IN PROGRESS</span></Button>         
+            <Button type='button' onClick={handleClick} ><span style={{color:'red', fontSize:15}}>TAKEOVER IN PROGRESS <br />{takeoverTimer}</span></Button>         
         }
         {refinery && 'Shipyard cannot be taken over'}
     </div>

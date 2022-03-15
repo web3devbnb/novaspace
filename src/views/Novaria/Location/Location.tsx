@@ -21,6 +21,7 @@ import {
   useGetShipClasses,
   useGetShips,
   useGetTimeModifier,
+  useGetPlayerInBattle,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -244,6 +245,8 @@ const Location: React.FC = () => {
   const openbattles = false
   const timeMod = useGetTimeModifier()
 
+  const playerInBattle = useGetPlayerInBattle(account)
+
   return (
     <Page>
       <GameHeader
@@ -262,6 +265,7 @@ const Location: React.FC = () => {
                 <LocationCard
                   playerMineral={fleetMineral}
                   playerMaxMineral={mineralCapacity}
+                  discoverer={placeInfo.discoverer}
                   fleetSize={fleetSize}
                   placename={placeInfo.name}
                   placetype={placeInfo.type}
@@ -279,7 +283,7 @@ const Location: React.FC = () => {
                   Luminosity={placeInfo.luminosity}
                   atWormhole={atWormhole}
                   miningCooldownActive={currentMiningCooldown > new Date()}
-                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0'}
+                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0' || playerInBattle}
                 />
               )}
             </LeftCol>

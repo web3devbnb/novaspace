@@ -2,11 +2,12 @@ import { useModal } from '@pancakeswap-libs/uikit'
 import React from 'react'
 import styled from 'styled-components'
 import { useGetBattle } from 'hooks/useNovaria'
+import showCountdown from 'utils/countdownTimer'
 import BattleModal from '../BattleModal'
 
 const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   border: 1px solid #289794;
   padding: 3px;
   margin: 4px 0;
@@ -26,7 +27,7 @@ const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, accoun
   const battleInfo = useGetBattle(battle)
   const attackTeam = battleInfo.attackers
   const defendTeam = battleInfo.defenders
-  const battleStart = new Date(battleInfo.deadline * 1000).toLocaleString()
+  const battleStart = showCountdown(new Date(battleInfo.deadline * 1000))
   let playerInBattle = false
   for (let i = 0; i < attackTeam.length; i++) {
     if (attackTeam[i].toString() === account.toString()) {

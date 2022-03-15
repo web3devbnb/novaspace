@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {useModal} from '@pancakeswap-libs/uikit'
 import styled from 'styled-components/macro'
 import Select from 'react-select'
@@ -25,6 +25,7 @@ import {
   useGetCurrentMiningCooldown,
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
+  useGetNameByAddress,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -419,9 +420,11 @@ const Shipyard = () => {
     }),
   }
 
+  
+  const ownerName = useGetNameByAddress(shipyardOwner)
   const buildStats = [
     { label: 'LOCATION', value: shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-' },
-    { label: 'OWNER', value: shipyardOwner ? accountEllipsis(shipyardOwner) : '-' },
+    { label: 'OWNER', value: shipyardOwner ? ownerName : '-' },
     { label: 'BUILD FEE', value: shipyardFee ? `${shipyardFee}%` : '-' },
   ]
 
@@ -491,7 +494,7 @@ const Shipyard = () => {
                     COST: {(buildCost / 10 ** 18).toFixed(2) || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
-                  <Text>TIME: {(shipAmount * buildTime) / timeMod / 60 || 0}m</Text>
+                  <Text>TIME: {((shipAmount * buildTime) / timeMod / 60 / 60).toFixed(2) || 0}hr</Text>
                 </Row>
                 <div style={{ color: '#289794', marginTop: '10px' }}>
                   {buildStats.map((buildStat) => (

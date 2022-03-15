@@ -430,9 +430,10 @@ export const useGetNameByAddress = (player) => {
 
   useEffect(() => {
     async function fetch() {
+      if (player === null) { setName(' - ') } else {
       const id = await fleetContract.methods.addressToPlayer(player).call()
       const data = await fleetContract.methods.players(id).call()
-      setName(data[0])
+      setName(data[0])}
     }
     fetch()
   }, [fastRefresh, player])
@@ -465,6 +466,20 @@ export const useGetDockCost = (shipClassId: number, amount: number) => {
     fetch()
   }, [fastRefresh, shipClassId, amount])
   return DockCost
+}
+
+export const useGetPlayerInBattle = (account) => {
+  const { fastRefresh } = useRefresh()
+  const [playerInBattle, setPlayerInBattle] = useState(false)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await fleetContract.methods.isInBattle(account)
+      setPlayerInBattle(data)
+    }
+    fetch()
+  }, [fastRefresh, account])
+  return playerInBattle
 }
 
 // ~~~Map contract functions~~~
