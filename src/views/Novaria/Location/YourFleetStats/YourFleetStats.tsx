@@ -103,7 +103,7 @@ const YourFleetStats = ({
         <div>{travelCooldown}</div>
       </Stat>
 
-      {Number(fleetSize) < 25 && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {Number(fleetSize) < Number(25) && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
     </Stats>
   )
 }
