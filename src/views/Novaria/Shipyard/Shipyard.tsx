@@ -258,6 +258,8 @@ const Shipyard = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
 
+  const currentLocation = Number(fleetLocation.X) === Number(shipyardX) && Number(fleetLocation.Y) === Number(shipyardY)
+
   const [handleViperClick] = useModal(<ShipCardModal shipclass='Viper' />)
   const [handleMoleClick] = useModal(<ShipCardModal shipclass='Mole' />)
   const [handleFireflyClick] = useModal(<ShipCardModal shipclass='Firefly' />)
@@ -470,7 +472,8 @@ const Shipyard = () => {
                   onChange={handleShipChange}
                   styles={customStyles}
                 />
-                {playerEXP < shipEXP && <span>*requires {shipEXP} EXP</span>}
+                {playerEXP < shipEXP && <div>*requires {shipEXP} EXP</div>}
+                {!currentLocation && <div>*selected shipyard is at different location</div>}
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <InputIcon>QTY</InputIcon>
                   <Input

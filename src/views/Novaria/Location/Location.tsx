@@ -245,6 +245,8 @@ const Location: React.FC = () => {
   const openbattles = false
   const timeMod = useGetTimeModifier()
 
+  console.log(placeInfo.discoverer)
+
   const playerInBattle = useGetPlayerInBattle(account)
 
   return (
