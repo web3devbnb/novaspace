@@ -60,16 +60,18 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-ReactGA.initialize(
-  [
-    {trackingId: 'AW-978000460'}, 
-    {trackingId: 'UA-206876567-1', 
-      gaOptions: {
-        siteSpeedSampleRate: 100
-        }
-    }
-  ], 
-    { debug: true });
+// ReactGA.initialize(
+//   [
+//     {trackingId: 'AW-978000460'}, 
+//     {trackingId: 'UA-206876567-1', 
+//       gaOptions: {
+//         siteSpeedSampleRate: 100
+//         }
+//     }
+//   ], 
+//     { debug: true });
+
+ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactPixel.init(
