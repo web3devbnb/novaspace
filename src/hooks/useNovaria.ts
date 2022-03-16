@@ -432,6 +432,7 @@ export const useGetNameByAddress = (player) => {
     async function fetch() {
       if (player === '0x0000000000000000000000000000000000000000') { setName(' ') } 
       else if (player === null) {setName(' ')}
+      else if (player === '') {setName(' ')}
       else {
       const id = await fleetContract.methods.addressToPlayer(player).call()
       const data = await fleetContract.methods.players(id).call()
