@@ -7,7 +7,7 @@ import ModalVideo from 'react-modal-video'
 import ReactGA from 'react-ga'
 import ReactPixel from 'react-facebook-pixel'
 import showCountdown from 'utils/countdownTimer'
-import logo from './assets/novariaLogoMain.png'
+import logo from './assets/novariaLogoBig.png'
 import StartMenu from './components/StartMenu'
 import 'react-modal-video/scss/modal-video.scss'
 
@@ -40,7 +40,7 @@ const breatheAnimation = keyframes`
 
 const Logo = styled.img`
   max-width: 800px;
-  padding-top: 80px;
+  padding-top: 20px;
   padding-left: 0px;
   width: 99%;
   animation-name: ${breatheAnimation};
@@ -56,10 +56,10 @@ const Column = styled.div`
 `
 
 const SubHeading = styled.div`
-  padding-top: 50px;
+  
   padding-right: 40px;
   padding-left: 20px;
-  padding-bottom: 80px;
+  padding-bottom: 20px;
   color: white;
   max-width: 800px;
   text-align: center;
@@ -92,6 +92,11 @@ const Button = styled.button`
 
 `
 
+const Description = styled.div`
+  margin: 10px;
+  font-size: 1.5rem;
+`
+
 const Novaria: React.FC = () => {
   // const account = useContext(ConnectedAccountContext)
   const { account, connect, reset } = useWallet()
@@ -121,18 +126,30 @@ const Novaria: React.FC = () => {
           />
 
           <SubHeading>
-            <span style={{color:'gold'}}>The legend begins in <br /> 
-            <span style={{color:'red', fontSize:32}}>{launchCountdown}</span></span>
+            <span style={{color:'gold', marginBottom:10}}>The legend begins in</span> <br /> <br />
+            <span style={{
+              color:'white', 
+              fontSize:50, 
+              border:'2px solid gold',
+              borderRadius:15,
+              padding:'.2em'}}>
+                 {launchCountdown}
+            </span>
 
             {/* {connected ? <StartMenu />
               : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
             } */}
 
 
-            <br /><br /><br />Legend of Novaria is a space strategy game built on the Binance Smart Chain fueled by NOVA.<br />
+            <br /><br />
+            <Description>
+              Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain fueled by NOVA.
+              Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS universe.
+            </Description>
 
             <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
             <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
+            <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank'><Button type="button">Game Info</Button></a>
 
           </SubHeading>
         </Column>

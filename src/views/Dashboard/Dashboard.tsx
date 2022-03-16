@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BaseLayout } from '@pancakeswap-libs/uikit'
+import showCountdown from 'utils/countdownTimer'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
 import FarmStakingCard from './components/FarmStakingCard'
@@ -58,13 +59,33 @@ const Teaser = styled.div`
   margin-top: 20px;
 `
 
+const NovariaCountdown = styled.div`
+  margin-top: 10px;
+  font-size: 3rem;
+  color: gold;
+  text-align: center;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 9rem;
+  }
+`
+
 const Dashboard: React.FC = () => {
+
+  const novariaTimer = showCountdown(new Date(1647547200000))
+
   return (
     <Page
     // style={{maxWidth:"100%", marginLeft: 'auto', marginRight: 'auto'}}
     >
       <Hero>
         <Header>Welcome</Header>
+        <NovariaCountdown>
+          <a href='/legend-of-novaria'>
+            <div style={{fontSize:'2rem', color:'white', marginBottom: 10}} >The Legend begins in</div>
+            {novariaTimer}
+          </a>
+        </NovariaCountdown>
         <SubHero />
       </Hero>
 
