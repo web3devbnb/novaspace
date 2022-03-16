@@ -51,7 +51,6 @@ const YourFleetStats = ({
   const Haven = Number(fleetLocation.X) === Number(0) && Number(fleetLocation.Y) === Number(0)
   const smallFleet = Number(fleetSize) < Number(25)
   const canRecall = smallFleet && !Haven
-  console.log('canrecall, nothaven, smallfleet', canRecall, Haven, smallFleet)
 
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {

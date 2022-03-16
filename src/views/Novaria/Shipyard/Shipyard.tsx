@@ -473,7 +473,7 @@ const Shipyard = () => {
                   styles={customStyles}
                 />
                 {playerEXP < shipEXP && <div>*requires {shipEXP} EXP</div>}
-                {!currentLocation && <div style={{color:'yellow'}}>*selected shipyard is at different location</div>}
+                {!currentLocation && shipyardX !== null && <div style={{color:'yellow'}}>*selected shipyard is at different location</div>}
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <InputIcon>QTY</InputIcon>
                   <Input
