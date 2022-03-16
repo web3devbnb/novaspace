@@ -184,7 +184,7 @@ const BuildQueue = ({fleetLocation}) => {
     return(
       <SpaceDockMenu>
         <Header style={{ marginTop: 0 }}>
-          BUILD QUEUE <span style={{ fontSize: '.75rem' }}>(Can only have 1 active order per shipyard)</span>
+          BUILD QUEUE <span style={{ fontSize: '.75rem' }}>(Must be at shipyard location to claim ships)</span>
         </Header>
         <QueueRow>
           {spaceDocks.map((dock) => {
