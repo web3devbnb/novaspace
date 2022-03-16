@@ -48,7 +48,10 @@ const YourFleetStats = ({
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
   const fleetCoords = [Number(fleetLocation.X), Number(fleetLocation.Y)]
-  const notHaven = Number(fleetLocation.X) !== Number(0) && Number(fleetLocation.Y) !== Number(0)
+  const Haven = Number(fleetLocation.X) === Number(0) && Number(fleetLocation.Y) === Number(0)
+  const smallFleet = Number(fleetSize) < Number(25)
+  const canRecall = smallFleet && !Haven
+  console.log('canrecall, nothaven, smallfleet', canRecall, Haven, smallFleet)
 
   const { onRecall } = useRecall(true)
   const sendRecallTx = async () => {
@@ -103,7 +106,7 @@ const YourFleetStats = ({
         <div>{travelCooldown}</div>
       </Stat>
 
-      {Number(fleetSize) < Number(25) && notHaven && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {canRecall && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
     </Stats>
   )
 }
