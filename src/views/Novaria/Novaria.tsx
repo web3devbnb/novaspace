@@ -121,7 +121,8 @@ const Novaria: React.FC = () => {
           />
 
           <SubHeading>
-            <span style={{color:'gold'}}>The legend begins in {launchCountdown}</span>
+            <span style={{color:'gold'}}>The legend begins in <br /> 
+            <span style={{color:'red', fontSize:32}}>{launchCountdown}</span></span>
 
             {/* {connected ? <StartMenu />
               : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
