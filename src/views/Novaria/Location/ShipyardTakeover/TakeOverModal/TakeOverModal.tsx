@@ -24,6 +24,7 @@ interface TakeoverModalProps {
   placeX: number
   placeY: number
   underAttack: boolean
+  underDeadline: boolean
   inCooldownStage: boolean
   currentLocation: boolean
   onDismiss?: () => void
@@ -52,8 +53,8 @@ const White = styled.span`
   color: white;
 `
 
-const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX, placeY, underAttack, inCooldownStage, currentLocation, onDismiss }) => {
-
+const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, shipyard, placeX, placeY, underAttack, inCooldownStage, currentLocation, onDismiss }) => {
+ 
   const [pending, setPendingTx] = useState(false)
   const player = shipyard.takeoverAddress
   const ships = useGetShips(player)
@@ -138,7 +139,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
               <Button  onClick={() => onEnterBattle(player, 2)}>
                 {!pending ? 'DEFEND PLAYER' : 'pending...'}
               </Button>
-            }
+            } 
           </ModalActions>                 */}
       </div> 
       }
@@ -150,14 +151,14 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ account, shipyard, placeX
           </Button>
         </ModalActions>
       }
-      {!underAttack && isTakeoverPlayer && currentLocation &&
+      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline &&
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'COMPLETE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation &&
+      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation && underDeadline &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'HIJACK Takeover' : 'pending...'}
