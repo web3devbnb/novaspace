@@ -785,8 +785,8 @@ export const useGetTimeModifier = () => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getTimeModifier().call()
-      setTimeModifier(data)
+      // const data = await mapContract.methods.getTimeModifier().call()
+      setTimeModifier(1000)
     }
     fetch()
   }, [fastRefresh])
