@@ -61,7 +61,8 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
   const playerName = playerInfo.name
-  const playerBattleStatus =(playerInfo.battleStatus).toString()
+  const playerBattleStatus =playerInfo.battleStatus
+  console.log('player battle status', playerInfo)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
@@ -112,7 +113,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
         <Child>
           To initiate a takeover, you must have at least 1000 fleet size and the cost is 25 NOVA.
         </Child>
-        {underAttack && !isTakeoverPlayer &&
+        {underAttack && 
         <div>
           <Child><White>TAKEOVER PLAYER:</White> {playerName}</Child>
           <Child><White>SHIPS:</White> {shipClasses.map((ship, index) => {
@@ -126,9 +127,9 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
           <Child><White>SIZE:</White> {fleetSize}</Child>
           <Child>
             <White>BATTLE STATUS:</White> {' '}
-            {playerBattleStatus === '0' && 'Not in Battle'}
-            {playerBattleStatus === '1' && 'Attacking'}
-            {playerBattleStatus === '2' && 'Defending'}
+            {playerBattleStatus === 0 && 'Not in Battle'}
+            {playerBattleStatus === 1 && 'Attacking'}
+            {playerBattleStatus === 2 && 'Defending'}
           </Child>
         
           {/* <ModalActions>

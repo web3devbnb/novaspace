@@ -22,6 +22,7 @@ import {
   useGetShips,
   useGetTimeModifier,
   useGetPlayerInBattle,
+  useGetPlayerExists,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
@@ -236,6 +237,7 @@ const Location: React.FC = () => {
   const playerBattleInfo = useGetPlayerBattle(account)
   const player = useGetPlayer(account.toString())
   const playerEXP = player.experience
+  const playerExists = useGetPlayerExists(account)
   const playerName = player.name
   const shipyards = useGetShipyards()
   const isDiscoverer = placeInfo.discoverer === account
@@ -356,11 +358,13 @@ const Location: React.FC = () => {
                 </YourFleetCard>
                 <BattleProgressCard>
                   <Header>BATTLE PROGRESS</Header>
-                  <BattleStatus
-                    playerBattleInfo={playerBattleInfo}
-                    playerBattleStatus={playerBattleInfo.battleStatus}
-                    currentLocation={fleetLocation}
-                  />
+                  {playerExists &&
+                    <BattleStatus
+                      playerBattleInfo={playerBattleInfo}
+                      playerBattleStatus={playerBattleInfo.battleStatus}
+                      currentLocation={fleetLocation}
+                    />
+                  }
                 </BattleProgressCard>
                 {shipyards
                   .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())

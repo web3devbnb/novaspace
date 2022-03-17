@@ -407,16 +407,16 @@ export const useGetPlayer = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      if (player !== null) {
+      if (player !== null ) {
         const playerId = await fleetContract.methods.addressToPlayer(player).call()
         const data = await fleetContract.methods.players(playerId).call()
         setPlayer({
           name: data[0],
           address: data[1],
           experience: data[2], 
-          battleId: data[4], 
-          mineral: data[5], 
-          battleStatus: data[6], 
+          battleId: data[3], 
+          mineral: data[4], 
+          battleStatus: data[5], 
         })
       }
     }
@@ -605,6 +605,20 @@ export const useGetPlayerCount = () => {
     fetch()
   }, [fastRefresh])
   return playerCount
+}
+
+export const useGetFleetMineralRefined = (account) => {
+  const { fastRefresh } = useRefresh()
+  const [mineralRefined, setmineralRefined] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await mapContract.methods.fleetMineralRefined(account).call()
+      setmineralRefined(data)
+    }
+    fetch()
+  }, [fastRefresh, account])
+  return mineralRefined
 }
 
 export const useGetFleetLocation = (fleet) => {

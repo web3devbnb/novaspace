@@ -26,6 +26,7 @@ import {
   useGetPlayerBattle,
   useGetPlayerBattleStatus,
   useGetNameByAddress,
+  useGetPlayerExists,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -257,6 +258,7 @@ const Shipyard = () => {
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
+  const playerExists = useGetPlayerExists(account)
 
   const currentLocation = Number(fleetLocation.X) === Number(shipyardX) && Number(fleetLocation.Y) === Number(shipyardY)
 
@@ -532,11 +534,13 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                <BattleStatus
-                  playerBattleInfo={playerBattleInfo}
-                  playerBattleStatus={playerBattleInfo.battleStatus}
-                  currentLocation={fleetLocation}
-                />
+                {playerExists &&
+                  <BattleStatus
+                    playerBattleInfo={playerBattleInfo}
+                    playerBattleStatus={playerBattleInfo.battleStatus}
+                    currentLocation={fleetLocation}
+                  />
+                }
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (

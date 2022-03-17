@@ -8,6 +8,7 @@ import {
   useGetMaxMineralCapacity,
   useGetPlayer,
   useGetPlayerCount,
+  useGetFleetMineralRefined,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -79,6 +80,7 @@ const Overview: React.FC = () => {
   const playerEXP = player.experience
   const playerName = player.name
   const playerBattleStatus = useGetPlayerBattleStatus(account)
+  const refinedMineral = useGetFleetMineralRefined(account)
 
   const playerCount = useGetPlayerCount()
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 1)
