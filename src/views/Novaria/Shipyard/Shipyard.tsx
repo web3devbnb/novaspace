@@ -30,6 +30,7 @@ import {
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import BigNumber from 'bignumber.js'
+import { ethersToBigNumber } from 'utils/bigNumber'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ShipCardModal from './ShipCardModal'
@@ -290,16 +291,16 @@ const Shipyard = () => {
     setShipEXP(Number(selectedShip.experienceRequired))
   }
   const costMod = useGetCostMod()
-  const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod
+  const buildCost = new BigNumber((shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod)
   const { onBuild } = useBuildShips()
-
+ 
   const timeMod = useGetTimeModifier()
 
   const handleBuild = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipId, shipAmount, new BigNumber(buildCost))
-      console.log(shipyardX, shipyardY, shipId, shipAmount, (buildCost).toString())
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost)
+      console.log(shipyardX, shipyardY, shipId, shipAmount, buildCost)
     } catch (error) {
       console.log('error: ', error)
     } finally {
