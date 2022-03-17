@@ -37,7 +37,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
   const inBattle = status 
-  const resolved = battleInfo.resolved 
+  const resolved = Number(battleInfo.resolvedTime) > 0 
 
 
   const GetPlayerName = (address) => {

@@ -81,7 +81,7 @@ const Overview: React.FC = () => {
   const playerBattleStatus = useGetPlayerBattleStatus(account)
 
   const playerCount = useGetPlayerCount()
-  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, true)
+  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 1)
 
   return (
     <Page>

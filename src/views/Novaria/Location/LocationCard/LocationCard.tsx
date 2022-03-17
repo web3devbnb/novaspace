@@ -239,7 +239,7 @@ const LocationCard = ({
   const { account } = useWallet()
   const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10 ** 18
   const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
-  const exploreCost = useGetExploreCost(placeX, placeY)
+  const exploreCost = useGetExploreCost(placeX, placeY, account)
   const distance = Math.floor(Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2)) 
   const atMaxMineral = Number(playerMaxMineral) <= Number(playerMineral)
   const discovererName = useGetNameByAddress(discoverer)

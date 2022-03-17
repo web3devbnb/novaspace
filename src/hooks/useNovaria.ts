@@ -315,26 +315,26 @@ export const useGetMiningCapacity = (fleet: string) => {
 }
 
 // returns list of battle IDs at a location
-export const useGetBattlesAtLocation = (x: any, y: any, showResolved: boolean) => {
+export const useGetBattlesAtLocation = (x: any, y: any, resolveTime: number) => {
   const { fastRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
       if (x !== null) {
-        const data = await fleetContract.methods.getBattlesAtLocation(x, y, showResolved).call()
+        const data = await fleetContract.methods.getBattlesAtLocation(x, y, resolveTime).call()
         setBattlesAtLocation(data)
       }
     }
     fetch()
-  }, [fastRefresh, x, y, showResolved])
+  }, [fastRefresh, x, y, resolveTime])
   return battlesAtLocation
 }
 
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { fastRefresh } = useRefresh()
-  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolved: false, attackers: [], defenders: []})
+  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolvedTime: 0, attackers: [], defenders: []})
 
   useEffect(() => {
     async function fetch() {
@@ -345,7 +345,7 @@ export const useGetBattle = (Id: number) => {
         deadline: data[1],
         coordX: data[2],
         coordY: data[3],
-        resolved: data[0],
+        resolvedTime: data[0],
         attackers: data[4][0],
         defenders: data[5][0],
       })
@@ -403,7 +403,7 @@ export const useGetAttackPower = (fleet) => {
 
 export const useGetPlayer = (player) => {
   const { fastRefresh } = useRefresh()
-  const [Player, setPlayer] = useState({ name: '', experience: 0,  battleId: null, mineral: 0, battleStatus: 0 })
+  const [Player, setPlayer] = useState({ name: '', address: '', experience: 0,  battleId: null, mineral: 0, battleStatus: 0 })
 
   useEffect(() => {
     async function fetch() {
@@ -412,10 +412,11 @@ export const useGetPlayer = (player) => {
         const data = await fleetContract.methods.players(playerId).call()
         setPlayer({
           name: data[0],
-          experience: data[1], 
-          battleId: data[2], 
-          mineral: data[3], 
-          battleStatus: data[4], 
+          address: data[1],
+          experience: data[2], 
+          battleId: data[4], 
+          mineral: data[5], 
+          battleStatus: data[6], 
         })
       }
     }
@@ -620,17 +621,17 @@ export const useGetFleetLocation = (fleet) => {
   return fleetLocation
 }
 
-export const useGetExploreCost = (x, y) => {
+export const useGetExploreCost = (x, y, account) => {
   const { fastRefresh } = useRefresh()
   const [ExploreCost, setExploreCost] = useState(0)
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.getExploreCost(x, y).call()
+      const data = await mapContract.methods.getExploreCost(x, y, account).call()
       setExploreCost(data)
     }
     fetch()
-  }, [fastRefresh, x, y])
+  }, [fastRefresh, x, y, account])
   return ExploreCost
 }
 
@@ -742,7 +743,7 @@ export const useGetCurrentTravelCooldown = (fleet: string) => {
 
   useEffect(() => {
     async function fetch() {
-      const data = await mapContract.methods.travelCooldown(fleet).call()
+      const data = await mapContract.methods.fleetTravelCooldown(fleet).call()
       setCurrentCooldown(data)
     }
     fetch()

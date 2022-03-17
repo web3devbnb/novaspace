@@ -261,7 +261,7 @@ const Shipyard = () => {
   const currentLocation = Number(fleetLocation.X) === Number(shipyardX) && Number(fleetLocation.Y) === Number(shipyardY)
 
   const [handleViperClick] = useModal(<ShipCardModal shipclass='Viper' />)
-  const [handleMoleClick] = useModal(<ShipCardModal shipclass='Mole' />)
+  const [handleMoleClick] = useModal(<ShipCardModal shipclass='P.U.P.' />)
   const [handleFireflyClick] = useModal(<ShipCardModal shipclass='Firefly' />)
   const [handleGorianClick] = useModal(<ShipCardModal shipclass='Gorian' />)
   const [handleUnknownClick] = useModal(<ShipCardModal shipclass='Unknown' />)
@@ -515,7 +515,9 @@ const Shipyard = () => {
           <RightCol>
             <FleetMenu>
               <Header style={{ color: 'white' }}>MY FLEET</Header>
-              <YourFleetStats
+              <YourFleetStats 
+                account={account}
+                playerBattleInfo={playerBattleInfo}
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
                 fleetPower={fleetPower}

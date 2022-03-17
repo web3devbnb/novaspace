@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useRecall } from 'hooks/useNovaria'
+import { useGetBattle, useRecall } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import { getWeb3 } from 'utils/web3'
 
@@ -30,6 +30,8 @@ const Button = styled.button`
 `
 
 const YourFleetStats = ({
+  account,
+  playerBattleInfo,
   fleetSize,
   maxFleetSize,
   fleetPower,
@@ -45,6 +47,9 @@ const YourFleetStats = ({
 
   const [pending, setPendingTx] = useState(false)
 
+  const battleID = Number(playerBattleInfo.battleId)
+  const resolvedTime = useGetBattle(battleID).resolvedTime
+  const battleCooldown = showCountdown(new Date(resolvedTime*1000))
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
   const fleetCoords = [Number(fleetLocation.X), Number(fleetLocation.Y)]
@@ -103,6 +108,10 @@ const YourFleetStats = ({
       <Stat>
         <div>TRAVEL</div>
         <div>{travelCooldown}</div>
+      </Stat>
+      <Stat>
+        <div>BATTLE</div>
+        <div>{battleCooldown}</div>
       </Stat>
 
       {canRecall && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}

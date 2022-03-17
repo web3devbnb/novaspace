@@ -221,7 +221,7 @@ const Location: React.FC = () => {
 
   // Main place info functions
   const placeInfo = useGetPlaceInfo(placeX, placeY)
-  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY, false)
+  const battlesAtLocation = useGetBattlesAtLocation(placeX, placeY, 0)
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
@@ -339,7 +339,9 @@ const Location: React.FC = () => {
               <FleetMenu>
                 <YourFleetCard>
                   <Header>MY FLEET</Header>
-                  <YourFleetStats
+                  <YourFleetStats 
+                    playerBattleInfo={playerBattleInfo}
+                    account={account}
                     fleetSize={fleetSize}
                     maxFleetSize={maxFleetSize}
                     fleetPower={fleetPower}
