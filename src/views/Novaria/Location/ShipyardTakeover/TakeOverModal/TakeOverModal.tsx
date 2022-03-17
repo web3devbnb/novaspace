@@ -157,7 +157,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
           </Button>
         </ModalActions>
       } 
-      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && canComplete &&
+      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && 
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'COMPLETE Takeover' : 'pending...'}
@@ -170,6 +170,9 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
             {!pending ? 'HIJACK Takeover' : 'pending...'}
           </Button>
         </ModalActions>
+      }
+      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && !canComplete && 
+        <Child>You have failed your attempted takeover, hit COMPLETE to free yourself.</Child>
       }
     </NovariaModal>
   )
