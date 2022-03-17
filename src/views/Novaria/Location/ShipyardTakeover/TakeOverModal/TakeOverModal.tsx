@@ -70,6 +70,8 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const isTakeoverPlayer = player.toString() === account.toString()
   const isBiggerFleet = Number(useGetFleetSize(account)) > Number(fleetSize)
+  const canInitiate = Number(useGetFleetSize(account)) >= 1000
+  const canComplete =  Number(useGetFleetSize(account)) >= 200
   const currentOwner = shipyard.owner
   const ownerName = useGetNameByAddress(currentOwner)
   const notCurrentOwner = (account).toString() !== (currentOwner).toString()
@@ -148,21 +150,21 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
       </div> 
       }
       {underAttack && <Child>Takeover completes in {takeoverTimer}</Child>}
-      {!underAttack && currentLocation && notCurrentOwner &&
+      {!underAttack && currentLocation && notCurrentOwner && canInitiate &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'INITIATE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
-      }
-      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && 
+      } 
+      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && canComplete &&
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'COMPLETE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation && notCurrentOwner &&
+      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation && notCurrentOwner && canInitiate &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'HIJACK Takeover' : 'pending...'}

@@ -60,7 +60,8 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
-  const inBattle = status
+
+
   const bscscan = 'https://bscscan.com/address/'
   const accountAddress = account !== null ? account : ''
   const isPlayer = player.toString() === accountAddress.toString()
@@ -68,6 +69,8 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
 
   const playerBattleInfo = useGetPlayerBattle(account)
   const battleID = Number(playerBattleInfo.battleId)
+  const inBattle = Number(playerBattleInfo.battleStatus) !== 0
+  console.log('inbattle', inBattle)
   const resolvedTime = Number(useGetBattle(battleID).resolvedTime)+900
   const battleCooldownActive = new Date(Number(resolvedTime)*1000) > new Date()
   
