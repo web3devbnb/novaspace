@@ -29,6 +29,7 @@ import {
   useGetPlayerExists,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
+import BigNumber from 'bignumber.js'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ShipCardModal from './ShipCardModal'
@@ -297,7 +298,7 @@ const Shipyard = () => {
   const handleBuild = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipId, shipAmount, BigInt(buildCost).toString())
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount, new BigNumber(buildCost))
       console.log(shipyardX, shipyardY, shipId, shipAmount, (buildCost).toString())
     } catch (error) {
       console.log('error: ', error)
@@ -496,7 +497,7 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    COST: {(buildCost / 10 ** 18).toFixed(2) || 0}
+                    COST: {(Number(buildCost) / 10 ** 18).toFixed(2) || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
                   <Text>TIME: {((shipAmount * buildTime) / timeMod / 60 / 60).toFixed(2) || 0}hr</Text>

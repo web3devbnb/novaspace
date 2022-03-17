@@ -26,6 +26,7 @@ import {
   setShipyardFeePercent,
   tunnel,
 } from 'utils/callHelpers'
+import BigNumber from 'bignumber.js'
 import { useFleet, useMap, useNova } from './useContract'
 import useRefresh from './useRefresh'
 
@@ -59,7 +60,7 @@ export const useBuildShips = () => {
   const useFleetContract = useFleet()
 
   const handleBuildShips = useCallback(
-    async (x: string, y: string, classId: string, amount: number, buildCost: string) => {
+    async (x: string, y: string, classId: string, amount: number, buildCost: BigNumber) => {
       const txHash = await buildShips(useFleetContract, x, y, classId, amount, buildCost, account)
 
       console.info(txHash)
