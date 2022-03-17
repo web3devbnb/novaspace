@@ -51,6 +51,7 @@ const Header = styled.div`
 const Text = styled.div`
   font-size: 15px;
   text-align: left;
+  max-width: 900px;
 `
 
 const OpenBattlesCard = styled.div`
@@ -71,6 +72,11 @@ const OpenBattlesCard = styled.div`
 const SubHeader = styled.div`
   font-size: 0.75rem;
   color: gray;
+`
+
+const StatsSection = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const Overview: React.FC = () => {
@@ -104,27 +110,28 @@ const Overview: React.FC = () => {
             <img src={logo} style={{}} alt="novaria logo" />
             <Header>Welcome to the Legend of Novaria</Header>
             <Text>
-              This is the testing phase of the game, so it&apos;s important to know that the game can be reset at any
-              moment, and all progress and in game purchases will be lost. However, it is still definitely possible to 
-              earn NOVA and make a profit!
+              You are about to embark on a journey to explore the world of Novaria.
+              The mysterious Draken forces have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know when they will strike again.
               <br />
               <br />
-              If you are unsure of
-              how to start your adventure, we suggest heading over to the shipyard and building ships at Haven! You will
-              need a fleet size of at least 25 to be able to travel anywhere.
+              By building ships, mining planets, and refining mineral into NOVA, you can help humanity rebuild. Along the way, you will meet friends and foes - are you cunning enough to figure out who will help you or destroy you?            
               <br />
               <br />
-              The basic premise of the game is to build ships, travel to mining planets, and harvest mineral to refine
-              into NOVA! However, the trip can be dangerous! The only safe location is a planet with a refinery.
-              Everywhere else, Players can attack each other and destroy each other&apos;s ships to create salvage.
-              Salvage can be collected by your mining ships and stored as mineral to be refined into NOVA.
+              The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
               <br />
               <br />
               Good Luck!
+              <br />
+              <br />
+              <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
             </Text>
           </div>
           <div style={{ background: '#11427399', padding: 15, textAlign: 'center' }}>
-            Total Players: {playerCount}
+            <StatsSection>
+              <span>Total Players: {playerCount}</span>
+              <span>Your Total Refined Minerals: {refinedMineral}</span>
+            </StatsSection>
+            
             <OpenBattlesCard>
               <Header>Your Recent Battles</Header>
               <SubHeader>(Only shows battles at your current location)</SubHeader>

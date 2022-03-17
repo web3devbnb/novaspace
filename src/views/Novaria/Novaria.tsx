@@ -118,6 +118,8 @@ const Novaria: React.FC = () => {
 
   const launchCountdown = showCountdown(new Date(1647547200000))
 
+  const waitingToLaunch = new Date(1647547200000) > new Date()
+
   return (
     <Page1>
       <Body>
@@ -131,18 +133,26 @@ const Novaria: React.FC = () => {
           />
 
           <SubHeading>
-            <span style={{color:'gold', marginBottom:10}}>The legend begins in</span> <br /> <br />
-            <span style={{
-              color:'white', 
-              fontSize:50, 
-              border:'2px solid gold',
-              borderRadius:15,
-              padding:'.2em'}}>
-                 {launchCountdown}
-            </span>
-
-            {connected ? <StartMenu />
-              : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
+            {waitingToLaunch &&
+              <div>
+              <span style={{color:'gold', marginBottom:10}}>The legend begins in</span> <br /> <br />
+              <span style={{
+                color:'white', 
+                fontSize:50, 
+                border:'2px solid gold',
+                borderRadius:15,
+                padding:'.2em'}}>
+                  {launchCountdown}
+              </span>
+              </div>
+            }
+            {!waitingToLaunch && 
+              <div>
+                <span style={{color:'gold', marginBottom:10}}>Game is Live!</span> <br /> <br />
+                {connected ? <StartMenu />
+                  : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
+                }
+              </div>
             }
 
 

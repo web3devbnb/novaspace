@@ -56,7 +56,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
   const playerBattleStatus =(playerInfo.battleStatus).toString()
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
-  const playerFleetSize = useGetFleetSize(account)
+  const yourFleetSize = useGetFleetSize(account)
   const fleetPower = useGetAttackPower(player)
   const fleetMineral = useGetFleetMineral(player)
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
@@ -65,7 +65,10 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
   const bscscan = 'https://bscscan.com/address/'
   const accountAddress = account !== null ? account : ''
   const isPlayer = player.toString() === accountAddress.toString()
-  const canAttack = playerFleetSize >= fleetSize / 4 || playerFleetSize / 4 <= fleetSize
+
+  const canAttack = yourFleetSize >= fleetSize / 4 && yourFleetSize / 4 <= fleetSize
+  console.log('can attack', canAttack)
+
 
   const playerBattleInfo = useGetPlayerBattle(account)
   const battleID = Number(playerBattleInfo.battleId)

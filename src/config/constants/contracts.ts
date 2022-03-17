@@ -16,15 +16,15 @@ export default {
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
   map: {
-    56: '0x8289AFEEC8910DaF3A8B73A68a8EE2FfaAD4eade',
+    56: '0x5cC9B3A05e80915AcCc52134dc1a4ec1C733cc03',
     97: '0xbd5d6A0BFcf8993E2E4352EfB95167c8b07c82D3',
   },
   fleet: {
-    56: '0xCf5FFef99c64aaa6a8e2b5E04e69DF9C1C1f46E8',
+    56: '0x2E56f9B28e8fB49F6370e2a3505631fB7c99E295',
     97: '0x20967ffC3CAA5CADB27ddff371617b4Ad6881Bf5',
   },
   treasury: {
-    56: '0xad71ad0C2dBD4b259df70bcBd4C4c6a41AF046a2',
+    56: '0xdDE0aBCe425B3d0E8db3c9DE2886D1E9e4f30ccb',
     97: '0x1c24392880612D4E119E7961906514caDe8E3Be3', 
   },
   approvals: {
