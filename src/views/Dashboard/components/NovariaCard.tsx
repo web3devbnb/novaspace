@@ -36,7 +36,7 @@ const NovariaCard = ({ title }: { title: string }) => {
         <Img src={NovariaLogo} alt="Legend of Novaria" />
       </a>
       <a href="/legend-of-novaria" style={{ display: 'flex' }}>
-        <Button style={{ margin: '10px auto', fontSize: 20, color:'gold' }}>The Battle is Coming {launchCountdown}</Button>
+        <Button style={{ margin: '10px auto', fontSize: 20, color:'gold' }}>Join the Battle</Button>
       </a>
       {/* <VideoModal /> */}
     </Body>

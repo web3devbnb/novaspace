@@ -80,12 +80,7 @@ const Dashboard: React.FC = () => {
     >
       <Hero>
         <Header>Welcome</Header>
-        <NovariaCountdown>
-          <a href='/legend-of-novaria'>
-            <div style={{fontSize:'2rem', color:'white', marginBottom: 10}} >The Legend begins in</div>
-            {novariaTimer}
-          </a>
-        </NovariaCountdown>
+      
         <SubHero />
       </Hero>
 
