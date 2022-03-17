@@ -12,6 +12,7 @@ import {
   useGetShips,
   useShipyardTakeover,
   useCompleteShipyardTakeover,
+  useGetNameByAddress,
 } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import { ConnectedAccountContext } from 'App'
@@ -70,6 +71,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const isTakeoverPlayer = player.toString() === account.toString()
   const isBiggerFleet = Number(useGetFleetSize(account)) > Number(fleetSize)
   const currentOwner = shipyard.owner
+  const ownerName = useGetNameByAddress(currentOwner)
   const notCurrentOwner = (account).toString() !== (currentOwner).toString()
 
   const takeoverTimer = showCountdown(shipyard.takeoverDeadline * 1000)
@@ -103,7 +105,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
 
   return (
     <NovariaModal title={shipyard.name} onDismiss={onDismiss}>
-      
+        <Child><White>CURRENT OWNER:</White> {ownerName}</Child>
         <Child>
           Players can attempt to take control of a shipyard from the current owner by initiating a takeover event. 
           The takeover event lasts 24 hours and during that time the player that initiated a takeover must survive 

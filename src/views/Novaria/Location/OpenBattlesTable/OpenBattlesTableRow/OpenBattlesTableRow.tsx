@@ -51,7 +51,9 @@ const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, accoun
       </Row>
     )
   } 
-  return (<Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}> </Row>)
+  return ( null
+      // <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}> </Row>
+    )
 }
 
 export default OpenBattlesTableRow
