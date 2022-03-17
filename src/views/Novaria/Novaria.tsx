@@ -136,9 +136,9 @@ const Novaria: React.FC = () => {
                  {launchCountdown}
             </span>
 
-            {connected ? <StartMenu />
+            {/* {connected ? <StartMenu />
               : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
-            }
+            } */}
 
 
             <br /><br />

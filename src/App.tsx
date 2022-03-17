@@ -71,15 +71,16 @@ BigNumber.config({
 //   ], 
 //     { debug: true });
 
-ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
-ReactGA.pageview(window.location.pathname + window.location.search);
-
-ReactPixel.init(
-  '964799387574791'
-)
-ReactPixel.pageView()
 
 const App: React.FC = () => {
+  
+  ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
+  ReactPixel.init(
+    '964799387574791'
+  )
+  ReactPixel.pageView()
   
   useEagerConnect()
   useFetchPublicData()
