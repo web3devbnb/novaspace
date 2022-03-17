@@ -233,7 +233,7 @@ export const travel = async (mapContract, x, y, account) => {
 export const explore = async (mapContract, x, y, account) => {
   return mapContract.methods
     .explore(x, y)
-    .send({from: account})
+    .send({from: account, gasLimit:1100000})
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
