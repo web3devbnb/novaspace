@@ -99,9 +99,6 @@ const StartMenu = () => {
 
   return (
     <div>
-      <BetaWarning>
-        ***NOTICE - THIS GAME IS CURRENTLY IN BETA. Players can still earn NOVA and profit, but there is no guarantee. The game will be fully reset around March 14 (no refund provided).***
-      </BetaWarning>
       {!isAllowed && 'Step 1 - approve Fleet and Treasury contracts for the game'}<br />
       {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pending ? 'Approve Fleet Contract' : 'pending...'}</Button> : ''}
       {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
