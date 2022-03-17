@@ -33,6 +33,7 @@ const BetaWarning = styled.p`
 `
 
 const StartMenu = () => {
+  ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
   const { account } = useWallet()
   const accountAddress = account === null ? '' : account
   const [isOpen, setOpen] = useState(false)
@@ -57,7 +58,11 @@ const StartMenu = () => {
   const { onCoin } = useInsertCoinHere()
 
   const sendInsertCoinTx = async () => {
-    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/r_S1CJHU06IDEMy0rNID' })
+    ReactGA.event({
+      category: 'Legend of Novaria',
+      action: 'Purchase Game',
+      label: 'button'
+    })
     ReactPixel.trackSingle('964799387574791', 'Purchase', {value: 0.00, currency: 'USD'})
     setPendingTx(true)
     try {
@@ -92,7 +97,11 @@ const StartMenu = () => {
   }
 
   const handleStartGameClick = () => {
-    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/DassCIH906IDEMy0rNID' })
+    ReactGA.event({
+      category: 'Legend of Novaria',
+      action: 'start game',
+      label: 'button'
+    })
     ReactPixel.trackSingle('964799387574791', 'Lead')
     history.push('/overview')
   }

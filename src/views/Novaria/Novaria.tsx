@@ -97,7 +97,8 @@ const Description = styled.div`
   font-size: 1.5rem;
 `
 
-const Novaria: React.FC = () => {
+const Novaria: React.FC = () => { 
+  ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
   // const account = useContext(ConnectedAccountContext)
   const { account, connect, reset } = useWallet()
   const accountAddress = account === null ? '' : account
@@ -106,7 +107,11 @@ const Novaria: React.FC = () => {
   const { onPresentConnectModal } = useWalletModal(connect, reset)
 
   const handleConnectWalletClick = () => {
-    ReactGA.ga('event', 'conversion', { send_to: 'AW-978000460/HXWoCKXCyaIDEMy0rNID' })
+    ReactGA.event({
+      category: 'Legend of Novaria',
+      action: 'connect wallet',
+      label: 'button'
+    })
     ReactPixel.trackSingle('964799387574791', 'InitiateCheckout')
     onPresentConnectModal()
   }
@@ -136,9 +141,9 @@ const Novaria: React.FC = () => {
                  {launchCountdown}
             </span>
 
-            {/* {connected ? <StartMenu />
+            {connected ? <StartMenu />
               : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
-            } */}
+            }
 
 
             <br /><br />
