@@ -38,6 +38,9 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
   const inBattle = status 
   const resolved = Number(battleInfo.resolvedTime) > 0 
+  
+  const resolvedTime = Number(battleInfo.resolvedTime)+900
+  const battleCooldownActive = new Date(Number(resolvedTime)*1000) > new Date()
 
 
   const GetPlayerName = (address) => {
@@ -84,7 +87,7 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
       </div>
       {!resolved &&
         <ModalActions>
-        {!inBattle && currentLocation &&
+        {!inBattle && currentLocation && !battleCooldownActive &&
           <div>
             <Button  onClick={() => onEnterBattle(defender, 1)}>
               JOIN ATTACKERS

@@ -48,8 +48,8 @@ const YourFleetStats = ({
   const [pending, setPendingTx] = useState(false)
 
   const battleID = Number(playerBattleInfo.battleId)
-  const resolvedTime = useGetBattle(battleID).resolvedTime
-  const battleCooldown = showCountdown(new Date(resolvedTime*1000))
+  const resolvedTime = Number(useGetBattle(battleID).resolvedTime)+900
+  const battleCooldown = showCountdown(new Date(Number(resolvedTime)*1000))
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
   const fleetCoords = [Number(fleetLocation.X), Number(fleetLocation.Y)]

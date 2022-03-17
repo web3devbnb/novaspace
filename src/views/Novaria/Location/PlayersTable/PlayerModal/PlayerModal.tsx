@@ -8,8 +8,10 @@ import {
   useGetFleetSize,
   useGetMaxMineralCapacity,
   useGetPlayer,
+  useGetPlayerBattle,
   useGetShipClasses,
   useGetShips,
+  useGetBattle,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
@@ -64,6 +66,15 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
   const isPlayer = player.toString() === accountAddress.toString()
   const canAttack = playerFleetSize >= fleetSize / 4 || playerFleetSize / 4 <= fleetSize
 
+  const playerBattleInfo = useGetPlayerBattle(account)
+  const battleID = Number(playerBattleInfo.battleId)
+  const resolvedTime = Number(useGetBattle(battleID).resolvedTime)+900
+  const battleCooldownActive = new Date(Number(resolvedTime)*1000) > new Date()
+  
+  const targetplayerBattleInfo = useGetPlayerBattle(player)
+  const targetbattleID = Number(targetplayerBattleInfo.battleId)
+  const targetresolvedTime = Number(useGetBattle(targetbattleID).resolvedTime)+900
+  const targetbattleCooldownActive = new Date(Number(targetresolvedTime)*1000) > new Date()
 
   const { onEnterBattle } = useEnterBattle()
 
@@ -116,9 +127,9 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
           {playerBattleStatus === '2' && 'Defending'}
         </Child>
       </div>
-      {!inBattle && !isPlayer && currentLocation && !refinery &&
+      {!inBattle && !isPlayer && currentLocation && !refinery && !battleCooldownActive &&
         <ModalActions>
-          {(playerBattleStatus === '0' && canAttack || playerBattleStatus !== '0') &&
+          {(playerBattleStatus === '0' && canAttack || playerBattleStatus !== '0') && !targetbattleCooldownActive &&
             <Button  onClick={() => handleEnterBattle(player, 'attack')}>
               ATTACK
             </Button>
