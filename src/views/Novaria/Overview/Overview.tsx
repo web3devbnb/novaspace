@@ -40,6 +40,7 @@ const Body = styled.div`
   border: 1px solid #5affff;
   padding: 10px;
   color: white;
+  
 `
 
 const Header = styled.div`
@@ -49,12 +50,13 @@ const Header = styled.div`
 
 const Text = styled.div`
   font-size: 15px;
+  text-align: left;
 `
 
 const OpenBattlesCard = styled.div`
   margin: 20px 10px;
   padding: 10px;
-  max-height: 45%;
+  max-height: 50%;
   min-height: 200px;
   min-width: 350px
   max-width: 450px;

@@ -132,7 +132,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
       </div>
       {!inBattle && !isPlayer && currentLocation && !refinery && !battleCooldownActive &&
         <ModalActions>
-          {(playerBattleStatus === '0' && canAttack || playerBattleStatus !== '0') && !targetbattleCooldownActive &&
+          {((playerBattleStatus === '0' && canAttack) || playerBattleStatus !== '0') && !targetbattleCooldownActive &&
             <Button  onClick={() => handleEnterBattle(player, 'attack')}>
               ATTACK
             </Button>
