@@ -373,7 +373,7 @@ const LocationCard = ({
           <span>{unexplored ? 'UNEXPLORED' : ''}</span>
           <span>{star ? <span>STAR Luminosity {Luminosity}</span> : ''}</span>
           <span>{wormhole && 'WORMHOLE'}</span>
-          <span>Discovered by {discovererName}</span>
+          <span>Discoverer: {discovererName}</span>
         </Row>
       </PlaceHeader>
       <PlaceBody>

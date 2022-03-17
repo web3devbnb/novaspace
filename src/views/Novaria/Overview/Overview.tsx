@@ -122,7 +122,7 @@ const Overview: React.FC = () => {
             Total Players: {playerCount}
             <OpenBattlesCard>
               <Header>Your Recent Battles</Header>
-              <SubHeader>(Only shows your battles at your current location)</SubHeader>
+              <SubHeader>(Only shows battles at your current location)</SubHeader>
               <OpenBattlesTable
                 battles={recentLocationBattles}
                 status={playerBattleStatus}
