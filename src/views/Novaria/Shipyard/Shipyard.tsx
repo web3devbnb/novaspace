@@ -291,7 +291,7 @@ const Shipyard = () => {
     setShipEXP(Number(selectedShip.experienceRequired))
   }
   const costMod = useGetCostMod()
-  const buildCost = new BigNumber((shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod)
+  const buildCost = ((shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod)/10**18
   const { onBuild } = useBuildShips()
  
   const timeMod = useGetTimeModifier()
@@ -498,7 +498,7 @@ const Shipyard = () => {
 
                 <Row style={{ justifyContent: 'space-between', color: 'white', fontSize: 12 }}>
                   <Text>
-                    COST: {(Number(buildCost) / 10 ** 18).toFixed(2) || 0}
+                    COST: {Number(buildCost).toFixed(2) || 0}
                     <span style={{ fontSize: 10 }}> NOVA</span>
                   </Text>
                   <Text>TIME: {((shipAmount * buildTime) / timeMod / 60 / 60).toFixed(2) || 0}hr</Text>

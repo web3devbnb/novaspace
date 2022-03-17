@@ -61,7 +61,7 @@ export const useBuildShips = () => {
 
   const handleBuildShips = useCallback( 
     async (x: string, y: string, classId: string, amount: number, buildCost) => {
-      const txHash = await buildShips(useFleetContract, x, y, classId, amount, buildCost, account)
+      const txHash = await buildShips(useFleetContract, x, y, classId, amount, new BigNumber(buildCost*10**18).toString(), account)
 
       console.info(txHash)
     },
