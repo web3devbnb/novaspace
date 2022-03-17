@@ -83,7 +83,8 @@ const Overview: React.FC = () => {
   const refinedMineral = useGetFleetMineralRefined(account)
 
   const playerCount = useGetPlayerCount()
-  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 1)
+  const currentTime = Math.round((new Date()). getTime() / 1000)
+  const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
   return (
     <Page>

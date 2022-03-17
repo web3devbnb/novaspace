@@ -315,19 +315,19 @@ export const useGetMiningCapacity = (fleet: string) => {
 }
 
 // returns list of battle IDs at a location
-export const useGetBattlesAtLocation = (x: any, y: any, resolveTime: number) => {
+export const useGetBattlesAtLocation = (x: any, y: any, startTime: number, endTime: number) => {
   const { fastRefresh } = useRefresh()
   const [battlesAtLocation, setBattlesAtLocation] = useState([])
 
   useEffect(() => {
     async function fetch() {
       if (x !== null) {
-        const data = await fleetContract.methods.getBattlesAtLocation(x, y, resolveTime).call()
+        const data = await fleetContract.methods.getBattlesAtLocation(x, y, startTime, endTime).call()
         setBattlesAtLocation(data)
       }
     }
     fetch()
-  }, [fastRefresh, x, y, resolveTime])
+  }, [fastRefresh, x, y, startTime, endTime])
   return battlesAtLocation
 }
 
