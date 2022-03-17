@@ -297,8 +297,8 @@ const Shipyard = () => {
   const handleBuild = async () => {
     setPendingTx(true)
     try {
-      await onBuild(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
-      console.log(shipyardX, shipyardY, shipId, shipAmount, buildCost.toString())
+      await onBuild(shipyardX, shipyardY, shipId, shipAmount, BigInt(buildCost).toString())
+      console.log(shipyardX, shipyardY, shipId, shipAmount, (buildCost).toString())
     } catch (error) {
       console.log('error: ', error)
     } finally {
