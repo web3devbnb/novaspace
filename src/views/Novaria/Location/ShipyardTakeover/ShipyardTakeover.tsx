@@ -39,7 +39,7 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, current
     const underAttack = Number(shipyard.status) !== 0
     const takeoverTimer = showCountdown(new Date(shipyard.takeoverDeadline * 1000))
     const [handleClick] = useModal(<TakeOverModal underDeadline={underDeadline} account={account} shipyard={shipyard} placeX={placeX} placeY={placeY} inCooldownStage={inCooldownStage} underAttack={underAttack} currentLocation={currentLocation} />)
-    console.log('shipyard battlestatus', shipyard.takeoverAddress )
+   
    
 
   return (

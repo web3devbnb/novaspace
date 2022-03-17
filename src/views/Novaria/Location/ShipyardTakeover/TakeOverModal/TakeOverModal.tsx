@@ -62,7 +62,6 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const playerInfo = useGetPlayer(player)
   const playerName = playerInfo.name
   const playerBattleStatus =playerInfo.battleStatus
-  console.log('player battle status', playerInfo)
   const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
@@ -70,6 +69,8 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const isTakeoverPlayer = player.toString() === account.toString()
   const isBiggerFleet = Number(useGetFleetSize(account)) > Number(fleetSize)
+  const currentOwner = shipyard.owner
+  const notCurrentOwner = (account).toString() !== (currentOwner).toString()
 
   const takeoverTimer = showCountdown(shipyard.takeoverDeadline * 1000)
 
@@ -145,21 +146,21 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
       </div> 
       }
       {underAttack && <Child>Takeover completes in {takeoverTimer}</Child>}
-      {!underAttack && currentLocation &&
+      {!underAttack && currentLocation && notCurrentOwner &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'INITIATE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline &&
+      {underAttack && isTakeoverPlayer && currentLocation && !underDeadline && 
         <ModalActions>
           <Button onClick={sendCompleteTakeoverTx}>
             {!pending ? 'COMPLETE Takeover' : 'pending...'}
           </Button>
         </ModalActions>
       }
-      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation && underDeadline &&
+      {underAttack && !isTakeoverPlayer && isBiggerFleet && currentLocation && notCurrentOwner &&
         <ModalActions>
           <Button onClick={sendTakeoverTx}>
             {!pending ? 'HIJACK Takeover' : 'pending...'}
