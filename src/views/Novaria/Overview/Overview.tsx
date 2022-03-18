@@ -88,7 +88,7 @@ const Overview: React.FC = () => {
   const playerEXP = player.experience
   const playerName = player.name
   const playerBattleStatus = useGetPlayerBattleStatus(account)
-  const refinedMineral = useGetFleetMineralRefined(account)
+  const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
 
   const playerCount = useGetPlayerCount()
   const currentTime = Math.round((new Date()). getTime() / 1000)
