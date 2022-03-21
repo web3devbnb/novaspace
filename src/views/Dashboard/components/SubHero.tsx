@@ -10,7 +10,7 @@ const Body = styled.div`
   margin-left: auto;
   width: 90%;
   display: flex;
-  height: 500px;
+  min-height: 500px;
   flex-direction: column;
 
   ${({ theme }) => theme.mediaQueries.md} {

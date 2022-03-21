@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import logo2 from '../assets/novadexbig-min.png'
 
 const Row = styled(Flex)`
-    height: 500px;
+    min-height: 500px;
     width: 95%;
     flex-direction: column;
     background-size: cover;

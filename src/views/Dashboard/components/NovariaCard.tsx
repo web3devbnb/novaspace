@@ -11,7 +11,7 @@ const Body = styled.div`
     background-position: center bottom;
     background-size: cover;
     background-image: url('/images/home/mainBackground-dark.jpg');
-    height: 500px;
+    min-height: 500px;
     width: 95%;
     margin: 20px auto;
     border: 2px solid #00aaff;

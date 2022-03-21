@@ -7,7 +7,7 @@ const Grid = styled(Flex)`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center bottom;
-  height: 500px;
+  min-height: 500px;
   width: 95%;
   margin: 20px auto;
   border-radius: 30px;
