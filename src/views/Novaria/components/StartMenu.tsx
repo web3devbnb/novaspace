@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Text, useWalletModal } from '@pancakeswap-libs/uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod } from 'hooks/useNovaria'
 import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
@@ -27,16 +26,10 @@ const Button = styled.button`
 
 `
 
-const BetaWarning = styled.p`
-  color: gold;
-  margin-bottom: 10px;
-`
-
 const StartMenu = () => {
   ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
   const { account } = useWallet()
   const accountAddress = account === null ? '' : account
-  const [isOpen, setOpen] = useState(false)
   const [pending, setPendingTx] = useState(false)
   const [name, setName] = useState('')
 
@@ -44,9 +37,7 @@ const StartMenu = () => {
   const mapContract = getMapAddress()
   const treasuryContract = getTreasuryAddress()
   console.log('fleet:', fleetContract, 'map:', mapContract, 'treasury:', treasuryContract)
-  const connected = account !== null
   const allowanceFleet = useGetAllowance(fleetContract)
-  const allowanceMap = useGetAllowance(mapContract)
   const allowanceTreasury = useGetAllowance(treasuryContract)
   const isAllowed = allowanceTreasury > 0 && allowanceFleet > 0
   const playerExists = useGetPlayerExists(accountAddress)
