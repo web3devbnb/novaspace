@@ -100,7 +100,7 @@ const Description = styled.div`
 const GameplayVideo = styled.iframe`
   height: 200px;
   width: 300px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   ${({ theme }) => theme.mediaQueries.md} {
     height: 400px;
     width: 600px;
@@ -154,17 +154,17 @@ const Novaria: React.FC = () => {
               </div>
             
 
+            <br />
+            <a href='https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' rel='noopener noreferrer' target='blank'><Button type="button">Buy NOVA</Button></a>
+            <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
+            <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
+            <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank'><Button type="button">Game Info</Button></a>
 
             <br /><br />
             <Description>
               Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain fueled by NOVA.
               Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS universe.
             </Description>
-
-            <a href='https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' rel='noopener noreferrer' target='blank'><Button type="button">Buy NOVA</Button></a>
-            <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
-            <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
-            <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank'><Button type="button">Game Info</Button></a>
 
           </SubHeading>
         </Column>

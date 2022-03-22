@@ -29,7 +29,16 @@ const Button = styled.button`
       color: gray;
       border-color: gray;
       cursor: not-allowed;
+      box-shadow: none;
   }
+`
+
+const Body = styled.div`
+  // background: #5c5c5c50;
+  // border-top: 1px solid gray;
+  // border-bottom: 1px solid gray;
+  padding: 10px 0;
+  font-size: 1.1rem;
 `
 
 const StartMenu = () => {
@@ -104,21 +113,21 @@ const StartMenu = () => {
   }
 
   return (
-    <div>
-      {!isAllowed && 'Step 1 - approve Fleet and Treasury contracts for the game'}<br />
+    <Body>
+      {!isAllowed && 'Step 1 - Approve game contracts'}<br />
       {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pendingApprove ? 'Approve Fleet Contract' : 'pending approval...'}</Button> : ''}
       {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}</Button> : ''}
 
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
       {!playerExists ?
-        <div>
+        <div style={{marginTop:10}}>
           Step 2 - Set your player name <br />
-          <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} />
+          <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} style={{marginTop:5}} />
           <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending} >{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <br />(costs {startCost} NOVA ~${startCostBUSD.toFixed(2)})
+          <br />(costs {startCost} NOVA ~${startCostBUSD.toFixed(2)}, includes 50 ships)
         </div> : ''}
       {playerExists ? <Button onClick={handleStartGameClick}>Start Game</Button> : ''}
-    </div>
+    </Body>
 
   )
 }
