@@ -97,6 +97,16 @@ const Description = styled.div`
   font-size: 1.5rem;
 `
 
+const GameplayVideo = styled.iframe`
+  height: 200px;
+  width: 300px;
+  margin-bottom: 10px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    height: 400px;
+    width: 600px;
+  }
+`
+
 const Novaria: React.FC = () => { 
   ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
   // const account = useContext(ConnectedAccountContext)
@@ -136,6 +146,8 @@ const Novaria: React.FC = () => {
       
               <div>
                 <span style={{color:'gold', marginBottom:10}}>Become a Legend</span> <br /> <br />
+                <GameplayVideo src='https://www.youtube.com/embed/BXmtualv27k' allowFullScreen />
+                
                 {connected ? <StartMenu />
                   : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
                 }
@@ -149,6 +161,7 @@ const Novaria: React.FC = () => {
               Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS universe.
             </Description>
 
+            <a href='https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' rel='noopener noreferrer' target='blank'><Button type="button">Buy NOVA</Button></a>
             <Button type="button" onClick={() => { setOpen(true) }} >Trailer</Button>
             <a href='https://discord.gg/vQdxbGx9pV' rel='noopener noreferrer' target='blank'><Button type="button" >Official Discord</Button></a>
             <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank'><Button type="button">Game Info</Button></a>

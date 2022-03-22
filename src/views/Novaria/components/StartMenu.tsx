@@ -6,6 +6,7 @@ import { getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addres
 import ReactGA from 'react-ga'
 import ReactPixel from 'react-facebook-pixel'
 import { useHistory } from 'react-router-dom'
+import { usePriceNovaBusd } from 'state/hooks'
 
 const Button = styled.button`
   cursor: pointer;
@@ -23,7 +24,12 @@ const Button = styled.button`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
     0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
     inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
-
+    
+  &:disabled {
+      color: gray;
+      border-color: gray;
+      cursor: not-allowed;
+  }
 `
 
 const StartMenu = () => {
@@ -31,17 +37,17 @@ const StartMenu = () => {
   const { account } = useWallet()
   const accountAddress = account === null ? '' : account
   const [pending, setPendingTx] = useState(false)
+  const [pendingApprove, setPendingApproveTx] = useState(false)
   const [name, setName] = useState('')
 
   const fleetContract = getFleetAddress()
-  const mapContract = getMapAddress()
   const treasuryContract = getTreasuryAddress()
-  console.log('fleet:', fleetContract, 'map:', mapContract, 'treasury:', treasuryContract)
   const allowanceFleet = useGetAllowance(fleetContract)
   const allowanceTreasury = useGetAllowance(treasuryContract)
   const isAllowed = allowanceTreasury > 0 && allowanceFleet > 0
   const playerExists = useGetPlayerExists(accountAddress)
   const startCost = 100 / useGetCostMod()
+  const startCostBUSD = Number(usePriceNovaBusd()) * startCost
 
   const history = useHistory()
 
@@ -66,13 +72,13 @@ const StartMenu = () => {
   }
 
   const sendApproveTx = async (contract) => {
-    setPendingTx(true)
+    setPendingApproveTx(true)
     try {
       await onClick(contract)
     } catch (error) {
       console.log('error: ', error)
     } finally {
-      setPendingTx(false)
+      setPendingApproveTx(false)
     }
   }
 
@@ -100,16 +106,16 @@ const StartMenu = () => {
   return (
     <div>
       {!isAllowed && 'Step 1 - approve Fleet and Treasury contracts for the game'}<br />
-      {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pending ? 'Approve Fleet Contract' : 'pending...'}</Button> : ''}
-      {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pending ? 'Approve Treasury Contract' : 'pending...'}</Button> : ''}
+      {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pendingApprove ? 'Approve Fleet Contract' : 'pending approval...'}</Button> : ''}
+      {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}</Button> : ''}
 
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
-      {isAllowed && !playerExists ?
+      {!playerExists ?
         <div>
           Step 2 - Set your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} />
-          <Button onClick={sendInsertCoinTx}>{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <br />(costs {startCost} nova)
+          <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending} >{!pending ? 'Set Player Name' : 'pending...'}</Button>
+          <br />(costs {startCost} NOVA ~${startCostBUSD.toFixed(2)})
         </div> : ''}
       {playerExists ? <Button onClick={handleStartGameClick}>Start Game</Button> : ''}
     </div>
