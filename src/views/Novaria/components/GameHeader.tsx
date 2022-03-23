@@ -99,7 +99,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         <Text glowing>
           <a 
           href='https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' 
-          target="blank"
+          target="_blank"
           rel="noreferrer noopener">
             NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)} </span> (+)
           </a>
@@ -116,14 +116,14 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
           <a
             href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
-            target="blank"
+            target="_blank"
             rel="noreferrer noopener"
           >
             <img src={tokenLogo} alt="nova logo" style={{ height: 30, margin: 5 }} />
           </a>
           <a
             href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
-            target="blank"
+            target="_blank"
             rel="noreferrer noopener"
           >
             <Text glowing>{novaPrice}</Text>
