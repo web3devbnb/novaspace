@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import {useModal} from '@pancakeswap-libs/uikit'
 import styled from 'styled-components/macro'
 import Select from 'react-select'
@@ -8,7 +8,6 @@ import {
   useGetSpaceDock,
   useBuildShips,
   useGetShips,
-  useClaimShips,
   useGetFleetSize,
   useGetMaxFleetSize,
   useGetMaxMineralCapacity,
@@ -24,13 +23,10 @@ import {
   useGetCurrentTravelCooldown,
   useGetCurrentMiningCooldown,
   useGetPlayerBattle,
-  useGetPlayerBattleStatus,
   useGetNameByAddress,
   useGetPlayerExists,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
-import BigNumber from 'bignumber.js'
-import { ethersToBigNumber } from 'utils/bigNumber'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ShipCardModal from './ShipCardModal'
@@ -224,8 +220,6 @@ const BuildStatsText = styled(Text)`
   font-size: 0.65rem;
 `
 
-const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
-
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const shipClasses = useGetShipClasses()
@@ -253,12 +247,10 @@ const Shipyard = () => {
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
   const [pending, setPendingTx] = useState(false)
-  const [claimAmount, setClaimAmount] = useState(null)
   const [shipEXP, setShipEXP] = useState(0)
 
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
-  const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerExists = useGetPlayerExists(account)
 
@@ -279,6 +271,7 @@ const Shipyard = () => {
     setShipyardY(selectedShipyard.coordY)
     setShipyardOwner(selectedShipyard.owner)
     setShipyardFee(selectedShipyard.feePercent)
+
   }
 
   const handleShipChange = (option) => {
@@ -307,32 +300,6 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-
-  const { onClaim } = useClaimShips()
-
-  const handleClaim = async (claimId) => {
-    setPendingTx(true)
-    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-    try {
-      await onClaim(claimId, claimAmount)
-    } catch (error) {
-      // console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-  const handleClaimMax = async (claimId, amount) => {
-    setPendingTx(true)
-    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-    try {
-      await onClaim(claimId, amount)
-    } catch (error) {
-      // console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-
 
   const isOwner = shipyardOwner === account.toString()
   const [newName, setShipyardNewName] = useState('')
