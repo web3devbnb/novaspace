@@ -59,9 +59,17 @@ export const useBuildShips = () => {
   const { account } = useWallet()
   const useFleetContract = useFleet()
 
-  const handleBuildShips = useCallback( 
+  const handleBuildShips = useCallback(
     async (x: string, y: string, classId: string, amount: number, buildCost) => {
-      const txHash = await buildShips(useFleetContract, x, y, classId, amount, new BigNumber(buildCost*10**18).toString(), account)
+      const txHash = await buildShips(
+        useFleetContract,
+        x,
+        y,
+        classId,
+        amount,
+        new BigNumber(buildCost * 10 ** 18).toString(),
+        account,
+      )
 
       console.info(txHash)
     },
@@ -111,7 +119,6 @@ export const useCompleteShipyardTakeover = () => {
   )
   return { onCompleteTakeover: handleClaimShips }
 }
-
 
 // mission options: ATTACK (1), DEFEND (2). target is address
 export const useEnterBattle = () => {
@@ -335,7 +342,16 @@ export const useGetBattlesAtLocation = (x: any, y: any, startTime: number, endTi
 // returns battle info
 export const useGetBattle = (Id: number) => {
   const { fastRefresh } = useRefresh()
-  const [battle, setBattle] = useState({ attackTeam: [], defendTeam: [], deadline: 0, coordX: 0, coordY: 0, resolvedTime: 0, attackers: [], defenders: []})
+  const [battle, setBattle] = useState({
+    attackTeam: [],
+    defendTeam: [],
+    deadline: 0,
+    coordX: 0,
+    coordY: 0,
+    resolvedTime: 0,
+    attackers: [],
+    defenders: [],
+  })
 
   useEffect(() => {
     async function fetch() {
@@ -404,20 +420,27 @@ export const useGetAttackPower = (fleet) => {
 
 export const useGetPlayer = (player) => {
   const { fastRefresh } = useRefresh()
-  const [Player, setPlayer] = useState({ name: '', address: '', experience: 0,  battleId: null, mineral: 0, battleStatus: 0 })
+  const [Player, setPlayer] = useState({
+    name: '',
+    address: '',
+    experience: 0,
+    battleId: null,
+    mineral: 0,
+    battleStatus: 0,
+  })
 
   useEffect(() => {
     async function fetch() {
-      if (player !== null ) {
+      if (player !== null) {
         const playerId = await fleetContract.methods.addressToPlayer(player).call()
         const data = await fleetContract.methods.players(playerId).call()
         setPlayer({
           name: data[0],
           address: data[1],
-          experience: data[2], 
-          battleId: data[3], 
-          mineral: data[4], 
-          battleStatus: data[5], 
+          experience: data[2],
+          battleId: data[3],
+          mineral: data[4],
+          battleStatus: data[5],
         })
       }
     }
@@ -432,13 +455,17 @@ export const useGetNameByAddress = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      if (player === '0x0000000000000000000000000000000000000000') { setName(' ') } 
-      else if (player === null) {setName(' ')}
-      else if (player === '') {setName(' ')}
-      else {
-      const id = await fleetContract.methods.addressToPlayer(player).call()
-      const data = await fleetContract.methods.players(id).call()
-      setName(data[0])}
+      if (player === '0x0000000000000000000000000000000000000000') {
+        setName(' ')
+      } else if (player === null) {
+        setName(' ')
+      } else if (player === '') {
+        setName(' ')
+      } else {
+        const id = await fleetContract.methods.addressToPlayer(player).call()
+        const data = await fleetContract.methods.players(id).call()
+        setName(data[0])
+      }
     }
     fetch()
   }, [fastRefresh, player])
@@ -495,11 +522,13 @@ export const useTunnel = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleTunnel = useCallback (
+  const handleTunnel = useCallback(
     async (x: number, y: number) => {
-    const txHash = await tunnel(useMapContract, x, y, account)
-    console.info(txHash)
-  }, [account, useMapContract])
+      const txHash = await tunnel(useMapContract, x, y, account)
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
   return { onTunnel: handleTunnel }
 }
 
@@ -529,13 +558,10 @@ export const useCollect = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleCollect = useCallback(
-    async () => {
-      const txHash = await collect(useMapContract, account)
-      console.info(txHash)
-    },
-    [account, useMapContract],
-  )
+  const handleCollect = useCallback(async () => {
+    const txHash = await collect(useMapContract, account)
+    console.info(txHash)
+  }, [account, useMapContract])
   return { onCollect: handleCollect }
 }
 
@@ -652,8 +678,7 @@ export const useGetExploreCost = (x, y, account) => {
 
 export const useGetPlaceInfo = (x1: any, y1: any) => {
   const { fastRefresh } = useRefresh()
-  const [placeInfo, setPlaceInfo] = useState(
-    {
+  const [placeInfo, setPlaceInfo] = useState({
     name: '',
     type: '',
     scrap: 0,
@@ -665,15 +690,13 @@ export const useGetPlaceInfo = (x1: any, y1: any) => {
     luminosity: 0,
     isMining: false,
     discoverer: '',
-  }
-  )
+  })
 
   useEffect(() => {
     async function fetch() {
       if (x1 !== null) {
         const data = await mapContract.methods.getPlaceInfo(x1, y1).call()
-        setPlaceInfo(
-          {
+        setPlaceInfo({
           name: data[0],
           type: data[1],
           scrap: data[2],
@@ -685,8 +708,7 @@ export const useGetPlaceInfo = (x1: any, y1: any) => {
           luminosity: data[8],
           isMining: data[9],
           discoverer: data[10],
-        }
-        )
+        })
       }
     }
     fetch()
