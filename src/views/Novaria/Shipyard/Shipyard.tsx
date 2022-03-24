@@ -211,6 +211,53 @@ const ShipyardEditor = styled.div`
   margin-top: 10px;
 `
 
+const selectStyles = {
+  container: (provided) => ({
+    ...provided,
+    margin: '10px 0',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    border: '2px solid #289794',
+    borderRadius: '0px',
+    color: 'black',
+    padding: 2,
+    background: 'black',
+  }),
+  control: (provided) => ({
+    ...provided,
+    color: '#289794',
+    border: '1px solid #289794',
+    borderRadius: '0px',
+    background: 'transparent',
+  }),
+  option: (provided) => ({
+    ...provided,
+    color: '#289794',
+    background: 'transparent',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: '#289794',
+    background: 'transparent',
+  }),
+  input: (provided) => ({
+    ...provided,
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: '#289794',
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    color: '#289794',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: '#289794',
+  }),
+}
+
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const shipClasses = useGetShipClasses()
@@ -335,54 +382,6 @@ const Shipyard = () => {
     }
   }
 
-  // styles for the dropdown Selector
-  const customStyles = {
-    container: (provided) => ({
-      ...provided,
-      margin: '10px 0',
-    }),
-    menu: (provided) => ({
-      ...provided,
-      border: '2px solid #289794',
-      borderRadius: '0px',
-      color: 'black',
-      padding: 2,
-      background: 'black',
-    }),
-    control: (provided) => ({
-      ...provided,
-      color: '#289794',
-      border: '1px solid #289794',
-      borderRadius: '0px',
-      background: 'transparent',
-    }),
-    option: (provided) => ({
-      ...provided,
-      color: '#289794',
-      background: 'transparent',
-    }),
-    placeholder: (provided) => ({
-      ...provided,
-      color: '#289794',
-      background: 'transparent',
-    }),
-    input: (provided) => ({
-      ...provided,
-    }),
-    dropdownIndicator: (provided) => ({
-      ...provided,
-      color: '#289794',
-    }),
-    valueContainer: (provided) => ({
-      ...provided,
-      color: '#289794',
-    }),
-    singleValue: (provided) => ({
-      ...provided,
-      color: '#289794',
-    }),
-  }
-
   return (
     <Page>
       <GameHeader
@@ -412,13 +411,13 @@ const Shipyard = () => {
                   placeholder="Select Shipyard"
                   options={shipyards.map((s, i) => ({ value: i, label: s.name }))}
                   onChange={handleShipyardChange}
-                  styles={customStyles}
+                  styles={selectStyles}
                 />
                 <Select
                   placeholder="Select Ship"
                   options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                   onChange={handleShipChange}
-                  styles={customStyles}
+                  styles={selectStyles}
                 />
                 {playerEXP < shipEXP && <div>*requires {shipEXP} EXP</div>}
                 {!currentLocation && shipyardX !== null && (
