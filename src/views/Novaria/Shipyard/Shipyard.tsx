@@ -293,7 +293,7 @@ const Shipyard = () => {
     }
   }
 
-  const isOwner = shipyardOwner === account.toString()
+  const isOwner = shipyardOwner === account
   const [newName, setShipyardNewName] = useState('')
   const { onShipyardChange } = useSetShipyardName()
   const sendShipyardNameChange = async (nameX, nameY, name) => {
