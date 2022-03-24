@@ -22,8 +22,20 @@ const StatsText = styled.div`
   color: #289794;
 `
 
+interface TShipyard {
+  coordX: number
+  coordY: number
+  feePercent: number
+  lastTakeoverTime: number
+  name: string
+  owner: string
+  status: number
+  takeoverAddress: string
+  takeoverDeadline: number
+}
+
 interface ShipyardStatsProps {
-  shipyard: { name: string; owner: string; feePercent: number; coordX: number; coordY: number }
+  shipyard: TShipyard
 }
 
 const ShipyardStats: React.FC<ShipyardStatsProps> = ({ shipyard }) => {
