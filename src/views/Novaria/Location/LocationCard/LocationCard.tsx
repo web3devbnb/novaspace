@@ -164,7 +164,7 @@ const Location = styled.div`
   text-align: right;
 `
 
-const Text = styled.text`
+const Text = styled.div`
   text-align: center;
   margin-bottom: 10px;
   font-size: 12px;
