@@ -142,7 +142,7 @@ const GameMenu = ({ pageName }) => {
             &lt;&lt;
           </ToggleButton>
           {MENU_DATA.map((item) => (
-            <Link href={item.href}>
+            <Link href={item.href} key={item.internalPageName}>
               <IconContainer active={pageName === item.internalPageName}>
                 <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
               </IconContainer>
@@ -159,7 +159,7 @@ const GameMenu = ({ pageName }) => {
             &gt;&gt;
           </ToggleButton>
           {MENU_DATA.map((item) => (
-            <Link href={item.href}>
+            <Link href={item.href} key={item.internalPageName}>
               <IconContainer active={pageName === item.internalPageName}>
                 <Icon src={item.img.src} alt={item.img.alt} title={item.title} />
               </IconContainer>
