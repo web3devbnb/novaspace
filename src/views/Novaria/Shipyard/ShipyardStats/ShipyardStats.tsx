@@ -40,7 +40,7 @@ const ShipyardStats: React.FC<ShipyardStatsProps> = ({ shipyard }) => {
   return (
     <StatsContainer>
       {stats.map((stat) => (
-        <StatsRow>
+        <StatsRow key={stat.label}>
           <StatsText>{stat.label}</StatsText>
           <StatsText>{stat.value}</StatsText>
         </StatsRow>

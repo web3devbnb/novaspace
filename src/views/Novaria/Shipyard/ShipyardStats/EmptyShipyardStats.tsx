@@ -31,7 +31,7 @@ const EmptyShipyardStats = () => {
   return (
     <StatsContainer>
       {stats.map((stat) => (
-        <StatsRow>
+        <StatsRow key={stat.label}>
           <StatsText>{stat.label}</StatsText>
           <StatsText>{stat.value}</StatsText>
         </StatsRow>
