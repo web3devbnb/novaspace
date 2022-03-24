@@ -229,7 +229,6 @@ const Shipyard = () => {
   const playerName = player.name
 
   const [currentShipyard, setCurrentShipyard] = useState(null)
-  const [shipyardName, setShipyardName] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
   const [shipyardOwner, setShipyardOwner] = useState(null)
@@ -259,7 +258,6 @@ const Shipyard = () => {
     const selectedShipyard = shipyards[selectedShipyardId]
 
     setCurrentShipyard(selectedShipyard)
-    setShipyardName(selectedShipyard.name)
     setShipyardX(selectedShipyard.coordX)
     setShipyardY(selectedShipyard.coordY)
     setShipyardOwner(selectedShipyard.owner)
