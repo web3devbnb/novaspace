@@ -45,7 +45,7 @@ const PlayersTable = ({ account, refinery, players, playerBattleStatus, currentL
       </div>
       <TableContent isRefinery={refinery}>
         {players.map((player) => (
-          <PlayersTableRow refinery={refinery} account={account} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
+          <PlayersTableRow key={player} refinery={refinery} account={account} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
         ))}
       </TableContent>
     </Body>
