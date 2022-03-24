@@ -1,6 +1,7 @@
 import { useGetNameByAddress, useGetPlaceInfo } from 'hooks/useNovaria'
 import React from 'react'
 import styled from 'styled-components'
+import { IShipyard } from 'views/Novaria/types'
 
 const StatsContainer = styled.div`
   margin-top: 10px;
@@ -22,20 +23,8 @@ const StatsText = styled.div`
   color: #289794;
 `
 
-interface TShipyard {
-  coordX: number
-  coordY: number
-  feePercent: number
-  lastTakeoverTime: number
-  name: string
-  owner: string
-  status: number
-  takeoverAddress: string
-  takeoverDeadline: number
-}
-
 interface ShipyardStatsProps {
-  shipyard: TShipyard
+  shipyard: IShipyard
 }
 
 const ShipyardStats: React.FC<ShipyardStatsProps> = ({ shipyard }) => {
