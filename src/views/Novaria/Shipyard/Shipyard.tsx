@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import {useModal} from '@pancakeswap-libs/uikit'
+import React, { useState, useContext } from 'react'
+import { useModal } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components/macro'
 import Select from 'react-select'
 import {
@@ -8,7 +8,6 @@ import {
   useGetSpaceDock,
   useBuildShips,
   useGetShips,
-  useClaimShips,
   useGetFleetSize,
   useGetMaxFleetSize,
   useGetMaxMineralCapacity,
@@ -24,13 +23,9 @@ import {
   useGetCurrentTravelCooldown,
   useGetCurrentMiningCooldown,
   useGetPlayerBattle,
-  useGetPlayerBattleStatus,
-  useGetNameByAddress,
   useGetPlayerExists,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
-import BigNumber from 'bignumber.js'
-import { ethersToBigNumber } from 'utils/bigNumber'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ShipCardModal from './ShipCardModal'
@@ -43,6 +38,7 @@ import YourFleetStats from '../Location/YourFleetStats'
 import BattleStatus from '../Location/BattleStatus'
 import BodyWrapper from '../components/BodyWrapper'
 import BuildQueue from './BuildQueue'
+import { EmptyShipyardStats, ShipyardStats } from './ShipyardStats'
 
 const Page = styled.div`
   font-size: 15px;
@@ -53,7 +49,6 @@ const Page = styled.div`
 `
 
 const PageRow = styled.div`
-  
   display: flex;
   flex-wrap: no-wrap;
   @media (max-width: 420px) {
@@ -96,13 +91,12 @@ const ShipClassMenu = styled.div`
     background-color: #5affff;
   }
 
-
   // @media (max-width: 1520px) {
   //   max-width: 740px;
   // }
 `
 
-const BuildRow=styled.div`
+const BuildRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
@@ -120,7 +114,6 @@ const ShipClassCard = styled.img`
   //height: 350px;
 `
 
-
 const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -128,7 +121,6 @@ const Row = styled.div`
   align-items: center;
   width: 100%;
 `
-
 
 const Item = styled.div``
 
@@ -201,7 +193,6 @@ const Input = styled.input`
   text-align: right;
 `
 
-
 const FleetMenu = styled.div`
   display: flex;
   flex-direction: column;
@@ -220,12 +211,6 @@ const ShipyardEditor = styled.div`
   margin-top: 10px;
 `
 
-const BuildStatsText = styled(Text)`
-  font-size: 0.65rem;
-`
-
-const accountEllipsis = (account) => `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
-
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const shipClasses = useGetShipClasses()
@@ -243,6 +228,7 @@ const Shipyard = () => {
   const playerEXP = Number(player.experience)
   const playerName = player.name
 
+  const [currentShipyard, setCurrentShipyard] = useState(null)
   const [shipyardName, setShipyardName] = useState(null)
   const [shipyardX, setShipyardX] = useState(null)
   const [shipyardY, setShipyardY] = useState(null)
@@ -253,27 +239,26 @@ const Shipyard = () => {
   const [shipCost, setShipCost] = useState(0)
   const [shipAmount, setShipAmount] = useState(0)
   const [pending, setPendingTx] = useState(false)
-  const [claimAmount, setClaimAmount] = useState(null)
   const [shipEXP, setShipEXP] = useState(0)
 
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
-  const playerBattleStatus = useGetPlayerBattleStatus(account)
   const playerBattleInfo = useGetPlayerBattle(account)
   const playerExists = useGetPlayerExists(account)
 
   const currentLocation = Number(fleetLocation.X) === Number(shipyardX) && Number(fleetLocation.Y) === Number(shipyardY)
 
-  const [handleViperClick] = useModal(<ShipCardModal shipclass='Viper' />)
-  const [handleMoleClick] = useModal(<ShipCardModal shipclass='P.U.P.' />)
-  const [handleFireflyClick] = useModal(<ShipCardModal shipclass='Firefly' />)
-  const [handleGorianClick] = useModal(<ShipCardModal shipclass='Gorian' />)
-  const [handleUnknownClick] = useModal(<ShipCardModal shipclass='Unknown' />)
+  const [handleViperClick] = useModal(<ShipCardModal shipclass="Viper" />)
+  const [handleMoleClick] = useModal(<ShipCardModal shipclass="P.U.P." />)
+  const [handleFireflyClick] = useModal(<ShipCardModal shipclass="Firefly" />)
+  const [handleGorianClick] = useModal(<ShipCardModal shipclass="Gorian" />)
+  const [handleUnknownClick] = useModal(<ShipCardModal shipclass="Unknown" />)
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
     const selectedShipyard = shipyards[selectedShipyardId]
 
+    setCurrentShipyard(selectedShipyard)
     setShipyardName(selectedShipyard.name)
     setShipyardX(selectedShipyard.coordX)
     setShipyardY(selectedShipyard.coordY)
@@ -291,9 +276,9 @@ const Shipyard = () => {
     setShipEXP(Number(selectedShip.experienceRequired))
   }
   const costMod = useGetCostMod()
-  const buildCost = ((shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod)/10**18
+  const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod / 10 ** 18
   const { onBuild } = useBuildShips()
- 
+
   const timeMod = useGetTimeModifier()
 
   const handleBuild = async () => {
@@ -307,32 +292,6 @@ const Shipyard = () => {
       setPendingTx(false)
     }
   }
-
-  const { onClaim } = useClaimShips()
-
-  const handleClaim = async (claimId) => {
-    setPendingTx(true)
-    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-    try {
-      await onClaim(claimId, claimAmount)
-    } catch (error) {
-      // console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-  const handleClaimMax = async (claimId, amount) => {
-    setPendingTx(true)
-    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-    try {
-      await onClaim(claimId, amount)
-    } catch (error) {
-      // console.log('error: ', error)
-    } finally {
-      setPendingTx(false)
-    }
-  }
-
 
   const isOwner = shipyardOwner === account.toString()
   const [newName, setShipyardNewName] = useState('')
@@ -426,14 +385,6 @@ const Shipyard = () => {
     }),
   }
 
-  
-  const ownerName = useGetNameByAddress(shipyardOwner)
-  const buildStats = [
-    { label: 'LOCATION', value: shipyardName ? `${shipyardName} (${shipyardX}, ${shipyardY})` : '-' },
-    { label: 'OWNER', value: shipyardOwner ? ownerName : '-' },
-    { label: 'BUILD FEE', value: shipyardFee ? `${shipyardFee}%` : '-' },
-  ]
-
   return (
     <Page>
       <GameHeader
@@ -449,16 +400,11 @@ const Shipyard = () => {
         <BodyWrapper>
           <LeftCol>
             <ShipClassMenu>
-              <ShipClassCard src={viperCard} alt="viper" role='button' 
-                onClick={handleViperClick} />
-              <ShipClassCard src={moleCard} alt="mole" role='button' 
-                onClick={handleMoleClick} />
-              <ShipClassCard src={fireflyCard} alt="firefly" role='button' 
-                onClick={handleFireflyClick} />
-              <ShipClassCard src={gorianCard} alt="gorian" role='button' 
-                onClick={handleGorianClick} />
-              <ShipClassCard src={unknownCard} alt="coming soon" role='button' 
-                onClick={handleUnknownClick} />
+              <ShipClassCard src={viperCard} alt="viper" role="button" onClick={handleViperClick} />
+              <ShipClassCard src={moleCard} alt="mole" role="button" onClick={handleMoleClick} />
+              <ShipClassCard src={fireflyCard} alt="firefly" role="button" onClick={handleFireflyClick} />
+              <ShipClassCard src={gorianCard} alt="gorian" role="button" onClick={handleGorianClick} />
+              <ShipClassCard src={unknownCard} alt="coming soon" role="button" onClick={handleUnknownClick} />
             </ShipClassMenu>
 
             <BuildRow>
@@ -477,7 +423,9 @@ const Shipyard = () => {
                   styles={customStyles}
                 />
                 {playerEXP < shipEXP && <div>*requires {shipEXP} EXP</div>}
-                {!currentLocation && shipyardX !== null && <div style={{color:'yellow'}}>*selected shipyard is at different location</div>}
+                {!currentLocation && shipyardX !== null && (
+                  <div style={{ color: 'yellow' }}>*selected shipyard is at different location</div>
+                )}
                 <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
                   <InputIcon>QTY</InputIcon>
                   <Input
@@ -503,23 +451,17 @@ const Shipyard = () => {
                   </Text>
                   <Text>TIME: {((shipAmount * buildTime) / timeMod / 60 / 60).toFixed(2) || 0}hr</Text>
                 </Row>
-                <div style={{ color: '#289794', marginTop: '10px' }}>
-                  {buildStats.map((buildStat) => (
-                    <Row style={{ justifyContent: 'space-between' }}>
-                      <BuildStatsText>{buildStat.label}</BuildStatsText>
-                      <BuildStatsText>{buildStat.value}</BuildStatsText>
-                    </Row>
-                  ))}
-                </div>
+
+                {currentShipyard ? <ShipyardStats shipyard={currentShipyard} /> : <EmptyShipyardStats />}
               </BuildMenu>
-              <BuildQueue fleetLocation={fleetLocation} />              
+              <BuildQueue fleetLocation={fleetLocation} />
             </BuildRow>
           </LeftCol>
 
           <RightCol>
             <FleetMenu>
               <Header style={{ color: 'white' }}>MY FLEET</Header>
-              <YourFleetStats 
+              <YourFleetStats
                 account={account}
                 playerBattleInfo={playerBattleInfo}
                 fleetSize={fleetSize}
@@ -536,13 +478,13 @@ const Shipyard = () => {
 
               <BattleProgressCard>
                 <Header style={{ color: 'white' }}>BATTLE PROGRESS</Header>
-                {playerExists &&
+                {playerExists && (
                   <BattleStatus
                     playerBattleInfo={playerBattleInfo}
                     playerBattleStatus={playerBattleInfo.battleStatus}
                     currentLocation={fleetLocation}
                   />
-                }
+                )}
               </BattleProgressCard>
               <ShipyardEditor>
                 {isOwner && (

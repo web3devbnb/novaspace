@@ -334,7 +334,6 @@ const Map: React.FC = () => {
                             {planet.hasRefinery === true && <GridIcon src={refineryLogo} alt="planet has refinery" />}
                             {planet.hasShipyard === true && <GridIcon src={shipyardLogo} alt="planet has shipyard" />}
                             {planet.availableMineral > 0 && <GridIcon src={mineralLogo} alt="planet has minerals" />}
-                            {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
                             {(Number(ry) + Number(mapData.y0)).toString() === fleetLocation.Y.toString() &&
                               (Number(x) + Number(mapData.x0)).toString() === fleetLocation.X.toString() && (
                                 <IndicatorImg src={youLogo} alt="current location" />
@@ -359,6 +358,7 @@ const Map: React.FC = () => {
                                 alt="unexplored"
                               />
                             )}
+                            {planet.placeType === '5' && <GridCellImg src={asteroid} alt="asteroid" />}
                             {planet.placeType === '6' && <GridCellImg src={wormholeLogo} alt="wormhole" />}
                             {planet.placeType === '4' && <GridCellImg src={planetLogo} alt="planet" />}
                             {planet.placeType === '3' && <GridCellImg src={star1} alt="star" />}
