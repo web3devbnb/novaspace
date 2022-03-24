@@ -29,6 +29,7 @@ import Legend from './Legend'
 
 const fetchMapData = async (contract, lx: number, ly: number) => {
   const data = await contract.methods.getCoordinatePlaces(lx, ly).call()
+  console.log(data)
   return data
 }
 
@@ -80,13 +81,16 @@ const Grid = styled.div`
   padding: 10px;
 `
 
-const GridCell = styled.div`
+const GridCell = styled.div<{hasBattle: boolean}>`
   display: flex;
   color: white;
   justify-content: center;
   align-items: center;
   text-align: center;
   direction: ltr;
+
+  border: ${(props) => props.hasBattle && '1px solid red'};
+
   @media (mmin-width: 800px) {
     width: 100px;
     height: 80px;
@@ -315,7 +319,7 @@ const Map: React.FC = () => {
                 const ry = Number(mapData.data.length - y - 1)
                 return mapData.data[y].map((planet, x) => {
                   return (
-                    <GridCell>
+                    <GridCell hasBattle={planet.activeBattleCount > 0}>
                       <Link
                         to={{
                           pathname: '/location',

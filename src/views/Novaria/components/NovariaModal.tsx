@@ -45,7 +45,7 @@ const ModalTitle = styled(Flex)`
   flex: 1;
   color: #5affff;
   padding: 10px;
-  padding-top: 20px;
+  padding-top: 30px;
 `;
 
 const Modal: React.FC<Props> = ({
@@ -73,7 +73,7 @@ const Modal: React.FC<Props> = ({
         </StyledIconButton>
       )}
     </ModalHeader>
-    <Flex flexDirection="column" p={3} style={{color:'#5affff', border:'1px solid #5affff'}}>
+    <Flex flexDirection="column" p={3} style={{color:'#5affff', paddingTop:50}}>
       {children}
     </Flex>
   </StyledModal>
