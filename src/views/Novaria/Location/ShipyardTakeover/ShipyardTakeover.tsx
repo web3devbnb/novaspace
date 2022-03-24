@@ -1,8 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { getWeb3 } from 'utils/web3'
 import { useModal } from '@pancakeswap-libs/uikit'
-import { useRecall, useShipyardTakeover } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import TakeOverModal from './TakeOverModal'
 

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
   useEnterBattle,
@@ -13,8 +13,6 @@ import {
   useGetShips,
   useGetBattle,
 } from 'hooks/useNovaria'
-import { ConnectedAccountContext } from 'App'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
@@ -50,7 +48,6 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
   const ships = useGetShips(player)
   const shipClasses = useGetShipClasses()
   const playerInfo = useGetPlayer(player)
-  const battleStatus = playerInfo.battleStatus
   const exp = playerInfo.experience
   const playerName = playerInfo.name
   const playerBattleStatus =(playerInfo.battleStatus).toString()

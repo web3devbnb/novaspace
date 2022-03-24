@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import Page from 'components/layout/Page'
@@ -109,9 +109,7 @@ const GameplayVideo = styled.iframe`
 
 const Novaria: React.FC = () => { 
   ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
-  // const account = useContext(ConnectedAccountContext)
   const { account, connect, reset } = useWallet()
-  const accountAddress = account === null ? '' : account
   const connected = account !== null
   const [isOpen, setOpen] = useState(false)
   const { onPresentConnectModal } = useWalletModal(connect, reset)

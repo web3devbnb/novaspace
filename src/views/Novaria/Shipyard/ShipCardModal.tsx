@@ -1,6 +1,5 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import ModalActions from '../components/NovariaModalActions'
 import Modal from '../components/CardModal'
 import moleCard from '../assets/moleCard.png'
 import viperCard from '../assets/viperCard.png'

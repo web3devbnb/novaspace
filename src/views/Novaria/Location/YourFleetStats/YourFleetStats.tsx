@@ -52,7 +52,6 @@ const YourFleetStats = ({
   const battleCooldown = showCountdown(new Date(Number(resolvedTime)*1000))
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
-  const fleetCoords = [Number(fleetLocation.X), Number(fleetLocation.Y)]
   const Haven = Number(fleetLocation.X) === Number(0) && Number(fleetLocation.Y) === Number(0)
   const smallFleet = Number(fleetSize) < Number(25)
   const canRecall = smallFleet && !Haven

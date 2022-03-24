@@ -8,7 +8,6 @@ import {
   useGetTravelCooldown,
   useGetFleetTravelCost,
   useMine,
-  useGetTimeModifier,
   useGetExploreCost,
   useTunnel,
   useGetNovaBalance,

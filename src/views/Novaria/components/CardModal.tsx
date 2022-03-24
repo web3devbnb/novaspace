@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconButton, Heading, Flex, ArrowBackIcon, CloseIcon, InjectedModalProps } from '@pancakeswap-libs/uikit'
+import { IconButton, Flex, CloseIcon, InjectedModalProps } from '@pancakeswap-libs/uikit'
 
 
 interface Props extends InjectedModalProps {
@@ -27,14 +27,6 @@ const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-`;
-
-const ModalTitle = styled(Flex)`
-  align-items: center;
-  flex: 1;
-  color: #5affff;
-  padding: 10px;
-  padding-top: 20px;
 `;
 
 const Modal: React.FC<Props> = ({

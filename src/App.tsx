@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import { ResetCSS, Text, Button, useWalletModal } from '@pancakeswap-libs/uikit'
+import { ResetCSS, Button, useWalletModal } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
 import useEagerConnect from 'hooks/useEagerConnect'

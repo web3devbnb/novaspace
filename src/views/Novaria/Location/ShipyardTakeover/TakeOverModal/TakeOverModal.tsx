@@ -1,12 +1,7 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import {
-  useEnterBattle,
-  useGetAttackPower,
-  useGetFleetLocation,
-  useGetFleetMineral,
   useGetFleetSize,
-  useGetMaxMineralCapacity,
   useGetPlayer,
   useGetShipClasses,
   useGetShips,
@@ -15,7 +10,6 @@ import {
   useGetNameByAddress,
 } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
-import { ConnectedAccountContext } from 'App'
 import ModalActions from '../../../components/NovariaModalActions'
 import NovariaModal from '../../../components/NovariaModal'
 
@@ -63,11 +57,7 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
   const playerInfo = useGetPlayer(player)
   const playerName = playerInfo.name
   const playerBattleStatus =playerInfo.battleStatus
-  const fleetLocation = useGetFleetLocation(player)
   const fleetSize = useGetFleetSize(player)
-  const fleetPower = useGetAttackPower(player)
-  const fleetMineral = useGetFleetMineral(player)
-  const fleetMaxMineral = useGetMaxMineralCapacity(player)
   const isTakeoverPlayer = player.toString() === account.toString()
   const isBiggerFleet = Number(useGetFleetSize(account)) > Number(fleetSize)
   const canInitiate = Number(useGetFleetSize(account)) >= 1000
@@ -78,8 +68,6 @@ const TakeoverModal: React.FC<TakeoverModalProps> = ({ underDeadline, account, s
 
   const takeoverTimer = showCountdown(shipyard.takeoverDeadline * 1000)
 
-  const { onEnterBattle } = useEnterBattle()
-  
   const { onTakeover } = useShipyardTakeover()
   const { onCompleteTakeover } = useCompleteShipyardTakeover()
   const sendTakeoverTx = async () => {

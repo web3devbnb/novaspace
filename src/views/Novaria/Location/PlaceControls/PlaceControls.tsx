@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { getWeb3 } from 'utils/web3'
-import { useChangeName, useGetPlaceInfo, useGetShipyards, useRecall, useSetShipyardName } from 'hooks/useNovaria'
+import { useChangeName } from 'hooks/useNovaria'
 
 const Body = styled.div`
   display: flex;
@@ -29,7 +28,6 @@ const Button = styled.button`
 `
 
 const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) => {
-  const web3 = getWeb3()
   const [pending, setPendingTx] = useState(false)
   const [planetName, setPlanetName] = useState('')
 

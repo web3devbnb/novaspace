@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { useEnterBattle, useGetBattle, useGoBattle, useGetNameByAddress } from 'hooks/useNovaria'
+import { useEnterBattle, useGetBattle, useGoBattle } from 'hooks/useNovaria'
 import ModalActions from '../../../components/NovariaModalActions'
 import Modal from '../../../components/NovariaModal'
 import PlayerList from './PlayerList'
@@ -42,10 +42,6 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const resolvedTime = Number(battleInfo.resolvedTime)+900
   const battleCooldownActive = new Date(Number(resolvedTime)*1000) > new Date()
 
-
-  const GetPlayerName = (address) => {
-    useGetNameByAddress(address)
-  }
   const { onBattle } = useGoBattle()
   
   const sendBattleTx = async () => {

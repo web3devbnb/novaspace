@@ -1,6 +1,5 @@
 import { useModal } from '@pancakeswap-libs/uikit'
 import { useGetAttackPower, useGetFleetSize, useGetNameByAddress, useGetFleetMineral } from 'hooks/useNovaria'
-import { getWeb3 } from 'utils/web3'
 import React from 'react'
 import styled from 'styled-components'
 import PlayerModal from '../PlayerModal'
@@ -25,7 +24,6 @@ const Cell = styled.div`
 `
 
 const PlayersTableRow = ({ account, refinery, player, status, currentLocation }) => {
-  const web3 = getWeb3()
   const fleetSize = useGetFleetSize(player)
   const fleetPower = useGetAttackPower(player)
   const name = useGetNameByAddress(player)
