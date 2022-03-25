@@ -62,6 +62,11 @@ const LeftCol = styled.div`
   flex-direction: column;
   // max-width: 78%;
   max-width: 95vw;
+   
+
+  ${({ theme }) => theme.mediaQueries.xl} {
+    max-width: 80vw;
+  }
 `
 
 const RightCol = styled.div`
@@ -69,6 +74,7 @@ const RightCol = styled.div`
   margin: 10px;
   display: flex;
   flex: 1;
+  min-width: 11vw;
 `
 
 // left col wraps shipclassmenu and buildrow

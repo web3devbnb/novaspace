@@ -261,6 +261,7 @@ const LocationCard = ({
  
   const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending || miningCapacity <= 0 
   const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle || pending
+  const refiningDisabled = !currentLocation || Number(playerMineral) <= 0 || pending
 
   const { onExplore } = useExplore()
   const { onMine } = useMine()
@@ -405,8 +406,9 @@ const LocationCard = ({
             disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'MINE'}
           </Button>}
-        {refinery && currentLocation && Number(playerMineral) > 0  && 
-          <Button onClick={sendRefineTx}>
+        {refinery && 
+          <Button onClick={sendRefineTx}
+            disabled={refiningDisabled}>
             {pending ? 'pending...' : 'REFINE'}
           </Button>}
         {canTravel && !currentLocation && 
