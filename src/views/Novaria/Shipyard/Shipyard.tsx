@@ -408,8 +408,9 @@ const Shipyard = () => {
               <BuildMenu>
                 <Header>BUILD SHIPS</Header>
                 <Select
+                  maxMenuHeight={150}
                   placeholder="Select Shipyard"
-                  options={shipyards.map((s, i) => ({ value: i, label: s.name }))}
+                  options={shipyards.map((s, i) => ({ value: i, label: String(s.name) + String( " (") + String(s.coordX) + String(", ") + String(s.coordY) + String(")")}))}
                   onChange={handleShipyardChange}
                   styles={selectStyles}
                 />
