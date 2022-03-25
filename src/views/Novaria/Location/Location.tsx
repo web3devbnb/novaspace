@@ -267,6 +267,7 @@ const Location: React.FC = () => {
                 <LocationCard
                   playerMineral={fleetMineral}
                   playerMaxMineral={mineralCapacity}
+                  miningCapacity={miningCapacity}
                   discoverer={placeInfo.discoverer}
                   fleetSize={fleetSize}
                   placename={placeInfo.name}

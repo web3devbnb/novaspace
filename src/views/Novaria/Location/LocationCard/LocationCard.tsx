@@ -173,7 +173,7 @@ const Text = styled.div`
 
 const PlaceBody = styled.div`
   position: absolute;
-  top: 310px;
+  top: 295px;
   left: 10px;
   width: 260px;
   display: flex;
@@ -232,6 +232,7 @@ const LocationCard = ({
   miningCooldownActive,
   currentTravelCooldown,
   notInBattle,
+  miningCapacity,
 }) => {
   const [pending, setPendingTx] = useState(false)
 
@@ -258,7 +259,7 @@ const LocationCard = ({
   const novaBalance = useGetNovaBalance(account)
 
  
-  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending
+  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending || miningCapacity <= 0 
   const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle || pending
 
   const { onExplore } = useExplore()
@@ -355,6 +356,7 @@ const LocationCard = ({
             {placename}
             {isEmpty ? 'EMPTY SPACE' : ''}
             {hostile ? 'HOSTILE SPACE' : ''}
+            {asteroid && 'ASTEROID'}
           </Name>
           <Location>
             ({placeX},{placeY})
