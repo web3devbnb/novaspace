@@ -124,7 +124,7 @@ const StartMenu = () => {
           Step 2 - Set your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} style={{marginTop:5}} />
           <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending} >{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <br />(costs {startCost} NOVA ~${startCostBUSD.toFixed(2)}, includes 50 ships)
+          <br />(costs {Math.ceil(startCost/.98)} NOVA ~${startCostBUSD.toFixed(2)}, includes 50 ships)
         </div> : ''}
       {playerExists ? <Button onClick={handleStartGameClick}>Start Game</Button> : ''}
     </Body>
