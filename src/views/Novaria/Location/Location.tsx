@@ -28,6 +28,7 @@ import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import Chatter2 from '../components/ChatBox/Chatter2'
 import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
@@ -35,7 +36,7 @@ import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
-import BodyWrapper from '../components/BodyWrapper'
+import BodyWrapper from '../components/BodyWrapper' 
 import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
@@ -58,23 +59,6 @@ const Row = styled.div`
   display: flex;
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-wrap: nowrap;
-  }
-`
-
-const Body = styled.div`
-  margin: 10px 10px 10px 0px;
-  padding: 15px 15px 15px 0px;
-  position: relative;
-  background: #00000050;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    // fix background later
-    background: transparent;
-    background-image: url('/images/novaria/border.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    margin: 10px 10px 10px 10px;
-    padding: 15px;
   }
 `
 
@@ -395,6 +379,7 @@ const Location: React.FC = () => {
             </RightCol>
           </Content>
         </BodyWrapper>
+        <Chatter2 username={playerName} />
       </Row>
     </Page>
   )

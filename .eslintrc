@@ -15,6 +15,7 @@
   "rules": {
     // Temporarily disable console related warning during development.
     // "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "import/no-unresolved": 0,
     "no-console": "off",
     "no-plusplus": 0,
