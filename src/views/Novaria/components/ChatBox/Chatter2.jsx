@@ -64,7 +64,7 @@ const MessageBox = styled.div`
   display: flex;
   margin: 5px;
   align-self: ${props => props.usermessage === true && 'flex-end'};
-  flex-direction: column-reverse;
+  flex-direction: column;
   text-align: ${props => props.usermessage === true && 'right'};
   color: ${props => props.usermessage === true && 'white'};
 `
