@@ -79,8 +79,13 @@ const Dashboard: React.FC = () => {
     // style={{maxWidth:"100%", marginLeft: 'auto', marginRight: 'auto'}}
     >
       <Hero>
-        <Header>Welcome</Header>
+        <Header>Welcome to Our Game DEX</Header>
       
+        <Cards id="stats">
+          <FarmStakingCard />
+          <SNovaStakingCard />
+          <MoneyedPotCard />
+        </Cards>
         <SubHero />
       </Hero>
 
@@ -97,11 +102,6 @@ const Dashboard: React.FC = () => {
         expanded={showExpandableSection}
       />
       <ExpandingWrapper expanded={showExpandableSection}> */}
-      <Cards id="stats">
-        <FarmStakingCard />
-        <SNovaStakingCard />
-        <MoneyedPotCard />
-      </Cards>
       {/* </ExpandingWrapper> */}
     </Page>
   )
