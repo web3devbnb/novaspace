@@ -74,7 +74,7 @@ const SubHero = () => {
                 </ColLeft>
             <ColRight>
                 <Announcement glowing>
-                    <p>The DeFi platform featuring an exchange, trade route rewards, a play to earn strategy game, and a daily <span style={{color:"gold"}} > MONEY POT</span> that rewards holders with 75% of all fees! <a href='https://swap.shibanova.io' target='blank' rel='noreferrer noopener'>NOVADEX</a> is the ONLY place to buy $NOVA!</p>
+                    <p>Binance Smart Chain DeFi platform featuring an exchange, farming rewards, a play to earn strategy game, and a daily <span style={{color:"gold"}} > MONEY POT</span> that rewards holders with 75% of all fees! <a href='https://swap.shibanova.io' target='blank' rel='noreferrer noopener'>NOVADEX</a> is the ONLY place to buy $NOVA!</p>
                                       
                 </Announcement>
                 <ButtonRow>
