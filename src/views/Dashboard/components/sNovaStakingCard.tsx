@@ -7,6 +7,7 @@ import useI18n from 'hooks/useI18n'
 import { useSNovaHarvest } from 'hooks/useHarvest'
 import useSNovaFarmsWithBalance from 'hooks/useSNovaFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
+import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
 import useTokenBalance, {
@@ -23,7 +24,6 @@ import { useSwapToNova } from '../../../hooks/useUnstake'
 import Stats from './Stats'
 import useSNovaEarnings from '../../../hooks/useSNovaEarnings'
 import HarvestButton from './HarvestButton'
-import QuestionHelper from '../../../components/QuestionHelper'
 
 const Block = styled.div`
   margin-bottom: 0px;
@@ -35,6 +35,21 @@ const Row = styled.div`
   font-size: 14px;
   justify-content: space-between;
   margin: 8px;
+`
+
+const GridRow = styled.div`
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  // grid-column-template: 1fr 3fr;
+  font-size: 14px;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: right;
 `
 
 const CardImage = styled.img`
@@ -50,12 +65,19 @@ const Label = styled.div`
 `
 
 const Actions = styled.div`
-  margin-top: 24px;
+  margin-top: 12px;
 `
+
+const ExpandingWrapper = styled.div<{ expanded: boolean }>`
+  height: ${(props) => (props.expanded ? '100%' : '0px')};
+  overflow: hidden;
+`
+
 
 const SNovaStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
+  const [showExpandableSection, setShowExpandableSection] = useState(false)
   const TranslateString = useI18n()
   const farmsSNovaWithBalance = useSNovaFarmsWithBalance()
   const totalSupply = useSNovaTotalSupply()
@@ -103,37 +125,23 @@ const SNovaStakingCard = () => {
 
   return (
     <StatsCard
-      actions={
-        account && sNovaBalance.comparedTo(0) > 0 ? (
-          <Row style={{marginTop:-15}}>
-            <Button  onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
-            <Text fontSize="14px">
-              {penalty}% {TranslateString(999, 'Penalty')}
-            </Text>
-          </Row>
-        ) : null
-      }
       title="sNOVA Stats"
     >
-      <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
-        <CardImage src="/images/tokens/snova.png" alt="snova logo" width={128} height={128} />
-      </Row>
-      <Block>
-        <Label>Pending sNOVA</Label>
-        <NovaHarvestBalance earningsSum={earningsSNovaSum} />
-      </Block>
-      <Block>
-        <Label>
-          sNOVA Balance
-          <QuestionHelper
-            text={TranslateString(
-              999,
-              'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.',
-            )}
-          />
-        </Label>
-        <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
-      </Block>
+      <GridRow>
+        <CardImage src="/images/tokens/snova.png" alt="snova logo" width={80} height={80} />
+        <Col>
+          <Block>
+            <Label>
+              sNOVA Balance
+            </Label>
+            <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
+          </Block>
+          <Block>
+            <Label>Pending sNOVA</Label>
+            <NovaHarvestBalance earningsSum={earningsSNovaSum} />
+          </Block>
+        </Col>
+      </GridRow>
       <Actions>
         {account ? (
           <HarvestButton
@@ -149,7 +157,24 @@ const SNovaStakingCard = () => {
           <UnlockButton fullWidth />
         )}
       </Actions>
+      
+      <ExpandableSectionButton
+        onClick={() => setShowExpandableSection(!showExpandableSection)}
+        expanded={showExpandableSection}
+      />
+      <ExpandingWrapper expanded={showExpandableSection}>
       <Stats stats={stats} />
+      {
+        account && sNovaBalance.comparedTo(0) > 0 ? (
+          <Row style={{marginTop:-15}}>
+            <Button  onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
+            <Text fontSize="14px">
+              {penalty}% {TranslateString(999, 'Penalty')}
+            </Text>
+          </Row>
+        ) : null
+      }
+      </ExpandingWrapper>
     </StatsCard>
   )
 }

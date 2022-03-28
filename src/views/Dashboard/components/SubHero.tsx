@@ -10,12 +10,16 @@ const Body = styled.div`
   margin-left: auto;
   width: 90%;
   display: flex;
-  min-height: 500px;
+  min-height: 200px;
   flex-direction: column;
 
   ${({ theme }) => theme.mediaQueries.md} {
     flex-direction: row;
   }
+`
+
+const Row=styled.div`
+  display: flex;
 `
 
 const Announcement = styled(Text)`
@@ -64,7 +68,9 @@ const SubHero = () => {
     return (
         <Body>
             <ColLeft>
-                <MainLogo src={mainLogo} alt="shibanova logo" />
+                <a href='/legend-of-novaria'>
+                  <MainLogo src={mainLogo} alt="shibanova logo" />
+                </a>
                 </ColLeft>
             <ColRight>
                 <Announcement glowing>
@@ -72,10 +78,9 @@ const SubHero = () => {
                                       
                 </Announcement>
                 <ButtonRow>
-                    <NeonButton title="Novaria" link="#novaria" />
+                    <NeonButton title="Legend of Novaria" link="#novaria" />
                     <NeonButton title="DEX" link="#dex" />
                     <NeonButton title="Trade Routes" link="#trade-routes" />
-                    <NeonButton title="Stats" link="#stats" />
                 </ButtonRow>
             </ColRight>
         </Body>

@@ -5,6 +5,7 @@ import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
 import { useNovaHarvest } from 'hooks/useHarvest'
 import UnlockButton from 'components/UnlockButton'
+import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import useNovaFarmsWithBalance from 'hooks/useNovaFarmsWithBalance'
 import NovaHarvestBalance from './NovaHarvestBalance'
 import NovaWalletBalance from './NovaWalletBalance'
@@ -16,7 +17,6 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import StatsCard from './StatsCard'
 import Stats from './Stats'
 import HarvestButton from './HarvestButton'
-import QuestionHelper from '../../../components/QuestionHelper' 
 
 const Block = styled.div`
   margin-bottom: 0px;
@@ -30,6 +30,21 @@ const Row = styled.div`
   margin: 8px;
 `
 
+const GridRow = styled.div`
+  align-items: center;
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-evenly;
+  // grid-column-template: 1fr 3fr;
+  font-size: 14px;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+`
+
 const CardImage = styled.img`
   margin-bottom: 0px;
 `
@@ -39,22 +54,29 @@ const Label = styled.div`
   font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
 `
 
 const Label1 = styled.div`
   color: #ffffff;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
 `
 
 const Actions = styled.div`
-  margin-top: 24px;
+  margin-top: 12px;
 `
+
+const ExpandingWrapper = styled.div<{ expanded: boolean }>`
+  height: ${(props) => (props.expanded ? '100%' : '0px')};
+  overflow: hidden;
+`
+
 
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
+  const [showExpandableSection, setShowExpandableSection] = useState(false)
   const { account } = useWallet()
   const TranslateString = useI18n()
   const farmsNovaWithBalance = useNovaFarmsWithBalance()
@@ -106,31 +128,29 @@ const FarmedStakingCard = () => {
 
   return (
     <StatsCard title="NOVA Stats">
-      <Row style={{ justifyContent: 'center', padding: '5px 0 10px 0' }}>
-        <CardImage src="/images/tokens/nova.png" alt="nova logo" width={128} height={128} />
-      </Row>
-      <Block>
-        <Label>Pending NOVA</Label>
-        <Label1>
-          <NovaHarvestBalance earningsSum={earningsNovaSum} />
-          &nbsp; ~ ${(novaPrice * earningsNovaSum).toFixed(2)}
-        </Label1>
-      </Block>
-      <Block>
-        <Label>
-          NOVA Balance
-          <QuestionHelper
-            text={TranslateString(
-              999,
-              'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.',
-            )}
-          />
-        </Label>
-        <Label1>
-          <NovaWalletBalance novaBalance={novaBalance} />
-          &nbsp; ~ ${(novaPrice * novaBalance).toFixed(2)}
-        </Label1>
-      </Block>
+      <GridRow>
+        <CardImage src="/images/tokens/nova.png" alt="nova logo" width={80} height={80} />
+        <Col>
+          <Block>
+            <Label>
+              NOVA Balance (${(novaPrice * novaBalance).toFixed(2)})
+            </Label>
+            <Label1>
+                &nbsp;
+              <NovaWalletBalance novaBalance={novaBalance} />
+            </Label1>
+          </Block>
+          <Block>
+            <Label>
+              Pending NOVA (${(novaPrice * earningsNovaSum).toFixed(2)})
+            </Label>
+            <Label1>
+                &nbsp;
+              <NovaHarvestBalance earningsSum={earningsNovaSum} />
+            </Label1>
+          </Block>
+        </Col>
+      </GridRow>
       <Actions>
         {account ? (
           <HarvestButton
@@ -146,7 +166,14 @@ const FarmedStakingCard = () => {
           <UnlockButton fullWidth />
         )}
       </Actions>
+      
+      <ExpandableSectionButton
+        onClick={() => setShowExpandableSection(!showExpandableSection)}
+        expanded={showExpandableSection}
+      />
+      <ExpandingWrapper expanded={showExpandableSection}>
       <Stats stats={stats} />
+      </ExpandingWrapper>
     </StatsCard>
   )
 }

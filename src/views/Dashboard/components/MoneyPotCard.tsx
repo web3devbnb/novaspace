@@ -11,6 +11,7 @@ import useTokenBalance, {
   useNextMoneyPot,
   useSNovaTotalSupply,
 } from 'hooks/useTokenBalance'
+import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { usePriceBnbBusd, usePriceNovaBusd } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import { useHarvestRewards } from 'hooks/useHarvest'
@@ -18,7 +19,6 @@ import { getSNovaAddress } from 'utils/addressHelpers'
 
 import StatsCard from './StatsCard'
 import Stats from './Stats'
-import QuestionHelper from '../../../components/QuestionHelper'
 import UnlockButton from '../../../components/UnlockButton'
 import HarvestButton from './HarvestButton'
 import CardValue from './CardValue'
@@ -28,13 +28,27 @@ const Row = styled.div`
   display: flex;
   font-size: 14px;
   justify-content: space-between;
-  margin: 8px 0;
+  margin: 0px 0;
+`
+
+const GridRow = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  // grid-column-template: 1fr 3fr;
+  font-size: 14px;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: right;
 `
 
 const CardImage = styled.img`
-  margin-bottom: 0px;
-  margin-top: 0px;
-  margin: auto;
+  // margin-bottom: 0px;
+  // margin-top: 0px;
+  // margin: auto;
   align-items: center;
   text-align: center;
 `
@@ -52,9 +66,15 @@ const NextMoneyPotCard = styled(Text)`
   }
 `
 
+const ExpandingWrapper = styled.div<{ expanded: boolean }>`
+  height: ${(props) => (props.expanded ? '100%' : '0px')};
+  overflow: hidden;
+`
+
 const MoneyPotCard = () => {
   const TranslateString = useI18n()
   const { account } = useWallet()
+  const [showExpandableSection, setShowExpandableSection] = useState(false)
   const bnbReward = useMoneyPotBNBReward()
   const bnbUserRew = Number(bnbReward) / 10 ** 18
   const busdReward = useMoneyPotBUSDReward()
@@ -97,37 +117,21 @@ const MoneyPotCard = () => {
 
   return (
     <StatsCard title="Money Pot">
-      <Row style={{ justifyContent: 'center', padding: '0 0 0px 0' }}>
-        <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
-        <QuestionHelper
-          text={TranslateString(
-            999,
-            'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.',
-          )}
-        />
-      </Row>
-      <Text glowing bold style={{ padding: '0 0 3px 0' }}>
-        Daily ROI {dailyROI.toFixed(2)}%
-      </Text>
-      <Text glowing bold style={{ padding: '0 0 3px 0' }}>
-        Annual ROI {yearlyROI.toFixed(2)}%
-      </Text>
-      <Row style={{ justifyContent: 'center' }}>
-        <div style={{ padding: '5px 20px' }}>
-          <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={90} height={90} />
-          <Text bold fontSize="20px">
-            {TranslateString(999, 'WBNB ')}
-          </Text>
-          <CardValue fontSize="18px" value={bnbUserRew || 0} decimals={4} />
-        </div>
-        <div style={{ padding: '0 20px' }}>
-          <CardImage src="/images/farms/busd.png" alt="busd logo" width={90} height={90} />
-          <Text bold fontSize="20px">
-            {TranslateString(999, ' BUSD ')}
-          </Text>
-          <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
-        </div>
-      </Row>
+      <GridRow>
+          <CardImage src="/images/home/moneyPot.png" alt="snova logo" width={80} height={80} />
+
+          <Col>
+            <Row>
+              <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
+            </Row>
+            <Text glowing bold style={{ padding: '0px 0px 3px 0' }}>
+              <span style={{color:'#5affff'}} >Daily ROI</span> {dailyROI.toFixed(2)}%
+            </Text>
+            <Text glowing bold style={{ padding: '0 0px 3px 0' }}>
+              <span style={{color:'#5affff'}} >Annual ROI</span> {yearlyROI.toFixed(2)}%
+            </Text>
+          </Col>
+      </GridRow>
       <Row style={{ paddingTop: '0px' }}>
         {account ? (
           <HarvestButton
@@ -141,9 +145,36 @@ const MoneyPotCard = () => {
           <UnlockButton fullWidth />
         )}
       </Row>
+
+      <ExpandableSectionButton
+        onClick={() => setShowExpandableSection(!showExpandableSection)}
+        expanded={showExpandableSection}
+      />
+      <ExpandingWrapper expanded={showExpandableSection}>
+
+      <Row style={{ justifyContent: 'center' }}>
+        <div style={{ padding: '5px 20px', display:'flex' }}>
+          <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={60} height={60} />
+          <div style={{marginLeft:5}}>
+            <Text bold fontSize="20px">
+              {TranslateString(999, 'WBNB ')}
+            </Text>
+            <CardValue fontSize="18px" value={bnbUserRew || 0} decimals={4} />
+          </div>
+        </div>
+        <div style={{ padding: '0 20px', display:'flex' }}>
+          <CardImage src="/images/farms/busd.png" alt="busd logo" width={60} height={60} />
+          <div style={{marginLeft:5}}>
+            <Text bold fontSize="20px">
+              {TranslateString(999, ' BUSD ')}
+            </Text>
+            <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
+          </div>
+        </div>
+      </Row>
       <div>
         <Stats stats={stats} />
-        <Row style={{ marginTop:0, justifyContent: 'center', padding: '7px 0 0px 0' }}>
+        <Row style={{ marginTop:-10, justifyContent: 'center', padding: '0px 0 3px 0' }}>
           <NextMoneyPotCard>
             Next Moneypot starts rewarding at block{' '}
             <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
@@ -152,6 +183,8 @@ const MoneyPotCard = () => {
           </NextMoneyPotCard>
         </Row>
       </div>
+      
+      </ExpandingWrapper>
     </StatsCard>
   )
 }

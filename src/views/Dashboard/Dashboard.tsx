@@ -68,7 +68,7 @@ const NovariaCountdown = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 9rem;
   }
-`
+` 
 
 const Dashboard: React.FC = () => {
 
@@ -80,13 +80,13 @@ const Dashboard: React.FC = () => {
     >
       <Hero>
         <Header>Welcome to Our Game DEX</Header>
-      
+        <SubHero /> 
         <Cards id="stats">
           <FarmStakingCard />
           <SNovaStakingCard />
           <MoneyedPotCard />
         </Cards>
-        <SubHero />
+        
       </Hero>
 
       <NovariaCard title="novaria" />
