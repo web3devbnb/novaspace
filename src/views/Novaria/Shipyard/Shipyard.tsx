@@ -147,7 +147,7 @@ const BuildMenu = styled.div`
   }
 `
 
-const Text = styled.text`
+const Text = styled.div`
   font-weight: light;
   font-size: 15px;
 `
