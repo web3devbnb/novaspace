@@ -134,7 +134,7 @@ function ChatRoom({user}) {
 
     await messagesRef.push({
       text: filter.clean(formValue),
-      createdAt: new Date().toDateString(),
+      createdAt: new Date().toUTCString(),
       uid
     })
 
@@ -183,14 +183,14 @@ function ChatRoom({user}) {
 
 
 function ChatMessage({message, user}) {
-  const { text, uid } = message;
+  const { text, uid, createdAt } = message;
 
   const messageClass = uid === user;
   
 
   return (<>
     <MessageBox usermessage={messageClass}>
-      <MsgName usermessage={messageClass}>{uid}</MsgName>
+      <MsgName usermessage={messageClass}>{uid} - {createdAt.slice(16,25)}</MsgName>
       <MsgItem>{text}</MsgItem>
     </MessageBox>
   </>)
