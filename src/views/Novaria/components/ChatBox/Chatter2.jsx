@@ -57,7 +57,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px;
-  max-width: 300px;
+  width: 90vw;
   
   &::-webkit-scrollbar { 
     width: 5px;
@@ -66,6 +66,9 @@ const Main = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: 0px;
     background-color: #5affff;
+  }
+  ${({ theme }) => theme.mediaQueries.sm} {
+    max-width: 300px;
   }
 `
 
@@ -86,7 +89,11 @@ const MsgItem = styled.div`
 `
 const MsgName = styled.div`
   font-size: .7rem;
-  color: ${props => props.usermessage === true ? 'gray' : '#00c4c4'};
+  color: ${props => props.usermessage === true ? 'gray' : '#009d9d'};
+`
+
+const NameSpan = styled.span`
+  font-size: .9rem;
 `
 
 function MSGApp({username, playerExists}) {
@@ -186,11 +193,13 @@ function ChatMessage({message, user}) {
   const { text, uid, createdAt } = message;
 
   const messageClass = uid === user;
+  const timeStamp = new Date(createdAt).toLocaleTimeString()
   
 
   return (<>
     <MessageBox usermessage={messageClass}>
-      <MsgName usermessage={messageClass}>{uid} - {createdAt.slice(16,25)}</MsgName>
+      {/* <MsgName usermessage={messageClass}>{uid}</MsgName> */}
+      <MsgName usermessage={messageClass}><NameSpan>{uid}</NameSpan> - {timeStamp}</MsgName> 
       <MsgItem>{text}</MsgItem>
     </MessageBox>
   </>)
