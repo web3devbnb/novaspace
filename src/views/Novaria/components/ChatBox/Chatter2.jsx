@@ -21,15 +21,15 @@ firebase.initializeApp({
   measurementId: "G-WLM7ED9HN0"
 })
 
-const appCheck = firebase.appCheck();
-// Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
-// key is the counterpart to the secret key you set in the Firebase console.
-appCheck.activate(
-  '6LfavC4fAAAAAJaICCAhbbbiyTNdcR17HV73GGiV',
+// const appCheck = firebase.appCheck();
+// // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
+// // key is the counterpart to the secret key you set in the Firebase console.
+// appCheck.activate(
+//   '6LfavC4fAAAAAJaICCAhbbbiyTNdcR17HV73GGiV',
 
-  // Optional argument. If true, the SDK automatically refreshes App Check
-  // tokens as needed.
-  true);
+//   // Optional argument. If true, the SDK automatically refreshes App Check
+//   // tokens as needed.
+//   true);
 
 
 
@@ -142,12 +142,12 @@ function ChatRoom({user}) {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-  
+ 
   useEffect(() => {
     const fetchData = async () => {
       // firebase.database().ref('messages/').orderByChild('createdAt').limitToLast(25).on('value', resp => {
       firebase.database().ref('messages/').limitToLast(50).on('value', resp => {
-        // setMessages([]);
+        setMessages([]);
         setMessages(snapshotToArray(resp))
       })
     }
@@ -156,7 +156,7 @@ function ChatRoom({user}) {
   return (<>
     <Main>
 
-      {messages && messages.reverse().map(msg => <ChatMessage user={user} key={msg.id} message={msg} />)}
+      {messages && messages.map(msg => <ChatMessage user={user} key={msg.id} message={msg} />)}
 
       <span ref={dummy} />
 
