@@ -1,9 +1,7 @@
-import React, {useState} from "react";
-import styled from "styled-components";
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import showCountdown from 'utils/countdownTimer'
-import { useClaimShips, useGetSpaceDock } from "hooks/useNovaria";
-
-
+import { useClaimShips, useGetSpaceDock } from 'hooks/useNovaria'
 
 const SpaceDockMenu = styled.div`
   display: flex;
@@ -37,7 +35,6 @@ const QueueRow = styled.div`
   display: grid;
   grid-auto-flow: column;
   // position: relative;
- 
 `
 
 const Col = styled.div`
@@ -46,11 +43,11 @@ const Col = styled.div`
   display: flex;
 `
 
-const QueueCol = styled(Col)<{shipclass: string}>`
-  background: ${props => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
-  background: ${props => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
-  background: ${props => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
-  background: ${props => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
+const QueueCol = styled(Col)<{ shipclass: string }>`
+  background: ${(props) => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
+  background: ${(props) => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
+  background: ${(props) => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
+  background: ${(props) => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
   background-size: fit;
   background-repeat: no-repeat;
   justify-content: flex-end;
@@ -59,13 +56,11 @@ const QueueCol = styled(Col)<{shipclass: string}>`
   position: relative;
 `
 
-
 const QueueCardItems = styled.div`
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: .75rem;
+  font-size: 0.75rem;
   // margin-top: 95%;
 
   margin-left: auto;
@@ -99,7 +94,7 @@ const ClaimButton = styled.button`
   text-decoration: none;
   color: black;
   border: none;
-  border-radius: 0px 0 10px  0;
+  border-radius: 0px 0 10px 0;
   background-color: #5affff;
 `
 
@@ -132,11 +127,10 @@ const WrongLocationButton = styled.button`
   background-color: transparent;
 `
 
-const Header = styled.text`
+const Header = styled.div`
   font-weight: bold;
   font-size: 20px;
-  margin: 10px;
-  margin-left: 0;
+  margin-bottom: 10px;
 `
 
 const Row = styled.div`
@@ -149,115 +143,111 @@ const Row = styled.div`
 
 const Item = styled.div``
 
+const BuildQueue = ({ fleetLocation }) => {
+  const [pending, setPendingTx] = useState(false)
+  const [claimAmount, setClaimAmount] = useState(null)
 
-const BuildQueue = ({fleetLocation}) => {
-    const [pending, setPendingTx] = useState(false)
-    const [claimAmount, setClaimAmount] = useState(null)
+  const spaceDocks = useGetSpaceDock()
 
-    const spaceDocks = useGetSpaceDock()
+  const { onClaim } = useClaimShips()
 
-    const { onClaim } = useClaimShips()
-
-    const handleClaim = async (claimId) => {
-        setPendingTx(true)
-        console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-        try {
-            await onClaim(claimId, claimAmount)
-        } catch (error) {
-            // console.log('error: ', error)
-        } finally {
-            setPendingTx(false)
-        }
+  const handleClaim = async (claimId) => {
+    setPendingTx(true)
+    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
+    try {
+      await onClaim(claimId, claimAmount)
+    } catch (error) {
+      // console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
     }
-    const handleClaimMax = async (claimId, amount) => {
-        setPendingTx(true)
-        console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
-        try {
-            await onClaim(claimId, amount)
-        } catch (error) {
-            // console.log('error: ', error)
-        } finally {
-            setPendingTx(false)
-        }
+  }
+  const handleClaimMax = async (claimId, amount) => {
+    setPendingTx(true)
+    console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)
+    try {
+      await onClaim(claimId, amount)
+    } catch (error) {
+      // console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
     }
+  }
 
-    return(
-      <SpaceDockMenu>
-        <Header style={{ marginTop: 0 }}>
-          BUILD QUEUE <span style={{ fontSize: '.75rem' }}>(Must be at shipyard location to claim ships)</span>
-        </Header>
-        <QueueRow>
-          {spaceDocks.map((dock) => {
-            return (
-              <QueueCol shipclass={dock.shipClassId}>
+  return (
+    <SpaceDockMenu>
+      <Header>
+        BUILD QUEUE <span style={{ fontSize: '.75rem' }}>(Must be at shipyard location to claim ships)</span>
+      </Header>
+      <QueueRow>
+        {spaceDocks.map((dock) => {
+          return (
+            <QueueCol shipclass={dock.shipClassId}>
+              <QueueCardItems>
+                <Row style={{ justifyContent: 'space-between' }}>
+                  <Item>LOCATION &nbsp;</Item>
+                  <br />
+                  <br />
+                  <Item style={{ zIndex: 1 }}>
+                    ({dock.coordX}, {dock.coordY})
+                  </Item>
+                </Row>
+                <Row style={{ justifyContent: 'space-between' }}>
+                  <Item>AMOUNT</Item>
+                  <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
+                </Row>
+              </QueueCardItems>
 
-
-                  <QueueCardItems>
-                    <Row style={{ justifyContent: 'space-between' }}>
-                      <Item>LOCATION &nbsp;</Item>
-                      <br />
-                      <br />
-                      <Item style={{ zIndex: 1 }}>
-                        ({dock.coordX}, {dock.coordY})
+              <ClaimControls>
+                {/* eslint-disable-next-line no-nested-ternary */}
+                {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
+                  +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
+                    <div>
+                      <Row>
+                        <ClaimButton
+                          style={{
+                            margin: 0,
+                            marginBottom: -2,
+                            marginRight: 5,
+                            padding: 3,
+                            fontSize: 13,
+                            width: '100%',
+                          }}
+                          onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
+                        >
+                          {!pending ? 'CLAIM MAX' : 'pending...'}
+                        </ClaimButton>
+                      </Row>
+                      <Item>
+                        <ClaimInput
+                          type="number"
+                          min="0"
+                          placeholder="0"
+                          value={claimAmount}
+                          onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
+                        />
+                        <ClaimButton onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
+                          {!pending ? 'CLAIM' : 'pending...'}
+                        </ClaimButton>
                       </Item>
-                    </Row>
-                    <Row style={{ justifyContent: 'space-between' }}>
-                      <Item>AMOUNT</Item>
-                      <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
-                    </Row>
-                  </QueueCardItems>
-
-
-                <ClaimControls>
-                  {/* eslint-disable-next-line no-nested-ternary */}
-                  {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
-                    +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
-                      <div>
-                        <Row>
-                          <ClaimButton
-                            style={{
-                              margin: 0,
-                              marginBottom: -2,
-                              marginRight: 5,
-                              padding: 3,
-                              fontSize: 13,
-                              width: '100%',
-                            }}
-                            onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
-                          >
-                            {!pending ? 'CLAIM MAX' : 'pending...'}
-                          </ClaimButton>
-                        </Row>
-                        <Item>
-                          <ClaimInput
-                            type="number"
-                            min="0"
-                            placeholder="0"
-                            value={claimAmount}
-                            onChange={(e) => setClaimAmount(parseFloat(e.target.value))}
-                          />
-                          <ClaimButton onClick={() => handleClaim(spaceDocks.indexOf(dock))}>
-                            {!pending ? 'CLAIM' : 'pending...'}
-                          </ClaimButton>
-                        </Item>
-                      </div>
-                    ) : (
-                      ''
-                    )
-                  ) : (
-                    <WrongLocationButton>Not at Shipyard</WrongLocationButton>
-                  )}
-                  {dock.completionTime * 1000 > Number(new Date()) ? (
-                    <CountdownButton>{showCountdown(new Date(dock.completionTime * 1000))}</CountdownButton>
+                    </div>
                   ) : (
                     ''
-                  )}
-                </ClaimControls>
-              </QueueCol>
-            )
-          })}
-        </QueueRow>
-      </SpaceDockMenu>
-    )
+                  )
+                ) : (
+                  <WrongLocationButton>Not at Shipyard</WrongLocationButton>
+                )}
+                {dock.completionTime * 1000 > Number(new Date()) ? (
+                  <CountdownButton>{showCountdown(new Date(dock.completionTime * 1000))}</CountdownButton>
+                ) : (
+                  ''
+                )}
+              </ClaimControls>
+            </QueueCol>
+          )
+        })}
+      </QueueRow>
+    </SpaceDockMenu>
+  )
 }
 export default BuildQueue

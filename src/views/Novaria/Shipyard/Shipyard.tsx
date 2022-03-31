@@ -62,7 +62,6 @@ const LeftCol = styled.div`
   flex-direction: column;
   // max-width: 78%;
   max-width: 95vw;
-   
 
   ${({ theme }) => theme.mediaQueries.xl} {
     max-width: 80vw;
@@ -152,11 +151,10 @@ const Text = styled.div`
   font-size: 15px;
 `
 
-const Header = styled.text`
+const Header = styled.div`
   font-weight: bold;
   font-size: 20px;
-  margin: 10px;
-  margin-left: 0;
+  margin-bottom: 10px;
 `
 const Button = styled.button`
   cursor: pointer;
@@ -416,7 +414,7 @@ const Shipyard = () => {
                 <Select
                   maxMenuHeight={150}
                   placeholder="Select Shipyard"
-                  options={shipyards.map((s, i) => ({ value: i, label: `${s.name} (${s.coordX}, ${s.coordY})`}))}
+                  options={shipyards.map((s, i) => ({ value: i, label: `${s.name} (${s.coordX}, ${s.coordY})` }))}
                   onChange={handleShipyardChange}
                   styles={selectStyles}
                 />
