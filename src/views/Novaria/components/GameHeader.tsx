@@ -71,9 +71,6 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
   const novaPrice = Number(usePriceNovaBusd()).toFixed(3)
   const playerExists = useGetPlayerExists(account)
 
-  const logout = async () => {
-    reset()
-  }
   const inBattle = useGetPlayerBattleStatus(account)
   const connected = status === 'connected'
   // eslint-disable-next-line prefer-template
