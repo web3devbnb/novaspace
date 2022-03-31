@@ -379,7 +379,7 @@ const Location: React.FC = () => {
             </RightCol>
           </Content>
         </BodyWrapper>
-        <Chatter2 username={playerName} />
+        <Chatter2 username={playerName} playerExists={playerExists} />
       </Row>
     </Page>
   )

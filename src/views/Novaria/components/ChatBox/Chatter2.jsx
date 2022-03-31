@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import styled from 'styled-components';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/database';
-import 'firebase/compat/auth';
-import 'firebase/compat/analytics';
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import styled from 'styled-components'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/database'
+import 'firebase/compat/auth'
+import 'firebase/compat/analytics'
+import 'firebase/compat/app-check'
 import useRefresh from 'hooks/useRefresh'
 import Filter from 'bad-words'
 
@@ -19,6 +20,18 @@ firebase.initializeApp({
   appId: "1:778958864134:web:d0954aa81fc2b951f32887",
   measurementId: "G-WLM7ED9HN0"
 })
+
+const appCheck = firebase.appCheck();
+// Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
+// key is the counterpart to the secret key you set in the Firebase console.
+appCheck.activate(
+  '6LfavC4fAAAAAJaICCAhbbbiyTNdcR17HV73GGiV',
+
+  // Optional argument. If true, the SDK automatically refreshes App Check
+  // tokens as needed.
+  true);
+
+
 
 // const auth = firebase.auth();
 
@@ -76,7 +89,7 @@ const MsgName = styled.div`
   color: ${props => props.usermessage === true ? 'gray' : '#00c4c4'};
 `
 
-function MSGApp({username}) {
+function MSGApp({username, playerExists}) {
 
   const user = username.toString();
 
@@ -88,7 +101,7 @@ function MSGApp({username}) {
       </Header>
 
       <section>
-        {user ? <ChatRoom user={user} /> : 'CONNECT WALLET TO CHAT'}
+        {user && playerExists ? <ChatRoom user={user} /> : 'MUST BE SIGNED IN TO GAME TO CHAT'}
       </section>
 
     </Wrapper>
@@ -130,9 +143,10 @@ function ChatRoom({user}) {
   }
 
   
-  useMemo(() => {
+  useEffect(() => {
     const fetchData = async () => {
-      firebase.database().ref('messages/').orderByChild('createdAt').limitToLast(25).on('value', resp => {
+      // firebase.database().ref('messages/').orderByChild('createdAt').limitToLast(25).on('value', resp => {
+      firebase.database().ref('messages/').limitToLast(50).on('value', resp => {
         // setMessages([]);
         setMessages(snapshotToArray(resp))
       })
