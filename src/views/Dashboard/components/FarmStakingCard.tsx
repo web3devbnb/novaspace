@@ -22,14 +22,6 @@ const Block = styled.div`
   margin-bottom: 0px;
 `
 
-const Row = styled.div`
-  align-items: center;
-  display: flex;
-  font-size: 14px;
-  justify-content: space-between;
-  margin: 8px;
-`
-
 const GridRow = styled.div`
   align-items: center;
   display: flex;

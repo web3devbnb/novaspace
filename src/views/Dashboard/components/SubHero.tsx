@@ -18,10 +18,6 @@ const Body = styled.div`
   }
 `
 
-const Row=styled.div`
-  display: flex;
-`
-
 const Announcement = styled(Text)`
   text-align: center;
   text-weight: bold;

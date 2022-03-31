@@ -61,23 +61,6 @@ const Row = styled.div`
   }
 `
 
-const Body = styled.div`
-  margin: 10px 10px 10px 0px;
-  padding: 15px 15px 15px 0px;
-  position: relative;
-  background: #00000050;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    // fix background later
-    background: transparent;
-    background-image: url('/images/novaria/border.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    margin: 10px 10px 10px 10px;
-    padding: 15px;
-  }
-`
-
 const Header = styled(Text)`
   color: white;
   font-weight: bold;
