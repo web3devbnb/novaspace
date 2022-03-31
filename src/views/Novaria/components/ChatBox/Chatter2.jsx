@@ -39,7 +39,7 @@ firebase.initializeApp({
 const Wrapper = styled.div`
   margin: 10px;
   padding: 5px;
-  background: #00000030;
+  background: #00000050;
 `
 const Header = styled.div`
   font-size: 1.25rem;
@@ -128,7 +128,7 @@ function ChatRoom({user}) {
   };
 
   const sendMessage = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const uid = user;
 
@@ -141,6 +141,12 @@ function ChatRoom({user}) {
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
+  const handleKeypress = e => {
+      // it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      sendMessage()
+    }
+  }
 
  
   useEffect(() => {
@@ -149,10 +155,13 @@ function ChatRoom({user}) {
       firebase.database().ref('messages/').limitToLast(50).on('value', resp => {
         setMessages([]);
         setMessages(snapshotToArray(resp))
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
       })
     }
     fetchData();
   }, [])
+
+
   return (<>
     <Main>
 
@@ -164,7 +173,7 @@ function ChatRoom({user}) {
 
     
     
-      <Input id='txt' maxlength="240" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="type message" />
+      <Input id='txt' maxlength="240" value={formValue} onChange={(e) => setFormValue(e.target.value)} onKeyUp={handleKeypress} placeholder="type message" />
 
       <button id='send' type="button" disabled={!formValue} onClick={sendMessage}>🕊️</button>
     
