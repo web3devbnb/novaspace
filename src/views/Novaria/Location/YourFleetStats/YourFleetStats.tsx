@@ -30,7 +30,6 @@ const Button = styled.button`
 `
 
 const YourFleetStats = ({
-  account,
   playerBattleInfo,
   fleetSize,
   maxFleetSize,

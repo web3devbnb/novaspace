@@ -327,7 +327,6 @@ const Location: React.FC = () => {
                   <Header>MY FLEET</Header>
                   <YourFleetStats 
                     playerBattleInfo={playerBattleInfo}
-                    account={account}
                     fleetSize={fleetSize}
                     maxFleetSize={maxFleetSize}
                     fleetPower={fleetPower}
