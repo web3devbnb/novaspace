@@ -7,9 +7,6 @@ const SpaceDockMenu = styled.div`
   display: flex;
   flex-direction: column;
 
-  // position: relative;
-  // max-width: 65%;
-
   width: 100%;
   border: 1px solid #8c8c8c;
   margin: 10px;
@@ -34,7 +31,6 @@ const SpaceDockMenu = styled.div`
 const QueueRow = styled.div`
   display: grid;
   grid-auto-flow: column;
-  // position: relative;
 `
 
 const Col = styled.div`
@@ -61,7 +57,6 @@ const QueueCardItems = styled.div`
   flex-direction: column;
   justify-content: center;
   font-size: 0.75rem;
-  // margin-top: 95%;
 
   margin-left: auto;
   margin-right: auto;
@@ -99,10 +94,7 @@ const ClaimButton = styled.button`
 `
 
 const CountdownButton = styled.button`
-  // margin: 5px;
-  // margin-left: 0px;
   align-self: center;
-  // padding: 0.25rem 1rem;
   font-family: sans-serif;
   font-size: 0.75rem;
   width: 125px;

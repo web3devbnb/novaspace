@@ -60,7 +60,6 @@ const PageRow = styled.div`
 const LeftCol = styled.div`
   display: flex;
   flex-direction: column;
-  // max-width: 78%;
   max-width: 95vw;
 
   ${({ theme }) => theme.mediaQueries.xl} {
@@ -95,10 +94,6 @@ const ShipClassMenu = styled.div`
     border-radius: 0px;
     background-color: #5affff;
   }
-
-  // @media (max-width: 1520px) {
-  //   max-width: 740px;
-  // }
 `
 
 const BuildRow = styled.div`
@@ -109,14 +104,10 @@ const BuildRow = styled.div`
   @media (max-width: 715px) {
     flex-wrap: wrap;
   }
-  // @media (max-width: 1520px) {
-  //   max-width: 740px;
-  // }
 `
 
 const ShipClassCard = styled.img`
   margin: 10px 5px;
-  //height: 350px;
 `
 
 const Row = styled.div`
@@ -139,7 +130,6 @@ const BuildMenu = styled.div`
   width: 30%;
   height: auto;
   min-width: 240px;
-  // min-height: 312px;
   background-color: #00000080;
   @media (max-width: 715px) {
     width: 100%;
@@ -200,7 +190,6 @@ const Input = styled.input`
 const FleetMenu = styled.div`
   display: flex;
   flex-direction: column;
-  // border-left: none;
   border-left: 1px solid gray;
 
   height: 100%;
