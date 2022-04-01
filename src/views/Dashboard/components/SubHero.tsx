@@ -74,9 +74,9 @@ const SubHero = () => {
                                       
                 </Announcement>
                 <ButtonRow>
-                    <NeonButton title="Legend of Novaria" link="#novaria" />
                     <NeonButton title="DEX" link="#dex" />
                     <NeonButton title="Trade Routes" link="#trade-routes" />
+                    <NeonButton title="Legend of Novaria" link="#novaria" />
                 </ButtonRow>
             </ColRight>
         </Body>
