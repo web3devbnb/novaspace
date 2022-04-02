@@ -27,12 +27,10 @@ const Button = styled.button`
 `
 
 const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocation, onDismiss}) => {
-  const [pendingTx, setPendingTx] = useState(false)
   const battleInfo = useGetBattle(battle)
   const atkPower = battleInfo.attackTeam[1]
   const defPower = battleInfo.defendTeam[1]
-  const attackers = battleInfo.attackers
-  const defenders = battleInfo.defenders
+  const { attackers, defenders } = battleInfo
   const defender = defenders[0]
   const startTime = new Date(battleInfo.deadline * 1000).toLocaleString()
   const battleReady = new Date() >= new Date(battleInfo.deadline * 1000)
@@ -45,14 +43,11 @@ const BattleModal: React.FC<BattleModalProps> = ({battle, status, currentLocatio
   const { onBattle } = useGoBattle()
   
   const sendBattleTx = async () => {
-    setPendingTx(true)
     try {
         await onBattle(battle)
         console.log('Completing Battle')
     } catch (error) {
         console.log('error: ', error)
-    } finally {
-        setPendingTx(false)
     }
   }
 
