@@ -7,9 +7,9 @@ const Body = styled.div`
   display: relative;
 `
 
-const HeaderRow = styled.div`
+const HeaderRow = styled.div<{resolved:boolean}>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${(props) => props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'};
   color: #289794;
   font-size: 12px;
 `
@@ -34,11 +34,13 @@ const OpenBattlesTable = ({ battles, status, currentLocation, resolved, account 
   return (
     <Body>
       <div>
-        <HeaderRow>
+        <HeaderRow resolved={resolved}>
           <div>BATTLE ID</div>
           <div>ATK ATTACK</div>
           <div>DEF ATTACK</div>
-          <div>RESOLVE TIME</div>
+          {!resolved &&
+            <div>RESOLVE TIME</div>
+          }
         </HeaderRow>
       </div>
       <TableContent>

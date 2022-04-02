@@ -120,7 +120,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, st
           LOCATION: ({fleetLocation.X}, {fleetLocation.Y})
         </Child>
         <Child>SIZE: {fleetSize}</Child>
-        <Child>POWER: {fleetPower}</Child>
+        <Child>ATTACK: {fleetPower}</Child>
         <Child>MINERAL: {(Number(fleetMineral)/10**18).toFixed(3)}</Child>
         <Child>MAX MINERAL: {(Number(fleetMaxMineral)/10**18).toFixed(2)}</Child>
         <Child>

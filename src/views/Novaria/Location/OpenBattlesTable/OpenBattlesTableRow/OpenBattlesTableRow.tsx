@@ -5,9 +5,9 @@ import { useGetBattle } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import BattleModal from '../BattleModal'
 
-const Row = styled.div`
+const Row = styled.div<{resolved:boolean}>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${(props) => props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'};
   border: 1px solid #289794;
   padding: 3px;
   margin: 4px 0;
@@ -43,11 +43,13 @@ const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, accoun
  
   if (!resolved || playerInBattle) {
     return (
-      <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}>
+      <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0} resolved={resolved} >
         <Cell>{battle}</Cell>
         <Cell>{battleInfo.attackTeam[1]}</Cell>
         <Cell>{battleInfo.defendTeam[1]}</Cell>
-        <Cell>{battleStart}</Cell> 
+        {!resolved &&
+          <Cell>{battleStart}</Cell> 
+        }
       </Row>
     )
   } 
