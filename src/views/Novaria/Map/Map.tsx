@@ -66,7 +66,7 @@ const Body = styled.div`
   margin: 10px 0px 0px 0px;
 `
 
-const Text = styled.text`
+const Text = styled.div`
   color: ${(props: TextProps) => (props.isStar ? '#ff7300' : '#5affff')};
   font-weight: medium;
   font-size: 12px;
