@@ -50,9 +50,9 @@ const Page = styled.div`
 
 const PageRow = styled.div`
   display: flex;
-  flex-wrap: no-wrap;
-  @media (max-width: 420px) {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-wrap: nowrap;
   }
 `
 
