@@ -6,13 +6,9 @@ import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
-import shipyardLogo from '../assets/shipyard.png'
 import scrapLogo from '../assets/scrap.png'
-import refineryLogo from '../assets/refinery.png'
-import planetLogo from '../assets/planet.png'
 import emptyLogo from '../assets/emptyLocation.png'
 import youLogo from '../assets/you.png'
-import mineralLogo from '../assets/mineral.png'
 import lowPlayers from '../assets/lowplayers.png'
 import medPlayers from '../assets/medplayers.png'
 import highPlayers from '../assets/highplayers.png'
@@ -70,9 +66,8 @@ const Body = styled.div`
   margin: 10px 0px 0px 0px;
 `
 
-const Text = styled.text`
+const Text = styled.div`
   color: ${(props: TextProps) => (props.isStar ? '#ff7300' : '#5affff')};
-  font-weight: medium;
   font-size: 12px;
 `
 

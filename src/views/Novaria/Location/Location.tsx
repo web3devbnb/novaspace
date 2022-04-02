@@ -315,7 +315,6 @@ const Location: React.FC = () => {
                 <PlayersTable
                   account = {account}
                   players={fleetsAtLocation}
-                  playerBattleStatus={playerBattleStatus}
                   currentLocation={currentLocation}
                   refinery={placeInfo.refinery}
                 />

@@ -37,8 +37,8 @@ const Page = styled.div`
 `
  
 const Row = styled.div`
-  flex-wrap: wrap;
   display: flex;
+  flex-wrap: wrap;
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-wrap: nowrap;
   }

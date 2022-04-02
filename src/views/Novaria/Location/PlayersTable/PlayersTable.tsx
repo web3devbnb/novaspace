@@ -7,22 +7,22 @@ const Body = styled.div`
   display: relative;
 `
 
-const HeaderRow = styled.div<{isRefinery: boolean}>`
+const HeaderRow = styled.div<{ isRefinery: boolean }>`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   color: #289794;
   font-size: 12px;
   text-align: right;
-  margin-top: ${props => props.isRefinery && '20px'};
+  margin-top: ${(props) => props.isRefinery && '20px'};
 `
 
-const TableContent = styled.div<{isRefinery: boolean}>`
+const TableContent = styled.div<{ isRefinery: boolean }>`
   overflow-y: auto;
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
-  max-height: ${props => props.isRefinery ? '280px' : '140px'};
+  max-height: ${(props) => (props.isRefinery ? '280px' : '140px')};
 
-  &::-webkit-scrollbar { 
+  &::-webkit-scrollbar {
     width: 5px;
     background-color: #289794;
   }
@@ -32,20 +32,26 @@ const TableContent = styled.div<{isRefinery: boolean}>`
   }
 `
 
-const PlayersTable = ({ account, refinery, players, playerBattleStatus, currentLocation }) => {
+const PlayersTable = ({ account, refinery, players, currentLocation }) => {
   return (
     <Body>
       <div>
-        <HeaderRow isRefinery={refinery} >
-          <div style={{textAlign:'left'}}>PLAYER</div>
+        <HeaderRow isRefinery={refinery}>
+          <div style={{ textAlign: 'left' }}>PLAYER</div>
           <div>SIZE</div>
           <div>ATTACK</div>
-          <div style={{marginRight:6}}>MINERAL</div>
+          <div style={{ marginRight: 6 }}>MINERAL</div>
         </HeaderRow>
       </div>
       <TableContent isRefinery={refinery}>
         {players.map((player) => (
-          <PlayersTableRow key={player} refinery={refinery} account={account} player={player} status={playerBattleStatus} currentLocation={currentLocation} />
+          <PlayersTableRow
+            key={player}
+            refinery={refinery}
+            account={account}
+            player={player}
+            currentLocation={currentLocation}
+          />
         ))}
       </TableContent>
     </Body>

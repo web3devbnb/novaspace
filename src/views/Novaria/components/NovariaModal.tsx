@@ -1,20 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 import { IconButton, Heading, Flex, ArrowBackIcon, CloseIcon, InjectedModalProps } from '@pancakeswap-libs/uikit'
-
-
-interface Props extends InjectedModalProps {
-  title: string;
-  hideCloseButton?: boolean;
-  onBack?: () => void;
-  bodyPadding?: string;
-}
 
 const StyledIconButton = styled(IconButton)`
   &:hover {
     background: transparent !important;
   }
-`;
+`
 
 const StyledModal = styled.div`
   background-image: url('/images/novaria/modalBG.png');
@@ -32,13 +24,13 @@ const StyledModal = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     max-width: 50vw;
   }
-`;
+`
 
 const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   align-items: center;
-`;
+`
 
 const ModalTitle = styled(Flex)`
   align-items: center;
@@ -46,18 +38,16 @@ const ModalTitle = styled(Flex)`
   color: #5affff;
   padding: 10px;
   padding-top: 30px;
-`;
+`
 
-const Modal: React.FC<Props> = ({
-  title,
-  onDismiss,
-  onBack,
-  children,
-  hideCloseButton = false,
-  bodyPadding = "24px",
-  ...props
-}) => (
-  <StyledModal {...props} >
+interface Props extends InjectedModalProps {
+  title: string
+  hideCloseButton?: boolean
+  onBack?: () => void
+}
+
+const Modal: React.FC<Props> = ({ title, onDismiss, onBack, children, hideCloseButton = false, ...props }) => (
+  <StyledModal {...props}>
     <ModalHeader>
       <ModalTitle>
         {onBack && (
@@ -65,7 +55,7 @@ const Modal: React.FC<Props> = ({
             <ArrowBackIcon color="#5affff" />
           </StyledIconButton>
         )}
-        <Heading style={{color:'#5affff'}}>{title}</Heading>
+        <Heading style={{ color: '#5affff' }}>{title}</Heading>
       </ModalTitle>
       {!hideCloseButton && (
         <StyledIconButton variant="text" onClick={onDismiss} aria-label="Close the dialog">
@@ -73,10 +63,10 @@ const Modal: React.FC<Props> = ({
         </StyledIconButton>
       )}
     </ModalHeader>
-    <Flex flexDirection="column" p={3} style={{color:'#5affff', paddingTop:50}}>
+    <Flex flexDirection="column" p={3} style={{ color: '#5affff', paddingTop: 50 }}>
       {children}
     </Flex>
   </StyledModal>
-);
+)
 
-export default Modal;
+export default Modal
