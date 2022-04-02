@@ -1,4 +1,4 @@
-import { useGetTimeModifier } from 'hooks/useNovaria'
+import { useGetPlaceInfo, useGetTimeModifier } from 'hooks/useNovaria'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -30,6 +30,8 @@ const ShipyardList = ({shipyard}) => {
     const cooldownTime = new Date((Number(shipyard.lastTakeoverTime) + (604800 / timeMod)) * 1000)
     const inCooldownStage = Number(cooldownTime) > Number(new Date())
     const underAttack = Number(shipyard.status) !== 0
+    const placeInfo = useGetPlaceInfo(Number(shipyard.coordX), Number(shipyard.coordY))
+    const isRefinery = placeInfo.refinery
     
 
     return(
@@ -43,8 +45,9 @@ const ShipyardList = ({shipyard}) => {
           <StatsCol>
             <StatsItem style={{textAlign:'right'}} >
                 {underAttack && 'In Progress'}
-                {!underAttack && inCooldownStage && '-'}
-                {!underAttack && !inCooldownStage && 'Available'}
+                {!underAttack && inCooldownStage && !isRefinery &&  '-'}
+                {!underAttack && isRefinery && 'Safe Zone'}
+                {!underAttack && !inCooldownStage && !isRefinery && 'Available'}
             </StatsItem>
           </StatsCol>
         </StatsRow>
