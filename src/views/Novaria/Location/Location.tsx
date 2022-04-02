@@ -28,6 +28,7 @@ import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import Chatter2 from '../components/ChatBox/Chatter2'
 import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
@@ -35,7 +36,7 @@ import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
-import BodyWrapper from '../components/BodyWrapper'
+import BodyWrapper from '../components/BodyWrapper' 
 import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
@@ -56,7 +57,7 @@ const Page = styled.div`
 const Row = styled.div`
   flex-wrap: wrap;
   display: flex;
-  ${({ theme }) => theme.mediaQueries.sm} {
+  ${({ theme }) => theme.mediaQueries.md} {
     flex-wrap: nowrap;
   }
 `
@@ -376,6 +377,7 @@ const Location: React.FC = () => {
             </RightCol>
           </Content>
         </BodyWrapper>
+        <Chatter2 username={playerName} playerExists={playerExists} />
       </Row>
     </Page>
   )
