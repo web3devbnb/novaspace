@@ -60,18 +60,6 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-// ReactGA.initialize(
-//   [
-//     {trackingId: 'AW-978000460'}, 
-//     {trackingId: 'UA-206876567-1', 
-//       gaOptions: {
-//         siteSpeedSampleRate: 100
-//         }
-//     }
-//   ], 
-//     { debug: true });
-
-
 const App: React.FC = () => {
   
   ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
