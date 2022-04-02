@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useEnterBattle, useGetBattle, useGoBattle } from 'hooks/useNovaria'
 import ModalActions from '../../../components/NovariaModalActions'
