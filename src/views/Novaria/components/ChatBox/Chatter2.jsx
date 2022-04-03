@@ -45,19 +45,13 @@ const app = initializeApp({
 // });
 firebase.appCheck().activate('6Le6zTwfAAAAADHtkEE3mOJ3NHtOS8J0bet5CDrD', true)
 
-firebase.appCheck().getToken()
-
 // const auth = firebase.auth();
 
 // styled components
 const Wrapper = styled.div`
   padding: 5px;
-  background: #00000050;
-  max-width: 90vw;
-  margin: 0 auto;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    margin: 10px;
-  }
+  background: #000000;
+  // max-width: 90vw;
 `
 const Header = styled.div`
   font-size: 1.25rem;
@@ -75,7 +69,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px;
-  max-width: 300px;
+  // max-width: 300px;
   
   &::-webkit-scrollbar { 
     width: 5px;
@@ -114,9 +108,38 @@ const NameSpan = styled.span`
   font-size: .9rem;
 `
 
+const WarningWrapper = styled.div`
+  text-align: center;
+`
+
+const WarningButton = styled.button`
+
+`
+
+
+
 function MSGApp({username, playerExists}) {
 
   const user = username.toString();
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    // check when the component is loaded
+    const localStorageToggled = localStorage.getItem("toggle");
+
+    // If is not null
+    if (localStorageToggled) {
+      setToggle(localStorageToggled === "true" && true);
+    } else {
+      // If null set the localStorage key/value as a string.
+      localStorage.setItem("toggle", `${toggle}`);
+    }
+  }, [toggle]);
+
+  const handleToggle = (tog) => {
+    localStorage.setItem("toggle", `${tog}`);
+    setToggle(tog);
+  };
 
   return (
     <Wrapper>
@@ -124,6 +147,14 @@ function MSGApp({username, playerExists}) {
         <h1>NOVARIA CHAT</h1>
         
       </Header>
+      {!toggle && 
+        <WarningWrapper>
+          This chat box is open to all players. Never share your personal information, anyone asking for it is scamming you. Anyone asking you to go to a different website is scamming you. Chat at your own risk. <br />
+          <WarningButton onClick={() => handleToggle(!toggle)}>
+            I Understand
+          </WarningButton>  
+        </WarningWrapper>
+      }
 
       <section>
         {user && playerExists ? <ChatRoom user={user} /> : 'MUST BE SIGNED IN TO GAME TO CHAT'}
@@ -181,7 +212,7 @@ function ChatRoom({user}) {
         setMessages([]);
         setMessages(snapshotToArray(resp))
         // this scroll method moves the whole page... need to find better solution
-        // dummy.current.scrollIntoView({ behavior: 'smooth' });
+        dummy.current.scrollIntoView({ behavior: 'auto' });
       })
     }
     fetchData();

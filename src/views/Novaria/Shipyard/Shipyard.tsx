@@ -29,6 +29,7 @@ import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ShipCardModal from './ShipCardModal'
+import ChatButton from '../components/ChatBox/ChatButton'
 import moleCard from '../assets/moleCard.png'
 import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
@@ -388,6 +389,7 @@ const Shipyard = () => {
         <GameMenu pageName="shipyard" />
 
         <BodyWrapper>
+          <ChatButton playerExists={playerExists} playerName={playerName} />
           <LeftCol>
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" role="button" onClick={handleViperClick} />

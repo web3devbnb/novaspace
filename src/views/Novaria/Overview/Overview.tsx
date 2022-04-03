@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { useModal } from '@pancakeswap-libs/uikit'
 import {
   useGetBattlesAtLocation,
   useGetPlayerBattleStatus,
@@ -27,7 +28,7 @@ import GameMenu from '../components/GameMenu'
 import YourFleetStats from '../Location/YourFleetStats'
 import OpenBattlesTable from '../Location/OpenBattlesTable'
 import ShipyardList from './ShipyardStats/ShipyardList'
-import Chatter2 from '../components/ChatBox/Chatter2'
+import ChatButton from '../components/ChatBox/ChatButton'
 import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
@@ -61,12 +62,11 @@ const UpperSection = styled.div`
   background: #11427399;
   padding: 15px;
   text-align: center;
-  max-width: 90vw;
 `
 const UpperCol = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5px 0px;
+  margin: 5px auto;
   align-items: center;
   ${({ theme }) => theme.mediaQueries.md} {
     max-width: 50vw;
@@ -75,7 +75,7 @@ const UpperCol = styled.div`
 `
 
 const MainLogo = styled.img`
-  max-width: 500px;
+  max-width: 60vw;
 `
 
 const Header = styled.div`
@@ -157,6 +157,7 @@ const ShipyardSubHeader = styled.div`
   color: #289794;
 `
 
+
 const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
   const fleetLocation = useGetFleetLocation(account)
@@ -183,6 +184,8 @@ const Overview: React.FC = () => {
   const playerCount = useGetPlayerCount()
   const currentTime = Math.round((new Date()). getTime() / 1000)
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
+
+  
 
   return (
     <Page>
@@ -218,8 +221,7 @@ const Overview: React.FC = () => {
                   <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
                 </Text>
               </UpperCol>
-              <Chatter2 username={playerName} playerExists={playerExists} />
-              
+              <ChatButton playerExists={playerExists} playerName={playerName} />
             </StatsRow>
           </UpperSection>
           
@@ -237,7 +239,7 @@ const Overview: React.FC = () => {
               />
             </OpenBattlesCard>
             <StatsContainer>
-              <Header>Stats</Header>
+              <Header>Stats</Header> 
               <StatsRow>
                 <StatsCol>
                   <StatsItem>Total Players: </StatsItem>

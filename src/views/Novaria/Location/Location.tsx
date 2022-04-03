@@ -28,7 +28,7 @@ import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
-import Chatter2 from '../components/ChatBox/Chatter2'
+import ChatButton from '../components/ChatBox/ChatButton'
 import LocationCard from './LocationCard'
 import OpenBattlesTable from './OpenBattlesTable'
 import PlayersTable from './PlayersTable'
@@ -377,7 +377,7 @@ const Location: React.FC = () => {
             </RightCol>
           </Content>
         </BodyWrapper>
-        <Chatter2 username={playerName} playerExists={playerExists} />
+        <ChatButton playerName={playerName} playerExists={playerExists} />
       </Row>
     </Page>
   )

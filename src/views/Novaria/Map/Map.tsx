@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ConnectedAccountContext } from 'App'
-import { useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer } from 'hooks/useNovaria'
+import { useGetFleetLocation, useGetFleetMineral, useGetMaxMineralCapacity, useGetPlayer, useGetPlayerExists } from 'hooks/useNovaria'
 import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import ChatButton from '../components/ChatBox/ChatButton'
 import scrapLogo from '../assets/scrap.png'
 import emptyLogo from '../assets/emptyLocation.png'
 import youLogo from '../assets/you.png'
@@ -229,6 +230,7 @@ const Map: React.FC = () => {
   const fleetMineral = useGetFleetMineral(account)
   const mineralCapacity = useGetMaxMineralCapacity(account)
   const player = useGetPlayer(account)
+  const playerExists = useGetPlayerExists(account)
 
   const mapContract = useMap()
 
@@ -323,6 +325,7 @@ const Map: React.FC = () => {
         <GameMenu pageName="starmap" />
         <Body>
           <BodyWrapper>
+            <ChatButton playerExists={playerExists} playerName={player.name} />
             <Grid nx={mapData.data[0].length} ny={mapData.data.length}>
               {mapData.data.map((arr, y) => {
                 const ry = Number(mapData.data.length - y - 1)
