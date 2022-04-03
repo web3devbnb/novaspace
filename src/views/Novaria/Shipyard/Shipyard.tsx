@@ -265,7 +265,7 @@ const Shipyard = () => {
   const miningCapacity = useGetMiningCapacity(account)
   const fleetLocation = useGetFleetLocation(account)
   const fleetMineral = useGetFleetMineral(account)
-  const player = useGetPlayer(account.toString())
+  const player = useGetPlayer(account)
   const playerEXP = Number(player.experience)
   const playerName = player.name
 
