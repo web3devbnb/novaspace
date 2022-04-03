@@ -5,6 +5,8 @@ import 'firebase/compat/database'
 import 'firebase/compat/auth'
 import 'firebase/compat/analytics'
 import 'firebase/compat/app-check'
+import { initializeApp } from "firebase/app";
+import {initializeAppCheck, ReCaptchaV3Provider, getToken} from 'firebase/app-check'
 import useRefresh from 'hooks/useRefresh'
 import Filter from 'bad-words'
 
@@ -24,19 +26,38 @@ firebase.initializeApp({
 // const appCheck = firebase.appCheck();
 // // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
 // // key is the counterpart to the secret key you set in the Firebase console.
+const app = initializeApp({
+  apiKey: "AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA",
+  authDomain: "novaria-chat.firebaseapp.com", 
+  projectId: "novaria-chat",
+  storageBucket: "novaria-chat.appspot.com",
+  messagingSenderId: "778958864134",
+  appId: "1:778958864134:web:d0954aa81fc2b951f32887",
+  measurementId: "G-WLM7ED9HN0"
+});
+
+// use for localhost
 // eslint-disable-next-line no-restricted-globals
 // self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaV3Provider('6Le6zTwfAAAAADHtkEE3mOJ3NHtOS8J0bet5CDrD'),
+//   isTokenAutoRefreshEnabled: true
+// });
 firebase.appCheck().activate('6Le6zTwfAAAAADHtkEE3mOJ3NHtOS8J0bet5CDrD', true)
 
-
+firebase.appCheck().getToken()
 
 // const auth = firebase.auth();
 
 // styled components
 const Wrapper = styled.div`
-  margin: 10px;
   padding: 5px;
   background: #00000050;
+  max-width: 90vw;
+  margin: 0 auto;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin: 10px;
+  }
 `
 const Header = styled.div`
   font-size: 1.25rem;
@@ -54,7 +75,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px;
-  width: 90vw;
+  max-width: 300px;
   
   &::-webkit-scrollbar { 
     width: 5px;
@@ -159,7 +180,8 @@ function ChatRoom({user}) {
       firebase.database().ref('messages/').limitToLast(50).on('value', resp => {
         setMessages([]);
         setMessages(snapshotToArray(resp))
-        dummy.current.scrollIntoView({ behavior: 'smooth' });
+        // this scroll method moves the whole page... need to find better solution
+        // dummy.current.scrollIntoView({ behavior: 'smooth' });
       })
     }
     fetchData();

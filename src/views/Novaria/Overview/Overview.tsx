@@ -18,7 +18,8 @@ import {
   useGetPlayerBattle,
   useGetShipyards,
   useGetShipClasses,
-  useGetShips
+  useGetShips,
+  useGetPlayerExists
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -26,6 +27,7 @@ import GameMenu from '../components/GameMenu'
 import YourFleetStats from '../Location/YourFleetStats'
 import OpenBattlesTable from '../Location/OpenBattlesTable'
 import ShipyardList from './ShipyardStats/ShipyardList'
+import Chatter2 from '../components/ChatBox/Chatter2'
 import logo from '../assets/novariaLogoMain.png'
 
 const Page = styled.div`
@@ -53,6 +55,27 @@ const Body = styled.div`
   padding: 10px;
   color: white;
   
+`
+
+const UpperSection = styled.div`
+  background: #11427399;
+  padding: 15px;
+  text-align: center;
+  max-width: 90vw;
+`
+const UpperCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+  align-items: center;
+  ${({ theme }) => theme.mediaQueries.md} {
+    max-width: 50vw;
+  }
+
+`
+
+const MainLogo = styled.img`
+  max-width: 500px;
 `
 
 const Header = styled.div`
@@ -99,6 +122,7 @@ const StatsRow = styled.div`
   display:flex;
   justify-content: space-between;
   text-align: initial;
+  flex-wrap: wrap;
 `
 
 const StatsCol = styled.div`
@@ -143,7 +167,7 @@ const Overview: React.FC = () => {
   const playerName = player.name
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
-
+  const playerExists = useGetPlayerExists(account)
   const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize(account)
   const fleetPower = useGetAttackPower(account)
@@ -172,26 +196,32 @@ const Overview: React.FC = () => {
       <Row>
         <GameMenu pageName="overview" />
         <Body>
-          <div style={{ background: '#11427399', padding: 15, textAlign: 'center' }}>
-            <img src={logo} style={{}} alt="novaria logo" />
-            <Header>Welcome to the Legend of Novaria</Header>
-            <Text>
-              You are about to embark on a journey to explore the world of Novaria.
-              The mysterious Draken forces have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know when they will strike again.
-              <br />
-              <br />
-              By building ships, mining planets, and refining mineral into NOVA, you can help humanity rebuild. Along the way, you will meet friends and foes - are you cunning enough to figure out who will help you or destroy you?            
-              <br />
-              <br />
-              The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
-              <br />
-              <br />
-              Good Luck!
-              <br />
-              <br />
-              <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
-            </Text>
-          </div>
+          <UpperSection>
+            <StatsRow>
+              <UpperCol>
+                <MainLogo src={logo} alt="novaria logo" />
+                <Header>Welcome to the Legend of Novaria</Header>
+                <Text>
+                  You are about to embark on a journey to explore the world of Novaria.
+                  The mysterious Draken forces have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know when they will strike again.
+                  <br />
+                  <br />
+                  By building ships, mining planets, and refining mineral into NOVA, you can help humanity rebuild. Along the way, you will meet friends and foes - are you cunning enough to figure out who will help you or destroy you?            
+                  <br />
+                  <br />
+                  The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
+                  <br />
+                  <br />
+                  Good Luck!
+                  <br />
+                  <br />
+                  <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
+                </Text>
+              </UpperCol>
+              <Chatter2 username={playerName} playerExists={playerExists} />
+              
+            </StatsRow>
+          </UpperSection>
           
           <StatsSection>
             
