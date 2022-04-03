@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import showCountdown from 'utils/countdownTimer'
 import { useClaimShips, useGetSpaceDock } from 'hooks/useNovaria'
+import { ConnectedAccountContext } from 'App'
 
 const SpaceDockMenu = styled.div`
   display: flex;
@@ -136,12 +137,12 @@ const Row = styled.div`
 const Item = styled.div``
 
 const BuildQueue = ({ fleetLocation }) => {
+  const account = useContext(ConnectedAccountContext)
+  const spaceDocks = useGetSpaceDock(account)
+  const { onClaim } = useClaimShips(account)
+
   const [pending, setPendingTx] = useState(false)
   const [claimAmount, setClaimAmount] = useState(null)
-
-  const spaceDocks = useGetSpaceDock()
-
-  const { onClaim } = useClaimShips()
 
   const handleClaim = async (claimId) => {
     setPendingTx(true)
@@ -154,6 +155,7 @@ const BuildQueue = ({ fleetLocation }) => {
       setPendingTx(false)
     }
   }
+  
   const handleClaimMax = async (claimId, amount) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)

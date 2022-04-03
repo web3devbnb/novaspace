@@ -78,16 +78,15 @@ export const useBuildShips = () => {
   return { onBuild: handleBuildShips }
 }
 
-export const useClaimShips = () => {
-  const { account } = useWallet()
+export const useClaimShips = (player: string) => {
   const useFleetContract = useFleet()
 
   const handleClaimShips = useCallback(
     async (dockId: string, amount: string) => {
-      const txHash = await claimShips(useFleetContract, dockId, amount, account)
+      const txHash = await claimShips(useFleetContract, dockId, amount, player)
       console.info(txHash)
     },
-    [account, useFleetContract],
+    [player, useFleetContract],
   )
   return { onClaim: handleClaimShips }
 }
@@ -223,18 +222,17 @@ export const useGetShipyards = () => {
   return shipyards
 }
 
-export const useGetSpaceDock = () => {
-  const { account } = useWallet()
+export const useGetSpaceDock = (player: string) => {
   const { fastRefresh } = useRefresh()
   const [spaceDock, setSpaceDock] = useState([])
 
   useEffect(() => {
     async function fetchSpaceDock() {
-      const data = await fleetContract.methods.getPlayerSpaceDocks(account).call()
+      const data = await fleetContract.methods.getPlayerSpaceDocks(player).call()
       setSpaceDock(data)
     }
     fetchSpaceDock()
-  }, [fastRefresh, account])
+  }, [fastRefresh, player])
   return spaceDock
 }
 

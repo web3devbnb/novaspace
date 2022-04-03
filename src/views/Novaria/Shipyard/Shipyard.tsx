@@ -255,7 +255,7 @@ const selectStyles = {
 const Shipyard = () => {
   const account = useContext(ConnectedAccountContext)
   const shipClasses = useGetShipClasses()
-  const spaceDocks = useGetSpaceDock()
+  const spaceDocks = useGetSpaceDock(account)
   const shipyards = useGetShipyards()
   const playerFleet = useGetShips(account)
   const fleetSize = useGetFleetSize(account)
