@@ -55,8 +55,7 @@ export const useInsertCoinHere = () => {
   return { onCoin: handleInsertCoinHere }
 }
 
-export const useBuildShips = () => {
-  const { account } = useWallet()
+export const useBuildShips = (player: string) => {
   const useFleetContract = useFleet()
 
   const handleBuildShips = useCallback(
@@ -68,12 +67,12 @@ export const useBuildShips = () => {
         classId,
         amount,
         new BigNumber(buildCost * 10 ** 18).toString(),
-        account,
+        player,
       )
 
       console.info(txHash)
     },
-    [account, useFleetContract],
+    [player, useFleetContract],
   )
   return { onBuild: handleBuildShips }
 }

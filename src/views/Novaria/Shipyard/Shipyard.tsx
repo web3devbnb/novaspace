@@ -316,7 +316,7 @@ const Shipyard = () => {
   }
   const costMod = useGetCostMod()
   const buildCost = (shipCost * shipAmount + (shipyardFee / 100) * shipCost * shipAmount) / costMod / 10 ** 18
-  const { onBuild } = useBuildShips()
+  const { onBuild } = useBuildShips(account)
 
   const timeMod = useGetTimeModifier()
 
