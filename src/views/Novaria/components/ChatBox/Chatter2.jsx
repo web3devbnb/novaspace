@@ -51,7 +51,11 @@ firebase.appCheck().activate('6Le6zTwfAAAAADHtkEE3mOJ3NHtOS8J0bet5CDrD', true)
 const Wrapper = styled.div`
   padding: 5px;
   background: #000000;
-  // max-width: 90vw;
+  border: 1px solid #5affff;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  
 `
 const Header = styled.div`
   font-size: 1.25rem;
@@ -85,7 +89,11 @@ const Main = styled.div`
 `
 
 const Input = styled.input`
-  width: 80%;
+  width: 85%;
+  margin-left:5px;
+`
+const InputMenu = styled.div`
+
 `
 
 const MessageBox = styled.div`
@@ -227,14 +235,10 @@ function ChatRoom({user}) {
       <span ref={dummy} />
 
     </Main>
+    <Input id='txt' maxlength="240" value={formValue} onChange={(e) => setFormValue(e.target.value)} onKeyUp={handleKeypress} placeholder="type message" />
 
-    
-    
-      <Input id='txt' maxlength="240" value={formValue} onChange={(e) => setFormValue(e.target.value)} onKeyUp={handleKeypress} placeholder="type message" />
+    <button id='send' type="button" disabled={!formValue} onClick={sendMessage}>🕊️</button>
 
-      <button id='send' type="button" disabled={!formValue} onClick={sendMessage}>🕊️</button>
-    
-    
   </>)
 }
 
