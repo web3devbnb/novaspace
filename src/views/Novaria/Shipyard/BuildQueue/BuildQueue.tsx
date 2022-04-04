@@ -195,7 +195,7 @@ const BuildQueue = ({ fleetLocation }) => {
               <ClaimControls>
                 {/* eslint-disable-next-line no-nested-ternary */}
                 {fleetLocation.X === dock.coordX && fleetLocation.Y === dock.coordY ? (
-                  +new Date(dock.completionTime * 1000) - +new Date() < 0 ? (
+                  +new Date(dock.completionTime * 1000) - +new Date() < 0 && (
                     <div>
                       <Row>
                         <ClaimButton
@@ -225,16 +225,12 @@ const BuildQueue = ({ fleetLocation }) => {
                         </ClaimButton>
                       </Item>
                     </div>
-                  ) : (
-                    ''
                   )
                 ) : (
                   <WrongLocationButton>Not at Shipyard</WrongLocationButton>
                 )}
-                {dock.completionTime * 1000 > Number(new Date()) ? (
+                {dock.completionTime * 1000 > Number(new Date()) && (
                   <CountdownButton>{showCountdown(new Date(dock.completionTime * 1000))}</CountdownButton>
-                ) : (
-                  ''
                 )}
               </ClaimControls>
             </QueueCol>
