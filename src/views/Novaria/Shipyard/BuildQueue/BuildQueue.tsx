@@ -94,6 +94,15 @@ const ClaimButton = styled.button`
   background-color: #5affff;
 `
 
+const ClaimMaxButton = styled(ClaimButton)`
+  margin: 0;
+  margin-bottom: -2px;
+  margin-right: 5px;
+  padding: 3px;
+  font-size: 13px;
+  width: 100%;
+`
+
 const CountdownButton = styled.button`
   align-self: center;
   font-family: sans-serif;
@@ -198,19 +207,9 @@ const BuildQueue = ({ fleetLocation }) => {
                   +new Date(dock.completionTime * 1000) - +new Date() < 0 && (
                     <div>
                       <Row>
-                        <ClaimButton
-                          style={{
-                            margin: 0,
-                            marginBottom: -2,
-                            marginRight: 5,
-                            padding: 3,
-                            fontSize: 13,
-                            width: '100%',
-                          }}
-                          onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}
-                        >
+                        <ClaimMaxButton onClick={() => handleClaimMax(spaceDocks.indexOf(dock), dock.amount)}>
                           {!pending ? 'CLAIM MAX' : 'pending...'}
-                        </ClaimButton>
+                        </ClaimMaxButton>
                       </Row>
                       <Item>
                         <ClaimInput
