@@ -49,8 +49,6 @@ const ShipCard = styled.div<{ shipclass: string }>`
   height: 265px;
   width: 195px;
   margin: 10px;
-
-  position: relative;
 `
 
 const ShipCardStats = styled.div`
