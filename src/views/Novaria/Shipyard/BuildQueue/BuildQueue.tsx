@@ -34,26 +34,26 @@ const QueueRow = styled.div`
   grid-auto-flow: column;
 `
 
-const Col = styled.div`
-  flex-direction: column;
-  margin: 10px;
-  display: flex;
-`
-
-const QueueCol = styled(Col)<{ shipclass: string }>`
+const ShipCard = styled.div<{ shipclass: string }>`
   background: ${(props) => props.shipclass === '0' && 'url(/images/novaria/viperQueue.png)'};
   background: ${(props) => props.shipclass === '1' && 'url(/images/novaria/moleQueue.png)'};
   background: ${(props) => props.shipclass === '2' && 'url(/images/novaria/fireflyQueue.png)'};
   background: ${(props) => props.shipclass === '3' && 'url(/images/novaria/gorianQueue.png)'};
   background-size: fit;
   background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
   justify-content: flex-end;
+
   height: 265px;
   width: 195px;
+  margin: 10px;
+
   position: relative;
 `
 
-const QueueCardItems = styled.div`
+const ShipCardStats = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,8 +185,8 @@ const BuildQueue = ({ fleetLocation }) => {
       <QueueRow>
         {spaceDocks.map((dock) => {
           return (
-            <QueueCol shipclass={dock.shipClassId}>
-              <QueueCardItems>
+            <ShipCard shipclass={dock.shipClassId}>
+              <ShipCardStats>
                 <Row style={{ justifyContent: 'space-between' }}>
                   <Item>LOCATION &nbsp;</Item>
                   <Item style={{ zIndex: 1 }}>
@@ -197,7 +197,7 @@ const BuildQueue = ({ fleetLocation }) => {
                   <Item>AMOUNT</Item>
                   <Item style={{ zIndex: 1 }}>{dock.amount}</Item>
                 </Row>
-              </QueueCardItems>
+              </ShipCardStats>
 
               <ClaimControls>
                 {/* eslint-disable-next-line no-nested-ternary */}
@@ -230,7 +230,7 @@ const BuildQueue = ({ fleetLocation }) => {
                   <CountdownButton>{showCountdown(new Date(dock.completionTime * 1000))}</CountdownButton>
                 )}
               </ClaimControls>
-            </QueueCol>
+            </ShipCard>
           )
         })}
       </QueueRow>
