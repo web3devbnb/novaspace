@@ -58,7 +58,7 @@ const QueueCardItems = styled.div`
   flex-direction: column;
   justify-content: center;
   font-size: 0.75rem;
-
+  gap: 5px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5px;
@@ -189,8 +189,6 @@ const BuildQueue = ({ fleetLocation }) => {
               <QueueCardItems>
                 <Row style={{ justifyContent: 'space-between' }}>
                   <Item>LOCATION &nbsp;</Item>
-                  <br />
-                  <br />
                   <Item style={{ zIndex: 1 }}>
                     ({dock.coordX}, {dock.coordY})
                   </Item>
