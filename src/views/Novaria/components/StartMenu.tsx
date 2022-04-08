@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod } from 'hooks/useNovaria'
+import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod, useAddReferral, useCheckReferralStatus } from 'hooks/useNovaria'
 import { getFleetAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import ReactGA from 'react-ga'
 import ReactPixel from 'react-facebook-pixel'
@@ -58,10 +58,14 @@ const StartMenu = () => {
   const startCost = 103 / useGetCostMod()
   const startCostBUSD = Number(usePriceNovaBusd()) * startCost
 
-  const history = useHistory()
+  const history = useHistory()  
+  const refAddress = window.location.search.slice(5, 47)
+  const refStatus = useCheckReferralStatus(account)
+  
 
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere()
+  const { onAdd } = useAddReferral(account, refAddress)
 
   const sendInsertCoinTx = async () => {
     ReactGA.event({
@@ -71,6 +75,14 @@ const StartMenu = () => {
     })
     ReactPixel.trackSingle('964799387574791', 'Purchase', {value: 0.00, currency: 'USD'})
     setPendingTx(true)
+    if (refAddress.length > 0 && refStatus !== true) {
+      try {
+        await onAdd()
+      } finally {
+        setPendingTx(false)
+      }
+    setPendingTx(true)
+    }
     try {
       await onCoin(name)
     } catch (error) {
@@ -112,6 +124,7 @@ const StartMenu = () => {
     history.push('/overview')
   }
 
+
   return (
     <Body>
       {!isAllowed && 'Step 1 - Approve game contracts'}<br />
@@ -121,7 +134,8 @@ const StartMenu = () => {
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
       {!playerExists ?
         <div style={{marginTop:10}}>
-          Step 2 - Set your player name <br />
+          
+          Step 2 - Register your player name <br />
           <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} style={{marginTop:5}} />
           <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending} >{!pending ? 'Set Player Name' : 'pending...'}</Button>
           <div>Registration: {startCost} NOVA ~${startCostBUSD.toFixed(2)} (includes 50 ship fleet)</div>

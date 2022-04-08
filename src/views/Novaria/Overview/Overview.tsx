@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { useModal } from '@pancakeswap-libs/uikit'
 import {
@@ -20,7 +20,9 @@ import {
   useGetShipyards,
   useGetShipClasses,
   useGetShips,
-  useGetPlayerExists
+  useGetPlayerExists,
+  useCheckReferrals,
+  useGetReferralBonus,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
@@ -157,6 +159,45 @@ const ShipyardSubHeader = styled.div`
   color: #289794;
 `
 
+const RefButton = styled.button`
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: .65rem;
+`
+
+const RefSection = styled.div`
+  margin-top: 10px;
+  color: gold;
+  text-align: center;
+  max-width: 80vw;
+`
+
+const RewardsSection = styled.div`
+
+`
+
+const RewardsButtons = styled.button`
+  cursor: pointer;
+  border: 1px solid #5affff;
+  background: transparent;
+  color: #5affff;
+  // width: 110px;
+  margin: 5px;
+  &:hover {
+    background-color: #5affff;
+    color: black;
+  }
+  &:disabled {
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+`
 
 const Overview: React.FC = () => {
   const account = useContext(ConnectedAccountContext)
@@ -185,6 +226,33 @@ const Overview: React.FC = () => {
   const currentTime = Math.round((new Date()). getTime() / 1000)
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
+  const [copySuccess, setCopySuccess] = useState('')
+  const refLink = `https://shibanova.io/legend-of-novaria?ref=${account}`
+  const [pending, setPending] = useState(false)
+  const rewardsAmount = useCheckReferrals(account) * 25
+  const rewardsDisabled = rewardsAmount <= 0 || pending
+
+  const { onGet } = useGetReferralBonus(account)
+
+  const sendGetRewardsTx = async () => {
+    setPending(true)
+    try {
+      await onGet()
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPending(false)
+    }
+  }
+
+  function copyToClipboard(e) {
+    navigator.clipboard.writeText(refLink)
+    // This is just personal preference.
+    // I prefer to not show the whole text area selected.
+    // e.target.focus();
+    setCopySuccess('Copied!')
+  }
+  
   
 
   return (
@@ -220,11 +288,25 @@ const Overview: React.FC = () => {
                   <br />
                   <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
                 </Text>
+               
+                <RefSection>
+                  <div>
+                    *NEW* Refer a friend and get rewarded 25 NOVA when they sign up!
+                  </div>
+                  <div>
+                    <RefButton onClick={copyToClipboard}>Copy: {refLink}</RefButton> 
+                    {' '}{copySuccess}
+                  </div>
+                  <RewardsSection>
+                    <RewardsButtons disabled={rewardsDisabled} onClick={sendGetRewardsTx}>
+                      Collect {rewardsAmount} NOVA Bonus
+                    </RewardsButtons>
+                  </RewardsSection>
+                </RefSection>
               </UpperCol>
               <ChatButton playerExists={playerExists} playerName={playerName} />
             </StatsRow>
           </UpperSection>
-          
           <StatsSection>
             
             <OpenBattlesCard>

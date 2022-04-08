@@ -117,6 +117,7 @@ const NameSpan = styled.span`
 `
 
 const WarningWrapper = styled.div`
+  max-width: 300px;
   text-align: center;
 `
 

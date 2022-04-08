@@ -12,7 +12,8 @@ import {
   getMoneyPotOldAddress,
   getFleetAddress,
   getMapAddress,
-  getApprovalsAddress
+  getApprovalsAddress,
+  getReferralsAddress
 } from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
@@ -27,6 +28,7 @@ import sousChefBnb from 'config/abi/sousChefBnb.json'
 import moneyPot from 'config/abi/moneypot.json'
 import sNova from 'config/abi/snova.json'
 import fleet from 'config/abi/Fleet.json'
+import referrals from 'config/abi/Referrals.json'
 import map from 'config/abi/Map.json'
 import approvals from 'config/abi/Approvals.json'
 
@@ -114,6 +116,11 @@ export const useMap = () => {
 export const useApprovals = () => {
   const approvalsABI = approvals as unknown as AbiItem
   return useContract(approvalsABI, getApprovalsAddress())
+}
+
+export const useReferrals = () => {
+  const referralsABI = referrals as unknown as AbiItem
+  return useContract(referralsABI, getReferralsAddress())
 }
 
 export default useContract

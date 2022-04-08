@@ -4,8 +4,9 @@ import novaABI from 'config/abi/nova.json'
 import fleetABI from 'config/abi/Fleet.json'
 import mapABI from 'config/abi/Map.json'
 import treasuryABI from 'config/abi/Treasury.json'
+import ReferralsABI from 'config/abi/Referrals.json'
 import { getContract } from 'utils/web3'
-import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress } from 'utils/addressHelpers'
+import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress, getReferralsAddress } from 'utils/addressHelpers'
 import {
   buildShips,
   claimShips,
@@ -25,9 +26,11 @@ import {
   changeName,
   setShipyardFeePercent,
   tunnel,
+  addReferral,
+  getReferralBonus,
 } from 'utils/callHelpers'
 import BigNumber from 'bignumber.js'
-import { useFleet, useMap, useNova } from './useContract'
+import { useFleet, useMap, useNova, useReferrals } from './useContract'
 import useRefresh from './useRefresh'
 
 // Contract constants
@@ -35,6 +38,7 @@ const fleetContract = getContract(fleetABI, getFleetAddress())
 const mapContract = getContract(mapABI, getMapAddress())
 const novaContract = getContract(novaABI, getNovaAddress())
 const treasuryContract = getContract(treasuryABI, getTreasuryAddress())
+const referralsContract = getContract(ReferralsABI, getReferralsAddress())
 
 // ~~~Fleet contract functions~~~
 // player setup and current ships, building ships, combat
@@ -872,4 +876,61 @@ export const useGetCostMod = () => {
     fetch()
   }, [fastRefresh])
   return CostMod
+}
+
+
+// *** Referrals Contract ***
+
+export const useAddReferral = (player: string, referrer: string) => {
+  const useReferralsContract = useReferrals()
+
+  const handleAddReferral = useCallback(
+    async () => {
+      const txHash = await addReferral(useReferralsContract, referrer, player)
+      console.info(txHash)
+    },
+    [player, referrer, useReferralsContract],
+  )
+  return { onAdd: handleAddReferral }
+}
+
+export const useGetReferralBonus = (player: string) => {
+  const useReferralsContract = useReferrals()
+
+  const handleGetReferralBonus = useCallback(
+    async () => {
+      const txHash = await getReferralBonus(useReferralsContract, player)
+      console.info(txHash)
+    },
+    [player, useReferralsContract],
+  )
+  return { onGet: handleGetReferralBonus }
+}
+
+export const useCheckReferrals = (player: string) => {
+  const { slowRefresh } = useRefresh()
+  const [totalReferrals, settotalReferrals] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await referralsContract.methods.checkReferrals(player).call()
+      settotalReferrals(data)
+    }
+    fetch()
+  }, [player, slowRefresh])
+  return totalReferrals
+}
+
+export const useCheckReferralStatus = (player: string) => {
+  const { slowRefresh } = useRefresh()
+  const [referralStatus, setReferralStatus] = useState(false)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await referralsContract.methods.addressReferred(player).call()
+      setReferralStatus(data)
+    }
+    fetch()
+  }, [player, slowRefresh])
+  return referralStatus
 }

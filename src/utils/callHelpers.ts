@@ -292,3 +292,21 @@ export const tunnel = async (mapContract, x, y, account) => {
       return tx.transactionHash
     })
 }
+
+export const addReferral = async (referralsContract, referrer, account) => {
+  return referralsContract.methods
+    .addReferral(referrer)
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const getReferralBonus = async (referralsContract, account) => {
+  return referralsContract.methods
+    .getReferralBonus()
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

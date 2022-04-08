@@ -31,6 +31,9 @@ export default {
     56: '0x12a8B6bc5DcBE9BD869ea8ad76a41c7D9f166d80',
     97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
   },
+  referrals: {
+    56: '0x394c64f247F9634a0654A0f48e4308e0D22ACf93',
+  },
   lottery: {
     56: '',
     97: '',

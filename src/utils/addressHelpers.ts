@@ -44,3 +44,6 @@ export const getApprovalsAddress = () => {
 export const getTreasuryAddress = () => {
   return addresses.treasury[chainId]
 }
+export const getReferralsAddress = () => {
+  return addresses.referrals[chainId]
+}
