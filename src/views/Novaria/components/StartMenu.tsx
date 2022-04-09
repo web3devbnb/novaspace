@@ -55,10 +55,13 @@ const StartMenu = () => {
   const [name, setName] = useState('')
 
   const fleetContract = getFleetAddress()
-  const treasuryContract = getTreasuryAddress()
   const allowanceFleet = useGetAllowance(fleetContract)
+  const fleetContractApproved = allowanceFleet === null ? null : allowanceFleet > 0
+
+  const treasuryContract = getTreasuryAddress()
   const allowanceTreasury = useGetAllowance(treasuryContract)
-  const isAllowed = allowanceTreasury > 0 && allowanceFleet > 0
+  const treasuryContractApproved = allowanceTreasury === null ? null : allowanceTreasury > 0
+
   const playerExists = useGetPlayerExists(accountAddress)
   const startCost = 103 / useGetCostMod()
   const startCostBUSD = Number(usePriceNovaBusd()) * startCost
@@ -108,15 +111,17 @@ const StartMenu = () => {
   }
 
   const handleFleetApprove = () => {
-    if (allowanceFleet <= 0) {
-      sendApproveTx(fleetContract)
+    if (pendingApprove) {
+      return
     }
+    sendApproveTx(fleetContract)
   }
 
   const handleTreasuryApprove = () => {
-    if (allowanceTreasury <= 0) {
-      sendApproveTx(treasuryContract)
+    if (pendingApprove) {
+      return
     }
+    sendApproveTx(treasuryContract)
   }
 
   const handleStartGameClick = () => {
@@ -129,23 +134,23 @@ const StartMenu = () => {
     history.push('/overview')
   }
 
+  if (fleetContractApproved === null || treasuryContractApproved === null) {
+    return null
+  }
+
   return (
     <Body>
-      {!isAllowed && 'Step 1 - Approve game contracts'}
+      {(fleetContractApproved && treasuryContractApproved) || 'Step 1 - Approve game contracts'}
       <br />
-      {allowanceFleet <= 0 ? (
+      {fleetContractApproved || (
         <Button onClick={handleFleetApprove}>
           {!pendingApprove ? 'Approve Fleet Contract' : 'pending approval...'}
         </Button>
-      ) : (
-        ''
       )}
-      {allowanceTreasury <= 0 ? (
+      {treasuryContractApproved || (
         <Button onClick={handleTreasuryApprove}>
           {!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}
         </Button>
-      ) : (
-        ''
       )}
 
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
@@ -159,7 +164,7 @@ const StartMenu = () => {
             onChange={(e) => setName(e.target.value)}
             style={{ marginTop: 5 }}
           />
-          <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending}>
+          <Button onClick={sendInsertCoinTx} disabled={!fleetContractApproved || !treasuryContractApproved || pending}>
             {!pending ? 'Set Player Name' : 'pending...'}
           </Button>
           <div>
