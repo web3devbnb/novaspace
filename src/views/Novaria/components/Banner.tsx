@@ -45,10 +45,10 @@ const UpdateBanner = () => {
   const [pendingApprove, setPendingApproveTx] = useState(false)
   const treasuryContract = getTreasuryAddress()
   const allowanceTreasury = useGetAllowance(treasuryContract)
-  const treasuryContractApproved = allowanceTreasury <= 0
+  const treasuryContractApproved = allowanceTreasury > 0
 
   const { onClick } = useApprove()
-  
+
   const sendApproveTx = async (contract) => {
     setPendingApproveTx(true)
     try {
