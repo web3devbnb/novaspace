@@ -23,10 +23,12 @@ import {
   useGetPlayerExists,
   useCheckReferrals,
   useGetReferralBonus,
+  useGetTotalReferrals,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import UpdateBanner from '../components/Banner'
 import YourFleetStats from '../Location/YourFleetStats'
 import OpenBattlesTable from '../Location/OpenBattlesTable'
 import ShipyardList from './ShipyardStats/ShipyardList'
@@ -231,6 +233,7 @@ const Overview: React.FC = () => {
   const [pending, setPending] = useState(false)
   const rewardsAmount = useCheckReferrals(account) * 25
   const rewardsDisabled = rewardsAmount <= 0 || pending
+  const totalReferrals = useGetTotalReferrals(account)
 
   const { onGet } = useGetReferralBonus(account)
 
@@ -257,6 +260,7 @@ const Overview: React.FC = () => {
 
   return (
     <Page>
+      <UpdateBanner />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
@@ -325,10 +329,12 @@ const Overview: React.FC = () => {
               <StatsRow>
                 <StatsCol>
                   <StatsItem>Total Players: </StatsItem>
+                  <StatsItem>My Total Referrals: </StatsItem>
                   <StatsItem>My Total Refined Mineral: </StatsItem>
                 </StatsCol>
                 <StatsCol>
                   <StatsItem>{playerCount}</StatsItem>
+                  <StatsItem>{totalReferrals}</StatsItem>
                   <StatsItem>{refinedMineral}</StatsItem>
                 </StatsCol>
               </StatsRow>

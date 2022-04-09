@@ -24,7 +24,7 @@ export default {
     97: '0x20967ffC3CAA5CADB27ddff371617b4Ad6881Bf5',
   },
   treasury: {
-    56: '0xdDE0aBCe425B3d0E8db3c9DE2886D1E9e4f30ccb',
+    56: '0x1D3B656120a5bB28Ff36a5764A2e610B8F59870a',
     97: '0x1c24392880612D4E119E7961906514caDe8E3Be3', 
   },
   approvals: {
@@ -32,7 +32,7 @@ export default {
     97: '0x02A31F9fBf1a9b3fE82F1d20550778B73113722f',
   },
   referrals: {
-    56: '0x394c64f247F9634a0654A0f48e4308e0D22ACf93',
+    56: '0x0c4645A8eF44b2f5d5b82c89f7F25a5Cb8494703',
   },
   lottery: {
     56: '',

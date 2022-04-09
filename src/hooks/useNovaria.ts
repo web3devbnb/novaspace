@@ -934,3 +934,17 @@ export const useCheckReferralStatus = (player: string) => {
   }, [player, slowRefresh])
   return referralStatus
 }
+
+export const useGetTotalReferrals = (player: string) => {
+  const {slowRefresh} = useRefresh()
+  const [totalReferrals, settotalReferrals] = useState(0)
+
+  useEffect(() => {
+    async function fetch() {
+      const data = await referralsContract.methods.totalReferralsByAddress(player).call()
+      settotalReferrals(data)
+    }
+    fetch()
+  }, [player, slowRefresh])
+  return totalReferrals
+}

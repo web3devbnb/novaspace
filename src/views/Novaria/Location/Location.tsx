@@ -42,6 +42,7 @@ import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
 import homeIcon from '../assets/homeicon.png'
+import UpdateBanner from '../components/Banner'
 
 const Page = styled.div`
   font-size: 15px;
@@ -235,6 +236,7 @@ const Location: React.FC = () => {
 
   return (
     <Page>
+      <UpdateBanner />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}

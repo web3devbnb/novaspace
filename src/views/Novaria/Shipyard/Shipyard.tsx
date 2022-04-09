@@ -40,6 +40,7 @@ import BattleStatus from '../Location/BattleStatus'
 import BodyWrapper from '../components/BodyWrapper'
 import BuildQueue from './BuildQueue'
 import { EmptyShipyardStats, ShipyardStats } from './ShipyardStats'
+import UpdateBanner from '../components/Banner'
 
 const Page = styled.div`
   font-size: 15px;
@@ -378,6 +379,7 @@ const Shipyard = () => {
 
   return (
     <Page>
+      <UpdateBanner />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}

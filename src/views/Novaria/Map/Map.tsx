@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useMap } from 'hooks/useContract'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import UpdateBanner from '../components/Banner'
 import ChatButton from '../components/ChatBox/ChatButton'
 import scrapLogo from '../assets/scrap.png'
 import emptyLogo from '../assets/emptyLocation.png'
@@ -314,6 +315,7 @@ const Map: React.FC = () => {
 
   return (
     <Page>
+      <UpdateBanner />
       <GameHeader
         location={fleetLocation}
         playerMineral={fleetMineral}
