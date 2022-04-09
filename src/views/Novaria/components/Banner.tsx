@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import styled from 'styled-components'
 import { useGetAllowance, useApprove  } from 'hooks/useNovaria'
 import { getTreasuryAddress } from 'utils/addressHelpers'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 const Wrapper = styled.div`
     display: flex;
@@ -43,11 +42,10 @@ const Button = styled.button`
 `
 
 const UpdateBanner = () => {
-    const wallet = useWallet()
     const [pendingApprove, setPendingApproveTx] = useState(false) 
     const treasuryContract = getTreasuryAddress()
     const allowanceTreasury = useGetAllowance(treasuryContract)
-    const isAllowed = allowanceTreasury > 0 
+    const showBanner = allowanceTreasury <= 0 
 
     const { onClick } = useApprove()
     const sendApproveTx = async (contract) => {
@@ -68,11 +66,10 @@ const UpdateBanner = () => {
 
     
     return (
-        !isAllowed &&
+        showBanner &&
             <Wrapper>
                 We have made updates to the treasury contract. It requires a new approval before you can continue to the game.
-                {
-                    allowanceTreasury <= 0 && 
+                {allowanceTreasury <= 0 && 
                     <Button onClick={handleTreasuryApprove}>
                         {!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}
                     </Button> 
