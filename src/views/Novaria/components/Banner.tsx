@@ -1,19 +1,19 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useGetAllowance, useApprove  } from 'hooks/useNovaria'
+import { useGetAllowance, useApprove } from 'hooks/useNovaria'
 import { getTreasuryAddress } from 'utils/addressHelpers'
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    background:  #11427399;
-    border-top: 1px solid #5affff;
-    border-bottom: 1px solid #5affff;
-    max-height: 50vw;
-    text-align: center;
-    padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background: #11427399;
+  border-top: 1px solid #5affff;
+  border-bottom: 1px solid #5affff;
+  max-height: 50vw;
+  text-align: center;
+  padding-top: 15px;
 `
 
 const Button = styled.button`
@@ -32,52 +32,53 @@ const Button = styled.button`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
     0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
     inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
-    
+
   &:disabled {
-      color: gray;
-      border-color: gray;
-      cursor: not-allowed;
-      box-shadow: none;
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 `
 
 const UpdateBanner = () => {
-    const [pendingApprove, setPendingApproveTx] = useState(false) 
-    const treasuryContract = getTreasuryAddress()
-    const allowanceTreasury = useGetAllowance(treasuryContract)
-    const showBanner = allowanceTreasury <= 0 
+  const [pendingApprove, setPendingApproveTx] = useState(false)
+  const treasuryContract = getTreasuryAddress()
+  const allowanceTreasury = useGetAllowance(treasuryContract)
+  const treasuryContractApproved = allowanceTreasury <= 0
 
-    const { onClick } = useApprove()
-    const sendApproveTx = async (contract) => {
-      setPendingApproveTx(true)
-      try {
-        await onClick(contract)
-      } catch (error) {
-        console.log('error: ', error)
-      } finally {
-        setPendingApproveTx(false)
-      }
+  const { onClick } = useApprove()
+  
+  const sendApproveTx = async (contract) => {
+    setPendingApproveTx(true)
+    try {
+      await onClick(contract)
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingApproveTx(false)
     }
-    const handleTreasuryApprove = () => {
-      if (allowanceTreasury <= 0) {
-        sendApproveTx(treasuryContract)
-      }
-    }
+  }
 
-    
-    return (
-        showBanner &&
-            <Wrapper>
-                We have made updates to the treasury contract. It requires a new approval before you can continue to the game.
-                {allowanceTreasury <= 0 && 
-                    <Button onClick={handleTreasuryApprove}>
-                        {!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}
-                    </Button> 
-                }
-            </Wrapper>
-        
-    )
-        
-    
+  const handleTreasuryApprove = () => {
+    if (treasuryContractApproved) {
+      return
+    }
+    sendApproveTx(treasuryContract)
+  }
+
+  if (treasuryContractApproved) {
+    return null
+  }
+
+  return (
+    <Wrapper>
+      We have made updates to the treasury contract. It requires a new approval before you can continue to the game.
+      <Button onClick={handleTreasuryApprove}>
+        {!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}
+      </Button>
+    </Wrapper>
+  )
 }
+
 export default UpdateBanner
