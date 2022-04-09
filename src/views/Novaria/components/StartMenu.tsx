@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import {
@@ -47,7 +47,6 @@ const Body = styled.div`
 `
 
 const StartMenu = () => {
-  ReactGA.initialize('UA-206876567-1', { gaOptions: { siteSpeedSampleRate: 100 } })
   const { account } = useWallet()
   const accountAddress = account === null ? '' : account
   const [pending, setPendingTx] = useState(false)
@@ -73,6 +72,10 @@ const StartMenu = () => {
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere()
   const { onAdd } = useAddReferral(account, refAddress)
+
+  useEffect(() => {
+    ReactGA.initialize('UA-206876567-1', { gaOptions: { siteSpeedSampleRate: 100 } })
+  }, [])
 
   const sendInsertCoinTx = async () => {
     ReactGA.event({
