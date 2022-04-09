@@ -837,7 +837,7 @@ export const useApprove = () => {
 export const useGetAllowance = (contract) => {
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
-  const [allowance, setAllowance] = useState(0)
+  const [allowance, setAllowance] = useState(null)
 
   useEffect(() => {
     async function fetch() {
