@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { useGetAllowance, useApprove, useInsertCoinHere, useGetPlayerExists, useGetCostMod, useAddReferral, useCheckReferralStatus } from 'hooks/useNovaria'
+import {
+  useGetAllowance,
+  useApprove,
+  useInsertCoinHere,
+  useGetPlayerExists,
+  useGetCostMod,
+  useAddReferral,
+  useCheckReferralStatus,
+} from 'hooks/useNovaria'
 import { getFleetAddress, getTreasuryAddress } from 'utils/addressHelpers'
 import ReactGA from 'react-ga'
 import ReactPixel from 'react-facebook-pixel'
@@ -24,25 +32,22 @@ const Button = styled.button`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 2px 1px 4px rgba(0, 0, 0, 0.3), 2px 4px 3px rgba(3, 0, 128, 0.3),
     0 0 7px 2px rgba(0, 208, 255, 0.6), inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 2px 1px 4px rgba(0, 0, 0, 0.3),
     inset 2px 4px 3px rgba(3, 0, 128, 0.3), inset 0 0 7px 2px rgba(0, 208, 255, 0.6);
-    
+
   &:disabled {
-      color: gray;
-      border-color: gray;
-      cursor: not-allowed;
-      box-shadow: none;
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 `
 
 const Body = styled.div`
-  // background: #5c5c5c50;
-  // border-top: 1px solid gray;
-  // border-bottom: 1px solid gray;
   padding: 10px 0;
   font-size: 1.1rem;
 `
 
 const StartMenu = () => {
-  ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
+  ReactGA.initialize('UA-206876567-1', { gaOptions: { siteSpeedSampleRate: 100 } })
   const { account } = useWallet()
   const accountAddress = account === null ? '' : account
   const [pending, setPendingTx] = useState(false)
@@ -58,10 +63,9 @@ const StartMenu = () => {
   const startCost = 103 / useGetCostMod()
   const startCostBUSD = Number(usePriceNovaBusd()) * startCost
 
-  const history = useHistory()  
+  const history = useHistory()
   const refAddress = window.location.search.slice(5, 47)
   const refStatus = useCheckReferralStatus(account)
-  
 
   const { onClick } = useApprove()
   const { onCoin } = useInsertCoinHere()
@@ -71,9 +75,9 @@ const StartMenu = () => {
     ReactGA.event({
       category: 'Legend of Novaria',
       action: 'Purchase Game',
-      label: 'button'
+      label: 'button',
     })
-    ReactPixel.trackSingle('964799387574791', 'Purchase', {value: 0.00, currency: 'USD'})
+    ReactPixel.trackSingle('964799387574791', 'Purchase', { value: 0.0, currency: 'USD' })
     setPendingTx(true)
     if (refAddress.length > 0 && refStatus !== true) {
       try {
@@ -81,7 +85,7 @@ const StartMenu = () => {
       } finally {
         setPendingTx(false)
       }
-    setPendingTx(true)
+      setPendingTx(true)
     }
     try {
       await onCoin(name)
@@ -108,6 +112,7 @@ const StartMenu = () => {
       sendApproveTx(fleetContract)
     }
   }
+
   const handleTreasuryApprove = () => {
     if (allowanceTreasury <= 0) {
       sendApproveTx(treasuryContract)
@@ -118,32 +123,55 @@ const StartMenu = () => {
     ReactGA.event({
       category: 'Legend of Novaria',
       action: 'start game',
-      label: 'button'
+      label: 'button',
     })
     ReactPixel.trackSingle('964799387574791', 'Lead')
     history.push('/overview')
   }
 
-
   return (
     <Body>
-      {!isAllowed && 'Step 1 - Approve game contracts'}<br />
-      {allowanceFleet <= 0 ? <Button onClick={handleFleetApprove}>{!pendingApprove ? 'Approve Fleet Contract' : 'pending approval...'}</Button> : ''}
-      {allowanceTreasury <= 0 ? <Button onClick={handleTreasuryApprove}>{!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}</Button> : ''}
+      {!isAllowed && 'Step 1 - Approve game contracts'}
+      <br />
+      {allowanceFleet <= 0 ? (
+        <Button onClick={handleFleetApprove}>
+          {!pendingApprove ? 'Approve Fleet Contract' : 'pending approval...'}
+        </Button>
+      ) : (
+        ''
+      )}
+      {allowanceTreasury <= 0 ? (
+        <Button onClick={handleTreasuryApprove}>
+          {!pendingApprove ? 'Approve Treasury Contract' : 'pending approval...'}
+        </Button>
+      ) : (
+        ''
+      )}
 
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
-      {!playerExists ?
-        <div style={{marginTop:10}}>
-          
+      {!playerExists ? (
+        <div style={{ marginTop: 10 }}>
           Step 2 - Register your player name <br />
-          <input type="text" required maxLength={12} onChange={(e) => setName(e.target.value)} style={{marginTop:5}} />
-          <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending} >{!pending ? 'Set Player Name' : 'pending...'}</Button>
-          <div>Registration: {startCost} NOVA ~${startCostBUSD.toFixed(2)} (includes 50 ship fleet)</div>
-          <div style={{fontSize:'0.9rem',marginTop:5}}>*Recommend 500 NOVA to build a competitive fleet</div>
-        </div> : ''}
+          <input
+            type="text"
+            required
+            maxLength={12}
+            onChange={(e) => setName(e.target.value)}
+            style={{ marginTop: 5 }}
+          />
+          <Button onClick={sendInsertCoinTx} disabled={!isAllowed || pending}>
+            {!pending ? 'Set Player Name' : 'pending...'}
+          </Button>
+          <div>
+            Registration: {startCost} NOVA ~${startCostBUSD.toFixed(2)} (includes 50 ship fleet)
+          </div>
+          <div style={{ fontSize: '0.9rem', marginTop: 5 }}>*Recommend 500 NOVA to build a competitive fleet</div>
+        </div>
+      ) : (
+        ''
+      )}
       {playerExists ? <Button onClick={handleStartGameClick}>Start Game</Button> : ''}
     </Body>
-
   )
 }
 
