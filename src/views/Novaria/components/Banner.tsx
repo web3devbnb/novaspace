@@ -43,16 +43,10 @@ const Button = styled.button`
 
 const UpdateBanner = () => {
   const [pendingApprove, setPendingApproveTx] = useState(false)
+
   const treasuryContract = getTreasuryAddress()
   const allowanceTreasury = useGetAllowance(treasuryContract)
-
-  // Assume the treasury contract is approved while waiting for `useGetAllowance`
-  // to query the blockchain, so we don't see the banner flashing on the first
-  // page load. Flashes might still happen in certain conditions, all this should
-  // be done differently by explicitly handling waiting for `useGetAllowance` to
-  // query the blockchain, rather than assume the treasury contract is approved
-  // when that happens ...
-  const treasuryContractApproved = allowanceTreasury !== null ? allowanceTreasury > 0 : true
+  const treasuryContractApproved = allowanceTreasury === null ? null : allowanceTreasury > 0
 
   const { onClick } = useApprove()
 
@@ -68,13 +62,13 @@ const UpdateBanner = () => {
   }
 
   const handleTreasuryApprove = () => {
-    if (treasuryContractApproved) {
+    if (pendingApprove) {
       return
     }
     sendApproveTx(treasuryContract)
   }
 
-  if (treasuryContractApproved) {
+  if (treasuryContractApproved === null || treasuryContractApproved === true) {
     return null
   }
 
