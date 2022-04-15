@@ -162,6 +162,7 @@ const Novaria: React.FC = () => {
             <Description>
               Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain fueled by NOVA.
               Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS universe.
+              <br /> <span style={{color:'gold', marginBottom:10}}>WARNING: This game is not for the feint of heart. Proceed with CAUTION!</span>
             </Description>
 
           </SubHeading>
