@@ -28,6 +28,7 @@ import {
 import { ConnectedAccountContext } from 'App'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
+import GameRankings from '../components/GameRankings'
 import UpdateBanner from '../components/Banner'
 import YourFleetStats from '../Location/YourFleetStats'
 import OpenBattlesTable from '../Location/OpenBattlesTable'
@@ -120,6 +121,20 @@ const StatsContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
+  
+  overflow-y: auto;
+  scrollbar-color: #5affff #289794;
+  scrollbar-width: thin;
+  max-height: 500px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #289794;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #5affff;
+  }
 `
 
 const StatsRow = styled.div`
@@ -211,6 +226,7 @@ const Overview: React.FC = () => {
   const playerName = player.name
   const playerBattleStatus = useGetPlayerBattleStatus(account)
   const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
+  const totalRefined = Number(refinedMineral).toFixed(0)
   const playerExists = useGetPlayerExists(account)
   const fleetSize = useGetFleetSize(account)
   const maxFleetSize = useGetMaxFleetSize(account)
@@ -308,6 +324,13 @@ const Overview: React.FC = () => {
                   </RewardsSection>
                 </RefSection>
               </UpperCol>
+              <GameRankings
+                exp={playerEXP}
+                playerName={playerName}
+                playerTotalMineral={totalRefined}
+                playerAttack={fleetPower}
+                playerSize={fleetSize} 
+              />
               <ChatButton playerExists={playerExists} playerName={playerName} />
             </StatsRow>
           </UpperSection>
