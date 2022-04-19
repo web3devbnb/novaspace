@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import styled from "styled-components"
 import {io} from 'socket.io-client'
 
-const socket = io('https://novaria-rankings.shibanova.io', {
+const socket = io('https://radiant-taiga-26464.herokuapp.com/', {
     autoConnect: false
 })
 
