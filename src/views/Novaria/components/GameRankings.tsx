@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     border: 1px solid #5affff;
     background: #00000099;
     padding: 5px;
+    max-height: 550px;
 `
 
 const Header = styled.div`
@@ -20,24 +21,39 @@ const Header = styled.div`
 
 const LabelRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr;
   color: #289794;
-  font-size: 12px;
-  margin-bottom: 5px;
+  font-size: .6rem;
+  margin-bottom: 5px;  
+  white-space: nowrap;
+  text-align: right;
+
+ 
+
+  ${({ theme }) => theme.mediaQueries.md} {
+     font-size: .8rem;
+  }
 `
 
 const RankRow = styled.div`
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    font-size: .8rem;
+    grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr;
+    font-size: .6rem;
+    white-space: nowrap;
         
     ${({ theme }) => theme.mediaQueries.md} {
-       font-size: 1rem;
+       font-size: .8rem;
     }
 `
 
 const NumberSpan = styled.span`
     text-align: right;
+    font-family: monospace;
+    font-weight: bold;
+`
+
+const LeftSpan = styled.span`
+    text-align: left;
 `
 
 const ScrollSection = styled.div`
@@ -45,14 +61,15 @@ const ScrollSection = styled.div`
     scrollbar-color: #5affff #289794;
     scrollbar-width: thin;
     max-height: 500px;
+    padding: 5px;
 
     &::-webkit-scrollbar {
-    width: 5px;
-    background-color: #289794;
+        width: 3px;
+        background-color: #289794;
     }
     &::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: #5affff;
+        border-radius: 0px;
+        background-color: #5affff;
     }
 
 `
@@ -90,7 +107,7 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
         socket.on('receive_rankings', (data) => {
             setRankings(data)
             setRankingsByExp(data.sort((a, b) =>
-                (a.experience > b.experience ? -1 : 1)
+                (Number(a.experience) > Number(b.experience) ? -1 : 1)
                 )
             )
         })
@@ -100,21 +117,23 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
         <Wrapper>
             <Header>Player Rankings</Header>
             <LabelRow>
-                <span>Name</span>
+                <LeftSpan>#</LeftSpan>
+                <LeftSpan>Name</LeftSpan>
+                <span>Exp</span>
                 <span>Size</span>
                 <span>Attack</span>
-                <span>Experience</span>
-                <span>Total Refined</span>
+                <span>Refined</span>
             </LabelRow>
             <ScrollSection>
                 {rankingsByExp.map((ranking) => {
                     return (
                         <RankRow>
+                            <span>{rankingsByExp.indexOf(ranking)+1}.  </span>
                             <span>{ranking.name}</span>
-                            <NumberSpan>{ranking.size}</NumberSpan>
-                            <NumberSpan>{ranking.attack}</NumberSpan>
-                            <NumberSpan>{ranking.experience}</NumberSpan>
-                            <NumberSpan>{ranking.totalMineral}</NumberSpan>
+                            <NumberSpan>{Number(ranking.experience).toLocaleString()}</NumberSpan>
+                            <NumberSpan>{Number(ranking.size).toLocaleString()}</NumberSpan>
+                            <NumberSpan>{Number(ranking.attack).toLocaleString()}</NumberSpan>
+                            <NumberSpan>{Number(ranking.totalMineral).toLocaleString()}</NumberSpan>
                         </RankRow>
                     )
                 })}
