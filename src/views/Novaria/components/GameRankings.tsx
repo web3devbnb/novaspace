@@ -21,12 +21,12 @@ const Header = styled.div`
 
 const LabelRow = styled.div`
   display: grid;
-  grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr 1fr;
   color: #289794;
   font-size: .6rem;
   margin-bottom: 5px;  
   white-space: nowrap;
-  text-align: right;
+  text-align: center;
 
  
 
@@ -37,7 +37,7 @@ const LabelRow = styled.div`
 
 const RankRow = styled.div`
     display: grid;
-    grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr 1fr;
     font-size: .6rem;
     white-space: nowrap;
         
@@ -74,7 +74,7 @@ const ScrollSection = styled.div`
 
 `
 
-const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMineral}) => {
+const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMineral, playerLocation}) => {
     const [rankings, setRankings] = useState([])
     const [rankingsByExp, setRankingsByExp] = useState([])
 
@@ -95,13 +95,14 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
             size: playerSize,
             attack: playerAttack,
             experience: exp,
-            totalMineral: playerTotalMineral
+            totalMineral: playerTotalMineral,
+            location: `(${playerLocation.X},${playerLocation.Y})`
         }
         if (playerName !== '') {
             socket.emit('send_rankings', userData)
             console.log(`sent user data: ${userData}`)
         }
-    }, [playerName, exp, playerAttack, playerSize, playerTotalMineral])
+    }, [playerName, exp, playerAttack, playerSize, playerTotalMineral, playerLocation.X, playerLocation.Y])
 
     useEffect(() => {
         socket.on('receive_rankings', (data) => {
@@ -121,8 +122,9 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
                 <LeftSpan>Name</LeftSpan>
                 <span>Exp</span>
                 <span>Size</span>
-                <span>Attack</span>
+                <span>Atk</span>
                 <span>Refined</span>
+                <span>Coords</span>
             </LabelRow>
             <ScrollSection>
                 {rankingsByExp.map((ranking) => {
@@ -134,6 +136,7 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
                             <NumberSpan>{Number(ranking.size).toLocaleString()}</NumberSpan>
                             <NumberSpan>{Number(ranking.attack).toLocaleString()}</NumberSpan>
                             <NumberSpan>{Number(ranking.totalMineral).toLocaleString()}</NumberSpan>
+                            <NumberSpan>{ranking.location}</NumberSpan>
                         </RankRow>
                     )
                 })}

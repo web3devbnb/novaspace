@@ -23,9 +23,11 @@ import {
   useGetTimeModifier,
   useGetPlayerInBattle,
   useGetPlayerExists,
+  useGetFleetMineralRefined,
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
+import {io} from 'socket.io-client'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ChatButton from '../components/ChatBox/ChatButton'
@@ -43,6 +45,10 @@ import leftArrow from '../assets/leftArrow.png'
 import rightArrow from '../assets/rightArrow.png'
 import homeIcon from '../assets/homeicon.png'
 import UpdateBanner from '../components/Banner'
+
+const socket = io('https://radiant-taiga-26464.herokuapp.com/', {
+    autoConnect: false
+})
 
 const Page = styled.div`
   font-size: 15px;
@@ -187,6 +193,17 @@ const Location: React.FC = () => {
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
+    
+    useEffect (() => {
+        
+      socket.connect()
+      socket.on('connect', () => {
+          console.log(`socket connected: ${socket.connected}`)
+      })
+  }, [])
+
+
+
   const [placeX, setX] = useState(null)
   const [placeY, setY] = useState(null)
 
@@ -211,6 +228,8 @@ const Location: React.FC = () => {
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
+  const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
+  const totalRefined = Number(refinedMineral).toFixed(0)
   const maxFleetSize = useGetMaxFleetSize(account)
   const fleetPower = useGetAttackPower(account)
   const fleetMineral = useGetFleetMineral(account)
@@ -233,6 +252,21 @@ const Location: React.FC = () => {
   const timeMod = useGetTimeModifier()
 
   const playerInBattle = useGetPlayerInBattle(account)
+
+  useEffect(() => {
+      const userData = {
+          name: playerName,
+          size: fleetSize,
+          attack: fleetPower,
+          experience: playerEXP,
+          totalMineral: totalRefined,
+          location: `(${fleetLocation.X},${fleetLocation.Y})`
+      }
+      if (playerName !== '') {
+          socket.emit('send_rankings', userData)
+          console.log(`sent user data: ${userData}`)
+      }
+  }, [playerName, playerEXP, fleetPower, fleetSize, totalRefined, fleetLocation.X, fleetLocation.Y])
 
   return (
     <Page>
