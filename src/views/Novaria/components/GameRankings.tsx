@@ -105,7 +105,7 @@ const GameRankings = ({exp, playerName, playerSize, playerAttack, playerTotalMin
 
     useEffect(() => {
         socket.on('receive_rankings', (data) => {
-            setRankings(data)
+            
             setRankingsByExp(data.sort((a, b) =>
                 (Number(a.experience) > Number(b.experience) ? -1 : 1)
                 )
