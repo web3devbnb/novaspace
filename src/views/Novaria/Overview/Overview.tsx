@@ -303,7 +303,7 @@ const Overview: React.FC = () => {
                   The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
                   <br />
                   <br />
-                  Good Luck!
+                  Good Luck! - is this working?
                   <br />
                   <br />
                   <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
