@@ -6,11 +6,12 @@ import viperCard from '../assets/viperCard.png'
 import unknownCard from '../assets/newShipCard.png'
 import gorianCard from '../assets/gorianCard.png'
 import fireflyCard from '../assets/fireflyCard.png'
+import lancerCard from '../assets/lancerSmall.png'
 
 interface PlayerModalProps {
   shipclass: string
   onDismiss?: () => void
-}
+} 
 
 const Img = styled.img`
   margin-top: 20px;
@@ -28,9 +29,10 @@ const ShipCardModal: React.FC<PlayerModalProps> = ({ shipclass, onDismiss }) => 
   return (
     <Modal onDismiss={onDismiss}>
       {shipclass === 'Viper' && <Img src={viperCard} alt="viper" />}
-      {shipclass === 'P.U.P.' && <Img src={moleCard} alt="viper" />}
-      {shipclass === 'Firefly' && <Img src={fireflyCard} alt="viper" />}
-      {shipclass === 'Gorian' && <Img src={gorianCard} alt="viper" />}
+      {shipclass === 'P.U.P.' && <Img src={moleCard} alt="PUP" />}
+      {shipclass === 'Firefly' && <Img src={fireflyCard} alt="firefly" />}
+      {shipclass === 'Gorian' && <Img src={gorianCard} alt="gorian" />}
+      {shipclass === 'Lancer' && <Img src={lancerCard} alt="lancer" />}
       {shipclass === 'Unknown' && <Img src={unknownCard} alt="viper" />}
     </Modal>
   )

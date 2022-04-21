@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     border: 1px solid #5affff;
     background: #00000099;
     padding: 5px;
-    max-height: 550px;
+    max-height: 560px;
 `
 
 const Header = styled.div`
