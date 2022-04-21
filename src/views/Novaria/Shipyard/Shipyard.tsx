@@ -132,6 +132,7 @@ const BuildMenu = styled.div`
   text-overflow: ellipsis;
   width: 30%;
   height: auto;
+  // min-height: 300px;
   min-width: 240px;
   background-color: #00000080;
   @media (max-width: 715px) {
@@ -415,6 +416,7 @@ const Shipyard = () => {
                   styles={selectStyles}
                 />
                 <Select
+                  maxMenuHeight={110}
                   placeholder="Select Ship"
                   options={shipClasses.map((c, i) => ({ value: i, label: c.name }))}
                   onChange={handleShipChange}
