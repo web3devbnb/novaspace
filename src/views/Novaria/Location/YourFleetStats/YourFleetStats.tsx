@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useGetBattle, useRecall } from 'hooks/useNovaria'
+import { useGetBattle, useRecall, useSetRecall, useGetSavedSpawnPlace } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import { getWeb3 } from 'utils/web3'
 
@@ -22,7 +22,6 @@ const Button = styled.button`
   color: #5affff;
   width: 100%;
   margin: 5px;
-  margin-top: 10px;
   &:hover {
     background-color: #5affff;
     color: black;
@@ -30,6 +29,7 @@ const Button = styled.button`
 `
 
 const YourFleetStats = ({
+  account,
   playerBattleInfo,
   fleetSize,
   maxFleetSize,
@@ -51,16 +51,32 @@ const YourFleetStats = ({
   const battleCooldown = showCountdown(new Date(Number(resolvedTime)*1000))
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
+  const savedShipyard = useGetSavedSpawnPlace(account)
+  const atSavedShipyard = Number(fleetLocation.X) === Number(savedShipyard.x) && Number(fleetLocation.Y) === Number(savedShipyard.y)
   const Haven = Number(fleetLocation.X) === Number(0) && Number(fleetLocation.Y) === Number(0)
   const smallFleet = Number(fleetSize) < Number(25)
   const canRecall = smallFleet && !Haven
+  const canRecallShipyard = smallFleet && !atSavedShipyard
 
-  const { onRecall } = useRecall(true)
-  const sendRecallTx = async () => {
+  const { onRecall } = useRecall()
+  const sendRecallTx = async (haven: boolean) => {
     setPendingTx(true)
     try {
-      await onRecall()
-      console.log('Exploring')
+      await onRecall(haven)
+      console.log('Recalling')
+    } catch (error) {
+      console.log('error: ', error)
+    } finally {
+      setPendingTx(false)
+    }
+  }
+
+  const { onSetRecall } = useSetRecall()
+  const sendSetRecall = async () => {
+    setPendingTx(true)
+    try {
+      await onSetRecall()
+      console.log('Setting Recall Point')
     } catch (error) {
       console.log('error: ', error)
     } finally {
@@ -111,8 +127,9 @@ const YourFleetStats = ({
         <div>BATTLE</div>
         <div>{battleCooldown}</div>
       </Stat>
-
-      {canRecall && <Button onClick={sendRecallTx}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {!atSavedShipyard && <Button onClick={sendSetRecall}>{!pending ? 'SET SHIPYARD RECALL POINT' : 'pending'}</Button>}
+      {canRecall && <Button onClick={()=>sendRecallTx(true)}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {canRecallShipyard && <Button onClick={()=>sendRecallTx(false)}>{!pending ? `RECALL TO SHIPYARD (${savedShipyard.x},${savedShipyard.y})` : 'pending'}</Button>}
     </Stats>
   )
 }

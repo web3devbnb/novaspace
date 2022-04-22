@@ -310,3 +310,12 @@ export const getReferralBonus = async (referralsContract, account) => {
       return tx.transactionHash
     })
 }
+
+export const setRecall = async (mapContract, account) => {
+  return mapContract.methods
+    .setRecall()
+    .send({from: account})
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

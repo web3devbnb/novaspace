@@ -364,17 +364,18 @@ const Overview: React.FC = () => {
               </StatsRow>
               <Header style={{marginTop:5}}>My Fleet</Header>
               <YourFleetStats 
-                    playerBattleInfo={playerBattleInfo}
-                    fleetSize={fleetSize}
-                    maxFleetSize={maxFleetSize}
-                    fleetPower={fleetPower}
-                    miningCapacity={miningCapacity}
-                    mineralCapacity={mineralCapacity}
-                    shipClasses={shipClasses}
-                    playerFleet={playerFleet}
-                    currentTravelCooldown={currentTravelCooldown}
-                    currentMiningCooldown={currentMiningCooldown}
-                    fleetLocation={fleetLocation} />
+                account = {account}
+                playerBattleInfo={playerBattleInfo}
+                fleetSize={fleetSize}
+                maxFleetSize={maxFleetSize}
+                fleetPower={fleetPower}
+                miningCapacity={miningCapacity}
+                mineralCapacity={mineralCapacity}
+                shipClasses={shipClasses}
+                playerFleet={playerFleet}
+                currentTravelCooldown={currentTravelCooldown}
+                currentMiningCooldown={currentMiningCooldown}
+                fleetLocation={fleetLocation} />
             </StatsContainer>
             <StatsContainer>
               <Header>Shipyards</Header>

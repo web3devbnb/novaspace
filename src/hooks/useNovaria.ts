@@ -28,6 +28,7 @@ import {
   tunnel,
   addReferral,
   getReferralBonus,
+  setRecall,
 } from 'utils/callHelpers'
 import BigNumber from 'bignumber.js'
 import { useFleet, useMap, useNova, useReferrals } from './useContract'
@@ -519,6 +520,19 @@ export const useGetPlayerInBattle = (account) => {
 // Movement, mining, refining, tracks mineral
 // Active Functions
 
+export const useSetRecall = () => {
+  const { account } = useWallet()
+  const useMapContract = useMap()
+
+  const handleSetRecall = useCallback(
+    async () => {
+      const txHash = await setRecall(useMapContract, account)
+      console.info(txHash)
+    }, [account, useMapContract]
+  )
+  return { onSetRecall: handleSetRecall }
+}
+
 export const useTunnel = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
@@ -608,18 +622,32 @@ export const useChangeName = () => {
   return { onChange: handleChangeName }
 }
 
-export const useRecall = (haven) => {
+export const useRecall = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleRecall = useCallback(async () => {
+  const handleRecall = useCallback(async (haven: boolean) => {
     const txHash = await recall(useMapContract, haven, account)
     console.info(txHash)
-  }, [account, haven, useMapContract])
+  }, [account, useMapContract])
   return { onRecall: handleRecall }
 }
 
 // ***View Functions***
+
+export const useGetSavedSpawnPlace = (account) => {
+  const { fastRefresh } = useRefresh()
+  const [savedPlace, setSavedPlace] = useState({x: 0, y: 0})
+
+  useEffect(() => {
+    async function fetch() {
+      const placeId = await mapContract.methods.fleetLastShipyardPlace(account).call()
+      const place = await mapContract.methods.places(placeId).call()
+      setSavedPlace({x: place.coordX, y: place.coordY})
+    } fetch()
+  }, [fastRefresh, account])
+  return savedPlace
+}
 
 export const useGetPlayerCount = () => {
   const { fastRefresh } = useRefresh()

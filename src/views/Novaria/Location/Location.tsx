@@ -362,6 +362,7 @@ const Location: React.FC = () => {
                 <YourFleetCard>
                   <Header>MY FLEET</Header>
                   <YourFleetStats 
+                    account={account}
                     playerBattleInfo={playerBattleInfo}
                     fleetSize={fleetSize}
                     maxFleetSize={maxFleetSize}

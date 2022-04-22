@@ -462,6 +462,7 @@ const Shipyard = () => {
             <FleetMenu>
               <Header style={{ color: 'white' }}>MY FLEET</Header>
               <YourFleetStats
+                account={account}
                 playerBattleInfo={playerBattleInfo}
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
