@@ -40,9 +40,14 @@ const RankRow = styled.div`
     grid-template-columns: .3fr 1.2fr 1fr 1fr 1fr 1fr 1fr;
     font-size: .6rem;
     white-space: nowrap;
+    padding: .1rem 0;
         
     ${({ theme }) => theme.mediaQueries.md} {
        font-size: .8rem;
+    }
+
+    :nth-child(odd) {
+        background-color: #19323f;
     }
 `
 
