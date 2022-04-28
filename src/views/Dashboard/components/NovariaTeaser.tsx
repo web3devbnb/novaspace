@@ -7,7 +7,7 @@ const Body = styled.div`
     justify-content: center;
     background-position: center;
     background-size: cover;
-    background-image: url('/images/home/ytcover.jpg');
+    background-image: url('/images/home/ytcover.jpg'); 
     height: 500px;
     width: 100%;
     border: 2px solid #00aaff;

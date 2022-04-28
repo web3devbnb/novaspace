@@ -25,8 +25,8 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
     // font-family: 'BigNoodle';
   }
   body {
-     background-image: ${({isNovaria}) => (isNovaria ? novariaMobileBG : '')};
-     background-image: ${({isStandard}) => (isStandard ? spacebgMobile : '')};
+     background: ${({isNovaria}) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
+     background: ${({isStandard}) => (isStandard ? ({ theme }) => theme.colors.background : '')};
      background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpaceMobile : '')};
      background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
 
@@ -40,8 +40,8 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background-image: ${({isNovaria}) => (isNovaria ? novariaBG : '')};
-      background-image: ${({isStandard}) => (isStandard ? spaceBG : '')};
+      background: ${({isNovaria}) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
+      background: ${({isStandard}) => (isStandard ? ({ theme }) => theme.colors.background : '')};
       background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
       background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
       

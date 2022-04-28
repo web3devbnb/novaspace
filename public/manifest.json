@@ -1,12 +1,12 @@
 {
-  "short_name": "ShibaNova - Legend of Novaria",
-  "name": "ShibaNova - Legend of Novaria",
+  "short_name": "NovaDEX - Legend of Novaria",
+  "name": "NovaDEX - Legend of Novaria",
   "description": "Earn Nova and sNova through trade routes, money pots and playing Legend of Novaria",
   "icons": [
     {
-      "src": "shibanovaTokenLogo.svg",
+      "src": "android-chrome-192x192.png",
       "type": "image/x-icon",
-      "sizes": "256x256"
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",

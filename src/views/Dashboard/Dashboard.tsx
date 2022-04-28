@@ -75,12 +75,9 @@ const Dashboard: React.FC = () => {
   const novariaTimer = showCountdown(new Date(1647547200000))
 
   return (
-    <Page
-    // style={{maxWidth:"100%", marginLeft: 'auto', marginRight: 'auto'}}
-    >
-      <Hero>
-        <Header>Welcome to Our Game DEX</Header>
+    <Page >
         <SubHero /> 
+      <Hero> 
         <Cards id="stats">
           <FarmStakingCard />
           <SNovaStakingCard />

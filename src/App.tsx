@@ -116,7 +116,7 @@ const App: React.FC = () => {
             </WalletProvider>
           </Route>
           <Route path="/overview">
-            <GlobalStyle isNovaria={false} isShipyard isNovariaSpace={false} isStandard={false} />
+            <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace={false} isStandard />
             <WalletProvider>
               <Overview />
             </WalletProvider>

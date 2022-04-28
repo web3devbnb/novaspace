@@ -5,9 +5,9 @@ const Page = styled(Container)`
   min-height: calc(100vh - 64px);
   padding-top: 16px;
   padding-bottom: 16px;
-  max-width: 1270px;
-  margin-left: auto;
-  margin-right: auto;
+  // max-width: 1270px;
+  margin-left: 15px;
+  margin-right: 15px;
   // padding: 25px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
