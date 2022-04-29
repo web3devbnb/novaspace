@@ -4,6 +4,7 @@ import { BaseLayout } from '@pancakeswap-libs/uikit'
 import showCountdown from 'utils/countdownTimer'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
+import HowToPlay from './components/HowToPlay'
 import FarmStakingCard from './components/FarmStakingCard'
 import SNovaStakingCard from './components/sNovaStakingCard'
 import MoneyedPotCard from './components/MoneyPotCard'
@@ -77,6 +78,7 @@ const Dashboard: React.FC = () => {
   return (
     <Page >
         <SubHero /> 
+        <HowToPlay />
       <Hero> 
         <Cards id="stats">
           <FarmStakingCard />
@@ -86,20 +88,6 @@ const Dashboard: React.FC = () => {
         
       </Hero>
 
-      <NovariaCard title="novaria" />
-      <Banner2 title="dex" />
-      <TradeRouteCard title="trade-routes" />
-
-      <Teaser>
-        <NovariaTeaser title="teaser" />
-      </Teaser>
-
-      {/* <ExpandableSectionButton
-        onClick={() => setShowExpandableSection(!showExpandableSection)}
-        expanded={showExpandableSection}
-      />
-      <ExpandingWrapper expanded={showExpandableSection}> */}
-      {/* </ExpandingWrapper> */}
     </Page>
   )
 }

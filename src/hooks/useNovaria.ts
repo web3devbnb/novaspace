@@ -378,6 +378,7 @@ export const useGetBattle = (Id: number) => {
 export const useGetPlayerBattle = (player) => {
   const { fastRefresh } = useRefresh()
   const [PlayerBattle, setPlayerBattle] = useState({ battleStatus: 0, battleId: null })
+  
 
   useEffect(() => {
     async function fetch() {
@@ -433,7 +434,7 @@ export const useGetPlayer = (player) => {
 
   useEffect(() => {
     async function fetch() {
-      if (player !== null) {
+      if (player !== null && player !== '') {
         const playerId = await fleetContract.methods.addressToPlayer(player).call()
         const data = await fleetContract.methods.players(playerId).call()
         setPlayer({

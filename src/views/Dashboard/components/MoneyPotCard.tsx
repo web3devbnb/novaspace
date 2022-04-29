@@ -57,9 +57,9 @@ const NextMoneyPotCard = styled(Text)`
   position: relative;
   font-size: 12px;
   padding: 10px;
-  border-radius: 32px;
+  border-radius: 5px;
   background-clip: padding-box;
-  border: solid 1px ${({ theme }) => theme.colors.primary};
+  // border: solid 1px ${({ theme }) => theme.colors.primary};
 
   & > a {
     color: ${({ theme }) => theme.colors.primary};

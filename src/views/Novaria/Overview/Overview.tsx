@@ -272,6 +272,14 @@ const Overview: React.FC = () => {
     setCopySuccess('Copied!')
   }
   
+  const isDev = account === '0x729F3cA74A55F2aB7B584340DDefC29813fb21dF'
+  const addressToFind = useRef(null)
+  const [searchAddress, setSearchAddress] = useState(null)
+  // console.log(addressToFind.current.value)
+  const foundPlayer = useGetPlayer(searchAddress).name
+  const handleFindPlayer = () => {
+    setSearchAddress(addressToFind.current.value)
+  }
   
 
   return (
@@ -303,7 +311,7 @@ const Overview: React.FC = () => {
                   The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
                   <br />
                   <br />
-                  Good Luck! - is this working?
+                  Good Luck! 
                   <br />
                   <br />
                   <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
@@ -324,15 +332,22 @@ const Overview: React.FC = () => {
                   </RewardsSection>
                 </RefSection>
               </UpperCol>
-              <GameRankings
-                exp={playerEXP}
-                playerName={playerName}
-                playerTotalMineral={totalRefined}
-                playerAttack={fleetPower}
-                playerSize={fleetSize} 
-                playerLocation={fleetLocation}
-              />
-              <ChatButton playerExists={playerExists} playerName={playerName} />
+              <div>
+                <GameRankings
+                  exp={playerEXP}
+                  playerName={playerName}
+                  playerTotalMineral={totalRefined}
+                  playerAttack={fleetPower}
+                  playerSize={fleetSize} 
+                  playerLocation={fleetLocation}
+                />
+                {isDev && <div>
+                <input type='text' placeholder='Search Wallet Address' ref={addressToFind} />
+                <button type='button' onClick={handleFindPlayer}>Get Player</button>
+                <span>{foundPlayer === 'Novaria' ? 'Not a Player' : foundPlayer}</span>
+                </div>}
+              </div>
+              {/* <ChatButton playerExists={playerExists} playerName={playerName} /> */}
             </StatsRow>
           </UpperSection>
           <StatsSection>

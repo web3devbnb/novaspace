@@ -15,7 +15,7 @@ const NeonButton = ({
     link: string
   }) => {
     return (
-        <Container href={link}>
+        <Container href={link} target='_blank' rel='noreferrer noopener'>
           <Button>
             {title}
           </Button>

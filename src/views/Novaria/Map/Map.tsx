@@ -168,7 +168,7 @@ const GridCellId = styled.div<{canTravel: boolean}>`
   ${GridCell} :hover & {
     opacity: 1;
   }
-`
+` 
 
 const GridControls = styled.div`
   display: flex;
