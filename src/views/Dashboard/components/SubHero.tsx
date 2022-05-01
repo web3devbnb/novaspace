@@ -11,7 +11,7 @@ const Body = styled.div<{background:string, mobileBackground:string}>`
   display: flex;
   min-height: 600px;
   flex-direction: row;
-  z-index: -100;
+  z-index: -2;
   background-image: ${(props) => props.mobileBackground}; 
   background-size: cover;
   -moz-box-shadow: inset 0 0 500em rgba(0,0,0, 0.95);
@@ -22,7 +22,7 @@ const Body = styled.div<{background:string, mobileBackground:string}>`
   ${({ theme }) => theme.mediaQueries.md} {
     flex-direction: row;
     background-image: ${(props) => props.background};
-    border-radius: 0px; 
+    border-radius: 5px; 
   }
 `
 
@@ -42,6 +42,7 @@ const ColLeft = styled.div`
   width: 80%;
   align-self: center;
   margin-left: 10%;
+  margin-bottom: 30px;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 40%;
@@ -56,8 +57,8 @@ const ButtonRow = styled.div`
 `
 
 const GridMenu = styled.div`
-  display: grid;
-  gap: 0;
+  display: flex;
+  margin-top: -150px;
   grid-template-columns: repeat(5, 1fr);
   z-index: 1;
   overflow-x: auto;
@@ -70,10 +71,7 @@ const GridMenu = styled.div`
     background-color: transparent;
   }
 
-  ${({ theme }) => theme.mediaQueries.md} {
-    margin-top: -150px;
-    margin-left: 3px;
-  }
+  
 `
 
 const ArrowIcon = styled.div`
@@ -93,13 +91,15 @@ const ArrowIcon = styled.div`
 
 const MenuCard = styled<{(background)}>(Card)`
   display: flex;
+  flex-shrink: 0;
   height: 150px;
   width: 300px;
   background: ${(props) => props.background};
   border:  2px solid ${darkColors.background};
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin: 2px;
   padding: 5px;
+  border-radius: 10px;
+
 
   &:hover {
     cursor: pointer;
@@ -108,10 +108,6 @@ const MenuCard = styled<{(background)}>(Card)`
       background: ${darkColors.primaryBright};
     }
   }
-
-`
-
-const CardWrap = styled.button`
 
 `
 

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { darkColors } from "@pancakeswap-libs/uikit";
+import FarmStakingCard from './FarmStakingCard'
+import SNovaStakingCard from './sNovaStakingCard'
+import MoneyedPotCard from './MoneyPotCard'
 import howto1 from '../assets/howto1.png'
 import howto2 from '../assets/howto2.png'
 import howto3 from '../assets/howto3.png'
@@ -38,7 +41,7 @@ const Border = styled.div`
 
 const ItemSquare = styled.a`
     height: 250px;
-    width: 100%;
+    width: 300px;
     background: #0c0b15;
     border: 1px solid ${darkColors.backgroundDisabled};
     // border-radius: 5px;
@@ -47,9 +50,6 @@ const ItemSquare = styled.a`
     justify-content: space-evenly;
     text-align: center;
     
-    ${({ theme }) => theme.mediaQueries.sm} {
-        width: 300px;
-    }
     ${({ theme }) => theme.mediaQueries.lg} {
         &:last-child {
             border-top-right-radius: 5px;
@@ -74,7 +74,7 @@ const HowToInfo = [
         id: 0,
         title: 'Transfer BNB to your Crypto Wallet',
         img: howto1,
-        link: "https://academy.binance.com/en/articles/how-to-get-started-with-binance-smart-chain-bsc",
+        link: "",
     },
     {
         id: 1,
@@ -86,33 +86,27 @@ const HowToInfo = [
         id: 2,
         title: 'Buy NOVA Tokens',
         img: howto3,
-        link: "https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F",
+        link: "",
     },
     {
         id: 3,
         title: 'Start Playing!',
         img: novaria,
-        link: "/legend-of-novaria",
+        link: "",
     },
 ]
 
-const HowToPlay = () => {
+const NovaEcosystem = () => {
 
     return (
         <div>
-            <Heading>How To Play</Heading>
+            <Heading>Nova Ecosystem</Heading>
             <Body>
-                {HowToInfo.map((item, idx) => {
-                    return (
-                        <ItemSquare key={item.id} href={item.link} target='_blank' rel='noreferrer noopener'>
-                            <ItemImg alt={item.title} src={item.img} />
-                            {item.title}
-                        </ItemSquare>
-                        
-                    )
-                })}
+                <FarmStakingCard />
+                <SNovaStakingCard />
+                <MoneyedPotCard />
             </Body>
         </div>
     )
 }
-export default HowToPlay
+export default NovaEcosystem

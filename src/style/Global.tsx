@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 // eslint-disable-next-line import/no-unresolved
 import { ShibanovaTheme } from '@pancakeswap-libs/uikit'
 
+
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
   export interface DefaultTheme extends ShibanovaTheme {}
@@ -15,12 +16,12 @@ const novariaSpaceMobile = "url('/images/novaria/starsbg_portrait.png')"
 const novariaShipyard = "url('/images/novaria/shipyardBG.jpg')"
 
 const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boolean, isShipyard: boolean, isStandard: boolean}>`
-@font-face {
-  font-family: 'BigNoodle';
-  src:  url('./fonts/bignoodletitling.woff') format('woff'), url('./fonts/bignoodletitling.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'BigNoodle';
+//   src:  url('./fonts/bignoodletitling.woff') format('woff'), url('./fonts/bignoodletitling.ttf') format('truetype');
+// }
   * {
-    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Montserrat', sans-serif;
     font-family: 'Poppins', sans-serif;
     // font-family: 'BigNoodle';
   }
@@ -33,6 +34,8 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
      background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
      background-repeat: repeat-y;
      background-position: center;
+
+     margin: 0 10px;
 
     img {
       height: auto;

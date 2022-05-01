@@ -40,7 +40,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, fa
             'What are EXTREME farms? Farms quickly created to support high volume, high volatility coins.  They are a little higher risk then our normal farms as they have not been around as long and/or as heavily vetted as staple projects such as BNB and ETH.  PLEASE do your own research.'
           />
           <img src="images/extremetag.png" alt="extreme" width="110px" /> </div>: null }
-          <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
+          <MultiplierTag variant="primaryDark">{multiplier}</MultiplierTag>
         </Flex>
       </Flex>
     </Wrapper>

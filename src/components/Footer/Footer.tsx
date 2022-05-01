@@ -9,8 +9,9 @@ const Hero = styled(Flex)`
   flex-direction: column;
   position: relative;
   justify-content: center;
-  background-image: transparent;
-  // border-top: solid 1px ${({ theme }) => theme.colors.primary};
+  background: #0c0b15;
+  margin: 0px -10px;
+  border-top: solid 1px ${({ theme }) => theme.colors.backgroundDisabled};
 
   // ${({ theme }) => theme.mediaQueries.lg} {
   //   display: flex;
@@ -58,8 +59,8 @@ const Footer = () => (
         <Row >
                 <a                  
                   target="_blank"
-                  rel="noreferrer"
-                  href="https://discord.gg/vQdxbGx9pV"
+                  rel="noreferrer noopener"
+                  href="https://discord.gg/nsxxXNjkqU"
                 >
                   <Img
                     src={discordIcon}
@@ -73,7 +74,7 @@ const Footer = () => (
                     alt="telegram"
                   />
                 </a>
-                <a target="_blank" rel="noreferrer" href="https://www.twitter.com/ShibaNovaDefi">
+                <a target="_blank" rel="noreferrer noopener" href="https://www.twitter.com/ShibaNovaDefi">
                   <Img
                     src="https://shibanova.io/assets/images/twitter-icon.svg"
                     alt="twitter"                    
@@ -81,7 +82,7 @@ const Footer = () => (
                 </a>
                 <a
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   href="https://www.instagram.com/ShibaNovaDEFI"
                 >
                   <Img
@@ -91,7 +92,7 @@ const Footer = () => (
                 </a>
                 <a
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener noopener"
                   href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
                 >
                   <Img
@@ -99,44 +100,25 @@ const Footer = () => (
                     alt="coinBrain"
                   />
                 </a>
-                {/* <a                  
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://coinmarketcap.com/currencies/shibanova/"
-                >
-                  <Img
-                    src="https://shibanova.io/images/home/cmclogo.png"
-                    alt="coin marketcap"
-                  />
-                </a> 
-                <a                  
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.coingecko.com/en/coins/shiba-nova"
-                >
-                  <Img
-                    src="https://shibanova.io/images/home/coingecko.png"
-                    alt="coin gecko"
-                  />
-                </a>  */}
+              
 
         </Row>
       </Col>
       <Col>
-        {/* <Text>Links</Text>       */}
+        
         <Ul>
           <li style={{ color: 'white', marginTop: '2px' }}>
-            <a target="_blank" rel="noreferrer" href="https://shibanova.io/terms">
+            <a target="_blank" rel="noreferrer" href="/terms">
               Terms
             </a>
           </li>
           <li style={{ color: 'white', marginTop: '4px' }}>
-            <a target="_blank" rel="noreferrer" href="https://shibanova.io/privacy">
+            <a target="_blank" rel="noreferrer" href="/privacy">
               Privacy
             </a>
           </li>
           <li style={{ color: 'white', marginTop: '4px' }}>
-            <a target="_blank" rel="noreferrer" href="https://docs.shibanova.io/shibanova-documentation/">
+            <a target="_blank" rel="noreferrer" href="https://docs.novadex.finance/shibanova-documentation/">
               Documentation
             </a>
           </li>
@@ -144,7 +126,7 @@ const Footer = () => (
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://docs.shibanova.io/shibanova-documentation/security/audits"
+              href="https://docs.novadex.finance/shibanova-documentation/security/audits"
             >
               Audits
             </a>
@@ -153,7 +135,7 @@ const Footer = () => (
       </Col>
     </Row>
     <Row style={{ marginBottom: '15px' }}>
-      <Text style={{ fontSize: '12px' }}>Copyright © 2021. All rights reserved. Shibanova.io</Text>
+      <Text style={{ fontSize: '12px' }}>Copyright © 2021. All rights reserved. NovaDEX.finance</Text>
     </Row>
   </Hero>
 )

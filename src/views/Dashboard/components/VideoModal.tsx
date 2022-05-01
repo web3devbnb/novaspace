@@ -28,7 +28,7 @@ const Body = styled.div`
   z-index: 1;
 `
 
-const scrollToMiddle = () => window.scrollTo(50, document.body.scrollHeight / 2.5)
+// const scrollToMiddle = () => window.scrollTo(50, document.body.scrollHeight / 2.5)
 
 const VideoModal = () => {
   const [isOpen, setOpen] = useState(false)
@@ -41,7 +41,8 @@ const VideoModal = () => {
             videoId="VRH2LvKXKEQ"
             onClose={() => setOpen(false)}
           />
-          <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button>
+          {/* <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button> */}
+          <Button type="button" onClick={()=> setOpen(true)} ><Img src={PlayLogo} alt="play" /></Button>
         </div>
       </Body>
     )

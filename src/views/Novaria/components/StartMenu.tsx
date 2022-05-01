@@ -39,6 +39,11 @@ const Button = styled.button`
     cursor: not-allowed;
     box-shadow: none;
   }
+
+  &:hover {
+    background: #1fffff;
+    color: #0c0b15;
+  }
 `
 
 const Body = styled.div`

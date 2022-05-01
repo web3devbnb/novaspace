@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { ButtonMenu, ButtonMenuItem, Text, Toggle } from '@pancakeswap-libs/uikit'
+import { ButtonMenu, ButtonMenuItem, Text, Toggle, Checkbox, darkColors } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 
 const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive }) => {
@@ -15,7 +15,9 @@ const FarmTabButtons = ({ stakedOnly, setStakedOnly, setShowInactive }) => {
   return (
     <Wrapper>
       <ToggleWrapper>
-        <Toggle checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} />
+        <CheckWrap>
+          <Checkbox checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} />
+        </CheckWrap>
         <Text bold>Staked</Text>
       </ToggleWrapper>
       {/* <ToggleWrapper>
@@ -44,8 +46,15 @@ const ToggleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  height: 30px;
 
   ${Text} {
     margin-left: 8px;
   }
+`
+
+const CheckWrap = styled.div`
+border: 1px solid ${darkColors.backgroundDisabled};
+border-radius: 10px;
+
 `
