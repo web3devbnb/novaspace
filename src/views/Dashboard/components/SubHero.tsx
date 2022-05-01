@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, darkColors, Card } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
+import useRefresh from 'hooks/useRefresh'
 import NeonButton from './NeonButton'
 
 const Body = styled.div<{background:string, mobileBackground:string}>`
@@ -95,7 +96,7 @@ const MenuCard = styled<{(background)}>(Card)`
   height: 150px;
   width: 300px;
   background: ${(props) => props.background};
-  border:  2px solid ${darkColors.background};
+  border: ${(props) => props.current? 'none' : `2px solid ${darkColors.background}`};
   margin: 2px;
   padding: 5px;
   border-radius: 10px;
@@ -146,16 +147,32 @@ const MenuItems = [
 ]
 
 const SubHero = () => {
-
+  const [currentItem, setCurrentItem] = useState(MenuItems[0].id)
+  const [itemCounter, setItemCounter] = useState(0)
   const [announcementText, setAnnouncementText] = useState(MenuItems[0].description)
   const [headerText, setHeaderText] = useState(MenuItems[0].title.toUpperCase())
   const [buttonTitle, setButtonTitle] = useState(MenuItems[0].buttonTitle)
   const [buttonLink, setButtonLink] = useState(MenuItems[0].buttonLink)
   const [bgImg, setBgImg] = useState(MenuItems[0].background)
   const [mobileBgImg, setMobileBgImg] = useState(MenuItems[0].backgroundMobile)
-  
+
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  useEffect(() => {
+    async function switchCard() {
+      await sleep(10000)
+      if (itemCounter < MenuItems.length-1) {
+        setItemCounter(itemCounter+1)
+      } else {
+        setItemCounter(0)
+      }
+      handleClick(MenuItems[itemCounter])
+    } switchCard()
+  }, [itemCounter])
 
   const handleClick = (item) => {
+    setCurrentItem(item.id)
     setAnnouncementText(item.description)
     setHeaderText(item.title.toUpperCase())
     setButtonTitle(item.buttonTitle)
@@ -183,7 +200,7 @@ const SubHero = () => {
           <GridMenu>
             {MenuItems.map(item => {
               return (
-                <MenuCard key={item.id} gradientBorder background={item.cardBackground} onClick={() => handleClick(item)} >
+                <MenuCard key={item.id} gradientBorder background={item.cardBackground} current={item.id === currentItem} onClick={() => handleClick(item)} >
                   <ContentRow>
                     <span>{item.title}</span>
                     <ArrowIcon>

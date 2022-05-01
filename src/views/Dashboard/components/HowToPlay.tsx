@@ -80,7 +80,7 @@ const HowToInfo = [
         id: 1,
         title: 'Connect Your Wallet',
         img: howto2,
-        link: "",
+        link: "https://docs.novadex.finance/shibanova-documentation/how-to-connect-a-wallet",
     },
     {
         id: 2,

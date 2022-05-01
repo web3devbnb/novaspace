@@ -7,6 +7,7 @@ import ModalVideo from 'react-modal-video'
 import ReactGA from 'react-ga'
 import ReactPixel from 'react-facebook-pixel'
 import showCountdown from 'utils/countdownTimer'
+import HowToPlay from 'views/Dashboard/components/HowToPlay'
 import NovariaTeaser from 'views/Dashboard/components/NovariaTeaser'
 import logo from './assets/novariaLogoBig.png'
 import StartMenu from './components/StartMenu'
@@ -135,6 +136,7 @@ const Novaria: React.FC = () => {
               <GameplayVideo src='https://www.youtube.com/embed/BXmtualv27k' allowFullScreen />
             </GameInfo>
           </SubHeading>
+          <HowToPlay />
         </Column>
       </Page>
     
