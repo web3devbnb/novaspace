@@ -8,7 +8,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getNovaAddress } from '../../../utils/addressHelpers'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import smallLogo from '../assets/novariaSmallLogo.png'
-import tokenLogo from '../assets/shibanovaTokenLogo.svg'
+import tokenLogo from '../assets/NOVA32.png'
 
 export interface HeaderProps {
   battleStatus: boolean

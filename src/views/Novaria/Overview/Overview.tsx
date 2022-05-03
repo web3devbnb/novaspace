@@ -245,7 +245,7 @@ const Overview: React.FC = () => {
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
   const [copySuccess, setCopySuccess] = useState('')
-  const refLink = `https://shibanova.io/legend-of-novaria?ref=${account}`
+  const refLink = `https://novadex.finance/legend-of-novaria?ref=${account}`
   const [pending, setPending] = useState(false)
   const rewardsAmount = useCheckReferrals(account) * 25
   const rewardsDisabled = rewardsAmount <= 0 || pending
