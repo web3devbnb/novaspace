@@ -68,25 +68,25 @@ const Footer = () => (
                     style={{backgroundColor:'transparent'}}
                   />
                 </a> 
-                <a target="_blank" rel="noreferrer" href="https://t.me/ShibaNovaDEX">
+                <a target="_blank" rel="noreferrer" href="https://t.me/NovaDexAnn">
                   <Img
-                    src="https://shibanova.io/assets/images/telegram-icon.svg"
+                    src="https://novadex.finance/assets/images/telegram-icon.svg"
                     alt="telegram"
                   />
                 </a>
-                <a target="_blank" rel="noreferrer noopener" href="https://www.twitter.com/ShibaNovaDefi">
+                <a target="_blank" rel="noreferrer noopener" href="https://www.twitter.com/earnwithNovaDEX">
                   <Img
-                    src="https://shibanova.io/assets/images/twitter-icon.svg"
+                    src="https://novadex.finance/assets/images/twitter-icon.svg"
                     alt="twitter"                    
                   />
                 </a>
                 <a
                   target="_blank"
                   rel="noreferrer noopener"
-                  href="https://www.instagram.com/ShibaNovaDEFI"
+                  href="https://www.instagram.com/earnwithnovadex"
                 >
                   <Img
-                    src="https://shibanova.io/assets/images/instagram-icon.svg"
+                    src="https://novadex.finance/assets/images/instagram-icon.svg"
                     alt="instagram"
                   />
                 </a>
@@ -118,7 +118,7 @@ const Footer = () => (
             </a>
           </li>
           <li style={{ color: 'white', marginTop: '4px' }}>
-            <a target="_blank" rel="noreferrer" href="https://docs.novadex.finance/shibanova-documentation/">
+            <a target="_blank" rel="noreferrer" href="https://docs.novadex.finance/novadex-documentation/">
               Documentation
             </a>
           </li>
@@ -126,7 +126,7 @@ const Footer = () => (
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://docs.novadex.finance/shibanova-documentation/security/audits"
+              href="https://docs.novadex.finance/novadex-documentation/security/audits"
             >
               Audits
             </a>

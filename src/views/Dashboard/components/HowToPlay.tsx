@@ -4,7 +4,7 @@ import { darkColors } from "@pancakeswap-libs/uikit";
 import howto1 from '../assets/howto1.png'
 import howto2 from '../assets/howto2.png'
 import howto3 from '../assets/howto3.png'
-import novaria from '../assets/novariaLogoBig.png'
+import novaria from '../assets/novariaLogoSmall.png'
 
 const Body = styled.div`
     display: flex;
