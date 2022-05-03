@@ -152,7 +152,6 @@ const Header = styled.div`
 `
 const Button = styled.button`
   cursor: pointer;
-  height: 35px;
   margin: 10px;
   align-self: center;
   padding: 0.25rem 1.25rem;
@@ -284,6 +283,7 @@ const Shipyard = () => {
   const [pending, setPendingTx] = useState(false)
   const [shipEXP, setShipEXP] = useState(0)
 
+  const disableButton = pending === true
   const currentTravelCooldown = new Date(useGetCurrentTravelCooldown(account) * 1000)
   const currentMiningCooldown = new Date(useGetCurrentMiningCooldown(account) * 1000)
   const playerBattleInfo = useGetPlayerBattle(account)
@@ -394,7 +394,7 @@ const Shipyard = () => {
         <GameMenu pageName="shipyard" />
 
         <BodyWrapper>
-          <ChatButton playerExists={playerExists} playerName={playerName} />
+          {/* <ChatButton playerExists={playerExists} playerName={playerName} /> */}
           <LeftCol>
             <ShipClassMenu>
               <ShipClassCard src={viperCard} alt="viper" role="button" onClick={handleViperClick} />
@@ -492,7 +492,7 @@ const Shipyard = () => {
                     <Item>
                       <input type="text" required maxLength={12} onChange={(e) => setShipyardNewName(e.target.value)} />
                       <br />
-                      <Button onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                      <Button disabled={disableButton} onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
                     </Item>
                   </div>
                 )}
@@ -508,7 +508,7 @@ const Shipyard = () => {
                         onChange={(e) => setNewFee(parseFloat(e.target.value))}
                       />
                       <br />
-                      <Button onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
+                      <Button disabled={disableButton} onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
                     </Item>
                   </div>
                 )}
