@@ -127,7 +127,7 @@ const MenuItems = [
   {
     id: 1,
     title: 'Legend of Novaria',
-    description: 'Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain and fueled by NOVA. Players can build fleets, mine mineral, fight others in epic space battles, and explore and ENDLESS universe.',
+    description: 'Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain and fueled by NOVA. Players can build fleets, mine mineral, fight others in epic space battles, and explore an ENDLESS universe.',
     background: "url('/images/home/homeBanner.jpg')",
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard1.jpg')",
