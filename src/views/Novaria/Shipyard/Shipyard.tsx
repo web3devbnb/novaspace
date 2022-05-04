@@ -36,6 +36,7 @@ import unknownCard from '../assets/newShipCard.png'
 import gorianCard from '../assets/gorianCard.png'
 import fireflyCard from '../assets/fireflyCard.png'
 import lancerCard from '../assets/lancerSmall.png'
+import viperSwarmCard from '../assets/viperSwarm.png'
 import YourFleetStats from '../Location/YourFleetStats'
 import BattleStatus from '../Location/BattleStatus'
 import BodyWrapper from '../components/BodyWrapper'
@@ -297,6 +298,8 @@ const Shipyard = () => {
   const [handleGorianClick] = useModal(<ShipCardModal shipclass="Gorian" />)
   const [handleLancerClick] = useModal(<ShipCardModal shipclass="Lancer" />)
   const [handleUnknownClick] = useModal(<ShipCardModal shipclass="Unknown" />)
+  const [handleViperSwarm] = useModal(<ShipCardModal shipclass="Viper Swarm" />)
+  
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
@@ -400,6 +403,7 @@ const Shipyard = () => {
               <ShipClassCard src={viperCard} alt="viper" role="button" onClick={handleViperClick} />
               <ShipClassCard src={moleCard} alt="mole" role="button" onClick={handleMoleClick} />
               <ShipClassCard src={fireflyCard} alt="firefly" role="button" onClick={handleFireflyClick} />
+              <ShipClassCard src={viperSwarmCard} alt="viper swarm" role="button" onClick={handleViperSwarm} />
               <ShipClassCard src={gorianCard} alt="gorian" role="button" onClick={handleGorianClick} />
               <ShipClassCard src={lancerCard} alt="lancer" role="button" onClick={handleLancerClick} />
               <ShipClassCard src={unknownCard} alt="coming soon" role="button" onClick={handleUnknownClick} />

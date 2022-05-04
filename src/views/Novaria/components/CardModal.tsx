@@ -17,7 +17,12 @@ const StyledModal = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-end; 
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `
 
 interface Props extends InjectedModalProps {
@@ -34,7 +39,7 @@ const Modal: React.FC<Props> = ({ onDismiss, children, hideCloseButton = false, 
         </StyledIconButton>
       )}
     </ModalHeader>
-    <Flex flexDirection="column" p={3} style={{ color: '#5affff' }}>
+    <Flex flexDirection="column" p={3} style={{ color: '#5affff' }} onClick={onDismiss}>
       {children}
     </Flex>
   </StyledModal>

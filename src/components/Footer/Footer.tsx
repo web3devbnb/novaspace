@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {  Text, Flex } from '@pancakeswap-libs/uikit'
 import discordIcon from './Discord.svg'
 import coinBrain from './coinBrain.png'
+import redditIcon from './redditIcon.png'
 
 
 const Hero = styled(Flex)`
@@ -90,6 +91,16 @@ const Footer = () => (
                     alt="instagram"
                   />
                 </a>
+                <a                  
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://www.reddit.com/r/NovaDEX/"
+                >
+                  <Img
+                    src={redditIcon}
+                    alt="reddit"
+                  />
+                </a> 
                 <a
                   target="_blank"
                   rel="noreferrer noopener noopener"

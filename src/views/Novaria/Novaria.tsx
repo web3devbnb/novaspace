@@ -134,7 +134,7 @@ const Novaria: React.FC = () => {
             </GameInfo>
             <GameInfo>
               <div>Game Guide</div>
-              <GameplayVideo src='https://www.youtube.com/embed/BXmtualv27k' allowFullScreen />
+              <GameplayVideo src='https://www.youtube.com/embed/GLNkjLuKWxc' allowFullScreen />
             </GameInfo>
           </SubHeading>
           <HowToPlay />

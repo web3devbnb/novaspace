@@ -7,6 +7,7 @@ import unknownCard from '../assets/newShipCard.png'
 import gorianCard from '../assets/gorianCard.png'
 import fireflyCard from '../assets/fireflyCard.png'
 import lancerCard from '../assets/lancerSmall.png'
+import viperSwarmCard from '../assets/viperSwarm.png'
 
 interface PlayerModalProps {
   shipclass: string
@@ -31,9 +32,10 @@ const ShipCardModal: React.FC<PlayerModalProps> = ({ shipclass, onDismiss }) => 
       {shipclass === 'Viper' && <Img src={viperCard} alt="viper" />}
       {shipclass === 'P.U.P.' && <Img src={moleCard} alt="PUP" />}
       {shipclass === 'Firefly' && <Img src={fireflyCard} alt="firefly" />}
+      {shipclass === 'Viper Swarm' && <Img src={viperSwarmCard} alt="viper swarm" />}
       {shipclass === 'Gorian' && <Img src={gorianCard} alt="gorian" />}
       {shipclass === 'Lancer' && <Img src={lancerCard} alt="lancer" />}
-      {shipclass === 'Unknown' && <Img src={unknownCard} alt="viper" />}
+      {shipclass === 'Unknown' && <Img src={unknownCard} alt="coming soon" />}
     </Modal>
   )
 }
