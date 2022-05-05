@@ -314,7 +314,7 @@ const Overview: React.FC = () => {
                   Good Luck! 
                   <br />
                   <br />
-                  <a href='https://docs.shibanova.io/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
+                  <a href='https://docs.novadex.finance/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
                 </Text>
                
                 <RefSection>
