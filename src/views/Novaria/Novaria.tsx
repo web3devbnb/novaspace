@@ -106,6 +106,9 @@ const Novaria: React.FC = () => {
    
       <Page>
         <Column>
+              <a href='https://novadex.finance/overview' rel='noopener noreferrer' target='blank'>
+                <ExternalButton type="button">VIEW LIVE GAME!</ExternalButton>
+              </a>
           <TeaserVideo 
             src='https://www.youtube.com/embed/VRH2LvKXKEQ?playlist=VRH2LvKXKEQ&autoplay=1&mute=1&loop=1' 
             title="YouTube video player"
@@ -116,9 +119,6 @@ const Novaria: React.FC = () => {
                 : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>
               }
               <ButtonRow>
-                <a href='https://novadex.finance/overview' rel='noopener noreferrer' target='blank'>
-                  <ExternalButton type="button">VIEW LIVE GAME!</ExternalButton>
-                </a>
                 <a href='https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' rel='noopener noreferrer' target='blank'>
                   <ExternalButton type="button">Buy NOVA</ExternalButton>
                 </a>
