@@ -81,6 +81,12 @@ const ButtonRow = styled.div`
   
 `
 
+const LiveGameLink = styled.div`
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  margin-bottom:5px;
+`
 const Novaria: React.FC = () => { 
   ReactGA.initialize('UA-206876567-1',{gaOptions: {siteSpeedSampleRate: 100}})
   const { account, connect, reset } = useWallet()
@@ -106,9 +112,11 @@ const Novaria: React.FC = () => {
    
       <Page>
         <Column>
-              <a href='https://novadex.finance/overview' rel='noopener noreferrer' target='blank'>
-                <ExternalButton type="button">VIEW LIVE GAME!</ExternalButton>
-              </a>
+          <LiveGameLink>
+            <a href='https://novadex.finance/overview' rel='noopener noreferrer' target='blank'>
+              <ExternalButton type="button">VIEW LIVE GAME!</ExternalButton>
+            </a>
+          </LiveGameLink>
           <TeaserVideo 
             src='https://www.youtube.com/embed/VRH2LvKXKEQ?playlist=VRH2LvKXKEQ&autoplay=1&mute=1&loop=1' 
             title="YouTube video player"
