@@ -8,8 +8,8 @@ const Privacy = () => {
       <Header>Privacy Policy</Header>
       <div style={{ margin: '40px 60px', color: 'white' }}>
         <p>
-          The NovaDEX.finance team (We) is committed to protecting and respecting your privacy. This policy (together with
-          our
+          The NovaDEX.finance team (We) is committed to protecting and respecting your privacy. This policy (together
+          with our
           <a href="/terms">terms and conditions of use</a>
           sets out the basis on which any data we collect from you, or that you provide to us, will be processed by us.
           Please read the following carefully to understand our views and practices regarding your data and how we will

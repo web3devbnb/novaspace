@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useModal } from '@pancakeswap-libs/uikit'
 import ChatModal from './ChatModal'
 
-
 const Button = styled.button`
   cursor: pointer;
   position: fixed;
@@ -16,13 +15,8 @@ const Button = styled.button`
   color: #5affff;
 `
 
-const ChatButton = ({playerExists, playerName}) => {
-
-    const [handleChatOpen] = useModal(<ChatModal playerExists={playerExists} playerName={playerName} /> )
-    return (
-        <Button onClick={handleChatOpen}>
-          CHAT
-        </Button>
-    )
+const ChatButton = ({ playerExists, playerName }) => {
+  const [handleChatOpen] = useModal(<ChatModal playerExists={playerExists} playerName={playerName} />)
+  return <Button onClick={handleChatOpen}>CHAT</Button>
 }
 export default ChatButton

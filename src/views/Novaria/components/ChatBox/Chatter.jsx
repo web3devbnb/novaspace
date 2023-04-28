@@ -1,28 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react'
 // import './Chat.css'
-import styled from 'styled-components';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
-import 'firebase/compat/analytics';
+import styled from 'styled-components'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
+import 'firebase/compat/auth'
+import 'firebase/compat/analytics'
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 // uses firestore
 firebase.initializeApp({
-  apiKey: "AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA",
-  authDomain: "novaria-chat.firebaseapp.com", 
-  projectId: "novaria-chat",
-  storageBucket: "novaria-chat.appspot.com",
-  messagingSenderId: "778958864134",
-  appId: "1:778958864134:web:d0954aa81fc2b951f32887",
-  measurementId: "G-WLM7ED9HN0"
+  apiKey: 'AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA',
+  authDomain: 'novaria-chat.firebaseapp.com',
+  projectId: 'novaria-chat',
+  storageBucket: 'novaria-chat.appspot.com',
+  messagingSenderId: '778958864134',
+  appId: '1:778958864134:web:d0954aa81fc2b951f32887',
+  measurementId: 'G-WLM7ED9HN0',
 })
 
 // const auth = firebase.auth();
-const firestore = firebase.firestore();
-const analytics = firebase.analytics();
+const firestore = firebase.firestore()
+const analytics = firebase.analytics()
 
 // styled components
 const Wrapper = styled.div`
@@ -54,98 +54,84 @@ const Input = styled.input`
 const MessageBox = styled.div`
   display: flex;
   margin: 5px;
-  align-self: ${props => props.usermessage === true && 'flex-end'};
+  align-self: ${(props) => props.usermessage === true && 'flex-end'};
   flex-direction: column;
-  text-align: ${props => props.usermessage === true && 'right'};
-  color: ${props => props.usermessage === true && 'white'};
+  text-align: ${(props) => props.usermessage === true && 'right'};
+  color: ${(props) => props.usermessage === true && 'white'};
 `
-const MsgItem = styled.div`
-
-`
+const MsgItem = styled.div``
 const MsgName = styled.div`
-  font-size: .7rem;
-
+  font-size: 0.7rem;
 `
 
-function MSGApp({username}) {
-
-  const user = username.toString();
+function MSGApp({ username }) {
+  const user = username.toString()
 
   return (
     <Wrapper>
       <Header>
         <h1>NOVARIA CHAT</h1>
-        
       </Header>
 
-      <section>
-        {user ? <ChatRoom user={user} /> : 'CONNECT WALLET TO CHAT'}
-      </section>
-
+      <section>{user ? <ChatRoom user={user} /> : 'CONNECT WALLET TO CHAT'}</section>
     </Wrapper>
-  );
+  )
 }
 
-function ChatRoom({user}) {
-  const dummy = useRef();
-  const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt', 'desc').limit(25);
+function ChatRoom({ user }) {
+  const dummy = useRef()
+  const messagesRef = firestore.collection('messages')
+  const query = messagesRef.orderBy('createdAt', 'desc').limit(25)
 
-  const [messages] = useCollectionData(query, { idField: 'id' });
+  const [messages] = useCollectionData(query, { idField: 'id' })
 
-  const [formValue, setFormValue] = useState('');
-
+  const [formValue, setFormValue] = useState('')
 
   const sendMessage = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const uid = user;
+    const uid = user
 
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid
+      uid,
     })
 
-    setFormValue('');
-    dummy.current.scrollIntoView({ behavior: 'smooth' });
+    setFormValue('')
+    dummy.current.scrollIntoView({ behavior: 'smooth' })
   }
 
+  return (
+    <>
+      <Main>
+        {messages && messages.reverse().map((msg) => <ChatMessage user={user} key={msg.id} message={msg} />)}
 
+        <span ref={dummy} />
+      </Main>
 
-  return (<>
-    <Main>
+      <Input id="txt" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="type message" />
 
-      {messages && messages.reverse().map(msg => <ChatMessage user={user} key={msg.id} message={msg} />)}
-
-      <span ref={dummy} />
-
-    </Main>
-
-    
-    
-      <Input id='txt' value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="type message" />
-
-      <button id='send' type="button" disabled={!formValue} onClick={sendMessage}>🕊️</button>
-    
-    
-  </>)
+      <button id="send" type="button" disabled={!formValue} onClick={sendMessage}>
+        🕊️
+      </button>
+    </>
+  )
 }
 
+function ChatMessage({ message, user }) {
+  const { text, uid } = message
 
-function ChatMessage({message, user}) {
-  const { text, uid } = message;
+  const messageClass = uid === user
 
-  const messageClass = uid === user;
-  
-
-  return (<>
-    <MessageBox usermessage={messageClass}>
-      <MsgName>{uid}</MsgName>
-      <MsgItem>{text}</MsgItem>
-    </MessageBox>
-  </>)
+  return (
+    <>
+      <MessageBox usermessage={messageClass}>
+        <MsgName>{uid}</MsgName>
+        <MsgItem>{text}</MsgItem>
+      </MessageBox>
+    </>
+  )
 }
 
-
-export default MSGApp;
+export default MSGApp

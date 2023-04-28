@@ -13,26 +13,25 @@ const Grid = styled.a`
   border-radius: 30px;
   background-image: url('/images/home/farm.png');
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   position: relative;
-
 `
 
 const TextRow1 = styled.div`
-grid-column-start: 1;
-grid-column-end: 4;
-align-items: flex-end;
-display: flex;
-margin-bottom: 30px;
-margin-left: 10px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  align-items: flex-end;
+  display: flex;
+  margin-bottom: 30px;
+  margin-left: 10px;
 `
 const TextRow2 = styled.div`
-wrap: no-wrap;
-grid-column-start: 1;
-grid-column-end: 4;
-position: absolute;
-top: 51%;
-left: 6%;
+  wrap: no-wrap;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  position: absolute;
+  top: 51%;
+  left: 6%;
 `
 
 const ColRight = styled.div`
@@ -59,7 +58,6 @@ const Heading = styled(Text)`
   margin-left: 3%;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    
     margin-left: 4%;
   }
   ${({ theme }) => theme.mediaQueries.md} {
@@ -75,7 +73,6 @@ const SubHeading = styled(Text)`
   font-weight: bold;
   margin-left: 3%;
   ${({ theme }) => theme.mediaQueries.sm} {
-    
   }
   ${({ theme }) => theme.mediaQueries.md} {
     margin-left: 0%;
@@ -86,25 +83,20 @@ const SubHeading = styled(Text)`
   }
 `
 
-
 const FarmsCard = () => {
-
   return (
     <Grid href="/farms">
       <TextRow1>
-        <Heading glowing>
-          FARMS
-        </Heading>
+        <Heading glowing>FARMS</Heading>
       </TextRow1>
-      <ColRight /> 
-      
+      <ColRight />
+
       <TextRow2>
-        <SubHeading glowing> 
-          Earn up to <span style={{color:"#00aaff"}}>500%</span> APR      
+        <SubHeading glowing>
+          Earn up to <span style={{ color: '#00aaff' }}>500%</span> APR
         </SubHeading>
       </TextRow2>
     </Grid>
-
   )
 }
 

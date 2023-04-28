@@ -5,7 +5,7 @@ const farms: FarmConfig[] = [
   {
     pid: 2,
     risk: 5,
-    lpSymbol: 'NOVA-BUSD LP', 
+    lpSymbol: 'NOVA-BUSD LP',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
       56: '0x9d6fDE3Bd9e1Cc21da6D6c606343BC9164509Cb6',
@@ -66,39 +66,39 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
-},
-{
-  pid: 30,
-  risk: 19,
-  lpSymbol: 'ETERNAL-NOVA LP',
-  lpAddresses: {
-    97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-    56: '0xEFd70fee6A55c8A8641554c7FEb5A216A3cb645D',
   },
-  tokenSymbol: 'ETERNAL',
-  tokenAddresses: {
-    97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+  {
+    pid: 30,
+    risk: 19,
+    lpSymbol: 'ETERNAL-NOVA LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xEFd70fee6A55c8A8641554c7FEb5A216A3cb645D',
+    },
+    tokenSymbol: 'ETERNAL',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
   },
-  quoteTokenSymbol: QuoteToken.NOVA,
-  quoteTokenAdresses: contracts.nova,
-},
-{
-  pid: 29,
-  risk: 19,
-  lpSymbol: 'ETERNAL-BNB LP',
-  lpAddresses: {
-    97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-    56: '0x6B6A170dA0713187DE61547F3807703735c5b01f',
+  {
+    pid: 29,
+    risk: 19,
+    lpSymbol: 'ETERNAL-BNB LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x6B6A170dA0713187DE61547F3807703735c5b01f',
+    },
+    tokenSymbol: 'ETERNAL',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
   },
-  tokenSymbol: 'ETERNAL',
-  tokenAddresses: {
-    97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-    56: '0xd44fd09d74cd13838f137b590497595d6b3feea4',
-  },
-  quoteTokenSymbol: QuoteToken.BNB,
-  quoteTokenAdresses: contracts.wbnb,
-},
   {
     pid: 27,
     risk: 20,
@@ -114,7 +114,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
-},
+  },
   {
     pid: 3,
     risk: 3,

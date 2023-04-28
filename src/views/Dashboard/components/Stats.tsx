@@ -33,13 +33,14 @@ const Row = styled.div`
 interface Stat {
   label: string
   value: string | number
+  decimals?: number
   prefix?: string
   suffix?: string
 }
 
 const Stats = ({ stats }: { stats: Stat[] }) => (
   <StyledStats>
-    {stats.map(({ label, value, prefix = null, suffix = null }) => (
+    {stats.map(({ label, value, decimals = 2, prefix = null, suffix = null }) => (
       <Row>
         <Text bold fontSize="12px">
           {label}
@@ -49,7 +50,7 @@ const Stats = ({ stats }: { stats: Stat[] }) => (
             {value}
           </Text>
         ) : (
-          <CardValue fontSize="14px" prefix={prefix} suffix={suffix} value={value} decimals={2} />
+          <CardValue fontSize="14px" prefix={prefix} suffix={suffix} value={value} decimals={decimals} />
         )}
       </Row>
     ))}

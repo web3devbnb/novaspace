@@ -73,7 +73,6 @@ const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-
 const SNovaStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWallet()
@@ -124,16 +123,12 @@ const SNovaStakingCard = () => {
   ]
 
   return (
-    <StatsCard
-      title="sNOVA Stats"
-    >
+    <StatsCard title="sNOVA Stats">
       <GridRow>
         <CardImage src="/images/tokens/snova.png" alt="snova logo" width={80} height={80} />
         <Col>
           <Block>
-            <Label>
-              sNOVA Balance
-            </Label>
+            <Label>sNOVA Balance</Label>
             <NovaWalletBalance novaBalance={getBalanceNumber(sNovaBalance)} />
           </Block>
           <Block>
@@ -157,23 +152,21 @@ const SNovaStakingCard = () => {
           <UnlockButton fullWidth />
         )}
       </Actions>
-      
+
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}
         expanded={showExpandableSection}
       />
       <ExpandingWrapper expanded={showExpandableSection}>
-      <Stats stats={stats} />
-      {
-        account && sNovaBalance.comparedTo(0) > 0 ? (
-          <Row style={{marginTop:-15}}>
-            <Button  onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
+        <Stats stats={stats} />
+        {account && sNovaBalance.comparedTo(0) > 0 ? (
+          <Row style={{ marginTop: -15 }}>
+            <Button onClick={onPresentSwapToNova}>{TranslateString(999, 'Swap to NOVA')}</Button>
             <Text fontSize="14px">
               {penalty}% {TranslateString(999, 'Penalty')}
             </Text>
           </Row>
-        ) : null
-      }
+        ) : null}
       </ExpandingWrapper>
     </StatsCard>
   )

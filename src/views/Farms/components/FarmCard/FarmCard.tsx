@@ -58,7 +58,7 @@ const Divider = styled.div`
   margin: 28px auto;
   width: 100%;
 `
- 
+
 const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   height: ${(props) => (props.expanded ? '100%' : '0px')};
   overflow: hidden;

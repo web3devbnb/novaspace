@@ -5,9 +5,9 @@ import { useGetBattle } from 'hooks/useNovaria'
 import showCountdown from 'utils/countdownTimer'
 import BattleModal from '../BattleModal'
 
-const Row = styled.div<{resolved:boolean}>`
+const Row = styled.div<{ resolved: boolean }>`
   display: grid;
-  grid-template-columns: ${(props) => props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'};
+  grid-template-columns: ${(props) => (props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr')};
   border: 1px solid #289794;
   padding: 3px;
   margin: 4px 0;
@@ -22,7 +22,7 @@ const Cell = styled.div`
   text-overflow: ellipsis;
 `
 
-const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, account}) => {
+const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, account }) => {
   const [handleClick] = useModal(<BattleModal battle={battle} status={status} currentLocation={currentLocation} />)
   const battleInfo = useGetBattle(battle)
   const attackTeam = battleInfo.attackers
@@ -33,29 +33,25 @@ const OpenBattlesTableRow = ({ battle, status, currentLocation, resolved, accoun
     if (attackTeam[i].toString() === account.toString()) {
       playerInBattle = true
     }
-  } 
+  }
   for (let i = 0; i < defendTeam.length; i++) {
     if (defendTeam[i].toString() === account.toString()) {
       playerInBattle = true
     }
-  } 
+  }
 
- 
   if (!resolved || playerInBattle) {
     return (
-      <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0} resolved={resolved} >
+      <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0} resolved={resolved}>
         <Cell>{battle}</Cell>
         <Cell>{battleInfo.attackTeam[1]}</Cell>
         <Cell>{battleInfo.defendTeam[1]}</Cell>
-        {!resolved &&
-          <Cell>{battleStart}</Cell> 
-        }
+        {!resolved && <Cell>{battleStart}</Cell>}
       </Row>
     )
-  } 
-  return ( null
-      // <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}> </Row>
-    )
+  }
+  return null
+  // <Row onClick={handleClick} onKeyDown={handleClick} role="button" tabIndex={0}> </Row>
 }
 
 export default OpenBattlesTableRow

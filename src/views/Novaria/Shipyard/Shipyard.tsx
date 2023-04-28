@@ -299,7 +299,6 @@ const Shipyard = () => {
   const [handleLancerClick] = useModal(<ShipCardModal shipclass="Lancer" />)
   const [handleUnknownClick] = useModal(<ShipCardModal shipclass="Unknown" />)
   const [handleViperSwarm] = useModal(<ShipCardModal shipclass="Viper Swarm" />)
-  
 
   const handleShipyardChange = (option) => {
     const selectedShipyardId = option.value
@@ -496,7 +495,9 @@ const Shipyard = () => {
                     <Item>
                       <input type="text" required maxLength={12} onChange={(e) => setShipyardNewName(e.target.value)} />
                       <br />
-                      <Button disabled={disableButton} onClick={handleNameChange}>{!pending ? 'Set Shipyard Name' : 'pending...'}</Button>
+                      <Button disabled={disableButton} onClick={handleNameChange}>
+                        {!pending ? 'Set Shipyard Name' : 'pending...'}
+                      </Button>
                     </Item>
                   </div>
                 )}
@@ -512,7 +513,9 @@ const Shipyard = () => {
                         onChange={(e) => setNewFee(parseFloat(e.target.value))}
                       />
                       <br />
-                      <Button disabled={disableButton} onClick={handleFeeChange}>{!pending ? 'Set Shipyard Fee' : 'pending...'}</Button>
+                      <Button disabled={disableButton} onClick={handleFeeChange}>
+                        {!pending ? 'Set Shipyard Fee' : 'pending...'}
+                      </Button>
                     </Item>
                   </div>
                 )}

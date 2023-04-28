@@ -1,9 +1,9 @@
-import React, {useCallback, useState} from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { BaseLayout, Flex, Text, Card } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
-import SimpleImageSlider from "react-simple-image-slider"
+import SimpleImageSlider from 'react-simple-image-slider'
 import MoneyPotCard from './components/MoneyPotCard'
 import VaultsCard from './components/VaultCard'
 import FarmsCard from './components/FarmCard'
@@ -11,10 +11,8 @@ import TradesCard from './components/TradeCard'
 import Defi2Card from './components/DefiCard'
 import CandleCard from './components/CandleCard'
 import Announcements from './components/Announcements'
-import Banner from "./components/Banner"
-import Divider from "./assets/divider.png"
-
-
+import Banner from './components/Banner'
+import Divider from './assets/divider.png'
 
 const Body = styled(Flex)`
   flex-wrap: wrap;
@@ -32,7 +30,6 @@ const Col = styled(Flex)`
   margin: 0 5px;
   max-width: 800px;
 
-
   ${({ theme }) => theme.mediaQueries.sm} {
     margin: 0 10px;
   }
@@ -40,7 +37,6 @@ const Col = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 47%;
   }
- 
 `
 
 const Main = styled(Flex)`
@@ -53,7 +49,6 @@ const Main = styled(Flex)`
 
   // border-radius: 30px;
   // border: 2px solid ${({ theme }) => theme.colors.primary};
-
 `
 const Announcement = styled(Text)`
   text-align: center;
@@ -67,14 +62,7 @@ const Img = styled.img`
 `
 
 const Home: React.FC = () => {
-  
-
-  
-  return (
-    <Page>
-      good luck
-    </Page>
-  )
+  return <Page>good luck</Page>
 }
 
 export default Home

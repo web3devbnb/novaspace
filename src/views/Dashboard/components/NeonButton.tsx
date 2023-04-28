@@ -7,20 +7,12 @@ const Container = styled.a`
   margin-right: 5px;
 `
 
-const NeonButton = ({
-    title,
-    link,
-  }: {
-    title: string
-    link: string
-  }) => {
-    return (
-        <Container href={link} target='_blank' rel='noreferrer noopener'>
-          <Button>
-            {title}
-          </Button>
-        </Container>
-    )
-  }
-  
-  export default NeonButton
+const NeonButton = ({ title, link }: { title: string; link: string }) => {
+  return (
+    <Container href={link} target="_blank" rel="noreferrer noopener">
+      <Button>{title}</Button>
+    </Container>
+  )
+}
+
+export default NeonButton

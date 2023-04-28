@@ -105,20 +105,15 @@ export const useTotalValue = (): BigNumber => {
       let val
       if (farm.quoteTokenSymbol === QuoteToken.BNB) {
         val = bnbPrice.times(farm.lpTotalInQuoteToken)
-      } 
-      else if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
+      } else if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
         val = busdPrice.times(farm.lpTotalInQuoteToken)
-      } 
-      else if (farm.quoteTokenSymbol === QuoteToken.USDT) {
+      } else if (farm.quoteTokenSymbol === QuoteToken.USDT) {
         val = usdtPrice.times(farm.lpTotalInQuoteToken)
-      } 
-      else if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
+      } else if (farm.quoteTokenSymbol === QuoteToken.NOVA) {
         val = novaPrice.times(farm.isTokenOnly ? farm.tokenAmount : farm.lpTotalInQuoteToken)
-      } 
-      else if (farm.quoteTokenSymbol === QuoteToken.ETH) {
-        val=ethPrice.times(farm.lpTotalInQuoteToken)
-      }
-      else {
+      } else if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+        val = ethPrice.times(farm.lpTotalInQuoteToken)
+      } else {
         val = farm.lpTotalInQuoteToken
       }
       value = value.plus(val)

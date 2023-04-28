@@ -9,8 +9,8 @@ const Terms = () => {
       <div style={{ margin: '40px 60px', color: 'white' }}>
         <p>
           The following Terms and Conditions (&quot;Terms&quot;) govern your (“you”) purchase of cryptocurrencies from
-          the NovaDEX.finance website, and the use of the NovaDEX.finance Services. This document is not a solicitation for
-          investment and does not pertain in any way to an offering of securities in any jurisdiction.
+          the NovaDEX.finance website, and the use of the NovaDEX.finance Services. This document is not a solicitation
+          for investment and does not pertain in any way to an offering of securities in any jurisdiction.
         </p>
 
         <br />
@@ -51,22 +51,22 @@ const Terms = () => {
         <br />
 
         <p>
-          All NovaDEX.finance Services are provided on an “AS IS” basis and the NovaDEX.finance team makes no representations
-          and no warranties, express, implied, statutory or otherwise, regarding any matter, including any implied
-          warranties of fitness for purpose and safety of the NovaDEX.finance Cryptocurrencies, Smart contracts source
-          code, UI and website. By using the NovaDEX.finance Services you acknowledges that your use of the NovaDEX.finance
-          Services is entirely at your own risk.
+          All NovaDEX.finance Services are provided on an “AS IS” basis and the NovaDEX.finance team makes no
+          representations and no warranties, express, implied, statutory or otherwise, regarding any matter, including
+          any implied warranties of fitness for purpose and safety of the NovaDEX.finance Cryptocurrencies, Smart
+          contracts source code, UI and website. By using the NovaDEX.finance Services you acknowledges that your use of
+          the NovaDEX.finance Services is entirely at your own risk.
         </p>
 
         <br />
         <p />
         <p>
-          The NovaDEX.finance team will not be liable to you for any loss whatsoever, including any direct loss, indirect
-          or consequential loss, (which includes, without limitation, any business losses, loss of revenue, income,
-          profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill,
-          or loss or corruption of information or data) howsoever caused (including as a result of negligence). Nothing
-          in this disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or
-          limit.
+          The NovaDEX.finance team will not be liable to you for any loss whatsoever, including any direct loss,
+          indirect or consequential loss, (which includes, without limitation, any business losses, loss of revenue,
+          income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or
+          goodwill, or loss or corruption of information or data) howsoever caused (including as a result of
+          negligence). Nothing in this disclaimer will exclude or limit any warranty implied by law that it would be
+          unlawful to exclude or limit.
         </p>
 
         <br />
@@ -96,8 +96,8 @@ const Terms = () => {
             losses due to fraudulent or accidental transactions are not recoverable;
           </li>
           <li>
-            All Crytocurrencies transactions made on the NovaDEX.finance website are deemed to be made when recorded on a
-            Binance Smart Chain public ledger. The public nature of said transactions may lead to an increased risk of
+            All Crytocurrencies transactions made on the NovaDEX.finance website are deemed to be made when recorded on
+            a Binance Smart Chain public ledger. The public nature of said transactions may lead to an increased risk of
             fraud or cyber- attack.
           </li>
         </ul>
@@ -107,9 +107,9 @@ const Terms = () => {
 
         <br />
         <p>
-          You hereby acknowledge that, in your jurisdiction, NovaDEX.finance is not regulated as a financial institution or
-          service provider and that the NovaDEX.finance Cryptocurrencies are not legal tender and are not backed by any
-          governmental authority.
+          You hereby acknowledge that, in your jurisdiction, NovaDEX.finance is not regulated as a financial institution
+          or service provider and that the NovaDEX.finance Cryptocurrencies are not legal tender and are not backed by
+          any governmental authority.
         </p>
 
         <br />
@@ -132,8 +132,8 @@ const Terms = () => {
         <br />
 
         <p>
-          Unless otherwise stated, the NovaDEX.finance team and its licensors own the intellectual property rights in the
-          NovaDEX.finance website and material on said website. Subject to the license below, all these intellectual
+          Unless otherwise stated, the NovaDEX.finance team and its licensors own the intellectual property rights in
+          the NovaDEX.finance website and material on said website. Subject to the license below, all these intellectual
           property rights are reserved.
         </p>
         <p>

@@ -10,10 +10,9 @@ import safu from './components/safupresale.png'
 import donate from './components/donatepresale.png'
 
 const Page1 = styled(Page)`
-background-image:url('/images/home/BG_SPACE.png');
- background-size:cover ;
+  background-image: url('/images/home/BG_SPACE.png');
+  background-size: cover;
 `
-
 
 const Body = styled(Flex)`
   flex-wrap: wrap;
@@ -53,9 +52,7 @@ const Column = styled(Flex)`
 const LeftColumnBlock = styled(Flex)`
   flex-direction: column;
   margin: 10px;
-  paddingLeft: 5px;
-
- 
+  paddingleft: 5px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     margin: 20px;
@@ -67,7 +64,6 @@ const LeftColumnBlock = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.xs} {
     margin: 20px;
     text-align: left;
-    
   }
 `
 
@@ -91,10 +87,9 @@ const RightColumnFooter = styled(Flex)`
 const NovaPadLogo = styled.img`
   width: 800px;
   height: undefined;
-  aspectRatio: 3/2;
-  margin-left:auto;
-  margin-right:auto;
-
+  aspectratio: 3/2;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const WrappedText = styled(Text)`
@@ -144,23 +139,24 @@ const data = [
 
 const LaunchPad: React.FC = () => {
   return (
-    <Page1 >      
+    <Page1>
       {/* <Header>NOVAPAD</Header> */}
       {/* <Divider /> */}
-      <Body >
-      <RightColumn>
-          <NovaPadLogo src={logo} alt="NovaPad"  />
+      <Body>
+        <RightColumn>
+          <NovaPadLogo src={logo} alt="NovaPad" />
           <RightColumnFooter>
             <Text>The DEFI 2.0</Text>
             <WrappedText>NEW PROJECT LAUNCHPAD</WrappedText>
-           
           </RightColumnFooter>
         </RightColumn>
         <LeftColumn>
           {data.map((entry) => {
             return (
               <LeftColumnBlock>
-                <Heading style={{color:"darkblue", backgroundColor:"#00aaff", padding:"5px 5px 2px"}} >{entry.title.toUpperCase()}</Heading>
+                <Heading style={{ color: 'darkblue', backgroundColor: '#00aaff', padding: '5px 5px 2px' }}>
+                  {entry.title.toUpperCase()}
+                </Heading>
                 <LeftColumnBlockItems>
                   {entry.items.map((item) => {
                     return <Text>{item.toUpperCase()}</Text>
@@ -169,53 +165,59 @@ const LaunchPad: React.FC = () => {
               </LeftColumnBlock>
             )
           })}
-          <Row style={{paddingBottom:10}}>
-        <a target="_blank" rel="noreferrer noopener" href="/NOVAPAD_PITCHDECK.pdf">
-          <Tag glowing bold>Learn More!</Tag>
-        </a>
-        <a target="_blank" rel="noreferrer noopener" href="https://forms.gle/hH2ikfTqaznbTjAe8">
-          <Tag glowing bold>Apply to Launch!</Tag>
-        </a>
-        </Row>
+          <Row style={{ paddingBottom: 10 }}>
+            <a target="_blank" rel="noreferrer noopener" href="/NOVAPAD_PITCHDECK.pdf">
+              <Tag glowing bold>
+                Learn More!
+              </Tag>
+            </a>
+            <a target="_blank" rel="noreferrer noopener" href="https://forms.gle/hH2ikfTqaznbTjAe8">
+              <Tag glowing bold>
+                Apply to Launch!
+              </Tag>
+            </a>
+          </Row>
         </LeftColumn>
-        <Heading glowing bold 
-          style={{fontSize:30, borderTop:"1px solid #00aaff", width:"95%", textAlign:"center",
-                  paddingTop:10, 
-          }}>
-         <span style={{ backgroundColor: "#00aaff", padding: "9px 10px 5px", color:"darkblue"}}> PROJECTS </span>
+        <Heading
+          glowing
+          bold
+          style={{ fontSize: 30, borderTop: '1px solid #00aaff', width: '95%', textAlign: 'center', paddingTop: 10 }}
+        >
+          <span style={{ backgroundColor: '#00aaff', padding: '9px 10px 5px', color: 'darkblue' }}> PROJECTS </span>
         </Heading>
-       <Row style={{ marginBottom:5}}>
-         <Column>
-           <img src={toonworld} alt="toon world" style={{maxHeight:"90%", maxWidth:"auto"}}  />
-           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts OCT 29, 2021 @ 20:00 UTC
-           </Text>
-           <Text style={{ backgroundColor: "YELLOW", color:"black", padding: "5px 5px 2px"}}>
-             COMPLETE - 56 BNB RAISED
-           </Text>
-         </Column>
-         <Column>
-           <img src={safu} alt="safu guard" style={{maxHeight:"90%", maxWidth:"auto"}}  />
-           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts NOV 5, 2021 @ 14:00 UTC
-           </Text>
-           <a target="_blank" rel="noreferrer noopener" href="https://safuguard.shibanova.io" style={{padding:"5px 0", marginTop:5}}>
-              <Tag glowing bold>Refund Active</Tag>
-           </a>
-         </Column>
-         <Column>
-           <img src={donate} alt="donate" style={{maxHeight:"90%", maxWidth:"auto"}}  />
-           <Text style={{ backgroundColor: "#00aaff", padding: "5px 5px 2px"}}>
-              Starts NOV 8, 2021 @ 18:00 UTC
-           </Text>
-           {/* <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
+        <Row style={{ marginBottom: 5 }}>
+          <Column>
+            <img src={toonworld} alt="toon world" style={{ maxHeight: '90%', maxWidth: 'auto' }} />
+            <Text style={{ backgroundColor: '#00aaff', padding: '5px 5px 2px' }}>Starts OCT 29, 2021 @ 20:00 UTC</Text>
+            <Text style={{ backgroundColor: 'YELLOW', color: 'black', padding: '5px 5px 2px' }}>
+              COMPLETE - 56 BNB RAISED
+            </Text>
+          </Column>
+          <Column>
+            <img src={safu} alt="safu guard" style={{ maxHeight: '90%', maxWidth: 'auto' }} />
+            <Text style={{ backgroundColor: '#00aaff', padding: '5px 5px 2px' }}>Starts NOV 5, 2021 @ 14:00 UTC</Text>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://safuguard.shibanova.io"
+              style={{ padding: '5px 0', marginTop: 5 }}
+            >
+              <Tag glowing bold>
+                Refund Active
+              </Tag>
+            </a>
+          </Column>
+          <Column>
+            <img src={donate} alt="donate" style={{ maxHeight: '90%', maxWidth: 'auto' }} />
+            <Text style={{ backgroundColor: '#00aaff', padding: '5px 5px 2px' }}>Starts NOV 8, 2021 @ 18:00 UTC</Text>
+            {/* <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold >ENTER</Tag>
            </a> */}
-           <Text style={{ backgroundColor: "YELLOW", color:"black", padding: "5px 5px 2px"}}>
-             COMPLETE - 42 BNB RAISED
-           </Text>
-         </Column>
-       </Row>
+            <Text style={{ backgroundColor: 'YELLOW', color: 'black', padding: '5px 5px 2px' }}>
+              COMPLETE - 42 BNB RAISED
+            </Text>
+          </Column>
+        </Row>
       </Body>
     </Page1>
   )

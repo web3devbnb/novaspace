@@ -1,1 +1,1 @@
-export {default} from './BattleStatus'
+export { default } from './BattleStatus'

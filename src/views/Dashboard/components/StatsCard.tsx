@@ -3,17 +3,15 @@ import styled from 'styled-components'
 import { Heading, Card, CardBody, CardHeader, CardFooter } from '@pancakeswap-libs/uikit'
 import QuestionHelper from '../../../components/QuestionHelper'
 
-
 const StyledCard = styled(Card)`
   text-align: center;
-  flex: 1 ;
+  flex: 1;
   max-width: 400px;
   margin: 2px 2.5px;
 `
 
 const StyledCardHeader = styled(CardHeader)`
-    padding: 12px;
-  
+  padding: 12px;
 `
 
 const StyledHeading = styled(Heading)`
@@ -21,8 +19,7 @@ const StyledHeading = styled(Heading)`
 `
 
 const StyledCardBody = styled(CardBody)`
-    padding: 0px 10px;
-  
+  padding: 0px 10px;
 `
 
 const StyledCardFooter = styled(CardFooter)`
@@ -39,21 +36,30 @@ const StatsCard = ({
   children: JSX.Element | JSX.Element[]
   actions?: JSX.Element
 }) => {
-
-  const moneyPotInfo = (title === 'Money Pot' ? 'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.' : '')
-  const snovaInfo = (title === 'sNOVA Stats' ? 'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.' : '')
-  const novaInfo = (title === 'NOVA Stats' ? 'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.' : '')
+  const moneyPotInfo =
+    title === 'Money Pot'
+      ? 'The pot is distributed out to all sNOVA holders. Your reward/snova is delivered every block. The pot is updated daily with the fees from the previous day.'
+      : ''
+  const snovaInfo =
+    title === 'sNOVA Stats'
+      ? 'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.'
+      : ''
+  const novaInfo =
+    title === 'NOVA Stats'
+      ? 'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.'
+      : ''
   const infoArray = [novaInfo, snovaInfo, moneyPotInfo]
-  const infoMap = infoArray.map((item) => item).join('').toString()
+  const infoMap = infoArray
+    .map((item) => item)
+    .join('')
+    .toString()
 
   return (
     <StyledCard gradientBorder>
       <StyledCardHeader style={{ padding: '10px 0 0 0' }}>
         <StyledHeading glowing style={{ padding: '0 0 0 0' }}>
           {title}
-              <QuestionHelper
-                text={infoMap}
-              />
+          <QuestionHelper text={infoMap} />
         </StyledHeading>
       </StyledCardHeader>
       <StyledCardBody>{children}</StyledCardBody>

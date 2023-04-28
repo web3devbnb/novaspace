@@ -65,7 +65,6 @@ const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -111,11 +110,16 @@ const FarmedStakingCard = () => {
   const NovaPerBlock = farms[0]?.NovaPerBlock ? getBalanceNumber(new BigNumber(farms[0].NovaPerBlock)) : 0
 
   const stats = [
-    { label: TranslateString(999, 'Market Cap').toUpperCase(), value: getBalanceNumber(marketCap), prefix: '$' },
-    { label: TranslateString(536, 'Total Minted'), value: novaSupply },
-    { label: TranslateString(538, 'Total Burned'), value: burnedNova },
-    { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova },
-    { label: 'NOVA/BLOCK', value: NovaPerBlock },
+    {
+      label: TranslateString(999, 'Market Cap').toUpperCase(),
+      value: getBalanceNumber(marketCap),
+      prefix: '$',
+      decimals: 2,
+    },
+    { label: TranslateString(536, 'Total Minted'), value: novaSupply, decimals: 2 },
+    { label: TranslateString(538, 'Total Burned'), value: burnedNova, decimals: 2 },
+    { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova, decimals: 4 },
+    { label: 'NOVA/BLOCK', value: NovaPerBlock, decimals: 4 },
   ]
 
   return (
@@ -124,20 +128,16 @@ const FarmedStakingCard = () => {
         <CardImage src="/images/tokens/nova.png" alt="nova logo" width={80} height={80} />
         <Col>
           <Block>
-            <Label>
-              NOVA Balance (${(novaPrice * novaBalance).toFixed(2)})
-            </Label>
+            <Label>NOVA Balance (${(novaPrice * novaBalance).toFixed(2)})</Label>
             <Label1>
-                &nbsp;
+              &nbsp;
               <NovaWalletBalance novaBalance={novaBalance} />
             </Label1>
           </Block>
           <Block>
-            <Label>
-              Pending NOVA (${(novaPrice * earningsNovaSum).toFixed(2)})
-            </Label>
+            <Label>Pending NOVA (${(novaPrice * earningsNovaSum).toFixed(2)})</Label>
             <Label1>
-                &nbsp;
+              &nbsp;
               <NovaHarvestBalance earningsSum={earningsNovaSum} />
             </Label1>
           </Block>
@@ -158,13 +158,13 @@ const FarmedStakingCard = () => {
           <UnlockButton fullWidth />
         )}
       </Actions>
-      
+
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}
         expanded={showExpandableSection}
       />
       <ExpandingWrapper expanded={showExpandableSection}>
-      <Stats stats={stats} />
+        <Stats stats={stats} />
       </ExpandingWrapper>
     </StatsCard>
   )

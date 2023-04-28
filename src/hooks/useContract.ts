@@ -13,7 +13,7 @@ import {
   getFleetAddress,
   getMapAddress,
   getApprovalsAddress,
-  getReferralsAddress
+  getReferralsAddress,
 } from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'

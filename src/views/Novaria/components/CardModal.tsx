@@ -17,7 +17,7 @@ const StyledModal = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 25%;
     margin-left: auto;

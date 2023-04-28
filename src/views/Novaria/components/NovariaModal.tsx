@@ -6,7 +6,7 @@ const StyledIconButton = styled(IconButton)`
   &:hover {
     background: transparent !important;
   }
-` 
+`
 
 const StyledModal = styled.div`
   background-image: url('/images/novaria/modalBG.png');

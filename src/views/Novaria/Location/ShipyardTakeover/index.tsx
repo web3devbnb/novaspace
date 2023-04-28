@@ -1,1 +1,1 @@
-export {default} from './ShipyardTakeover'
+export { default } from './ShipyardTakeover'

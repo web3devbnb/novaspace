@@ -58,7 +58,7 @@ const Button = styled.button`
   background: transparent;
   padding: 5px 10px;
   text-overflow: ellipsis;
-  &:hover{
+  &:hover {
     background: #5affff;
     color: black;
   }
@@ -83,28 +83,35 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
       </a>
       <InfoBlock>
         <Text glowing>
-          {playerExists ?
+          {playerExists ? (
             <span style={{ color: 'gold' }}>{playerName}</span>
-            : <Button><a href='/legend-of-novaria'>Register Here</a></Button>
-          }
+          ) : (
+            <Button>
+              <a href="/legend-of-novaria">Register Here</a>
+            </Button>
+          )}
         </Text>
         <Text glowing>
-        {playerExists &&
-          <span>EXP: <span style={{ color: 'gold' }}>{exp}</span></span>
-        }
+          {playerExists && (
+            <span>
+              EXP: <span style={{ color: 'gold' }}>{exp}</span>
+            </span>
+          )}
         </Text>
         <Text glowing>
-          <a 
-          href='https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F' 
-          target="_blank"
-          rel="noreferrer noopener">
+          <a
+            href="https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             NOVA: <span style={{ color: 'gold' }}>{novaBalance.toFixed(2)} </span> (+)
           </a>
         </Text>
         <Text glowing>
           MINERAL:{' '}
           <span style={{ color: 'gold' }}>
-            {(playerMineral / 10 ** 18).toFixed(2)} ({playerMineralCapacity > 0 ? (playerMineral / playerMineralCapacity * 100).toFixed(1) : '0.0'}%)
+            {(playerMineral / 10 ** 18).toFixed(2)} (
+            {playerMineralCapacity > 0 ? ((playerMineral / playerMineralCapacity) * 100).toFixed(1) : '0.0'}%)
           </span>
         </Text>
         <Text glowing>

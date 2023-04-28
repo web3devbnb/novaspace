@@ -43,7 +43,7 @@ const Page = styled.div`
   flex-direction: column;
   flex-wrap: no-wrap;
 `
- 
+
 const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -60,7 +60,6 @@ const Body = styled.div`
   border: 1px solid #5affff;
   padding: 10px;
   color: white;
-  
 `
 
 const UpperSection = styled.div`
@@ -76,7 +75,6 @@ const UpperCol = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     max-width: 50vw;
   }
-
 `
 
 const MainLogo = styled.img`
@@ -121,7 +119,7 @@ const StatsContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
-  
+
   overflow-y: auto;
   scrollbar-color: #5affff #289794;
   scrollbar-width: thin;
@@ -138,7 +136,7 @@ const StatsContainer = styled.div`
 `
 
 const StatsRow = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
   text-align: initial;
   flex-wrap: wrap;
@@ -148,12 +146,10 @@ const StatsCol = styled.div`
   display: flex;
   flex-direction: column;
   margin: 5px 0px;
-
 `
 
 const StatsItem = styled.div`
   margin: 5px 0px;
-
 `
 
 const SubHeader = styled.div`
@@ -181,7 +177,7 @@ const RefButton = styled.button`
   cursor: pointer;
   border: none;
   color: white;
-  font-size: .65rem;
+  font-size: 0.65rem;
 `
 
 const RefSection = styled.div`
@@ -191,9 +187,7 @@ const RefSection = styled.div`
   max-width: 80vw;
 `
 
-const RewardsSection = styled.div`
-
-`
+const RewardsSection = styled.div``
 
 const RewardsButtons = styled.button`
   cursor: pointer;
@@ -225,7 +219,7 @@ const Overview: React.FC = () => {
   const playerEXP = player.experience
   const playerName = player.name
   const playerBattleStatus = useGetPlayerBattleStatus(account)
-  const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
+  const refinedMineral = (useGetFleetMineralRefined(account) / 10 ** 18).toFixed(2)
   const totalRefined = Number(refinedMineral).toFixed(0)
   const playerExists = useGetPlayerExists(account)
   const fleetSize = useGetFleetSize(account)
@@ -241,7 +235,7 @@ const Overview: React.FC = () => {
   const shipyards = useGetShipyards()
 
   const playerCount = useGetPlayerCount()
-  const currentTime = Math.round((new Date()). getTime() / 1000)
+  const currentTime = Math.round(new Date().getTime() / 1000)
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
   const [copySuccess, setCopySuccess] = useState('')
@@ -271,7 +265,7 @@ const Overview: React.FC = () => {
     // e.target.focus();
     setCopySuccess('Copied!')
   }
-  
+
   const isDev = account === '0x729F3cA74A55F2aB7B584340DDefC29813fb21dF'
   const addressToFind = useRef(null)
   const [searchAddress, setSearchAddress] = useState(null)
@@ -280,7 +274,6 @@ const Overview: React.FC = () => {
   const handleFindPlayer = () => {
     setSearchAddress(addressToFind.current.value)
   }
-  
 
   return (
     <Page>
@@ -301,29 +294,37 @@ const Overview: React.FC = () => {
                 <MainLogo src={logo} alt="novaria logo" />
                 <Header>Welcome to the Legend of Novaria</Header>
                 <Text>
-                  You are about to embark on a journey to explore the world of Novaria.
-                  The mysterious Draken forces have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know when they will strike again.
+                  You are about to embark on a journey to explore the world of Novaria. The mysterious Draken forces
+                  have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know
+                  when they will strike again.
                   <br />
                   <br />
-                  By building ships, mining planets, and refining mineral into NOVA, you can help humanity rebuild. Along the way, you will meet friends and foes - are you cunning enough to figure out who will help you or destroy you?            
+                  By building ships, mining planets, and refining mineral into NOVA, you can help humanity rebuild.
+                  Along the way, you will meet friends and foes - are you cunning enough to figure out who will help you
+                  or destroy you?
                   <br />
                   <br />
-                  The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!  Are you ready to begin your mission?
+                  The journey will be perilous - the challenges will seem insurmountable - but the time to act is NOW!
+                  Are you ready to begin your mission?
                   <br />
                   <br />
-                  Good Luck! 
+                  Good Luck!
                   <br />
                   <br />
-                  <a href='https://docs.novadex.finance/shibanova-documentation/legend-of-novaria' rel='noopener noreferrer' target='blank' style={{color:'#5affff'}}>[LEARN MORE]</a>
+                  <a
+                    href="https://docs.novadex.finance/shibanova-documentation/legend-of-novaria"
+                    rel="noopener noreferrer"
+                    target="blank"
+                    style={{ color: '#5affff' }}
+                  >
+                    [LEARN MORE]
+                  </a>
                 </Text>
-               
+
                 <RefSection>
+                  <div>*NEW* Refer a friend and get rewarded 25 NOVA when they sign up!</div>
                   <div>
-                    *NEW* Refer a friend and get rewarded 25 NOVA when they sign up!
-                  </div>
-                  <div>
-                    <RefButton onClick={copyToClipboard}>Copy: {refLink}</RefButton> 
-                    {' '}{copySuccess}
+                    <RefButton onClick={copyToClipboard}>Copy: {refLink}</RefButton> {copySuccess}
                   </div>
                   <RewardsSection>
                     <RewardsButtons disabled={rewardsDisabled} onClick={sendGetRewardsTx}>
@@ -338,20 +339,23 @@ const Overview: React.FC = () => {
                   playerName={playerName}
                   playerTotalMineral={totalRefined}
                   playerAttack={fleetPower}
-                  playerSize={fleetSize} 
+                  playerSize={fleetSize}
                   playerLocation={fleetLocation}
                 />
-                {isDev && <div>
-                <input type='text' placeholder='Search Wallet Address' ref={addressToFind} />
-                <button type='button' onClick={handleFindPlayer}>Get Player</button>
-                <span>{foundPlayer === 'Novaria' ? 'Not a Player' : foundPlayer}</span>
-                </div>}
+                {isDev && (
+                  <div>
+                    <input type="text" placeholder="Search Wallet Address" ref={addressToFind} />
+                    <button type="button" onClick={handleFindPlayer}>
+                      Get Player
+                    </button>
+                    <span>{foundPlayer === 'Novaria' ? 'Not a Player' : foundPlayer}</span>
+                  </div>
+                )}
               </div>
               {/* <ChatButton playerExists={playerExists} playerName={playerName} /> */}
             </StatsRow>
           </UpperSection>
           <StatsSection>
-            
             <OpenBattlesCard>
               <Header>My Recent Battles</Header>
               <SubHeader>(Only shows battles at your current location)</SubHeader>
@@ -364,7 +368,7 @@ const Overview: React.FC = () => {
               />
             </OpenBattlesCard>
             <StatsContainer>
-              <Header>Stats</Header> 
+              <Header>Stats</Header>
               <StatsRow>
                 <StatsCol>
                   <StatsItem>Total Players: </StatsItem>
@@ -377,9 +381,9 @@ const Overview: React.FC = () => {
                   <StatsItem>{refinedMineral}</StatsItem>
                 </StatsCol>
               </StatsRow>
-              <Header style={{marginTop:5}}>My Fleet</Header>
-              <YourFleetStats 
-                account = {account}
+              <Header style={{ marginTop: 5 }}>My Fleet</Header>
+              <YourFleetStats
+                account={account}
                 playerBattleInfo={playerBattleInfo}
                 fleetSize={fleetSize}
                 maxFleetSize={maxFleetSize}
@@ -390,21 +394,19 @@ const Overview: React.FC = () => {
                 playerFleet={playerFleet}
                 currentTravelCooldown={currentTravelCooldown}
                 currentMiningCooldown={currentMiningCooldown}
-                fleetLocation={fleetLocation} />
+                fleetLocation={fleetLocation}
+              />
             </StatsContainer>
             <StatsContainer>
               <Header>Shipyards</Header>
               <ShipyardSubHeader>
-                <span style={{textAlign:'left'}} >Name</span>
-                <span style={{textAlign:'right'}} >Location</span>
-                <span style={{textAlign:'right'}} >Takeover?</span>
+                <span style={{ textAlign: 'left' }}>Name</span>
+                <span style={{ textAlign: 'right' }}>Location</span>
+                <span style={{ textAlign: 'right' }}>Takeover?</span>
               </ShipyardSubHeader>
-                {shipyards.map((shipyard) => {
-                  return(
-                    <ShipyardList shipyard={shipyard} />
-                  )
-                })}
-
+              {shipyards.map((shipyard) => {
+                return <ShipyardList shipyard={shipyard} />
+              })}
             </StatsContainer>
           </StatsSection>
         </Body>

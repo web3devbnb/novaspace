@@ -17,7 +17,7 @@ const Container = styled.div`
   position: relative;
   padding: 32px 40px 4px;
   border-right: solid 2px ${({ theme }) => theme.colors.primary};
-  border-top: solid 1px ${({ theme }) => theme.colors.secondary}; 
+  border-top: solid 1px ${({ theme }) => theme.colors.secondary};
   border-radius: 30px;
   border-top-left-radius: 0;
   text-align: right;

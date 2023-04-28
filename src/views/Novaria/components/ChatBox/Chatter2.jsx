@@ -5,8 +5,8 @@ import 'firebase/compat/database'
 import 'firebase/compat/auth'
 import 'firebase/compat/analytics'
 import 'firebase/compat/app-check'
-import { initializeApp } from "firebase/app";
-import {initializeAppCheck, ReCaptchaV3Provider, getToken} from 'firebase/app-check'
+import { initializeApp } from 'firebase/app'
+import { initializeAppCheck, ReCaptchaV3Provider, getToken } from 'firebase/app-check'
 import useRefresh from 'hooks/useRefresh'
 import Filter from 'bad-words'
 
@@ -14,27 +14,27 @@ const filter = new Filter()
 
 // uses firebase real-time database
 firebase.initializeApp({
-  apiKey: "AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA",
-  authDomain: "novaria-chat.firebaseapp.com", 
-  projectId: "novaria-chat",
-  storageBucket: "novaria-chat.appspot.com",
-  messagingSenderId: "778958864134",
-  appId: "1:778958864134:web:d0954aa81fc2b951f32887",
-  measurementId: "G-WLM7ED9HN0"
+  apiKey: 'AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA',
+  authDomain: 'novaria-chat.firebaseapp.com',
+  projectId: 'novaria-chat',
+  storageBucket: 'novaria-chat.appspot.com',
+  messagingSenderId: '778958864134',
+  appId: '1:778958864134:web:d0954aa81fc2b951f32887',
+  measurementId: 'G-WLM7ED9HN0',
 })
 
 // const appCheck = firebase.appCheck();
 // // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
 // // key is the counterpart to the secret key you set in the Firebase console.
 const app = initializeApp({
-  apiKey: "AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA",
-  authDomain: "novaria-chat.firebaseapp.com", 
-  projectId: "novaria-chat",
-  storageBucket: "novaria-chat.appspot.com",
-  messagingSenderId: "778958864134",
-  appId: "1:778958864134:web:d0954aa81fc2b951f32887",
-  measurementId: "G-WLM7ED9HN0"
-});
+  apiKey: 'AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA',
+  authDomain: 'novaria-chat.firebaseapp.com',
+  projectId: 'novaria-chat',
+  storageBucket: 'novaria-chat.appspot.com',
+  messagingSenderId: '778958864134',
+  appId: '1:778958864134:web:d0954aa81fc2b951f32887',
+  measurementId: 'G-WLM7ED9HN0',
+})
 
 // use for localhost
 // eslint-disable-next-line no-restricted-globals
@@ -55,7 +55,6 @@ const Wrapper = styled.div`
   position: fixed;
   bottom: 40px;
   right: 10px;
-  
 `
 const Header = styled.div`
   font-size: 1.25rem;
@@ -74,8 +73,8 @@ const Main = styled.div`
   flex-direction: column;
   padding: 5px;
   // max-width: 300px;
-  
-  &::-webkit-scrollbar { 
+
+  &::-webkit-scrollbar {
     width: 5px;
     background-color: #289794;
   }
@@ -90,30 +89,26 @@ const Main = styled.div`
 
 const Input = styled.input`
   width: 85%;
-  margin-left:5px;
+  margin-left: 5px;
 `
-const InputMenu = styled.div`
-
-`
+const InputMenu = styled.div``
 
 const MessageBox = styled.div`
   display: flex;
   margin: 5px;
-  align-self: ${props => props.usermessage === true && 'flex-end'};
+  align-self: ${(props) => props.usermessage === true && 'flex-end'};
   flex-direction: column;
-  text-align: ${props => props.usermessage === true && 'right'};
-  color: ${props => props.usermessage === true && 'white'};
+  text-align: ${(props) => props.usermessage === true && 'right'};
+  color: ${(props) => props.usermessage === true && 'white'};
 `
-const MsgItem = styled.div`
-
-`
+const MsgItem = styled.div``
 const MsgName = styled.div`
-  font-size: .7rem;
-  color: ${props => props.usermessage === true ? 'gray' : '#009d9d'};
+  font-size: 0.7rem;
+  color: ${(props) => (props.usermessage === true ? 'gray' : '#009d9d')};
 `
 
 const NameSpan = styled.span`
-  font-size: .9rem;
+  font-size: 0.9rem;
 `
 
 const WarningWrapper = styled.div`
@@ -121,144 +116,145 @@ const WarningWrapper = styled.div`
   text-align: center;
 `
 
-const WarningButton = styled.button`
+const WarningButton = styled.button``
 
-`
-
-
-
-function MSGApp({username, playerExists}) {
-
-  const user = username.toString();
-  const [toggle, setToggle] = useState(false);
+function MSGApp({ username, playerExists }) {
+  const user = username.toString()
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     // check when the component is loaded
-    const localStorageToggled = localStorage.getItem("toggle");
+    const localStorageToggled = localStorage.getItem('toggle')
 
     // If is not null
     if (localStorageToggled) {
-      setToggle(localStorageToggled === "true" && true);
+      setToggle(localStorageToggled === 'true' && true)
     } else {
       // If null set the localStorage key/value as a string.
-      localStorage.setItem("toggle", `${toggle}`);
+      localStorage.setItem('toggle', `${toggle}`)
     }
-  }, [toggle]);
+  }, [toggle])
 
   const handleToggle = (tog) => {
-    localStorage.setItem("toggle", `${tog}`);
-    setToggle(tog);
-  };
+    localStorage.setItem('toggle', `${tog}`)
+    setToggle(tog)
+  }
 
   return (
     <Wrapper>
       <Header>
         <h1>NOVARIA CHAT</h1>
-        
       </Header>
-      {!toggle && 
+      {!toggle && (
         <WarningWrapper>
-          This chat box is open to all players. Never share your personal information, anyone asking for it is scamming you. Anyone asking you to go to a different website is scamming you. Chat at your own risk. <br />
-          <WarningButton onClick={() => handleToggle(!toggle)}>
-            I Understand
-          </WarningButton>  
+          This chat box is open to all players. Never share your personal information, anyone asking for it is scamming
+          you. Anyone asking you to go to a different website is scamming you. Chat at your own risk. <br />
+          <WarningButton onClick={() => handleToggle(!toggle)}>I Understand</WarningButton>
         </WarningWrapper>
-      }
+      )}
 
-      <section>
-        {user && playerExists ? <ChatRoom user={user} /> : 'MUST BE SIGNED IN TO GAME TO CHAT'}
-      </section>
-
+      <section>{user && playerExists ? <ChatRoom user={user} /> : 'MUST BE SIGNED IN TO GAME TO CHAT'}</section>
     </Wrapper>
-  );
+  )
 }
 
-function ChatRoom({user}) {
-  const dummy = useRef();
+function ChatRoom({ user }) {
+  const dummy = useRef()
   const [messages, setMessages] = useState([])
   const [formValue, setFormValue] = useState('')
   const messagesRef = firebase.database().ref('messages/')
   const { slowRefresh } = useRefresh()
 
   const snapshotToArray = (snapshot) => {
-    const returnArr = [];
+    const returnArr = []
 
     snapshot.forEach((childSnapshot) => {
-        const item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        returnArr.push(item);
-    });
+      const item = childSnapshot.val()
+      item.key = childSnapshot.key
+      returnArr.push(item)
+    })
 
-    return returnArr;
-  };
+    return returnArr
+  }
 
   const sendMessage = async (e) => {
     // e.preventDefault();
 
-    const uid = user;
+    const uid = user
 
     await messagesRef.push({
       text: filter.clean(formValue),
       createdAt: new Date().toUTCString(),
-      uid
+      uid,
     })
 
-    setFormValue('');
-    dummy.current.scrollIntoView({ behavior: 'smooth' });
+    setFormValue('')
+    dummy.current.scrollIntoView({ behavior: 'smooth' })
   }
-  const handleKeypress = e => {
-      // it triggers by pressing the enter key
+  const handleKeypress = (e) => {
+    // it triggers by pressing the enter key
     if (e.keyCode === 13) {
       sendMessage()
     }
   }
 
- 
   useEffect(() => {
     const fetchData = async () => {
       // firebase.database().ref('messages/').orderByChild('createdAt').limitToLast(25).on('value', resp => {
-      firebase.database().ref('messages/').limitToLast(50).on('value', resp => {
-        setMessages([]);
-        setMessages(snapshotToArray(resp))
-        // this scroll method moves the whole page... need to find better solution
-        dummy.current.scrollIntoView({ behavior: 'auto' });
-      })
+      firebase
+        .database()
+        .ref('messages/')
+        .limitToLast(50)
+        .on('value', (resp) => {
+          setMessages([])
+          setMessages(snapshotToArray(resp))
+          // this scroll method moves the whole page... need to find better solution
+          dummy.current.scrollIntoView({ behavior: 'auto' })
+        })
     }
-    fetchData();
+    fetchData()
   }, [])
 
+  return (
+    <>
+      <Main>
+        {messages && messages.map((msg) => <ChatMessage user={user} key={msg.id} message={msg} />)}
 
-  return (<>
-    <Main>
+        <span ref={dummy} />
+      </Main>
+      <Input
+        id="txt"
+        maxlength="240"
+        value={formValue}
+        onChange={(e) => setFormValue(e.target.value)}
+        onKeyUp={handleKeypress}
+        placeholder="type message"
+      />
 
-      {messages && messages.map(msg => <ChatMessage user={user} key={msg.id} message={msg} />)}
-
-      <span ref={dummy} />
-
-    </Main>
-    <Input id='txt' maxlength="240" value={formValue} onChange={(e) => setFormValue(e.target.value)} onKeyUp={handleKeypress} placeholder="type message" />
-
-    <button id='send' type="button" disabled={!formValue} onClick={sendMessage}>🕊️</button>
-
-  </>)
+      <button id="send" type="button" disabled={!formValue} onClick={sendMessage}>
+        🕊️
+      </button>
+    </>
+  )
 }
 
+function ChatMessage({ message, user }) {
+  const { text, uid, createdAt } = message
 
-function ChatMessage({message, user}) {
-  const { text, uid, createdAt } = message;
-
-  const messageClass = uid === user;
+  const messageClass = uid === user
   const timeStamp = new Date(createdAt).toLocaleTimeString()
-  
 
-  return (<>
-    <MessageBox usermessage={messageClass}>
-      {/* <MsgName usermessage={messageClass}>{uid}</MsgName> */}
-      <MsgName usermessage={messageClass}><NameSpan>{uid}</NameSpan> - {timeStamp}</MsgName> 
-      <MsgItem>{text}</MsgItem>
-    </MessageBox>
-  </>)
+  return (
+    <>
+      <MessageBox usermessage={messageClass}>
+        {/* <MsgName usermessage={messageClass}>{uid}</MsgName> */}
+        <MsgName usermessage={messageClass}>
+          <NameSpan>{uid}</NameSpan> - {timeStamp}
+        </MsgName>
+        <MsgItem>{text}</MsgItem>
+      </MessageBox>
+    </>
+  )
 }
 
-
-export default MSGApp;
+export default MSGApp

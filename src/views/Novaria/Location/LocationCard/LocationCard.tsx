@@ -20,7 +20,6 @@ const Body = styled.div`
   margin: 15px;
   width: 300px;
   height: 450px;
-  
 `
 
 const HavenImageCard = styled.div`
@@ -219,7 +218,7 @@ const LocationCard = ({
   shipyard,
   refinery,
   placeX,
-  placeY, 
+  placeY,
   fleetLocation,
   isMining,
   canTravel,
@@ -238,15 +237,16 @@ const LocationCard = ({
 
   const { account } = useWallet()
   const travelCost = useGetFleetTravelCost(account, placeX, placeY) / 10 ** 18
-  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60 
+  const travelCooldown = useGetTravelCooldown(account, placeX, placeY) / 60
   const exploreCost = useGetExploreCost(placeX, placeY, account)
-  const distance = Math.floor(Math.sqrt(Math.abs(placeX - fleetLocation.X)**2 + Math.abs(placeY - fleetLocation.Y)**2)) 
+  const distance = Math.floor(
+    Math.sqrt(Math.abs(placeX - fleetLocation.X) ** 2 + Math.abs(placeY - fleetLocation.Y) ** 2),
+  )
   const atMaxMineral = Number(playerMaxMineral) <= Number(playerMineral)
   const discovererName = useGetNameByAddress(discoverer)
-  
- 
+
   const unexplored = placetype === '0'
-  const isEmpty = placetype === '1' 
+  const isEmpty = placetype === '1'
   const hostile = placetype === '2'
   const star = placetype === '3'
   const planet = placetype === '4'
@@ -258,9 +258,9 @@ const LocationCard = ({
   const travelOnCooldown = currentTravelCooldown > new Date()
   const novaBalance = useGetNovaBalance(account)
 
- 
-  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending || miningCapacity <= 0 
-  const travelIsDisabled = travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle || pending
+  const miningIsDisabled = !currentLocation || atMaxMineral || miningCooldownActive || pending || miningCapacity <= 0
+  const travelIsDisabled =
+    travelOnCooldown || distance > 5 || fleetSize < 25 || novaBalance < travelCost || !notInBattle || pending
   const refiningDisabled = !currentLocation || Number(playerMineral) <= 0 || pending
 
   const { onExplore } = useExplore()
@@ -270,7 +270,6 @@ const LocationCard = ({
   const { onTravel } = useTravel()
   const { onTunnel } = useTunnel()
 
-    
   const sendTunnelTx = async () => {
     setPendingTx(true)
     try {
@@ -379,77 +378,71 @@ const LocationCard = ({
         </Row>
       </PlaceHeader>
       <PlaceBody>
-        {placename === 'Haven' && 
-          <Text>
-            The last planet of Humanity. Your journey starts here.
-          </Text>
-        }
-        {placename === 'Cetrus 22A' && 
-          <Text>
-            Planet with huge chunks of Nova Mineral. A powerful resource.
-          </Text>
-        }
-        {placename === 'Cetrus 22B' && 
-          <Text>
-            Draken technology was found here, and helped us build the legendary ship, &quot;Novaria.&quot;
-          </Text>
-        }
-        
-        {Number(salvage) > 0  &&
-          <Button onClick={sendCollectTx}
-            disabled={miningIsDisabled}>
+        {placename === 'Haven' && <Text>The last planet of Humanity. Your journey starts here.</Text>}
+        {placename === 'Cetrus 22A' && <Text>Planet with huge chunks of Nova Mineral. A powerful resource.</Text>}
+        {placename === 'Cetrus 22B' && (
+          <Text>Draken technology was found here, and helped us build the legendary ship, &quot;Novaria.&quot;</Text>
+        )}
+
+        {Number(salvage) > 0 && (
+          <Button onClick={sendCollectTx} disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'COLLECT'}
-          </Button>}
+          </Button>
+        )}
         {hostile && 'Fleets cannot travel to hostile space'}
-        {Number(mineral) > 0 && 
-          <Button onClick={sendMineTx}
-            disabled={miningIsDisabled}>
+        {Number(mineral) > 0 && (
+          <Button onClick={sendMineTx} disabled={miningIsDisabled}>
             {pending ? 'pending...' : 'MINE'}
-          </Button>}
-        {refinery && 
-          <Button onClick={sendRefineTx}
-            disabled={refiningDisabled}>
+          </Button>
+        )}
+        {refinery && (
+          <Button onClick={sendRefineTx} disabled={refiningDisabled}>
             {pending ? 'pending...' : 'REFINE'}
-          </Button>}
-        {canTravel && !currentLocation && 
-          <Button onClick={sendTravelTx} disabled={travelIsDisabled} >
+          </Button>
+        )}
+        {canTravel && !currentLocation && (
+          <Button onClick={sendTravelTx} disabled={travelIsDisabled}>
             {pending ? 'pending...' : 'TRAVEL'}
           </Button>
-        }
-        {unexplored && distance < 3 && 
-          <Button  onClick={sendExploreTx}>
-            {pending ? 'pending...' : 'EXPLORE'}
-          </Button>}
-        {canTunnel && 
-          <Button onClick={sendTunnelTx}>
-            {pending ? 'pending...' : 'TUNNEL'}
-          </Button>
-          }
-        
-        
-          <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
-            {distance > 5 && !currentLocation && !hostile && <span>Too far to travel</span>}
-            {unexplored && !currentLocation && !hostile && <span>Location must be explored</span>}
-            {unexplored && distance > 2 && <span>Can only explore within 2 AU</span>}
-            {fleetSize < 25 && !currentLocation && !hostile && <span>Your fleet is too small (under 25 fleet size) to travel </span> }
-            {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
-            {!notInBattle && !currentLocation && !hostile && <span>Cannot travel while in battle</span>}
-            {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
-            {atMaxMineral && !hostile && (isMining || salvage > 0) && <span>You are at max mineral capacity</span>}
-            {isMining && Number(mineral) === 0 && <span>Waiting for mines to refill</span>}
-            {miningCooldownActive && (isMining || salvage > 0) && currentLocation && <span>Mining/collecting on cooldown</span>}
-            {distance < 6 && !unexplored && !hostile && <div>
-                <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span><br />
-                <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
-              </div>}
-              <span>Distance: {Math.floor(distance)} AU(s)</span>
-            {unexplored && <span>Explore Cost (NOVA): {(exploreCost/10**18).toFixed(2)}</span>}<br />
-            {wormhole && 'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
-            {canTunnel && <span>Tunnel Cost (NOVA): {travelCost/10}</span>}
-            {shipyard && !haven && <span>Shipyards can be taken over once every 7 days, dependent upon last takeover/discovery time. 
-              A successful takeover allows the owner to set the shipyard name and set/collect the build fee.</span>}
-          </Row>
-        
+        )}
+        {unexplored && distance < 3 && <Button onClick={sendExploreTx}>{pending ? 'pending...' : 'EXPLORE'}</Button>}
+        {canTunnel && <Button onClick={sendTunnelTx}>{pending ? 'pending...' : 'TUNNEL'}</Button>}
+
+        <Row style={{ marginTop: 5, color: '#289794', fontSize: 11 }}>
+          {distance > 5 && !currentLocation && !hostile && <span>Too far to travel</span>}
+          {unexplored && !currentLocation && !hostile && <span>Location must be explored</span>}
+          {unexplored && distance > 2 && <span>Can only explore within 2 AU</span>}
+          {fleetSize < 25 && !currentLocation && !hostile && (
+            <span>Your fleet is too small (under 25 fleet size) to travel </span>
+          )}
+          {travelOnCooldown && !currentLocation && !hostile && <span>Your jump drive is on cooldown</span>}
+          {!notInBattle && !currentLocation && !hostile && <span>Cannot travel while in battle</span>}
+          {novaBalance < travelCost && !currentLocation && !hostile && <span>Not enough NOVA to travel</span>}
+          {atMaxMineral && !hostile && (isMining || salvage > 0) && <span>You are at max mineral capacity</span>}
+          {isMining && Number(mineral) === 0 && <span>Waiting for mines to refill</span>}
+          {miningCooldownActive && (isMining || salvage > 0) && currentLocation && (
+            <span>Mining/collecting on cooldown</span>
+          )}
+          {distance < 6 && !unexplored && !hostile && (
+            <div>
+              <span>Travel Cost (NOVA): {!currentLocation ? travelCost : ''}</span>
+              <br />
+              <span>Travel Cooldown: {!currentLocation ? <span>{travelCooldown} minutes</span> : ''}</span>
+            </div>
+          )}
+          <span>Distance: {Math.floor(distance)} AU(s)</span>
+          {unexplored && <span>Explore Cost (NOVA): {(exploreCost / 10 ** 18).toFixed(2)}</span>}
+          <br />
+          {wormhole &&
+            'Wormholes allow players to tunnel (travel) from one wormhole to any other wormhole at 1/10th the cost and no cooldown'}
+          {canTunnel && <span>Tunnel Cost (NOVA): {travelCost / 10}</span>}
+          {shipyard && !haven && (
+            <span>
+              Shipyards can be taken over once every 7 days, dependent upon last takeover/discovery time. A successful
+              takeover allows the owner to set the shipyard name and set/collect the build fee.
+            </span>
+          )}
+        </Row>
       </PlaceBody>
     </Body>
   )

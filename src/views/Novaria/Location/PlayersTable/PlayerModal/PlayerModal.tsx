@@ -121,8 +121,8 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ account, refinery, player, cu
         </Child>
         <Child>SIZE: {fleetSize}</Child>
         <Child>ATTACK: {fleetPower}</Child>
-        <Child>MINERAL: {(Number(fleetMineral)/10**18).toFixed(3)}</Child>
-        <Child>MAX MINERAL: {(Number(fleetMaxMineral)/10**18).toFixed(2)}</Child>
+        <Child>MINERAL: {(Number(fleetMineral) / 10 ** 18).toFixed(3)}</Child>
+        <Child>MAX MINERAL: {(Number(fleetMaxMineral) / 10 ** 18).toFixed(2)}</Child>
         <Child>
           BATTLE STATUS: {playerBattleStatus === '0' && 'Not in Battle'}
           {playerBattleStatus === '1' && 'Attacking'}

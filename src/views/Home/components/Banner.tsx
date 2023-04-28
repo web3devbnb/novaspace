@@ -1,5 +1,5 @@
-import React from 'react';
-import Carousel from 'nuka-carousel';
+import React from 'react'
+import Carousel from 'nuka-carousel'
 import styled from 'styled-components'
 import Banner1 from './Banner1'
 import Banner2 from './Banner2'
@@ -28,23 +28,22 @@ const Img = styled.img`
 `
 
 const Banner = () => {
-    return (
-      <Wrapper>
-        <Carousel
+  return (
+    <Wrapper>
+      <Carousel
         // eslint-disable-next-line react/jsx-boolean-value
         autoplay={true}
-        autoplayInterval={8000} 
+        autoplayInterval={8000}
         // eslint-disable-next-line react/jsx-boolean-value
         wrapAround={true}
         // eslint-disable-next-line react/jsx-boolean-value
         withoutControls={true}
-        >
-          <Banner1 />
-          <Banner2 />
-         
-        </Carousel>
-      </Wrapper>
-    )
-  }
+      >
+        <Banner1 />
+        <Banner2 />
+      </Carousel>
+    </Wrapper>
+  )
+}
 
 export default Banner

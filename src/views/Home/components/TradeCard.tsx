@@ -14,27 +14,26 @@ const Grid = styled.div`
   border-radius: 30px;
   background-image: url('/images/home/trade_1.png');
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   position: relative;
-
 `
 
 const TextRow1 = styled.div`
-grid-column-start: 1;
-grid-column-end: 6;
-align-items: flex-end;
-display: flex;
-margin-bottom: 60px;
-margin-left: 10px;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  align-items: flex-end;
+  display: flex;
+  margin-bottom: 60px;
+  margin-left: 10px;
 `
 const TextRow2 = styled.div`
-// wrap: no-wrap;
-// align-items: center;
-grid-column-start: 1;
-grid-column-end: 6;
-position: absolute;
-top: 51%;
-left: 6%;
+  // wrap: no-wrap;
+  // align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  position: absolute;
+  top: 51%;
+  left: 6%;
 `
 
 const ColRight = styled.div`
@@ -63,24 +62,27 @@ const SubHeading = styled(Text)`
   font-weight: bold;
 `
 
-
 const TradesCard = () => {
-
   return (
     <Grid>
-      <TextRow1><Heading glowing>TRADE $NOVA</Heading></TextRow1>
-      <ColRight /> 
-      
+      <TextRow1>
+        <Heading glowing>TRADE $NOVA</Heading>
+      </TextRow1>
+      <ColRight />
+
       <TextRow2>
-      <a href="https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F" target="_blank" rel="noreferrer noopener">
-        <img src={dexlogo} alt="nova dex" style={{paddingTop:"15px"}}/>
-      </a>
-      <a href="https://www.cointiger.com/en-us/#/trade_pro?coin=nova_usdt" target="_blank" rel="noreferrer noopener">
-        <img src={cointiger} alt="coin tiger" style={{paddingBottom:"18px"}} />
-      </a>
+        <a
+          href="https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img src={dexlogo} alt="nova dex" style={{ paddingTop: '15px' }} />
+        </a>
+        <a href="https://www.cointiger.com/en-us/#/trade_pro?coin=nova_usdt" target="_blank" rel="noreferrer noopener">
+          <img src={cointiger} alt="coin tiger" style={{ paddingBottom: '18px' }} />
+        </a>
       </TextRow2>
     </Grid>
-
   )
 }
 

@@ -7,7 +7,7 @@ const StyledCard = styled(Card)`
 `
 
 const StyledCardHeader = styled(CardHeader)`
-  @media (min-width: 360px) and (max-width: 576px) { 
+  @media (min-width: 360px) and (max-width: 576px) {
     padding: 12px;
   }
 `

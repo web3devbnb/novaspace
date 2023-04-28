@@ -1,1 +1,1 @@
-export {default} from './Novaria'
+export { default } from './Novaria'

@@ -1,5 +1,5 @@
-import React from "react";
-import { Flex} from '@pancakeswap-libs/uikit'
+import React from 'react'
+import { Flex } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
 import logo1 from '../assets/launchdefined.png'
 import logo2 from '../assets/novapadlogo.png'
@@ -28,57 +28,56 @@ const Row = styled(Flex)`
 `
 
 const Img1 = styled.img`
-    display: flex;
-    width: 50%;
-    height: auto;
-    ${({ theme }) => theme.mediaQueries.sm} {
-        width: 30%;
-        margin-top: 40px;
-       }
-       ${({ theme }) => theme.mediaQueries.md} {
-           width: 25%;
-           padding-bottom: 20px;
-           margin-left: -50px;
-          }
-          ${({ theme }) => theme.mediaQueries.lg} {
-            width: 20%;
-            margin-left: -80px;
-              }
-          ${({ theme }) => theme.mediaQueries.xl} {
-            width: 25%;
-            margin-left: -20%;
-             }
-
+  display: flex;
+  width: 50%;
+  height: auto;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 30%;
+    margin-top: 40px;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 25%;
+    padding-bottom: 20px;
+    margin-left: -50px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    width: 20%;
+    margin-left: -80px;
+  }
+  ${({ theme }) => theme.mediaQueries.xl} {
+    width: 25%;
+    margin-left: -20%;
+  }
 `
 const Img2 = styled.img`
-    display: flex;
-    width: 350px;
-    height: auto;
-    margin-bottom: 50px;
-    ${({ theme }) => theme.mediaQueries.sm} {
-        width: 90%;
-        margin-top: -10px;
-       }
-       ${({ theme }) => theme.mediaQueries.md} {
-            width: 60%;
-            margin-top: auto;
-            padding-top: 20px;
-            margin-bottom: auto;
-            margin-left: -20%;
-          }
-          ${({ theme }) => theme.mediaQueries.lg} {
-            width: 50%;
-            padding-top: 0px;
-            margin-right: 40px;
-            margin-bottom: auto;
-              }
-        
-          ${({ theme }) => theme.mediaQueries.xl} {
-            width: auto;
-            height: 290px;
-            margin-top: auto;
-            padding-top: 20px;
-             }
+  display: flex;
+  width: 350px;
+  height: auto;
+  margin-bottom: 50px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 90%;
+    margin-top: -10px;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 60%;
+    margin-top: auto;
+    padding-top: 20px;
+    margin-bottom: auto;
+    margin-left: -20%;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    width: 50%;
+    padding-top: 0px;
+    margin-right: 40px;
+    margin-bottom: auto;
+  }
+
+  ${({ theme }) => theme.mediaQueries.xl} {
+    width: auto;
+    height: 290px;
+    margin-top: auto;
+    padding-top: 20px;
+  }
 `
 const Img3 = styled.img`
     display: flex;
@@ -107,12 +106,12 @@ const Img3 = styled.img`
 `
 
 const Banner1 = () => {
-    return (
-        <Row>
-            <Img1 src={logo1} alt="launchpad redefined" />
-            <Img2 src={logo2} alt="launchpad redefined" />
-            <Img3 src={rocket} alt="launchpad rocket" />
-            {/* <Col1>
+  return (
+    <Row>
+      <Img1 src={logo1} alt="launchpad redefined" />
+      <Img2 src={logo2} alt="launchpad redefined" />
+      <Img3 src={rocket} alt="launchpad rocket" />
+      {/* <Col1>
                 <img src={logo1} alt="launchpad redefined" />
             </Col1>
             
@@ -122,8 +121,8 @@ const Banner1 = () => {
             <Col3>
                 <img src={rocket} alt="launchpad rocket" />
             </Col3> */}
-        </Row>
-    )
+    </Row>
+  )
 }
 
 export default Banner1

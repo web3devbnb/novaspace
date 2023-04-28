@@ -1,1 +1,1 @@
-export {default} from './LocationCard'
+export { default } from './LocationCard'

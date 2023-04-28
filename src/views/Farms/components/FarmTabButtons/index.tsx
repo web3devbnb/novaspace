@@ -54,7 +54,6 @@ const ToggleWrapper = styled.div`
 `
 
 const CheckWrap = styled.div`
-border: 1px solid ${darkColors.backgroundDisabled};
-border-radius: 10px;
-
+  border: 1px solid ${darkColors.backgroundDisabled};
+  border-radius: 10px;
 `

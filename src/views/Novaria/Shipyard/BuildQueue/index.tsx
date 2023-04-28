@@ -1,1 +1,1 @@
-export {default} from './BuildQueue'
+export { default } from './BuildQueue'

@@ -1,10 +1,9 @@
-import React, {useCallback, useState} from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { BaseLayout, Flex, Text, Card } from '@pancakeswap-libs/uikit'
 import Page from 'components/layout/Page'
 import Header from 'components/Header'
-import Divider from "./assets/divider.png"
-
+import Divider from './assets/divider.png'
 
 const Body = styled(Flex)`
   flex-wrap: wrap;
@@ -21,7 +20,6 @@ const Col = styled(Flex)`
   margin: 0 5px;
   max-width: 800px;
 
-
   ${({ theme }) => theme.mediaQueries.sm} {
     margin: 0 10px;
   }
@@ -29,7 +27,6 @@ const Col = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 47%;
   }
- 
 `
 
 const Main = styled(Flex)`
@@ -42,7 +39,6 @@ const Main = styled(Flex)`
 
   // border-radius: 30px;
   // border: 2px solid ${({ theme }) => theme.colors.primary};
-
 `
 const Announcement = styled(Text)`
   text-align: center;
@@ -56,19 +52,11 @@ const Img = styled.img`
 `
 
 const MoneyPot: React.FC = () => {
-  
-
-  
   return (
-    <Page 
-      
-    >
+    <Page>
       <Header>MoneyPot</Header>
-      
-      <Body>
-     
-        
-      </Body>
+
+      <Body></Body>
     </Page>
   )
 }

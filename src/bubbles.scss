@@ -61,7 +61,11 @@
         }
 
         to {
-          -webkit-transform: translate3d(#{random(100) + vw}, #{$startPositionY - random($startPositionY) - 10 + vh}, 0);
+          -webkit-transform: translate3d(
+            #{random(100) + vw},
+            #{$startPositionY - random($startPositionY) - 10 + vh},
+            0
+          );
         }
       }
       .circle {

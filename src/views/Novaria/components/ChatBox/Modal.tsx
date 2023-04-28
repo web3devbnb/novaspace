@@ -11,7 +11,6 @@ const StyledIconButton = styled(IconButton)`
 const StyledModal = styled.div`
   width: 100%;
   z-index: ${({ theme }) => theme.zIndices.modal};
-  
 `
 
 const ModalHeader = styled.div`

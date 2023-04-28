@@ -15,18 +15,12 @@ import Banner2 from './components/Banner2'
 import NovariaCard from './components/NovariaCard'
 import NovariaTeaser from './components/NovariaTeaser'
 
-
-
 const Dashboard: React.FC = () => {
-
-  
-
   return (
-    <Page >
-      <SubHero /> 
+    <Page>
+      <SubHero />
       <HowToPlay />
       <NovaEcosystem />
-      
     </Page>
   )
 }

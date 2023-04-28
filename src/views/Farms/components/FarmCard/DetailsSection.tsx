@@ -57,8 +57,8 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
         <StyledLinkExternal
           href={
             isTokenOnly
-              ? `https://swap.shibanova.io/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
-              : `https://swap.shibanova.io/#/add/${liquidityUrlPathParts}`
+              ? `https://swap.novadex.finance/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              : `https://swap.novadex.finance/#/add/${liquidityUrlPathParts}`
           }
         >
           {lpLabel}

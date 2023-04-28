@@ -163,7 +163,7 @@ const BuildQueue = ({ fleetLocation }) => {
       setPendingTx(false)
     }
   }
-  
+
   const handleClaimMax = async (claimId, amount) => {
     setPendingTx(true)
     console.log('claimId, claimAmount', typeof claimId, claimId, typeof claimAmount, claimAmount)

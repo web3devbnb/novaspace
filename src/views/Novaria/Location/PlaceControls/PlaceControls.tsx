@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useChangeName } from 'hooks/useNovaria'
 
@@ -14,17 +14,17 @@ const Item = styled.div`
   margin: 10px;
 `
 
-const Button = styled.button` 
-    cursor:pointer;
-    border: 1px solid #5affff;
-    background: transparent;
-    color: #5affff;
-    margin: 5px;
-    margin-top: 10px;
-    &:hover {
-        background-color: #5affff;
-        color: black
-    }
+const Button = styled.button`
+  cursor: pointer;
+  border: 1px solid #5affff;
+  background: transparent;
+  color: #5affff;
+  margin: 5px;
+  margin-top: 10px;
+  &:hover {
+    background-color: #5affff;
+    color: black;
+  }
 `
 
 const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) => {
@@ -34,9 +34,8 @@ const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) =
   // need to set so only the discoverer can set the name and it can only be set once
   // const placeOwner = useGetPlaceInfo(placeX, placeY)
 
-
-  const {onChange} = useChangeName()
-  const sendPlanetNameChange = async () =>{
+  const { onChange } = useChangeName()
+  const sendPlanetNameChange = async () => {
     setPendingTx(true)
     try {
       await onChange(placeX, placeY, planetName)
@@ -48,22 +47,30 @@ const PlaceControls = ({ placeType, placeX, placeY, placeName, isDiscoverer }) =
   }
 
   if (placeName !== '') {
-    return (null)
+    return null
   }
 
   if (!isDiscoverer) {
-    return (null)
+    return null
   }
 
-  if(placeType !== 3 && placeType !== 4) {
-    return (null)
+  if (placeType !== 3 && placeType !== 4) {
+    return null
   }
 
   return (
-    <Body style={{marginTop:10}}>
+    <Body style={{ marginTop: 10 }}>
       <Item>
-        <input type="text" style={{maxWidth: 180}} required maxLength={12} onChange={(e) => setPlanetName(e.target.value)} /><br />
-        <Button onClick={sendPlanetNameChange} >{!pending ? 'Set Location Name' : 'pending...'}</Button><br />
+        <input
+          type="text"
+          style={{ maxWidth: 180 }}
+          required
+          maxLength={12}
+          onChange={(e) => setPlanetName(e.target.value)}
+        />
+        <br />
+        <Button onClick={sendPlanetNameChange}>{!pending ? 'Set Location Name' : 'pending...'}</Button>
+        <br />
         (The name can only be set once)
       </Item>
     </Body>

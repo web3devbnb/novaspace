@@ -32,20 +32,17 @@ const Body = styled.div`
 
 const VideoModal = () => {
   const [isOpen, setOpen] = useState(false)
-    return (
-      <Body>
-        <div>
-          <ModalVideo
-            channel="youtube"
-            isOpen={isOpen}
-            videoId="VRH2LvKXKEQ"
-            onClose={() => setOpen(false)}
-          />
-          {/* <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button> */}
-          <Button type="button" onClick={()=> setOpen(true)} ><Img src={PlayLogo} alt="play" /></Button>
-        </div>
-      </Body>
-    )
+  return (
+    <Body>
+      <div>
+        <ModalVideo channel="youtube" isOpen={isOpen} videoId="VRH2LvKXKEQ" onClose={() => setOpen(false)} />
+        {/* <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button> */}
+        <Button type="button" onClick={() => setOpen(true)}>
+          <Img src={PlayLogo} alt="play" />
+        </Button>
+      </div>
+    </Body>
+  )
 }
 
 export default VideoModal

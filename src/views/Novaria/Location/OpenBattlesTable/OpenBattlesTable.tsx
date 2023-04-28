@@ -7,9 +7,9 @@ const Body = styled.div`
   display: relative;
 `
 
-const HeaderRow = styled.div<{resolved:boolean}>`
+const HeaderRow = styled.div<{ resolved: boolean }>`
   display: grid;
-  grid-template-columns: ${(props) => props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'};
+  grid-template-columns: ${(props) => (props.resolved ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr')};
   color: #289794;
   font-size: 12px;
 `
@@ -38,14 +38,19 @@ const OpenBattlesTable = ({ battles, status, currentLocation, resolved, account 
           <div>BATTLE ID</div>
           <div>ATK ATTACK</div>
           <div>DEF ATTACK</div>
-          {!resolved &&
-            <div>RESOLVE TIME</div>
-          }
+          {!resolved && <div>RESOLVE TIME</div>}
         </HeaderRow>
       </div>
       <TableContent>
         {battles.map((battle) => (
-          <OpenBattlesTableRow key={battle} account={account} battle={battle} status={status} currentLocation={currentLocation} resolved={resolved} />
+          <OpenBattlesTableRow
+            key={battle}
+            account={account}
+            battle={battle}
+            status={status}
+            currentLocation={currentLocation}
+            resolved={resolved}
+          />
         ))}
       </TableContent>
     </Body>

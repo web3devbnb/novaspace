@@ -12,7 +12,7 @@ import viperSwarmCard from '../assets/viperSwarm.png'
 interface PlayerModalProps {
   shipclass: string
   onDismiss?: () => void
-} 
+}
 
 const Img = styled.img`
   margin-top: 20px;

@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components'
 // eslint-disable-next-line import/no-unresolved
 import { ShibanovaTheme } from '@pancakeswap-libs/uikit'
 
-
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
   export interface DefaultTheme extends ShibanovaTheme {}
@@ -15,7 +14,12 @@ const novariaSpace = "url('/images/novaria/mapBG.jpg')"
 const novariaSpaceMobile = "url('/images/novaria/starsbg_portrait.png')"
 const novariaShipyard = "url('/images/novaria/shipyardBG.jpg')"
 
-const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boolean, isShipyard: boolean, isStandard: boolean}>`
+const GlobalStyle = createGlobalStyle<{
+  isNovaria: boolean
+  isNovariaSpace: boolean
+  isShipyard: boolean
+  isStandard: boolean
+}>`
 // @font-face {
 //   font-family: 'BigNoodle';
 //   src:  url('./fonts/bignoodletitling.woff') format('woff'), url('./fonts/bignoodletitling.ttf') format('truetype');
@@ -26,12 +30,13 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
     // font-family: 'BigNoodle';
   }
   body {
-     background: ${({isNovaria}) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
-     background: ${({isStandard}) => (isStandard ? ({ theme }) => theme.colors.background : '')};
-     background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpaceMobile : '')};
-     background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
+     background: ${({ isNovaria }) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
+     background: ${({ isStandard }) => (isStandard ? ({ theme }) => theme.colors.background : '')};
+     background-image: ${({ isNovariaSpace }) => (isNovariaSpace ? novariaSpaceMobile : '')};
+     background-image: ${({ isShipyard }) => (isShipyard ? novariaShipyard : '')};
 
-     background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
+     background-size: ${({ isNovaria, isShipyard, isNovariaSpace }) =>
+       isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto'};
      background-repeat: repeat-y;
      background-position: center;
 
@@ -43,13 +48,14 @@ const GlobalStyle = createGlobalStyle<{isNovaria: boolean, isNovariaSpace: boole
     }
 
     ${({ theme }) => theme.mediaQueries.md} {
-      background: ${({isNovaria}) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
-      background: ${({isStandard}) => (isStandard ? ({ theme }) => theme.colors.background : '')};
-      background-image: ${({isNovariaSpace}) => (isNovariaSpace ? novariaSpace : '')};
-      background-image: ${({isShipyard}) => (isShipyard ? novariaShipyard : '')};
+      background: ${({ isNovaria }) => (isNovaria ? ({ theme }) => theme.colors.background : '')};
+      background: ${({ isStandard }) => (isStandard ? ({ theme }) => theme.colors.background : '')};
+      background-image: ${({ isNovariaSpace }) => (isNovariaSpace ? novariaSpace : '')};
+      background-image: ${({ isShipyard }) => (isShipyard ? novariaShipyard : '')};
       
-      background-size: ${({isNovaria, isShipyard, isNovariaSpace}) => (isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto')};
-      background-repeat: ${({isNovaria}) => (isNovaria ? 'none' : 'repeat-y')};
+      background-size: ${({ isNovaria, isShipyard, isNovariaSpace }) =>
+        isNovaria || isShipyard || isNovariaSpace ? 'cover' : '100% auto'};
+      background-repeat: ${({ isNovaria }) => (isNovaria ? 'none' : 'repeat-y')};
       background-position: center;
     }
   }

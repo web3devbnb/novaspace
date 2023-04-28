@@ -27,7 +27,7 @@ import {
 } from 'hooks/useNovaria'
 import { ConnectedAccountContext } from 'App'
 import { Text } from '@pancakeswap-libs/uikit'
-import {io} from 'socket.io-client'
+import { io } from 'socket.io-client'
 import GameHeader from '../components/GameHeader'
 import GameMenu from '../components/GameMenu'
 import ChatButton from '../components/ChatBox/ChatButton'
@@ -38,7 +38,7 @@ import YourFleetStats from './YourFleetStats'
 import BattleStatus from './BattleStatus'
 import PlaceControls from './PlaceControls'
 import ShipyardTakeover from './ShipyardTakeover'
-import BodyWrapper from '../components/BodyWrapper' 
+import BodyWrapper from '../components/BodyWrapper'
 import upArrow from '../assets/upArrow.png'
 import downArrow from '../assets/downArrow.png'
 import leftArrow from '../assets/leftArrow.png'
@@ -47,7 +47,7 @@ import homeIcon from '../assets/homeicon.png'
 import UpdateBanner from '../components/Banner'
 
 const socket = io('https://radiant-taiga-26464.herokuapp.com/', {
-    autoConnect: false
+  autoConnect: false,
 })
 
 const Page = styled.div`
@@ -90,7 +90,7 @@ const Content = styled.div`
   margin-right: auto;
 `
 
-const OpenBattlesCard = styled.div<{refinery: boolean}>`
+const OpenBattlesCard = styled.div<{ refinery: boolean }>`
   background-image: url('/images/novaria/locationTableBorder.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -100,27 +100,27 @@ const OpenBattlesCard = styled.div<{refinery: boolean}>`
   min-height: 200px;
   min-width: 350px
   max-width: 450px;
-  display: ${props => props.refinery && 'none'}; 
+  display: ${(props) => props.refinery && 'none'}; 
   
   ${({ theme }) => theme.mediaQueries.md} {
     min-width: 450px;
   }
 `
 
-const PlayersCard = styled.div<{refinery: boolean}>`
+const PlayersCard = styled.div<{ refinery: boolean }>`
   background-image: url('/images/novaria/locationTableBorder.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 20px 10px;
   padding: 10px;
-  max-height: ${props => props.refinery ? '100%' :  '45%'};
+  max-height: ${(props) => (props.refinery ? '100%' : '45%')};
   min-height: 200px;
   min-width: 350px
   max-width: 450px;
 `
 
 const RightCol = styled.div`
-  flex:1;
+  flex: 1;
 `
 
 const FleetMenu = styled.div`
@@ -193,16 +193,12 @@ const Location: React.FC = () => {
   const loadedCoords =
     typeof location.state === 'undefined' ? { x: fleetLocation.X, y: fleetLocation.Y } : location.state[0]
 
-    
-    useEffect (() => {
-        
-      socket.connect()
-      socket.on('connect', () => {
-          console.log(`socket connected: ${socket.connected}`)
-      })
+  useEffect(() => {
+    socket.connect()
+    socket.on('connect', () => {
+      console.log(`socket connected: ${socket.connected}`)
+    })
   }, [])
-
-
 
   const [placeX, setX] = useState(null)
   const [placeY, setY] = useState(null)
@@ -228,7 +224,7 @@ const Location: React.FC = () => {
   const fleetsAtLocation = useGetFleetsAtLocation(placeX, placeY)
 
   const fleetSize = useGetFleetSize(account)
-  const refinedMineral = (useGetFleetMineralRefined(account)/10**18).toFixed(2)
+  const refinedMineral = (useGetFleetMineralRefined(account) / 10 ** 18).toFixed(2)
   const totalRefined = Number(refinedMineral).toFixed(0)
   const maxFleetSize = useGetMaxFleetSize(account)
   const fleetPower = useGetAttackPower(account)
@@ -254,18 +250,18 @@ const Location: React.FC = () => {
   const playerInBattle = useGetPlayerInBattle(account)
 
   useEffect(() => {
-      const userData = {
-          name: playerName,
-          size: fleetSize,
-          attack: fleetPower,
-          experience: playerEXP,
-          totalMineral: totalRefined,
-          location: `(${fleetLocation.X},${fleetLocation.Y})`
-      }
-      if (playerName !== '') {
-          socket.emit('send_rankings', userData)
-          console.log(`sent user data: ${userData}`)
-      }
+    const userData = {
+      name: playerName,
+      size: fleetSize,
+      attack: fleetPower,
+      experience: playerEXP,
+      totalMineral: totalRefined,
+      location: `(${fleetLocation.X},${fleetLocation.Y})`,
+    }
+    if (playerName !== '') {
+      socket.emit('send_rankings', userData)
+      console.log(`sent user data: ${userData}`)
+    }
   }, [playerName, playerEXP, fleetPower, fleetSize, totalRefined, fleetLocation.X, fleetLocation.Y])
 
   return (
@@ -300,13 +296,13 @@ const Location: React.FC = () => {
                   refinery={placeInfo.refinery}
                   isMining={placeInfo.isMining}
                   fleetLocation={fleetLocation}
-                  canTravel={placeInfo.canTravel }
+                  canTravel={placeInfo.canTravel}
                   currentTravelCooldown={currentTravelCooldown}
                   currentLocation={currentLocation}
                   Luminosity={placeInfo.luminosity}
                   atWormhole={atWormhole}
                   miningCooldownActive={currentMiningCooldown > new Date()}
-                  notInBattle={(playerBattleInfo.battleStatus).toString() === '0' && playerInBattle === false}
+                  notInBattle={playerBattleInfo.battleStatus.toString() === '0' && playerInBattle === false}
                 />
               )}
             </LeftCol>
@@ -335,8 +331,7 @@ const Location: React.FC = () => {
                 </MoveControls>
               </InputControl>
 
-              <OpenBattlesCard
-                  refinery={placeInfo.refinery}>
+              <OpenBattlesCard refinery={placeInfo.refinery}>
                 <Header>OPEN BATTLES</Header>
                 <OpenBattlesTable
                   battles={battlesAtLocation}
@@ -346,11 +341,10 @@ const Location: React.FC = () => {
                   account={account}
                 />
               </OpenBattlesCard>
-              <PlayersCard
-                  refinery={placeInfo.refinery}>
+              <PlayersCard refinery={placeInfo.refinery}>
                 <Header>PLAYERS</Header>
                 <PlayersTable
-                  account = {account}
+                  account={account}
                   players={fleetsAtLocation}
                   currentLocation={currentLocation}
                   refinery={placeInfo.refinery}
@@ -361,7 +355,7 @@ const Location: React.FC = () => {
               <FleetMenu>
                 <YourFleetCard>
                   <Header>MY FLEET</Header>
-                  <YourFleetStats 
+                  <YourFleetStats
                     account={account}
                     playerBattleInfo={playerBattleInfo}
                     fleetSize={fleetSize}
@@ -378,13 +372,13 @@ const Location: React.FC = () => {
                 </YourFleetCard>
                 <BattleProgressCard>
                   <Header>BATTLE PROGRESS</Header>
-                  {playerExists &&
+                  {playerExists && (
                     <BattleStatus
                       playerBattleInfo={playerBattleInfo}
                       playerBattleStatus={playerBattleInfo.battleStatus}
                       currentLocation={fleetLocation}
                     />
-                  }
+                  )}
                 </BattleProgressCard>
                 {shipyards
                   .filter((shipyard) => shipyard.coordX === placeX.toString() && shipyard.coordY === placeY.toString())

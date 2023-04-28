@@ -1,1 +1,1 @@
-export {default} from './TakeOverModal'
+export { default } from './TakeOverModal'

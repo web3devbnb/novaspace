@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { fetchFarmUserDataAsync, updateUserStakedBalance, updateUserBalance } from 'state/actions'
 import { stake, sousStake, sousStakeBnb } from 'utils/callHelpers'
 import { useMasterchef, useSousChef } from './useContract'
- 
+
 const useStake = (pid: number) => {
   const dispatch = useDispatch()
   const { account } = useWallet()

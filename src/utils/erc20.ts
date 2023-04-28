@@ -37,5 +37,3 @@ export const getTokenBalance = async (
     return '0'
   }
 }
-
-

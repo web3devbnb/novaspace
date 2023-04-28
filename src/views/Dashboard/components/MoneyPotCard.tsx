@@ -7,7 +7,7 @@ import useTokenBalance, {
   useMoneyPotBNBReward,
   useMoneyPotBUSDReward,
   useDistributedMoneyPotBNB,
-  useDistributedMoneyPotBUSD, 
+  useDistributedMoneyPotBUSD,
   useNextMoneyPot,
   useSNovaTotalSupply,
 } from 'hooks/useTokenBalance'
@@ -118,19 +118,19 @@ const MoneyPotCard = () => {
   return (
     <StatsCard title="Money Pot">
       <GridRow>
-          <CardImage src="/images/home/moneyPot.png" alt="snova logo" width={80} height={80} />
+        <CardImage src="/images/home/moneyPot.png" alt="snova logo" width={80} height={80} />
 
-          <Col>
-            <Row>
-              <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
-            </Row>
-            <Text glowing bold style={{ padding: '0px 0px 3px 0' }}>
-              <span style={{color:'#5affff'}} >Daily ROI</span> {dailyROI.toFixed(2)}%
-            </Text>
-            <Text glowing bold style={{ padding: '0 0px 3px 0' }}>
-              <span style={{color:'#5affff'}} >Annual ROI</span> {yearlyROI.toFixed(2)}%
-            </Text>
-          </Col>
+        <Col>
+          <Row>
+            <CardValue fontSize="34px" value={totalvalue || 0} prefix="$" decimals={2} />
+          </Row>
+          <Text glowing bold style={{ padding: '0px 0px 3px 0' }}>
+            <span style={{ color: '#5affff' }}>Daily ROI</span> {dailyROI.toFixed(2)}%
+          </Text>
+          <Text glowing bold style={{ padding: '0 0px 3px 0' }}>
+            <span style={{ color: '#5affff' }}>Annual ROI</span> {yearlyROI.toFixed(2)}%
+          </Text>
+        </Col>
       </GridRow>
       <Row style={{ paddingTop: '0px' }}>
         {account ? (
@@ -151,39 +151,37 @@ const MoneyPotCard = () => {
         expanded={showExpandableSection}
       />
       <ExpandingWrapper expanded={showExpandableSection}>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <div style={{ padding: '5px 20px', display:'flex' }}>
-          <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={60} height={60} />
-          <div style={{marginLeft:5}}>
-            <Text bold fontSize="20px">
-              {TranslateString(999, 'WBNB ')}
-            </Text>
-            <CardValue fontSize="18px" value={bnbUserRew || 0} decimals={4} />
+        <Row style={{ justifyContent: 'center' }}>
+          <div style={{ padding: '5px 20px', display: 'flex' }}>
+            <CardImage src="/images/farms/bnb.png" alt="bnb logo" width={60} height={60} />
+            <div style={{ marginLeft: 5 }}>
+              <Text bold fontSize="20px">
+                {TranslateString(999, 'WBNB ')}
+              </Text>
+              <CardValue fontSize="18px" value={bnbUserRew || 0} decimals={4} />
+            </div>
           </div>
-        </div>
-        <div style={{ padding: '0 20px', display:'flex' }}>
-          <CardImage src="/images/farms/busd.png" alt="busd logo" width={60} height={60} />
-          <div style={{marginLeft:5}}>
-            <Text bold fontSize="20px">
-              {TranslateString(999, ' BUSD ')}
-            </Text>
-            <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
+          <div style={{ padding: '0 20px', display: 'flex' }}>
+            <CardImage src="/images/farms/busd.png" alt="busd logo" width={60} height={60} />
+            <div style={{ marginLeft: 5 }}>
+              <Text bold fontSize="20px">
+                {TranslateString(999, ' BUSD ')}
+              </Text>
+              <CardValue fontSize="18px" value={busdUserRew || 0} decimals={4} />
+            </div>
           </div>
-        </div>
-      </Row>
-      <div>
-        <Stats stats={stats} />
-        <Row style={{ marginTop:-10, justifyContent: 'center', padding: '0px 0 3px 0' }}>
-          <NextMoneyPotCard>
-            Next Moneypot starts rewarding at block{' '}
-            <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
-              #{nextMoneyPot?.toNumber()}
-            </a>
-          </NextMoneyPotCard>
         </Row>
-      </div>
-      
+        <div>
+          <Stats stats={stats} />
+          <Row style={{ marginTop: -10, justifyContent: 'center', padding: '0px 0 3px 0' }}>
+            <NextMoneyPotCard>
+              Next Moneypot starts rewarding at block{' '}
+              <a target="_blank" rel="noreferrer" href={`https://bscscan.com/block/${nextMoneyPot?.toNumber()}`}>
+                #{nextMoneyPot?.toNumber()}
+              </a>
+            </NextMoneyPotCard>
+          </Row>
+        </div>
       </ExpandingWrapper>
     </StatsCard>
   )

@@ -6,7 +6,13 @@ import mapABI from 'config/abi/Map.json'
 import treasuryABI from 'config/abi/Treasury.json'
 import ReferralsABI from 'config/abi/Referrals.json'
 import { getContract } from 'utils/web3'
-import { getNovaAddress, getFleetAddress, getMapAddress, getTreasuryAddress, getReferralsAddress } from 'utils/addressHelpers'
+import {
+  getNovaAddress,
+  getFleetAddress,
+  getMapAddress,
+  getTreasuryAddress,
+  getReferralsAddress,
+} from 'utils/addressHelpers'
 import {
   buildShips,
   claimShips,
@@ -378,7 +384,6 @@ export const useGetBattle = (Id: number) => {
 export const useGetPlayerBattle = (player) => {
   const { fastRefresh } = useRefresh()
   const [PlayerBattle, setPlayerBattle] = useState({ battleStatus: 0, battleId: null })
-  
 
   useEffect(() => {
     async function fetch() {
@@ -525,12 +530,10 @@ export const useSetRecall = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleSetRecall = useCallback(
-    async () => {
-      const txHash = await setRecall(useMapContract, account)
-      console.info(txHash)
-    }, [account, useMapContract]
-  )
+  const handleSetRecall = useCallback(async () => {
+    const txHash = await setRecall(useMapContract, account)
+    console.info(txHash)
+  }, [account, useMapContract])
   return { onSetRecall: handleSetRecall }
 }
 
@@ -627,10 +630,13 @@ export const useRecall = () => {
   const { account } = useWallet()
   const useMapContract = useMap()
 
-  const handleRecall = useCallback(async (haven: boolean) => {
-    const txHash = await recall(useMapContract, haven, account)
-    console.info(txHash)
-  }, [account, useMapContract])
+  const handleRecall = useCallback(
+    async (haven: boolean) => {
+      const txHash = await recall(useMapContract, haven, account)
+      console.info(txHash)
+    },
+    [account, useMapContract],
+  )
   return { onRecall: handleRecall }
 }
 
@@ -638,14 +644,15 @@ export const useRecall = () => {
 
 export const useGetSavedSpawnPlace = (account) => {
   const { fastRefresh } = useRefresh()
-  const [savedPlace, setSavedPlace] = useState({x: 0, y: 0})
+  const [savedPlace, setSavedPlace] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     async function fetch() {
       const placeId = await mapContract.methods.fleetLastShipyardPlace(account).call()
       const place = await mapContract.methods.places(placeId).call()
-      setSavedPlace({x: place.coordX, y: place.coordY})
-    } fetch()
+      setSavedPlace({ x: place.coordX, y: place.coordY })
+    }
+    fetch()
   }, [fastRefresh, account])
   return savedPlace
 }
@@ -907,32 +914,25 @@ export const useGetCostMod = () => {
   return CostMod
 }
 
-
 // *** Referrals Contract ***
 
 export const useAddReferral = (player: string, referrer: string) => {
   const useReferralsContract = useReferrals()
 
-  const handleAddReferral = useCallback(
-    async () => {
-      const txHash = await addReferral(useReferralsContract, referrer, player)
-      console.info(txHash)
-    },
-    [player, referrer, useReferralsContract],
-  )
+  const handleAddReferral = useCallback(async () => {
+    const txHash = await addReferral(useReferralsContract, referrer, player)
+    console.info(txHash)
+  }, [player, referrer, useReferralsContract])
   return { onAdd: handleAddReferral }
 }
 
 export const useGetReferralBonus = (player: string) => {
   const useReferralsContract = useReferrals()
 
-  const handleGetReferralBonus = useCallback(
-    async () => {
-      const txHash = await getReferralBonus(useReferralsContract, player)
-      console.info(txHash)
-    },
-    [player, useReferralsContract],
-  )
+  const handleGetReferralBonus = useCallback(async () => {
+    const txHash = await getReferralBonus(useReferralsContract, player)
+    console.info(txHash)
+  }, [player, useReferralsContract])
   return { onGet: handleGetReferralBonus }
 }
 
@@ -965,7 +965,7 @@ export const useCheckReferralStatus = (player: string) => {
 }
 
 export const useGetTotalReferrals = (player: string) => {
-  const {slowRefresh} = useRefresh()
+  const { slowRefresh } = useRefresh()
   const [totalReferrals, settotalReferrals] = useState(0)
 
   useEffect(() => {

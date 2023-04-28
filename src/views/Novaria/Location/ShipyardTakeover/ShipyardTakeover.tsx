@@ -40,7 +40,7 @@ const ShpiyardTakeover = ({ shipyard, placeX, placeY, refinery, account, current
       placeY={placeY}
       underAttack={underAttack}
       currentLocation={currentLocation}
-    />
+    />,
   )
 
   return (

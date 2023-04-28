@@ -8,7 +8,7 @@ import { useMasterchef, useSousChef, useMoneyPot, useMoneyPotOld } from './useCo
 export const useHarvest = (farmPid: number) => {
   const dispatch = useDispatch()
   const { account } = useWallet()
-  const masterChefContract = useMasterchef() 
+  const masterChefContract = useMasterchef()
 
   const handleHarvest = useCallback(async () => {
     const txHash = await harvest(masterChefContract, farmPid, account)
@@ -17,7 +17,7 @@ export const useHarvest = (farmPid: number) => {
   }, [account, dispatch, farmPid, masterChefContract])
 
   return { onReward: handleHarvest }
-} 
+}
 
 export const useSNovaHarvest = (farmPids: number[]) => {
   const { account } = useWallet()

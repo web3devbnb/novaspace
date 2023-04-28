@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardBody, CardHeader, CardFooter, Text, Flex } from '@pancakeswap-libs/uikit'
 import styled from 'styled-components'
-import {useTotalMoneyPotBNB} from 'hooks/useTokenBalance'
+import { useTotalMoneyPotBNB } from 'hooks/useTokenBalance'
 import logo from '../assets/farmcoins.png'
 
 const Grid = styled.a`
@@ -16,26 +16,25 @@ const Grid = styled.a`
   border-radius: 30px;
   background-image: url('/images/home/moneypot1.jpg');
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   position: relative;
-
 `
 
 const TextRow1 = styled.div`
-grid-column-start: 1;
-grid-column-end: 4;
-align-items: flex-end;
-display: flex;
-margin-bottom: 39px;
-margin-left: 10px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  align-items: flex-end;
+  display: flex;
+  margin-bottom: 39px;
+  margin-left: 10px;
 `
 const TextRow2 = styled.div`
-wrap: no-wrap;
-grid-column-start: 1;
-grid-column-end: 4;
-position: absolute;
-top: 51%;
-left: 6%;
+  wrap: no-wrap;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  position: absolute;
+  top: 51%;
+  left: 6%;
 `
 
 const ColRight = styled.div`
@@ -62,7 +61,6 @@ const Heading = styled(Text)`
   margin-left: 3%;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-
     margin-left: 4%;
   }
   ${({ theme }) => theme.mediaQueries.md} {
@@ -78,7 +76,6 @@ const SubHeading = styled(Text)`
   font-weight: bold;
   margin-left: 3%;
   ${({ theme }) => theme.mediaQueries.sm} {
-
   }
   ${({ theme }) => theme.mediaQueries.md} {
     margin-left: 0%;
@@ -89,26 +86,20 @@ const SubHeading = styled(Text)`
   }
 `
 
-
 const MoneyPotCard = () => {
-
- 
   return (
     <Grid href="/dashboard">
       <TextRow1>
-        <Heading glowing>
-          MONEY POT
-        </Heading>
+        <Heading glowing>MONEY POT</Heading>
       </TextRow1>
       <ColRight />
 
       <TextRow2>
         <SubHeading glowing>
-          <span style={{color:"#00aaff"}}>75%</span> of all platform fees are rewarded to SNOVA holders
+          <span style={{ color: '#00aaff' }}>75%</span> of all platform fees are rewarded to SNOVA holders
         </SubHeading>
       </TextRow2>
     </Grid>
-
   )
 }
 

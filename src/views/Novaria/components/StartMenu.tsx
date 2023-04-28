@@ -164,7 +164,9 @@ const StartMenu = () => {
       {/*  Eventually this needs to have a confirm popup to make sure name set correctly  */}
       {!playerExists ? (
         <div style={{ marginTop: 10 }}>
-          Step 2 - Register your player name <br />(name cannot be changed after registration)<br />
+          Step 2 - Register your player name <br />
+          (name cannot be changed after registration)
+          <br />
           <input
             type="text"
             required

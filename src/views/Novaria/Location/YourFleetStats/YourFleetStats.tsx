@@ -47,12 +47,13 @@ const YourFleetStats = ({
   const [pending, setPendingTx] = useState(false)
 
   const battleID = Number(playerBattleInfo.battleId)
-  const resolvedTime = Number(useGetBattle(battleID).resolvedTime)+900
-  const battleCooldown = showCountdown(new Date(Number(resolvedTime)*1000))
+  const resolvedTime = Number(useGetBattle(battleID).resolvedTime) + 900
+  const battleCooldown = showCountdown(new Date(Number(resolvedTime) * 1000))
   const miningCooldown = showCountdown(currentMiningCooldown)
   const travelCooldown = showCountdown(currentTravelCooldown)
   const savedShipyard = useGetSavedSpawnPlace(account)
-  const atSavedShipyard = Number(fleetLocation.X) === Number(savedShipyard.x) && Number(fleetLocation.Y) === Number(savedShipyard.y)
+  const atSavedShipyard =
+    Number(fleetLocation.X) === Number(savedShipyard.x) && Number(fleetLocation.Y) === Number(savedShipyard.y)
   const Haven = Number(fleetLocation.X) === Number(0) && Number(fleetLocation.Y) === Number(0)
   const smallFleet = Number(fleetSize) < Number(25)
   const canRecall = smallFleet && !Haven
@@ -127,9 +128,15 @@ const YourFleetStats = ({
         <div>BATTLE</div>
         <div>{battleCooldown}</div>
       </Stat>
-      {!atSavedShipyard && <Button onClick={sendSetRecall}>{!pending ? 'SET SHIPYARD RECALL POINT' : 'pending'}</Button>}
-      {canRecall && <Button onClick={()=>sendRecallTx(true)}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
-      {canRecallShipyard && <Button onClick={()=>sendRecallTx(false)}>{!pending ? `RECALL TO SHIPYARD (${savedShipyard.x},${savedShipyard.y})` : 'pending'}</Button>}
+      {!atSavedShipyard && (
+        <Button onClick={sendSetRecall}>{!pending ? 'SET SHIPYARD RECALL POINT' : 'pending'}</Button>
+      )}
+      {canRecall && <Button onClick={() => sendRecallTx(true)}>{!pending ? 'RECALL TO HAVEN' : 'pending'}</Button>}
+      {canRecallShipyard && (
+        <Button onClick={() => sendRecallTx(false)}>
+          {!pending ? `RECALL TO SHIPYARD (${savedShipyard.x},${savedShipyard.y})` : 'pending'}
+        </Button>
+      )}
     </Stats>
   )
 }

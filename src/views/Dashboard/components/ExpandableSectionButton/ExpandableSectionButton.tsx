@@ -29,10 +29,8 @@ const Title = styled.text`
 const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onClick, expanded }) => {
   return (
     <Wrapper aria-label="Hide or show expandable content" role="button" onClick={() => onClick()}>
-      <Title>
-        {expanded ? 'DASHBOARD' : 'DASHBOARD'}
-      </Title>
-      {expanded ? <ChevronDownIcon /> :  <ChevronUpIcon />}
+      <Title>{expanded ? 'DASHBOARD' : 'DASHBOARD'}</Title>
+      {expanded ? <ChevronDownIcon /> : <ChevronUpIcon />}
     </Wrapper>
   )
 }
