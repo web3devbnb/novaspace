@@ -118,7 +118,7 @@ const FarmedStakingCard = () => {
     },
     { label: TranslateString(536, 'Total Minted'), value: novaSupply, decimals: 2 },
     { label: TranslateString(538, 'Total Burned'), value: burnedNova, decimals: 2 },
-    { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova, decimals: 4 },
+    { label: TranslateString(999, 'Circulating Supply').toUpperCase(), value: circNova, decimals: 2 },
     { label: 'NOVA/BLOCK', value: NovaPerBlock, decimals: 4 },
   ]
 
