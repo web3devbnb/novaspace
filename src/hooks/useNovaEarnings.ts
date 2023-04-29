@@ -10,11 +10,11 @@ const useNovaEarnings = () => {
   const [balances, setBalance] = useState([])
   const { account }: { account: string } = useWallet()
   const { fastRefresh } = useRefresh()
-
+  
   useEffect(() => {
     const fetchNovaBalances = async () => {
       const calls = farmsConfig
-        .filter((farm) => farm.pid !== 1 && farm.pid !== 2 && farm.pid !== 30)
+        .filter((farm) => farm.pid !== 1 && farm.pid !== 2 && farm.pid !== 30 && farm.pid !== 5 && farm.pid !== 7 && farm.pid !== 9 && farm.pid !== 10)
         .map((farm) => ({
           address: getMasterChefAddress(),
           name: 'pendingNova',
