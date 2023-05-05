@@ -19,27 +19,25 @@ const useSNovaFarmsWithBalance = () => {
 
   useEffect(() => {
     const fetchSNovaBalances = async () => {
-      const calls = farmsConfig
-        .filter(
-          (farm) =>
-            farm.pid === 1 ||
-            farm.pid === 2 ||
-            farm.pid === 30 ||
-            farm.pid === 5 ||
-            farm.pid === 7 ||
-            farm.pid === 9 ||
-            farm.pid === 10,
-        )
-        .map((farm) => ({
-          address: getMasterChefAddress(),
-          name: 'pendingNova',
-          params: [farm.pid, account],
-        }))
+      const sNovaFarms = farmsConfig.filter(
+        (farm) =>
+          farm.pid === 1 ||
+          farm.pid === 2 ||
+          farm.pid === 5 ||
+          farm.pid === 7 ||
+          farm.pid === 9 ||
+          farm.pid === 10 ||
+          farm.pid === 30,
+      )
+
+      const calls = sNovaFarms.map((farm) => ({
+        address: getMasterChefAddress(),
+        name: 'pendingNova',
+        params: [farm.pid, account],
+      }))
 
       const rawResults = await multicall(masterChefABI, calls)
-      const results = farmsConfig
-        .filter((farm) => farm.pid === 1 || farm.pid === 2 || farm.pid === 30)
-        .map((farm, index) => ({ ...farm, balance: new BigNumber(rawResults[index]) }))
+      const results = sNovaFarms.map((farm, index) => ({ ...farm, balance: new BigNumber(rawResults[index]) }))
 
       setFarmsWithBalances(results)
     }
