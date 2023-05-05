@@ -98,11 +98,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
     <Action>
       <Flex>
         <Text bold textTransform="uppercase" color="primaryBright" fontSize="12px" pr="3px">
-          {/* TODO: Is there a way to get a dynamic value here from useFarmFromSymbol? */}
-          {/* {(farm.pid < 2) && 0716 */}
-          {(farm.pid === 2 || farm.pid === 1 || farm.pid === 30) && <>sNOVA</>}
-          {/* // {(farm.pid >= 2) && 0716 */}
-          {farm.pid !== 2 && farm.pid !== 1 && farm.pid !== 30 && <>NOVA</>}
+          {lpName.toLowerCase().includes('nova') && lpName.toLowerCase() !== 'nova' ? <>sNOVA</> : <>NOVA</>}
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Earned')}
