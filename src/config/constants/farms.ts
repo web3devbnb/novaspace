@@ -35,6 +35,70 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
+    pid: 7,
+    risk: 2,
+    lpSymbol: 'NOVA-BTCB LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xA673a0a4eAbCD5850d945B0fd7CedEf60F80ad44',
+    },
+    tokenSymbol: 'BTCB',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
+  },
+  {
+    pid: 5,
+    risk: 1,
+    lpSymbol: 'NOVA-ETH LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xca332c918c78e8879d377fc97a7ccf103fc6aedd',
+    },
+    tokenSymbol: 'ETH',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
+  },
+  {
+    pid: 9,
+    risk: 1,
+    lpSymbol: 'NOVA-MATIC LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x858522e9023E5c2cacb6C13C0cEbd63ff763a10f',
+    },
+    tokenSymbol: 'MATIC',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xcc42724c6683b7e57334c4e856f4c9965ed682bd',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
+  },
+  {
+    pid: 10,
+    risk: 1,
+    lpSymbol: 'NOVA-CAKE LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x9E3659d2a4AC2FD9A9B0424df10b956DD99A07a4',
+    },
+    tokenSymbol: 'CAKE',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
+    },
+    quoteTokenSymbol: QuoteToken.NOVA,
+    quoteTokenAdresses: contracts.nova,
+  },
+  {
     pid: 0,
     risk: 5,
     isTokenOnly: true,
@@ -132,6 +196,54 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.busd,
   },
   {
+    pid: 18,
+    risk: 4,
+    lpSymbol: 'DAI-BNB LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x3d40E6de751b264c4328C11f17Ab5448A519AC36',
+    },
+    tokenSymbol: 'DAI',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  {
+    pid: 8,
+    risk: 2,
+    lpSymbol: 'BTCB-BNB LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0xb21e5fedbd23e36a273dc3521bbb5d6e0bc43b0b',
+    },
+    tokenSymbol: 'BTCB',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  {
+    pid: 6,
+    risk: 2,
+    lpSymbol: 'ETH-BNB LP',
+    lpAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x092ecdebed7270fcce414ccfb24b69829610f5aa',
+    },
+    tokenSymbol: 'ETH',
+    tokenAddresses: {
+      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
+      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  {
     pid: 19,
     risk: 4,
     lpSymbol: 'USDT-BNB LP',
@@ -180,22 +292,6 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.wbnb,
   },
   {
-    pid: 8,
-    risk: 2,
-    lpSymbol: 'BTCB-BNB LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0xb21e5fedbd23e36a273dc3521bbb5d6e0bc43b0b',
-    },
-    tokenSymbol: 'BTCB',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
-    },
-    quoteTokenSymbol: QuoteToken.BNB,
-    quoteTokenAdresses: contracts.wbnb,
-  },
-  {
     pid: 4,
     risk: 1,
     lpSymbol: 'USDT-BUSD LP',
@@ -226,86 +322,6 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-  },
-  {
-    pid: 5,
-    risk: 1,
-    lpSymbol: 'NOVA-ETH LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0xca332c918c78e8879d377fc97a7ccf103fc6aedd',
-    },
-    tokenSymbol: 'ETH',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
-    pid: 7,
-    risk: 2,
-    lpSymbol: 'NOVA-BTCB LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0xA673a0a4eAbCD5850d945B0fd7CedEf60F80ad44',
-    },
-    tokenSymbol: 'BTCB',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
-    pid: 9,
-    risk: 1,
-    lpSymbol: 'NOVA-MATIC LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x858522e9023E5c2cacb6C13C0cEbd63ff763a10f',
-    },
-    tokenSymbol: 'MATIC',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0xcc42724c6683b7e57334c4e856f4c9965ed682bd',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
-    pid: 10,
-    risk: 1,
-    lpSymbol: 'NOVA-CAKE LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x9E3659d2a4AC2FD9A9B0424df10b956DD99A07a4',
-    },
-    tokenSymbol: 'CAKE',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
-    },
-    quoteTokenSymbol: QuoteToken.NOVA,
-    quoteTokenAdresses: contracts.nova,
-  },
-  {
-    pid: 6,
-    risk: 2,
-    lpSymbol: 'ETH-BNB LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x092ecdebed7270fcce414ccfb24b69829610f5aa',
-    },
-    tokenSymbol: 'ETH',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
-    },
-    quoteTokenSymbol: QuoteToken.BNB,
-    quoteTokenAdresses: contracts.wbnb,
   },
   {
     pid: 20,
@@ -386,22 +402,6 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.USDT,
     quoteTokenAdresses: contracts.usdt,
-  },
-  {
-    pid: 18,
-    risk: 4,
-    lpSymbol: 'DAI-BNB LP',
-    lpAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x3d40E6de751b264c4328C11f17Ab5448A519AC36',
-    },
-    tokenSymbol: 'DAI',
-    tokenAddresses: {
-      97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3',
-    },
-    quoteTokenSymbol: QuoteToken.BNB,
-    quoteTokenAdresses: contracts.wbnb,
   },
   {
     pid: 14,

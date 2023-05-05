@@ -20,7 +20,8 @@ const useSNovaFarmsWithBalance = () => {
   useEffect(() => {
     const fetchSNovaBalances = async () => {
       const calls = farmsConfig
-        .filter((farm) => 
+        .filter(
+          (farm) =>
             farm.pid === 1 ||
             farm.pid === 2 ||
             farm.pid === 30 ||

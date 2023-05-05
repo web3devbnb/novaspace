@@ -20,7 +20,8 @@ const useNovaFarmsWithBalance = () => {
   useEffect(() => {
     const fetchBalances = async () => {
       const calls = farmsConfig
-        .filter((farm) => 
+        .filter(
+          (farm) =>
             farm.pid !== 1 &&
             farm.pid !== 2 &&
             farm.pid !== 30 &&
