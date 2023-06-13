@@ -34,3 +34,6 @@ yarn-error.log*
 sftp-config.json
 /.github/
 .vercel
+
+# Local Netlify folder
+.netlify
