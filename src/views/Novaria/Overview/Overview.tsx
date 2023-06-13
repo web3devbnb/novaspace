@@ -292,7 +292,7 @@ const Overview: React.FC = () => {
             <StatsRow>
               <UpperCol>
                 <MainLogo src={logo} alt="novaria logo" />
-                <Header>Welcome to the Legend of Novaria</Header>
+                <Header>Welcome to the LEGEND OF NOVARIA</Header>
                 <Text>
                   You are about to embark on a journey to explore the world of Novaria. The mysterious Draken forces
                   have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know

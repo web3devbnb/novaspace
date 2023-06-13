@@ -129,7 +129,7 @@ const data = [
   },
   {
     title: 'Benefits',
-    items: ['Low fees', 'Dedicated dev assistance', 'Access to the complete', 'ShibaNova marketing package'],
+    items: ['Low fees', 'Dedicated dev assistance', 'Access to the complete', 'NovaSpace marketing package'],
   },
   {
     title: 'For the community',
@@ -199,7 +199,7 @@ const LaunchPad: React.FC = () => {
             <a
               target="_blank"
               rel="noreferrer noopener"
-              href="https://safuguard.shibanova.io"
+              href="https://safuguard.NovaSpace.io "
               style={{ padding: '5px 0', marginTop: 5 }}
             >
               <Tag glowing bold>
@@ -210,7 +210,7 @@ const LaunchPad: React.FC = () => {
           <Column>
             <img src={donate} alt="donate" style={{ maxHeight: '90%', maxWidth: 'auto' }} />
             <Text style={{ backgroundColor: '#00aaff', padding: '5px 5px 2px' }}>Starts NOV 8, 2021 @ 18:00 UTC</Text>
-            {/* <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.shibanova.io/" style={{padding:"5px 0", marginTop:5}}>
+            {/* <a target="_blank" rel="noreferrer noopener" href="https://donatepresale.NovaSpace.io /" style={{padding:"5px 0", marginTop:5}}>
               <Tag glowing bold >ENTER</Tag>
            </a> */}
             <Text style={{ backgroundColor: 'YELLOW', color: 'black', padding: '5px 5px 2px' }}>

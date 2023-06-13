@@ -49,7 +49,7 @@ const config: MenuEntry[] = [
       {
         label: 'Docs',
         icon: 'BookIcon',
-        href: 'https://docs.shibanova.io',
+        href: 'https://docs.NovaSpace.io ',
       },
     ],
   },

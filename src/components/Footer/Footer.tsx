@@ -55,9 +55,9 @@ const Footer = () => (
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://bscscan.com/address/0x56E344bE9A7a7A1d27C854628483Efd67c11214F#code"
+            href="https://bscscan.com/address/0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3#code"
           >
-            0x56E344bE9A7a7A1d27C854628483Efd67c11214F{' '}
+            0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3{' '}
           </a>
         </Text>
         <Row>
@@ -79,7 +79,7 @@ const Footer = () => (
           <a
             target="_blank"
             rel="noreferrer noopener noopener"
-            href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            href="https://coinbrain.com/coins/0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
           >
             <Img src={coinBrain} alt="coinBrain" />
           </a>

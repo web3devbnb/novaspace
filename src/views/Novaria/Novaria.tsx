@@ -92,7 +92,7 @@ const Novaria: React.FC = () => {
 
   const handleConnectWalletClick = () => {
     ReactGA.event({
-      category: 'Legend of Novaria',
+      category: 'LEGEND OF NOVARIA',
       action: 'connect wallet',
       label: 'button',
     })
@@ -121,7 +121,7 @@ const Novaria: React.FC = () => {
             {connected ? <StartMenu /> : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>}
             <ButtonRow>
               <a
-                href="https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+                href="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
                 rel="noopener noreferrer"
                 target="blank"
               >
@@ -139,7 +139,7 @@ const Novaria: React.FC = () => {
               </a>
             </ButtonRow>
             <Description>
-              Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain fueled by NOVA.
+              LEGEND OF NovaWars is a play to earn MMO strategy game built on the Binance Smart Chain fueled by NOVA.
               Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS
               universe.
               <br />{' '}

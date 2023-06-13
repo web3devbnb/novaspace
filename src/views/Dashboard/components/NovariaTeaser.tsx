@@ -18,7 +18,7 @@ const NovariaTeaser = ({ title }: { title: string }) => {
   return (
     <Body id={title}>
       {/* <a href="/novaria">
-            <Img src={NovariaLogo} alt="Legend of Novaria" />
+            <Img src={NovariaLogo} alt="LEGEND OF NOVARIA" />
         </a> */}
       <VideoModal />
     </Body>

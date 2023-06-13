@@ -119,9 +119,9 @@ const ContentRow = styled.div`
 const MenuItems = [
   {
     id: 1,
-    title: 'Legend of Novaria',
+    title: 'LEGEND OF NovaWars',
     description:
-      'Legend of Novaria is a play to earn MMO strategy game built on the Binance Smart Chain and fueled by NOVA. Players can build fleets, mine mineral, fight others in epic space battles, and explore an ENDLESS universe.',
+      'LEGEND OF NovaWars is a play to earn MMO strategy game built on the Binance Smart Chain and fueled by NOVA. Players can build fleets, mine mineral, fight others in epic space battles, and explore an ENDLESS universe.',
     background: "url('/images/home/homeBanner.jpg')",
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard1.jpg')",
@@ -186,7 +186,7 @@ const SubHero = () => {
           <ButtonRow>
             <NeonButton
               title="Buy NOVA"
-              link="https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+              link="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             />
             <NeonButton title={buttonTitle} link={buttonLink} />
           </ButtonRow>

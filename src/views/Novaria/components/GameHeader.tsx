@@ -100,7 +100,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         </Text>
         <Text glowing>
           <a
-            href="https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+            href="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -119,14 +119,14 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         </Text>
         <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
           <a
-            href="https://poocoin.app/tokens/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            href="https://poocoin.app/tokens/0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             target="_blank"
             rel="noreferrer noopener"
           >
             <img src={tokenLogo} alt="nova logo" style={{ height: 30, margin: 5 }} />
           </a>
           <a
-            href="https://coinbrain.com/coins/0x56e344be9a7a7a1d27c854628483efd67c11214f"
+            href="https://coinbrain.com/coins/0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             target="_blank"
             rel="noreferrer noopener"
           >

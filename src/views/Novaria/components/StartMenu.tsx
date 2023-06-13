@@ -84,7 +84,7 @@ const StartMenu = () => {
 
   const sendInsertCoinTx = async () => {
     ReactGA.event({
-      category: 'Legend of Novaria',
+      category: 'LEGEND OF NOVARIA',
       action: 'Purchase Game',
       label: 'button',
     })
@@ -134,7 +134,7 @@ const StartMenu = () => {
 
   const handleStartGameClick = () => {
     ReactGA.event({
-      category: 'Legend of Novaria',
+      category: 'LEGEND OF NOVARIA',
       action: 'start game',
       label: 'button',
     })

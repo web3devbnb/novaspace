@@ -1,6 +1,6 @@
 export default {
   nova: {
-    56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+    56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
     97: '0xBC241DFFf64583Bcc9889311B1044cB6B4e9eCaF',
   },
   snova: {

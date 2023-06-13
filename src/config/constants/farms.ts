@@ -13,7 +13,7 @@ const farms: FarmConfig[] = [
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+      56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
@@ -29,7 +29,7 @@ const farms: FarmConfig[] = [
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+      56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
@@ -105,12 +105,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'NOVA',
     lpAddresses: {
       97: '0xc86008fb885619cb8bafc6c7a97d99e4928f0145',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+      56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
     },
     tokenSymbol: 'NOVA',
     tokenAddresses: {
       97: '0x7cc3F3945351F1Bc3b57836d90af3D7dCD0bEF9c',
-      56: '0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+      56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
     },
     quoteTokenSymbol: QuoteToken.NOVA,
     quoteTokenAdresses: contracts.nova,

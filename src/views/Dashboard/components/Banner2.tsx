@@ -63,7 +63,7 @@ const Banner2 = ({ title }: { title: string }) => {
   return (
     <Row>
       <ColLeft>
-        <a id={title} href="https://swap.shibanova.io" rel="noreferrer noopener">
+        <a id={title} href="https://swap.NovaSpace.io " rel="noreferrer noopener">
           <Img2 src={logo2} alt="launchpad redefined" />
         </a>
       </ColLeft>
@@ -75,13 +75,13 @@ const Banner2 = ({ title }: { title: string }) => {
         </Description>
         <ButtonRow>
           <a
-            href="https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+            href="https://swap.NovaSpace.io /#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             rel="noopener noreferrer"
           >
             <Button style={{ margin: '0 10px' }}>Buy NOVA</Button>
           </a>
           <a
-            href="https://docs.shibanova.io/shibanova-documentation/how-to-defi"
+            href="https://docs.NovaSpace.io /shibanova-documentation/how-to-defi"
             target="blank"
             rel="noopener noreferrer"
           >

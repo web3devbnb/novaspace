@@ -72,7 +72,7 @@ const TradesCard = () => {
 
       <TextRow2>
         <a
-          href="https://swap.shibanova.io/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F"
+          href="https://swap.NovaSpace.io /#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
           target="_blank"
           rel="noreferrer noopener"
         >

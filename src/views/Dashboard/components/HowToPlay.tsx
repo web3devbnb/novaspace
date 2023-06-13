@@ -86,7 +86,7 @@ const HowToInfo = [
     id: 2,
     title: 'Buy NOVA Tokens',
     img: howto3,
-    link: 'https://swap.novadex.finance/#/swap?outputCurrency=0x56E344bE9A7a7A1d27C854628483Efd67c11214F',
+    link: 'https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
   },
   {
     id: 3,
