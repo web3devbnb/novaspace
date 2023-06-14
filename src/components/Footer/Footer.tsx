@@ -50,7 +50,7 @@ const Footer = () => (
   <Hero>
     <Row>
       <Col>
-        <Text style={{ fontSize: '12px', paddingBottom: '0px' }}>NOVA Contract: (ONLY ON NOVADEX)</Text>
+        <Text style={{ fontSize: '12px', paddingBottom: '0px' }}>NOVA Contract: (ONLY ON NovaSpaceDEX)</Text>
         <Text style={{ fontSize: '8px' }}>
           <a
             target="_blank"
@@ -61,19 +61,19 @@ const Footer = () => (
           </a>
         </Text>
         <Row>
-          <a target="_blank" rel="noreferrer noopener" href="https://discord.gg/nsxxXNjkqU">
+          <a target="_blank" rel="noreferrer noopener" href="https://discord.gg/NovaSpace_">
             <Img src={discordIcon} alt="discord" style={{ backgroundColor: 'transparent' }} />
           </a>
-          <a target="_blank" rel="noreferrer" href="https://t.me/NovaDexAnn">
-            <Img src="https://novadex.finance/assets/images/telegram-icon.svg" alt="telegram" />
+          <a target="_blank" rel="noreferrer" href="https://t.me/NovaSpaceX">
+            <Img src="https://novaspace.io/assets/images/telegram-icon.svg" alt="telegram" />
           </a>
-          <a target="_blank" rel="noreferrer noopener" href="https://www.twitter.com/earnwithNovaDEX">
-            <Img src="https://novadex.finance/assets/images/twitter-icon.svg" alt="twitter" />
+          <a target="_blank" rel="noreferrer noopener" href="https://www.twitter.com/NovaSpace_">
+            <Img src="https://novaspace.io/assets/images/twitter-icon.svg" alt="twitter" />
           </a>
-          <a target="_blank" rel="noreferrer noopener" href="https://www.instagram.com/earnwithnovadex">
-            <Img src="https://novadex.finance/assets/images/instagram-icon.svg" alt="instagram" />
+          <a target="_blank" rel="noreferrer noopener" href="https://www.instagram.com/NovaSpace_">
+            <Img src="https://novaspace.io/assets/images/instagram-icon.svg" alt="instagram" />
           </a>
-          <a target="_blank" rel="noreferrer noopener" href="https://www.reddit.com/r/NovaDEX/">
+          <a target="_blank" rel="noreferrer noopener" href="https://www.reddit.com/r/NovaSpaceDEX/">
             <Img src={redditIcon} alt="reddit" />
           </a>
           <a
@@ -98,16 +98,12 @@ const Footer = () => (
             </a>
           </li>
           <li style={{ color: 'white', marginTop: '4px' }}>
-            <a target="_blank" rel="noreferrer" href="https://docs.novadex.finance/novadex-documentation/">
+            <a target="_blank" rel="noreferrer" href="https://docs.novaspace.io/">
               Documentation
             </a>
           </li>
           <li style={{ color: 'white', marginTop: '4px' }}>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="https://docs.novadex.finance/novadex-documentation/security/audits"
-            >
+            <a target="_blank" rel="noreferrer" href="https://docs.novaspace.io/security/audits">
               Audits
             </a>
           </li>
@@ -115,7 +111,7 @@ const Footer = () => (
       </Col>
     </Row>
     <Row style={{ marginBottom: '15px' }}>
-      <Text style={{ fontSize: '12px' }}>Copyright © 2021. All rights reserved. NovaDEX.finance</Text>
+      <Text style={{ fontSize: '12px' }}>Copyright © 2023. All rights reserved. novaspace.io</Text>
     </Row>
   </Hero>
 )

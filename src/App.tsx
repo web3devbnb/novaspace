@@ -89,7 +89,7 @@ const App: React.FC = () => {
               <Footer />
             </Menu>
           </Route>
-          <Route path="/legend-of-novaria">
+          <Route path="/mission-novawars">
             <Menu>
               <GlobalStyle isNovaria isShipyard={false} isNovariaSpace={false} isStandard={false} />
 
@@ -98,7 +98,7 @@ const App: React.FC = () => {
             </Menu>
           </Route>
           <Route path="/novaria">
-            <Redirect to="/legend-of-novaria" />
+            <Redirect to="/mission-novawars" />
           </Route>
           <Route path="/map">
             <GlobalStyle isNovaria={false} isShipyard={false} isNovariaSpace isStandard={false} />

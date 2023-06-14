@@ -35,7 +35,7 @@ const VideoModal = () => {
   return (
     <Body>
       <div>
-        <ModalVideo channel="youtube" isOpen={isOpen} videoId="VRH2LvKXKEQ" onClose={() => setOpen(false)} />
+        <ModalVideo channel="youtube" isOpen={isOpen} videoId="" onClose={() => setOpen(false)} />
         {/* <Button type="button" onClick={()=> {setOpen(true); scrollToMiddle()}} ><Img src={PlayLogo} alt="play" /></Button> */}
         <Button type="button" onClick={() => setOpen(true)}>
           <Img src={PlayLogo} alt="play" />

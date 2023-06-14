@@ -108,12 +108,12 @@ const Novaria: React.FC = () => {
     <Page>
       <Column>
         <LiveGameLink>
-          <a href="https://novadex.finance/overview" rel="noopener noreferrer" target="blank">
+          <a href="https://novaspace.io/overview" rel="noopener noreferrer" target="blank">
             <ExternalButton type="button">VIEW LIVE GAME!</ExternalButton>
           </a>
         </LiveGameLink>
         <TeaserVideo
-          src="https://www.youtube.com/embed/VRH2LvKXKEQ?playlist=VRH2LvKXKEQ&autoplay=1&mute=1&loop=1"
+          src="https://player.vimeo.com/video/818219585&autoplay=1&mute=1&loop=1"
           title="YouTube video player"
         />
         <SubHeading>
@@ -121,20 +121,16 @@ const Novaria: React.FC = () => {
             {connected ? <StartMenu /> : <Button onClick={handleConnectWalletClick}>CONNECT WALLET</Button>}
             <ButtonRow>
               <a
-                href="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+                href="https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
                 rel="noopener noreferrer"
                 target="blank"
               >
-                <ExternalButton type="button">Buy NOVA</ExternalButton>
+                <ExternalButton type="button">Buy NovaSpace</ExternalButton>
               </a>
-              <a href="https://discord.gg/nsxxXNjkqU" rel="noopener noreferrer" target="blank">
+              <a href="https://discord.gg/NovaSpace_" rel="noopener noreferrer" target="blank">
                 <ExternalButton type="button">Official Discord</ExternalButton>
               </a>
-              <a
-                href="https://docs.novadex.finance/shibanova-documentation/legend-of-novaria"
-                rel="noopener noreferrer"
-                target="blank"
-              >
+              <a href="https://docs.novaspace.io/" rel="noopener noreferrer" target="blank">
                 <ExternalButton type="button">Game Info</ExternalButton>
               </a>
             </ButtonRow>
@@ -143,14 +139,14 @@ const Novaria: React.FC = () => {
               Players can build fleets, mine mineral, fight other players in epic space battles, and explore an ENDLESS
               universe.
               <br />{' '}
-              <span style={{ color: 'gold', marginBottom: 10 }}>
-                WARNING: This game is not for the faint of heart. Proceed with CAUTION!
+              <span style={{ color: 'blue', marginBottom: 10 }}>
+                WARNING: This game is not for the Weak minded. Proceed with Care!
               </span>
             </Description>
           </GameInfo>
           <GameInfo>
             <div>Game Guide</div>
-            <GameplayVideo src="https://www.youtube.com/embed/GLNkjLuKWxc" allowFullScreen />
+            <GameplayVideo src="https://player.vimeo.com/video/818219585" allowFullScreen />
           </GameInfo>
         </SubHeading>
         <HowToPlay />

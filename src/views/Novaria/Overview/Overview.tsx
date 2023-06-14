@@ -239,7 +239,7 @@ const Overview: React.FC = () => {
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
   const [copySuccess, setCopySuccess] = useState('')
-  const refLink = `https://novadex.finance/legend-of-novaria?ref=${account}`
+  const refLink = `https://novaspace.io/mission-novawars?ref=${account}`
   const [pending, setPending] = useState(false)
   const rewardsAmount = useCheckReferrals(account) * 25
   const rewardsDisabled = rewardsAmount <= 0 || pending
@@ -292,9 +292,9 @@ const Overview: React.FC = () => {
             <StatsRow>
               <UpperCol>
                 <MainLogo src={logo} alt="novaria logo" />
-                <Header>Welcome to the LEGEND OF NOVARIA</Header>
+                <Header>Welcome to the Mission NovaWars</Header>
                 <Text>
-                  You are about to embark on a journey to explore the world of Novaria. The mysterious Draken forces
+                  You are about to embark on a journey to explore the world of NovaWars. The mysterious Draken forces
                   have pushed Humanity to the edge of the galaxy. They have been repelled for now, but we never know
                   when they will strike again.
                   <br />
@@ -312,7 +312,7 @@ const Overview: React.FC = () => {
                   <br />
                   <br />
                   <a
-                    href="https://docs.novadex.finance/shibanova-documentation/legend-of-novaria"
+                    href="https://docs.novaspace.io/NovaWars-documentation/mission-novawars"
                     rel="noopener noreferrer"
                     target="blank"
                     style={{ color: '#5affff' }}

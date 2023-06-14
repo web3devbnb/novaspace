@@ -8,12 +8,12 @@ const Privacy = () => {
       <Header>Privacy Policy</Header>
       <div style={{ margin: '40px 60px', color: 'white' }}>
         <p>
-          The NovaDEX.finance team (We) is committed to protecting and respecting your privacy. This policy (together
-          with our
+          The novaspace.io team (We) is committed to protecting and respecting your privacy. This policy (together with
+          our
           <a href="/terms">terms and conditions of use</a>
           sets out the basis on which any data we collect from you, or that you provide to us, will be processed by us.
           Please read the following carefully to understand our views and practices regarding your data and how we will
-          treat it. This policy only applies to NovaDEX.finance (Hereinafter referred to as “this Website” or “our
+          treat it. This policy only applies to novaspace.io (Hereinafter referred to as “this Website” or “our
           Website”). If you leave this Website via a link or otherwise, you will be subject to the policy of that
           website provider.
         </p>
@@ -23,7 +23,7 @@ const Privacy = () => {
         <p>
           This website tracks basic information about its visitors. This information includes, but is not limited to, IP
           addresses, browser details, timestamps and referring pages. None of this information can personally identify a
-          specific visitor to NovaDEX.finance. The information is tracked for routine administration and maintenance
+          specific visitor to novaspace.io. The information is tracked for routine administration and maintenance
           purposes and to deliver the Services defined in the terms and conditions of use linked above.
         </p>
         <br />
@@ -83,7 +83,7 @@ const Privacy = () => {
           You have the right to ask us what information we hold about you and to delete it from our Website and
           databases at any time, where this is technically feasible. Your are hereby reminded that we have no control
           over the public and permanent nature of transactions made on the Binance Smart Chain. You can exercise this
-          right at any time by contacting us at admin@NovaDEX.finance.
+          right at any time by contacting us at admin@novaspace.io.
         </p>
 
         <br />
@@ -91,7 +91,7 @@ const Privacy = () => {
         <br />
         <p>
           Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to
-          admin@NovaDEX.finance.
+          admin@novaspace.io.
         </p>
       </div>
     </Page>

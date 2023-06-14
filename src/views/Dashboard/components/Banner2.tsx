@@ -63,25 +63,25 @@ const Banner2 = ({ title }: { title: string }) => {
   return (
     <Row>
       <ColLeft>
-        <a id={title} href="https://swap.NovaSpace.io " rel="noreferrer noopener">
+        <a id={title} href="https://dex.NovaSpace.io " rel="noreferrer noopener">
           <Img2 src={logo2} alt="launchpad redefined" />
         </a>
       </ColLeft>
 
       <ColRight>
         <Description glowing>
-          NovaDex is a decentralized exchange (DEX) on the Binance Smart Chain. Users can exchange any tokens on the DEX
-          that have liquidity. Trade fees are disbursed to sNOVA holders in the daily money pot!
+          NovaSpaceDex is a decentralized exchange (DEX) on the Binance Smart Chain. Users can exchange any tokens on
+          the DEX that have liquidity. Trade fees are disbursed to sNOVA holders in the daily money pot!
         </Description>
         <ButtonRow>
           <a
-            href="https://swap.NovaSpace.io /#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+            href="https://dex.NovaSpace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             rel="noopener noreferrer"
           >
             <Button style={{ margin: '0 10px' }}>Buy NOVA</Button>
           </a>
           <a
-            href="https://docs.NovaSpace.io /shibanova-documentation/how-to-defi"
+            href="https://docs.NovaSpace.io/NovaSpace-documentation/how-to-defi"
             target="blank"
             rel="noopener noreferrer"
           >

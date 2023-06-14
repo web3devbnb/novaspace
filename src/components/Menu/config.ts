@@ -29,22 +29,22 @@ const config: MenuEntry[] = [
       {
         label: 'Telegram',
         icon: 'TelegramIcon',
-        href: 'https://t.me/ShibaNovaDEX',
+        href: 'https://t.me/NovaSpacex',
       },
       {
         label: 'Twitter',
         icon: 'TwitterIcon',
-        href: 'https://twitter.com/ShibaNovaDefi',
+        href: 'https://twitter.com/NovaSpace_',
       },
       {
         label: 'Medium',
         icon: 'MediumIcon',
-        href: 'https://shibanova.medium.com/',
+        href: 'https://NovaSpace.medium.com/',
       },
       {
         label: 'Github',
         icon: 'GithubIcon',
-        href: 'https://github.com/ShibaNova',
+        href: 'https://github.com/NovaSpace',
       },
       {
         label: 'Docs',

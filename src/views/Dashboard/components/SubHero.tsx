@@ -126,13 +126,13 @@ const MenuItems = [
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard1.jpg')",
     buttonTitle: 'Play Now',
-    buttonLink: '/legend-of-novaria',
+    buttonLink: '/mission-novawars',
   },
   {
     id: 2,
-    title: 'NovaDEX',
+    title: 'NovaSpaceDEX',
     description:
-      'Binance Smart Chain DeFi platform featuring an exchange, farming rewards, P2E 4X game, and a daily MONEY POT that rewards holders with 75% of all fees! NOVADEX is the ONLY place to buy $NOVA!',
+      'Binance Smart Chain DeFi platform featuring an exchange, farming rewards, P2E 4X game, and a daily MONEY POT that rewards holders with 75% of all fees! NovaSpaceDex is the ONLY place to buy $NOVA!',
     background: "url('/images/home/homeBanner.jpg')",
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard2.jpg')",
@@ -186,7 +186,7 @@ const SubHero = () => {
           <ButtonRow>
             <NeonButton
               title="Buy NOVA"
-              link="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+              link="https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             />
             <NeonButton title={buttonTitle} link={buttonLink} />
           </ButtonRow>

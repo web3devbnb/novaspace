@@ -42,11 +42,11 @@ const StatsCard = ({
       : ''
   const snovaInfo =
     title === 'sNOVA Stats'
-      ? 'sNOVA is the share token for ShibaNova. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.'
+      ? 'sNOVA is the share token for NovaSpace. Holders get rewarded with dividends from the Money Pot. sNOVA can only be obtained through NOVA-BNB and NOVA-BUSD farms.'
       : ''
   const novaInfo =
     title === 'NOVA Stats'
-      ? 'NOVA is the utility token for ShibaNova. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.'
+      ? 'NOVA is the utility token for NovaSpace. It can be obtained as yield rewards for liquidity farms and can also be obtained by swapping sNOVA for it.'
       : ''
   const infoArray = [novaInfo, snovaInfo, moneyPotInfo]
   const infoMap = infoArray

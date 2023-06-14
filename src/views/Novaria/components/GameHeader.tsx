@@ -53,13 +53,13 @@ const ConnectButton = styled.button`
 
 const Button = styled.button`
   cursor: pointer;
-  border: 1px solid #5affff;
-  color: #5affff;
+  border: 2px solid #000000;
+  color: #a075de;
   background: transparent;
   padding: 5px 10px;
   text-overflow: ellipsis;
   &:hover {
-    background: #5affff;
+    background: ##a075de;
     color: black;
   }
 `
@@ -78,7 +78,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
 
   return (
     <Hero battleStatus={inBattle}>
-      <a href="/legend-of-novaria">
+      <a href="/mission-novawars">
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
@@ -87,7 +87,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
             <span style={{ color: 'gold' }}>{playerName}</span>
           ) : (
             <Button>
-              <a href="/legend-of-novaria">Register Here</a>
+              <a href="/mission-novawars">Register Here</a>
             </Button>
           )}
         </Text>
@@ -100,7 +100,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
         </Text>
         <Text glowing>
           <a
-            href="https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+            href="https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
             target="_blank"
             rel="noreferrer noopener"
           >

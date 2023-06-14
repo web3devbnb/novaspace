@@ -93,11 +93,11 @@ const TradeRouteCard = ({ title }: { title: string }) => {
           <a href="/traderoutes" rel="noopener noreferrer">
             <Button style={{ margin: '0 10px 10px' }}>Trade Routes</Button>
           </a>
-          <a href="https://swap.NovaSpace.io /#/pool" rel="noopener noreferrer">
+          <a href="https://dex.NovaSpace.io /#/pool" rel="noopener noreferrer">
             <Button style={{ margin: '0 10px' }}>Get Liquidity</Button>
           </a>
           <a
-            href="https://docs.NovaSpace.io /shibanova-documentation/how-farming-works"
+            href="https://docs.NovaSpace.io/NovaSpace-documentation/how-farming-works"
             target="blank"
             rel="noopener noreferrer"
           >

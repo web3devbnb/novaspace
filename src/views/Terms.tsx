@@ -9,8 +9,8 @@ const Terms = () => {
       <div style={{ margin: '40px 60px', color: 'white' }}>
         <p>
           The following Terms and Conditions (&quot;Terms&quot;) govern your (“you”) purchase of cryptocurrencies from
-          the NovaDEX.finance website, and the use of the NovaDEX.finance Services. This document is not a solicitation
-          for investment and does not pertain in any way to an offering of securities in any jurisdiction.
+          the novaspace.io website, and the use of the novaspace.io Services. This document is not a solicitation for
+          investment and does not pertain in any way to an offering of securities in any jurisdiction.
         </p>
 
         <br />
@@ -19,7 +19,7 @@ const Terms = () => {
         <p>
           <strong>Cryptocurrencies or Digital Assets:</strong> Digital currencies which transactions are verified and
           records maintained by a decentralized system using cryptography. This definition refers both to the NOVA and
-          sNOVA cryptocurrencies and third party cryptocurrencies swappable on the NovaDEX.finance website.
+          sNOVA cryptocurrencies and third party cryptocurrencies swappable on the novaspace.io website.
         </p>
 
         <p>
@@ -29,11 +29,11 @@ const Terms = () => {
 
         <p>
           <strong> Services: </strong>The Cryptocurrency swap, yield farms, staking pools, vaults and any other services
-          provided on the NovaDEX.finance website.
+          provided on the novaspace.io website.
         </p>
 
         <p>
-          <strong> UI: </strong> The NovaDEX.finance user interface used to interact with the NovaDEX.finance Services.
+          <strong> UI: </strong> The novaspace.io user interface used to interact with the novaspace.io Services.
         </p>
 
         <p>
@@ -51,22 +51,22 @@ const Terms = () => {
         <br />
 
         <p>
-          All NovaDEX.finance Services are provided on an “AS IS” basis and the NovaDEX.finance team makes no
-          representations and no warranties, express, implied, statutory or otherwise, regarding any matter, including
-          any implied warranties of fitness for purpose and safety of the NovaDEX.finance Cryptocurrencies, Smart
-          contracts source code, UI and website. By using the NovaDEX.finance Services you acknowledges that your use of
-          the NovaDEX.finance Services is entirely at your own risk.
+          All novaspace.io Services are provided on an “AS IS” basis and the novaspace.io team makes no representations
+          and no warranties, express, implied, statutory or otherwise, regarding any matter, including any implied
+          warranties of fitness for purpose and safety of the novaspace.io Cryptocurrencies, Smart contracts source
+          code, UI and website. By using the novaspace.io Services you acknowledges that your use of the novaspace.io
+          Services is entirely at your own risk.
         </p>
 
         <br />
         <p />
         <p>
-          The NovaDEX.finance team will not be liable to you for any loss whatsoever, including any direct loss,
-          indirect or consequential loss, (which includes, without limitation, any business losses, loss of revenue,
-          income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or
-          goodwill, or loss or corruption of information or data) howsoever caused (including as a result of
-          negligence). Nothing in this disclaimer will exclude or limit any warranty implied by law that it would be
-          unlawful to exclude or limit.
+          The novaspace.io team will not be liable to you for any loss whatsoever, including any direct loss, indirect
+          or consequential loss, (which includes, without limitation, any business losses, loss of revenue, income,
+          profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill,
+          or loss or corruption of information or data) howsoever caused (including as a result of negligence). Nothing
+          in this disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or
+          limit.
         </p>
 
         <br />
@@ -74,7 +74,7 @@ const Terms = () => {
         <br />
         <p>
           You hereby acknowledges that you are fully aware and, understand, the risks related to the use of the
-          NovaDEX.finance Services, including but not limited to:
+          novaspace.io Services, including but not limited to:
         </p>
         <br />
         <ul>
@@ -83,7 +83,7 @@ const Terms = () => {
           </li>
           <li>
             A risk of partial or total loss of your cryptocurrencies due to the exploitation by third parties of the
-            NovaDEX.finance smart contracts, coding errors, UI, domain and DNS weaknesses;
+            novaspace.io smart contracts, coding errors, UI, domain and DNS weaknesses;
           </li>
           <li>
             The price and liquidity of your cryptocurrencies may be subject to large fluctuations. The value of
@@ -96,8 +96,8 @@ const Terms = () => {
             losses due to fraudulent or accidental transactions are not recoverable;
           </li>
           <li>
-            All Crytocurrencies transactions made on the NovaDEX.finance website are deemed to be made when recorded on
-            a Binance Smart Chain public ledger. The public nature of said transactions may lead to an increased risk of
+            All Crytocurrencies transactions made on the novaspace.io website are deemed to be made when recorded on a
+            Binance Smart Chain public ledger. The public nature of said transactions may lead to an increased risk of
             fraud or cyber- attack.
           </li>
         </ul>
@@ -107,9 +107,9 @@ const Terms = () => {
 
         <br />
         <p>
-          You hereby acknowledge that, in your jurisdiction, NovaDEX.finance is not regulated as a financial institution
-          or service provider and that the NovaDEX.finance Cryptocurrencies are not legal tender and are not backed by
-          any governmental authority.
+          You hereby acknowledge that, in your jurisdiction, novaspace.io is not regulated as a financial institution or
+          service provider and that the novaspace.io Cryptocurrencies are not legal tender and are not backed by any
+          governmental authority.
         </p>
 
         <br />
@@ -128,17 +128,17 @@ const Terms = () => {
         </p>
         <br />
 
-        <h5>Use of the NovaDEX.finance website:</h5>
+        <h5>Use of the novaspace.io website:</h5>
         <br />
 
         <p>
-          Unless otherwise stated, the NovaDEX.finance team and its licensors own the intellectual property rights in
-          the NovaDEX.finance website and material on said website. Subject to the license below, all these intellectual
+          Unless otherwise stated, the novaspace.io team and its licensors own the intellectual property rights in the
+          novaspace.io website and material on said website. Subject to the license below, all these intellectual
           property rights are reserved.
         </p>
         <p>
           You may view, download for caching purposes only, and print pages from the website in order to access and use
-          the NovaDEX.finance Services subject to the restrictions set out below and elsewhere in these terms and
+          the novaspace.io Services subject to the restrictions set out below and elsewhere in these terms and
           conditions.
         </p>
         <br />
@@ -170,7 +170,7 @@ const Terms = () => {
         <p>
           You must not conduct any systematic or automated data collection activities (including without limitation
           scraping, data mining, data extraction and data harvesting) on or in relation to this website without the
-          NovaDEX.finance team express written consent.
+          novaspace.io team express written consent.
         </p>
 
         <br />
@@ -185,7 +185,7 @@ const Terms = () => {
         <h5>Changes to these terms and conditions</h5>
         <br />
         <p>
-          The NovaDEX.finance team may revise these terms and conditions from time-to-time. Revised terms and conditions
+          The novaspace.io team may revise these terms and conditions from time-to-time. Revised terms and conditions
           will apply to the use of this website from the date of the publication of the revised terms and conditions on
           this website. Please check this page regularly to ensure you are familiar with the current version.
         </p>

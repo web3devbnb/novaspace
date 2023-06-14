@@ -80,19 +80,19 @@ const HowToInfo = [
     id: 1,
     title: 'Connect Your Wallet',
     img: howto2,
-    link: 'https://docs.novadex.finance/shibanova-documentation/how-to-connect-a-wallet',
+    link: 'https://docs.novaspace.io/NovaSpace-documentation/how-to-connect-a-wallet',
   },
   {
     id: 2,
     title: 'Buy NOVA Tokens',
     img: howto3,
-    link: 'https://swap.novadex.finance/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
+    link: 'https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
   },
   {
     id: 3,
     title: 'Start Playing!',
     img: novaria,
-    link: '/legend-of-novaria',
+    link: '/mission-novawars',
   },
 ]
 
