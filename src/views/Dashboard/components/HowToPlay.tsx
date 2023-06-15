@@ -86,13 +86,13 @@ const HowToInfo = [
     id: 2,
     title: 'Buy NOVA Tokens',
     img: howto3,
-    link: 'https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
+    link: 'https://dex.novaspace.io/#/swap?outputCurrency=0x56e344be9a7a7a1d27c854628483efd67c11214f',
   },
   {
     id: 3,
     title: 'Start Playing!',
     img: novaria,
-    link: '/mission-novawars',
+    link: '/legend-of-novaria',
   },
 ]
 

@@ -75,7 +75,7 @@ const Banner2 = ({ title }: { title: string }) => {
         </Description>
         <ButtonRow>
           <a
-            href="https://dex.NovaSpace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+            href="https://dex.NovaSpace.io/#/swap?outputCurrency=0x56e344be9a7a7a1d27c854628483efd67c11214f"
             rel="noopener noreferrer"
           >
             <Button style={{ margin: '0 10px' }}>Buy NOVA</Button>

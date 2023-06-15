@@ -239,7 +239,7 @@ const Overview: React.FC = () => {
   const recentLocationBattles = useGetBattlesAtLocation(fleetLocation.X, fleetLocation.Y, 2, currentTime)
 
   const [copySuccess, setCopySuccess] = useState('')
-  const refLink = `https://novaspace.io/mission-novawars?ref=${account}`
+  const refLink = `https://novaspace.io/legend-of-novaria?ref=${account}`
   const [pending, setPending] = useState(false)
   const rewardsAmount = useCheckReferrals(account) * 25
   const rewardsDisabled = rewardsAmount <= 0 || pending
@@ -312,7 +312,7 @@ const Overview: React.FC = () => {
                   <br />
                   <br />
                   <a
-                    href="https://docs.novaspace.io/NovaWars-documentation/mission-novawars"
+                    href="https://docs.novaspace.io/NovaWars-documentation/legend-of-novaria"
                     rel="noopener noreferrer"
                     target="blank"
                     style={{ color: '#5affff' }}

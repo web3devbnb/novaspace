@@ -1,10 +1,10 @@
 export default {
   nova: {
-    56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
+    56: '0x56e344be9a7a7a1d27c854628483efd67c11214f',
     97: '0xBC241DFFf64583Bcc9889311B1044cB6B4e9eCaF',
   },
   snova: {
-    56: '0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3',
+    56: '0x56e344be9a7a7a1d27c854628483efd67c11214f',
     97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3',
   },
   masterChef: {

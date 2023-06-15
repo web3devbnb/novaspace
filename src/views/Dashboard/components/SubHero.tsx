@@ -126,7 +126,7 @@ const MenuItems = [
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard1.jpg')",
     buttonTitle: 'Play Now',
-    buttonLink: '/mission-novawars',
+    buttonLink: '/legend-of-novaria',
   },
   {
     id: 2,
@@ -186,7 +186,7 @@ const SubHero = () => {
           <ButtonRow>
             <NeonButton
               title="Buy NOVA"
-              link="https://dex.novaspace.io/#/swap?outputCurrency=0xe91a8d2c584ca93c7405f15c22cdfe53c29896e3"
+              link="https://dex.novaspace.io/#/swap?outputCurrency=0x56e344be9a7a7a1d27c854628483efd67c11214f"
             />
             <NeonButton title={buttonTitle} link={buttonLink} />
           </ButtonRow>

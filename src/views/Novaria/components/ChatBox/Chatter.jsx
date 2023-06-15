@@ -11,13 +11,13 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 // uses firestore
 firebase.initializeApp({
-  apiKey: 'AIzaSyD5BYm6GWsTf9LNt2vrGG9pUGVvv4z9DXA',
-  authDomain: 'novaria-chat.firebaseapp.com',
-  projectId: 'novaria-chat',
-  storageBucket: 'novaria-chat.appspot.com',
-  messagingSenderId: '778958864134',
-  appId: '1:778958864134:web:d0954aa81fc2b951f32887',
-  measurementId: 'G-WLM7ED9HN0',
+  apiKey: "AIzaSyDxzdcsfbSTcGjR5FiPddoRb20lVS8fTa0",
+  authDomain: "shibanova-64bff.firebaseapp.com",
+  projectId: "shibanova-64bff",
+  storageBucket: "shibanova-64bff.appspot.com",
+  messagingSenderId: "507398672762",
+  appId: "1:507398672762:web:6e55dfb040ba17173586c3",
+  measurementId: "G-VZRSSNPMW1",
 })
 
 // const auth = firebase.auth();
