@@ -78,7 +78,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
 
   return (
     <Hero battleStatus={inBattle}>
-      <a href="/legend-of-novaria">
+      <a href="/">
         <Logo src={smallLogo} alt="Novaria Logo" />
       </a>
       <InfoBlock>
@@ -87,7 +87,7 @@ const GameHeader = ({ location, playerMineral, playerMineralCapacity, exp, playe
             <span style={{ color: 'gold' }}>{playerName}</span>
           ) : (
             <Button>
-              <a href="/legend-of-novaria">Register Here</a>
+              <a href="/">Register Here</a>
             </Button>
           )}
         </Text>

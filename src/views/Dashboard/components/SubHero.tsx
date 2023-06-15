@@ -126,7 +126,7 @@ const MenuItems = [
     backgroundMobile: "url('/images/home/homeBannerMobile.jpg')",
     cardBackground: "url('/images/home/menucard1.jpg')",
     buttonTitle: 'Play Now',
-    buttonLink: '/legend-of-novaria',
+    buttonLink: '/',
   },
   {
     id: 2,

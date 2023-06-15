@@ -14,26 +14,26 @@ const filter = new Filter()
 
 // uses firebase real-time database
 firebase.initializeApp({
-  apiKey: "AIzaSyDxzdcsfbSTcGjR5FiPddoRb20lVS8fTa0",
-  authDomain: "shibanova-64bff.firebaseapp.com",
-  projectId: "shibanova-64bff",
-  storageBucket: "shibanova-64bff.appspot.com",
-  messagingSenderId: "507398672762",
-  appId: "1:507398672762:web:6e55dfb040ba17173586c3",
-  measurementId: "G-VZRSSNPMW1",
+  apiKey: 'AIzaSyDxzdcsfbSTcGjR5FiPddoRb20lVS8fTa0',
+  authDomain: 'shibanova-64bff.firebaseapp.com',
+  projectId: 'shibanova-64bff',
+  storageBucket: 'shibanova-64bff.appspot.com',
+  messagingSenderId: '507398672762',
+  appId: '1:507398672762:web:6e55dfb040ba17173586c3',
+  measurementId: 'G-VZRSSNPMW1',
 })
 
 // const appCheck = firebase.appCheck();
 // // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
 // // key is the counterpart to the secret key you set in the Firebase console.
 const app = initializeApp({
-  apiKey: "AIzaSyDxzdcsfbSTcGjR5FiPddoRb20lVS8fTa0",
-  authDomain: "shibanova-64bff.firebaseapp.com",
-  projectId: "shibanova-64bff",
-  storageBucket: "shibanova-64bff.appspot.com",
-  messagingSenderId: "507398672762",
-  appId: "1:507398672762:web:6e55dfb040ba17173586c3",
-  measurementId: "G-VZRSSNPMW1"
+  apiKey: 'AIzaSyDxzdcsfbSTcGjR5FiPddoRb20lVS8fTa0',
+  authDomain: 'shibanova-64bff.firebaseapp.com',
+  projectId: 'shibanova-64bff',
+  storageBucket: 'shibanova-64bff.appspot.com',
+  messagingSenderId: '507398672762',
+  appId: '1:507398672762:web:6e55dfb040ba17173586c3',
+  measurementId: 'G-VZRSSNPMW1',
 })
 
 // use for localhost

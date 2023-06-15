@@ -56,7 +56,7 @@ const MoneyPot: React.FC = () => {
     <Page>
       <Header>MoneyPot</Header>
 
-      <Body></Body>
+      <Body />
     </Page>
   )
 }

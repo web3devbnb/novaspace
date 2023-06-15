@@ -1,7 +1,7 @@
 {
     "codetogether.virtualCursorJoin": "ownVirtualCursor",
     "search.exclude": {
-        "novadexann": true
+        "NovaSpaceAnn": true
     },
     "search.useIgnoreFiles": false
 }

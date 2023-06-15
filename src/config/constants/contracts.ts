@@ -1,10 +1,10 @@
 export default {
   nova: {
-    56: '0x56e344be9a7a7a1d27c854628483efd67c11214f',
+    56: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
     97: '0xBC241DFFf64583Bcc9889311B1044cB6B4e9eCaF',
   },
   snova: {
-    56: '0x56e344be9a7a7a1d27c854628483efd67c11214f',
+    56: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
     97: '0xb79927bA8D1dF7B9c2199f3307Ddf6B263eBa6A3',
   },
   masterChef: {
@@ -16,7 +16,7 @@ export default {
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
   map: {
-    56: '0x5cC9B3A05e80915AcCc52134dc1a4ec1C733cc03',
+    56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     97: '0xbd5d6A0BFcf8993E2E4352EfB95167c8b07c82D3',
   },
   fleet: {

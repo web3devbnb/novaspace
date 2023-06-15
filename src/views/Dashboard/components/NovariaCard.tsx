@@ -31,10 +31,10 @@ const NovariaCard = ({ title }: { title: string }) => {
 
   return (
     <Body id={title}>
-      <a href="/legend-of-novaria" style={{ display: 'flex' }}>
+      <a href="/" style={{ display: 'flex' }}>
         <Img src={NovariaLogo} alt="LEGEND OF NOVARIA" />
       </a>
-      <a href="/legend-of-novaria" style={{ display: 'flex' }}>
+      <a href="/" style={{ display: 'flex' }}>
         <Button style={{ margin: '10px auto', fontSize: 20, color: 'gold' }}>Join the Battle</Button>
       </a>
       {/* <VideoModal /> */}
